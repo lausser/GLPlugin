@@ -125,6 +125,12 @@ sub add_snmp_args {
      The context name for SNMPv3 (empty represents the "default" context)',
       required => 0,
   );
+  $self->add_arg(
+      spec => 'community2|C=s',
+      help => '--community2
+     SNMP community which can be used to switch the context during runtime',
+      required => 0,
+  );
 }
 
 sub validate_args {
@@ -186,6 +192,7 @@ sub init {
     if ($self->opts->snmpdump) {
       $name = $self->opts->snmpdump;
     }
+    $self->opts->override_opt("protocol", $1) if $self->opts->protocol =~ /^v(.*)/;
     if (defined $self->opts->offline) {
       $self->{pidfile} = $name.".pid";
       if (! $self->check_pidfile()) {
@@ -651,6 +658,8 @@ sub init {
         '1.3.6.1.2.1', '1.3.6.1.4.1',
     ]);
     foreach my $mibinfo (@{$mibdepot}) {
+      next if $self->opts->protocol eq "1" && $mibinfo->[2] ne "v1";
+      next if $self->opts->protocol ne "1" && $mibinfo->[2] eq "v1";
       $GLPlugin::SNMP::mib_ids->{$mibinfo->[3]} = $mibinfo->[0];
     }
     $GLPlugin::SNMP::mib_ids->{'SNMP-MIB2'} = "1.3.6.1.2.1";
@@ -773,66 +782,7 @@ sub check_snmp_and_model {
         keys %$response;
     $self->set_rawdata($response);
   } else {
-    $self->set_timeout_alarm();
-    if (eval "require Net::SNMP") {
-      my %params = ();
-      my $net_snmp_version = Net::SNMP->VERSION(); # 5.002000 or 6.000000
-      $params{'-translate'} = [ # because we see "NULL" coming from socomec devices
-        -all => 0x0,
-        -nosuchobject => 1,
-        -nosuchinstance => 1,
-        -endofmibview => 1,
-        -unsigned => 1,
-      ];
-      $params{'-hostname'} = $self->opts->hostname;
-      $params{'-version'} = $self->opts->protocol;
-      if ($self->opts->port) {
-        $params{'-port'} = $self->opts->port;
-      }
-      if ($self->opts->domain) {
-        $params{'-domain'} = $self->opts->domain;
-      }
-      $self->v2tov3;
-      if ($self->opts->protocol eq '3') {
-        $params{'-version'} = $self->opts->protocol;
-        $params{'-username'} = $self->opts->username;
-        if ($self->opts->authpassword) {
-          $params{'-authpassword'} = $self->opts->authpassword;
-        }
-        if ($self->opts->authprotocol) {
-          $params{'-authprotocol'} = $self->opts->authprotocol;
-        }
-        if ($self->opts->privpassword) {
-          $params{'-privpassword'} = $self->opts->privpassword;
-        }
-        if ($self->opts->privprotocol) {
-          $params{'-privprotocol'} = $self->opts->privprotocol;
-        }
-        # context hat in der session nix verloren, sondern wird
-        # als zusatzinfo bei den requests mitgeschickt
-        #if ($self->opts->contextengineid) {
-        #  $params{'-contextengineid'} = $self->opts->contextengineid;
-        #}
-        #if ($self->opts->contextname) {
-        #  $params{'-contextname'} = $self->opts->contextname;
-        #}
-      } else {
-        $params{'-community'} = $self->opts->community;
-      }
-      my ($session, $error) = Net::SNMP->session(%params);
-      if (! defined $session) {
-        $self->add_message(CRITICAL, 
-            sprintf 'cannot create session object: %s', $error);
-        $self->debug(Data::Dumper::Dumper(\%params));
-      } else {
-        my $max_msg_size = $session->max_msg_size();
-        $session->max_msg_size(4 * $max_msg_size);
-        $GLPlugin::SNMP::session = $session;
-      }
-    } else {
-      $self->add_message(CRITICAL,
-          'could not find Net::SNMP module');
-    }
+    $self->establish_snmp_session();
   }
   if (! $self->check_messages()) {
     my $tic = time;
@@ -866,6 +816,96 @@ sub check_snmp_and_model {
       $GLPlugin::SNMP::session->close if $GLPlugin::SNMP::session;
     }
   }
+}
+
+sub establish_snmp_session {
+  my $self = shift;
+  $self->set_timeout_alarm();
+  if (eval "require Net::SNMP") {
+    my %params = ();
+    my $net_snmp_version = Net::SNMP->VERSION(); # 5.002000 or 6.000000
+    $params{'-translate'} = [ # because we see "NULL" coming from socomec devices
+      -all => 0x0,
+      -nosuchobject => 1,
+      -nosuchinstance => 1,
+      -endofmibview => 1,
+      -unsigned => 1,
+    ];
+    $params{'-hostname'} = $self->opts->hostname;
+    $params{'-version'} = $self->opts->protocol;
+    if ($self->opts->port) {
+      $params{'-port'} = $self->opts->port;
+    }
+    if ($self->opts->domain) {
+      $params{'-domain'} = $self->opts->domain;
+    }
+    $self->v2tov3;
+    if ($self->opts->protocol eq '3') {
+      $params{'-version'} = $self->opts->protocol;
+      $params{'-username'} = $self->opts->username;
+      if ($self->opts->authpassword) {
+        $params{'-authpassword'} = 
+            $self->decode_password($self->opts->authpassword);
+      }
+      if ($self->opts->authprotocol) {
+        $params{'-authprotocol'} = $self->opts->authprotocol;
+      }
+      if ($self->opts->privpassword) {
+        $params{'-privpassword'} = 
+            $self->decode_password($self->opts->privpassword);
+      }
+      if ($self->opts->privprotocol) {
+        $params{'-privprotocol'} = $self->opts->privprotocol;
+      }
+      # context hat in der session nix verloren, sondern wird
+      # als zusatzinfo bei den requests mitgeschickt
+      #if ($self->opts->contextengineid) {
+      #  $params{'-contextengineid'} = $self->opts->contextengineid;
+      #}
+      #if ($self->opts->contextname) {
+      #  $params{'-contextname'} = $self->opts->contextname;
+      #}
+    } else {
+      $params{'-community'} = 
+          $self->decode_password($self->opts->community);
+    }
+    my ($session, $error) = Net::SNMP->session(%params);
+    if (! defined $session) {
+      $self->add_message(CRITICAL, 
+          sprintf 'cannot create session object: %s', $error);
+      $self->debug(Data::Dumper::Dumper(\%params));
+    } else {
+      my $max_msg_size = $session->max_msg_size();
+      $session->max_msg_size(4 * $max_msg_size);
+      $GLPlugin::SNMP::session = $session;
+    }
+  } else {
+    $self->add_message(CRITICAL,
+        'could not find Net::SNMP module');
+  }
+}
+
+sub establish_snmp_secondary_session {
+  my $self = shift;
+  if ($self->opts->protocol eq '3') {
+  } else {
+    if (defined $self->opts->community2 &&
+        $self->decode_password($self->opts->community2) ne
+        $self->decode_password($self->opts->community)) {
+      $GLPlugin::SNMP::session = undef;
+      $self->opts->override_opt('community',
+        $self->decode_password($self->opts->community2)) ;
+      $self->establish_snmp_session;
+    }
+  }
+}
+
+sub mult_snmp_max_msg_size {
+  my $self = shift;
+  my $factor = shift || 10;
+  $self->debug(sprintf "raise maxmsgsize %d * %d", 
+      $factor, $GLPlugin::SNMP::session->max_msg_size()) if $GLPlugin::SNMP::session;
+  $GLPlugin::SNMP::session->max_msg_size($factor * $GLPlugin::SNMP::session->max_msg_size()) if $GLPlugin::SNMP::session;
 }
 
 sub no_such_model {
@@ -1445,6 +1485,7 @@ sub get_entries_get_bulk {
   my $result = {};
   $self->debug(sprintf "get_entries_get_bulk %s", Data::Dumper::Dumper(\%params));
   my %newparams = ();
+  $newparams{'-maxrepetitions'} = 3;
   $newparams{'-startindex'} = $params{'-startindex'}
       if defined $params{'-startindex'};
   $newparams{'-endindex'} = $params{'-endindex'}
@@ -1553,7 +1594,7 @@ sub get_entries {
       } else {
         $result = $self->get_entries_get_next(%params);
       }
-      if (! $result && $params{'-startindex'} !~ /\./) {
+      if (! $result && defined $params{'-startindex'} && $params{'-startindex'} !~ /\./) {
         # compound indexes cannot continue, as these two methods iterate numerically
         if ($GLPlugin::SNMP::session->error() =~ /tooBig/i) {
           $result = $self->get_entries_get_next_1index(%params);
@@ -2097,6 +2138,10 @@ sub unhex_ip {
   if ($value && $value =~ /^0x(\w{8})/) {
     $value = join(".", unpack "C*", pack "H*", $1);
   } elsif ($value && $value =~ /^0x(\w{2} \w{2} \w{2} \w{2})/) {
+    $value = $1;
+    $value =~ s/ //g;
+    $value = join(".", unpack "C*", pack "H*", $value);
+  } elsif ($value && $value =~ /^([A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2})/i) {
     $value = $1;
     $value =~ s/ //g;
     $value = join(".", unpack "C*", pack "H*", $value);

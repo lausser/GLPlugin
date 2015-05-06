@@ -138,7 +138,17 @@ sub validate_args {
     $ENV{NRPE_MULTILINESUPPORT} = 0;
   }
   if (! $self->opts->statefilesdir) {
-    if (exists $ENV{OMD_ROOT}) {
+    if ($^O =~ /MSWin/) {
+      if (defined $ENV{TEMP}) {
+        $self->override_opt('statefilesdir', $ENV{TEMP}."/".$GLPlugin::plugin->{name});
+      } elsif (defined $ENV{TMP}) {
+        $self->override_opt('statefilesdir', $ENV{TMP}."/".$GLPlugin::plugin->{name});
+      } elsif (defined $ENV{windir}) {
+        $self->override_opt('statefilesdir', File::Spec->catfile($ENV{windir}, 'Temp')."/".$GLPlugin::plugin->{name});
+      } else {
+        $self->override_opt('statefilesdir', "C:/".$GLPlugin::plugin->{name});
+      }
+    } elsif (exists $ENV{OMD_ROOT}) {
       $self->override_opt('statefilesdir', $ENV{OMD_ROOT}."/var/tmp/".$GLPlugin::plugin->{name});
     } else {
       $self->override_opt('statefilesdir', "/var/tmp/".$GLPlugin::plugin->{name});
@@ -326,8 +336,21 @@ sub dump {
   printf "\n";
   foreach (grep !/^(info|trace|warning|critical|blacklisted|extendedinfo|flat_indices|indices)/, sort keys %{$self}) {
     if (defined $self->{$_} && ref($self->{$_}) eq "ARRAY") {
+      my $have_flat_indices = 1;
       foreach my $obj (@{$self->{$_}}) {
-        $obj->dump();
+        $have_flat_indices = 0 if (! exists $obj->{flat_indices});
+      }
+      if ($have_flat_indices) {
+        foreach my $obj (sort {
+            join('', map { sprintf("%30d",$_) } split( /\./, $a->{flat_indices})) cmp
+            join('', map { sprintf("%30d",$_) } split( /\./, $b->{flat_indices}))
+        } @{$self->{$_}}) {
+          $obj->dump();
+        }
+      } else {
+        foreach my $obj (@{$self->{$_}}) {
+          $obj->dump();
+        }
       }
     }
   }
@@ -457,12 +480,22 @@ sub load_my_extension {
   }
 }
 
+sub decode_password {
+  my $self = shift;
+  my $password = shift;
+  if ($password && $password =~ /^rfc3986:\/\/(.*)/) {
+    $password =~ s/\%([A-Fa-f0-9]{2})/pack('C', hex($1))/seg;
+  }
+  return $password;
+}
+
+
 #########################################################
 # runtime methods
 #
-sub mode {
+sub mode : lvalue {
   my $self = shift;
-  return $GLPlugin::mode;
+  $GLPlugin::mode;
 }
 
 sub statefilesdir {
@@ -658,11 +691,12 @@ sub add_info {
   push(@{$GLPlugin::info}, $info);
 }
 
-sub annotate_info { # deprecated
+sub annotate_info {
   my $self = shift;
   my $annotation = shift;
   my $lastinfo = pop(@{$GLPlugin::info});
   $lastinfo .= sprintf ' (%s)', $annotation;
+  $self->{info} = $lastinfo;
   push(@{$GLPlugin::info}, $lastinfo);
 }
 
@@ -678,6 +712,11 @@ sub get_info {
   my $self = shift;
   my $separator = shift || ' ';
   return join($separator , @{$GLPlugin::info});
+}
+
+sub get_last_info {
+  my $self = shift;
+  return pop(@{$GLPlugin::info});
 }
 
 sub get_extendedinfo {
@@ -1138,6 +1177,20 @@ sub add_perfdata {
   my $value = $args{value};
   my $uom = $args{uom} || "";
   my $format = '%d';
+
+  if ($self->opts->can("morphperfdata") && $self->opts->morphperfdata) {
+    # 'Intel [R] Interface (\d+) usage'='nic$1'
+    foreach my $key (keys %{$self->opts->morphperfdata}) {
+      if ($label =~ /$key/) {
+        my $replacement = '"'.$self->opts->morphperfdata->{$key}.'"';
+        my $oldlabel = $label;
+        $label =~ s/$key/$replacement/ee;
+        if (exists $self->{thresholds}->{$oldlabel}) {
+          %{$self->{thresholds}->{$label}} = %{$self->{thresholds}->{$oldlabel}};
+        }
+      }
+    }
+  }
   if ($value =~ /\./) {
     if (defined $args{places}) {
       $value = sprintf '%.'.$args{places}.'f', $value;
@@ -1332,10 +1385,11 @@ sub nagios_exit {
       chomp $message;
   }
   if ($self->opts->negate) {
+    my $original_code = $code;
     foreach my $from (keys %{$self->opts->negate}) {
       if ((uc $from) =~ /^(OK|WARNING|CRITICAL|UNKNOWN)$/ &&
           (uc $self->opts->negate->{$from}) =~ /^(OK|WARNING|CRITICAL|UNKNOWN)$/) {
-        if ($code == $ERRORS{uc $from}) {
+        if ($original_code == $ERRORS{uc $from}) {
           $code = $ERRORS{uc $self->opts->negate->{$from}};
         }
       }
