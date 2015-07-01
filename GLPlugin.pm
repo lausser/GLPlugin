@@ -4,7 +4,7 @@ use IO::File;
 use File::Basename;
 use Digest::MD5 qw(md5_hex);
 use Errno;
-use AutoLoader;
+#use AutoLoader;
 our $AUTOLOAD;
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
@@ -57,6 +57,148 @@ sub no_such_mode {
 #########################################################
 # framework-related. setup, options
 #
+sub add_default_args {
+  my $self = shift;
+  $self->add_arg(
+      spec => 'mode=s',
+      help => "--mode
+     A keyword which tells the plugin what to do",
+      required => 1,
+  );
+  $self->add_arg(
+      spec => 'blacklist|b=s',
+      help => '--blacklist
+     Blacklist some (missing/failed) components',
+      required => 0,
+      default => '',
+  );
+  $self->add_arg(
+      spec => 'regexp',
+      help => "--regexp
+     if this parameter is used, name will be interpreted as a
+     regular expression",
+      required => 0,);
+  $self->add_arg(
+      spec => 'warning=s',
+      help => "--warning
+     The warning threshold",
+      required => 0,);
+  $self->add_arg(
+      spec => 'critical=s',
+      help => "--critical
+     The critical threshold",
+      required => 0,);
+  $self->add_arg(
+      spec => 'warningx=s%',
+      help => '--warningx
+     The extended warning thresholds
+     e.g. --warningx db_msdb_free_pct=6: to override the threshold for a
+     specific item ',
+      required => 0,
+  );
+  $self->add_arg(
+      spec => 'criticalx=s%',
+      help => '--criticalx
+     The extended critical thresholds',
+      required => 0,
+  );
+  $self->add_arg(
+      spec => 'mitigation=s',
+      help => "--mitigation
+     The parameter allows you to change a critical error to a warning.",
+      required => 0,
+  );
+  $self->add_arg(
+      spec => 'units=s',
+      help => "--units
+     One of %, B, KB, MB, GB, Bit, KBi, MBi, GBi. (used for e.g. mode interface-usage)",
+      required => 0,
+  );
+  $self->add_arg(
+      spec => 'lookback=s',
+      help => "--lookback
+     The amount of time you want to look back when calculating average rates.
+     Use it for mode interface-errors or interface-usage. Without --lookback
+     the time between two runs of check_nwc_health is the base for calculations.
+     If you want your checkresult to be based for example on the past hour,
+     use --lookback 3600. ",
+      required => 0,
+  );
+  $self->add_arg(
+      spec => 'environment|e=s%',
+      help => "--environment
+     Add a variable to the plugin's environment",
+      required => 0,
+  );
+  $self->add_arg(
+      spec => 'negate=s%',
+      help => "--negate
+     Emulate the negate plugin. --negate warning=critical --negate unknown=critical",
+      required => 0,
+  );
+  $self->add_arg(
+      spec => 'morphmessage=s%',
+      help => '--morphmessage
+     Modify the final output message',
+      required => 0,
+  );
+  $self->add_arg(
+      spec => 'morphperfdata=s%',
+      help => "--morphperfdata
+     The parameter allows you to change performance data labels.
+     It's a perl regexp and a substitution.
+     Example: --morphperfdata '(.*)ISATAP(.*)'='\$1patasi\$2'",
+      required => 0,
+  );
+  $self->add_arg(
+      spec => 'selectedperfdata=s',
+      help => "--selectedperfdata
+     The parameter allows you to limit the list of performance data. It's a perl regexp.
+     Only matching perfdata show up in the output",
+      required => 0,
+  );
+  $self->add_arg(
+      spec => 'report=s',
+      help => "--report
+     Can be used to shorten the output",
+      required => 0,
+      default => 'long',
+  );
+  $self->add_arg(
+      spec => 'multiline',
+      help => '--multiline
+     Multiline output',
+      required => 0,
+  );
+  $self->add_arg(
+      spec => 'with-mymodules-dyn-dir=s',
+      help => "--with-mymodules-dyn-dir
+     Add-on modules for the my-modes will be searched in this directory",
+      required => 0,
+  );
+  $self->add_arg(
+      spec => 'statefilesdir=s',
+      help => '--statefilesdir
+     An alternate directory where the plugin can save files',
+      required => 0,
+      env => 'STATEFILESDIR',
+  );
+  $self->add_arg(
+      spec => 'isvalidtime=i',
+      help => '--isvalidtime
+     Signals the plugin to return OK if now is not a valid check time',
+      required => 0,
+      default => 1,
+  );
+  $self->add_arg(
+      spec => 'drecksptkdb=s',
+      help => "--drecksptkdb
+     This parameter must be used instead of --name, because Devel::ptkdb is stealing the latter from the command line",
+      aliasfor => "name",
+      required => 0,
+  );
+}
+
 sub add_modes {
   my $self = shift;
   my $modes = shift;
@@ -137,7 +279,7 @@ sub validate_args {
   } else {
     $ENV{NRPE_MULTILINESUPPORT} = 0;
   }
-  if (! $self->opts->statefilesdir) {
+  if ($self->opts->can("statefilesdir") && ! $self->opts->statefilesdir) {
     if ($^O =~ /MSWin/) {
       if (defined $ENV{TEMP}) {
         $self->override_opt('statefilesdir', $ENV{TEMP}."/".$GLPlugin::plugin->{name});
@@ -154,7 +296,8 @@ sub validate_args {
       $self->override_opt('statefilesdir', "/var/tmp/".$GLPlugin::plugin->{name});
     }
   }
-  $GLPlugin::plugin->{statefilesdir} = $self->opts->statefilesdir;
+  $GLPlugin::plugin->{statefilesdir} = $self->opts->statefilesdir 
+      if $self->opts->can("statefilesdir");
   if ($self->opts->can("warningx") && $self->opts->warningx) {
     foreach my $key (keys %{$self->opts->warningx}) {
       $self->set_thresholds(metric => $key, 
@@ -338,7 +481,7 @@ sub dump {
     if (defined $self->{$_} && ref($self->{$_}) eq "ARRAY") {
       my $have_flat_indices = 1;
       foreach my $obj (@{$self->{$_}}) {
-        $have_flat_indices = 0 if (! exists $obj->{flat_indices});
+        $have_flat_indices = 0 if (ref($obj) ne "HASH" || ! exists $obj->{flat_indices});
       }
       if ($have_flat_indices) {
         foreach my $obj (sort {
@@ -349,7 +492,7 @@ sub dump {
         }
       } else {
         foreach my $obj (@{$self->{$_}}) {
-          $obj->dump();
+          $obj->dump() if UNIVERSAL::can($obj, "isa") && $obj->can("dump");
         }
       }
     }
@@ -883,11 +1026,13 @@ sub protect_value {
   if (ref($validfunc) ne "CODE" && $validfunc eq "percent") {
     $validfunc = sub {
       my $value = shift;
+      return 0 if $value !~ /^[-+]?([0-9]+(\.[0-9]+)?|\.[0-9]+)$/;
       return ($value < 0 || $value > 100) ? 0 : 1;
     };
   } elsif (ref($validfunc) ne "CODE" && $validfunc eq "positive") {
     $validfunc = sub {
       my $value = shift;
+      return 0 if $value !~ /^[-+]?([0-9]+(\.[0-9]+)?|\.[0-9]+)$/;
       return ($value < 0) ? 0 : 1;
     };
   }
@@ -1397,10 +1542,25 @@ sub nagios_exit {
   }
   my $output = "$STATUS_TEXT{$code}";
   $output .= " - $message" if defined $message && $message ne '';
+  if ($self->opts->can("morphmessage") && $self->opts->morphmessage) {
+    # 'Intel [R] Interface (\d+) usage'='nic$1'
+    # '^OK.*'="alles klar"   '^CRITICAL.*'="alles hi"
+    foreach my $key (keys %{$self->opts->morphmessage}) {
+      if ($output =~ /$key/) {
+        my $replacement = '"'.$self->opts->morphmessage->{$key}.'"';
+        $output =~ s/$key/$replacement/ee;
+      }
+    }
+  }
   if (scalar (@{$self->{perfdata}})) {
     $output .= " | ".$self->perfdata_string();
   }
   $output .= "\n";
+  if ($self->opts->can("isvalidtime") && ! $self->opts->isvalidtime) {
+    $code = OK;
+    $output = "OK - outside valid timerange. check results are not relevant now. original message was: ".
+        $output;
+  }
   if (! exists $self->{suppress_messages}) {
     print $output;
   }
