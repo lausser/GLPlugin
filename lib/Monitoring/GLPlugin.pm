@@ -1,4 +1,4 @@
-package GLPlugin;
+package Monitoring::GLPlugin;
 use strict;
 use IO::File;
 use File::Basename;
@@ -25,7 +25,7 @@ sub new {
   my %params = @_;
   my $self = {};
   bless $self, $class;
-  $GLPlugin::plugin = GLPlugin::Commandline->new(%params);
+  $Monitoring::GLPlugin::plugin = Monitoring::GLPlugin::Commandline->new(%params);
   return $self;
 }
 
@@ -62,140 +62,161 @@ sub add_default_args {
   $self->add_arg(
       spec => 'mode=s',
       help => "--mode
-     A keyword which tells the plugin what to do",
+   A keyword which tells the plugin what to do",
       required => 1,
-  );
-  $self->add_arg(
-      spec => 'blacklist|b=s',
-      help => '--blacklist
-     Blacklist some (missing/failed) components',
-      required => 0,
-      default => '',
   );
   $self->add_arg(
       spec => 'regexp',
       help => "--regexp
-     if this parameter is used, name will be interpreted as a
-     regular expression",
+   if this parameter is used, name will be interpreted as a
+   regular expression",
       required => 0,);
   $self->add_arg(
       spec => 'warning=s',
       help => "--warning
-     The warning threshold",
+   The warning threshold",
       required => 0,);
   $self->add_arg(
       spec => 'critical=s',
       help => "--critical
-     The critical threshold",
+   The critical threshold",
       required => 0,);
   $self->add_arg(
       spec => 'warningx=s%',
       help => '--warningx
-     The extended warning thresholds
-     e.g. --warningx db_msdb_free_pct=6: to override the threshold for a
-     specific item ',
+   The extended warning thresholds
+   e.g. --warningx db_msdb_free_pct=6: to override the threshold for a
+   specific item ',
       required => 0,
   );
   $self->add_arg(
       spec => 'criticalx=s%',
       help => '--criticalx
-     The extended critical thresholds',
-      required => 0,
-  );
-  $self->add_arg(
-      spec => 'mitigation=s',
-      help => "--mitigation
-     The parameter allows you to change a critical error to a warning.",
+   The extended critical thresholds',
       required => 0,
   );
   $self->add_arg(
       spec => 'units=s',
       help => "--units
-     One of %, B, KB, MB, GB, Bit, KBi, MBi, GBi. (used for e.g. mode interface-usage)",
+   One of %, B, KB, MB, GB, Bit, KBi, MBi, GBi. (used for e.g. mode interface-usage)",
+      required => 0,
+  );
+  $self->add_arg(
+      spec => 'name=s',
+      help => "--name
+   The name of a specific component to check",
+      required => 0,
+  );
+  $self->add_arg(
+      spec => 'name2=s',
+      help => "--name2
+   The secondary name of a component",
+      required => 0,
+  );
+  $self->add_arg(
+      spec => 'blacklist|b=s',
+      help => '--blacklist
+   Blacklist some (missing/failed) components',
+      required => 0,
+      default => '',
+  );
+  $self->add_arg(
+      spec => 'mitigation=s',
+      help => "--mitigation
+   The parameter allows you to change a critical error to a warning.",
       required => 0,
   );
   $self->add_arg(
       spec => 'lookback=s',
       help => "--lookback
-     The amount of time you want to look back when calculating average rates.
-     Use it for mode interface-errors or interface-usage. Without --lookback
-     the time between two runs of check_nwc_health is the base for calculations.
-     If you want your checkresult to be based for example on the past hour,
-     use --lookback 3600. ",
+   The amount of time you want to look back when calculating average rates.
+   Use it for mode interface-errors or interface-usage. Without --lookback
+   the time between two runs of check_nwc_health is the base for calculations.
+   If you want your checkresult to be based for example on the past hour,
+   use --lookback 3600. ",
       required => 0,
   );
   $self->add_arg(
       spec => 'environment|e=s%',
       help => "--environment
-     Add a variable to the plugin's environment",
+   Add a variable to the plugin's environment",
       required => 0,
   );
   $self->add_arg(
       spec => 'negate=s%',
       help => "--negate
-     Emulate the negate plugin. --negate warning=critical --negate unknown=critical",
+   Emulate the negate plugin. --negate warning=critical --negate unknown=critical",
       required => 0,
   );
   $self->add_arg(
       spec => 'morphmessage=s%',
       help => '--morphmessage
-     Modify the final output message',
+   Modify the final output message',
       required => 0,
   );
   $self->add_arg(
       spec => 'morphperfdata=s%',
       help => "--morphperfdata
-     The parameter allows you to change performance data labels.
-     It's a perl regexp and a substitution.
-     Example: --morphperfdata '(.*)ISATAP(.*)'='\$1patasi\$2'",
+   The parameter allows you to change performance data labels.
+   It's a perl regexp and a substitution.
+   Example: --morphperfdata '(.*)ISATAP(.*)'='\$1patasi\$2'",
       required => 0,
   );
   $self->add_arg(
       spec => 'selectedperfdata=s',
       help => "--selectedperfdata
-     The parameter allows you to limit the list of performance data. It's a perl regexp.
-     Only matching perfdata show up in the output",
+   The parameter allows you to limit the list of performance data. It's a perl regexp.
+   Only matching perfdata show up in the output",
       required => 0,
   );
   $self->add_arg(
       spec => 'report=s',
       help => "--report
-     Can be used to shorten the output",
+   Can be used to shorten the output",
       required => 0,
       default => 'long',
   );
   $self->add_arg(
       spec => 'multiline',
       help => '--multiline
-     Multiline output',
+   Multiline output',
       required => 0,
   );
   $self->add_arg(
       spec => 'with-mymodules-dyn-dir=s',
       help => "--with-mymodules-dyn-dir
-     Add-on modules for the my-modes will be searched in this directory",
+   Add-on modules for the my-modes will be searched in this directory",
       required => 0,
   );
   $self->add_arg(
       spec => 'statefilesdir=s',
       help => '--statefilesdir
-     An alternate directory where the plugin can save files',
+   An alternate directory where the plugin can save files',
       required => 0,
       env => 'STATEFILESDIR',
   );
   $self->add_arg(
       spec => 'isvalidtime=i',
       help => '--isvalidtime
-     Signals the plugin to return OK if now is not a valid check time',
+   Signals the plugin to return OK if now is not a valid check time',
       required => 0,
       default => 1,
   );
   $self->add_arg(
-      spec => 'drecksptkdb=s',
-      help => "--drecksptkdb
-     This parameter must be used instead of --name, because Devel::ptkdb is stealing the latter from the command line",
+      spec => 'reset',
+      help => "--reset
+   remove the state file",
       aliasfor => "name",
       required => 0,
+      hidden => 1,
+  );
+  $self->add_arg(
+      spec => 'drecksptkdb=s',
+      help => "--drecksptkdb
+   This parameter must be used instead of --name, because Devel::ptkdb is stealing the latter from the command line",
+      aliasfor => "name",
+      required => 0,
+      hidden => 1,
   );
 }
 
@@ -212,31 +233,36 @@ sub add_modes {
     $modestring .= sprintf $format, $_->[1], $_->[3];
   }
   $modestring .= sprintf "\n";
-  $GLPlugin::plugin->{modestring} = $modestring;
+  $Monitoring::GLPlugin::plugin->{modestring} = $modestring;
 }
 
 sub add_arg {
   my $self = shift;
   my %args = @_;
   if ($args{help} =~ /^--mode/) {
-    $args{help} .= "\n".$GLPlugin::plugin->{modestring};
+    $args{help} .= "\n".$Monitoring::GLPlugin::plugin->{modestring};
   }
-  $GLPlugin::plugin->{opts}->add_arg(%args);
+  $Monitoring::GLPlugin::plugin->{opts}->add_arg(%args);
+}
+
+sub mod_arg {
+  my $self = shift;
+  $Monitoring::GLPlugin::plugin->{opts}->mod_arg(@_);
 }
 
 sub add_mode {
   my $self = shift;
   my %args = @_;
-  push(@{$GLPlugin::plugin->{modes}}, \%args);
-  my $longest = length ((reverse sort {length $a <=> length $b} map { $_->{spec} } @{$GLPlugin::plugin->{modes}})[0]);
+  push(@{$Monitoring::GLPlugin::plugin->{modes}}, \%args);
+  my $longest = length ((reverse sort {length $a <=> length $b} map { $_->{spec} } @{$Monitoring::GLPlugin::plugin->{modes}})[0]);
   my $format = "       %-".
-      (length ((reverse sort {length $a <=> length $b} map { $_->{spec} } @{$GLPlugin::plugin->{modes}})[0])).
+      (length ((reverse sort {length $a <=> length $b} map { $_->{spec} } @{$Monitoring::GLPlugin::plugin->{modes}})[0])).
       "s\t(%s)\n";
-  $GLPlugin::plugin->{modestring} = "";
-  foreach (@{$GLPlugin::plugin->{modes}}) {
-    $GLPlugin::plugin->{modestring} .= sprintf $format, $_->{spec}, $_->{help};
+  $Monitoring::GLPlugin::plugin->{modestring} = "";
+  foreach (@{$Monitoring::GLPlugin::plugin->{modes}}) {
+    $Monitoring::GLPlugin::plugin->{modestring} .= sprintf $format, $_->{spec}, $_->{help};
   }
-  $GLPlugin::plugin->{modestring} .= "\n";
+  $Monitoring::GLPlugin::plugin->{modestring} .= "\n";
 }
 
 sub validate_args {
@@ -256,8 +282,8 @@ sub validate_args {
     $input =~ s/([^A-Za-z0-9])/sprintf("%%%02X", ord($1))/seg;
     printf "%s\n", $input;
     exit 0;
-  } elsif ((! grep { $self->opts->mode eq $_ } map { $_->{spec} } @{$GLPlugin::plugin->{modes}}) &&
-      (! grep { $self->opts->mode eq $_ } map { defined $_->{alias} ? @{$_->{alias}} : () } @{$GLPlugin::plugin->{modes}})) {
+  } elsif ((! grep { $self->opts->mode eq $_ } map { $_->{spec} } @{$Monitoring::GLPlugin::plugin->{modes}}) &&
+      (! grep { $self->opts->mode eq $_ } map { defined $_->{alias} ? @{$_->{alias}} : () } @{$Monitoring::GLPlugin::plugin->{modes}})) {
     printf "UNKNOWN - mode %s\n", $self->opts->mode;
     $self->opts->print_help();
     exit 3;
@@ -267,12 +293,12 @@ sub validate_args {
     $name =~ s/\%([A-Fa-f0-9]{2})/pack('C', hex($1))/seg;
     $self->override_opt('name', $name);
   }
-  $GLPlugin::mode = (
+  $Monitoring::GLPlugin::mode = (
       map { $_->{internal} }
       grep {
          ($self->opts->mode eq $_->{spec}) ||
          ( defined $_->{alias} && grep { $self->opts->mode eq $_ } @{$_->{alias}})
-      } @{$GLPlugin::plugin->{modes}}
+      } @{$Monitoring::GLPlugin::plugin->{modes}}
   )[0];
   if ($self->opts->multiline) {
     $ENV{NRPE_MULTILINESUPPORT} = 1;
@@ -282,21 +308,21 @@ sub validate_args {
   if ($self->opts->can("statefilesdir") && ! $self->opts->statefilesdir) {
     if ($^O =~ /MSWin/) {
       if (defined $ENV{TEMP}) {
-        $self->override_opt('statefilesdir', $ENV{TEMP}."/".$GLPlugin::plugin->{name});
+        $self->override_opt('statefilesdir', $ENV{TEMP}."/".$Monitoring::GLPlugin::plugin->{name});
       } elsif (defined $ENV{TMP}) {
-        $self->override_opt('statefilesdir', $ENV{TMP}."/".$GLPlugin::plugin->{name});
+        $self->override_opt('statefilesdir', $ENV{TMP}."/".$Monitoring::GLPlugin::plugin->{name});
       } elsif (defined $ENV{windir}) {
-        $self->override_opt('statefilesdir', File::Spec->catfile($ENV{windir}, 'Temp')."/".$GLPlugin::plugin->{name});
+        $self->override_opt('statefilesdir', File::Spec->catfile($ENV{windir}, 'Temp')."/".$Monitoring::GLPlugin::plugin->{name});
       } else {
-        $self->override_opt('statefilesdir', "C:/".$GLPlugin::plugin->{name});
+        $self->override_opt('statefilesdir', "C:/".$Monitoring::GLPlugin::plugin->{name});
       }
     } elsif (exists $ENV{OMD_ROOT}) {
-      $self->override_opt('statefilesdir', $ENV{OMD_ROOT}."/var/tmp/".$GLPlugin::plugin->{name});
+      $self->override_opt('statefilesdir', $ENV{OMD_ROOT}."/var/tmp/".$Monitoring::GLPlugin::plugin->{name});
     } else {
-      $self->override_opt('statefilesdir', "/var/tmp/".$GLPlugin::plugin->{name});
+      $self->override_opt('statefilesdir', "/var/tmp/".$Monitoring::GLPlugin::plugin->{name});
     }
   }
-  $GLPlugin::plugin->{statefilesdir} = $self->opts->statefilesdir 
+  $Monitoring::GLPlugin::plugin->{statefilesdir} = $self->opts->statefilesdir 
       if $self->opts->can("statefilesdir");
   if ($self->opts->can("warningx") && $self->opts->warningx) {
     foreach my $key (keys %{$self->opts->warningx}) {
@@ -317,7 +343,7 @@ sub set_timeout_alarm {
   my $self = shift;
   $SIG{'ALRM'} = sub {
     printf "UNKNOWN - %s timed out after %d seconds\n",
-        $GLPlugin::plugin->{name}, $self->opts->timeout;
+        $Monitoring::GLPlugin::plugin->{name}, $self->opts->timeout;
     exit 3;
   };
   alarm($self->opts->timeout);
@@ -330,21 +356,21 @@ sub set_variable {
   my $self = shift;
   my $key = shift;
   my $value = shift;
-  $GLPlugin::variables->{$key} = $value;
+  $Monitoring::GLPlugin::variables->{$key} = $value;
 }
 
 sub get_variable {
   my $self = shift;
   my $key = shift;
   my $fallback = shift;
-  return exists $GLPlugin::variables->{$key} ?
-      $GLPlugin::variables->{$key} : $fallback;
+  return exists $Monitoring::GLPlugin::variables->{$key} ?
+      $Monitoring::GLPlugin::variables->{$key} : $fallback;
 }
 
 sub debug {
   my $self = shift;
   my $format = shift;
-  my $tracefile = "/tmp/".$GLPlugin::pluginname.".trace";
+  my $tracefile = "/tmp/".$Monitoring::GLPlugin::pluginname.".trace";
   $self->{trace} = -f $tracefile ? 1 : 0;
   if ($self->get_variable("verbose") &&
       $self->get_variable("verbose") > $self->get_variable("verbosity", 10)) {
@@ -580,7 +606,7 @@ sub load_my_extension {
     if (! $self->opts->get("with-mymodules-dyn-dir")) {
       $self->override_opt("with-mymodules-dyn-dir", "");
     }
-    my $plugin_name = $GLPlugin::pluginname;
+    my $plugin_name = $Monitoring::GLPlugin::pluginname;
     $plugin_name =~ /check_(.*?)_health/;
     $plugin_name = "Check".uc(substr($1, 0, 1)).substr($1, 1)."Health";
     foreach my $libpath (split(":", $self->opts->get("with-mymodules-dyn-dir"))) {
@@ -603,7 +629,7 @@ sub load_my_extension {
     my $original_class = ref($self);
     my $original_init = $self->can("init");
     bless $self, "My$class";
-    if ($self->isa("GLPlugin")) {
+    if ($self->isa("Monitoring::GLPlugin")) {
       my $new_init = $self->can("init");
       if ($new_init == $original_init) {
           $self->add_unknown(
@@ -614,7 +640,7 @@ sub load_my_extension {
     } else {
       bless $self, $original_class;
       $self->add_unknown(
-          sprintf "Class %s is not a subclass of GLPlugin%s",
+          sprintf "Class %s is not a subclass of Monitoring::GLPlugin%s",
               "My$class",
               $loaderror ? sprintf " (syntax error in %s?)", $loaderror : "" );
       my ($code, $message) = $self->check_messages(join => ', ', join_all => ', ');
@@ -638,27 +664,27 @@ sub decode_password {
 #
 sub mode : lvalue {
   my $self = shift;
-  $GLPlugin::mode;
+  $Monitoring::GLPlugin::mode;
 }
 
 sub statefilesdir {
   my $self = shift;
-  return $GLPlugin::plugin->{statefilesdir};
+  return $Monitoring::GLPlugin::plugin->{statefilesdir};
 }
 
 sub opts { # die beiden _nicht_ in AUTOLOAD schieben, das kracht!
   my $self = shift;
-  return $GLPlugin::plugin->opts();
+  return $Monitoring::GLPlugin::plugin->opts();
 }
 
 sub getopts {
   my $self = shift;
   my $envparams = shift || [];
-  $GLPlugin::plugin->getopts();
+  $Monitoring::GLPlugin::plugin->getopts();
   # es kann sein, dass beim aufraeumen zum schluss als erstes objekt
-  # das $GLPlugin::plugin geloescht wird. in anderen destruktoren
+  # das $Monitoring::GLPlugin::plugin geloescht wird. in anderen destruktoren
   # (insb. fuer dbi disconnect) steht dann $self->opts->verbose
-  # nicht mehr zur verfuegung bzw. $GLPlugin::plugin->opts ist undef.
+  # nicht mehr zur verfuegung bzw. $Monitoring::GLPlugin::plugin->opts ist undef.
   $self->set_variable("verbose", $self->opts->verbose);
   #
   # die gueltigkeit von modes wird bereits hier geprueft und nicht danach
@@ -666,8 +692,8 @@ sub getopts {
   # normalerweise classify aufgerufen, welches bereits eine verbindung
   # zum endgeraet herstellt. bei falschem mode waere das eine verschwendung
   # bzw. durch den exit3 ein evt. unsauberes beenden der verbindung.
-  if ((! grep { $self->opts->mode eq $_ } map { $_->{spec} } @{$GLPlugin::plugin->{modes}}) &&
-      (! grep { $self->opts->mode eq $_ } map { defined $_->{alias} ? @{$_->{alias}} : () } @{$GLPlugin::plugin->{modes}})) {
+  if ((! grep { $self->opts->mode eq $_ } map { $_->{spec} } @{$Monitoring::GLPlugin::plugin->{modes}}) &&
+      (! grep { $self->opts->mode eq $_ } map { defined $_->{alias} ? @{$_->{alias}} : () } @{$Monitoring::GLPlugin::plugin->{modes}})) {
     if ($self->opts->mode !~ /^my-/) {
       printf "UNKNOWN - mode %s\n", $self->opts->mode;
       $self->opts->print_help();
@@ -704,7 +730,7 @@ sub add_message {
   my $self = shift;
   my $level = shift;
   my $message = shift || $self->{info};
-  $GLPlugin::plugin->add_message($level, $message)
+  $Monitoring::GLPlugin::plugin->add_message($level, $message)
       unless $self->is_blacklisted();
   if (exists $self->{failed}) {
     if ($level == UNKNOWN && $self->{failed} == OK) {
@@ -780,7 +806,7 @@ sub blacklist {
 sub add_blacklist {
   my $self = shift;
   my $list = shift;
-  $GLPlugin::blacklist = join('/',
+  $Monitoring::GLPlugin::blacklist = join('/',
       (split('/', $self->opts->blacklist), $list));
 }
 
@@ -831,16 +857,16 @@ sub add_info {
   my $info = shift;
   $info = $self->is_blacklisted() ? $info.' (blacklisted)' : $info;
   $self->{info} = $info;
-  push(@{$GLPlugin::info}, $info);
+  push(@{$Monitoring::GLPlugin::info}, $info);
 }
 
 sub annotate_info {
   my $self = shift;
   my $annotation = shift;
-  my $lastinfo = pop(@{$GLPlugin::info});
+  my $lastinfo = pop(@{$Monitoring::GLPlugin::info});
   $lastinfo .= sprintf ' (%s)', $annotation;
   $self->{info} = $lastinfo;
-  push(@{$GLPlugin::info}, $lastinfo);
+  push(@{$Monitoring::GLPlugin::info}, $lastinfo);
 }
 
 sub add_extendedinfo {  # deprecated
@@ -848,35 +874,35 @@ sub add_extendedinfo {  # deprecated
   my $info = shift;
   $self->{extendedinfo} = $info;
   return if ! $self->opts->extendedinfo;
-  push(@{$GLPlugin::extendedinfo}, $info);
+  push(@{$Monitoring::GLPlugin::extendedinfo}, $info);
 }
 
 sub get_info {
   my $self = shift;
   my $separator = shift || ' ';
-  return join($separator , @{$GLPlugin::info});
+  return join($separator , @{$Monitoring::GLPlugin::info});
 }
 
 sub get_last_info {
   my $self = shift;
-  return pop(@{$GLPlugin::info});
+  return pop(@{$Monitoring::GLPlugin::info});
 }
 
 sub get_extendedinfo {
   my $self = shift;
   my $separator = shift || ' ';
-  return join($separator, @{$GLPlugin::extendedinfo});
+  return join($separator, @{$Monitoring::GLPlugin::extendedinfo});
 }
 
 sub add_summary {  # deprecated
   my $self = shift;
   my $summary = shift;
-  push(@{$GLPlugin::summary}, $summary);
+  push(@{$Monitoring::GLPlugin::summary}, $summary);
 }
 
 sub get_summary {
   my $self = shift;
-  return join(', ', @{$GLPlugin::summary});
+  return join(', ', @{$Monitoring::GLPlugin::summary});
 }
 
 #########################################################
@@ -889,6 +915,31 @@ sub valdiff {
   my @keys = @_;
   my $now = time;
   my $newest_history_set = {};
+  $params{freeze} = 0 if ! $params{freeze};
+  my $mode = "normal";
+  if ($self->opts->lookback && $self->opts->lookback == 99999 && $params{freeze} == 0) {
+    $mode = "lookback_freeze_chill";
+  } elsif ($self->opts->lookback && $self->opts->lookback == 99999 && $params{freeze} == 1) {
+    $mode = "lookback_freeze_shockfrost";
+  } elsif ($self->opts->lookback && $self->opts->lookback == 99999 && $params{freeze} == 2) {
+    $mode = "lookback_freeze_defrost";
+  } elsif ($self->opts->lookback) {
+    $mode = "lookback";
+  }
+  # lookback=99999, freeze=0(default)
+  #  nimm den letzten lauf und schreib ihn nach {cold}
+  #  vergleich dann 
+  #    wenn es frozen gibt, vergleich frozen und den letzten lauf
+  #    sonst den letzten lauf und den aktuellen lauf
+  # lookback=99999, freeze=1
+  #  wird dann aufgerufen,wenn nach dem freeze=0 ein problem festgestellt wurde 
+  #     (also als 2.valdiff hinterher)
+  #  schreib cold nach frozen
+  # lookback=99999, freeze=2
+  #  wird dann aufgerufen,wenn nach dem freeze=0 wieder alles ok ist
+  #     (also als 2.valdiff hinterher)
+  #  loescht frozen
+  #  
   my $last_values = $self->load_state(%params) || eval {
     my $empty_events = {};
     foreach (@keys) {
@@ -899,14 +950,47 @@ sub valdiff {
       }
     }
     $empty_events->{timestamp} = 0;
-    if ($self->opts->lookback) {
+    if ($mode eq "lookback") {
       $empty_events->{lookback_history} = {};
+    } elsif ($mode eq "lookback_freeze_chill") {
+      $empty_events->{cold} = {};
+      $empty_events->{frozen} = {};
     }
     $empty_events;
   };
   $self->{'delta_timestamp'} = $now - $last_values->{timestamp};
   foreach (@keys) {
-    if ($self->opts->lookback) {
+    if ($mode eq "lookback_freeze_chill") {
+      # die werte vom letzten lauf wegsichern.
+      # vielleicht gibts gleich einen freeze=1, dann muessen die eingefroren werden
+      if (exists $last_values->{$_}) {
+        if (ref($self->{$_}) eq "ARRAY") {
+          $last_values->{cold}->{$_} = [];
+          foreach my $value (@{$last_values->{$_}}) {
+            push(@{$last_values->{cold}->{$_}}, $value);
+          }
+        } else {
+          $last_values->{cold}->{$_} = $last_values->{$_};
+        }
+      } else {
+        if (ref($self->{$_}) eq "ARRAY") {
+          $last_values->{cold}->{$_} = [];
+        } else {
+          $last_values->{cold}->{$_} = 0;
+        }
+      }
+      # es wird so getan, als sei der frozen wert vom letzten lauf
+      if (exists $last_values->{frozen}->{$_}) {
+        if (ref($self->{$_}) eq "ARRAY") {
+          $last_values->{$_} = [];
+          foreach my $value (@{$last_values->{frozen}->{$_}}) {
+            push(@{$last_values->{$_}}, $value);
+          }
+        } else {
+          $last_values->{$_} = $last_values->{frozen}->{$_};
+        }
+      } 
+    } elsif ($mode eq "lookback") {
       # find a last_value in the history which fits lookback best
       # and overwrite $last_values->{$_} with historic data
       if (exists $last_values->{lookback_history}->{$_}) {
@@ -925,56 +1009,78 @@ sub valdiff {
         }
       }
     }
-    if ($self->{$_} =~ /^\d+$/) {
-      $last_values->{$_} = 0 if ! exists $last_values->{$_};
-      if ($self->{$_} >= $last_values->{$_}) {
-        $self->{'delta_'.$_} = $self->{$_} - $last_values->{$_};
-      } else {
-        # vermutlich db restart und zaehler alle auf null
-        $self->{'delta_'.$_} = $self->{$_};
+    if ($mode eq "normal" || $mode eq "lookback" || $mode eq "lookback_freeze_chill") {
+      if ($self->{$_} =~ /^\d+$/) {
+        $last_values->{$_} = 0 if ! exists $last_values->{$_};
+        if ($self->{$_} >= $last_values->{$_}) {
+          $self->{'delta_'.$_} = $self->{$_} - $last_values->{$_};
+        } else {
+          if ($mode =~ /lookback_freeze/) {
+            # hier koennen delta-werte auch negativ sein, wenn z.b. peers verschwinden
+            $self->{'delta_'.$_} = $self->{$_} - $last_values->{$_};
+          } else {
+            # vermutlich db restart und zaehler alle auf null
+            $self->{'delta_'.$_} = $self->{$_};
+          }
+        }
+        $self->debug(sprintf "delta_%s %f", $_, $self->{'delta_'.$_});
+        $self->{$_.'_per_sec'} = $self->{'delta_timestamp'} ?
+            $self->{'delta_'.$_} / $self->{'delta_timestamp'} : 0;
+      } elsif (ref($self->{$_}) eq "ARRAY") {
+        if ((! exists $last_values->{$_} || ! defined $last_values->{$_}) && exists $params{lastarray}) {
+          # innerhalb der lookback-zeit wurde nichts in der lookback_history
+          # gefunden. allenfalls irgendwas aelteres. normalerweise
+          # wuerde jetzt das array als [] initialisiert.
+          # d.h. es wuerde ein delta geben, @found s.u.
+          # wenn man das nicht will, sondern einfach aktuelles array mit
+          # dem array des letzten laufs vergleichen will, setzt man lastarray
+          $last_values->{$_} = %{$newest_history_set} ?
+              $newest_history_set->{$_} : []
+        } elsif ((! exists $last_values->{$_} || ! defined $last_values->{$_}) && ! exists $params{lastarray}) {
+          $last_values->{$_} = [] if ! exists $last_values->{$_};
+        } elsif (exists $last_values->{$_} && ! defined $last_values->{$_}) {
+          # $_ kann es auch ausserhalb des lookback_history-keys als normalen
+          # key geben. der zeigt normalerweise auf den entspr. letzten
+          # lookback_history eintrag. wurde der wegen ueberalterung abgeschnitten
+          # ist der hier auch undef.
+          $last_values->{$_} = %{$newest_history_set} ?
+              $newest_history_set->{$_} : []
+        }
+        my %saved = map { $_ => 1 } @{$last_values->{$_}};
+        my %current = map { $_ => 1 } @{$self->{$_}};
+        my @found = grep(!defined $saved{$_}, @{$self->{$_}});
+        my @lost = grep(!defined $current{$_}, @{$last_values->{$_}});
+        $self->{'delta_found_'.$_} = \@found;
+        $self->{'delta_lost_'.$_} = \@lost;
       }
-      $self->debug(sprintf "delta_%s %f", $_, $self->{'delta_'.$_});
-      $self->{$_.'_per_sec'} = $self->{'delta_timestamp'} ?
-          $self->{'delta_'.$_} / $self->{'delta_timestamp'} : 0;
-    } elsif (ref($self->{$_}) eq "ARRAY") {
-      if ((! exists $last_values->{$_} || ! defined $last_values->{$_}) && exists $params{lastarray}) {
-        # innerhalb der lookback-zeit wurde nichts in der lookback_history
-        # gefunden. allenfalls irgendwas aelteres. normalerweise
-        # wuerde jetzt das array als [] initialisiert.
-        # d.h. es wuerde ein delta geben, @found s.u.
-        # wenn man das nicht will, sondern einfach aktuelles array mit
-        # dem array des letzten laufs vergleichen will, setzt man lastarray
-        $last_values->{$_} = %{$newest_history_set} ?
-            $newest_history_set->{$_} : []
-      } elsif ((! exists $last_values->{$_} || ! defined $last_values->{$_}) && ! exists $params{lastarray}) {
-        $last_values->{$_} = [] if ! exists $last_values->{$_};
-      } elsif (exists $last_values->{$_} && ! defined $last_values->{$_}) {
-        # $_ kann es auch ausserhalb des lookback_history-keys als normalen
-        # key geben. der zeigt normalerweise auf den entspr. letzten
-        # lookback_history eintrag. wurde der wegen ueberalterung abgeschnitten
-        # ist der hier auch undef.
-        $last_values->{$_} = %{$newest_history_set} ?
-            $newest_history_set->{$_} : []
-      }
-      my %saved = map { $_ => 1 } @{$last_values->{$_}};
-      my %current = map { $_ => 1 } @{$self->{$_}};
-      my @found = grep(!defined $saved{$_}, @{$self->{$_}});
-      my @lost = grep(!defined $current{$_}, @{$last_values->{$_}});
-      $self->{'delta_found_'.$_} = \@found;
-      $self->{'delta_lost_'.$_} = \@lost;
     }
   }
   $params{save} = eval {
     my $empty_events = {};
     foreach (@keys) {
       $empty_events->{$_} = $self->{$_};
+      if ($mode =~ /lookback_freeze/) {
+        if (exists $last_values->{frozen}->{$_}) {
+          $empty_events->{cold}->{$_} = $last_values->{frozen}->{$_};
+        } else {
+          $empty_events->{cold}->{$_} = $last_values->{cold}->{$_};
+        }
+        $empty_events->{cold}->{timestamp} = $last_values->{cold}->{timestamp};
+      }
+      if ($mode eq "lookback_freeze_shockfrost") {
+        $empty_events->{frozen}->{$_} = $empty_events->{cold}->{$_};
+        $empty_events->{frozen}->{timestamp} = $now;
+      }
     }
     $empty_events->{timestamp} = $now;
-    if ($self->opts->lookback) {
+    if ($mode eq "lookback") {
       $empty_events->{lookback_history} = $last_values->{lookback_history};
       foreach (@keys) {
         $empty_events->{lookback_history}->{$_}->{$now} = $self->{$_};
       }
+    }
+    if ($mode eq "lookback_freeze_defrost") {
+      delete $empty_events->{freeze};
     }
     $empty_events;
   };
@@ -1188,9 +1294,11 @@ sub AUTOLOAD {
     $self->{components}->{$subsystem}->dump()
         if $self->opts->verbose >= 2;
   } elsif ($AUTOLOAD =~ /^.*::(status_code|check_messages|nagios_exit|html_string|perfdata_string|selected_perfdata|check_thresholds|get_thresholds|opts)$/) {
-    return $GLPlugin::plugin->$1(@_);
+    return $Monitoring::GLPlugin::plugin->$1(@_);
   } elsif ($AUTOLOAD =~ /^.*::(clear_messages|suppress_messages|add_html|add_perfdata|override_opt|create_opt|set_thresholds|force_thresholds)$/) {
-    $GLPlugin::plugin->$1(@_);
+    $Monitoring::GLPlugin::plugin->$1(@_);
+  } elsif ($AUTOLOAD =~ /^.*::mod_arg_(.*)$/) {
+    return $Monitoring::GLPlugin::plugin->mod_arg($1, @_);
   } else {
     $self->debug("AUTOLOAD: class %s has no method %s\n",
         ref($self), $AUTOLOAD);
@@ -1198,7 +1306,7 @@ sub AUTOLOAD {
 }
 
 
-package GLPlugin::Commandline;
+package Monitoring::GLPlugin::Commandline;
 use strict;
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3, DEPENDENT => 4 };
 our %ERRORS = (
@@ -1224,7 +1332,7 @@ sub new {
          unknown => [],
        },
        args => [],
-       opts => GLPlugin::Commandline::Getopt->new(%params),
+       opts => Monitoring::GLPlugin::Commandline::Getopt->new(%params),
        modes => [],
        statefilesdir => undef,
   };
@@ -1234,7 +1342,7 @@ sub new {
   }
   bless $self, $class;
   $self->{name} = $self->{plugin};
-  $GLPlugin::plugin = $self;
+  $Monitoring::GLPlugin::plugin = $self;
 }
 
 sub AUTOLOAD {
@@ -1257,7 +1365,7 @@ sub DESTROY {
 sub debug {
   my $self = shift;
   my $format = shift;
-  my $tracefile = "/tmp/".$GLPlugin::pluginname.".trace";
+  my $tracefile = "/tmp/".$Monitoring::GLPlugin::pluginname.".trace";
   $self->{trace} = -f $tracefile ? 1 : 0;
   if ($self->opts->verbose && $self->opts->verbose > 10) {
     printf("%s: ", scalar localtime);
@@ -1709,7 +1817,7 @@ sub check_thresholds {
 }
 
 
-package GLPlugin::Commandline::Getopt;
+package Monitoring::GLPlugin::Commandline::Getopt;
 use strict;
 use File::Basename;
 use Getopt::Long qw(:config no_ignore_case bundling);
@@ -1757,7 +1865,7 @@ sub _init {
     usage => 1,
     version => 0,
     url => 0,
-    plugin => { default => $GLPlugin::pluginname },
+    plugin => { default => $Monitoring::GLPlugin::pluginname },
     blurb => 0,
     extra => 0,
     'extra-opts' => 0,
@@ -1796,6 +1904,18 @@ sub add_arg {
   my $self = shift;
   my %arg = @_;
   push (@{$self->{_args}}, \%arg);
+}
+
+sub mod_arg {
+  my $self = shift;
+  my $argname = shift;
+  my %arg = @_;
+  foreach my $old_arg (@{$self->{_args}}) {
+    next unless $old_arg->{spec} =~ /(\w+).*/ && $argname eq $1;
+    foreach my $key (keys %arg) {
+      $old_arg->{$key} = $arg{$key};
+    }
+  }
 }
 
 sub getopts {
@@ -1879,7 +1999,9 @@ sub print_help {
   printf "\n%s\n", $self->{_attr}->{license};
   printf "\n%s\n\n", $self->{_attr}->{blurb};
   $self->print_usage();
-  foreach (@{$self->{_args}}) {
+  foreach (grep {
+      ! (exists $_->{hidden} && $_->{hidden}) 
+  } @{$self->{_args}}) {
     printf " %s\n", $_->{help};
   }
   exit 0;
@@ -1905,8 +2027,8 @@ sub print_license {
 }
 
 
-package GLPlugin::Item;
-our @ISA = qw(GLPlugin);
+package Monitoring::GLPlugin::Item;
+our @ISA = qw(Monitoring::GLPlugin);
 
 use strict;
 
@@ -1937,8 +2059,8 @@ sub check {
 }
 
 
-package GLPlugin::TableItem;
-our @ISA = qw(GLPlugin::Item);
+package Monitoring::GLPlugin::TableItem;
+our @ISA = qw(Monitoring::GLPlugin::Item);
 
 use strict;
 
