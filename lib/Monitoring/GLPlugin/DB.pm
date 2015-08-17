@@ -6,6 +6,28 @@ use strict;
   our $session = undef;
 }
 
+sub add_db_modes {
+  my $self = shift;
+  $self->add_mode(
+      internal => 'server::connectiontime',
+      spec => 'connection-time',
+      alias => undef,
+      help => 'Time to connect to the server',
+  );
+  $self->add_mode(
+      internal => 'server::sql',
+      spec => 'sql',
+      alias => undef,
+      help => 'any sql command returning a single number',
+  );
+  $self->add_mode(
+      internal => 'server::sqlruntime',
+      spec => 'sql-runtime',
+      alias => undef,
+      help => 'the time an sql command needs to run',
+  );
+}
+
 sub get_db_tables {
 #  $self->get_db_tables([
 #    ['databases', 'select * from', 'Classes::POSTGRES::Component::DatabaseSubsystem::Database']
@@ -18,9 +40,10 @@ sub get_db_tables {
     my $class = $info->[2];
     my $filter = $info->[3];
     my $mapping = $info->[4];
+    my $args = $info->[5];
     $self->{$arrayname} = [] if ! exists $self->{$arrayname};
     my $max_idx = scalar(@{$mapping});;
-    foreach my $row ($self->fetchall_array($sql)) {
+    foreach my $row ($self->fetchall_array($sql, @{$args})) {
       my $col_idx = -1;
       my $params = {};
       while ($col_idx < $max_idx) {
