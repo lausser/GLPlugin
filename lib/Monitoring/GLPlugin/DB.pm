@@ -109,7 +109,10 @@ sub globalize_errors {
   #delete *{'add_message'};
   {
     no strict 'refs';
-    *{'add_message'} = *{'Monitoring::GLPlugin::add_message'};
+    foreach my $sub (qw(add_ok add_warning add_critical add_unknown
+        add_message check_messages)) {
+      *{$sub} = *{'Monitoring::GLPlugin::'.$sub};
+    }
   }
 }
 
@@ -124,7 +127,10 @@ sub localize_errors {
   # save global errors
   {
     no strict 'refs';
-    *{'add_message'} = *{'Monitoring::GLPlugin::Commandline::add_message'};
+    foreach my $sub (qw(add_ok add_warning add_critical add_unknown
+        add_message check_messages)) {
+      *{$sub} = *{'Monitoring::GLPlugin::Commandline::'.$sub};
+    }
   }
 }
 
