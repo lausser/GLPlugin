@@ -1,5 +1,6 @@
 Changes
 lib/Monitoring/GLPlugin.pm
+lib/Monitoring/GLPlugin/DB.pm
 lib/Monitoring/GLPlugin/SNMP.pm
 lib/Monitoring/GLPlugin/UPNP.pm
 Makefile.PL

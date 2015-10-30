@@ -134,3 +134,4 @@ sub localize_errors {
   }
 }
 
+__PACKAGE__
