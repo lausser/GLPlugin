@@ -6,6 +6,15 @@ use strict;
   our $session = undef;
 }
 
+sub new {
+  my $self = shift;
+  require Monitoring::GLPlugin::DB::Item
+      if ! grep /AUTOLOAD/, keys %Monitoring::GLPlugin::DB::Item::;
+  require Monitoring::GLPlugin::DB::TableItem
+      if ! grep /AUTOLOAD/, keys %Monitoring::GLPlugin::DB::TableItem::;
+  return $self->SUPER();
+}
+
 sub add_db_modes {
   my $self = shift;
   $self->add_mode(

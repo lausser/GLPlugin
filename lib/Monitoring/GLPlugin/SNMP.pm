@@ -26,6 +26,17 @@ use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
   our $uptime = 0;
 }
 
+sub new {
+  my $self = shift;
+  require Monitoring::GLPlugin::SNMP::CSF
+      if ! grep /AUTOLOAD/, keys %Monitoring::GLPlugin::SNMP::CSF::;
+  require Monitoring::GLPlugin::SNMP::Item
+      if ! grep /AUTOLOAD/, keys %Monitoring::GLPlugin::SNMP::Item::;
+  require Monitoring::GLPlugin::SNMP::TableItem
+      if ! grep /AUTOLOAD/, keys %Monitoring::GLPlugin::SNMP::TableItem::;
+  return $self->SUPER();
+}
+
 sub v2tov3 {
   my $self = shift;
   if ($self->opts->community && $self->opts->community =~ /^snmpv3(.)(.+)/) {
