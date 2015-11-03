@@ -94,44 +94,6 @@ sub validate_args {
   }
 }
 
+1;
 
-package Monitoring::GLPlugin::DB::Item;
-our @ISA = qw(Monitoring::GLPlugin::Item Monitoring::GLPlugin::DB);
-use strict;
-
-
-package Monitoring::GLPlugin::DB::TableItem;
-our @ISA = qw(Monitoring::GLPlugin::TableItem Monitoring::GLPlugin::DB);
-use strict;
-
-sub globalize_errors {
-  my $self = shift;
-  #delete *{'add_message'};
-  {
-    no strict 'refs';
-    foreach my $sub (qw(add_ok add_warning add_critical add_unknown
-        add_message check_messages)) {
-      *{$sub} = *{'Monitoring::GLPlugin::'.$sub};
-    }
-  }
-}
-
-sub localize_errors {
-  my $self = shift;
-  $self->{messages} = { 
-      ok=> [],
-      warning => [],
-      critical => [],
-      unknown => []
-  } if ! exists $self->{messages};
-  # save global errors
-  {
-    no strict 'refs';
-    foreach my $sub (qw(add_ok add_warning add_critical add_unknown
-        add_message check_messages)) {
-      *{$sub} = *{'Monitoring::GLPlugin::Commandline::'.$sub};
-    }
-  }
-}
-
-__PACKAGE__
+__END__
