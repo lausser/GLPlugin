@@ -1,3 +1,5 @@
+* 2015-11-05 1.2
+  remove VERSION from submodules
 * 2015-11-05 1.1
   Fix CPAN structure
 * 2015-07-08 1.0
