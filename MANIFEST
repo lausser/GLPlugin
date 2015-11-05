@@ -1,7 +1,16 @@
 Changes
 lib/Monitoring/GLPlugin.pm
+lib/Monitoring/GLPlugin/Commandline.pm
+lib/Monitoring/GLPlugin/Commandline/Getopt.pm
 lib/Monitoring/GLPlugin/DB.pm
+lib/Monitoring/GLPlugin/DB/Item.pm
+lib/Monitoring/GLPlugin/DB/TableItem.pm
+lib/Monitoring/GLPlugin/Item.pm
 lib/Monitoring/GLPlugin/SNMP.pm
+lib/Monitoring/GLPlugin/SNMP/CSF.pm
+lib/Monitoring/GLPlugin/SNMP/Item.pm
+lib/Monitoring/GLPlugin/SNMP/TableItem.pm
+lib/Monitoring/GLPlugin/TableItem.pm
 lib/Monitoring/GLPlugin/UPNP.pm
 Makefile.PL
 MANIFEST			This list of files

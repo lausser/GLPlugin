@@ -12,7 +12,7 @@ use File::Basename;
 use Digest::MD5 qw(md5_hex);
 use Errno;
 our $AUTOLOAD;
-our $VERSION = "1.0";
+our $VERSION = "1.1";
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -33,11 +33,11 @@ sub new {
   my $self = {};
   bless $self, $class;
   require Monitoring::GLPlugin::Commandline
-      if ! grep /AUTOLOAD/, keys %Monitoring::GLPlugin::Commandline::;
+      if ! grep /BEGIN/, keys %Monitoring::GLPlugin::Commandline::;
   require Monitoring::GLPlugin::Item
-      if ! grep /AUTOLOAD/, keys %Monitoring::GLPlugin::Item::;
+      if ! grep /BEGIN/, keys %Monitoring::GLPlugin::Item::;
   require Monitoring::GLPlugin::TableItem
-      if ! grep /AUTOLOAD/, keys %Monitoring::GLPlugin::TableItem::;
+      if ! grep /BEGIN/, keys %Monitoring::GLPlugin::TableItem::;
   $Monitoring::GLPlugin::plugin = Monitoring::GLPlugin::Commandline->new(%params);
   return $self;
 }

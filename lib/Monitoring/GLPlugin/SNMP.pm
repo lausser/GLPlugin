@@ -27,14 +27,19 @@ use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 }
 
 sub new {
-  my $self = shift;
+  my $class = shift;
+  my %params = @_;
+  require Monitoring::GLPlugin
+      if ! grep /BEGIN/, keys %Monitoring::GLPlugin::;
   require Monitoring::GLPlugin::SNMP::CSF
-      if ! grep /AUTOLOAD/, keys %Monitoring::GLPlugin::SNMP::CSF::;
+      if ! grep /BEGIN/, keys %Monitoring::GLPlugin::SNMP::CSF::;
   require Monitoring::GLPlugin::SNMP::Item
-      if ! grep /AUTOLOAD/, keys %Monitoring::GLPlugin::SNMP::Item::;
+      if ! grep /BEGIN/, keys %Monitoring::GLPlugin::SNMP::Item::;
   require Monitoring::GLPlugin::SNMP::TableItem
-      if ! grep /AUTOLOAD/, keys %Monitoring::GLPlugin::SNMP::TableItem::;
-  return $self->SUPER();
+      if ! grep /BEGIN/, keys %Monitoring::GLPlugin::SNMP::TableItem::;
+  my $self = Monitoring::GLPlugin->new(%params);
+  bless $self, $class;
+  return $self;
 }
 
 sub v2tov3 {

@@ -1,3 +1,5 @@
+* 2015-11-05 1.1
+  Fix CPAN structure
 * 2015-07-08 1.0
   First version, released on an unsuspecting world.
   GLPlugin has long been used in check_*_health-plugins

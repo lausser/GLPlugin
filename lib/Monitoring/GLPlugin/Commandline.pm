@@ -17,7 +17,7 @@ sub new {
   my $class = shift;
   my %params = @_;
   require Monitoring::GLPlugin::Commandline::Getopt
-      if ! grep /AUTOLOAD/, keys %Monitoring::GLPlugin::Commandline::Getopt::;
+      if ! grep /BEGIN/, keys %Monitoring::GLPlugin::Commandline::Getopt::;
   my $self = {
        perfdata => [],
        messages => {
