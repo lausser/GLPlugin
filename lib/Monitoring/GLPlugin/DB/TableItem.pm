@@ -1,5 +1,5 @@
 package Monitoring::GLPlugin::DB::TableItem;
-our @ISA = qw(Monitoring::GLPlugin::TableItem Monitoring::GLPlugin::DB);
+our @ISA = qw(Monitoring::GLPlugin::DB::CSF Monitoring::GLPlugin::TableItem Monitoring::GLPlugin::DB);
 use strict;
 
 sub globalize_errors {

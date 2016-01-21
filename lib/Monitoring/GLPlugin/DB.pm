@@ -7,12 +7,19 @@ use strict;
 }
 
 sub new {
-  my $self = shift;
+  my $class = shift;
+  my %params = @_;
+  require Monitoring::GLPlugin
+      if ! grep /BEGIN/, keys %Monitoring::GLPlugin::;
   require Monitoring::GLPlugin::DB::Item
-      if ! grep /AUTOLOAD/, keys %Monitoring::GLPlugin::DB::Item::;
+      if ! grep /BEGIN/, keys %Monitoring::GLPlugin::DB::CSF::;
+  require Monitoring::GLPlugin::DB::CSF
+      if ! grep /BEGIN/, keys %Monitoring::GLPlugin::DB::Item::;
   require Monitoring::GLPlugin::DB::TableItem
-      if ! grep /AUTOLOAD/, keys %Monitoring::GLPlugin::DB::TableItem::;
-  return $self->SUPER();
+      if ! grep /BEGIN/, keys %Monitoring::GLPlugin::DB::TableItem::;
+  my $self = Monitoring::GLPlugin->new(%params);
+  bless $self, $class;
+  return $self;
 }
 
 sub add_db_modes {
@@ -34,6 +41,38 @@ sub add_db_modes {
       spec => 'sql-runtime',
       alias => undef,
       help => 'the time an sql command needs to run',
+  );
+}
+
+sub add_db_args {
+  my $self = shift;
+  $self->add_arg(
+      spec => 'dbthresholds:s',
+      help => '--dbthresholds
+   Read thresholds from a database table',
+      required => 0,
+      env => 'DBTHRESHOLDS',
+  );
+  $self->add_arg(
+      spec => 'notemp',
+      help => '--notemp
+   Ignore temporary databases/tablespaces',
+      required => 0,
+  );
+  $self->add_arg(
+      spec => 'commit',
+      help => '--commit
+   turns on autocommit for the dbd::* module',
+      default => 0,
+      required => 0,
+  );
+  $self->add_arg(
+      spec => 'method:s',
+      help => '--method
+   how to connect to the database, perl-dbi or calling a command line client.
+   Default is "dbi", which requires the installation of a suitable perl-module.',
+      default => 'dbi',
+      required => 0,
   );
 }
 
@@ -66,33 +105,6 @@ sub get_db_tables {
   }
 }
 
-sub create_statefile {
-  my $self = shift;
-  my %params = @_;
-  my $extension = "";
-  $extension .= $params{name} ? '_'.$params{name} : '';
-  if ($self->opts->can('hostname') && $self->opts->hostname) {
-    $extension .= '_'.$self->opts->hostname;
-    $extension .= '_'.$self->opts->port;
-  }
-  if ($self->opts->can('server') && $self->opts->server) {
-    $extension .= '_'.$self->opts->server;
-  }
-  if ($self->opts->can('connection') && $self->opts->connection) {
-    $extension .= '_'.$self->opts->connection;
-  }
-  if ($self->opts->mode eq 'sql' && $self->opts->username) {
-    $extension .= '_'.$self->opts->username;
-  }
-  $extension =~ s/\//_/g;
-  $extension =~ s/\(/_/g;
-  $extension =~ s/\)/_/g;
-  $extension =~ s/\*/_/g;
-  $extension =~ s/\s/_/g;
-  return sprintf "%s/%s%s", $self->statefilesdir(),
-      $self->opts->mode, lc $extension;
-}
-
 sub validate_args {
   my $self = shift;
   $self->SUPER::validate_args();
@@ -100,6 +112,198 @@ sub validate_args {
     my $name = $self->opts->name;
     $name =~ s/\%([A-Fa-f0-9]{2})/pack('C', hex($1))/seg;
     $self->override_opt('name', $name);
+  }
+}
+
+sub no_such_mode {
+  my $self = shift;
+  if (ref($self) eq "Classes::Device") {
+    $self->add_unknown('the device is no known type of database server');
+  } else {
+    bless $self, "Monitoring::GLPlugin::DB";
+    $self->init();
+  }
+  if (ref($self) eq "Monitoring::GLPlugin") {
+    printf "Mode %s is not implemented for this type of device\n",
+        $self->opts->mode;
+    exit 3;
+  }
+}
+
+sub init {
+  my $self = shift;
+  if ($self->mode =~ /^server::connectiontime/) {
+    my $connection_time = $self->{tac} - $self->{tic};
+    $self->set_thresholds(warning => 1, critical => 5);
+    $self->add_message($self->check_thresholds($connection_time),
+         sprintf "%.2f seconds to connect as %s",
+              $connection_time, $self->opts->username,);
+    $self->add_perfdata(
+        label => 'connection_time',
+        value => $connection_time,
+    );
+  } elsif ($self->mode =~ /^server::sqlruntime/) {
+    my $tic = Time::HiRes::time();
+    my @genericsql = $self->fetchrow_array($self->opts->name);
+    my $runtime = Time::HiRes::time() - $tic;
+    # normally, sql errors and stderr result in CRITICAL or WARNING
+    # we can clear these errors if we are only interested in the runtime
+    $self->clear_all() if $self->check_messages() &&
+        defined $self->opts->mitigation && $self->opts->mitigation == 0;
+    $self->set_thresholds(warning => 1, critical => 5);
+    $self->add_nagios($self->check_thresholds($runtime),
+        sprintf "%.2f seconds to execute %s",
+            $runtime,
+            $self->opts->name2 ? $self->opts->name2 : $self->opts->name);
+    $self->add_perfdata(
+        label => "sql_runtime",
+        value => $runtime,
+        uom => "s",
+    );
+  } elsif ($self->mode =~ /^server::sql/) {
+    if ($self->opts->regexp) {
+      # sql output is treated as text
+      my $pattern = $self->opts->name2;
+      #if ($self->opts->name2 eq $self->opts->name) {
+      my $genericsql = $self->fetchrow_array($self->opts->name);
+      if (! defined $genericsql) {
+        $self->add_unknown(sprintf "got no valid response for %s",
+            $self->opts->name);
+      } else {
+        if (substr($pattern, 0, 1) eq '!') {
+          $pattern =~ s/^!//;
+          if ($genericsql !~ /$pattern/) {
+            $self->add_ok(
+                sprintf "output %s does not match pattern %s",
+                    $genericsql, $pattern);
+          } else {
+            $self->add_critical(
+                sprintf "output %s matches pattern %s",
+                    $genericsql, $pattern);
+          }
+        } else {
+          if ($genericsql =~ /$pattern/) {
+            $self->add_ok(
+                sprintf "output %s matches pattern %s",
+                    $genericsql, $pattern);
+          } else {
+            $self->add_critical(
+                sprintf "output %s does not match pattern %s",
+                    $genericsql, $pattern);
+          }
+        }
+      }
+    } else {
+      # sql output must be a number (or array of numbers)
+      my @genericsql = $self->fetchrow_array($self->opts->name);
+      #$self->create_opt("name2") if ! $self->opts->name2
+      $self->override_opt("name2", $self->opts->name) if ! $self->opts->name2;
+      if (! @genericsql) {
+          #(scalar(grep { /^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/ } @{$self->{genericsql}})) ==
+          #scalar(@{$self->{genericsql}}))) {
+        $self->add_unknown(sprintf "got no valid response for %s",
+            $self->opts->name);
+      } else {
+        # name2 in array
+        # units in array
+
+        $self->set_thresholds(warning => 1, critical => 5);
+        $self->add_message(
+          # the first item in the list will trigger the threshold values
+            $self->check_thresholds($genericsql[0]),
+                sprintf "%s: %s%s",
+                $self->opts->name2 ? lc $self->opts->name2 : lc $self->opts->name,
+              # float as float, integers as integers
+                join(" ", map {
+                    (sprintf("%d", $_) eq $_) ? $_ : sprintf("%f", $_)
+                } @genericsql),
+                $self->opts->units ? $self->opts->units : "");
+        my $i = 0;
+        # workaround... getting the column names from the database would be nicer
+        my @names2_arr = split(/\s+/, $self->opts->name2);
+        foreach my $t (@genericsql) {
+          $self->add_perfdata(
+              label => $names2_arr[$i] ? lc $names2_arr[$i] : lc $self->opts->name,
+              value => (sprintf("%d", $t) eq $t) ? $t : sprintf("%f", $t),
+              uom => $self->opts->units ? $self->opts->units : "",
+          );
+          $i++;
+        }
+      }
+    }
+  } else {
+    bless $self, "Monitoring::GLPlugin"; # see above: no_such_mode
+  }
+}
+
+sub compatibility_methods {
+  my $self = shift;
+  $self->{handle} = $self;
+  $self->SUPER::compatibility_methods() if $self->SUPER::can('compatibility_methods');
+}
+
+sub has_threshold_table {
+  my $self = shift;
+  # has to be implemented in each database driver class
+  return 0;
+}
+
+sub set_thresholds {
+  my $self = shift;
+  my %params = @_;
+  $self->SUPER::set_thresholds(%params);
+  if (defined $self->opts->dbthresholds && $self->has_threshold_table()) {
+    #
+    my @dbthresholds = $self->fetchall_array(
+        sprintf "SELECT * FROM %s WHERE mode = '%s'",
+            $self->{has_threshold_table}, $self->opts->mode
+    );
+    if (@dbthresholds) {
+      # | mode | =metric | warning | critical |
+      # | mode | =dbthresholds | warning | critical |
+      # | mode | =name2 | warning | critical |
+      # | mode | =name | warning | critical |
+      # | mode | NULL | warning | critical |
+      my %newparams = ();
+      my @metricmatches = grep { $params{metric} eq $_->[1] }
+          grep { defined $_->[1] }
+          grep { exists $params{metric} } @dbthresholds;
+      my @dbtmatches = grep { $self->opts->dbthresholds eq $_->[1] }
+          grep { defined $_->[1] }
+          grep { $self->opts->dbthresholds ne '1' } @dbthresholds;
+      my @name2matches = grep { $self->opts->name2 eq $_->[1] }
+          grep { defined $_->[1] }
+          grep { $self->opts->name2 } @dbthresholds;
+      my @namematches = grep { $self->opts->name eq $_->[1] }
+          grep { defined $_->[1] }
+          grep { $self->opts->name } @dbthresholds;
+      my @modematches = grep { ! defined $_->[1] } @dbthresholds;
+      if (@metricmatches) {
+        $newparams{warning} = $metricmatches[0]->[2];
+        $newparams{critical} = $metricmatches[0]->[3];
+      } elsif (@dbtmatches) {
+        $newparams{warning} = $dbtmatches[0]->[2];
+        $newparams{critical} = $dbtmatches[0]->[3];
+      } elsif (@name2matches) {
+        $newparams{warning} = $name2matches[0]->[2];
+        $newparams{critical} = $name2matches[0]->[3];
+      } elsif (@namematches) {
+        $newparams{warning} = $namematches[0]->[2];
+        $newparams{critical} = $namematches[0]->[3];
+      } elsif (@modematches) {
+        $newparams{warning} = $modematches[0]->[2];
+        $newparams{critical} = $modematches[0]->[3];
+      }
+      delete $newparams{warning} if
+          (! defined $newparams{warning} ||
+              $newparams{warning} !~ /^[-+]?[0-9]*\.?[0-9]+$/);
+      delete $newparams{critical} if
+          (! defined $newparams{critical} ||
+              $newparams{critical} !~ /^[-+]?[0-9]*\.?[0-9]+$/);
+      $newparams{metric} = $params{metric} if exists $params{metric};
+      $self->debug("overwrite thresholds with db-values: %s", Data::Dumper::Dumper(\%newparams)) if scalar(%newparams);
+      $self->SUPER::set_thresholds(%newparams) if scalar(%newparams);
+    }
   }
 }
 
