@@ -1,5 +1,6 @@
 package Monitoring::GLPlugin::Commandline;
 use strict;
+use IO::File;
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3, DEPENDENT => 4 };
 our %ERRORS = (
     'OK'        => OK,
@@ -69,7 +70,7 @@ sub debug {
     printf "\n";
   }
   if ($self->{trace}) {
-    my $logfh = new IO::File;
+    my $logfh = IO::File->new();
     $logfh->autoflush(1);
     if ($logfh->open($tracefile, "a")) {
       $logfh->printf("%s: ", scalar localtime);
