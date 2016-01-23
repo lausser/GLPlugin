@@ -3,6 +3,7 @@ lib/Monitoring/GLPlugin.pm
 lib/Monitoring/GLPlugin/Commandline.pm
 lib/Monitoring/GLPlugin/Commandline/Getopt.pm
 lib/Monitoring/GLPlugin/DB.pm
+lib/Monitoring/GLPlugin/DB/CSF.pm
 lib/Monitoring/GLPlugin/DB/Item.pm
 lib/Monitoring/GLPlugin/DB/TableItem.pm
 lib/Monitoring/GLPlugin/Item.pm
