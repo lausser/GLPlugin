@@ -6,7 +6,10 @@
   fix autoload of DB module
 * 2015-11-28 1.3
   add merge_tables, merge_tables_with_code
+* 2015-11-29 1.2.2
+  add merge_tables
   get_tables can get only specific rows
+  finish units
 * 2015-11-05 1.2
   remove VERSION from submodules
 * 2015-11-05 1.1

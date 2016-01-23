@@ -12,7 +12,11 @@ use File::Basename;
 use Digest::MD5 qw(md5_hex);
 use Errno;
 our $AUTOLOAD;
+<<<<<<< HEAD
 *VERSION = \'1.4.1.1';
+=======
+*VERSION = \'1.2.2';
+>>>>>>> 6ffded4930aebc895c2411e3a6d2e299e441ad29
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -724,10 +728,18 @@ sub number_of_bits {
     'Tibit' => 1099511627776,	# Tebibit per second, 1,024 gibibits per second
     'TB' => 8000000000000,	# Terabyte per second, 1,000 gigabytes per second
     # eigene kreationen
+<<<<<<< HEAD
     'Bits' => 1,
     'KBi' => 1024,
     'MBi' => 1024 * 1024,
     'GBi' => 1024 * 1024 * 1024,
+=======
+    'Bit' => 1,			# Bit per second
+    'KB' => 1024,		# Kilobyte (like disk kilobyte)
+    'KBi' => 1024,		# -"-
+    'MBi' => 1024 * 1024,	# Megabyte (like disk megabyte)
+    'GBi' => 1024 * 1024 * 1024, # Gigybate (like disk gigybyte)
+>>>>>>> 6ffded4930aebc895c2411e3a6d2e299e441ad29
   };
   if (exists $bits->{$unit}) {
     return $bits->{$unit};
