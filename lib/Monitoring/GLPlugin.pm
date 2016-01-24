@@ -1371,6 +1371,29 @@ sub system_tmpdir {
   }
 }
 
+sub convert_scientific_numbers {
+  my $n = shift;
+  # mostly used to convert numbers in scientific notation
+  if ($n =~ /^\s*\d+\s*$/) {
+    return $n;
+  } elsif ($n =~ /^\s*([-+]?)(\d*[\.,]*\d*)[eE]{1}([-+]?)(\d+)\s*$/) {
+    my ($vor, $num, $sign, $exp) = ($1, $2, $3, $4);
+    $n =~ s/E/e/g;
+    $n =~ s/,/\./g;
+    $num =~ s/,/\./g;
+    my $sig = $sign eq '-' ? "." . ($exp - 1 + length $num) : '';
+    my $dec = sprintf "%${sig}f", $n;
+    $dec =~ s/\.[0]+$//g;
+    return $dec;
+  } elsif ($n =~ /^\s*([-+]?)(\d+)[\.,]*(\d*)\s*$/) {
+    return $1.$2.".".$3;
+  } elsif ($n =~ /^\s*(.*?)\s*$/) {
+    return $1;
+  } else {
+    return $n;
+  }
+}
+
 sub compatibility_methods {
   my $self = shift;
   # add_perfdata
