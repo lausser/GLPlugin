@@ -1349,6 +1349,28 @@ sub write_pidfile {
   }
 }
 
+sub system_vartmpdir {
+  my $self = shift;
+  if ($^O =~ /MSWin/) {
+    return $self->system_tmpdir();
+  } else {
+    return "/var/tmp/".$Monitoring::GLPlugin::pluginname;
+  }
+}
+
+sub system_tmpdir {
+  my $self = shift;
+  if ($^O =~ /MSWin/) {
+    return $ENV{TEMP} if defined $ENV{TEMP};
+    return $ENV{TMP} if defined $ENV{TMP};
+    return File::Spec->catfile($ENV{windir}, 'Temp')
+        if defined $ENV{windir};
+    return 'C:\Temp';
+  } else {
+    return "/tmp";
+  }
+}
+
 sub compatibility_methods {
   my $self = shift;
   # add_perfdata
