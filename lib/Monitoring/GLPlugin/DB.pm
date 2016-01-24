@@ -373,8 +373,10 @@ sub create_extcmd_files {
 
 sub delete_extcmd_files {
   my $self = shift;
-  unlink $self->{sql_commandfile} if -f $self->{sql_commandfile};
-  unlink $self->{sql_resultfile} if -f $self->{sql_resultfile};
+  unlink $self->{sql_commandfile}
+      if $self->{sql_commandfile} && -f $self->{sql_commandfile};
+  unlink $self->{sql_resultfile}
+      if $self->{sql_resultfile} && -f $self->{sql_resultfile};
 }
 
 sub DESTROY {
