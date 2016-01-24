@@ -1,6 +1,7 @@
 package Monitoring::GLPlugin::DB;
 our @ISA = qw(Monitoring::GLPlugin);
 use strict;
+use File::Basename qw(basename dirname);
 
 {
   our $session = undef;
@@ -305,6 +306,81 @@ sub set_thresholds {
       $self->SUPER::set_thresholds(%newparams) if scalar(%newparams);
     }
   }
+}
+
+sub find_extcmd {
+  my $self = shift;
+  my $cmd = shift;
+  my @envpaths = @_;
+  my @paths = $^O =~ /MSWin/ ?
+      split(';', $ENV{PATH}) : split(':', $ENV{PATH});
+  return $self->{extcmd} if $self->{extcmd};
+  foreach my $path (@envpaths) {
+    if ($ENV{$path}) {
+      if (! -d $path.'/'.($^O =~ /MSWin/ ? $cmd.'.exe' : $cmd) &&
+          -x $path.'/'.($^O =~ /MSWin/ ? $cmd.'.exe' : $cmd)) {
+        $self->{extcmd} = $path.'/'.($^O =~ /MSWin/ ? $cmd.'.exe' : $cmd);
+        last;
+      } elsif (! -d $path.'/bin/'.$cmd && -x $path.'/bin/'.$cmd) {
+        $self->{extcmd} = $path.'/bin/'.$cmd;
+        last;
+      }
+    }
+  }
+  return $self->{extcmd} if $self->{extcmd};
+  foreach my $path (@paths) {
+    if (! -d $path.'/'.($^O =~ /MSWin/ ? $cmd.'.exe' : $cmd) &&
+        -x $path.'/'.($^O =~ /MSWin/ ? $cmd.'.exe' : $cmd)) {
+      $self->{extcmd} = $path.'/'.($^O =~ /MSWin/ ? $cmd.'.exe' : $cmd);
+      if ($^O =~ /MSWin/) {
+        map { $ENV{$_} = $path } @envpaths;
+      } else {
+        if (basename(dirname($path)) eq "bin") {
+          $path = dirname(dirname($path));
+        }
+        map { $ENV{$_} = $path } @envpaths;
+      }
+      last;
+    }
+  }
+  return $self->{extcmd};
+}
+
+sub write_extcmd_file {
+  my $self = shift;
+  my $sql = shift;
+}
+
+sub create_extcmd_files {
+  my $self = shift;
+  my $template = $self->{mode}.'XXXXX';
+  if ($^O =~ /MSWin/) {
+    $template =~ s/::/_/g;
+  }
+  ($self->{sql_commandfile_handle}, $self->{sql_commandfile}) =
+      tempfile($template, SUFFIX => ".sql",
+      DIR => $self->system_tmpdir() );
+  close $self->{sql_commandfile_handle};
+  ($self->{sql_resultfile_handle}, $self->{sql_resultfile}) =
+      tempfile($template, SUFFIX => ".out",
+      DIR => $self->system_tmpdir() );
+  close $self->{sql_resultfile_handle};
+  ($self->{sql_outfile_handle}, $self->{sql_outfile}) =
+      tempfile($template, SUFFIX => ".out",
+      DIR => $self->system_tmpdir() );
+  close $self->{sql_outfile_handle};
+}
+
+sub delete_extcmd_files {
+  my $self = shift;
+  unlink $self->{sql_commandfile} if -f $self->{sql_commandfile};
+  unlink $self->{sql_resultfile} if -f $self->{sql_resultfile};
+}
+
+sub DESTROY {
+  my $self = shift;
+  $self->trace("try to clean up command and result files");
+  $self->delete_extcmd_files();
 }
 
 1;
