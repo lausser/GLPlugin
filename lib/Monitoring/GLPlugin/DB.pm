@@ -370,14 +370,22 @@ sub create_extcmd_files {
       tempfile($template, SUFFIX => ".out",
       DIR => $self->system_tmpdir() );
   close $self->{sql_outfile_handle};
+  $Monitoring::GLPlugin::DB::sql_commandfile = $self->{sql_commandfile};
+  $Monitoring::GLPlugin::DB::sql_resultfile = $self->{sql_resultfile};
+  $Monitoring::GLPlugin::DB::sql_outfile = $self->{sql_outfile};
 }
 
 sub delete_extcmd_files {
   my $self = shift;
-  unlink $self->{sql_commandfile}
-      if $self->{sql_commandfile} && -f $self->{sql_commandfile};
-  unlink $self->{sql_resultfile}
-      if $self->{sql_resultfile} && -f $self->{sql_resultfile};
+  unlink $Monitoring::GLPlugin::DB::sql_commandfile
+      if $Monitoring::GLPlugin::DB::sql_commandfile &&
+      -f $Monitoring::GLPlugin::DB::sql_commandfile;
+  unlink $Monitoring::GLPlugin::DB::sql_resultfile
+      if $Monitoring::GLPlugin::DB::sql_resultfile &&
+      -f $Monitoring::GLPlugin::DB::sql_resultfile;
+  unlink $Monitoring::GLPlugin::DB::sql_outfile
+      if $Monitoring::GLPlugin::DB::sql_outfile &&
+      -f $Monitoring::GLPlugin::DB::sql_outfile;
 }
 
 sub DESTROY {
