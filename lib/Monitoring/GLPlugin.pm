@@ -1372,6 +1372,7 @@ sub system_tmpdir {
 }
 
 sub convert_scientific_numbers {
+  my $self = shift;
   my $n = shift;
   # mostly used to convert numbers in scientific notation
   if ($n =~ /^\s*\d+\s*$/) {
