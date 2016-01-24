@@ -2,6 +2,7 @@ package Monitoring::GLPlugin::DB;
 our @ISA = qw(Monitoring::GLPlugin);
 use strict;
 use File::Basename qw(basename dirname);
+use File::Temp qw(tempfile);
 
 {
   our $session = undef;
