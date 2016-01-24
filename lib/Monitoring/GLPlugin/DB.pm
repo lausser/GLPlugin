@@ -381,7 +381,7 @@ sub delete_extcmd_files {
 
 sub DESTROY {
   my $self = shift;
-  $self->trace("try to clean up command and result files");
+  $self->debug("try to clean up command and result files");
   $self->delete_extcmd_files();
 }
 
