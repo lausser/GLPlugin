@@ -354,7 +354,7 @@ sub write_extcmd_file {
 
 sub create_extcmd_files {
   my $self = shift;
-  my $template = $self->{mode}.'XXXXX';
+  my $template = $self->mode().'XXXXX';
   if ($^O =~ /MSWin/) {
     $template =~ s/::/_/g;
   }
