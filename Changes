@@ -1,3 +1,7 @@
+* 2016-01-24 1.4.2.1
+  add DB/DBI.pm
+* 2016-01-24 1.4.2
+  Bugfixes in the DB part
 * 2016-01-20 1.4.1
   Bugfixes in the DB part
 * 2016-01-06 1.4
