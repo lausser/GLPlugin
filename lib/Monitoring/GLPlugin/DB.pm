@@ -13,9 +13,11 @@ sub new {
   my %params = @_;
   require Monitoring::GLPlugin
       if ! grep /BEGIN/, keys %Monitoring::GLPlugin::;
-  require Monitoring::GLPlugin::DB::Item
-      if ! grep /BEGIN/, keys %Monitoring::GLPlugin::DB::CSF::;
   require Monitoring::GLPlugin::DB::CSF
+      if ! grep /BEGIN/, keys %Monitoring::GLPlugin::DB::CSF::;
+  require Monitoring::GLPlugin::DB::DBI
+      if ! grep /BEGIN/, keys %Monitoring::GLPlugin::DB::DBI::;
+  require Monitoring::GLPlugin::DB::Item
       if ! grep /BEGIN/, keys %Monitoring::GLPlugin::DB::Item::;
   require Monitoring::GLPlugin::DB::TableItem
       if ! grep /BEGIN/, keys %Monitoring::GLPlugin::DB::TableItem::;
