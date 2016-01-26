@@ -9,6 +9,7 @@ lib/Monitoring/GLPlugin/DB/Item.pm
 lib/Monitoring/GLPlugin/DB/TableItem.pm
 lib/Monitoring/GLPlugin/Item.pm
 lib/Monitoring/GLPlugin/SNMP.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids.pm
 lib/Monitoring/GLPlugin/SNMP/CSF.pm
 lib/Monitoring/GLPlugin/SNMP/Item.pm
 lib/Monitoring/GLPlugin/SNMP/TableItem.pm
