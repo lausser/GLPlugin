@@ -1054,11 +1054,23 @@ sub implements_mib {
   # some mibs are only composed of tables
   my $traces;
   if ($self->opts->snmpwalk) {
-    $traces = {@{[map {
-        $_, $self->rawdata->{$_} 
+    my @matches;  
+    # exact match  
+    push(@matches, @{[map {  
+        $_, $self->rawdata->{$_}  
+    } grep {  
+        $_ eq $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{$mib}  
+    } keys %{$self->rawdata}]});  
+  
+    # partial match (add trailing dot)  
+    my $check = $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{$mib};  
+    $check =~ s/\.?$/./;  
+    push(@matches, @{[map {  
+        $_, $self->rawdata->{$_}  
     } grep {
-        substr($_, 0, length($Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{$mib})) eq $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{$mib} 
-    } keys %{$self->rawdata}]}};
+        substr($_, 0, length($check)) eq $check  
+    } keys %{$self->rawdata}]});  
+    $traces = {@matches};  
   } else {
     my %params = (
         -varbindlist => [
