@@ -6,6 +6,7 @@ use strict;
 use File::Basename;
 use Digest::MD5 qw(md5_hex);
 use Data::Dumper;
+use Module::Load;
 use AutoLoader;
 our $AUTOLOAD;
 
@@ -773,18 +774,6 @@ sub init {
 
 sub check_snmp_and_model {
   my $self = shift;
-  $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'MIB-II'} = {
-    sysDescr => '1.3.6.1.2.1.1.1',
-    sysObjectID => '1.3.6.1.2.1.1.2',
-    sysUpTime => '1.3.6.1.2.1.1.3',
-    sysName => '1.3.6.1.2.1.1.5',
-  };
-  $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'SNMP-FRAMEWORK-MIB'} = {
-    snmpEngineID => '1.3.6.1.6.3.10.2.1.1.0',
-    snmpEngineBoots => '1.3.6.1.6.3.10.2.1.2.0',
-    snmpEngineTime => '1.3.6.1.6.3.10.2.1.3.0',
-    snmpEngineMaxMessageSize => '1.3.6.1.6.3.10.2.1.4.0',
-  };
   if ($self->opts->snmpwalk) {
     my $response = {};
     if (! -f $self->opts->snmpwalk) {
@@ -866,9 +855,9 @@ sub check_snmp_and_model {
   }
   if (! $self->check_messages()) {
     my $tic = time;
-    my $sysUptime = $self->get_snmp_object('MIB-II', 'sysUpTime', 0);
+    my $sysUptime = $self->get_snmp_object('MIB-2-MIB', 'sysUpTime', 0);
     my $snmpEngineTime = $self->get_snmp_object('SNMP-FRAMEWORK-MIB', 'snmpEngineTime');
-    my $sysDescr = $self->get_snmp_object('MIB-II', 'sysDescr', 0);
+    my $sysDescr = $self->get_snmp_object('MIB-2-MIB', 'sysDescr', 0);
     my $tac = time;
     if (defined $sysUptime && defined $sysDescr) {
       # drecksschrott asa liefert negative werte
@@ -879,7 +868,7 @@ sub check_snmp_and_model {
         $self->{uptime} = $self->timeticks($sysUptime);
       }
       $self->{productname} = $sysDescr;
-      $self->{sysobjectid} = $self->get_snmp_object('MIB-II', 'sysObjectID', 0);
+      $self->{sysobjectid} = $self->get_snmp_object('MIB-2-MIB', 'sysObjectID', 0);
       $self->debug(sprintf 'uptime: %s', $self->{uptime});
       $self->debug(sprintf 'up since: %s',
           scalar localtime (time - $self->{uptime}));
@@ -1028,21 +1017,52 @@ sub uptime {
   return $Monitoring::GLPlugin::SNMP::uptime;
 }
 
+sub map_oid_to_class {
+  my $self = shift;
+  my $oid = shift;
+  my $class = shift;
+  $Monitoring::GLPlugin::SNMP::MibsAndOids::discover_ids->{$oid} = $class;
+}
+
 sub discover_suitable_class {
   my $self = shift;
-  my $sysobj = $self->get_snmp_object('MIB-II', 'sysObjectID', 0);
-  if ($sysobj && exists $Monitoring::GLPlugin::SNMP::MibsAndOids::discover_ids->{$sysobj}) {
-    return $Monitoring::GLPlugin::SNMP::MibsAndOids::discover_ids->{$sysobj};
+  my $sysobj = $self->get_snmp_object('MIB-2-MIB', 'sysObjectID', 0);
+  foreach my $oid (keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::discover_ids}) {
+    if ($sysobj && $Monitoring::GLPlugin::SNMP::MibsAndOids::discover_ids->{$oid} eq $sysobj) {
+      return $Monitoring::GLPlugin::SNMP::MibsAndOids::discover_ids->{$sysobj};
+    }
+  }
+}
+
+sub require_mib {
+  my $self = shift;
+  my $mib = shift;
+  if (! exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}) {
+    my $package = uc $mib;
+    $package =~ s/-//g;
+    eval {
+      my @keynum = keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids};
+      load "Monitoring::GLPlugin::SNMP::MibsAndOids::".$package;
+      my @newkeynum = keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids};
+      if (scalar(@newkeynum) <= scalar(@keynum)) {
+        $self->debug(sprintf "from %d to %d keys. why did we laod?",
+            scalar(@newkeynum), scalar(@keynum));
+      }
+    };
+    if ($@) {
+      $self->debug("failed to load "."Monitoring::GLPlugin::SNMP::MibsAndOids::".$package);
+    }
   }
 }
 
 sub implements_mib {
   my $self = shift;
   my $mib = shift;
+  $self->require_mib($mib);
   if (! exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{$mib}) {
     return 0;
   }
-  my $sysobj = $self->get_snmp_object('MIB-II', 'sysObjectID', 0);
+  my $sysobj = $self->get_snmp_object('MIB-2-MIB', 'sysObjectID', 0);
   $sysobj =~ s/^\.// if $sysobj;
   if ($sysobj && $sysobj eq $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{$mib}) {
     $self->debug(sprintf "implements %s (sysobj exact)", $mib);
@@ -1378,6 +1398,7 @@ sub get_snmp_object {
   my $mib = shift;
   my $mo = shift;
   my $index = shift;
+  $self->require_mib($mib);
   if (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib} &&
       exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$mo}) {
     my $oid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$mo}.
@@ -1416,6 +1437,7 @@ sub get_table_row_oids {
   my $mib = shift;
   my $table = shift;
   my $rows = shift;
+  $self->require_mib($mib);
   my $entry = $table;
   $entry =~ s/Table/Entry/g;
   my $eoid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry}.'.';
@@ -1442,6 +1464,7 @@ sub get_snmp_table_objects {
   my $table = shift;
   my $indices = shift || [];
   my $rows = shift || [];
+  $self->require_mib($mib);
   my @entries = ();
   my $augmenting_table;
   $self->debug(sprintf "get_snmp_table_objects %s %s", $mib, $table);
@@ -1662,13 +1685,24 @@ sub get_request {
       $params{-contextname} = $self->opts->contextname if $self->opts->contextname;
     }
     my $result = $Monitoring::GLPlugin::SNMP::session->get_request(%params);
+    # so, und jetzt gibts stinkstiefel, die kriegen
+    # params{-varbindlist => [1.3.6.1.4.1.318.1.1.1.1.1.1]
+    # und result ist
+    # { 1.3.6.1.4.1.318.1.1.1.1.1.1.0 => "Smart-UPS RT 10000 XL" }
+    # letzteres kommt in raw_data
+    # und beim abschliessenden map wirds natuerlich nicht mehr gefunden 
+    # also leeres return. <<kraftausdruck>>
     foreach my $key (%{$result}) {
       $self->add_rawdata($key, $result->{$key});
     }
   }
   my $result = {};
-  map { $result->{$_} = $Monitoring::GLPlugin::SNMP::rawdata->{$_} }
-      @{$params{'-varbindlist'}};
+  map {
+      $result->{$_} = exists $Monitoring::GLPlugin::SNMP::rawdata->{$_} ?
+          $Monitoring::GLPlugin::SNMP::rawdata->{$_} :
+      exists $Monitoring::GLPlugin::SNMP::rawdata->{$_.'.0'} ?
+          $Monitoring::GLPlugin::SNMP::rawdata->{$_.'.0'} : undef;
+  } @{$params{'-varbindlist'}};
   return $result;
 }
 
@@ -1976,6 +2010,7 @@ sub valid_response {
   my $mib = shift;
   my $oid = shift;
   my $index = shift;
+  $self->require_mib($mib);
   if (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib} &&
       exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$oid}) {
     # make it numerical
@@ -2010,6 +2045,7 @@ sub make_symbolic {
   my $mib = shift;
   my $result = shift;
   my $indices = shift;
+  $self->require_mib($mib);
   my @entries = ();
   if (! wantarray && ref(\$result) eq "SCALAR" && ref(\$indices) eq "SCALAR") {
     # $self->make_symbolic('CISCO-IETF-NAT-MIB', 'cnatProtocolStatsName', $self->{cnatProtocolStatsName});
@@ -2297,6 +2333,7 @@ sub get_sub_table {
   my $self = shift;
   my $mib = shift;
   my $names = shift;
+  $self->require_mib($mib);
 
   my @oids = map {
     $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$_}
