@@ -12,7 +12,7 @@ use File::Basename;
 use Digest::MD5 qw(md5_hex);
 use Errno;
 our $AUTOLOAD;
-*VERSION = \'2.0';
+*VERSION = \'2.1';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 

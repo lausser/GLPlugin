@@ -1041,12 +1041,21 @@ sub require_mib {
     my $package = uc $mib;
     $package =~ s/-//g;
     eval {
-      my @keynum = keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids};
+      my @oldkeys = ();
+      $self->set_variable("verbosity", 2);
+      if ($self->get_variable("verbose")) {
+        my @oldkeys = keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids};
+      }
+      $self->debug("load mib "."Monitoring::GLPlugin::SNMP::MibsAndOids::".$package);
       load "Monitoring::GLPlugin::SNMP::MibsAndOids::".$package;
-      my @newkeynum = keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids};
-      if (scalar(@newkeynum) <= scalar(@keynum)) {
-        $self->debug(sprintf "from %d to %d keys. why did we laod?",
-            scalar(@newkeynum), scalar(@keynum));
+      if ($self->get_variable("verbose")) {
+        my @newkeys = keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids};
+        $self->debug(sprintf "now i know: %s", join(" ", sort @newkeys));
+        $self->debug(sprintf "now i know %d keys.", scalar(@newkeys));
+        if (scalar(@newkeys) <= scalar(@oldkeys)) {
+          $self->debug(sprintf "from %d to %d keys. why did we load?",
+              scalar(@oldkeys), scalar(@newkeys));
+        }
       }
     };
     if ($@) {
