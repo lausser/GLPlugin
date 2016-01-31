@@ -741,7 +741,7 @@ sub init {
       next if $self->opts->protocol ne "1" && $mibinfo->[2] eq "v1";
       $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{$mibinfo->[3]} = $mibinfo->[0];
     }
-    $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'SNMP-MIB2'} = "1.3.6.1.2.1";
+    $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'MIB-2-MIB'} = "1.3.6.1.2.1";
     foreach my $mib (keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids}) {
       if ($self->implements_mib($mib)) {
         push(@outputlist, [$mib, $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{$mib}]);
@@ -1387,6 +1387,19 @@ sub mibs_and_oids_definition {
     }
   } else {
     return "unknown_".$definition;
+  }
+}
+
+sub clear_table_cache {
+  my $self = shift;
+  my $mib = shift;
+  my $table = shift;
+  if ($table && exists $Monitoring::GLPlugin::SNMP::tablecache->{$mib}) {
+    delete $Monitoring::GLPlugin::SNMP::tablecache->{$mib}->{$table};
+  } elsif ($mib) {
+    delete $Monitoring::GLPlugin::SNMP::tablecache->{$mib};
+  } else {
+    $Monitoring::GLPlugin::SNMP::tablecache = {};
   }
 }
 
