@@ -13,6 +13,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'HWg-WLD-MIB'} = {
   x390 => '1.3.6.1.4.1.21796.4',
   hwgwld => '1.3.6.1.4.1.21796.4.5',
   sensTable => '1.3.6.1.4.1.21796.4.5.4',
+  sensEntry => '1.3.6.1.4.1.21796.4.5.4.1', # gibts nicht, aber wldEntry ist bloed
   wldEntry => '1.3.6.1.4.1.21796.4.5.4.1',
   wldIndex => '1.3.6.1.4.1.21796.4.5.4.1.1',
   wldName => '1.3.6.1.4.1.21796.4.5.4.1.2',
