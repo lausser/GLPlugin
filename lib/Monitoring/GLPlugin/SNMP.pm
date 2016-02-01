@@ -954,6 +954,13 @@ sub establish_snmp_session {
   }
 }
 
+sub session_translate {
+  my $self = shift;
+  my $translation = shift;
+  $Monitoring::GLPlugin::SNMP::session->translate($translation) if
+      $Monitoring::GLPlugin::SNMP::session;
+}
+
 sub establish_snmp_secondary_session {
   my $self = shift;
   if ($self->opts->protocol eq '3') {
