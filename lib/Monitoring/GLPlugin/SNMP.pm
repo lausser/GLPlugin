@@ -1298,15 +1298,15 @@ sub get_snmp_objects {
   my $mib = shift;
   my @mos = @_;
   foreach (@mos) {
-    my $value = $self->get_snmp_object($mib, $_, 0);
-    if (defined $value) {
-      $self->{$_} = $value;
-    } else {
+    #my $value = $self->get_snmp_object($mib, $_, 0);
+    #if (defined $value) {
+    #  $self->{$_} = $value;
+    #} else {
       my $value = $self->get_snmp_object($mib, $_);
       if (defined $value) {
         $self->{$_} = $value;
       }
-    }
+    #}
   }
 }
 
@@ -1434,6 +1434,9 @@ sub get_snmp_object {
       }
     }
     $self->debug(sprintf "GET: %s::%s (%s) : %s", $mib, $mo, $oid, defined $response->{$oid} ? $response->{$oid} : "<undef>");
+    if (! defined $response->{$oid} && ! defined $index) {
+      return $self->get_snmp_object($mib, $mo, 0);
+    }
     return $response->{$oid};
   }
   return undef;
