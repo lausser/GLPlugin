@@ -1044,19 +1044,25 @@ sub discover_suitable_class {
 sub require_mib {
   my $self = shift;
   my $mib = shift;
-  if (! exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}) {
-    my $package = uc $mib;
-    $package =~ s/-//g;
+  my $package = uc $mib;
+  $package =~ s/-//g;
+  if (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib} ||
+      exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{$mib}) {
+    $self->debug("i know package "."Monitoring::GLPlugin::SNMP::MibsAndOids::".$package);
+    return;
+  } else {
     eval {
       my @oldkeys = ();
       $self->set_variable("verbosity", 2);
       if ($self->get_variable("verbose")) {
-        my @oldkeys = keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids};
+        my @oldkeys = exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib} ?
+            keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids} : 0;
       }
       $self->debug("load mib "."Monitoring::GLPlugin::SNMP::MibsAndOids::".$package);
       load "Monitoring::GLPlugin::SNMP::MibsAndOids::".$package;
       if ($self->get_variable("verbose")) {
-        my @newkeys = keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids};
+        my @newkeys = exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib} ?
+            keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids} : 0;
         $self->debug(sprintf "now i know: %s", join(" ", sort @newkeys));
         $self->debug(sprintf "now i know %d keys.", scalar(@newkeys));
         if (scalar(@newkeys) <= scalar(@oldkeys)) {
@@ -1067,6 +1073,12 @@ sub require_mib {
     };
     if ($@) {
       $self->debug("failed to load "."Monitoring::GLPlugin::SNMP::MibsAndOids::".$package);
+    } else {
+      if (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::requirements->{$mib}) {
+        foreach my $submib (@{$Monitoring::GLPlugin::SNMP::MibsAndOids::requirements->{$mib}}) {
+          $self->require_mib($submib);
+        }
+      }
     }
   }
 }

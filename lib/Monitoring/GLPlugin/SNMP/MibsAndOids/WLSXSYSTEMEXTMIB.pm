@@ -1,5 +1,9 @@
 package Monitoring::GLPlugin::SNMP::MibsAndOids::WLSXSYSTEMEXTMIB;
 
+$Monitoring::GLPlugin::SNMP::MibsAndOids::requirements->{'WLSX-SYSTEMEXT-MIB'} = [
+  'ARUBA-TC-MIB',
+];
+
 $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'WLSX-SYSTEMEXT-MIB'} = {
   url => '',
   name => 'WLSX-SYSTEMEXT-MIB',
@@ -15,7 +19,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'WLSX-SYSTEMEXT-MIB'} 
   'wlsxSysExtHostname' => '1.3.6.1.4.1.14823.2.2.1.2.1.2',
   'wlsxSysExtModelName' => '1.3.6.1.4.1.14823.2.2.1.2.1.3',
   'wlsxSysExtSwitchRole' => '1.3.6.1.4.1.14823.2.2.1.2.1.4',
-  'wlsxSysExtSwitchRoleDefinition' => 'ARUBA-TC::ArubaSwitchRole',
+  'wlsxSysExtSwitchRoleDefinition' => 'ARUBA-TC-MIB::ArubaSwitchRole',
   'wlsxSysExtSwitchMasterIp' => '1.3.6.1.4.1.14823.2.2.1.2.1.5',
   'wlsxSysExtSwitchDate' => '1.3.6.1.4.1.14823.2.2.1.2.1.6',
   'wlsxSysExtSwitchBaseMacaddress' => '1.3.6.1.4.1.14823.2.2.1.2.1.7',
@@ -62,12 +66,12 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'WLSX-SYSTEMEXT-MIB'} 
   'wlsxSysExtFanEntry' => '1.3.6.1.4.1.14823.2.2.1.2.1.17.1',
   'sysExtFanIndex' => '1.3.6.1.4.1.14823.2.2.1.2.1.17.1.1',
   'sysExtFanStatus' => '1.3.6.1.4.1.14823.2.2.1.2.1.17.1.2',
-  'sysExtFanStatusDefinition' => 'ARUBA-TC::ArubaActiveState',
+  'sysExtFanStatusDefinition' => 'ARUBA-TC-MIB::ArubaActiveState',
   'wlsxSysExtPowerSupplyTable' => '1.3.6.1.4.1.14823.2.2.1.2.1.18',
   'wlsxSysExtPowerSupplyEntry' => '1.3.6.1.4.1.14823.2.2.1.2.1.18.1',
   'sysExtPowerSupplyIndex' => '1.3.6.1.4.1.14823.2.2.1.2.1.18.1.1',
   'sysExtPowerSupplyStatus' => '1.3.6.1.4.1.14823.2.2.1.2.1.18.1.2',
-  'sysExtPowerSupplyStatusDefinition' => 'ARUBA-TC::ArubaActiveState',
+  'sysExtPowerSupplyStatusDefinition' => 'ARUBA-TC-MIB::ArubaActiveState',
   'wlsxSysExtSwitchListTable' => '1.3.6.1.4.1.14823.2.2.1.2.1.19',
   'wlsxSysExtSwitchListEntry' => '1.3.6.1.4.1.14823.2.2.1.2.1.19.1',
   'sysExtSwitchIPAddress' => '1.3.6.1.4.1.14823.2.2.1.2.1.19.1.1',

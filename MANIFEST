@@ -15,6 +15,8 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ADICMANAGEMENTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/AIRESPACESWITCHINGMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/AIRESPACEWIRELESSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ALARMMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ALCATELIND1BASEMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ARUBATCMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ASYNCOSMAILMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ATTACKMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/BDTMIB.pm
@@ -55,6 +57,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/FOUNDRYSNSWL4SWITCHGROUPMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HH3CENTITYEXTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HOSTRESOURCESMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HPICFCHASSISMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HWGWLDMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IFMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IPFORWARDMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IPMIB.pm
@@ -65,7 +68,9 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LOADBALSYSTEMMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/MGSNMPUPSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/MIB2MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/MINIIFMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/NETGEARMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/NETSCREENCHASSISMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/NETSCREENPRODUCTSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/NETSCREENRESOURCEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/NETSWITCHMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/NETVISIONV6.pm
@@ -75,6 +80,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/OLDSTATISTICSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ONEACCESSSYSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/OSPFMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/PANCOMMONMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/PANPRODUCTSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/PDU2MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/PDUMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/POWERNETMIB.pm
@@ -96,14 +102,16 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SPECTRALOGICGLOBALREG.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SPECTRALOGICGLOBALREGSLHARDWARESLLIBRARIESSLTSERIES.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/STATISTICSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SWMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SYNOPTICSROOTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SYSTEMRESOURCESMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/UCDSNMPMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/UPSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/UPSV4MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/USAGEMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/WEBGRAPH8XTHERMOMETERMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/WEBGRAPHTHERMOHYGROBAROMETERMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/WLSXSYSTEMEXTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/WLSXWLANMIB.pm
-lib/Monitoring/GLPlugin/SNMP/MibsAndOids/XPANPRODUCTSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/XPPCMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/XUPSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/CSF.pm
