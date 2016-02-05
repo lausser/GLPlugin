@@ -4,8 +4,7 @@ use Digest::MD5 qw(md5_hex);
 use strict;
 
 sub create_statefile {
-  my $self = shift;
-  my %params = @_;
+  my ($self, %params) = @_;
   my $extension = "";
   $extension .= $params{name} ? '_'.$params{name} : '';
   if ($self->opts->community) {

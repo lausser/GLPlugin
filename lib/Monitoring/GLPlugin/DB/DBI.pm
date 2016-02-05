@@ -3,9 +3,7 @@ our @ISA = qw(Monitoring::GLPlugin::DB);
 use strict;
 
 sub fetchrow_array {
-  my $self = shift;
-  my $sql = shift;
-  my @arguments = @_;
+  my ($self, $shift, @arguments) = @_;
   my $sth = undef;
   my @row = ();
   my $stderrvar = "";
@@ -39,9 +37,7 @@ sub fetchrow_array {
 }
 
 sub fetchall_array {
-  my $self = shift;
-  my $sql = shift;
-  my @arguments = @_;
+  my ($self, $shift, @arguments) = @_;
   my $sth = undef;
   my $rows = undef;
   my $stderrvar = "";
@@ -74,8 +70,7 @@ sub fetchall_array {
 }
 
 sub execute {
-  my $self = shift;
-  my $sql = shift;
+  my ($self, $sql) = @_;
   my $errvar = "";
   my $stderrvar = "";
   *SAVEERR = *STDERR;
@@ -98,14 +93,14 @@ sub execute {
 }
 
 sub DESTROY {
-  my $self = shift;
+  my ($self) = @_;
   $self->debug(sprintf "disconnecting DBD %s",
       $Monitoring::GLPlugin::DB::session ? "with handle" : "without handle");
   $Monitoring::GLPlugin::DB::session->disconnect() if $Monitoring::GLPlugin::DB::session;
 }
 
 sub add_dbi_funcs {
-  my $self = shift;
+  my ($self) = @_;
   $self->SUPER::add_dbi_funcs();
   {
     no strict 'refs';

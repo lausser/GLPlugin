@@ -28,8 +28,7 @@ use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 }
 
 sub new {
-  my $class = shift;
-  my %params = @_;
+  my ($class, %params) = @_;
   my $self = {};
   bless $self, $class;
   require Monitoring::GLPlugin::Commandline
@@ -43,7 +42,7 @@ sub new {
 }
 
 sub init {
-  my $self = shift;
+  my ($self) = @_;
   if ($self->opts->can("blacklist") && $self->opts->blacklist &&
       -f $self->opts->blacklist) {
     $self->opts->blacklist = do {
@@ -52,8 +51,7 @@ sub init {
 }
 
 sub dumper {
-  my $self = shift;
-  my $object = shift;
+  my ($self, $object) = @_;
   my $run = $object->{runtime};
   delete $object->{runtime};
   printf STDERR "%s\n", Data::Dumper::Dumper($object);
@@ -61,7 +59,7 @@ sub dumper {
 }
 
 sub no_such_mode {
-  my $self = shift;
+  my ($self) = @_;
   printf "Mode %s is not implemented for this type of device\n",
       $self->opts->mode;
   exit 3;
@@ -71,7 +69,7 @@ sub no_such_mode {
 # framework-related. setup, options
 #
 sub add_default_args {
-  my $self = shift;
+  my ($self) = @_;
   $self->add_arg(
       spec => 'mode=s',
       help => "--mode
@@ -239,8 +237,7 @@ sub add_default_args {
 }
 
 sub add_modes {
-  my $self = shift;
-  my $modes = shift;
+  my ($self, $modes) = @_;
   my $modestring = "";
   my @modes = @{$modes};
   my $longest = length ((reverse sort {length $a <=> length $b} map { $_->[1] } @modes)[0]);
@@ -255,8 +252,7 @@ sub add_modes {
 }
 
 sub add_arg {
-  my $self = shift;
-  my %args = @_;
+  my ($self, %args) = @_;
   if ($args{help} =~ /^--mode/) {
     $args{help} .= "\n".$Monitoring::GLPlugin::plugin->{modestring};
   }
@@ -264,13 +260,12 @@ sub add_arg {
 }
 
 sub mod_arg {
-  my $self = shift;
-  $Monitoring::GLPlugin::plugin->{opts}->mod_arg(@_);
+  my ($self, @arg) = @_;
+  $Monitoring::GLPlugin::plugin->{opts}->mod_arg(@arg);
 }
 
 sub add_mode {
-  my $self = shift;
-  my %args = @_;
+  my ($self, %args) = @_;
   push(@{$Monitoring::GLPlugin::plugin->{modes}}, \%args);
   my $longest = length ((reverse sort {length $a <=> length $b} map { $_->{spec} } @{$Monitoring::GLPlugin::plugin->{modes}})[0]);
   my $format = "       %-".
@@ -284,7 +279,7 @@ sub add_mode {
 }
 
 sub validate_args {
-  my $self = shift;
+  my ($self) = @_;
   if ($self->opts->mode =~ /^my-([^\-.]+)/) {
     my $param = $self->opts->mode;
     $param =~ s/\-/::/g;
@@ -376,7 +371,7 @@ sub validate_args {
 }
 
 sub set_timeout_alarm {
-  my $self = shift;
+  my ($self) = @_;
   $SIG{'ALRM'} = sub {
     printf "UNKNOWN - %s timed out after %d seconds\n",
         $Monitoring::GLPlugin::plugin->{name}, $self->opts->timeout;
@@ -389,23 +384,18 @@ sub set_timeout_alarm {
 # global helpers
 #
 sub set_variable {
-  my $self = shift;
-  my $key = shift;
-  my $value = shift;
+  my ($self, $key, $value) = @_;
   $Monitoring::GLPlugin::variables->{$key} = $value;
 }
 
 sub get_variable {
-  my $self = shift;
-  my $key = shift;
-  my $fallback = shift;
+  my ($self, $key, $fallback) = @_;
   return exists $Monitoring::GLPlugin::variables->{$key} ?
       $Monitoring::GLPlugin::variables->{$key} : $fallback;
 }
 
 sub debug {
-  my $self = shift;
-  my $format = shift;
+  my ($self, $format) = @_;
   my $tracefile = "/tmp/".$Monitoring::GLPlugin::pluginname.".trace";
   $self->{trace} = -f $tracefile ? 1 : 0;
   if ($self->get_variable("verbose") &&
@@ -427,9 +417,7 @@ sub debug {
 }
 
 sub filter_namex {
-  my $self = shift;
-  my $opt = shift;
-  my $name = shift;
+  my ($self, $opt, $name) = @_;
   if ($opt) {
     if ($self->opts->regexp) {
       if ($name =~ /$opt/i) {
@@ -447,26 +435,22 @@ sub filter_namex {
 }
 
 sub filter_name {
-  my $self = shift;
-  my $name = shift;
+  my ($self, $name) = @_;
   return $self->filter_namex($self->opts->name, $name);
 }
 
 sub filter_name2 {
-  my $self = shift;
-  my $name = shift;
+  my ($self, $name) = @_;
   return $self->filter_namex($self->opts->name2, $name);
 }
 
 sub filter_name3 {
-  my $self = shift;
-  my $name = shift;
+  my ($self, $name) = @_;
   return $self->filter_namex($self->opts->name3, $name);
 }
 
 sub version_is_minimum {
-  my $self = shift;
-  my $version = shift;
+  my ($self, $version) = @_;
   my $installed_version;
   my $newer = 1;
   if ($self->get_variable("version")) {
@@ -496,8 +480,7 @@ sub version_is_minimum {
 }
 
 sub accentfree {
-  my $self = shift;
-  my $text = shift;
+  my ($self, $text) = @_;
   # thanks mycoyne who posted this accent-remove-algorithm
   # http://www.experts-exchange.com/Programming/Languages/Scripting/Perl/Q_23275533.html#a21234612
   my @transformed;
@@ -524,7 +507,7 @@ sub accentfree {
 }
 
 sub dump {
-  my $self = shift;
+  my ($self) = @_;
   my $class = ref($self);
   $class =~ s/^.*:://;
   if (exists $self->{flat_indices}) {
@@ -562,9 +545,7 @@ sub dump {
 }
 
 sub table_ascii {
-  my $self = shift;
-  my $table = shift;
-  my $titles = shift;
+  my ($self, $table, $titles) = @_;
   my $text = "";
   my $column_length = {};
   my $column = 0;
@@ -602,9 +583,7 @@ sub table_ascii {
 }
 
 sub table_html {
-  my $self = shift;
-  my $table = shift;
-  my $titles = shift;
+  my ($self, $table, $titles) = @_;
   my $text = "";
   $text .= "<table style=\"border-collapse:collapse; border: 1px solid black;\">";
   $text .= "<tr>";
@@ -634,7 +613,7 @@ sub table_html {
 }
 
 sub load_my_extension {
-  my $self = shift;
+  my ($self) = @_;
   if ($self->opts->mode =~ /^my-([^-.]+)/) {
     my $class = $1;
     my $loaderror = undef;
@@ -688,8 +667,7 @@ sub load_my_extension {
 }
 
 sub decode_password {
-  my $self = shift;
-  my $password = shift;
+  my ($self, $password) = @_;
   if ($password && $password =~ /^rfc3986:\/\/(.*)/) {
     $password = $1;
     $password =~ s/%([A-Za-z0-9]{2})/chr(hex($1))/seg;
@@ -698,8 +676,7 @@ sub decode_password {
 }
 
 sub number_of_bits {
-  my $self = shift;
-  my $unit = shift;
+  my ($self, $unit) = @_;
   # https://en.wikipedia.org/wiki/Data_rate_units
   my $bits = {
     'bit' => 1,			# Bit per second
@@ -743,23 +720,23 @@ sub number_of_bits {
 # runtime methods
 #
 sub mode : lvalue {
-  my $self = shift;
+  my ($self) = @_;
   $Monitoring::GLPlugin::mode;
 }
 
 sub statefilesdir {
-  my $self = shift;
+  my ($self) = @_;
   return $Monitoring::GLPlugin::plugin->{statefilesdir};
 }
 
 sub opts { # die beiden _nicht_ in AUTOLOAD schieben, das kracht!
-  my $self = shift;
+  my ($self) = @_;
   return $Monitoring::GLPlugin::plugin->opts();
 }
 
 sub getopts {
-  my $self = shift;
-  my $envparams = shift || [];
+  my ($self, $envparams) = @_;
+  $envparams ||= [];
   $Monitoring::GLPlugin::plugin->getopts();
   # es kann sein, dass beim aufraeumen zum schluss als erstes objekt
   # das $Monitoring::GLPlugin::plugin geloescht wird. in anderen destruktoren
@@ -783,33 +760,32 @@ sub getopts {
 }
 
 sub add_ok {
-  my $self = shift;
-  my $message = shift || $self->{info};
+  my ($self, $message) = @_;
+  $message ||= $self->{info};
   $self->add_message(OK, $message);
 }
 
 sub add_warning {
-  my $self = shift;
-  my $message = shift || $self->{info};
+  my ($self, $message) = @_;
+  $message ||= $self->{info};
   $self->add_message(WARNING, $message);
 }
 
 sub add_critical {
-  my $self = shift;
-  my $message = shift || $self->{info};
+  my ($self, $message) = @_;
+  $message ||= $self->{info};
   $self->add_message(CRITICAL, $message);
 }
 
 sub add_unknown {
-  my $self = shift;
-  my $message = shift || $self->{info};
+  my ($self, $message) = @_;
+  $message ||= $self->{info};
   $self->add_message(UNKNOWN, $message);
 }
 
 sub add_message {
-  my $self = shift;
-  my $level = shift;
-  my $message = shift || $self->{info};
+  my ($self, $level, $message) = @_;
+  $message ||= $self->{info};
   $Monitoring::GLPlugin::plugin->add_message($level, $message)
       unless $self->is_blacklisted();
   if (exists $self->{failed}) {
@@ -822,27 +798,27 @@ sub add_message {
 }
 
 sub clear_ok {
-  my $self = shift;
+  my ($self) = @_;
   $self->clear_messages(OK);
 }
 
 sub clear_warning {
-  my $self = shift;
+  my ($self) = @_;
   $self->clear_messages(WARNING);
 }
 
 sub clear_critical {
-  my $self = shift;
+  my ($self) = @_;
   $self->clear_messages(CRITICAL);
 }
 
 sub clear_unknown {
-  my $self = shift;
+  my ($self) = @_;
   $self->clear_messages(UNKNOWN);
 }
 
 sub clear_all { # deprecated, use clear_messages
-  my $self = shift;
+  my ($self) = @_;
   $self->clear_ok();
   $self->clear_warning();
   $self->clear_critical();
@@ -850,8 +826,7 @@ sub clear_all { # deprecated, use clear_messages
 }
 
 sub set_level {
-  my $self = shift;
-  my $code = shift;
+  my ($self, $code) = @_;
   $code = (qw(ok warning critical unknown))[$code] if $code =~ /^\d+$/;
   $code = lc $code;
   if (! exists $self->{tmp_level}) {
@@ -866,7 +841,7 @@ sub set_level {
 }
 
 sub get_level {
-  my $self = shift;
+  my ($self) = @_;
   return OK if ! exists $self->{tmp_level};
   my $code = OK;
   $code ||= CRITICAL if $self->{tmp_level}->{critical};
@@ -879,19 +854,18 @@ sub get_level {
 # blacklisting
 #
 sub blacklist {
-  my $self = shift;
+  my ($self) = @_;
   $self->{blacklisted} = 1;
 }
 
 sub add_blacklist {
-  my $self = shift;
-  my $list = shift;
+  my ($self, $list) = @_;
   $Monitoring::GLPlugin::blacklist = join('/',
       (split('/', $self->opts->blacklist), $list));
 }
 
 sub is_blacklisted {
-  my $self = shift;
+  my ($self) = @_;
   if (! $self->opts->can("blacklist")) {
     return 0;
   }
@@ -933,16 +907,14 @@ sub is_blacklisted {
 # additional info
 #
 sub add_info {
-  my $self = shift;
-  my $info = shift;
+  my ($self, $info) = @_;
   $info = $self->is_blacklisted() ? $info.' (blacklisted)' : $info;
   $self->{info} = $info;
   push(@{$Monitoring::GLPlugin::info}, $info);
 }
 
 sub annotate_info {
-  my $self = shift;
-  my $annotation = shift;
+  my ($self, $annotation) = @_;
   my $lastinfo = pop(@{$Monitoring::GLPlugin::info});
   $lastinfo .= sprintf ' (%s)', $annotation;
   $self->{info} = $lastinfo;
@@ -950,38 +922,36 @@ sub annotate_info {
 }
 
 sub add_extendedinfo {  # deprecated
-  my $self = shift;
-  my $info = shift;
+  my ($self, $info) = @_;
   $self->{extendedinfo} = $info;
   return if ! $self->opts->extendedinfo;
   push(@{$Monitoring::GLPlugin::extendedinfo}, $info);
 }
 
 sub get_info {
-  my $self = shift;
-  my $separator = shift || ' ';
+  my ($self, $separator) = @_;
+  $separator ||= ' ';
   return join($separator , @{$Monitoring::GLPlugin::info});
 }
 
 sub get_last_info {
-  my $self = shift;
+  my ($self) = @_;
   return pop(@{$Monitoring::GLPlugin::info});
 }
 
 sub get_extendedinfo {
-  my $self = shift;
-  my $separator = shift || ' ';
+  my ($self, $separator) = @_;
+  $separator ||= ' ';
   return join($separator, @{$Monitoring::GLPlugin::extendedinfo});
 }
 
 sub add_summary {  # deprecated
-  my $self = shift;
-  my $summary = shift;
+  my ($self, $summary) = @_;
   push(@{$Monitoring::GLPlugin::summary}, $summary);
 }
 
 sub get_summary {
-  my $self = shift;
+  my ($self) = @_;
   return join(', ', @{$Monitoring::GLPlugin::summary});
 }
 
@@ -989,8 +959,7 @@ sub get_summary {
 # persistency
 #
 sub valdiff {
-  my $self = shift;
-  my $pparams = shift;
+  my ($self, $pparams) = @_;
   my %params = %{$pparams};
   my @keys = @_;
   my $now = time;
@@ -1172,7 +1141,7 @@ sub valdiff {
 }
 
 sub create_statefilesdir {
-  my $self = shift;
+  my ($self) = @_;
   if (! -d $self->statefilesdir()) {
     eval {
       use File::Path;
@@ -1189,8 +1158,7 @@ sub create_statefilesdir {
 }
 
 sub create_statefile {
-  my $self = shift;
-  my %params = @_;
+  my ($self, %params) = @_;
   my $extension = "";
   $extension .= $params{name} ? '_'.$params{name} : '';
   $extension =~ s/\//_/g;
@@ -1203,16 +1171,13 @@ sub create_statefile {
 }
 
 sub schimpf {
-  my $self = shift;
+  my ($self) = @_;
   printf "statefilesdir %s is not writable.\nYou didn't run this plugin as root, didn't you?\n", $self->statefilesdir();
 }
 
 # $self->protect_value('1.1-flat_index', 'cpu_busy', 'percent');
 sub protect_value {
-  my $self = shift;
-  my $ident = shift;
-  my $key = shift;
-  my $validfunc = shift;
+  my ($self, $ident, $key, $validfunc) = @_;
   if (ref($validfunc) ne "CODE" && $validfunc eq "percent") {
     $validfunc = sub {
       my $value = shift;
@@ -1249,8 +1214,7 @@ sub protect_value {
 }
 
 sub save_state {
-  my $self = shift;
-  my %params = @_;
+  my ($self, %params) = @_;
   $self->create_statefilesdir();
   my $statefile = $self->create_statefile(%params);
   my $tmpfile = $self->statefilesdir().'/check__health_tmp_'.$$;
@@ -1272,8 +1236,7 @@ sub save_state {
 }
 
 sub load_state {
-  my $self = shift;
-  my %params = @_;
+  my ($self, %params) = @_;
   my $statefile = $self->create_statefile(%params);
   if ( -f $statefile) {
     our $VAR1;
@@ -1294,7 +1257,7 @@ sub load_state {
 # daemon mode
 #
 sub check_pidfile {
-  my $self = shift;
+  my ($self) = @_;
   my $fh = IO::File->new();
   if ($fh->open($self->{pidfile}, "r")) {
     my $pid = $fh->getline();
@@ -1323,7 +1286,7 @@ sub check_pidfile {
 }
 
 sub write_pidfile {
-  my $self = shift;
+  my ($self) = @_;
   if (! -d dirname($self->{pidfile})) {
     eval "require File::Path;";
     if (defined(&File::Path::mkpath)) {
@@ -1350,7 +1313,7 @@ sub write_pidfile {
 }
 
 sub system_vartmpdir {
-  my $self = shift;
+  my ($self) = @_;
   if ($^O =~ /MSWin/) {
     return $self->system_tmpdir();
   } else {
@@ -1359,7 +1322,7 @@ sub system_vartmpdir {
 }
 
 sub system_tmpdir {
-  my $self = shift;
+  my ($self) = @_;
   if ($^O =~ /MSWin/) {
     return $ENV{TEMP} if defined $ENV{TEMP};
     return $ENV{TMP} if defined $ENV{TMP};
@@ -1372,8 +1335,7 @@ sub system_tmpdir {
 }
 
 sub convert_scientific_numbers {
-  my $self = shift;
-  my $n = shift;
+  my ($self, $n) = @_;
   # mostly used to convert numbers in scientific notation
   if ($n =~ /^\s*\d+\s*$/) {
     return $n;
@@ -1396,7 +1358,7 @@ sub convert_scientific_numbers {
 }
 
 sub compatibility_methods {
-  my $self = shift;
+  my ($self) = @_;
   # add_perfdata
   # add_message
   # nagios_exit
@@ -1467,7 +1429,7 @@ sub compatibility_methods {
 
 
 sub AUTOLOAD {
-  my $self = shift;
+  my ($self, @params) = @_;
   return if ($AUTOLOAD =~ /DESTROY/);
   $self->debug("AUTOLOAD %s\n", $AUTOLOAD)
         if $self->opts->verbose >= 2;
@@ -1476,7 +1438,6 @@ sub AUTOLOAD {
     my $subsystem = $2;
     my $analyze = sprintf "analyze_%s_subsystem", $subsystem;
     my $check = sprintf "check_%s_subsystem", $subsystem;
-    my @params = @_;
     if (@params) {
       # analyzer class
       my $subsystem_class = shift @params;
@@ -1495,11 +1456,11 @@ sub AUTOLOAD {
     $self->{components}->{$subsystem}->dump()
         if $self->opts->verbose >= 2;
   } elsif ($AUTOLOAD =~ /^.*::(status_code|check_messages|nagios_exit|html_string|perfdata_string|selected_perfdata|check_thresholds|get_thresholds|opts)$/) {
-    return $Monitoring::GLPlugin::plugin->$1(@_);
+    return $Monitoring::GLPlugin::plugin->$1(@params);
   } elsif ($AUTOLOAD =~ /^.*::(reduce_messages|reduce_messages_short|clear_messages|suppress_messages|add_html|add_perfdata|override_opt|create_opt|set_thresholds|force_thresholds)$/) {
-    $Monitoring::GLPlugin::plugin->$1(@_);
+    $Monitoring::GLPlugin::plugin->$1(@params);
   } elsif ($AUTOLOAD =~ /^.*::mod_arg_(.*)$/) {
-    return $Monitoring::GLPlugin::plugin->mod_arg($1, @_);
+    return $Monitoring::GLPlugin::plugin->mod_arg($1, @params);
   } else {
     $self->debug("AUTOLOAD: class %s has no method %s\n",
         ref($self), $AUTOLOAD);

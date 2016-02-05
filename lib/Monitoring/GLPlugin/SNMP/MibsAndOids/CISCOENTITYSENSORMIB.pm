@@ -5,6 +5,10 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'CISCO-ENTITY-SENSOR-MIB'} = 
   name => 'CISCO-ENTITY-SENSOR-MIB',
 };
 
+$Monitoring::GLPlugin::SNMP::MibsAndOids::requirements->{'CISCO-ENTITY-SENSOR-MIB'} = [
+  'SNMPv2-TC-v1-MIB',
+];
+
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'CISCO-ENTITY-SENSOR-MIB'} = 
   '1.3.6.1.4.1.9.9.91';
 
@@ -31,9 +35,9 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'CISCO-ENTITY-SENSOR-M
   'entSensorThresholdRelationDefinition' => 'CISCO-ENTITY-SENSOR-MIB::SensorThresholdRelation',
   'entSensorThresholdValue' => '1.3.6.1.4.1.9.9.91.1.2.1.1.4',
   'entSensorThresholdEvaluation' => '1.3.6.1.4.1.9.9.91.1.2.1.1.5',
-  'entSensorThresholdEvaluationDefinition' => 'SNMPv2-TC-v1::TruthValue',
+  'entSensorThresholdEvaluationDefinition' => 'SNMPv2-TC-v1-MIB::TruthValue',
   'entSensorThresholdNotificationEnable' => '1.3.6.1.4.1.9.9.91.1.2.1.1.6',
-  'entSensorThresholdNotificationEnableDefinition' => 'SNMPv2-TC-v1::TruthValue',
+  'entSensorThresholdNotificationEnableDefinition' => 'SNMPv2-TC-v1-MIB::TruthValue',
 };
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'CISCO-ENTITY-SENSOR-MIB'} = {

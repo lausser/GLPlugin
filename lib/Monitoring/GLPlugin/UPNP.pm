@@ -24,7 +24,7 @@ use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 }
 
 sub init {
-  my $self = shift;
+  my ($self) = @_;
   if ($self->mode =~ /device::walk/) {
   } elsif ($self->mode =~ /device::uptime/) {
     my $info = sprintf 'device is up since %s',
@@ -44,7 +44,7 @@ sub init {
 }
 
 sub check_upnp_and_model {
-  my $self = shift;
+  my ($self) = @_;
   if (eval "require SOAP::Lite") {
     require XML::LibXML;
   } else {
@@ -104,8 +104,7 @@ sub check_upnp_and_model {
 }
 
 sub create_statefile {
-  my $self = shift;
-  my %params = @_;
+  my ($self, %params) = @_;
   my $extension = "";
   $extension .= $params{name} ? '_'.$params{name} : '';
   if ($self->opts->community) {

@@ -9,8 +9,7 @@ use File::Temp qw(tempfile);
 }
 
 sub new {
-  my $class = shift;
-  my %params = @_;
+  my ($class, %params) = @_;
   require Monitoring::GLPlugin
       if ! grep /BEGIN/, keys %Monitoring::GLPlugin::;
   require Monitoring::GLPlugin::DB::CSF
@@ -27,7 +26,7 @@ sub new {
 }
 
 sub add_db_modes {
-  my $self = shift;
+  my ($self) = @_;
   $self->add_mode(
       internal => 'server::connectiontime',
       spec => 'connection-time',
@@ -49,7 +48,7 @@ sub add_db_modes {
 }
 
 sub add_db_args {
-  my $self = shift;
+  my ($self) = @_;
   $self->add_arg(
       spec => 'dbthresholds:s',
       help => '--dbthresholds
@@ -84,8 +83,7 @@ sub get_db_tables {
 #  $self->get_db_tables([
 #    ['databases', 'select * from', 'Classes::POSTGRES::Component::DatabaseSubsystem::Database']
 #  ]);
-  my $self = shift;
-  my $infos = shift;
+  my ($self, $infos) = @_;
   foreach my $info (@{$infos}) {
     my $arrayname = $info->[0];
     my $sql = $info->[1];
@@ -110,7 +108,7 @@ sub get_db_tables {
 }
 
 sub validate_args {
-  my $self = shift;
+  my ($self) = @_;
   $self->SUPER::validate_args();
   if ($self->opts->name && $self->opts->name =~ /select%20/i) {
     my $name = $self->opts->name;
@@ -120,7 +118,7 @@ sub validate_args {
 }
 
 sub no_such_mode {
-  my $self = shift;
+  my ($self) = @_;
   if (ref($self) eq "Classes::Device") {
     $self->add_unknown('the device is no known type of database server');
   } else {
@@ -135,7 +133,7 @@ sub no_such_mode {
 }
 
 sub init {
-  my $self = shift;
+  my ($self) = @_;
   if ($self->mode =~ /^server::connectiontime/) {
     my $connection_time = $self->{tac} - $self->{tic};
     $self->set_thresholds(warning => 1, critical => 5);
@@ -241,20 +239,19 @@ sub init {
 }
 
 sub compatibility_methods {
-  my $self = shift;
+  my ($self) = @_;
   $self->{handle} = $self;
   $self->SUPER::compatibility_methods() if $self->SUPER::can('compatibility_methods');
 }
 
 sub has_threshold_table {
-  my $self = shift;
+  my ($self) = @_;
   # has to be implemented in each database driver class
   return 0;
 }
 
 sub set_thresholds {
-  my $self = shift;
-  my %params = @_;
+  my ($self, %params) = @_;
   $self->SUPER::set_thresholds(%params);
   if (defined $self->opts->dbthresholds && $self->has_threshold_table()) {
     #
@@ -312,8 +309,7 @@ sub set_thresholds {
 }
 
 sub find_extcmd {
-  my $self = shift;
-  my $cmd = shift;
+  my ($self, $cmd) = @_;
   my @envpaths = @_;
   my @paths = $^O =~ /MSWin/ ?
       split(';', $ENV{PATH}) : split(':', $ENV{PATH});
@@ -350,12 +346,11 @@ sub find_extcmd {
 }
 
 sub write_extcmd_file {
-  my $self = shift;
-  my $sql = shift;
+  my ($self, $sql) = @_;
 }
 
 sub create_extcmd_files {
-  my $self = shift;
+  my ($self) = @_;
   my $template = $self->opts->mode.'XXXXX';
   if ($^O =~ /MSWin/) {
     $template =~ s/::/_/g;
@@ -378,7 +373,7 @@ sub create_extcmd_files {
 }
 
 sub delete_extcmd_files {
-  my $self = shift;
+  my ($self) = @_;
   unlink $Monitoring::GLPlugin::DB::sql_commandfile
       if $Monitoring::GLPlugin::DB::sql_commandfile &&
       -f $Monitoring::GLPlugin::DB::sql_commandfile;
@@ -391,7 +386,7 @@ sub delete_extcmd_files {
 }
 
 sub DESTROY {
-  my $self = shift;
+  my ($self) = @_;
   $self->debug("try to clean up command and result files");
   $self->delete_extcmd_files();
 }

@@ -3,14 +3,12 @@ our @ISA = qw(Monitoring::GLPlugin::SNMP::CSF Monitoring::GLPlugin::TableItem Mo
 use strict;
 
 sub ensure_index {
-  my $self = shift;
-  my $key = shift;
+  my ($self, $key) = @_;
   $self->{$key} ||= $self->{flat_indices};
 }
 
 sub unhex_ip {
-  my $self = shift;
-  my $value = shift;
+  my ($self, $value) = @_;
   if ($value && $value =~ /^0x(\w{8})/) {
     $value = join(".", unpack "C*", pack "H*", $1);
   } elsif ($value && $value =~ /^0x(\w{2} \w{2} \w{2} \w{2})/) {
@@ -28,8 +26,7 @@ sub unhex_ip {
 }
 
 sub unhex_mac {
-  my $self = shift;
-  my $value = shift;
+  my ($self, $value) = @_;
   if ($value && $value =~ /^0x(\w{12})/) {
     $value = join(".", unpack "C*", pack "H*", $1);
   } elsif ($value && $value =~ /^0x(\w{2}\s*\w{2}\s*\w{2}\s*\w{2}\s*\w{2}\s*\w{2})/) {

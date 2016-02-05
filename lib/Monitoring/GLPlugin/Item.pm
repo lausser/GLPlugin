@@ -4,8 +4,7 @@ our @ISA = qw(Monitoring::GLPlugin);
 use strict;
 
 sub new {
-  my $class = shift;
-  my %params = @_;
+  my ($class, %params) = @_;
   my $self = {
     blacklisted => 0,
     info => undef,
@@ -17,8 +16,7 @@ sub new {
 }
 
 sub check {
-  my $self = shift;
-  my $lists = shift;
+  my ($self, $lists) = @_;
   my @lists = $lists ? @{$lists} : grep { ref($self->{$_}) eq "ARRAY" } keys %{$self};
   foreach my $list (@lists) {
     $self->add_info('checking '.$list);

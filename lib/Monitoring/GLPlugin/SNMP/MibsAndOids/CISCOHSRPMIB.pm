@@ -5,6 +5,10 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'CISCO-HSRP-MIB'} = {
   name => 'CISCO-HSRP-MIB',
 };
 
+$Monitoring::GLPlugin::SNMP::MibsAndOids::requirements->{'CISCO-HSRP-MIB'} = [
+  'SNMPv2-TC-v1-MIB',
+];
+
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'CISCO-HSRP-MIB'} = {
   'cHsrpGrpTable' => '1.3.6.1.4.1.9.9.106.1.2.1',
   'cHsrpGrpEntry' => '1.3.6.1.4.1.9.9.106.1.2.1.1',
@@ -26,7 +30,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'CISCO-HSRP-MIB'} = {
   'cHsrpGrpStandbyStateDefinition' => 'CISCO-HSRP-MIB::HsrpState',
   'cHsrpGrpVirtualMacAddr' => '1.3.6.1.4.1.9.9.106.1.2.1.1.16',
   'cHsrpGrpEntryRowStatus' => '1.3.6.1.4.1.9.9.106.1.2.1.1.17',
-  'cHsrpGrpEntryRowStatusDefinition' => 'SNMPv2-TC-v1::RowStatus',
+  'cHsrpGrpEntryRowStatusDefinition' => 'SNMPv2-TC-v1-MIB::RowStatus',
 };
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'CISCO-HSRP-MIB'} = {

@@ -1,13 +1,13 @@
 package Monitoring::GLPlugin::SNMP::MibsAndOids::WLSXSYSTEMEXTMIB;
 
-$Monitoring::GLPlugin::SNMP::MibsAndOids::requirements->{'WLSX-SYSTEMEXT-MIB'} = [
-  'ARUBA-TC-MIB',
-];
-
 $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'WLSX-SYSTEMEXT-MIB'} = {
   url => '',
   name => 'WLSX-SYSTEMEXT-MIB',
 };
+
+$Monitoring::GLPlugin::SNMP::MibsAndOids::requirements->{'WLSX-SYSTEMEXT-MIB'} = [
+  'ARUBA-TC-MIB',
+];
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'WLSX-SYSTEMEXT-MIB'} = 
   '1.3.6.1.4.1.14823.2.2.1.2';

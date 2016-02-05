@@ -15,8 +15,7 @@ our $AUTOLOAD;
 
 
 sub new {
-  my $class = shift;
-  my %params = @_;
+  my ($class, %params) = @_;
   require Monitoring::GLPlugin::Commandline::Getopt
       if ! grep /BEGIN/, keys %Monitoring::GLPlugin::Commandline::Getopt::;
   my $self = {
@@ -43,25 +42,24 @@ sub new {
 }
 
 sub AUTOLOAD {
-  my $self = shift;
+  my ($self, @params) = @_;
   return if ($AUTOLOAD =~ /DESTROY/);
   $self->debug("AUTOLOAD %s\n", $AUTOLOAD)
         if $self->{opts}->verbose >= 2;
   if ($AUTOLOAD =~ /^.*::(add_arg|override_opt|create_opt)$/) {
-    $self->{opts}->$1(@_);
+    $self->{opts}->$1(@params);
   }
 }
 
 sub DESTROY {
-  my $self = shift;
+  my ($self) = @_;
   # ohne dieses DESTROY rennt nagios_exit in obiges AUTOLOAD rein
   # und fliegt aufs Maul, weil {opts} bereits nicht mehr existiert.
   # Unerklaerliches Verhalten.
 }
 
 sub debug {
-  my $self = shift;
-  my $format = shift;
+  my ($self, $format) = @_;
   my $tracefile = "/tmp/".$Monitoring::GLPlugin::pluginname.".trace";
   $self->{trace} = -f $tracefile ? 1 : 0;
   if ($self->opts->verbose && $self->opts->verbose > 10) {
@@ -82,26 +80,24 @@ sub debug {
 }
 
 sub opts {
-  my $self = shift;
+  my ($self) = @_;
   return $self->{opts};
 }
 
 sub getopts {
-  my $self = shift;
+  my ($self) = @_;
   $self->opts->getopts();
 }
 
 sub add_message {
-  my $self = shift;
-  my ($code, @messages) = @_;
+  my ($self, $code, @messages) = @_;
   $code = (qw(ok warning critical unknown))[$code] if $code =~ /^\d+$/;
   $code = lc $code;
   push @{$self->{messages}->{$code}}, @messages;
 }
 
 sub selected_perfdata {
-  my $self = shift;
-  my $label = shift;
+  my ($self, $label) = @_;
   if ($self->opts->can("selectedperfdata") && $self->opts->selectedperfdata) {
     my $pattern = $self->opts->selectedperfdata;
     return ($label =~ /$pattern/i) ? 1 : 0;
@@ -223,27 +219,25 @@ sub add_perfdata {
 }
 
 sub add_html {
-  my $self = shift;
-  my $line = shift;
+  my ($self, $line) = @_;
   push @{$self->{html}}, $line;
 }
 
 sub suppress_messages {
-  my $self = shift;
+  my ($self) = @_;
   $self->{suppress_messages} = 1;
 }
 
 sub clear_messages {
-  my $self = shift;
-  my $code = shift;
+  my ($self, $code) = @_;
   $code = (qw(ok warning critical unknown))[$code] if $code =~ /^\d+$/;
   $code = lc $code;
   $self->{messages}->{$code} = [];
 }
 
 sub reduce_messages_short {
-  my $self = shift;
-  my $message = shift || "no problems";
+  my ($self, $message) = @_;
+  $message ||= "no problems";
   if ($self->opts->report && $self->opts->report eq "short") {
     $self->clear_messages(OK);
     $self->add_message(OK, $message) if ! $self->check_messages();
@@ -251,15 +245,14 @@ sub reduce_messages_short {
 }
 
 sub reduce_messages {
-  my $self = shift;
-  my $message = shift || "no problems";
+  my ($self, $message) = @_;
+  $message ||= "no problems";
   $self->clear_messages(OK);
   $self->add_message(OK, $message) if ! $self->check_messages();
 }
 
 sub check_messages {
-  my $self = shift;
-  my %args = @_;
+  my ($self, %args) = @_;
 
   # Add object messages to any passed in as args
   for my $code (qw(critical warning unknown ok)) {
@@ -312,8 +305,7 @@ sub check_messages {
 }
 
 sub status_code {
-  my $self = shift;
-  my $code = shift;
+  my ($self, $code) = @_;
   $code = (qw(ok warning critical unknown))[$code] if $code =~ /^\d+$/;
   $code = uc $code;
   $code = $ERRORS{$code} if defined $code && exists $ERRORS{$code};
@@ -322,7 +314,7 @@ sub status_code {
 }
 
 sub perfdata_string {
-  my $self = shift;
+  my ($self) = @_;
   if (scalar (@{$self->{perfdata}})) {
     return join(" ", @{$self->{perfdata}});
   } else {
@@ -331,7 +323,7 @@ sub perfdata_string {
 }
 
 sub html_string {
-  my $self = shift;
+  my ($self) = @_;
   if (scalar (@{$self->{html}})) {
     return join(" ", @{$self->{html}});
   } else {
@@ -340,8 +332,7 @@ sub html_string {
 }
 
 sub nagios_exit {
-  my $self = shift;
-  my ($code, $message, $arg) = @_;
+  my ($self, $code, $message, $arg) = @_;
   $code = $ERRORS{$code} if defined $code && exists $ERRORS{$code};
   $code = UNKNOWN unless defined $code && exists $STATUS_TEXT{$code};
   $message = '' unless defined $message;
@@ -389,8 +380,7 @@ sub nagios_exit {
 }
 
 sub set_thresholds {
-  my $self = shift;
-  my %params = @_;
+  my ($self, %params) = @_;
   if (exists $params{metric}) {
     my $metric = $params{metric};
     # erst die hartcodierten defaultschwellwerte
@@ -425,8 +415,7 @@ sub set_thresholds {
 }
 
 sub force_thresholds {
-  my $self = shift;
-  my %params = @_;
+  my ($self, %params) = @_;
   if (exists $params{metric}) {
     my $metric = $params{metric};
     $self->{thresholds}->{$metric}->{warning} = $params{warning} || 0;
@@ -438,8 +427,7 @@ sub force_thresholds {
 }
 
 sub get_thresholds {
-  my $self = shift;
-  my @params = @_;
+  my ($self, @params) = @_;
   if (scalar(@params) > 1) {
     my %params = @params;
     my $metric = $params{metric};
@@ -452,8 +440,7 @@ sub get_thresholds {
 }
 
 sub check_thresholds {
-  my $self = shift;
-  my @params = @_;
+  my ($self, @params) = @_;
   my $level = $ERRORS{OK};
   my $warningrange;
   my $criticalrange;

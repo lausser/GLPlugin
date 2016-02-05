@@ -5,6 +5,10 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'ASYNCOS-MAIL-MIB'} = {
   name => 'ASYNCOS-MAIL-MIB',
 };
 
+$Monitoring::GLPlugin::SNMP::MibsAndOids::requirements->{'ASYNCOS-MAIL-MIB'} = [
+  'SNMPv2-TC-v1-MIB',
+];
+
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'ASYNCOS-MAIL-MIB'} = {
   'asyncOSMailObjects' => '1.3.6.1.4.1.15497.1.1.1',
   'perCentMemoryUtilization' => '1.3.6.1.4.1.15497.1.1.1.1.0',
@@ -52,7 +56,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'ASYNCOS-MAIL-MIB'} = 
   'keyExpirationIndex' => '1.3.6.1.4.1.15497.1.1.1.12.1.1',
   'keyDescription' => '1.3.6.1.4.1.15497.1.1.1.12.1.2',
   'keyIsPerpetual' => '1.3.6.1.4.1.15497.1.1.1.12.1.3',
-  'keyIsPerpetualDefinition' => 'SNMPv2-TC-v1::TruthValue',
+  'keyIsPerpetualDefinition' => 'SNMPv2-TC-v1-MIB::TruthValue',
   'keySecondsUntilExpire' => '1.3.6.1.4.1.15497.1.1.1.12.1.4',
   'updateTable' => '1.3.6.1.4.1.15497.1.1.1.13',
   'updateEntry' => '1.3.6.1.4.1.15497.1.1.1.13.1',

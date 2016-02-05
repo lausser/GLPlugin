@@ -1,7 +1,7 @@
 package Monitoring::GLPlugin::SNMP::MibsAndOids::CHECKPOINTMIB;
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'CHECKPOINT-MIB'} = {
-  url => '',
+  url => 'https://supportcenter.checkpoint.com/supportcenter/portal/user/anon/page/default.psml/media-type/html?action=portlets.DCFileAction&eventSubmit_doGetdcdetails=&fileid=42272',
   name => 'CHECKPOINT-MIB',
 };
 
@@ -636,6 +636,48 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'CHECKPOINT-MIB'} = {
   'lsStatCode' => '1.3.6.1.4.1.2620.1.11.101.0',
   'lsStatShortDescr' => '1.3.6.1.4.1.2620.1.11.102.0',
   'lsStatLongDescr' => '1.3.6.1.4.1.2620.1.11.103.0',
+    vsx => '1.3.6.1.4.1.2620.1.16',
+    vsxVsSupported => '1.3.6.1.4.1.2620.1.16.11',
+    vsxVsConfigured => '1.3.6.1.4.1.2620.1.16.12',
+    vsxVsInstalled => '1.3.6.1.4.1.2620.1.16.13',
+    vsxStatus => '1.3.6.1.4.1.2620.1.16.22',
+    vsxStatusTable => '1.3.6.1.4.1.2620.1.16.22.1',
+    vsxStatusEntry => '1.3.6.1.4.1.2620.1.16.22.1.1',
+    vsxStatusVSId => '1.3.6.1.4.1.2620.1.16.22.1.1.1',
+    vsxStatusVRId => '1.3.6.1.4.1.2620.1.16.22.1.1.2',
+    vsxStatusVsName => '1.3.6.1.4.1.2620.1.16.22.1.1.3',
+    vsxStatusVsType => '1.3.6.1.4.1.2620.1.16.22.1.1.4',
+    vsxStatusMainIP => '1.3.6.1.4.1.2620.1.16.22.1.1.5',
+    vsxStatusPolicyName => '1.3.6.1.4.1.2620.1.16.22.1.1.6',
+    vsxStatusVsPolicyType => '1.3.6.1.4.1.2620.1.16.22.1.1.7',
+    vsxStatusSicTrustState => '1.3.6.1.4.1.2620.1.16.22.1.1.8',
+    vsxStatusHAState => '1.3.6.1.4.1.2620.1.16.22.1.1.9',
+    vsxStatusVSWeight => '1.3.6.1.4.1.2620.1.16.22.1.1.10',
+    vsxStatusCPUUsageTable => '1.3.6.1.4.1.2620.1.16.22.2',
+    vsxStatusCPUUsageEntry => '1.3.6.1.4.1.2620.1.16.22.2.1',
+    vsxStatusCPUUsage1sec => '1.3.6.1.4.1.2620.1.16.22.2.1.1',
+    vsxStatusCPUUsage10sec => '1.3.6.1.4.1.2620.1.16.22.2.1.2',
+    vsxStatusCPUUsage1min => '1.3.6.1.4.1.2620.1.16.22.2.1.3',
+    vsxStatusCPUUsage1hr => '1.3.6.1.4.1.2620.1.16.22.2.1.4',
+    vsxStatusCPUUsage24hr => '1.3.6.1.4.1.2620.1.16.22.2.1.5',
+    vsxStatusCPUUsageVSId => '1.3.6.1.4.1.2620.1.16.22.2.1.6',
+    vsxCounters => '1.3.6.1.4.1.2620.1.16.23',
+    vsxCountersTable => '1.3.6.1.4.1.2620.1.16.23.1',
+    vsxCountersEntry => '1.3.6.1.4.1.2620.1.16.23.1.1',
+    vsxCountersVSId => '1.3.6.1.4.1.2620.1.16.23.1.1.1',
+    vsxCountersConnNum => '1.3.6.1.4.1.2620.1.16.23.1.1.2',
+    vsxCountersConnPeakNum => '1.3.6.1.4.1.2620.1.16.23.1.1.3',
+    vsxCountersConnTableLimit => '1.3.6.1.4.1.2620.1.16.23.1.1.4',
+    vsxCountersPackets => '1.3.6.1.4.1.2620.1.16.23.1.1.5',
+    vsxCountersDroppedTotal => '1.3.6.1.4.1.2620.1.16.23.1.1.6',
+    vsxCountersAcceptedTotal => '1.3.6.1.4.1.2620.1.16.23.1.1.7',
+    vsxCountersRejectedTotal => '1.3.6.1.4.1.2620.1.16.23.1.1.8',
+    vsxCountersBytesAcceptedTotal => '1.3.6.1.4.1.2620.1.16.23.1.1.9',
+    vsxCountersBytesDroppedTotal => '1.3.6.1.4.1.2620.1.16.23.1.1.10',
+    vsxCountersBytesRejectedTotal => '1.3.6.1.4.1.2620.1.16.23.1.1.11',
+    vsxCountersLoggedTotal => '1.3.6.1.4.1.2620.1.16.23.1.1.12',
+    vsxCountersIsDataValid => '1.3.6.1.4.1.2620.1.16.23.1.1.13',
+
 };
 
 

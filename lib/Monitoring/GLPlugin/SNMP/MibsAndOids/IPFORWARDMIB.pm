@@ -5,6 +5,10 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'IP-FORWARD-MIB'} = {
   name => 'IP-FORWARD-MIB',
 };
 
+$Monitoring::GLPlugin::SNMP::MibsAndOids::requirements->{'IP-FORWARD-MIB'} = [
+  'SNMPv2-TC-v1-MIB',
+];
+
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'IP-FORWARD-MIB'} = 
   '1.3.6.1.2.1.4.24';
 
@@ -71,7 +75,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'IP-FORWARD-MIB'} = {
   'ipCidrRouteMetric4' => '1.3.6.1.2.1.4.24.4.1.14',
   'ipCidrRouteMetric5' => '1.3.6.1.2.1.4.24.4.1.15',
   'ipCidrRouteStatus' => '1.3.6.1.2.1.4.24.4.1.16',
-  'ipCidrRouteStatusDefinition' => 'SNMPv2-TC-v1::RowStatus',
+  'ipCidrRouteStatusDefinition' => 'SNMPv2-TC-v1-MIB::RowStatus',
   'ipForwardConformance' => '1.3.6.1.2.1.4.24.5',
   'ipForwardGroups' => '1.3.6.1.2.1.4.24.5.1',
   'ipForwardCompliances' => '1.3.6.1.2.1.4.24.5.2',

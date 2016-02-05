@@ -39,7 +39,7 @@ my @ARGS = ({
 my %DEFER_ARGS = map { $_ => 1 } qw(timeout verbose);
 
 sub _init {
-  my $self = shift;
+  my ($self) = @_;
   my %params = @_;
   # Check params
   my %attr = (
@@ -76,21 +76,18 @@ sub _init {
 }
 
 sub new {
-  my $class = shift;
+  my ($class) = @_;
   my $self = bless {}, $class;
   $self->_init(@_);
 }
 
 sub add_arg {
-  my $self = shift;
-  my %arg = @_;
+  my ($self, %arg) = @_;
   push (@{$self->{_args}}, \%arg);
 }
 
 sub mod_arg {
-  my $self = shift;
-  my $argname = shift;
-  my %arg = @_;
+  my ($self, $argname, %arg) = @_;
   foreach my $old_arg (@{$self->{_args}}) {
     next unless $old_arg->{spec} =~ /(\w+).*/ && $argname eq $1;
     foreach my $key (keys %arg) {
@@ -100,7 +97,7 @@ sub mod_arg {
 }
 
 sub getopts {
-  my $self = shift;
+  my ($self) = @_;
   my %commandline = ();
   my @params = map { $_->{spec} } @{$self->{_args}};
   if (! GetOptions(\%commandline, @params)) {
@@ -153,8 +150,7 @@ sub getopts {
 }
 
 sub create_opt {
-  my $self = shift;
-  my $key = shift;
+  my ($self, $key) = @_;
   no strict 'refs';
   *{"$key"} = sub {
       return $self->{opts}->{$key};
@@ -162,20 +158,17 @@ sub create_opt {
 }
 
 sub override_opt {
-  my $self = shift;
-  my $key = shift;
-  my $value = shift;
+  my ($self, $key, $value) = @_;
   $self->{opts}->{$key} = $value;
 }
 
 sub get {
-  my $self = shift;
-  my $opt = shift;
+  my ($self, $opt) = @_;
   return $self->{opts}->{$opt};
 }
 
 sub print_help {
-  my $self = shift;
+  my ($self) = @_;
   $self->print_version();
   printf "\n%s\n", $self->{_attr}->{license};
   printf "\n%s\n\n", $self->{_attr}->{blurb};
@@ -189,20 +182,20 @@ sub print_help {
 }
 
 sub print_usage {
-  my $self = shift;
+  my ($self) = @_;
   printf $self->{_attr}->{usage}, $self->{_attr}->{plugin};
   print "\n";
 }
 
 sub print_version {
-  my $self = shift;
+  my ($self) = @_;
   printf "%s %s", $self->{_attr}->{plugin}, $self->{_attr}->{version};
   printf " [%s]", $self->{_attr}->{url} if $self->{_attr}->{url};
   print "\n";
 }
 
 sub print_license {
-  my $self = shift;
+  my ($self) = @_;
   printf "%s\n", $self->{_attr}->{license};
   print "\n";
 }

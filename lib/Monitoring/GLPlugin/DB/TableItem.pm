@@ -3,7 +3,7 @@ our @ISA = qw(Monitoring::GLPlugin::DB::CSF Monitoring::GLPlugin::TableItem Moni
 use strict;
 
 sub globalize_errors {
-  my $self = shift;
+  my ($self) = @_;
   #delete *{'add_message'};
   {
     no strict 'refs';
@@ -15,7 +15,7 @@ sub globalize_errors {
 }
 
 sub localize_errors {
-  my $self = shift;
+  my ($self) = @_;
   $self->{messages} = { 
       ok=> [],
       warning => [],

@@ -5,6 +5,10 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'CISCO-ETHERNET-FABRIC-EXTEND
   name => 'CISCO-ETHERNET-FABRIC-EXTENDER-MIB',
 };
 
+$Monitoring::GLPlugin::SNMP::MibsAndOids::requirements->{'CISCO-ETHERNET-FABRIC-EXTENDER-MIB'} = [
+  'SNMPv2-TC-v1-MIB',
+];
+
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'CISCO-ETHERNET-FABRIC-EXTENDER-MIB'} = {
   'enterprises' => '1.3.6.1.4.1',
   'cisco' => '1.3.6.1.4.1.9',
@@ -21,7 +25,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'CISCO-ETHERNET-FABRIC
   'cefexBindingExtenderIndex' => '1.3.6.1.4.1.9.9.691.1.1.1.1.2',
   'cefexBindingCreationTime' => '1.3.6.1.4.1.9.9.691.1.1.1.1.3',
   'cefexBindingRowStatus' => '1.3.6.1.4.1.9.9.691.1.1.1.1.4',
-  'cefexBindingRowStatusDefinition' => 'SNMPv2-TC-v1::RowStatus',
+  'cefexBindingRowStatusDefinition' => 'SNMPv2-TC-v1-MIB::RowStatus',
   'cefexConfigTable' => '1.3.6.1.4.1.9.9.691.1.1.2',
   'cefexConfigEntry' => '1.3.6.1.4.1.9.9.691.1.1.2.1',
   'cefexConfigExtenderName' => '1.3.6.1.4.1.9.9.691.1.1.2.1.1',
@@ -32,7 +36,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'CISCO-ETHERNET-FABRIC
   'cefexConfigPinningMaxLinks' => '1.3.6.1.4.1.9.9.691.1.1.2.1.5',
   'cefexConfigCreationTime' => '1.3.6.1.4.1.9.9.691.1.1.2.1.6',
   'cefexConfigRowStatus' => '1.3.6.1.4.1.9.9.691.1.1.2.1.7',
-  'cefexConfigRowStatusDefinition' => 'SNMPv2-TC-v1::RowStatus',
+  'cefexConfigRowStatusDefinition' => 'SNMPv2-TC-v1-MIB::RowStatus',
   'ciscoEthernetFabricExtenderMIBConformance' => '1.3.6.1.4.1.9.9.691.2',
   'cEthernetFabricExtenderMIBCompliances' => '1.3.6.1.4.1.9.9.691.2.1',
   'cEthernetFabricExtenderMIBGroups' => '1.3.6.1.4.1.9.9.691.2.1.1.1',
