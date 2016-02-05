@@ -1096,7 +1096,7 @@ sub implements_mib {
     $self->debug(sprintf "implements %s (sysobj exact)", $mib);
     return 1;
   }
-  if ($Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{$mib} eq
+  if ($sysobj && $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{$mib} eq
       substr $sysobj, 0, length $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{$mib}) {
     $self->debug(sprintf "implements %s (sysobj)", $mib);
     return 1;
