@@ -1373,8 +1373,7 @@ sub merge_tables_with_code {
 }
 
 sub mibs_and_oids_definition {
-  my ($self, $mib, $definition) = @_;
-  my @values = @_;
+  my ($self, $mib, $definition, @values) = @_;
   if (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib} &&
       exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}) {
     if (ref($Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}) eq "CODE") {
@@ -1706,8 +1705,7 @@ sub get_request {
 }
 
 sub get_entries_get_bulk {
-  my ($self) = @_;
-  my %params = @_;
+  my ($self, %params) = @_;
   my $result = {};
   $self->debug(sprintf "get_entries_get_bulk %s", Data::Dumper::Dumper(\%params));
   my %newparams = ();

@@ -59,12 +59,12 @@ sub DESTROY {
 }
 
 sub debug {
-  my ($self, $format) = @_;
+  my ($self, $format, @message) = @_;
   my $tracefile = "/tmp/".$Monitoring::GLPlugin::pluginname.".trace";
   $self->{trace} = -f $tracefile ? 1 : 0;
   if ($self->opts->verbose && $self->opts->verbose > 10) {
     printf("%s: ", scalar localtime);
-    printf($format, @_);
+    printf($format, @message);
     printf "\n";
   }
   if ($self->{trace}) {
@@ -72,7 +72,7 @@ sub debug {
     $logfh->autoflush(1);
     if ($logfh->open($tracefile, "a")) {
       $logfh->printf("%s: ", scalar localtime);
-      $logfh->printf($format, @_);
+      $logfh->printf($format, @message);
       $logfh->printf("\n");
       $logfh->close();
     }

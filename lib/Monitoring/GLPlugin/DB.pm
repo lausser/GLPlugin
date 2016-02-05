@@ -309,8 +309,7 @@ sub set_thresholds {
 }
 
 sub find_extcmd {
-  my ($self, $cmd) = @_;
-  my @envpaths = @_;
+  my ($self, $cmd, @envpaths) = @_;
   my @paths = $^O =~ /MSWin/ ?
       split(';', $ENV{PATH}) : split(':', $ENV{PATH});
   return $self->{extcmd} if $self->{extcmd};

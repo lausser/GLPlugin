@@ -39,8 +39,7 @@ my @ARGS = ({
 my %DEFER_ARGS = map { $_ => 1 } qw(timeout verbose);
 
 sub _init {
-  my ($self) = @_;
-  my %params = @_;
+  my ($self, %params) = @_;
   # Check params
   my %attr = (
     usage => 1,
@@ -76,9 +75,9 @@ sub _init {
 }
 
 sub new {
-  my ($class) = @_;
+  my ($class, @params) = @_;
   my $self = bless {}, $class;
-  $self->_init(@_);
+  $self->_init(@params);
 }
 
 sub add_arg {
