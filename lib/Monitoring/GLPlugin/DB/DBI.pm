@@ -3,7 +3,7 @@ our @ISA = qw(Monitoring::GLPlugin::DB);
 use strict;
 
 sub fetchrow_array {
-  my ($self, $shift, @arguments) = @_;
+  my ($self, $sql, @arguments) = @_;
   my $sth = undef;
   my @row = ();
   my $stderrvar = "";
@@ -37,7 +37,7 @@ sub fetchrow_array {
 }
 
 sub fetchall_array {
-  my ($self, $shift, @arguments) = @_;
+  my ($self, $sql, @arguments) = @_;
   my $sth = undef;
   my $rows = undef;
   my $stderrvar = "";
