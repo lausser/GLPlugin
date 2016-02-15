@@ -2232,8 +2232,8 @@ sub get_number {
 # caching functions
 # 
 sub set_rawdata {
-  my ($self) = @_;
-  $Monitoring::GLPlugin::SNMP::rawdata = shift;
+  my ($self, $rawdata) = @_;
+  $Monitoring::GLPlugin::SNMP::rawdata = $rawdata;
 }
 
 sub add_rawdata {
