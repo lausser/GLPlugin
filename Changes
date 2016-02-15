@@ -1,5 +1,6 @@
 * 2016-02-15 2.0.1
   bugfix in snmpwalk simulation
+  bugfix in valdiff @_
 * 2016-01-29 2.0
   add MIBS, dynamical load of snmp modules
 * 2016-01-25 1.4.3

@@ -959,9 +959,8 @@ sub get_summary {
 # persistency
 #
 sub valdiff {
-  my ($self, $pparams) = @_;
+  my ($self, $pparams, @keys) = @_;
   my %params = %{$pparams};
-  my @keys = @_;
   my $now = time;
   my $newest_history_set = {};
   $params{freeze} = 0 if ! $params{freeze};
