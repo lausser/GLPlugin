@@ -364,6 +364,7 @@ sub nagios_exit {
       }
     }
   }
+  $output =~ s/\|/!/g if $output;
   if (scalar (@{$self->{perfdata}})) {
     $output .= " | ".$self->perfdata_string();
   }
