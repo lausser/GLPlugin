@@ -1,3 +1,5 @@
+* 2016-02-17 2.0.2
+  update CHECKPOINT-MIB
 * 2016-02-15 2.0.1
   bugfix in snmpwalk simulation
   bugfix in valdiff @_
