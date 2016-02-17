@@ -1001,6 +1001,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'CHECKPOINT-MIB'} = {
   'vsxCountersLoggedTotal' => '1.3.6.1.4.1.2620.1.16.23.1.1.12',
   'vsxCountersIsDataValid' => '1.3.6.1.4.1.2620.1.16.23.1.1.13',
   'vsxCountersIsDataValidDefinition' => 'CHECKPOINT-MIB::vsxCountersIsDataValid',
+  'managementServer' => '1.3.6.1.4.1.2620.1.7.1.0',
   'smartDefense' => '1.3.6.1.4.1.2620.1.17',
   'asmAttacks' => '1.3.6.1.4.1.2620.1.17.1',
   'asmLayer3' => '1.3.6.1.4.1.2620.1.17.1.1',
