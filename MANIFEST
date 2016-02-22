@@ -41,6 +41,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOIPSECFLOWMONITORMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOL2L3INTERFACECONFIGMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOMEMORYPOOLMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOPROCESSMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOSTACKMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOSYSTEMEXTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOVTPMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CLAVISTERMIB.pm
