@@ -1070,6 +1070,8 @@ sub valdiff {
           if ($mode =~ /lookback_freeze/) {
             # hier koennen delta-werte auch negativ sein, wenn z.b. peers verschwinden
             $self->{'delta_'.$_} = $self->{$_} - $last_values->{$_};
+          } elsif (exists $params{lastarray}) {
+            $self->{'delta_'.$_} = $self->{$_} - $last_values->{$_};
           } else {
             # vermutlich db restart und zaehler alle auf null
             $self->{'delta_'.$_} = $self->{$_};
