@@ -57,6 +57,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'CISCO-ENVMON-MIB'} = 
   'ciscoEnvMonSupplyState' => '1.3.6.1.4.1.9.9.13.1.5.1.3',
   'ciscoEnvMonSupplyStateDefinition' => 'CISCO-ENVMON-MIB::ciscoEnvMonState',
   'ciscoEnvMonSupplySource' => '1.3.6.1.4.1.9.9.13.1.5.1.4',
+  'ciscoEnvMonSupplySourceDefinition' => 'CISCO-ENVMON-MIB::ciscoEnvMonSupplySource',
   'ciscoEnvMonAlarmContacts' => '1.3.6.1.4.1.9.9.13.1.6.0',
 };
 
@@ -68,6 +69,13 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'CISCO-ENVMON-MIB'} = {
     '4' => 'shutdown',
     '5' => 'notPresent',
     '6' => 'notFunctioning',
+  },
+  'ciscoEnvMonSupplySource' => {
+    '1' => 'unknown',
+    '2' => 'ac',
+    '3' => 'dc',
+    '4' => 'externalPowerSupply',
+    '5' => 'internalRedundant',
   },
 };
 
