@@ -1243,6 +1243,7 @@ sub load_state {
   if ( -f $statefile) {
     our $VAR1;
     eval {
+      delete $INC{$statefile} if exists $INC{$statefile}; # else unit tests fail
       require $statefile;
     };
     if($@) {
