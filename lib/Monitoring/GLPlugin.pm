@@ -1051,8 +1051,16 @@ sub valdiff {
           if ($date >= ($now - $self->opts->lookback)) {
             $last_values->{$_} = $last_values->{lookback_history}->{$_}->{$date};
             $last_values->{timestamp} = $date;
+            if (ref($last_values->{$_}) eq "ARRAY") {
+              $self->debug(sprintf "oldest value of %s within lookback is size %s (age %d)",
+                  $_, scalar(@{$last_values->{$_}}), time - $date);
+            } else {
+              $self->debug(sprintf "oldest value of %s within lookback is %s (age %d)",
+                  $_, $last_values->{$_}, time - $date);
+            }
             last;
           } else {
+            $self->debug(sprintf "deprecate %s of age %d", $_, time - $date);
             delete $last_values->{lookback_history}->{$_}->{$date};
           }
         }
@@ -1116,14 +1124,26 @@ sub valdiff {
       $empty_events->{$_} = $self->{$_};
       if ($mode =~ /lookback_freeze/) {
         if (exists $last_values->{frozen}->{$_}) {
-          $empty_events->{cold}->{$_} = $last_values->{frozen}->{$_};
+          if (ref($last_values->{frozen}->{$_}) eq "ARRAY") {
+            @{$empty_events->{cold}->{$_}} = @{$last_values->{frozen}->{$_}};
+          } else {
+            $empty_events->{cold}->{$_} = $last_values->{frozen}->{$_};
+          }
         } else {
-          $empty_events->{cold}->{$_} = $last_values->{cold}->{$_};
+          if (ref($last_values->{cold}->{$_}) eq "ARRAY") {
+            @{$empty_events->{cold}->{$_}} = @{$last_values->{cold}->{$_}};
+          } else {
+            $empty_events->{cold}->{$_} = $last_values->{cold}->{$_};
+          }
         }
         $empty_events->{cold}->{timestamp} = $last_values->{cold}->{timestamp};
       }
       if ($mode eq "lookback_freeze_shockfrost") {
-        $empty_events->{frozen}->{$_} = $empty_events->{cold}->{$_};
+        if (ref($empty_events->{cold}->{$_}) eq "ARRAY") {
+          @{$empty_events->{frozen}->{$_}} = @{$empty_events->{cold}->{$_}};
+        } else {
+          $empty_events->{frozen}->{$_} = $empty_events->{cold}->{$_};
+        }
         $empty_events->{frozen}->{timestamp} = $now;
       }
     }
@@ -1131,7 +1151,11 @@ sub valdiff {
     if ($mode eq "lookback") {
       $empty_events->{lookback_history} = $last_values->{lookback_history};
       foreach (@keys) {
-        $empty_events->{lookback_history}->{$_}->{$now} = $self->{$_};
+        if (ref($self->{$_}) eq "ARRAY") {
+          @{$empty_events->{lookback_history}->{$_}->{$now}} = @{$self->{$_}};
+        } else {
+          $empty_events->{lookback_history}->{$_}->{$now} = $self->{$_};
+        }
       }
     }
     if ($mode eq "lookback_freeze_defrost") {
