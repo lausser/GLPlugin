@@ -5,7 +5,6 @@ our @ISA = qw(Monitoring::GLPlugin);
 use strict;
 use File::Basename;
 use Digest::MD5 qw(md5_hex);
-use Data::Dumper;
 use Module::Load;
 use AutoLoader;
 our $AUTOLOAD;

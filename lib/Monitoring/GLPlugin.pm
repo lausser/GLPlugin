@@ -11,6 +11,7 @@ use IO::File;
 use File::Basename;
 use Digest::MD5 qw(md5_hex);
 use Errno;
+use Data::Dumper;
 our $AUTOLOAD;
 *VERSION = \'2.0.3';
 
@@ -1247,7 +1248,7 @@ sub load_state {
     if($@) {
       printf "rumms\n";
     }
-    $self->debug(sprintf "load %s", Data::Dumper::Dumper($VAR1));
+    $self->debug(sprintf "load %s from %s", Data::Dumper::Dumper($VAR1), $statefile);
     return $VAR1;
   } else {
     return undef;
