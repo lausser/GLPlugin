@@ -1,14 +1,14 @@
-package Monitoring::GLPlugin::SNMP::MibsAndOids::EX;
+package Monitoring::GLPlugin::SNMP::MibsAndOids::EMDMIB;
 
-$Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'EMX'} = {
+$Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'EMD-MIB'} = {
   url => '',
-  name => 'EMX',
+  name => 'EMD-MIB',
 };
 
-$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'EMX'} =
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'EMD-MIB'} =
   '1.3.6.1.4.1.13742.8.1.1.1.14';
 
-$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'EMX'} = {
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'EMD-MIB'} = {
   raritan => '1.3.6.1.4.1.13742',
   emd => '1.3.6.1.4.1.13742.8',
   traps => '1.3.6.1.4.1.13742.8.0',
@@ -131,5 +131,5 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'EMX'} = {
   actuatorState => '1.3.6.1.4.1.13742.8.5.1.1.1.1',
 };
 
-$Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'EMX'} = {
+$Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'EMD-MIB'} = {
 };
