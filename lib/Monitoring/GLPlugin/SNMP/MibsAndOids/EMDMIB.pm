@@ -6,7 +6,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'EMD-MIB'} = {
 };
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'EMD-MIB'} =
-  '1.3.6.1.4.1.13742.8.1.1.1.14';
+  '1.3.6.1.4.1.13742.8';
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'EMD-MIB'} = {
   raritan => '1.3.6.1.4.1.13742',

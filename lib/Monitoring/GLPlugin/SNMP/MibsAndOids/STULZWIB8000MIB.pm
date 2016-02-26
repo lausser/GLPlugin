@@ -6,7 +6,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'STULZ-WIB8000'} = {
 };
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'STULZ-WIB8000'} =
-  '1.3.6.1.4.1.29462.10.1.1.1.65536';
+  '1.3.6.1.4.1.29462.10';
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'STULZ-WIB8000'} = {
   stulz => '1.3.6.1.4.1.29462',
