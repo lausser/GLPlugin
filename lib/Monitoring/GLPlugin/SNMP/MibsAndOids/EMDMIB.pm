@@ -109,6 +109,10 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'EMD-MIB'} = {
   externalSensorMeasurementsTable => '1.3.6.1.4.1.13742.8.2.1.1',
   externalSensorMeasurementsEntry => '1.3.6.1.4.1.13742.8.2.1.1.1',
   measurementsExternalSensorIsAvailable => '1.3.6.1.4.1.13742.8.2.1.1.1.1',
+  measurementsExternalSensorIsAvailableDefinition => {
+    1 => 'true',
+    2 => 'false',
+  },
   measurementsExternalSensorState => '1.3.6.1.4.1.13742.8.2.1.1.1.2',
   measurementsExternalSensorStateDefinition => 'EMD-MIB::SensorStateEnumeration',
   measurementsExternalSensorValue => '1.3.6.1.4.1.13742.8.2.1.1.1.3',
@@ -128,6 +132,10 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'EMD-MIB'} = {
   externalSensorLogTable => '1.3.6.1.4.1.13742.8.4.2.1',
   externalSensorLogEntry => '1.3.6.1.4.1.13742.8.4.2.1.1',
   logExternalSensorDataAvailable => '1.3.6.1.4.1.13742.8.4.2.1.1.2',
+  logExternalSensorDataAvailableDefinition => {
+    1 => 'true',
+    2 => 'false',
+  },
   logExternalSensorState => '1.3.6.1.4.1.13742.8.4.2.1.1.3',
   logExternalSensorStateDefinition => 'EMD-MIB::SensorStateEnumeration',
   logExternalSensorAvgValue => '1.3.6.1.4.1.13742.8.4.2.1.1.4',
