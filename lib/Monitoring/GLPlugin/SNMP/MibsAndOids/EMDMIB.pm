@@ -88,6 +88,10 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'EMD-MIB'} = {
   externalSensorEnabledThresholds => '1.3.6.1.4.1.13742.8.1.2.1.1.24',
   externalSensorPort => '1.3.6.1.4.1.13742.8.1.2.1.1.25',
   externalSensorIsActuator => '1.3.6.1.4.1.13742.8.1.2.1.1.26',
+  externalSensorIsActuatorDefinition => {
+    1 => 'true',
+    2 => 'false',
+  },
   peripheralDevicePackageTable => '1.3.6.1.4.1.13742.8.1.2.5',
   peripheralDevicePackageEntry => '1.3.6.1.4.1.13742.8.1.2.5.1',
   peripheralDevicePackageId => '1.3.6.1.4.1.13742.8.1.2.5.1.1',
