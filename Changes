@@ -1,3 +1,5 @@
+* 2016-03-08 2.0.6
+  DB: allow encoded exec
 * 2016-02-26 2.0.5
   add Raritan-EMD-MIB and Stulz-WIB8000-MIB
 * 2016-02-22 2.0.3
