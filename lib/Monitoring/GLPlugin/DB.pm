@@ -110,7 +110,7 @@ sub get_db_tables {
 sub validate_args {
   my ($self) = @_;
   $self->SUPER::validate_args();
-  if ($self->opts->name && $self->opts->name =~ /select%20/i) {
+  if ($self->opts->name && $self->opts->name =~ /(select|exec)%20/i) {
     my $name = $self->opts->name;
     $name =~ s/\%([A-Fa-f0-9]{2})/pack('C', hex($1))/seg;
     $self->override_opt('name', $name);
