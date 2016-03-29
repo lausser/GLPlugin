@@ -5,7 +5,8 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'CISCO-STACKWISE-MIB'} = {
   name => 'CISCO-STACKWISE-MIB',
 };
 
-#$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'CISCO-STACKWISE-MIB'} = 
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'CISCO-STACKWISE-MIB'} =
+    '1.3.6.1.4.1.9.9.500.1';
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'CISCO-STACKWISE-MIB'} = {
   ciscoStackWiseMIB => '1.3.6.1.4.1.9.9.500',
