@@ -1,3 +1,5 @@
+* 2016-04-04 2.0.10
+  improve the timeout handler
 * 2016-04-04 2.0.9
   DB: add fetchall_array_cached
 * 2016-03-29 2.0.8

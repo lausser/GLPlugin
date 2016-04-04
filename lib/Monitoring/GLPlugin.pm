@@ -13,7 +13,7 @@ use Digest::MD5 qw(md5_hex);
 use Errno;
 use Data::Dumper;
 our $AUTOLOAD;
-*VERSION = \'2.0.9';
+*VERSION = \'2.0.10';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -372,13 +372,25 @@ sub validate_args {
 }
 
 sub set_timeout_alarm {
-  my ($self) = @_;
-  $SIG{'ALRM'} = sub {
+  my ($self, $timeout) = @_;
+  my $timeout = defined $timeout ? int($timeout) : $self->opts->timeout;
+  my $handler = sub {
     printf "UNKNOWN - %s timed out after %d seconds\n",
         $Monitoring::GLPlugin::plugin->{name}, $self->opts->timeout;
     exit 3;
   };
-  alarm($self->opts->timeout);
+  use POSIX ':signal_h';
+  if ($^O =~ /MSWin/) {
+    local $SIG{'ALRM'} = $handler;
+  } else {
+    my $mask = POSIX::SigSet->new( SIGALRM );
+    my $action = POSIX::SigAction->new(
+        $handler, $mask
+    );   
+    my $oldaction = POSIX::SigAction->new();
+    sigaction(SIGALRM ,$action ,$oldaction );
+  }    
+  alarm($timeout); # 1 second before the global unknown timeout
 }
 
 #########################################################
