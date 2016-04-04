@@ -6,6 +6,7 @@ use File::Temp qw(tempfile);
 
 {
   our $session = undef;
+  our $fetchall_array_cache = {};
 }
 
 sub new {
@@ -383,6 +384,25 @@ sub delete_extcmd_files {
       if $Monitoring::GLPlugin::DB::sql_outfile &&
       -f $Monitoring::GLPlugin::DB::sql_outfile;
 }
+
+sub fetchall_array_cached {
+  my $self = shift;
+  my $sql = shift;
+  my @arguments = @_;
+  my @rows = ();
+  my $key = Digest::MD5::md5_hex($sql.Data::Dumper::Dumper(\@arguments));
+  if (! exists $Monitoring::GLPlugin::DB->{fetchall_array_cache}->{$key}) {
+    @rows = $self->fetchall_array($sql, @arguments);
+    $Monitoring::GLPlugin::DB->{fetchall_array_cache}->{$key} = \@rows;
+  } else {
+    $self->debug(sprintf "cached SQL:\n%s\n", $sql);
+    @rows = @{$Monitoring::GLPlugin::DB->{fetchall_array_cache}->{$key}};
+    $self->debug(sprintf "RESULT:\n%s\n",
+        Data::Dumper::Dumper(\@rows));
+  }
+  return @rows;
+}
+
 
 sub DESTROY {
   my ($self) = @_;

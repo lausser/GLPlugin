@@ -23,6 +23,8 @@ sub fetchrow_array {
     @row = $sth->fetchrow_array();
     $self->debug(sprintf "RESULT:\n%s\n",
         Data::Dumper::Dumper(\@row));
+    my $rest = $sth->fetchall_arrayref();
+    $sth->finish();
   };
   *STDERR = *SAVEERR;
   if ($@) {
@@ -56,6 +58,7 @@ sub fetchall_array {
     $rows = $sth->fetchall_arrayref();
     $self->debug(sprintf "RESULT:\n%s\n",
         Data::Dumper::Dumper($rows));
+    $sth->finish();
   };
   *STDERR = *SAVEERR;
   if ($@) {
@@ -80,6 +83,7 @@ sub execute {
     $self->debug(sprintf "EXEC:\n%s\n", $sql);
     my $sth = $Monitoring::GLPlugin::DB::session->prepare($sql);
     $sth->execute();
+    $sth->finish();
   };
   *STDERR = *SAVEERR;
   if ($@) {
