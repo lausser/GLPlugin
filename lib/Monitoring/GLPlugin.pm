@@ -373,7 +373,7 @@ sub validate_args {
 
 sub set_timeout_alarm {
   my ($self, $timeout) = @_;
-  my $timeout = defined $timeout ? int($timeout) : $self->opts->timeout;
+  $timeout = defined $timeout ? int($timeout) : $self->opts->timeout;
   my $handler = sub {
     printf "UNKNOWN - %s timed out after %d seconds\n",
         $Monitoring::GLPlugin::plugin->{name}, $self->opts->timeout;
