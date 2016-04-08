@@ -15,6 +15,9 @@ sub create_statefile {
   $extension =~ s/\)/_/g;
   $extension =~ s/\*/_/g;
   $extension =~ s/\s/_/g;
+  if ($^O =~ /MSWin/) {
+    $extension =~ s/:/_/g;
+  }
   if ($self->opts->snmpwalk && ! $self->opts->hostname) {
     return sprintf "%s/%s_%s%s", $self->statefilesdir(),
         'snmpwalk.file'.md5_hex($self->opts->snmpwalk),

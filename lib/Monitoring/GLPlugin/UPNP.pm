@@ -115,6 +115,9 @@ sub create_statefile {
   $extension =~ s/\)/_/g;
   $extension =~ s/\*/_/g;
   $extension =~ s/\s/_/g;
+  if ($^O =~ /MSWin/) {
+    $extension =~ s/:/_/g;
+  }
   return sprintf "%s/%s_%s%s", $self->statefilesdir(),
       $self->opts->hostname, $self->opts->mode, lc $extension;
 }
