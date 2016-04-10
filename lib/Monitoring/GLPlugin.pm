@@ -1205,7 +1205,15 @@ sub create_statefile {
   $extension =~ s/\*/_/g;
   $extension =~ s/\s/_/g;
   return sprintf "%s/%s%s", $self->statefilesdir(),
-      $self->mode, lc $extension;
+      $self->clean_path($self->opts->mode), $self->clean_path(lc $extension);
+}
+
+sub clean_path {
+  my ($self, $path) = @_;
+  if ($^O =~ /MSWin/) {
+    $path =~ s/:/_/g;
+  }
+  return $path;
 }
 
 sub schimpf {

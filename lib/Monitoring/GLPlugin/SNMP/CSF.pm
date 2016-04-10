@@ -15,20 +15,18 @@ sub create_statefile {
   $extension =~ s/\)/_/g;
   $extension =~ s/\*/_/g;
   $extension =~ s/\s/_/g;
-  if ($^O =~ /MSWin/) {
-    $extension =~ s/:/_/g;
-  }
   if ($self->opts->snmpwalk && ! $self->opts->hostname) {
     return sprintf "%s/%s_%s%s", $self->statefilesdir(),
         'snmpwalk.file'.md5_hex($self->opts->snmpwalk),
-        $self->opts->mode, lc $extension;
+        $self->clean_path($self->opts->mode), $self->clean_path(lc $extension);
   } elsif ($self->opts->snmpwalk && $self->opts->hostname eq "walkhost") {
     return sprintf "%s/%s_%s%s", $self->statefilesdir(),
         'snmpwalk.file'.md5_hex($self->opts->snmpwalk),
-        $self->mode, lc $extension;
+        $self->clean_path($self->opts->mode), $self->clean_path(lc $extension);
   } else {
     return sprintf "%s/%s_%s%s", $self->statefilesdir(),
-        $self->opts->hostname, $self->mode, lc $extension;
+        $self->opts->hostname,
+        $self->clean_path($self->opts->mode), $self->clean_path(lc $extension);
   }
 }
 
