@@ -394,6 +394,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'PowerNet-MIB'} = {
   upsState => '1.3.6.1.4.1.318.1.1.1.11',
   upsBasicState => '1.3.6.1.4.1.318.1.1.1.11.1',
   upsBasicStateOutputState => '1.3.6.1.4.1.318.1.1.1.11.1.1',
+  upsBasicStateOutputStateDefinition => 'PowerNet-MIB::upsBasicStateOutputState',
   upsAdvState => '1.3.6.1.4.1.318.1.1.1.11.2',
   upsAdvStateAbnormalConditions => '1.3.6.1.4.1.318.1.1.1.11.2.1',
   upsAdvStateSymmetra3PhaseSpecificFaults => '1.3.6.1.4.1.318.1.1.1.11.2.2',
@@ -12786,5 +12787,8 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
   atsStatusMinus12VPowerSupply => {
     '1' => 'atsPowerSupplyFailure',
     '2' => 'atsPowerSupplyOK',
+  },
+  'upsBasicStateOutputState' => sub {
+    my @values = @_;
   },
 };

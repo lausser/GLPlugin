@@ -2114,8 +2114,14 @@ sub make_symbolic {
             } elsif ($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'} =~ /^(.*?)::(.*)/) {
               my $mib = $1;
               my $definition = $2;
-              if  (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib} && exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}
-                  && exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->{$result->{$oid}}) {
+              if  (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib} &&
+                  exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition} &&
+                  ref($Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}) eq 'CODE') {
+                $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->($result->{$oid});
+              } elsif  (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib} &&
+                  exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition} &&
+                  ref($Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}) eq 'HASH' &&
+                  exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->{$result->{$oid}}) {
                 $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->{$result->{$oid}};
               } else {
                 $mo->{$symoid} = 'unknown_'.$result->{$oid};
