@@ -1,3 +1,5 @@
+* 2016-04-17 2.0.12
+  add VRRP-MIB (dhoffend pullrequest #3)
 * 2016-04-08 2.0.11
   escape special characters for statefiles under windows
 * 2016-04-04 2.0.10
