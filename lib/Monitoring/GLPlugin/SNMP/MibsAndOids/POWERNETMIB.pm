@@ -12789,94 +12789,92 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
     '2' => 'atsPowerSupplyOK',
   },
   'upsBasicStateOutputState' => sub {
+    # ftp://ftp.apc.com/apc/public/software/pnetmib/mib/417/powernet417.mib
     my ($state) = @_;
     if ($state eq 'UNKNOWN') {
-      return 'UNKNOWN';
+      return '0'x64;
     } else {
-      my @flags = ();
-      my $doc = "
-       Flag  1: Abnormal Condition Present
-       Flag  2: On Battery
-       Flag  3: Low Battery
-       Flag  4: On Line
-
-       Flag  5: Replace Battery
-       Flag  6: Serial Communication Established
-       Flag  7: AVR Boost Active
-       Flag  8: AVR Trim Active
-
-       Flag  9: Overload
-       Flag 10: Runtime Calibration
-       Flag 11: Batteries Discharged
-       Flag 12: Manual Bypass
-
-       Flag 13: Software Bypass
-       Flag 14: In Bypass due to Internal Fault
-       Flag 15: In Bypass due to Supply Failure
-       Flag 16: In Bypass due to Fan Failure
-
-       Flag 17: Sleeping on a Timer
-       Flag 18: Sleeping until Utility Power Returns
-       Flag 19: On
-       Flag 20: Rebooting
-
-       Flag 21: Battery Communication Lost
-       Flag 22: Graceful Shutdown Initiated
-       Flag 23: Smart Boost or Smart Trim Fault
-       Flag 24: Bad Output Voltage
-
-       Flag 25: Battery Charger Failure
-       Flag 26: High Battery Temperature
-       Flag 27: Warning Battery Temperature
-       Flag 28: Critical Battery Temperature
-
-       Flag 29: Self Test In Progress
-       Flag 30: Low Battery / On Battery
-       Flag 31: Graceful Shutdown Issued by Upstream Device
-       Flag 32: Graceful Shutdown Issued by Downstream Device
-
-       Flag 33: No Batteries Attached
-       Flag 34: Synchronized Command is in Progress
-       Flag 35: Synchronized Sleeping Command is in Progress
-       Flag 36: Synchronized Rebooting Command is in Progress
-
-       Flag 37: Inverter DC Imbalance
-       Flag 38: Transfer Relay Failure
-       Flag 39: Shutdown or Unable to Transfer
-       Flag 40: Low Battery Shutdown
-
-       Flag 41: Electronic Unit Fan Failure
-       Flag 42: Main Relay Failure
-       Flag 43: Bypass Relay Failure
-       Flag 44: Temporary Bypass
-
-       Flag 45: High Internal Temperature
-       Flag 46: Battery Temperature Sensor Fault
-       Flag 47: Input Out of Range for Bypass
-       Flag 48: DC Bus Overvoltage
-
-       Flag 49: PFC Failure
-       Flag 50: Critical Hardware Fault
-       Flag 51: Green Mode/ECO Mode
-       Flag 52: Hot Standby
-
-       Flag 53: Emergency Power Off (EPO) Activated
-       Flag 54: Load Alarm Violation
-       Flag 55: Bypass Phase Fault
-       Flag 56: UPS Internal Communication Failure
-
-       Flag 57: Efficiency Booster Mode
-       Flag 58: Off
-       Flag 59: Standby
-       Flag 60: <Not Used>
-
-       Flag 61: <Not Used>
-       Flag 62: <Not Used>
-       Flag 63: <Not Used>
-       Flag 64: <Not Used>
-       ";
-
-      my @bits = split(//, $state);
+      # The flags are numbered from 1 to 32, and read from left to right
+      return '0'.$state;
     }
+    # Flag  1: Abnormal Condition Present
+    # Flag  2: On Battery
+    # Flag  3: Low Battery
+    # Flag  4: On Line
+
+    # Flag  5: Replace Battery
+    # Flag  6: Serial Communication Established
+    # Flag  7: AVR Boost Active
+    # Flag  8: AVR Trim Active
+
+    # Flag  9: Overload
+    # Flag 10: Runtime Calibration
+    # Flag 11: Batteries Discharged
+    # Flag 12: Manual Bypass
+
+    # Flag 13: Software Bypass
+    # Flag 14: In Bypass due to Internal Fault
+    # Flag 15: In Bypass due to Supply Failure
+    # Flag 16: In Bypass due to Fan Failure
+
+    # Flag 17: Sleeping on a Timer
+    # Flag 18: Sleeping until Utility Power Returns
+    # Flag 19: On
+    # Flag 20: Rebooting
+
+    # Flag 21: Battery Communication Lost
+    # Flag 22: Graceful Shutdown Initiated
+    # Flag 23: Smart Boost or Smart Trim Fault
+    # Flag 24: Bad Output Voltage
+
+    # Flag 25: Battery Charger Failure
+    # Flag 26: High Battery Temperature
+    # Flag 27: Warning Battery Temperature
+    # Flag 28: Critical Battery Temperature
+
+    # Flag 29: Self Test In Progress
+    # Flag 30: Low Battery / On Battery
+    # Flag 31: Graceful Shutdown Issued by Upstream Device
+    # Flag 32: Graceful Shutdown Issued by Downstream Device
+
+    # Flag 33: No Batteries Attached
+    # Flag 34: Synchronized Command is in Progress
+    # Flag 35: Synchronized Sleeping Command is in Progress
+    # Flag 36: Synchronized Rebooting Command is in Progress
+
+    # Flag 37: Inverter DC Imbalance
+    # Flag 38: Transfer Relay Failure
+    # Flag 39: Shutdown or Unable to Transfer
+    # Flag 40: Low Battery Shutdown
+
+    # Flag 41: Electronic Unit Fan Failure
+    # Flag 42: Main Relay Failure
+    # Flag 43: Bypass Relay Failure
+    # Flag 44: Temporary Bypass
+
+    # Flag 45: High Internal Temperature
+    # Flag 46: Battery Temperature Sensor Fault
+    # Flag 47: Input Out of Range for Bypass
+    # Flag 48: DC Bus Overvoltage
+
+    # Flag 49: PFC Failure
+    # Flag 50: Critical Hardware Fault
+    # Flag 51: Green Mode/ECO Mode
+    # Flag 52: Hot Standby
+
+    # Flag 53: Emergency Power Off (EPO) Activated
+    # Flag 54: Load Alarm Violation
+    # Flag 55: Bypass Phase Fault
+    # Flag 56: UPS Internal Communication Failure
+
+    # Flag 57: Efficiency Booster Mode
+    # Flag 58: Off
+    # Flag 59: Standby
+    # Flag 60: <Not Used>
+
+    # Flag 61: <Not Used>
+    # Flag 62: <Not Used>
+    # Flag 63: <Not Used>
+    # Flag 64: <Not Used>
   },
 };
