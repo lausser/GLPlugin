@@ -18,15 +18,15 @@ sub create_statefile {
   if ($self->opts->snmpwalk && ! $self->opts->hostname) {
     return sprintf "%s/%s_%s%s", $self->statefilesdir(),
         'snmpwalk.file'.md5_hex($self->opts->snmpwalk),
-        $self->clean_path($self->opts->mode), $self->clean_path(lc $extension);
+        $self->clean_path($self->mode), $self->clean_path(lc $extension);
   } elsif ($self->opts->snmpwalk && $self->opts->hostname eq "walkhost") {
     return sprintf "%s/%s_%s%s", $self->statefilesdir(),
         'snmpwalk.file'.md5_hex($self->opts->snmpwalk),
-        $self->clean_path($self->opts->mode), $self->clean_path(lc $extension);
+        $self->clean_path($self->mode), $self->clean_path(lc $extension);
   } else {
     return sprintf "%s/%s_%s%s", $self->statefilesdir(),
         $self->opts->hostname,
-        $self->clean_path($self->opts->mode), $self->clean_path(lc $extension);
+        $self->clean_path($self->mode), $self->clean_path(lc $extension);
   }
 }
 
