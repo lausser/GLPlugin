@@ -1205,7 +1205,7 @@ sub create_statefile {
   $extension =~ s/\*/_/g;
   $extension =~ s/\s/_/g;
   return sprintf "%s/%s%s", $self->statefilesdir(),
-      $self->clean_path($self->opts->mode), $self->clean_path(lc $extension);
+      $self->clean_path($self->mode), $self->clean_path(lc $extension);
 }
 
 sub clean_path {
