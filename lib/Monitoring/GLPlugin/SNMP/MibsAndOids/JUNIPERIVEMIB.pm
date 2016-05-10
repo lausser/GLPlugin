@@ -5,6 +5,9 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'JUNIPER-IVE-MIB'} = {
   name => 'JUNIPER-IVE-MIB',
 };
 
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'JUNIPER-IVE-MIB'} =
+    '1.3.6.1.4.1.12532';
+
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'JUNIPER-IVE-MIB'} = {
   'logFullPercent' => '1.3.6.1.4.1.12532.1.0',
   'signedInWebUsers' => '1.3.6.1.4.1.12532.2.0',

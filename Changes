@@ -1,3 +1,5 @@
+* 2016-05-10 2.0.14
+  add mib_ids to JUNIPER-IVE and UCD-SNMP Mibs
 * 2016-04-19 2.0.13
   allow own handlers for set_timeout_alarm
 * 2016-04-17 2.0.12

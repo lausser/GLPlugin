@@ -5,7 +5,8 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'UCD-SNMP-MIB'} = {
   name => 'UCD-SNMP-MIB',
 };
 
-#$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'UCD-SNMP-MIB'} = 
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'UCD-SNMP-MIB'} =
+    '1.3.6.1.4.1.2021';
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'UCD-SNMP-MIB'} = {
   ucdavis => '1.3.6.1.4.1.2021',
