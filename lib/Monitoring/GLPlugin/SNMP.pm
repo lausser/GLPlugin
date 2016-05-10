@@ -1029,6 +1029,7 @@ sub map_oid_to_class {
 sub discover_suitable_class {
   my ($self) = @_;
   my $sysobj = $self->get_snmp_object('MIB-2-MIB', 'sysObjectID', 0);
+  $sysobj =~ s/^\.//g;
   foreach my $oid (keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::discover_ids}) {
     if ($sysobj && $Monitoring::GLPlugin::SNMP::MibsAndOids::discover_ids->{$oid} eq $sysobj) {
       return $Monitoring::GLPlugin::SNMP::MibsAndOids::discover_ids->{$sysobj};
