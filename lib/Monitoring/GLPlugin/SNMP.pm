@@ -1032,7 +1032,6 @@ sub discover_suitable_class {
   $sysobj =~ s/^\.//g;
   foreach my $oid (keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::discover_ids}) {
     if ($sysobj && $oid eq $sysobj) {
-#dreck!!!!
       return $Monitoring::GLPlugin::SNMP::MibsAndOids::discover_ids->{$sysobj};
     }
   }
