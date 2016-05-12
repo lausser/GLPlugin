@@ -1,3 +1,6 @@
+* 2016-05-12 2.0.17
+  add mitigation-methods
+  update CISCO-FIREWALL-MIB
 * 2016-05-12 2.0.16
   add BIANCA-BRICK-MIBRES-MIB
   add BINTEC_FILESYS-MIB

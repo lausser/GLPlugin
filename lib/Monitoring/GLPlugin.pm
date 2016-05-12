@@ -13,7 +13,7 @@ use Digest::MD5 qw(md5_hex);
 use Errno;
 use Data::Dumper;
 our $AUTOLOAD;
-*VERSION = \'2.0.16';
+*VERSION = \'2.0.17';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -794,6 +794,42 @@ sub add_unknown {
   my ($self, $message) = @_;
   $message ||= $self->{info};
   $self->add_message(UNKNOWN, $message);
+}
+
+sub add_ok_mitigation {
+  my ($self, $message) = @_;
+  if (defined $self->opts->mitigation()) {
+    $self->add_message($self->opts->mitigation(), $message);
+  } else {
+    $self->add_ok($message);
+  }
+}
+
+sub add_warning_mitigation {
+  my ($self, $message) = @_;
+  if (defined $self->opts->mitigation()) {
+    $self->add_message($self->opts->mitigation(), $message);
+  } else {
+    $self->add_warning($message);
+  }
+}
+
+sub add_critical_mitigation {
+  my ($self, $message) = @_;
+  if (defined $self->opts->mitigation()) {
+    $self->add_message($self->opts->mitigation(), $message);
+  } else {
+    $self->add_critical($message);
+  }
+}
+
+sub add_unknown_mitigation {
+  my ($self, $message) = @_;
+  if (defined $self->opts->mitigation()) {
+    $self->add_message($self->opts->mitigation(), $message);
+  } else {
+    $self->add_unknown($message);
+  }
 }
 
 sub add_message {
