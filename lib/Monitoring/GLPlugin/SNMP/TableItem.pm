@@ -39,6 +39,20 @@ sub unhex_mac {
   return $value;
 }
 
+sub unhex_octet_string {
+  my ($self, $value) = @_;
+  my $original = $value;
+  $value =~ s/ //g;
+  if ($value && $value =~ /^0x([0-9a-zA-Z]+)$/) {
+    $value = join("", unpack "A*", pack "H*", $1);
+  } elsif ($value && $value =~ /^([0-9a-zA-Z]+)$/) {
+    $value = join("", unpack "A*", pack "H*", $1);
+  } else {
+    $value = $original;
+  }
+  return $value;
+}
+
 1;
 
 __END__
