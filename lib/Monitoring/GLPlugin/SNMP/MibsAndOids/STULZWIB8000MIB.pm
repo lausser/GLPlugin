@@ -2917,6 +2917,10 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'STULZ-WIB8000'} = {
   busalarm => '1.3.6.1.4.1.29462.10.2.1.4.1.1.1.10',
   busadrconflict => '1.3.6.1.4.1.29462.10.2.1.4.1.1.1.12',
   unitOnOff => '1.3.6.1.4.1.29462.10.2.1.4.1.1.1.1013',
+  unitOnOffDefinition => {
+    0 => 'off',
+    1 => 'on',
+  },
   unitstate => '1.3.6.1.4.1.29462.10.2.1.4.2',
   unitstateTable => '1.3.6.1.4.1.29462.10.2.1.4.2.1',
   unitstateEntry => '1.3.6.1.4.1.29462.10.2.1.4.2.1.1',
