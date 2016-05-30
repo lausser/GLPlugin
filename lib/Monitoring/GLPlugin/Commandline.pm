@@ -396,15 +396,52 @@ sub set_thresholds {
     }
     # dann die ganz spezifischen schwellwerte von der kommandozeile
     if ($self->opts->warningx) { # muss nicht auf defined geprueft werden, weils ein hash ist
-      foreach my $key (keys %{$self->opts->warningx}) {
+      # Erst schauen, ob einer * beinhaltet. Von denen wird vom Laengsten
+      # bis zum Kuerzesten probiert, ob die matchen. Der laengste Match
+      # gewinnt.
+      my @keys = keys %{$self->opts->warningx};
+      my @stringkeys = ();
+      my @regexkeys = ();
+      foreach my $key (sort { length($b) > length($a) } @keys) {
+        if ($key =~ /\*/) {
+          push(@regexkeys, $key);
+        } else {
+          push(@stringkeys, $key);
+        }
+      }
+      foreach my $key (@regexkeys) {
+        next if $metric !~ /$key/;
+        $self->{thresholds}->{$metric}->{warning} = $self->opts->warningx->{$key};
+        last;
+      }
+      # Anschliessend nochmal schauen, ob es einen nicht-Regex-Volltreffer gibt
+      foreach my $key (@stringkeys) {
         next if $key ne $metric;
         $self->{thresholds}->{$metric}->{warning} = $self->opts->warningx->{$key};
+        last;
       }
     }
     if ($self->opts->criticalx) {
-      foreach my $key (keys %{$self->opts->criticalx}) {
+      my @keys = keys %{$self->opts->criticalx};
+      my @stringkeys = ();
+      my @regexkeys = ();
+      foreach my $key (sort { length($b) > length($a) } @keys) {
+        if ($key =~ /\*/) {
+          push(@regexkeys, $key);
+        } else {
+          push(@stringkeys, $key);
+        }
+      }
+      foreach my $key (@regexkeys) {
+        next if $metric !~ /$key/;
+        $self->{thresholds}->{$metric}->{critical} = $self->opts->criticalx->{$key};
+        last;
+      }
+      # Anschliessend nochmal schauen, ob es einen nicht-Regex-Volltreffer gibt
+      foreach my $key (@stringkeys) {
         next if $key ne $metric;
         $self->{thresholds}->{$metric}->{critical} = $self->opts->criticalx->{$key};
+        last;
       }
     }
   } else {
