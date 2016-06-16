@@ -1,3 +1,5 @@
+* 2016-06-16 2.1.1
+  add DAMOCLES-MIB
 * 2016-05-30 2.1
   warninx and criticalx can be regular expressions
 * 2016-05-19 2.0.18
