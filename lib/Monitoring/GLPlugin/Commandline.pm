@@ -218,6 +218,28 @@ sub add_perfdata {
       if $self->selected_perfdata($label);
 }
 
+sub add_pandora {
+  my ($self, %args) = @_;
+  my $label = $args{label};
+  my $value = $args{value};
+
+  if ($args{help}) {
+    push @{$self->{pandora}}, sprintf("# HELP %s %s", $label, $args{help});
+  }
+  if ($args{type}) {
+    push @{$self->{pandora}}, sprintf("# TYPE %s %s", $label, $args{type});
+  }
+  if ($args{labels}) {
+    push @{$self->{pandora}}, sprintf("%s{%s} %s", $label,
+        join(",", map {
+            sprintf '%s="%s"', $_, $args{labels}->{$_};
+        } keys %{$args{labels}}),
+        $value);
+  } else {
+    push @{$self->{pandora}}, sprintf("%s %s", $label, $value);
+  }
+}
+
 sub add_html {
   my ($self, $line) = @_;
   push @{$self->{html}}, $line;
@@ -317,6 +339,15 @@ sub perfdata_string {
   my ($self) = @_;
   if (scalar (@{$self->{perfdata}})) {
     return join(" ", @{$self->{perfdata}});
+  } else {
+    return "";
+  }
+}
+
+sub metrics_string {
+  my ($self) = @_;
+  if (scalar (@{$self->{metrics}})) {
+    return join("\n", @{$self->{metrics}});
   } else {
     return "";
   }
