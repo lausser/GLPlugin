@@ -1,3 +1,5 @@
+* 2016-07-07 2.1.3
+  add bulk_is_baeh for devices which don't like bulk requests
 * 2016-06-29 2.1.2.2
   return metrics as string
 * 2016-06-29 2.1.2.1

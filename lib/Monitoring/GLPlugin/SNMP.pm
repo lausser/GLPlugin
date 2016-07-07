@@ -1658,6 +1658,12 @@ sub get_snmp_table_objects {
   return @entries;
 }
 
+sub bulk_is_baeh {
+  my ($self, $maxrepetitions) = @_;
+  $maxrepetitions ||= 1;
+  $Monitoring::GLPlugin::SNMP::maxrepetitions = $maxrepetitions;
+}
+
 ################################################################
 # 3rd level functions. calling net::snmp-functions
 # 
@@ -1954,6 +1960,11 @@ sub get_table {
     if ($Monitoring::GLPlugin::SNMP::session->version() == 3) {
       $params{-contextengineid} = $self->opts->contextengineid if $self->opts->contextengineid;
       $params{-contextname} = $self->opts->contextname if $self->opts->contextname;
+    }
+    if ($Monitoring::GLPlugin::SNMP::maxrepetitions) {
+      # some devices (Bintec) don't like bulk-requests. They call bulk_is_baeh(), so
+      # we immediately send get-next
+      $params{'-maxrepetitions'} = $Monitoring::GLPlugin::SNMP::maxrepetitions;
     }
     $self->debug(sprintf "get_table %s", Data::Dumper::Dumper(\%params));
     my $result = $Monitoring::GLPlugin::SNMP::session->get_table(%params);
