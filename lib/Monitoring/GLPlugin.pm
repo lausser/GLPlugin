@@ -13,7 +13,7 @@ use Digest::MD5 qw(md5_hex);
 use Errno;
 use Data::Dumper;
 our $AUTOLOAD;
-*VERSION = \'2.2';
+*VERSION = \'2.2.0.1';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 

@@ -1,3 +1,5 @@
+* 2016-07-12 2.2.01
+  fix tests
 * 2016-07-12 2.2
   add handling for --environment and --runas
 * 2016-07-07 2.1.3

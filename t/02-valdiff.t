@@ -37,7 +37,7 @@ $plugin->add_mode(
 $plugin->add_default_args();
 $plugin->getopts();
 $plugin->override_opt("mode", "uptime");
-#$plugin->validate_args();
+$plugin->validate_args();
 
 sub clean_plugin {
   my @elements = @_;
