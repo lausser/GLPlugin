@@ -98,6 +98,7 @@ sub mod_arg {
 sub getopts {
   my ($self) = @_;
   my %commandline = ();
+  $self->{opts}->{all_my_opts} = {};
   my @params = map { $_->{spec} } @{$self->{_args}};
   if (! GetOptions(\%commandline, @params)) {
     $self->print_help();
@@ -114,6 +115,9 @@ sub getopts {
         return $self->{opts}->{$field};
       };
     }
+    *{"all_my_opts"} = sub {
+      return $self->{opts}->{all_my_opts};
+    };
     foreach (map { $_->{spec} =~ /^([\w\-]+)/; $1; }
         grep { exists $_->{required} && $_->{required} } @{$self->{_args}}) {
       do { $self->print_usage(); exit 0 } if ! exists $commandline{$_};
@@ -125,6 +129,7 @@ sub getopts {
     }
     foreach (keys %commandline) {
       $self->{opts}->{$_} = $commandline{$_};
+      $self->{opts}->{all_my_opts}->{$_} = $commandline{$_};
     }
     foreach (grep { exists $_->{env} } @{$self->{_args}}) {
       $_->{spec} =~ /^([\w\-]+)/;

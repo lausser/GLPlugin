@@ -47,12 +47,6 @@ sub add_db_modes {
       help => 'the time an sql command needs to run',
   );
   $self->add_mode(
-      internal => 'server::sqlruntime',
-      spec => 'sql-runtime',
-      alias => undef,
-      help => 'the time an sql command needs to run',
-  );
-  $self->add_mode(
       internal => 'internal::encode',
       spec => 'encode',
       alias => undef,

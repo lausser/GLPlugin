@@ -13,7 +13,7 @@ use Digest::MD5 qw(md5_hex);
 use Errno;
 use Data::Dumper;
 our $AUTOLOAD;
-*VERSION = \'2.1.3';
+*VERSION = \'2.2';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -26,6 +26,7 @@ use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
   our $extendedinfo = [];
   our $summary = [];
   our $variables = {};
+  our $survive_sudo_env = ["LD_LIBRARY_PATH", "SHLIB_PATH"];
 }
 
 sub new {
@@ -223,7 +224,20 @@ sub add_default_args {
       spec => 'reset',
       help => "--reset
    remove the state file",
-      aliasfor => "name",
+      required => 0,
+      hidden => 1,
+  );
+  $self->add_arg(
+      spec => 'runas=s',
+      help => "--runas
+   run as a different user",
+      required => 0,
+      hidden => 1,
+  );
+  $self->add_arg(
+      spec => 'shell',
+      help => "--shell
+   forget what you see",
       required => 0,
       hidden => 1,
   );
@@ -752,6 +766,8 @@ sub opts { # die beiden _nicht_ in AUTOLOAD schieben, das kracht!
 sub getopts {
   my ($self, $envparams) = @_;
   $envparams ||= [];
+  my $needs_restart = 0;
+  my @restart_opts = ();
   $Monitoring::GLPlugin::plugin->getopts();
   # es kann sein, dass beim aufraeumen zum schluss als erstes objekt
   # das $Monitoring::GLPlugin::plugin geloescht wird. in anderen destruktoren
@@ -772,7 +788,82 @@ sub getopts {
       exit 3;
     }
   }
+  if ($self->opts->environment) {
+    # wenn die gewuenschten Environmentvariablen sich von den derzeit
+    # gesetzten unterscheiden, dann restart. Denn $ENV aendert
+    # _nicht_ das Environment des laufenden Prozesses. 
+    # $ENV{ZEUGS} = 1 bedeutet lediglich, dass $ENV{ZEUGS} bei weiterer
+    # Verwendung 1 ist, bedeutet aber _nicht_, dass diese Variable 
+    # im Environment des laufenden Prozesses existiert.
+    foreach (keys %{$self->opts->environment}) {
+      if ((! $ENV{$_}) || ($ENV{$_} ne $self->opts->environment->{$_})) {
+        $needs_restart = 1;
+        $ENV{$_} = $self->opts->environment->{$_};
+        $self->debug(sprintf "new %s=%s forces restart\n", $_, $ENV{$_});
+      }
+    }
+  }
+  if ($self->opts->runas) {
+    # exec sudo $0 ... und dann ohne --runas
+    $needs_restart = 1;
+    # wenn wir environmentvariablen haben, die laut survive_sudo_env als
+    # wichtig erachtet werden, dann muessen wir die ueber einen moeglichen
+    # sudo-aufruf rueberretten, also in zusaetzliche --environment umwandenln.
+    # sudo putzt das Environment naemlich aus.
+    foreach my $survive_env (@{$Monitoring::GLPlugin::survive_sudo_env}) {
+      if ($ENV{$survive_env} && ! scalar(grep { /^$survive_env=/ }
+          keys %{$self->opts->environment})) {
+        $self->opts->environment->{$survive_env} = $ENV{$survive_env};
+        printf STDERR "add important --environment %s=%s\n",
+            $survive_env, $ENV{$survive_env} if $self->opts->verbose >= 2;
+        push(@restart_opts, '--environment');
+        push(@restart_opts, sprintf '%s=%s',
+            $survive_env, $ENV{$survive_env});
+      }
+    }
+  }
+  if ($needs_restart) {
+    foreach my $option (keys %{$self->opts->all_my_opts}) {
+      # der fliegt raus, sonst gehts gleich wieder in needs_restart rein
+      next if $option eq "runas";
+      foreach my $spec (map { $_->{spec} } @{$Monitoring::GLPlugin::plugin->opts->{_args}}) {
+        if ($spec =~ /^(\w+)=(.*)/) {
+          if ($1 eq $option && $2 =~ /s%/) {
+            foreach (keys %{$self->opts->$option()}) {
+              push(@restart_opts, sprintf "--%s", $option);
+              push(@restart_opts, sprintf "%s=%s", $_, $self->opts->$option()->{$_});
+            }
+          } elsif ($1 eq $option) {
+            push(@restart_opts, sprintf "--%s", $option);
+            push(@restart_opts, sprintf "%s", $self->opts->$option());
+          }
+        } elsif ($spec eq $option) {
+          push(@restart_opts, sprintf "--%s", $option);
+        }
+      }
+    }
+    if ($self->opts->runas && ($> == 0)) {
+      # Ja, es gibt so Narrische, die gehen mit check_by_ssh als root
+      # auf Datenbankmaschinen drauf und lassen dann dort check_oracle_health
+      # laufen. Damit OPS$-Anmeldung dann funktioniert, wird mit --runas
+      # auf eine andere Kennung umgeschwenkt. Diese Kennung gleich fuer
+      # ssh zu verwenden geht aus Sicherheitsgruenden nicht. Narrische halt.
+      exec "su", "-c", sprintf("%s %s", $0, join(" ", @restart_opts)), "-", $self->opts->runas;
+    } elsif ($self->opts->runas) {
+      exec "sudo", "-S", "-u", $self->opts->runas, $0, @restart_opts;
+    } else {
+      exec $0, @restart_opts;
+      # dadurch werden SHLIB oder LD_LIBRARY_PATH sauber gesetzt, damit beim
+      # erneuten Start libclntsh.so etc. gefunden werden.
+    }
+    exit;
+  }
+  if ($self->opts->shell) {
+    # So komme ich bei den Narrischen zu einer root-Shell.
+    system("/bin/sh");
+  }
 }
+
 
 sub add_ok {
   my ($self, $message) = @_;
