@@ -102,7 +102,7 @@ sub getopts {
   my @params = map { $_->{spec} } @{$self->{_args}};
   if (! GetOptions(\%commandline, @params)) {
     $self->print_help();
-    exit 0;
+    exit 3;
   } else {
     no strict 'refs';
     no warnings 'redefine';
@@ -182,7 +182,6 @@ sub print_help {
   } @{$self->{_args}}) {
     printf " %s\n", $_->{help};
   }
-  exit 0;
 }
 
 sub print_usage {
