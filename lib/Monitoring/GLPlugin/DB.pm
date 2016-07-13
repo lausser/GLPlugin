@@ -160,7 +160,7 @@ sub init {
     $self->clear_all() if $self->check_messages() &&
         defined $self->opts->mitigation && $self->opts->mitigation == 0;
     $self->set_thresholds(warning => 1, critical => 5);
-    $self->add_nagios($self->check_thresholds($runtime),
+    $self->add_message($self->check_thresholds($runtime),
         sprintf "%.2f seconds to execute %s",
             $runtime,
             $self->opts->name2 ? $self->opts->name2 : $self->opts->name);
