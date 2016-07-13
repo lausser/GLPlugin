@@ -120,7 +120,7 @@ sub getopts {
     };
     foreach (map { $_->{spec} =~ /^([\w\-]+)/; $1; }
         grep { exists $_->{required} && $_->{required} } @{$self->{_args}}) {
-      do { $self->print_usage(); exit 0 } if ! exists $commandline{$_};
+      do { $self->print_usage(); exit 3 } if ! exists $commandline{$_};
     }
     foreach (grep { exists $_->{default} } @{$self->{_args}}) {
       $_->{spec} =~ /^([\w\-]+)/;
