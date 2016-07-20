@@ -2,6 +2,7 @@ Changes
 lib/Monitoring/GLPlugin.pm
 lib/Monitoring/GLPlugin/Commandline.pm
 lib/Monitoring/GLPlugin/Commandline/Getopt.pm
+lib/Monitoring/GLPlugin/Commandline/Extraopts.pm
 lib/Monitoring/GLPlugin/DB.pm
 lib/Monitoring/GLPlugin/DB/DBI.pm
 lib/Monitoring/GLPlugin/DB/CSF.pm
