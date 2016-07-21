@@ -1,18 +1,14 @@
 package Monitoring::GLPlugin::Commandline::Extraopts;
 use strict;
 use File::Basename;
-use Getopt::Long qw(:config no_ignore_case bundling);
-
-
 use strict;
-use File::Basename;
-use Data::Dumper;
 
 sub new {
   my $class = shift;
   my %params = @_;
   my $self = {
     file => $params{file},
+    commandline => $params{commandline},
     config => {},
     section => 'default_no_section',
   };
@@ -20,22 +16,6 @@ sub new {
   $self->prepare_file_and_section();
   $self->init();
   return $self;
-}
-
-sub resolve {
-  my ($self) = @_;
-  my @commandline = ();
-  if (scalar(keys %{$self->{config}->{default_no_section}}) > 0) {
-    foreach (keys %{$self->{config}->{default_no_section}}) {
-      push(@commandline, [$_, $self->{config}->{default_no_section}->{$_}]);
-    }
-  }
-  if (exists $self->{config}->{$self->{section}}) {
-    foreach (keys %{$self->{config}->{$self->{section}}}) {
-      push(@commandline, [$_, $self->{config}->{$self->{section}}->{$_}]);
-    }
-  }
-  return \@commandline;
 }
 
 sub prepare_file_and_section {
@@ -101,22 +81,19 @@ sub is_valid {
 }
 sub overwrite {
   my $self = shift;
-  my %commandline = ();
   if (scalar(keys %{$self->{config}->{default_no_section}}) > 0) {
     foreach (keys %{$self->{config}->{default_no_section}}) {
-      $commandline{$_} = $self->{config}->{default_no_section}->{$_};
+      $self->{commandline}->{$_} = $self->{config}->{default_no_section}->{$_};
     }
   }
   if (exists $self->{config}->{$self->{section}}) {
     foreach (keys %{$self->{config}->{$self->{section}}}) {
-      $commandline{$_} = $self->{config}->{$self->{section}}->{$_};
-    }
-  }
-  foreach (keys %commandline) {
-    if (! exists $self->{commandline}->{$_}) {
-      $self->{commandline}->{$_} = $commandline{$_};
+      $self->{commandline}->{$_} = $self->{config}->{$self->{section}}->{$_};
     }
   }
 }
 
+1;
+
+__END__
 

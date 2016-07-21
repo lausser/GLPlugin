@@ -13,7 +13,7 @@ use Digest::MD5 qw(md5_hex);
 use Errno;
 use Data::Dumper;
 our $AUTOLOAD;
-*VERSION = \'2.2.0.1';
+*VERSION = \'2.3';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -301,7 +301,6 @@ sub add_mode {
 
 sub validate_args {
   my ($self) = @_;
-  $self->process_extra_opts();
   if ($self->opts->mode =~ /^my-([^\-.]+)/) {
     my $param = $self->opts->mode;
     $param =~ s/\-/::/g;
@@ -390,17 +389,6 @@ sub validate_args {
     }
   }
   $self->set_timeout_alarm() if ! $SIG{'ALRM'};
-}
-
-sub process_extra_opts {
-  my ($self) = @_;
-  return if (! $self->opts->get("extra-opts"));
-  my $extras = Monitoring::GLPlugin::Commandline::Extraopts->new(
-      file => $self->opts->get("extra-opts")
-  );
-  foreach my $param (@{$extras->resolve()}) {
-    $self->override_opt($param->[0], $param->[1]);
-  }
 }
 
 sub set_timeout_alarm {

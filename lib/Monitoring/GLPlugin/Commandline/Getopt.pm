@@ -76,6 +76,8 @@ sub _init {
 
 sub new {
   my ($class, @params) = @_;
+  require Monitoring::GLPlugin::Commandline::Extraopts
+      if ! grep /BEGIN/, keys %Monitoring::GLPlugin::Commandline::Extraopts::;
   my $self = bless {}, $class;
   $self->_init(@params);
 }
@@ -106,6 +108,19 @@ sub getopts {
   } else {
     no strict 'refs';
     no warnings 'redefine';
+    if (exists $commandline{'extra-opts'}) {
+      # read the extra file and overwrite other parameters
+      my $extras = Monitoring::GLPlugin::Commandline::Extraopts->new(
+          file => $commandline{'extra-opts'},
+          commandline => \%commandline
+      );
+      if (! $extras->is_valid()) {
+        printf "UNKNOWN - extra-opts are not valid: %s\n", $extras->errors();
+        exit 3;
+      } else {
+        $extras->overwrite();
+      }
+    }
     do { $self->print_help(); exit 0; } if $commandline{help};
     do { $self->print_version(); exit 0 } if $commandline{version};
     do { $self->print_usage(); exit 3 } if $commandline{usage};
