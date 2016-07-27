@@ -173,6 +173,12 @@ sub add_default_args {
       required => 0,
   );
   $self->add_arg(
+      spec => 'chartonly',
+      help => "--chartonly
+   Just output the perfdata with OK",
+      required => 0,
+  );
+  $self->add_arg(
       spec => 'morphmessage=s%',
       help => '--morphmessage
    Modify the final output message',
@@ -406,10 +412,10 @@ sub set_timeout_alarm {
     my $mask = POSIX::SigSet->new( SIGALRM );
     my $action = POSIX::SigAction->new(
         $handler, $mask
-    );   
+    );
     my $oldaction = POSIX::SigAction->new();
     sigaction(SIGALRM ,$action ,$oldaction );
-  }    
+  }
   alarm(int($timeout)); # 1 second before the global unknown timeout
 }
 
