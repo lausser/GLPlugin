@@ -113,7 +113,7 @@ sub add_perfdata {
 #
 # wenn warning, critical, dann wird von oben ein expliziter wert mitgegeben
 # wenn thresholds
-#  wenn label in 
+#  wenn label in
 #    warningx $self->{thresholds}->{$label}->{warning} existiert
 #  dann nimm $self->{thresholds}->{$label}->{warning}
 #  ansonsten thresholds->default->warning
@@ -382,6 +382,9 @@ sub nagios_exit {
         }
       }
     }
+  }
+  if ($self->opts->chartonly) {
+    $code = $ERRORS{'OK'};
   }
   my $output = "$STATUS_TEXT{$code}";
   $output .= " - $message" if defined $message && $message ne '';
