@@ -96,6 +96,13 @@ sub add_message {
   push @{$self->{messages}->{$code}}, @messages;
 }
 
+sub add_message_beginning {
+  my ($self, $code, @messages) = @_;
+  $code = (qw(ok warning critical unknown))[$code] if $code =~ /^\d+$/;
+  $code = lc $code;
+  unshift @{$self->{messages}->{$code}}, @messages;
+}
+
 sub selected_perfdata {
   my ($self, $label) = @_;
   if ($self->opts->can("selectedperfdata") && $self->opts->selectedperfdata) {

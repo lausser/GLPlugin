@@ -1021,6 +1021,20 @@ sub add_message {
   }
 }
 
+sub add_message_beginning {
+  my ($self, $level, $message) = @_;
+  $message ||= $self->{info};
+  $Monitoring::GLPlugin::plugin->add_message_beginning($level, $message)
+      unless $self->is_blacklisted();
+  if (exists $self->{failed}) {
+    if ($level == UNKNOWN && $self->{failed} == OK) {
+      $self->{failed} = $level;
+    } elsif ($level > $self->{failed}) {
+      $self->{failed} = $level;
+    }
+  }
+}
+
 sub clear_ok {
   my ($self) = @_;
   $self->clear_messages(OK);
