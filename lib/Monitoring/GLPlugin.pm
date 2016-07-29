@@ -944,10 +944,6 @@ sub getopts {
     }
     exit;
   }
-  if ($self->opts->shell) {
-    # So komme ich bei den Narrischen zu einer root-Shell.
-    system("/bin/sh");
-  }
 }
 
 
