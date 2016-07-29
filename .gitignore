@@ -48,3 +48,5 @@ rfc*.trc
 dev_rfc
 dev_rfc.trc
 plugins-scripts/check_*_health.ptkdb
+*.old
+*.bak

@@ -96,6 +96,13 @@ sub add_message {
   push @{$self->{messages}->{$code}}, @messages;
 }
 
+sub add_message_beginning {
+  my ($self, $code, @messages) = @_;
+  $code = (qw(ok warning critical unknown))[$code] if $code =~ /^\d+$/;
+  $code = lc $code;
+  unshift @{$self->{messages}->{$code}}, @messages;
+}
+
 sub selected_perfdata {
   my ($self, $label) = @_;
   if ($self->opts->can("selectedperfdata") && $self->opts->selectedperfdata) {
@@ -150,7 +157,15 @@ sub add_perfdata {
   my $crit = "";
   my $min = defined $args{min} ? $args{min} : "";
   my $max = defined $args{max} ? $args{max} : "";
-  if ($args{thresholds} || (! exists $args{warning} && ! exists $args{critical})) {
+  # if thresholds explicitly disabled or specific local thresholds specifed
+  if ( (defined $args{thresholds} && $args{thresholds} == 0) || (exists $args{warning} && exists $args{critical}) ) {
+    if ($args{warning}) {
+      $warn = $args{warning};
+    }
+    if ($args{critical}) {
+      $crit = $args{critical};
+    }
+  } else {
     if (exists $self->{thresholds}->{$label}->{warning}) {
       $warn = $self->{thresholds}->{$label}->{warning};
     } elsif (exists $self->{thresholds}->{default}->{warning}) {
@@ -160,13 +175,6 @@ sub add_perfdata {
       $crit = $self->{thresholds}->{$label}->{critical};
     } elsif (exists $self->{thresholds}->{default}->{critical}) {
       $crit = $self->{thresholds}->{default}->{critical};
-    }
-  } else {
-    if ($args{warning}) {
-      $warn = $args{warning};
-    }
-    if ($args{critical}) {
-      $crit = $args{critical};
     }
   }
   if ($uom eq "%") {

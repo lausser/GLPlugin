@@ -36,6 +36,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOENVMONMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOETHERNETFABRICEXTENDERMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOFEATURECONTROLMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOFIREWALLMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOFLASHMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOHSRPMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOIETFNATMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOIPSECFLOWMONITORMIB.pm

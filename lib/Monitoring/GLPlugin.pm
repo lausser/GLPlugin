@@ -579,16 +579,32 @@ sub dump {
 
 sub table_ascii {
   my ($self, $table, $titles) = @_;
-  my $text = "";
+
+  if ( ref($table) ne 'ARRAY' ) {
+    $self->add_critical("table must be ARRAY, but is " . ref($table));
+    return;
+  }
+  if ( ref($titles) ne 'ARRAY' ) {
+    $self->add_critical("titles must be ARRAY, but is " . ref($titles));
+    return;
+  }
+
+  my $text = "\n";
   my $column_length = {};
   my $column = 0;
   foreach (@{$titles}) {
     $column_length->{$column++} = length($_);
   }
   foreach my $tr (@{$table}) {
+    if ( ref($tr) eq "HASH" ) {
+      $tr = $tr->{content} or ();
+    }
     @{$tr} = map { ref($_) eq "ARRAY" ? $_->[0] : $_; } @{$tr};
     $column = 0;
     foreach my $td (@{$tr}) {
+      if (ref($td) eq "HASH") {
+        $td = $td->{content} || "";
+      }
       if (length($td) > $column_length->{$column}) {
         $column_length->{$column} = length($td);
       }
@@ -607,7 +623,13 @@ sub table_ascii {
   $text .= "\n";
   foreach my $tr (@{$table}) {
     $column = 0;
+    if ( ref($tr) eq "HASH" ) {
+      $tr = $tr->{content} or ();
+    }
     foreach my $td (@{$tr}) {
+      if (ref($td) eq "HASH") {
+        $td = $td->{content} || "";
+      }
       $text .= sprintf $column_length->{$column++}, $td;
     }
     $text .= "\n";
@@ -615,21 +637,63 @@ sub table_ascii {
   return $text;
 }
 
+#   $table - array with <tr> entries
+#            <tr> entries can be
+#               array of td entries or
+#               hash 'style'  : complete style element (overrides the other)
+#                    'bgcolor': just background-color for style
+#                    'code'   : nagios status code
+#                    'content': td text/array/hash
+#            <td> entry can be
+#               text - simple td content or
+#               array - 0 - text, 1 - code (nagios status code 0-3) or
+#               hash 'style'  : complete style element (overrides the other)
+#                    'bgcolor': just background-color for style element
+#                    'code'   : nagios status code
+#                    'content': td text content
 sub table_html {
-  my ($self, $table, $titles) = @_;
+  my ($self, $table, $titles, $summary) = @_;
+
+  if ( ref($table) ne 'ARRAY' ) {
+    print "ERROR - table must be ARRAY, but is " . ref($table);
+    die;
+  }
+  if ( ref($titles) ne 'ARRAY' ) {
+    print "ERROR - titles must be ARRAY, but is " . ref($titles);
+    die;
+  }
+
   my $text = "";
   $text .= "<table style=\"border-collapse:collapse; border: 1px solid black;\">";
+  if ( defined $summary && length($summary) > 0 ) {
+    $text .= sprintf("<caption style=\"caption-side: bottom;text-align: right;\">%s</caption>", $summary);
+  }
   $text .= "<tr>";
   foreach (@{$titles}) {
-    $text .= sprintf "<th style=\"text-align: left; padding-left: 4px; padding-right: 6px;\">%s</th>", $_;
+    $text .= sprintf("<th style=\"text-align: right; padding-left: 4px; padding-right: 6px;\">%s</th>", $_);
   }
   $text .= "</tr>";
   foreach my $tr (@{$table}) {
-    $text .= "<tr>";
+    my ($bgcolor, $class, $style);
+    if ( ref($tr) eq "HASH" ) {
+      $bgcolor = $tr->{bgcolor} if defined $tr->{bgcolor};
+      $class = $tr->{code} if defined $tr->{code};
+      $style = $tr->{style} if defined $tr->{style};
+      $tr = $tr->{content} or ();
+    }
+    unless ( defined $style ) {
+      if ( defined $bgcolor ) {
+        $style = sprintf("background-color: %s;", $bgcolor);
+      }
+    }
+    $text .= sprintf("<tr%s%s>",
+      defined $style ? sprintf(" style=\"%s\"", $style) : "",
+      defined $class ? sprintf(" class=\"%s\"", $class) : ""
+    );
     foreach my $td (@{$tr}) {
-      my $class = "statusOK";
+      my ($tdbgcolor, $tdclass, $tdstyle);
       if (ref($td) eq "ARRAY") {
-        $class = {
+        $tdclass = {
           0 => "statusOK",
           1 => "statusWARNING",
           2 => "statusCRITICAL",
@@ -637,7 +701,23 @@ sub table_html {
         }->{$td->[1]};
         $td = $td->[0];
       }
-      $text .= sprintf "<td style=\"text-align: left; padding-left: 4px; padding-right: 6px;\" class=\"%s\">%s</td>", $class, $td;
+      if (ref($td) eq "HASH") {
+        $tdbgcolor = $td->{bgcolor} if defined $td->{bgcolor};
+        $tdclass = $td->{code} if defined $td->{code};
+        $tdstyle = $td->{style} if defined $td->{style};
+        $td = $td->{content};
+      }
+      #$text .= sprintf "<td style=\"text-align: left; padding-left: 4px; padding-right: 6px;\" class=\"%s\">%s</td>", $class, $td;
+      unless ( defined $tdstyle ) {
+        if ( defined $tdbgcolor ) {
+          $tdstyle = sprintf("background-color: %s;", $tdbgcolor);
+        }
+      }
+      $text .= sprintf("<td%s%s>%s</td>",
+        defined $tdstyle ? sprintf(" style=\"%s\"", $tdstyle) : "",
+        defined $tdclass ? sprintf(" class=\"%s\"", $tdclass) : "",
+        $td
+      );
     }
     $text .= "</tr>";
   }
@@ -864,10 +944,6 @@ sub getopts {
     }
     exit;
   }
-  if ($self->opts->shell) {
-    # So komme ich bei den Narrischen zu einer root-Shell.
-    system("/bin/sh");
-  }
 }
 
 
@@ -935,6 +1011,20 @@ sub add_message {
   my ($self, $level, $message) = @_;
   $message ||= $self->{info};
   $Monitoring::GLPlugin::plugin->add_message($level, $message)
+      unless $self->is_blacklisted();
+  if (exists $self->{failed}) {
+    if ($level == UNKNOWN && $self->{failed} == OK) {
+      $self->{failed} = $level;
+    } elsif ($level > $self->{failed}) {
+      $self->{failed} = $level;
+    }
+  }
+}
+
+sub add_message_beginning {
+  my ($self, $level, $message) = @_;
+  $message ||= $self->{info};
+  $Monitoring::GLPlugin::plugin->add_message_beginning($level, $message)
       unless $self->is_blacklisted();
   if (exists $self->{failed}) {
     if ($level == UNKNOWN && $self->{failed} == OK) {
@@ -1214,7 +1304,11 @@ sub valdiff {
       }
     }
     if ($mode eq "normal" || $mode eq "lookback" || $mode eq "lookback_freeze_chill") {
-      if ($self->{$_} =~ /^\d+\.*\d*$/) {
+      if ( ! exists $self->{$_} ) {
+        # the value is not defined
+        $self->debug(sprintf("The key %s is not present", $_));
+        $self->{$_} = 0;
+      } elsif ($self->{$_} =~ /^\d+\.*\d*$/) {
         $last_values->{$_} = 0 if ! exists $last_values->{$_};
         if ($self->{$_} >= $last_values->{$_}) {
           $self->{'delta_'.$_} = $self->{$_} - $last_values->{$_};
