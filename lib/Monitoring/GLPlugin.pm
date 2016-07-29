@@ -1290,7 +1290,11 @@ sub valdiff {
       }
     }
     if ($mode eq "normal" || $mode eq "lookback" || $mode eq "lookback_freeze_chill") {
-      if ($self->{$_} =~ /^\d+\.*\d*$/) {
+      if ( ! exists $self->{$_} ) {
+        # the value is not defined
+        $self->debug(sprintf("The key %s is not present", $_));
+        $self->{$_} = 0;
+      } elsif ($self->{$_} =~ /^\d+\.*\d*$/) {
         $last_values->{$_} = 0 if ! exists $last_values->{$_};
         if ($self->{$_} >= $last_values->{$_}) {
           $self->{'delta_'.$_} = $self->{$_} - $last_values->{$_};
