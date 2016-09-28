@@ -5,7 +5,8 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'US_AN1GRAPH_BARO_MIB_134'} =
   name => 'US_AN1GRAPH_BARO_MIB_134',
 };
 
-#$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'US_AN1GRAPH_BARO_MIB_134'} = 
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'US_AN1GRAPH_BARO_MIB_134'} =
+    '1.3.6.1.4.1.5040.1.2.37';
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'US_AN1GRAPH_BARO_MIB_134'} = {
   wut => '1.3.6.1.4.1.5040',
