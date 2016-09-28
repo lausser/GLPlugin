@@ -1,14 +1,14 @@
-package Monitoring::GLPlugin::SNMP::MibsAndOids::USAN1GRAPHBAROMIB134;
+package Monitoring::GLPlugin::SNMP::MibsAndOids::WEBGRAPHTHERMOHYGROBAROMETERUSMIB;
 
-$Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'US_AN1GRAPH_BARO_MIB_134'} = {
+$Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'WebGraph-Thermo-Hygro-Barometer-US-MIB'} = {
   url => '',
-  name => 'US_AN1GRAPH_BARO_MIB_134',
+  name => 'WebGraph-Thermo-Hygro-Barometer-US-MIB',
 };
 
-$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'US_AN1GRAPH_BARO_MIB_134'} =
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'WebGraph-Thermo-Hygro-Barometer-US-MIB'} =
     '1.3.6.1.4.1.5040.1.2.37';
 
-$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'US_AN1GRAPH_BARO_MIB_134'} = {
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'WebGraph-Thermo-Hygro-Barometer-US-MIB'} = {
   wut => '1.3.6.1.4.1.5040',
   wtComServer => '1.3.6.1.4.1.5040.1',
   wtWebio => '1.3.6.1.4.1.5040.1.2',
@@ -239,7 +239,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'US_AN1GRAPH_BARO_MIB_
   wtWebGraphThermoBaroDiagErrorClear => '1.3.6.1.4.1.5040.1.2.37.4.5',
 };
 
-$Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'US_AN1GRAPH_BARO_MIB_134'} = {
+$Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'WebGraph-Thermo-Hygro-Barometer-US-MIB'} = {
   wtWebGraphThermoBaroLoggerTimebase => {
     '1' => 'wtWebGraphThermoBaroDatalogger-1Min',
     '2' => 'wtWebGraphThermoBaroDatalogger-5Min',
