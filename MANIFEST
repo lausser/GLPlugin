@@ -119,6 +119,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/UPSV4MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/USAGEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/WEBGRAPH8XTHERMOMETERMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/WEBGRAPHTHERMOHYGROBAROMETERMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/WEBGRAPHTHERMOHYGROBAROMETERUSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/WLSXSYSTEMEXTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/WLSXWLANMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/XPPCMIB.pm
