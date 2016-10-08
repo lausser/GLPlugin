@@ -17,6 +17,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/AIRESPACESWITCHINGMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/AIRESPACEWIRELESSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ALARMMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ALCATELIND1BASEMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ARISTAENTITYSENSORMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ARUBATCMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ASYNCOSMAILMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ATTACKMIB.pm
@@ -56,6 +57,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DISKMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/EMDMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ENTITYMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ENTITYSENSORMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ENTITYSTATEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/F5BIGIPLOCALMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/F5BIGIPSYSTEMMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/FCEOSMIB.pm
