@@ -76,6 +76,7 @@ $plugin->validate_args();
 diag($plugin->statefilesdir());
 diag($plugin->create_statefile());
 ok($plugin, 'Monitoring::GLPlugin->new');
+diag("module loaded");
 ok($plugin->opts->method eq "mysql");
 ok($plugin->opts->hostname eq "wwwsrv8.naprax.de");
 ok($plugin->opts->password eq "pfu1de1fl");
