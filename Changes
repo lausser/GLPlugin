@@ -1,3 +1,5 @@
+* 2016-10-11 2.3.3.1
+  bugfix in get_request, do not cache invalid responses
 * 2016-10-08 2.3.3
   add CISCOSB*
   add ARISTA-ENTITY-SENSOR-MIB

@@ -1697,7 +1697,15 @@ sub get_request {
     # und beim abschliessenden map wirds natuerlich nicht mehr gefunden 
     # also leeres return. <<kraftausdruck>>
     foreach my $key (%{$result}) {
-      $self->add_rawdata($key, $result->{$key});
+      # so, und zwei jahre spaeter kommt man drauf, dass es viele sorten 
+      # von stinkstiefeln gibt. die fragt man nach 1.3.6.1.4.1.13885.120.1.3.1
+      # und kriegt als antwort 1.3.6.1.4.1.13885.120.1.3.1.0=[noSuchInstance]
+      # bis zum 11.10.16 wurde das in den cache geschrieben. eine etage hoeher
+      # wird aber dann nach 1.3.6.1.4.1.13885.120.1.3.1.0 gefallbacked, was
+      # dann prompt aus dem cache gefischt wird, anstatt den agenten zu fragen,
+      # der in diesem fall eine saubere antwort liefern wuerde.
+      # ergo: keine fehlermeldungen in den chache
+      $self->add_rawdata($key, $result->{$key}) if defined $result->{$key} && $result->{$key} ne 'noSuchInstance';
     }
   }
   my $result = {};
