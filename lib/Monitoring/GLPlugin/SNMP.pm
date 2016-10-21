@@ -86,6 +86,13 @@ sub add_snmp_modes {
       help => 'Show snmpwalk command with the oids necessary for a simulation',
   );
   $self->add_mode(
+      internal => 'device::walkbulk',
+      spec => 'bulkwalk',
+      alias => undef,
+      help => 'Show snmpbulkwalk command with the oids necessary for a simulation',
+      hidden => 1,
+  );
+  $self->add_mode(
       internal => 'device::supportedmibs',
       spec => 'supportedmibs',
       alias => undef,
@@ -213,7 +220,7 @@ sub add_snmp_args {
 sub validate_args {
   my ($self) = @_;
   $self->SUPER::validate_args();
-  if ($self->opts->mode eq 'walk') {
+  if ($self->opts->mode =~ /^walk/) {
     if ($self->opts->snmpwalk && $self->opts->hostname) {
       if ($self->check_messages == CRITICAL) {
         # gemecker vom super-validierer, der sicherstellt, dass die datei
@@ -291,7 +298,8 @@ sub init {
       while (! $timedout && @trees) {
         my $tree = shift @trees;
         $SIG{CHLD} = 'IGNORE';
-        my $cmd = sprintf "snmpwalk -ObentU -v%s -c %s %s %s >> %s", 
+        my $cmd = sprintf "%s -ObentU -v%s -c %s %s %s >> %s",
+            ($self->mode =~ /bulk/) ? "snmpbulkwalk" : "snmpwalk",
             $self->opts->protocol,
             $self->opts->community,
             $self->opts->hostname,
@@ -315,7 +323,8 @@ sub init {
     } else {
       printf "rm -f %s\n", $name;
       foreach (@trees) {
-        printf "snmpwalk -ObentU -v%s -c %s %s %s >> %s\n", 
+        printf "%s -ObentU -v%s -c %s %s %s >> %s\n",
+            ($self->mode =~ /bulk/) ? "snmpbulkwalk -t 15 -r 20" : "snmpwalk",
             $self->opts->protocol,
             $self->opts->community,
             $self->opts->hostname,
@@ -731,6 +740,7 @@ sub init {
     push(@{$mibdepot}, ['1.3.6.1.2.1.129', 'ietf', 'v2', 'VPN-TC-STD-MIB']);
     push(@{$mibdepot}, ['1.3.6.1.2.1.68', 'ietf', 'v2', 'VRRP-MIB']);
     push(@{$mibdepot}, ['1.3.6.1.2.1.65', 'ietf', 'v2', 'WWW-MIB']);
+    push(@{$mibdepot}, ['1.3.6.1.4.1.8072', 'net-snmp', 'v2', 'NET-SNMP-MIB']);
     my $oids = $self->get_entries_by_walk(-varbindlist => [
         '1.3.6.1.2.1', '1.3.6.1.4.1',
     ]);
