@@ -1,5 +1,8 @@
+* 2016-10-24 2.3.4
+  fix host-resource-mib for mode supportedmibs
   add mode bulkwalk
   add NET-SNMP-MIB detector
+  add Liebert-Mibs
 * 2016-10-11 2.3.3.1
   bugfix in get_request, do not cache invalid responses
 * 2016-10-08 2.3.3
