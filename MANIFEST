@@ -78,6 +78,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNIPERMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LARAMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LIEBERTGPCONDITIONSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LIEBERTGPENVIRONMENTALMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LIEBERTGPPDUMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LIEBERTGPPOWERMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LIEBERTGPREGISTRATIONMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LIEBERTGPSYSTEMMIB.pm
