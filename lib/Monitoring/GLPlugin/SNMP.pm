@@ -98,6 +98,12 @@ sub add_snmp_modes {
       alias => undef,
       help => 'Shows the names of the mibs which this devices has implemented (only lausser may run this command)',
   );
+  $self->add_mode(
+      internal => 'device::supportedoids',
+      spec => 'supportedoids',
+      alias => undef,
+      help => 'Shows the names of the oids which this devices has implemented (only lausser may run this command)',
+  );
 }
 
 sub add_snmp_args {
@@ -777,6 +783,55 @@ sub init {
     $self->add_ok("have fun");
     my ($code, $message) = $self->check_messages(join => ', ', join_all => ', ');
     $Monitoring::GLPlugin::plugin->nagios_exit($code, $message);
+  } elsif ($self->mode =~ /device::supportedoids/) {
+    my $unknowns = {};
+    %{$unknowns} = %{$self->rawdata};
+    my $confirmed = {};
+    foreach my $mib (keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids}) {
+      foreach my $sym (keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}}) {
+        if (my $obj = $self->get_snmp_object($mib, $sym)) {
+          my $oid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$sym};
+          if (exists $unknowns->{$oid}) {
+            $confirmed->{$oid} = sprintf '%s::%s = %s', $mib, $sym, $obj;
+            delete $unknowns->{$oid};
+          } elsif (exists $unknowns->{$oid.'.0'}) {
+            $confirmed->{$oid.'.0'} = sprintf '%s::%s = %s', $mib, $sym, $obj;
+            delete $unknowns->{$oid.'.0'};
+          }
+        }
+        if ($sym =~ /Table$/) {
+          if (my @table = $self->get_snmp_table_objects($mib, $sym)) {
+            my $oid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$sym};
+            $confirmed->{$oid} = sprintf '%s::%s', $mib, $sym;
+            $self->add_rawdata($oid, '--------------------');
+            foreach my $line (@table) {
+              if ($line->{flat_indices}) {
+                foreach my $column (grep !/(flat_indices)|(indices)/, keys %{$line}) {
+                  my $oid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$column};
+                  if (exists $unknowns->{$oid.'.'.$line->{flat_indices}}) {
+                    $confirmed->{$oid.'.'.$line->{flat_indices}} = 
+                        sprintf '%s::%s.%s = %s', $mib, $column, $line->{flat_indices}, $line->{$column};
+                    delete $unknowns->{$oid.'.'.$line->{flat_indices}};
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    my @sortedoids = map { $_->[0] }
+        sort { $a->[1] cmp $b->[1] }
+            map { [$_,
+                join '', map { sprintf("%30d",$_) } split( /\./, $_)
+            ] } keys %{$self->rawdata};
+    foreach (@sortedoids) {
+      if (exists $confirmed->{$_}) {
+        printf "%s\n", $confirmed->{$_}, $_;
+      } else {
+        printf "%s = %s\n", $_, $unknowns->{$_};
+      }
+    }
   }
 }
 
