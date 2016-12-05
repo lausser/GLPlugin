@@ -621,6 +621,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'LIEBERT-GP-CONDITIONS
   lgpConditionContactClosureClosed => '1.3.6.1.4.1.476.1.42.3.2.1.5480',
   lgpConditionsPresent => '1.3.6.1.4.1.476.1.42.3.2.2',
   lgpConditionsTable => '1.3.6.1.4.1.476.1.42.3.2.3',
+  lgpConditionsEntry => '1.3.6.1.4.1.476.1.42.3.2.3.1', # dummy /Table/Entry/
   lgpConditionEntry => '1.3.6.1.4.1.476.1.42.3.2.3.1',
   lgpConditionId => '1.3.6.1.4.1.476.1.42.3.2.3.1.1',
   lgpConditionDescr => '1.3.6.1.4.1.476.1.42.3.2.3.1.2',
