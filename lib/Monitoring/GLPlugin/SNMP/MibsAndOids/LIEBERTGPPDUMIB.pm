@@ -12,6 +12,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'LIEBERT-GP-PDU-MIB'} 
   liebertGlobalProductsPduModule => '1.3.6.1.4.1.476.1.42.1.9.1',
   lgpPduCluster => '1.3.6.1.4.1.476.1.42.3.8.10',
   lgpPduGrpSysStatus => '1.3.6.1.4.1.476.1.42.3.8.10.5',
+  lgpPduGrpSysStatusDefinition => 'LIEBERT-GP-PDU-MIB::lgpPduGrpSysStatus',
   lgpPduTableCount => '1.3.6.1.4.1.476.1.42.3.8.19',
   lgpPduTable => '1.3.6.1.4.1.476.1.42.3.8.20',
   lgpPduEntry => '1.3.6.1.4.1.476.1.42.3.8.20.1',
@@ -359,4 +360,25 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'LIEBERT-GP-PDU-MIB'} = 
     '4' => 'three-phase-5-wire-L1-L2-L3-N-PE',
     '5' => 'two-phase-4-wire-L1-L2-N-PE',
   },
+  lgpPduGrpSysStatus => sub {
+    my $val = shift;
+    $val &= 0xffff;
+    my @return = ();
+    my $bits = {
+      1 => 'normalOperation',
+      2 => 'startUp',
+      4 => 'unknownNoSupport',
+      8 => 'normalWithWarning',
+      16 => 'normalWithAlarm',
+      32 => 'abnormalOperation',
+      64 => 'unknownCommFailure',
+    };
+    foreach my $bit (sort { $a <=> $b } keys %{$bits}) {
+      if ($val & $bit) {
+        push(@return, $bits->{$bit});
+      }
+    }
+    return join(",", @return);
+  },
+
 };
