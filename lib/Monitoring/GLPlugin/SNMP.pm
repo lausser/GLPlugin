@@ -827,7 +827,7 @@ sub init {
             ] } keys %{$self->rawdata};
     foreach (@sortedoids) {
       if (exists $confirmed->{$_}) {
-        printf "%s\n", $confirmed->{$_}, $_;
+        printf "%s\n", $confirmed->{$_};
       } else {
         printf "%s = %s\n", $_, $unknowns->{$_};
       }
