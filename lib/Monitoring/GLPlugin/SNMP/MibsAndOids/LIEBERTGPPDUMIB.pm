@@ -22,6 +22,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'LIEBERT-GP-PDU-MIB'} 
   lgpPduEntrySysAssignLabel => '1.3.6.1.4.1.476.1.42.3.8.20.1.15',
   lgpPduEntryPositionRelative => '1.3.6.1.4.1.476.1.42.3.8.20.1.20',
   lgpPduEntrySysStatus => '1.3.6.1.4.1.476.1.42.3.8.20.1.25',
+  lgpPduEntrySysStatusDefinition => 'LIEBERT-GP-PDU-MIB::lgpPduEntrySysStatus',
   lgpPduEntryUsrTag1 => '1.3.6.1.4.1.476.1.42.3.8.20.1.35',
   lgpPduEntryUsrTag2 => '1.3.6.1.4.1.476.1.42.3.8.20.1.40',
   lgpPduEntrySerialNumber => '1.3.6.1.4.1.476.1.42.3.8.20.1.45',
@@ -362,7 +363,8 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'LIEBERT-GP-PDU-MIB'} = 
   },
   lgpPduGrpSysStatus => sub {
     my $val = shift;
-    $val &= 0xffff;
+    $val &= 0xffffffff;
+    $val = unpack("B32", pack("h", $val));
     my @return = ();
     my $bits = {
       1 => 'normalOperation',
@@ -380,5 +382,27 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'LIEBERT-GP-PDU-MIB'} = 
     }
     return join(",", @return);
   },
-
+  lgpPduEntrySysStatus => sub {
+    my $val = shift;
+    #printf "lgpPduEntrySysStatus unpack %s to %s\n", $val, unpack("B32", pack("h", $val));
+    $val &= 0xffffffff;
+    # we have Octet32 16 which results in 00000000000000000000000000010000
+    # shuffle nibbles so that bit1 is 1: 00000001
+    $val = unpack("B32", pack("h", $val));
+    my @return = ();
+    my $bits = {
+      1 => 'normalOperation',
+      2 => 'startUp',
+      4 => 'unknownNoSupport',
+      8 => 'normalWithWarning',
+      16 => 'normalWithAlarm',
+      32 => 'abnormalOperation',
+    };
+    foreach my $bit (sort { $a <=> $b } keys %{$bits}) {
+      if ($val & $bit) {
+        push(@return, $bits->{$bit});
+      }
+    }
+    return join(",", @return);
+  },
 };
