@@ -66,7 +66,7 @@ sub v2tov3 {
   }
   if (($self->opts->authpassword || $self->opts->authprotocol ||
       $self->opts->privpassword || $self->opts->privprotocol) && 
-      ! $self->opts->protocol eq '3') {
+      $self->opts->protocol ne '3') {
     $self->override_opt('protocol', '3') ;
   }
 }
