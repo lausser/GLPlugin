@@ -918,17 +918,56 @@ sub check_snmp_and_model {
   }
   if (! $self->check_messages()) {
     my $tic = time;
+    # Datatype TimeTicks = 1/100s
     my $sysUptime = $self->get_snmp_object('MIB-2-MIB', 'sysUpTime', 0);
+    # Datatype Integer32 = 1s
     my $snmpEngineTime = $self->get_snmp_object('SNMP-FRAMEWORK-MIB', 'snmpEngineTime');
+    # Datatype TimeTicks = 1/100s
+    my $hrSystemUptime = $self->get_snmp_object('HOST-RESOURCES-MIB', 'hrSystemUptime');
     my $sysDescr = $self->get_snmp_object('MIB-2-MIB', 'sysDescr', 0);
     my $tac = time;
-    if (defined $sysUptime && defined $sysDescr) {
+    if (defined $hrSystemUptime && $hrSystemUptime =~ /^\d+$/ && $hrSystemUptime > 0) {
+      $hrSystemUptime = $self->timeticks($hrSystemUptime);
+      $self->debug(sprintf 'hrSystemUptime says: up since: %s / %s',
+          scalar localtime (time -  $self->timeticks($hrSystemUptime)),
+          $self->human_timeticks($hrSystemUptime));
+    } else {
+      $hrSystemUptime = undef;
+    }
+    if (defined $snmpEngineTime && $snmpEngineTime =~ /^\d+$/ && $snmpEngineTime > 0) {
+      $snmpEngineTime = $snmpEngineTime;
+      $self->debug(sprintf 'snmpEngineTime says: up since: %s / %s',
+          scalar localtime (time - $snmpEngineTime),
+          $self->human_timeticks($snmpEngineTime));
+    } else {
       # drecksschrott asa liefert negative werte
       # und drecksschrott socomec liefert: wrong type (should be INTEGER): NULL
-      if (defined $snmpEngineTime && $snmpEngineTime =~ /^\d+$/ && $snmpEngineTime > 0) {
+      $snmpEngineTime = undef;
+    }
+    if (defined $sysUptime) {
+      $sysUptime = $self->timeticks($sysUptime);
+      $self->debug(sprintf 'sysUptime says:      up since: %s / %s',
+          scalar localtime (time -  $self->timeticks($sysUptime)),
+          $self->human_timeticks($sysUptime));
+    }
+    if (defined $sysUptime && defined $sysDescr) {
+      if ($hrSystemUptime) {
+        # Bei Linux-basierten Geraeten wird snmpEngineTime viel zu haeufig
+        # durchgestartet, also lieber das hier.
+        $self->{uptime} = $self->timeticks($hrSystemUptime);
+        # Es sei denn, snmpEngineTime ist tatsaechlich groesser, dann gilt
+        # wiederum dieses. Mag sein, dass der zahlenwert hier manchmal huepft
+        # und ein Performancegraph Zacken bekommt, aber das ist mir egal.
+        # es geht nicht um Graphen in Form einer ansteigenden Geraden, sondern
+        # um das Erkennen von spontanen Reboots und das Vermeiden von
+        # falschen Alarmen.
+        if ($snmpEngineTime && $snmpEngineTime > $hrSystemUptime) {
+          $self->{uptime} = $snmpEngineTime;
+        }
+      } elsif ($snmpEngineTime) {
         $self->{uptime} = $snmpEngineTime;
       } else {
-        $self->{uptime} = $self->timeticks($sysUptime);
+        $self->{uptime} = $sysUptime;
       }
       $self->{productname} = $sysDescr;
       $self->{sysobjectid} = $self->get_snmp_object('MIB-2-MIB', 'sysObjectID', 0);
