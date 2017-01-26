@@ -1,3 +1,5 @@
+* 2017-01-26 2.3.8.3
+  add mib_id to cisco wireless mibs
 * 2017-01-18 2.3.8.2
   improve uptime calculation
 * 2017-01-11 2.3.8.1

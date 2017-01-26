@@ -5,6 +5,9 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'AIRESPACE-WIRELESS-MIB'} = {
   name => 'AIRESPACE-WIRELESS-MIB',
 };
 
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'AIRESPACE-WIRELESS-MIB'} =
+  '1.3.6.1.4.1.14179.2';
+
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'AIRESPACE-WIRELESS-MIB'} = {
   'bsnWireless' => '1.3.6.1.4.1.14179.2',
   'bsnEss' => '1.3.6.1.4.1.14179.2.1',
