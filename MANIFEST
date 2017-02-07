@@ -41,7 +41,9 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOHSRPMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOIETFNATMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOIPSECFLOWMONITORMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOL2L3INTERFACECONFIGMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOLAGMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOMEMORYPOOLMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOPORTCHANNELMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOPROCESSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOSBHWENVIROMENTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOSBRNDMNGMIB.pm
@@ -70,6 +72,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HH3CENTITYEXTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HOSTRESOURCESMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HPICFCHASSISMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HWGWLDMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IEEE8023LAGMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IFMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IPFORWARDMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IPMIB.pm

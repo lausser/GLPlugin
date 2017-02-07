@@ -1,3 +1,7 @@
+* 2017-02-07 2.3.9
+  add CISCO-LAG-MIB
+  add CISCO-PORT-CHANNEL-MIB
+  add IEEE8023-LAG-MIB
 * 2017-01-26 2.3.8.4
   fix definition of bsnAPAdminStatus
 * 2017-01-26 2.3.8.3
