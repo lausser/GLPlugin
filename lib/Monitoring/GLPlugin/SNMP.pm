@@ -348,6 +348,9 @@ sub init {
         value => $self->{uptime} / 60,
         places => 0,
     );
+    if ($self->opts->report ne 'short') {
+      $self->add_ok($self->pretty_sysdesc($self->{productname}));
+    }
     my ($code, $message) = $self->check_messages(join => ', ', join_all => ', ');
     $Monitoring::GLPlugin::plugin->nagios_exit($code, $message);
   } elsif ($self->mode =~ /device::supportedmibs/) {
@@ -987,6 +990,11 @@ sub check_snmp_and_model {
       $Monitoring::GLPlugin::SNMP::session->close if $Monitoring::GLPlugin::SNMP::session;
     }
   }
+}
+
+sub pretty_sysdesc {
+  my ($self, $sysDesc) = @_;
+  return $sysDesc;
 }
 
 sub establish_snmp_session {
