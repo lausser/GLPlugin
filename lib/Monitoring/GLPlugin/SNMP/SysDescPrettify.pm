@@ -1,9 +1,9 @@
-package Monitoring::GLPlugin::SNMP::SysDescPrettyfy;
+package Monitoring::GLPlugin::SNMP::SysDescPrettify;
 our @ISA = qw(Monitoring::GLPlugin::SNMP);
 
 {
   no warnings qw(once);
-  $Monitoring::GLPlugin::SNMP::SysDescPrettyfy::vendor_rules = {};
+  $Monitoring::GLPlugin::SNMP::SysDescPrettify::vendor_rules = {};
 }
 
 1;

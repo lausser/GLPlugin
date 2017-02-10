@@ -997,9 +997,9 @@ sub check_snmp_and_model {
 sub pretty_sysdesc {
   my ($self, $sysDesc) = @_;
   foreach my $vendor (
-      keys %{$Monitoring::GLPlugin::SNMP::SysDescPrettyfy::vendor_rules}) {
-    if ($sysDesc =~ /$Monitoring::GLPlugin::SNMP::SysDescPrettyfy::vendor_rules->{$vendor}->{vendor_pattern}/) {
-      foreach my $func (@{$Monitoring::GLPlugin::SNMP::SysDescPrettyfy::vendor_rules->{$vendor}->{prettifier_funcs}}) {
+      keys %{$Monitoring::GLPlugin::SNMP::SysDescPrettify::vendor_rules}) {
+    if ($sysDesc =~ /$Monitoring::GLPlugin::SNMP::SysDescPrettify::vendor_rules->{$vendor}->{vendor_pattern}/) {
+      foreach my $func (@{$Monitoring::GLPlugin::SNMP::SysDescPrettify::vendor_rules->{$vendor}->{prettifier_funcs}}) {
         if (my $pretty = $func->($sysDesc, $self->session())) {
           return $pretty;
         }
