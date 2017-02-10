@@ -1,6 +1,7 @@
 * 2017-02-07 2.3.12
   add CISCO-LWAPP-HA-MIB
   add CISCO-LWAPP-AP-MIB
+  add sysdesc to the output of mode uptime
 * 2017-02-07 2.3.11
   add sysDesc to more uptime
 * 2017-02-07 2.3.10
