@@ -1945,16 +1945,26 @@ sub get_entries {
   my $result = {};
   $self->debug(sprintf "get_entries %s", Data::Dumper::Dumper(\%params));
   if (! $self->opts->snmpwalk) {
-    $result = $self->get_entries_get_bulk(%params);
+    if (scalar (@{$params{'-columns'}}) < 5 && $params{'-endindex'} && $params{'-startindex'} eq $params{'-endindex'}) {
+      $result = $self->get_entries_get_simple(%params);
+    } else {
+      $result = $self->get_entries_get_bulk(%params);
+    }
     if (! $result) {
-      if (scalar (@{$params{'-columns'}}) < 50 && $params{'-endindex'} && $params{'-startindex'} eq $params{'-endindex'}) {
-        $result = $self->get_entries_get_simple(%params);
-      } else {
-        $result = $self->get_entries_get_next(%params);
+      $self->debug(sprintf "get_entries_get_simple/bulk failed");
+      if ($Monitoring::GLPlugin::SNMP::session->error() =~ /The message size exceeded the buffer maxMsgSize of (\d+)/i) {
+        $self->debug(sprintf "buffer exceeded");
+        $self->mult_snmp_max_msg_size(5);
       }
+    #  if (scalar (@{$params{'-columns'}}) < 50 && $params{'-endindex'} && $params{'-startindex'} eq $params{'-endindex'}) {
+    #    $result = $self->get_entries_get_simple(%params);
+    #  } else {
+        $result = $self->get_entries_get_next(%params);
+    #  }
       if (! $result && defined $params{'-startindex'} && $params{'-startindex'} !~ /\./) {
         # compound indexes cannot continue, as these two methods iterate numerically
         if ($Monitoring::GLPlugin::SNMP::session->error() =~ /tooBig/i) {
+          $self->debug(sprintf "answer too big");
           $result = $self->get_entries_get_next_1index(%params);
         }
         if (! $result) {
