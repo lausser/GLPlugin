@@ -66,6 +66,13 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'HOST-RESOURCES-MIB'} 
   'hrDeviceDescr' => '1.3.6.1.2.1.25.3.2.1.3',
   'hrDeviceID' => '1.3.6.1.2.1.25.3.2.1.4',
   'hrDeviceStatus' => '1.3.6.1.2.1.25.3.2.1.5',
+  'hrDeviceStatusDefinition' => {
+    1 => 'unknown',
+    2 => 'running',
+    3 => 'warning',
+    4 => 'testing',
+    5 => 'down',
+  },
   'hrDeviceErrors' => '1.3.6.1.2.1.25.3.2.1.6',
   'hrProcessorTable' => '1.3.6.1.2.1.25.3.3',
   'hrProcessorEntry' => '1.3.6.1.2.1.25.3.3.1',

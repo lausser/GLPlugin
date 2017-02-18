@@ -1955,6 +1955,8 @@ sub get_entries {
       if ($Monitoring::GLPlugin::SNMP::session->error() =~ /The message size exceeded the buffer maxMsgSize of (\d+)/i) {
         $self->debug(sprintf "buffer exceeded");
         $self->mult_snmp_max_msg_size(5);
+      } else {
+        $self->debug($Monitoring::GLPlugin::SNMP::session->error());
       }
     #  if (scalar (@{$params{'-columns'}}) < 50 && $params{'-endindex'} && $params{'-startindex'} eq $params{'-endindex'}) {
     #    $result = $self->get_entries_get_simple(%params);

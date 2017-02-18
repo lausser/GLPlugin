@@ -1,3 +1,10 @@
+* 2017-02-18 2.3.13
+  add F5-BIGIP-GLOBAL-MIB
+  add HOST-RESOURCES-V2-MIB
+  add NETSCREEN-NSRP-MIB
+  update HOST-RESOURCES-MIB
+  optimize get_entries
+  output sysDesc with uptime
 * 2017-02-07 2.3.12
   add CISCO-LWAPP-HA-MIB
   add CISCO-LWAPP-AP-MIB
