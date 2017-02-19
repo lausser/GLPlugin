@@ -2417,6 +2417,12 @@ sub add_oidtrace {
 #  my @indices = $self->get_cache_indices();
 sub get_cache_indices {
   my ($self, $mib, $table, $key_attr) = @_;
+  # get_cache_indices is only used by get_snmp_table_objects_with_cache
+  # so if we dont use --name returning all the indices would result
+  # in a step-by-step get_table_objecs(index 1...n) which could take long
+  # time when used with nexus or f5 pools
+  # returning () forces get_snmp_table_objects to use get_tables
+  return () if ! $self->opts->name;
   if (ref($key_attr) ne "ARRAY") {
     $key_attr = [$key_attr];
   }
