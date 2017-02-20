@@ -1949,20 +1949,19 @@ sub get_entries {
       $result = $self->get_entries_get_simple(%params);
     } else {
       $result = $self->get_entries_get_bulk(%params);
+      if (! $result) {
+        $self->debug("bulk failed, retry simple");
+        if ($Monitoring::GLPlugin::SNMP::session->error() =~ /The message size exceeded the buffer maxMsgSize of (\d+)/i) {
+          $self->debug(sprintf "buffer exceeded. raise *5 for next try");
+          $self->mult_snmp_max_msg_size(5);
+        } else {
+          $self->debug($Monitoring::GLPlugin::SNMP::session->error());
+        }
+        $result = $self->get_entries_get_simple(%params);
+      }
     }
     if (! $result) {
-      $self->debug(sprintf "get_entries_get_simple/bulk failed");
-      if ($Monitoring::GLPlugin::SNMP::session->error() =~ /The message size exceeded the buffer maxMsgSize of (\d+)/i) {
-        $self->debug(sprintf "buffer exceeded");
-        $self->mult_snmp_max_msg_size(5);
-      } else {
-        $self->debug($Monitoring::GLPlugin::SNMP::session->error());
-      }
-    #  if (scalar (@{$params{'-columns'}}) < 50 && $params{'-endindex'} && $params{'-startindex'} eq $params{'-endindex'}) {
-    #    $result = $self->get_entries_get_simple(%params);
-    #  } else {
-        $result = $self->get_entries_get_next(%params);
-    #  }
+      $result = $self->get_entries_get_next(%params);
       if (! $result && defined $params{'-startindex'} && $params{'-startindex'} !~ /\./) {
         # compound indexes cannot continue, as these two methods iterate numerically
         if ($Monitoring::GLPlugin::SNMP::session->error() =~ /tooBig/i) {
@@ -2417,6 +2416,12 @@ sub add_oidtrace {
 #  my @indices = $self->get_cache_indices();
 sub get_cache_indices {
   my ($self, $mib, $table, $key_attr) = @_;
+  # get_cache_indices is only used by get_snmp_table_objects_with_cache
+  # so if we dont use --name returning all the indices would result
+  # in a step-by-step get_table_objecs(index 1...n) which could take long
+  # time when used with nexus or f5 pools
+  # returning () forces get_snmp_table_objects to use get_tables
+  return () if ! $self->opts->name;
   if (ref($key_attr) ne "ARRAY") {
     $key_attr = [$key_attr];
   }
