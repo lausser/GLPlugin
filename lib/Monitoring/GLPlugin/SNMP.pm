@@ -1067,7 +1067,8 @@ sub establish_snmp_session {
       $self->debug(Data::Dumper::Dumper(\%params));
     } else {
       my $max_msg_size = $session->max_msg_size();
-      $session->max_msg_size(4 * $max_msg_size);
+      #$session->max_msg_size(4 * $max_msg_size);
+      $Monitoring::GLPlugin::SNMP::max_msg_size = $max_msg_size;
       $Monitoring::GLPlugin::SNMP::session = $session;
     }
   } else {
@@ -1097,10 +1098,17 @@ sub establish_snmp_secondary_session {
   }
 }
 
+sub reset_snmp_max_msg_size {
+  my ($self) = @_;
+  $self->debug(sprintf "reset snmp_max_msg_size to %s",
+      $Monitoring::GLPlugin::SNMP::max_msg_size);
+  $Monitoring::GLPlugin::SNMP::session->max_msg_size($Monitoring::GLPlugin::SNMP::max_msg_size) if $Monitoring::GLPlugin::SNMP::session;
+}
+
 sub mult_snmp_max_msg_size {
   my ($self, $factor) = @_;
   $factor ||= 10;
-  $self->debug(sprintf "raise maxmsgsize %d * %d", 
+  $self->debug(sprintf "raise snmp_max_msg_size %d * %d", 
       $factor, $Monitoring::GLPlugin::SNMP::session->max_msg_size()) if $Monitoring::GLPlugin::SNMP::session;
   $Monitoring::GLPlugin::SNMP::session->max_msg_size($factor * $Monitoring::GLPlugin::SNMP::session->max_msg_size()) if $Monitoring::GLPlugin::SNMP::session;
 }
