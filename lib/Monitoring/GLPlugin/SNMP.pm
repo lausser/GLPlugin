@@ -2123,15 +2123,35 @@ sub get_table {
     if (scalar(keys %{$result}) == 0) {
       $self->debug(sprintf "get_table error: %s", 
           $Monitoring::GLPlugin::SNMP::session->error());
+      if ($Monitoring::GLPlugin::SNMP::session->error() =~ /The message size exceeded the buffer maxMsgSize of (\d+)/i) {
+        # bei irrsinnigen maxrepetitions
+        $self->debug(sprintf "buffer exceeded");
+        #$self->reset_snmp_max_msg_size();
+        if ($params{'-maxrepetitions'}) {
+          $params{'-maxrepetitions'} = int($params{'-maxrepetitions'} / 2);
+          $self->debug(sprintf "reduce maxrepetitions to %d",
+              $params{'-maxrepetitions'});
+        } else {
+          $self->mult_snmp_max_msg_size(2);
+        }
+      }
       $self->debug("get_table error: try fallback");
-      $params{'-maxrepetitions'} = 1;
       $self->debug(sprintf "get_table %s", Data::Dumper::Dumper(\%params));
       $result = $Monitoring::GLPlugin::SNMP::session->get_table(%params);
       $self->debug(sprintf "get_table returned %d oids", scalar(keys %{$result}));
       if (scalar(keys %{$result}) == 0) {
         $self->debug(sprintf "get_table error: %s", 
             $Monitoring::GLPlugin::SNMP::session->error());
-        $self->debug("get_table error: no more fallbacks. Try --protocol 1");
+        if (exists $params{'-maxrepetitions'} && $params{'-maxrepetitions'} > 1) {
+          $params{'-maxrepetitions'} = 1;
+          $self->debug("get_table error: try getnext fallback");
+          $self->debug(sprintf "get_table %s", Data::Dumper::Dumper(\%params));
+          $result = $Monitoring::GLPlugin::SNMP::session->get_table(%params);
+          $self->debug(sprintf "get_table returned %d oids", scalar(keys %{$result}));
+        }
+        if (scalar(keys %{$result}) == 0) {
+          $self->debug("get_table error: no more fallbacks. Try --protocol 1");
+        }
       }
     }
     # Drecksstinkstiefel Net::SNMP
