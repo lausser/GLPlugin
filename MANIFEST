@@ -138,6 +138,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SPECTRALOGICGLOBALREG.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SPECTRALOGICGLOBALREGSLHARDWARESLLIBRARIESSLTSERIES.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/STATISTICSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/STEELHEAD-MIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/STEELHEADEX-MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/STULZWIB8000MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SWMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SYNOPTICSROOTMIB.pm
