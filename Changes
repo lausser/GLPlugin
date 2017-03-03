@@ -1,3 +1,9 @@
+* 2017-03-03 2.3.18
+  add GENUA-MIB
+  add OPENBSD-PF-MIB
+  add OPENBSD-SENSORS-MIB
+  add OPENBSD-MEM-MIB
+  add OPENBSD-CARP-MIB
 * 2017-03-01 2.3.17.1
   fix packaging error
 * 2017-03-01 2.3.17

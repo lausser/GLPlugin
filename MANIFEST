@@ -76,6 +76,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/FORTINETFORTIGATEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/FOUNDRYSNAGENTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/FOUNDRYSNSWL4SWITCHGROUPMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/FSCRAIDMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/GENUAMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HH3CENTITYEXTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HOSTRESOURCESMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HOSTRESOURCESV2MIB.pm
@@ -111,6 +112,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/OLDCISCOCPUMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/OLDNETSWITCHMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/OLDSTATISTICSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ONEACCESSSYSMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/OPENBSDMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/OSPFMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/PANCOMMONMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/PANPRODUCTSMIB.pm
