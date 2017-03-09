@@ -1,13 +1,13 @@
 package Monitoring::GLPlugin::SNMP::MibsAndOids::HOSTRESOURCESV2MIB;
 
-$Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'HOST-RESOURCES-V2-MIB'} = {
+$Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'HOST-RESOURCES-MIB'} = {
   url => '',
-  name => 'HOST-RESOURCES-V2-MIB',
+  name => 'HOST-RESOURCES-MIB',
 };
 
-#$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'HOST-RESOURCES-V2-MIB'} = 
+#$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'HOST-RESOURCES-MIB'} = 
 
-$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'HOST-RESOURCES-V2-MIB'} = {
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'HOST-RESOURCES-MIB'} = {
   hostResourcesMibModule => '1.3.6.1.2.1.25',
   hrSystem => '1.3.6.1.2.1.25.1',
   hrSystemUptime => '1.3.6.1.2.1.25.1.1',
@@ -66,7 +66,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'HOST-RESOURCES-V2-MIB
   hrDeviceDescr => '1.3.6.1.2.1.25.3.2.1.3',
   hrDeviceID => '1.3.6.1.2.1.25.3.2.1.4',
   hrDeviceStatus => '1.3.6.1.2.1.25.3.2.1.5',
-  hrDeviceStatusDefinition => 'HOST-RESOURCES-V2-MIB::hrDeviceStatus',
+  hrDeviceStatusDefinition => 'HOST-RESOURCES-MIB::hrDeviceStatus',
   hrDeviceErrors => '1.3.6.1.2.1.25.3.2.1.6',
   hrProcessorTable => '1.3.6.1.2.1.25.3.3',
   hrProcessorEntry => '1.3.6.1.2.1.25.3.3.1',
@@ -78,16 +78,16 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'HOST-RESOURCES-V2-MIB
   hrPrinterTable => '1.3.6.1.2.1.25.3.5',
   hrPrinterEntry => '1.3.6.1.2.1.25.3.5.1',
   hrPrinterStatus => '1.3.6.1.2.1.25.3.5.1.1',
-  hrPrinterStatusDefinition => 'HOST-RESOURCES-V2-MIB::hrPrinterStatus',
+  hrPrinterStatusDefinition => 'HOST-RESOURCES-MIB::hrPrinterStatus',
   hrPrinterDetectedErrorState => '1.3.6.1.2.1.25.3.5.1.2',
   hrDiskStorageTable => '1.3.6.1.2.1.25.3.6',
   hrDiskStorageEntry => '1.3.6.1.2.1.25.3.6.1',
   hrDiskStorageAccess => '1.3.6.1.2.1.25.3.6.1.1',
-  hrDiskStorageAccessDefinition => 'HOST-RESOURCES-V2-MIB::hrDiskStorageAccess',
+  hrDiskStorageAccessDefinition => 'HOST-RESOURCES-MIB::hrDiskStorageAccess',
   hrDiskStorageMedia => '1.3.6.1.2.1.25.3.6.1.2',
-  hrDiskStorageMediaDefinition => 'HOST-RESOURCES-V2-MIB::hrDiskStorageMedia',
+  hrDiskStorageMediaDefinition => 'HOST-RESOURCES-MIB::hrDiskStorageMedia',
   hrDiskStorageRemoveble => '1.3.6.1.2.1.25.3.6.1.3',
-  hrDiskStorageRemovebleDefinition => 'HOST-RESOURCES-V2-MIB::Boolean',
+  hrDiskStorageRemovebleDefinition => 'HOST-RESOURCES-MIB::Boolean',
   hrDiskStorageCapacity => '1.3.6.1.2.1.25.3.6.1.4',
   hrPartitionTable => '1.3.6.1.2.1.25.3.7',
   hrPartitionEntry => '1.3.6.1.2.1.25.3.7.1',
@@ -103,9 +103,9 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'HOST-RESOURCES-V2-MIB
   hrFSRemoteMountPoint => '1.3.6.1.2.1.25.3.8.1.3',
   hrFSType => '1.3.6.1.2.1.25.3.8.1.4',
   hrFSAccess => '1.3.6.1.2.1.25.3.8.1.5',
-  hrFSAccessDefinition => 'HOST-RESOURCES-V2-MIB::hrFSAccess',
+  hrFSAccessDefinition => 'HOST-RESOURCES-MIB::hrFSAccess',
   hrFSBootable => '1.3.6.1.2.1.25.3.8.1.6',
-  hrFSBootableDefinition => 'HOST-RESOURCES-V2-MIB::Boolean',
+  hrFSBootableDefinition => 'HOST-RESOURCES-MIB::Boolean',
   hrFSStorageIndex => '1.3.6.1.2.1.25.3.8.1.7',
   hrFSLastFullBackupDate => '1.3.6.1.2.1.25.3.8.1.8',
   hrFSLastPartialBackupDate => '1.3.6.1.2.1.25.3.8.1.9',
@@ -142,9 +142,9 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'HOST-RESOURCES-V2-MIB
   hrSWRunPath => '1.3.6.1.2.1.25.4.2.1.4',
   hrSWRunParameters => '1.3.6.1.2.1.25.4.2.1.5',
   hrSWRunType => '1.3.6.1.2.1.25.4.2.1.6',
-  hrSWRunTypeDefinition => 'HOST-RESOURCES-V2-MIB::hrSWRunType',
+  hrSWRunTypeDefinition => 'HOST-RESOURCES-MIB::hrSWRunType',
   hrSWRunStatus => '1.3.6.1.2.1.25.4.2.1.7',
-  hrSWRunStatusDefinition => 'HOST-RESOURCES-V2-MIB::hrSWRunStatus',
+  hrSWRunStatusDefinition => 'HOST-RESOURCES-MIB::hrSWRunStatus',
   hrSWRunPerf => '1.3.6.1.2.1.25.5',
   hrSWRunPerfTable => '1.3.6.1.2.1.25.5.1',
   hrSWRunPerfEntry => '1.3.6.1.2.1.25.5.1.1',
@@ -159,14 +159,14 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'HOST-RESOURCES-V2-MIB
   hrSWInstalledName => '1.3.6.1.2.1.25.6.3.1.2',
   hrSWInstalledID => '1.3.6.1.2.1.25.6.3.1.3',
   hrSWInstalledType => '1.3.6.1.2.1.25.6.3.1.4',
-  hrSWInstalledTypeDefinition => 'HOST-RESOURCES-V2-MIB::hrSWInstalledType',
+  hrSWInstalledTypeDefinition => 'HOST-RESOURCES-MIB::hrSWInstalledType',
   hrSWInstalledDate => '1.3.6.1.2.1.25.6.3.1.5',
   hrConformance => '1.3.6.1.2.1.25.7',
   hrMIBCompliances => '1.3.6.1.2.1.25.7.1',
   hrMIBGroups => '1.3.6.1.2.1.25.7.2',
 };
 
-$Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'HOST-RESOURCES-V2-MIB'} = {
+$Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'HOST-RESOURCES-MIB'} = {
   hrDeviceStatus => {
     '1' => 'unknown',
     '2' => 'running',
