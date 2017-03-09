@@ -1965,7 +1965,11 @@ sub get_entries {
         } else {
           $self->debug($Monitoring::GLPlugin::SNMP::session->error());
         }
-        $result = $self->get_entries_get_simple(%params);
+        if (defined $params{'-endindex'} && defined $params{'-startindex'}) {
+          $result = $self->get_entries_get_simple(%params);
+        } else {
+          $result = $self->get_entries_get_next(%params);
+        }
       }
     }
     if (! $result) {
