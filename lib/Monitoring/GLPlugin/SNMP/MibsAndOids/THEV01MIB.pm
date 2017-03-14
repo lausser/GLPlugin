@@ -38,7 +38,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'THE_V01-MIB'} = {
   watchValTable => '1.3.6.1.4.1.18248.20.1.3.1',
   watchValEntry => '1.3.6.1.4.1.18248.20.1.3.1.1',
   modeWatch => '1.3.6.1.4.1.18248.20.1.3.1.1.1',
-  modeWatchDescription => {
+  modeWatchDefinition => {
     0 => 'inactive',
     1 => 'active',
   },
