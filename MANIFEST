@@ -143,6 +143,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/STULZWIB8000MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SWMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SYNOPTICSROOTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SYSTEMRESOURCESMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/THEV01MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/UCDDISKIOMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/UCDSNMPMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/UPSMIB.pm
