@@ -1942,6 +1942,7 @@ sub get_entries {
   # [-startindex]
   # [-endindex]
   # -columns
+  $params{'-columns'} = [$self->sort_oids($params{'-columns'})];
   my $result = {};
   $self->debug(sprintf "get_entries %s", Data::Dumper::Dumper(\%params));
   if (! $self->opts->snmpwalk) {
