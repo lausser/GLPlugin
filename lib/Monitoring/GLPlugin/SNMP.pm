@@ -1555,10 +1555,10 @@ sub get_snmp_object {
 sub get_snmp_table_objects_with_cache {
   my ($self, $mib, $table, $key_attr) = @_;
   #return $self->get_snmp_table_objects($mib, $table);
-  $self->update_entry_cache(0, $mib, $table, $key_attr);
+  $self->update_entry_cache(0, $mib, $table, $key_attr, $rows);
   my @indices = $self->get_cache_indices($mib, $table, $key_attr);
   my @entries = ();
-  foreach ($self->get_snmp_table_objects($mib, $table, \@indices)) {
+  foreach ($self->get_snmp_table_objects($mib, $table, \@indices, $rows)) {
     push(@entries, $_);
   }
   return @entries;
