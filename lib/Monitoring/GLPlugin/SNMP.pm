@@ -1063,7 +1063,8 @@ sub establish_snmp_session {
       $self->debug(Data::Dumper::Dumper(\%params));
     } else {
       my $max_msg_size = $session->max_msg_size();
-      $session->max_msg_size(4 * $max_msg_size);
+      #$session->max_msg_size(4 * $max_msg_size);
+      $Monitoring::GLPlugin::SNMP::max_msg_size = $max_msg_size;
       $Monitoring::GLPlugin::SNMP::session = $session;
     }
   } else {
@@ -1093,10 +1094,17 @@ sub establish_snmp_secondary_session {
   }
 }
 
+sub reset_snmp_max_msg_size {
+  my ($self) = @_;
+  $self->debug(sprintf "reset snmp_max_msg_size to %s",
+      $Monitoring::GLPlugin::SNMP::max_msg_size);
+  $Monitoring::GLPlugin::SNMP::session->max_msg_size($Monitoring::GLPlugin::SNMP::max_msg_size) if $Monitoring::GLPlugin::SNMP::session;
+}
+
 sub mult_snmp_max_msg_size {
   my ($self, $factor) = @_;
   $factor ||= 10;
-  $self->debug(sprintf "raise maxmsgsize %d * %d", 
+  $self->debug(sprintf "raise snmp_max_msg_size %d * %d", 
       $factor, $Monitoring::GLPlugin::SNMP::session->max_msg_size()) if $Monitoring::GLPlugin::SNMP::session;
   $Monitoring::GLPlugin::SNMP::session->max_msg_size($factor * $Monitoring::GLPlugin::SNMP::session->max_msg_size()) if $Monitoring::GLPlugin::SNMP::session;
 }
@@ -1941,20 +1949,23 @@ sub get_entries {
       $result = $self->get_entries_get_simple(%params);
     } else {
       $result = $self->get_entries_get_bulk(%params);
+      if (! $result) {
+        $self->debug("bulk failed, retry simple");
+        if ($Monitoring::GLPlugin::SNMP::session->error() =~ /The message size exceeded the buffer maxMsgSize of (\d+)/i) {
+          $self->debug(sprintf "buffer exceeded. raise *5 for next try");
+          $self->mult_snmp_max_msg_size(5);
+        } else {
+          $self->debug($Monitoring::GLPlugin::SNMP::session->error());
+        }
+        if (defined $params{'-endindex'} && defined $params{'-startindex'}) {
+          $result = $self->get_entries_get_simple(%params);
+        } else {
+          $result = $self->get_entries_get_next(%params);
+        }
+      }
     }
     if (! $result) {
-      $self->debug(sprintf "get_entries_get_simple/bulk failed");
-      if ($Monitoring::GLPlugin::SNMP::session->error() =~ /The message size exceeded the buffer maxMsgSize of (\d+)/i) {
-        $self->debug(sprintf "buffer exceeded");
-        $self->mult_snmp_max_msg_size(5);
-      } else {
-        $self->debug($Monitoring::GLPlugin::SNMP::session->error());
-      }
-    #  if (scalar (@{$params{'-columns'}}) < 50 && $params{'-endindex'} && $params{'-startindex'} eq $params{'-endindex'}) {
-    #    $result = $self->get_entries_get_simple(%params);
-    #  } else {
-        $result = $self->get_entries_get_next(%params);
-    #  }
+      $result = $self->get_entries_get_next(%params);
       if (! $result && defined $params{'-startindex'} && $params{'-startindex'} !~ /\./) {
         # compound indexes cannot continue, as these two methods iterate numerically
         if ($Monitoring::GLPlugin::SNMP::session->error() =~ /tooBig/i) {
@@ -2104,15 +2115,35 @@ sub get_table {
     if (scalar(keys %{$result}) == 0) {
       $self->debug(sprintf "get_table error: %s", 
           $Monitoring::GLPlugin::SNMP::session->error());
+      if ($Monitoring::GLPlugin::SNMP::session->error() =~ /The message size exceeded the buffer maxMsgSize of (\d+)/i) {
+        # bei irrsinnigen maxrepetitions
+        $self->debug(sprintf "buffer exceeded");
+        #$self->reset_snmp_max_msg_size();
+        if ($params{'-maxrepetitions'}) {
+          $params{'-maxrepetitions'} = int($params{'-maxrepetitions'} / 2);
+          $self->debug(sprintf "reduce maxrepetitions to %d",
+              $params{'-maxrepetitions'});
+        } else {
+          $self->mult_snmp_max_msg_size(2);
+        }
+      }
       $self->debug("get_table error: try fallback");
-      $params{'-maxrepetitions'} = 1;
       $self->debug(sprintf "get_table %s", Data::Dumper::Dumper(\%params));
       $result = $Monitoring::GLPlugin::SNMP::session->get_table(%params);
       $self->debug(sprintf "get_table returned %d oids", scalar(keys %{$result}));
       if (scalar(keys %{$result}) == 0) {
         $self->debug(sprintf "get_table error: %s", 
             $Monitoring::GLPlugin::SNMP::session->error());
-        $self->debug("get_table error: no more fallbacks. Try --protocol 1");
+        if (exists $params{'-maxrepetitions'} && $params{'-maxrepetitions'} > 1) {
+          $params{'-maxrepetitions'} = 1;
+          $self->debug("get_table error: try getnext fallback");
+          $self->debug(sprintf "get_table %s", Data::Dumper::Dumper(\%params));
+          $result = $Monitoring::GLPlugin::SNMP::session->get_table(%params);
+          $self->debug(sprintf "get_table returned %d oids", scalar(keys %{$result}));
+        }
+        if (scalar(keys %{$result}) == 0) {
+          $self->debug("get_table error: no more fallbacks. Try --protocol 1");
+        }
       }
     }
     # Drecksstinkstiefel Net::SNMP
