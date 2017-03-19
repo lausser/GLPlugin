@@ -1654,7 +1654,7 @@ sub get_snmp_table_objects {
     @entries = map { $_->{indices} = shift @{$indices}; $_ } @entries;
   } elsif (scalar(@{$indices}) > 1) {
     my $result = {};
-    my @sortedindices = $self->sort_oids($indices);
+    my @sortedindices = $self->sort_inidces($indices);
     my $startindex = $sortedindices[0];
     my $endindex = $sortedindices[$#sortedindices];
     if (0) {
@@ -2281,6 +2281,17 @@ sub sort_oids {
                 ] } @{$oids};
   return @sortedkeys;
 }
+
+sub sort_indices {
+  my ($self, $indices) = @_;
+  my @sortedindices = map { $_->[0] } 
+      sort { $a->[1] cmp $b->[1] } 
+          map { [$_, 
+              join '', map { sprintf("%30d",$_) } split( /\./, $_) 
+          ] } map { join('.', @{$_})} @{$indices}; 
+  return @sortedindices;
+}
+
 
 sub get_matching_oids {
   my ($self, %params) = @_;
