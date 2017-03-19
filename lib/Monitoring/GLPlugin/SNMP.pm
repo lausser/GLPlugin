@@ -1654,7 +1654,7 @@ sub get_snmp_table_objects {
     @entries = map { $_->{indices} = shift @{$indices}; $_ } @entries;
   } elsif (scalar(@{$indices}) > 1) {
     my $result = {};
-    my @sortedindices = $self->sort_inidces($indices);
+    my @sortedindices = $self->sort_indices($indices);
     my $startindex = $sortedindices[0];
     my $endindex = $sortedindices[$#sortedindices];
     if (0) {
