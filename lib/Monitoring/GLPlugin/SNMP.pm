@@ -1601,182 +1601,130 @@ sub get_snmp_table_objects {
   }
   my $entry = $table;
   $entry =~ s/Table/Entry/g;
-  if (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib} &&
-      exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$table}) {
-    if (scalar(@{$indices}) == 1 && $indices->[0] == -1) {
-      # get mini-version of a table
-      my $result = {};
-      my $eoid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry}.'.';
-      my $eoidlen = length($eoid);
-      my @columns = map {
-          $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$_}
-      } grep {
-        substr($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$_}, 0, $eoidlen) eq
-            $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry}.'.'
-      } keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}};
-      my $ifresult = $self->get_entries(
-          -columns => \@columns,
+  if (! exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib} ||
+      ! exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$table}) {
+    return @entries;
+  }
+  if (! exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry}) {
+    $self->debug(sprintf "table %s::%s has no entry oid", $mib, $table);
+    return @entries;
+  }
+  my @columns = $self->get_table_row_oids($mib, $table, $rows);
+  my @augmenting_columns = ();
+  if($augmenting_table) {
+    @augmenting_columns = $self->get_table_row_oids($mib, $augmenting_table, $rows);
+  }
+  if (scalar(@{$indices}) == 1 && $indices->[0] == -1) {
+    # get mini-version of a table
+    my $result = $self->get_entries(
+        -columns => \@columns,
+    );
+    if ($augmenting_table) {
+      my $augmenting_result = $self->get_entries(
+          -columns => \@augmenting_columns,
       );
-      map { $result->{$_} = $ifresult->{$_} }
-          keys %{$ifresult};
-      if ($augmenting_table &&
-          exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$augmenting_table}) {
-        my $entry = $augmenting_table;
-        $entry =~ s/Table/Entry/g;
-        my $eoid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry}.'.';
-        my $eoidlen = length($eoid);
-        my @columns = map {
-            $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$_}
-        } grep {
-          substr($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$_}, 0, $eoidlen) eq $eoid
-        } keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}};
-        my $ifresult = $self->get_entries(
-            -columns => \@columns,
-        );
-        map { $result->{$_} = $ifresult->{$_} }
-            keys %{$ifresult};
-      }
-      my @indices = 
-          $self->get_indices(
-              -baseoid => $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry},
-              -oids => [keys %{$result}]);
-      $self->debug(sprintf "get_snmp_table_objects get_table returns %d indices",
-          scalar(@indices));
-      @entries = $self->make_symbolic($mib, $result, \@indices);
-      @entries = map { $_->{indices} = shift @indices; $_ } @entries;
-    } elsif (scalar(@{$indices}) == 1) {
-      my $result = {};
-      my $eoid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry}.'.';
-      my $eoidlen = length($eoid);
-      my @columns = map {
-          $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$_}
-      } grep {
-        substr($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$_}, 0, $eoidlen) eq
-            $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry}.'.'
-      } keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}};
-      my $index = join('.', @{$indices->[0]});
-      my $ifresult = $self->get_entries(
+      map { $result->{$_} = $augmenting_result->{$_} }
+          keys %{$augmenting_result};
+    }
+    my @indices = 
+        $self->get_indices(
+            -baseoid => $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry},
+            -oids => [keys %{$result}]);
+    $self->debug(sprintf "get_snmp_table_objects get_table returns %d indices",
+        scalar(@indices));
+    @entries = $self->make_symbolic($mib, $result, \@indices);
+    @entries = map { $_->{indices} = shift @indices; $_ } @entries;
+  } elsif (scalar(@{$indices}) == 1) {
+    my $index = join('.', @{$indices->[0]});
+    my $result = $self->get_entries(
+        -startindex => $index,
+        -endindex => $index,
+        -columns => \@columns,
+    );
+    if ($augmenting_table) {
+      my $augmenting_result = $self->get_entries(
           -startindex => $index,
           -endindex => $index,
-          -columns => \@columns,
+          -columns => \@augmenting_columns,
       );
-      map { $result->{$_} = $ifresult->{$_} }
-          keys %{$ifresult};
-      if ($augmenting_table &&
-          exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$augmenting_table}) {
-        my $entry = $augmenting_table;
-        $entry =~ s/Table/Entry/g;
-        my $eoid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry}.'.';
-        my $eoidlen = length($eoid);
-        my @columns = map {
-            $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$_}
-        } grep {
-          substr($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$_}, 0, $eoidlen) eq $eoid
-        } keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}};
-        my $ifresult = $self->get_entries(
-            -startindex => $index,
-            -endindex => $index,
-            -columns => \@columns,
-        );
-        map { $result->{$_} = $ifresult->{$_} }
-            keys %{$ifresult};
-      }
-      @entries = $self->make_symbolic($mib, $result, $indices);
-      @entries = map { $_->{indices} = shift @{$indices}; $_ } @entries;
-    } elsif (scalar(@{$indices}) > 1) {
-    # man koennte hier pruefen, ob die indices aufeinanderfolgen
-    # und dann get_entries statt get_table aufrufen
-      my $result = {};
-      my $eoid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry}.'.';
-      my $eoidlen = length($eoid);
-      my @columns = map {
-          $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$_}
-      } grep {
-        substr($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$_}, 0, $eoidlen) eq $eoid
-      } keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}};
-      my @sortedindices = $self->sort_oids($indices);
-      my $startindex = $sortedindices[0];
-      my $endindex = $sortedindices[$#sortedindices];
-      if (0) {
-        # holzweg. dicke ciscos liefern unvollstaendiges resultat, d.h.
-        # bei 138,19,157 kommt nur 138..144, dann ist schluss.
-        # maxrepetitions bringt nichts.
-        $result = $self->get_entries(
-            -startindex => $startindex,
-            -endindex => $endindex,
-            -columns => \@columns,
-        );
-      } else {
-        foreach my $ifidx (@sortedindices) {
-          my $ifresult = $self->get_entries(
-              -startindex => $ifidx,
-              -endindex => $ifidx,
-              -columns => \@columns,
-          );
-          map { $result->{$_} = $ifresult->{$_} }
-              keys %{$ifresult};
-        }
-      }
-      if ($augmenting_table &&
-          exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$augmenting_table}) {
-        my $entry = $augmenting_table;
-        $entry =~ s/Table/Entry/g;
-        my $eoid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry}.'.';
-        my $eoidlen = length($eoid);
-        my @columns = map {
-            $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$_}
-        } grep {
-          substr($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$_}, 0, $eoidlen) eq $eoid
-        } keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}};
-        foreach my $ifidx (@sortedindices) {
-          my $ifresult = $self->get_entries(
-              -startindex => $ifidx,
-              -endindex => $ifidx,
-              -columns => \@columns,
-          );
-          map { $result->{$_} = $ifresult->{$_} }
-              keys %{$ifresult};
-        }
-      }
-      # now we have numerical_oid+index => value
-      # needs to become symboic_oid => value
-      #my @indices =
-      # $self->get_indices($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry});
-      @entries = $self->make_symbolic($mib, $result, $indices);
-      @entries = map { $_->{indices} = shift @{$indices}; $_ } @entries;
-    } elsif (scalar(@{$rows})) {
-      my @columns = $self->get_table_row_oids($mib, $table, $rows);
-      my $result = $self->get_entries(
-          -columns => \@columns,
-      );
-      $self->debug(sprintf "get_snmp_table_objects get_table_r returns %d oids",
-          scalar(keys %{$result}));
-      my @indices =
-          $self->get_indices(
-              -baseoid => $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry},
-              -oids => [keys %{$result}]);
-      $self->debug(sprintf "get_snmp_table_objects get_table_r returns %d indices",
-          scalar(@indices));
-      @entries = $self->make_symbolic($mib, $result, \@indices);
-      @entries = map { $_->{indices} = shift @indices; $_ } @entries;
-    } else {
-      $self->debug(sprintf "get_snmp_table_objects calls get_table %s",
-          $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$table});
-      my $result = $self->get_table(
-          -baseoid => $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$table});
-      $self->debug(sprintf "get_snmp_table_objects get_table returns %d oids",
-          scalar(keys %{$result}));
-      # now we have numerical_oid+index => value
-      # needs to become symboic_oid => value
-      my @indices = 
-          $self->get_indices(
-              -baseoid => $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry},
-              -oids => [keys %{$result}]);
-      $self->debug(sprintf "get_snmp_table_objects get_table returns %d indices",
-          scalar(@indices));
-      @entries = $self->make_symbolic($mib, $result, \@indices);
-      @entries = map { $_->{indices} = shift @indices; $_ } @entries;
+      map { $result->{$_} = $augmenting_result->{$_} }
+          keys %{$augmenting_result};
     }
+    @entries = $self->make_symbolic($mib, $result, $indices);
+    @entries = map { $_->{indices} = shift @{$indices}; $_ } @entries;
+  } elsif (scalar(@{$indices}) > 1) {
+    my $result = {};
+    my @sortedindices = $self->sort_oids($indices);
+    my $startindex = $sortedindices[0];
+    my $endindex = $sortedindices[$#sortedindices];
+    if (0) {
+      # holzweg. dicke ciscos liefern unvollstaendiges resultat, d.h.
+      # bei 138,19,157 kommt nur 138..144, dann ist schluss.
+      # maxrepetitions bringt nichts.
+      $result = $self->get_entries(
+          -startindex => $startindex,
+          -endindex => $endindex,
+          -columns => \@columns,
+      );
+    } else {
+      foreach my $idx (@sortedindices) {
+        my $tmp_result = $self->get_entries(
+            -startindex => $idx,
+            -endindex => $idx,
+            -columns => \@columns,
+        );
+        map { $result->{$_} = $tmp_result->{$_} }
+            keys %{$tmp_result};
+      }
+    }
+    if ($augmenting_table) {
+      foreach my $idx (@sortedindices) {
+        my $tmp_result = $self->get_entries(
+            -startindex => $idx,
+            -endindex => $idx,
+            -columns => \@augmenting_columns,
+        );
+        map { $result->{$_} = $tmp_result->{$_} }
+            keys %{$tmp_result};
+      }
+    }
+    # now we have numerical_oid+index => value
+    # needs to become symboic_oid => value
+    #my @indices =
+    # $self->get_indices($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry});
+    @entries = $self->make_symbolic($mib, $result, $indices);
+    @entries = map { $_->{indices} = shift @{$indices}; $_ } @entries;
+  } elsif (scalar(@{$rows})) {
+    my $result = $self->get_entries(
+        -columns => \@columns,
+    );
+    $self->debug(sprintf "get_snmp_table_objects get_table_r returns %d oids",
+        scalar(keys %{$result}));
+    my @indices =
+        $self->get_indices(
+            -baseoid => $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry},
+            -oids => [keys %{$result}]);
+    $self->debug(sprintf "get_snmp_table_objects get_table_r returns %d indices",
+        scalar(@indices));
+    @entries = $self->make_symbolic($mib, $result, \@indices);
+    @entries = map { $_->{indices} = shift @indices; $_ } @entries;
+  } else {
+    $self->debug(sprintf "get_snmp_table_objects calls get_table %s",
+        $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$table});
+    my $result = $self->get_table(
+        -baseoid => $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$table});
+    $self->debug(sprintf "get_snmp_table_objects get_table returns %d oids",
+        scalar(keys %{$result}));
+    # now we have numerical_oid+index => value
+    # needs to become symboic_oid => value
+    my @indices = 
+        $self->get_indices(
+            -baseoid => $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry},
+            -oids => [keys %{$result}]);
+    $self->debug(sprintf "get_snmp_table_objects get_table returns %d indices",
+        scalar(@indices));
+    @entries = $self->make_symbolic($mib, $result, \@indices);
+    @entries = map { $_->{indices} = shift @indices; $_ } @entries;
   }
   @entries = map { $_->{flat_indices} = join(".", @{$_->{indices}}); $_ } @entries;
   return @entries;
