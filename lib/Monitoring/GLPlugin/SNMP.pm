@@ -825,7 +825,7 @@ sub init {
         }
       }
     }
-    my @sortedoids = $self->sort_oids(keys %{$self->{rawdata}});
+    my @sortedoids = $self->sort_oids([keys %{$self->{rawdata}}]);
     foreach (@sortedoids) {
       if (exists $confirmed->{$_}) {
         printf "%s\n", $confirmed->{$_};
@@ -1694,7 +1694,7 @@ sub get_snmp_table_objects {
       } grep {
         substr($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$_}, 0, $eoidlen) eq $eoid
       } keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}};
-      my @sortedindices = $self->sort_oids(@{$indices});
+      my @sortedindices = $self->sort_oids($indices);
       my $startindex = $sortedindices[0];
       my $endindex = $sortedindices[$#sortedindices];
       if (0) {
@@ -2018,7 +2018,7 @@ sub get_entries {
     foreach (keys %{$preresult}) {
       $result->{$_} = $preresult->{$_};
     }
-    my @sortedkeys = $self->sort_oids(keys %{$result});
+    my @sortedkeys = $self->sort_oids([keys %{$result}]);
     my @to_del = ();
     if ($params{'-startindex'}) {
       foreach my $resoid (@sortedkeys) {
