@@ -108,6 +108,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/NETSCREENRESOURCEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/NETSWITCHMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/NETVISIONV6.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/OLDCISCOCPUMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/OLDCISCOINTERFACESMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/OLDNETSWITCHMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/OLDSTATISTICSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ONEACCESSSYSMIB.pm

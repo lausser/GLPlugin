@@ -1,3 +1,5 @@
+* 2017-03-23 2.4.1
+  add OLD-CISCO-INTERFACES-MIB
 * 2017-03-19 2.4
   improve get_entries
 * 2017-03-14 2.3.19
