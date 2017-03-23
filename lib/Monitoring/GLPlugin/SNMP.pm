@@ -228,7 +228,7 @@ sub add_snmp_args {
 sub validate_args {
   my ($self) = @_;
   $self->SUPER::validate_args();
-  if ($self->opts->mode =~ /^walk/) {
+  if ($self->opts->mode =~ /^(bulk)*walk/) {
     if ($self->opts->snmpwalk && $self->opts->hostname) {
       if ($self->check_messages == CRITICAL) {
         # gemecker vom super-validierer, der sicherstellt, dass die datei
@@ -247,7 +247,7 @@ sub validate_args {
       $self->create_opt('snmpdump');
       $self->override_opt('snmpdump', $self->opts->snmpwalk);
       $self->override_opt('snmpwalk', undef);
-    } elsif (! $self->opts->snmpwalk && $self->opts->hostname && $self->opts->mode eq 'walk') {   
+    } elsif (! $self->opts->snmpwalk && $self->opts->hostname) {
       # snmp agent wird abgefragt, die ergebnisse landen in einem file, dessen name
       # nicht vorgegeben ist
       $self->create_opt('snmpdump');
@@ -265,7 +265,7 @@ sub validate_args {
 
 sub init {
   my ($self) = @_;
-  if ($self->mode =~ /device::walk/) {
+  if ($self->mode =~ /device::(bulk)*walk/) {
     my @trees = ();
     my $name = $Monitoring::GLPlugin::pluginname;
     $name =~ s/.*\///g;
