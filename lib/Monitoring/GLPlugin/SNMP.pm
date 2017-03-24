@@ -1348,26 +1348,43 @@ sub create_entry_cache_file {
 
 sub update_entry_cache {
   my ($self, $force, $mib, $table, $key_attr) = @_;
+  my @key_attrs = ();
   if (ref($key_attr) ne "ARRAY") {
+    if ($key_attr eq 'flat_indices') {
+      # wird nur 1x verwendet bisher, bei OLD-CISCO-INTERFACES-MIB etherstats
+      my $entry = $table =~ s/Table/Entry/gr;
+      my @sortednames = map {
+          $_->[0]
+      } sort {
+          $a->[1] cmp $b->[1]
+      } map {
+          [$_, join '', map {
+              sprintf("%30d", $_)
+          } split( /\./, $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$_})];
+      } grep {
+          $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$_} =~ /^$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry}\./;
+      } keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}};
+      $key_attr = $sortednames[0];
+    }
     $key_attr = [$key_attr];
   }
-  my $cache = sprintf "%s_%s_%s_cache", 
+  my $cache = sprintf "%s_%s_%s_cache",
       $mib, $table, join('#', @{$key_attr});
   my $statefile = $self->create_entry_cache_file($mib, $table, $key_attr);
   my $update = time - 3600;
-  #my $update = time - 1;
   if ($force || ! -f $statefile || ((stat $statefile)[9]) < ($update)) {
     $self->debug(sprintf 'force update of %s %s %s %s cache',
         $self->opts->hostname, $self->opts->mode, $mib, $table);
     $self->{$cache} = {};
-    foreach my $entry ($self->get_snmp_table_objects($mib, $table)) {
+    foreach my $entry ($self->get_snmp_table_objects($mib, $table, undef, $key_attr)) {
       my $key = join('#', map { $entry->{$_} } @{$key_attr});
       my $hash = $key . '-//-' . join('.', @{$entry->{indices}});
       $self->{$cache}->{$hash} = $entry->{indices};
     }
-    $self->save_cache($mib, $table, $key_attr);
+    $self->save_cache($mib, $table, \@key_attrs);
+  } else {
+    $self->load_cache($mib, $table, \@key_attrs);
   }
-  $self->load_cache($mib, $table, $key_attr);
 }
 
 sub save_cache {
