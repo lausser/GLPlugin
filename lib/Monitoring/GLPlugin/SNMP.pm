@@ -825,7 +825,7 @@ sub init {
         }
       }
     }
-    my @sortedoids = $self->sort_oids([keys %{$self->{rawdata}}]);
+    my @sortedoids = $self->sort_oids([keys %{$self->rawdata}]);
     foreach (@sortedoids) {
       if (exists $confirmed->{$_}) {
         printf "%s\n", $confirmed->{$_};
