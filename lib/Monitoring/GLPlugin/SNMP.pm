@@ -1352,7 +1352,9 @@ sub update_entry_cache {
   if (ref($key_attr) ne "ARRAY") {
     if ($key_attr eq 'flat_indices') {
       # wird nur 1x verwendet bisher, bei OLD-CISCO-INTERFACES-MIB etherstats
-      my $entry = $table =~ s/Table/Entry/gr;
+      #my $entry = $table =~ s/Table/Entry/gr; # zu neu fuer centos6
+      my $entry = $table;
+      $entry =~ s/Table/Entry/g;
       my @sortednames = map {
           $_->[0]
       } sort {
