@@ -5,7 +5,8 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'HOST-RESOURCES-MIB'} = {
   name => 'HOST-RESOURCES-MIB',
 };
 
-#$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'HOST-RESOURCES-MIB'} = 
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'HOST-RESOURCES-MIB'} =
+    '1.3.6.1.2.1.25';
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'HOST-RESOURCES-MIB'} = {
   hostResourcesMibModule => '1.3.6.1.2.1.25',
