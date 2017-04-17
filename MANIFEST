@@ -29,6 +29,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/BIANCABRICKMIBRESMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/BINTECFILESYS.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/BLUECOATAVMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/BLUECOATSGPROXYMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/BROTHERMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CHECKPOINTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOBGP4MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOCCMMIB.pm
