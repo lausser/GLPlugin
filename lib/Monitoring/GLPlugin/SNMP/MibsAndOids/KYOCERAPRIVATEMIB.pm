@@ -1,14 +1,14 @@
 package Monitoring::GLPlugin::SNMP::MibsAndOids::KYOCERAPRIVATEMIB;
 
-$Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'KYOCERA-PRIVATE-MIB'} = {
+$Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'KYOCERA-Private-MIB'} = {
   url => '',
-  name => 'KYOCERA-PRIVATE-MIB',
+  name => 'KYOCERA-Private-MIB',
 };
 
-$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'KYOCERA-PRIVATE-MIB'} =
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'KYOCERA-Private-MIB'} =
     '1.3.6.1.4.1.1347.43';
 
-$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'KYOCERA-PRIVATE-MIB'} = {
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'KYOCERA-Private-MIB'} = {
   kyocera => '1.3.6.1.4.1.1347',
   kcPrinter => '1.3.6.1.4.1.1347.43',
   kcprtGeneral => '1.3.6.1.4.1.1347.43.5',
@@ -166,7 +166,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'KYOCERA-PRIVATE-MIB'}
   kcprtFontAttributeDefinition => 'KYOCERA-Private-MIB::kcprtFontAttribute',
 };
 
-$Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'KYOCERA-PRIVATE-MIB'} = {
+$Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'KYOCERA-Private-MIB'} = {
   kcprtMessageDataAttribute => {
     '0' => 'notRegistered',
     '1' => 'registered',
