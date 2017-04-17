@@ -81,6 +81,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'HOST-RESOURCES-MIB'} 
   hrPrinterStatus => '1.3.6.1.2.1.25.3.5.1.1',
   hrPrinterStatusDefinition => 'HOST-RESOURCES-MIB::hrPrinterStatus',
   hrPrinterDetectedErrorState => '1.3.6.1.2.1.25.3.5.1.2',
+  hrPrinterDetectedErrorStateDefinition => 'HOST-RESOURCES-MIB::hrPrinterDetectedErrorState',
   hrDiskStorageTable => '1.3.6.1.2.1.25.3.6',
   hrDiskStorageEntry => '1.3.6.1.2.1.25.3.6.1',
   hrDiskStorageAccess => '1.3.6.1.2.1.25.3.6.1.1',
@@ -221,5 +222,26 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'HOST-RESOURCES-MIB'} = 
     '2' => 'runnable',
     '3' => 'notRunnable',
     '4' => 'invalid',
+  },
+  hrPrinterDetectedErrorState => sub {
+    my $val = shift;
+    my $state = unpack("B*", $val);
+    my @errors = ();
+    my $errors = {
+        0 => 'lowPaper',
+        1 => 'noPaper',
+        2 => 'lowToner',
+        3 => 'noToner',
+        4 => 'doorOpen',
+        5 => 'jammed',
+        6 => 'offline',
+        7 => 'serviceRequested',
+    };
+    foreach my $bit (0..7) {
+      if (substr($state, $bit, 1) eq "1") {
+        push(@errors, $errors->{$bit});
+      }
+    }
+    return @errors ? join("|", @errors) : 'good';
   },
 };
