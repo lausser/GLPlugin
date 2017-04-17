@@ -78,7 +78,6 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/FOUNDRYSNSWL4SWITCHGROUPMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/FSCRAIDMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HH3CENTITYEXTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HOSTRESOURCESMIB.pm
-lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HOSTRESOURCESV2MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HPICFCHASSISMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HWGWLDMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IEEE8023LAGMIB.pm
@@ -87,7 +86,9 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IPFORWARDMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IPMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNIPERIVEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNIPERMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/KYOCERAPRIVATEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LARAMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LEXMARKPVTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LIEBERTGPCONDITIONSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LIEBERTGPENVIRONMENTALMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LIEBERTGPFLEXIBLEMIB.pm
@@ -118,6 +119,8 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/PANPRODUCTSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/PDU2MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/PDUMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/POWERNETMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/PRINTERMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/PRINTERPORTMONITORMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/PROXYMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/QUANTUMSMALLTAPELIBRARYMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/RAPIDCITYMIB.pm
@@ -138,8 +141,8 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SNMPV2TCV1MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SPECTRALOGICGLOBALREG.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SPECTRALOGICGLOBALREGSLHARDWARESLLIBRARIESSLTSERIES.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/STATISTICSMIB.pm
-lib/Monitoring/GLPlugin/SNMP/MibsAndOids/STEELHEADMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/STEELHEADEXMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/STEELHEADMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/STULZWIB8000MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SWMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SYNOPTICSROOTMIB.pm
