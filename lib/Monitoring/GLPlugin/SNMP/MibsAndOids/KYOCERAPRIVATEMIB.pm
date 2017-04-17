@@ -196,6 +196,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'KYOCERA-Private-MIB'} =
     '2' => 'running',
   },
   kcprtOutputMode => {
+    '-1' => 'notSupported',
     '0' => 'sorter',
     '1' => 'collator',
     '2' => 'stacker',
@@ -262,10 +263,12 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'KYOCERA-Private-MIB'} =
     '1' => 'controller',
   },
   kcprtOutputBulkStatus => {
+    '-1' => 'notSupported',
     '0' => 'notFull',
     '1' => 'full',
   },
   kcprtOutputMultiMode => {
+    '-1' => 'notSupported',
     '0' => 'off',
     '1' => 'id-specific',
     '2' => 'if-specific',
