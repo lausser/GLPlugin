@@ -395,6 +395,18 @@ sub nagios_exit {
       }
     }
   }
+  if ($self->opts->negate) {
+    # negate again: --negate "UNKNOWN - no peers"=ok
+    my $original_code = $code;
+    foreach my $from (keys %{$self->opts->negate}) {
+      if ((uc $self->opts->negate->{$from}) =~ /^(OK|WARNING|CRITICAL|UNKNOWN)$/) {
+        if ($output =~ /$from/) {
+          $code = $ERRORS{uc $self->opts->negate->{$from}};
+          $output =~ s/^.*? -/$STATUS_TEXT{$code} -/;
+        }
+      }
+    }
+  }
   $output =~ s/\|/!/g if $output;
   if (scalar (@{$self->{perfdata}})) {
     $output .= " | ".$self->perfdata_string();
