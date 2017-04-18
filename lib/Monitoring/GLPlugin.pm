@@ -395,9 +395,10 @@ sub set_timeout_alarm {
   my ($self, $timeout, $handler) = @_;
   $timeout ||= $self->opts->timeout;
   $handler ||= sub {
-    printf "UNKNOWN - %s timed out after %d seconds\n",
-        $Monitoring::GLPlugin::plugin->{name}, $self->opts->timeout;
-    exit 3;
+    $self->nagios_exit(UNKNOWN,
+        sprintf("%s timed out after %d seconds\n",
+            $Monitoring::GLPlugin::plugin->{name}, $self->opts->timeout)
+    );
   };
   use POSIX ':signal_h';
   if ($^O =~ /MSWin/) {
