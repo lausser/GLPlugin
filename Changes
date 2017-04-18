@@ -1,3 +1,5 @@
+  add JUNOSBGP4V2MIB (Pull Request #9, dupondje)
+  allow --negate also for conection timeout exits
 * 2017-04-17 2.4.4
   add PRINTER-MIB
   add KYOCERA-Private-MIB
