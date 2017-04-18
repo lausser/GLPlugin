@@ -1,6 +1,7 @@
+* 2017-04-18 2.4.5
   add JUNOSBGP4V2MIB (Pull Request #9, dupondje)
   allow --negate also for conection timeout exits
-  add GENUA-MIB
+  add GENUA-MIB (Pull Request #10, freneticf)
   add OPENBSD-PF-MIB
   add OPENBSD-SENSORS-MIB
   add OPENBSD-MEM-MIB
