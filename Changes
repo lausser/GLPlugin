@@ -1,5 +1,10 @@
   add JUNOSBGP4V2MIB (Pull Request #9, dupondje)
   allow --negate also for conection timeout exits
+  add GENUA-MIB
+  add OPENBSD-PF-MIB
+  add OPENBSD-SENSORS-MIB
+  add OPENBSD-MEM-MIB
+  add OPENBSD-CARP-MIB
 * 2017-04-17 2.4.4
   add PRINTER-MIB
   add KYOCERA-Private-MIB
