@@ -1,4 +1,4 @@
-package Monitoring::GLPlugin::SNMP::MibsAndOids::LEXMARK-PVT-MIB;
+package Monitoring::GLPlugin::SNMP::MibsAndOids::LEXMARKPVTMIB;
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'LEXMARK-PVT-MIB'} = {
   url => '',
