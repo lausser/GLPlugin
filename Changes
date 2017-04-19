@@ -1,3 +1,5 @@
+* 2017-04-20 2.4.6
+  add LEXMARK-MPS-MIB
 * 2017-04-18 2.4.5
   add JUNOSBGP4V2MIB (Pull Request #9, dupondje)
   allow --negate also for conection timeout exits
