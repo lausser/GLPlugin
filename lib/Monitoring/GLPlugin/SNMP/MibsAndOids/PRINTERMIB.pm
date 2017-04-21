@@ -77,6 +77,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'PRINTER-MIB'} = {
   prtInputMaxCapacity => '1.3.6.1.2.1.43.8.2.1.9',
   prtInputCurrentLevel => '1.3.6.1.2.1.43.8.2.1.10',
   prtInputStatus => '1.3.6.1.2.1.43.8.2.1.11',
+  prtInputStatusDefinition => 'PRINTER-MIB::PrtSubUnitStatusTC',
   prtInputMediaName => '1.3.6.1.2.1.43.8.2.1.12',
   prtInputName => '1.3.6.1.2.1.43.8.2.1.13',
   prtInputVendorName => '1.3.6.1.2.1.43.8.2.1.14',
@@ -103,6 +104,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'PRINTER-MIB'} = {
   prtOutputMaxCapacity => '1.3.6.1.2.1.43.9.2.1.4',
   prtOutputRemainingCapacity => '1.3.6.1.2.1.43.9.2.1.5',
   prtOutputStatus => '1.3.6.1.2.1.43.9.2.1.6',
+  prtOutputStatusDefinition => 'PRINTER-MIB::PrtSubUnitStatusTC',
   prtOutputName => '1.3.6.1.2.1.43.9.2.1.7',
   prtOutputVendorName => '1.3.6.1.2.1.43.9.2.1.8',
   prtOutputModel => '1.3.6.1.2.1.43.9.2.1.9',
@@ -150,6 +152,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'PRINTER-MIB'} = {
   prtMarkerWestMargin => '1.3.6.1.2.1.43.10.2.1.13',
   prtMarkerEastMargin => '1.3.6.1.2.1.43.10.2.1.14',
   prtMarkerStatus => '1.3.6.1.2.1.43.10.2.1.15',
+  prtMarkerStatusDefinition => 'PRINTER-MIB::PrtSubUnitStatusTC',
   prtMarkerSupplies => '1.3.6.1.2.1.43.11',
   prtMarkerSuppliesTable => '1.3.6.1.2.1.43.11.1',
   prtMarkerSuppliesEntry => '1.3.6.1.2.1.43.11.1.1',
@@ -191,6 +194,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'PRINTER-MIB'} = {
   prtMediaPathTypeDefinition => 'PRINTER-MIB::PrtMediaPathTypeTC',
   prtMediaPathDescription => '1.3.6.1.2.1.43.13.4.1.10',
   prtMediaPathStatus => '1.3.6.1.2.1.43.13.4.1.11',
+  prtMediaPathStatusDefinition => 'PRINTER-MIB::PrtSubUnitStatusTC',
   prtChannel => '1.3.6.1.2.1.43.14',
   prtChannelTable => '1.3.6.1.2.1.43.14.1',
   prtChannelEntry => '1.3.6.1.2.1.43.14.1.1',
@@ -204,6 +208,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'PRINTER-MIB'} = {
   prtChannelStateDefinition => 'PRINTER-MIB::PrtChannelStateTC',
   prtChannelIfIndex => '1.3.6.1.2.1.43.14.1.1.7',
   prtChannelStatus => '1.3.6.1.2.1.43.14.1.1.8',
+  prtChannelStatusDefinition => 'PRINTER-MIB::PrtSubUnitStatusTC',
   prtChannelInformation => '1.3.6.1.2.1.43.14.1.1.9',
   prtInterpreter => '1.3.6.1.2.1.43.15',
   prtInterpreterTable => '1.3.6.1.2.1.43.15.1',
@@ -708,5 +713,49 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PRINTER-MIB'} = {
     '5' => 'continuousRollDevice',
     '6' => 'mailBox',
     '7' => 'continuousFanFold',
+  },
+  PrtSubUnitStatusTC => sub {
+    my $status = shift;
+    my @status = ();
+    if ($status - 64 >= 0) {
+      push(@status, 'Currently at intended state');
+      $status -= 64;
+    } else {
+      push(@status, 'Transitioning to intended state');
+    }
+    if ($status - 32 >= 0) {
+      push(@status, 'State is Off-Line');
+      $status -= 32;
+    } else {
+      push(@status, 'State is On-Line');
+    }
+    if ($status - 16 >= 0) {
+      push(@status, 'Critical Alerts');
+      $status -= 16;
+    } else {
+      push(@status, 'No Critical Alerts');
+    }
+    if ($status - 8 >= 0) {
+      push(@status, 'Non-Critical Alerts');
+      $status -= 8;
+    } else {
+      push(@status, 'No Non-Critical Alerts');
+    }
+    if ($status == 0) {
+      push(@status, 'Available and Idle')
+    } elsif ($status == 2) {
+      push(@status, 'Available and Standby');
+    } elsif ($status == 4) {
+      push(@status, 'Available and Active');
+    } elsif ($status == 6) {
+      push(@status, 'Available and Busy');
+    } elsif ($status == 1) {
+      push(@status, 'Unavailable and OnRequest');
+    } elsif ($status == 3) {
+      push(@status, 'Unavailable because Broken');
+    } elsif ($status == 5) {
+      push(@status, 'Unknown');
+    }
+    return join('|', @status);
   },
 };
