@@ -1,4 +1,4 @@
-package Monitoring::GLPlugin::SNMP::MibsAndOids::HOSTRESOURCESV2MIB;
+package Monitoring::GLPlugin::SNMP::MibsAndOids::HOSTRESOURCESMIB;
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'HOST-RESOURCES-MIB'} = {
   url => '',

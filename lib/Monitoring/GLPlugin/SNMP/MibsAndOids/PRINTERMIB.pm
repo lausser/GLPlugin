@@ -5,7 +5,8 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'PRINTER-MIB'} = {
   name => 'PRINTER-MIB',
 };
 
-#$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'PRINTER-MIB'} = 
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'PRINTER-MIB'} =
+    '1.3.6.1.2.1.43';
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'PRINTER-MIB'} = {
   printmib => '1.3.6.1.2.1.43',
