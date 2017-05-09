@@ -13,7 +13,7 @@ use Digest::MD5 qw(md5_hex);
 use Errno;
 use Data::Dumper;
 our $AUTOLOAD;
-*VERSION = \'2.4.6.2';
+*VERSION = \'2.4.7';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -255,6 +255,13 @@ sub add_default_args {
       required => 0,
       hidden => 1,
   );
+  $self->add_arg(
+      spec => 'tracefile=s',
+      help => "--tracefile
+   Write debugging-info to this file (if it exists)",
+      required => 0,
+      hidden => 1,
+  );
 }
 
 sub add_modes {
@@ -430,7 +437,9 @@ sub get_variable {
 
 sub debug {
   my ($self, $format, @message) = @_;
-  my $tracefile = "/tmp/".$Monitoring::GLPlugin::pluginname.".trace";
+  my $tracefile = $self->opts->tracefile ?
+      $self->opts->tracefile :
+      "/tmp/".$Monitoring::GLPlugin::pluginname.".trace";
   $self->{trace} = -f $tracefile ? 1 : 0;
   if ($self->get_variable("verbose") &&
       $self->get_variable("verbose") > $self->get_variable("verbosity", 10)) {

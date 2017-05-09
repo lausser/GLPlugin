@@ -930,7 +930,7 @@ sub check_snmp_and_model {
     if (defined $hrSystemUptime && $hrSystemUptime =~ /^\d+$/ && $hrSystemUptime > 0) {
       $hrSystemUptime = $self->timeticks($hrSystemUptime);
       $self->debug(sprintf 'hrSystemUptime says: up since: %s / %s',
-          scalar localtime (time -  $self->timeticks($hrSystemUptime)),
+          scalar localtime (time -  $hrSystemUptime),
           $self->human_timeticks($hrSystemUptime));
     } else {
       $hrSystemUptime = undef;
@@ -948,14 +948,14 @@ sub check_snmp_and_model {
     if (defined $sysUptime) {
       $sysUptime = $self->timeticks($sysUptime);
       $self->debug(sprintf 'sysUptime says:      up since: %s / %s',
-          scalar localtime (time -  $self->timeticks($sysUptime)),
+          scalar localtime (time - $sysUptime),
           $self->human_timeticks($sysUptime));
     }
     if (defined $sysUptime && defined $sysDescr) {
       if ($hrSystemUptime) {
         # Bei Linux-basierten Geraeten wird snmpEngineTime viel zu haeufig
         # durchgestartet, also lieber das hier.
-        $self->{uptime} = $self->timeticks($hrSystemUptime);
+        $self->{uptime} = $hrSystemUptime;
         # Es sei denn, snmpEngineTime ist tatsaechlich groesser, dann gilt
         # wiederum dieses. Mag sein, dass der zahlenwert hier manchmal huepft
         # und ein Performancegraph Zacken bekommt, aber das ist mir egal.
@@ -1340,17 +1340,18 @@ sub create_interface_cache_file {
 }
 
 sub create_entry_cache_file {
-  my ($self, $mib, $table, $key_attr) = @_;
+  my ($self, $mib, $table, $key_attr_id) = @_;
   return lc sprintf "%s_%s_%s_%s_cache",
       $self->create_interface_cache_file(),
-      $mib, $table, join('#', @{$key_attr});
+      $mib, $table, $key_attr_id;
 }
 
 sub update_entry_cache {
-  my ($self, $force, $mib, $table, $key_attr) = @_;
-  my @key_attrs = ();
-  if (ref($key_attr) ne "ARRAY") {
-    if ($key_attr eq 'flat_indices') {
+  my ($self, $force, $mib, $table, $key_attrs) = @_;
+  my $update_deadline = time - 3600;
+  my $must_update = 0;
+  if (ref($key_attrs) ne "ARRAY") {
+    if ($key_attrs eq 'flat_indices') {
       # wird nur 1x verwendet bisher, bei OLD-CISCO-INTERFACES-MIB etherstats
       #my $entry = $table =~ s/Table/Entry/gr; # zu neu fuer centos6
       my $entry = $table;
@@ -1366,38 +1367,41 @@ sub update_entry_cache {
       } grep {
           $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$_} =~ /^$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry}\./;
       } keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}};
-      $key_attr = $sortednames[0];
+      $key_attrs = $sortednames[0];
     }
-    $key_attr = [$key_attr];
+    $key_attrs = [$key_attrs];
   }
-  my $cache = sprintf "%s_%s_%s_cache",
-      $mib, $table, join('#', @{$key_attr});
-  my $statefile = $self->create_entry_cache_file($mib, $table, $key_attr);
-  my $update = time - 3600;
-  if ($force || ! -f $statefile || ((stat $statefile)[9]) < ($update)) {
+  my $key_attr_id = join('#', @{$key_attrs});
+  my $cache = sprintf "%s_%s_%s_cache", $mib, $table, $key_attr_id;
+  my $statefile = $self->create_entry_cache_file($mib, $table, $key_attr_id);
+  if ($force == -1 && -f $statefile) {
+    $must_update = 1;
+    # brauchts unter keinen umstaenden.
+    # z.b. wenn ein vorhergehender update_interfaces_cache keine aenderungen
+    # angezeigt hat, dann spart man sich hier den etherlike-update o.ae.
+    $self->debug(sprintf 'skip update of %s %s %s %s cache',
+        $self->opts->hostname, $self->opts->mode, $mib, $table);
+  } elsif ($force != 0 || ! -f $statefile || ((stat $statefile)[9]) < ($update_deadline)) {
+    $must_update = 1;
     $self->debug(sprintf 'force update of %s %s %s %s cache',
         $self->opts->hostname, $self->opts->mode, $mib, $table);
     $self->{$cache} = {};
-    foreach my $entry ($self->get_snmp_table_objects($mib, $table, undef, $key_attr)) {
-      my $key = join('#', map { $entry->{$_} } @{$key_attr});
+    foreach my $entry ($self->get_snmp_table_objects($mib, $table, undef, $key_attrs)) {
+      my $key = join('#', map { $entry->{$_} } @{$key_attrs});
       my $hash = $key . '-//-' . join('.', @{$entry->{indices}});
       $self->{$cache}->{$hash} = $entry->{indices};
     }
-    $self->save_cache($mib, $table, \@key_attrs);
-  } else {
-    $self->load_cache($mib, $table, \@key_attrs);
+    $self->save_cache($mib, $table, $key_attrs);
   }
+  $self->load_cache($mib, $table, $key_attrs);
+  return $must_update;
 }
 
 sub save_cache {
-  my ($self, $mib, $table, $key_attr) = @_;
-  if (ref($key_attr) ne "ARRAY") {
-    $key_attr = [$key_attr];
-  }
-  my $cache = sprintf "%s_%s_%s_cache", 
-      $mib, $table, join('#', @{$key_attr});
+  my ($self, $mib, $table, $key_attrs) = @_;
+  my $cache = sprintf "%s_%s_%s_cache", $mib, $table, join('#', @{$key_attrs});
   $self->create_statefilesdir();
-  my $statefile = $self->create_entry_cache_file($mib, $table, $key_attr);
+  my $statefile = $self->create_entry_cache_file($mib, $table, join('#', @{$key_attrs}));
   open(STATE, ">".$statefile.".".$$);
   printf STATE Data::Dumper::Dumper($self->{$cache});
   close STATE;
@@ -1407,13 +1411,9 @@ sub save_cache {
 }
 
 sub load_cache {
-  my ($self, $mib, $table, $key_attr) = @_;
-  if (ref($key_attr) ne "ARRAY") {
-    $key_attr = [$key_attr];
-  }
-  my $cache = sprintf "%s_%s_%s_cache", 
-      $mib, $table, join('#', @{$key_attr});
-  my $statefile = $self->create_entry_cache_file($mib, $table, $key_attr);
+  my ($self, $mib, $table, $key_attrs) = @_;
+  my $cache = sprintf "%s_%s_%s_cache", $mib, $table, join('#', @{$key_attrs});
+  my $statefile = $self->create_entry_cache_file($mib, $table, join('#', @{$key_attrs}));
   $self->{$cache} = {};
   if ( -f $statefile) {
     our $VAR1;
@@ -1572,9 +1572,9 @@ sub get_snmp_object {
 }
 
 sub get_snmp_table_objects_with_cache {
-  my ($self, $mib, $table, $key_attr, $rows) = @_;
-  #return $self->get_snmp_table_objects($mib, $table);
-  $self->update_entry_cache(0, $mib, $table, $key_attr);
+  my ($self, $mib, $table, $key_attr, $rows, $force) = @_;
+  $force ||= 0;
+  $self->update_entry_cache($force, $mib, $table, $key_attr);
   my @indices = $self->get_cache_indices($mib, $table, $key_attr);
   my @entries = ();
   foreach ($self->get_snmp_table_objects($mib, $table, \@indices, $rows)) {
@@ -1591,15 +1591,16 @@ sub get_table_row_oids {
   my $eoid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry}.'.';
   my $eoidlen = length($eoid);
   my @columns = scalar(@{$rows}) ?
-  map {
+  grep {
+      substr($_, 0, $eoidlen) eq $eoid
+  } map {
       $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$_}
   } @{$rows}
   :
-  map {
+  grep {
+      substr($_, 0, $eoidlen) eq $eoid
+  } map {
       $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$_}
-  } grep {
-    substr($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$_}, 0, $eoidlen) eq
-        $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry}.'.'
   } keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}};
   return @columns;
 }
