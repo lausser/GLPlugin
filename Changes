@@ -1,3 +1,5 @@
+* 2017-05-15 2.4.7.1
+  fix a bug in make_symbolic, definitions pointing to other mibs
 * 2017-05-09 2.4.7
   fix entry cache, uptime
 * 2017-04-24 2.4.6.2

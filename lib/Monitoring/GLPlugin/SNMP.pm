@@ -2207,6 +2207,11 @@ sub make_symbolic {
               }
             } elsif ($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'} =~ /^OID::(.*)/) {
               my $othermib = $1;
+              if (! exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$othermib}) {
+                # may point to another mib's definitions, which hasn't 
+                # been used yet.
+                $self->require_mib($othermib);
+              }
               my $value_which_is_a_oid = $result->{$fulloid};
               $value_which_is_a_oid =~ s/^\.//g;
               my @result = grep { $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$othermib}->{$_} eq $value_which_is_a_oid } keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$othermib}};
@@ -2218,6 +2223,11 @@ sub make_symbolic {
             } elsif ($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'} =~ /^(.*?)::(.*)/) {
               my $mib = $1;
               my $definition = $2;
+              if (! exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}) {
+                # may point to another mib's definitions, which hasn't 
+                # been used yet.
+                $self->require_mib($mib);
+              }
               if  (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib} &&
                   exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition} &&
                   ref($Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}) eq 'CODE') {
