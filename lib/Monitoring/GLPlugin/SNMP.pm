@@ -2140,12 +2140,12 @@ sub get_table {
 # helper functions
 # 
 sub valid_response {
-  my ($self, $mib, $oid, $index) = @_;
+  my ($self, $mib, $mo, $index) = @_;
   $self->require_mib($mib);
   if (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib} &&
-      exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$oid}) {
+      exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$mo}) {
     # make it numerical
-    my $oid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$oid};
+    my $oid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$mo};
     if (defined $index) {
       $oid .= '.'.$index;
     }
@@ -2157,10 +2157,10 @@ sub valid_response {
         $result->{$oid} eq 'noSuchInstance' ||
         $result->{$oid} eq 'noSuchObject' ||
         $result->{$oid} eq 'endOfMibView') {
-      $self->debug(sprintf "GET: %s::%s : %s", $mib, $oid, defined $result->{$oid} ? $result->{$oid} : "<undef>");
+      $self->debug(sprintf "GET: %s::%s (%s) : %s", $mib, $mo, $oid, defined $result->{$oid} ? $result->{$oid} : "<undef>");
       return undef;
     } else {
-      $self->debug(sprintf "GET: %s::%s : %s", $mib, $oid, defined $result->{$oid} ? $result->{$oid} : "<undef>");
+      $self->debug(sprintf "GET: %s::%s (%s) : %s", $mib, $mo, $oid, defined $result->{$oid} ? $result->{$oid} : "<undef>");
       $self->add_rawdata($oid, $result->{$oid});
       return $result->{$oid};
     }
