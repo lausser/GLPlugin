@@ -2157,8 +2157,10 @@ sub valid_response {
         $result->{$oid} eq 'noSuchInstance' ||
         $result->{$oid} eq 'noSuchObject' ||
         $result->{$oid} eq 'endOfMibView') {
+      $self->debug(sprintf "GET: %s::%s : %s", $mib, $oid, defined $result->{$oid} ? $result->{$oid} : "<undef>");
       return undef;
     } else {
+      $self->debug(sprintf "GET: %s::%s : %s", $mib, $oid, defined $result->{$oid} ? $result->{$oid} : "<undef>");
       $self->add_rawdata($oid, $result->{$oid});
       return $result->{$oid};
     }
