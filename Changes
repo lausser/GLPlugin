@@ -1,3 +1,5 @@
+* 2017-05-29 2.4.7.3
+  remove debug stmt from destructor
 * 2017-05-26 2.4.7.2
   update WebGraph-8xThermometer-MIB
 * 2017-05-15 2.4.7.1
