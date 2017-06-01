@@ -13,7 +13,7 @@ use Digest::MD5 qw(md5_hex);
 use Errno;
 use Data::Dumper;
 our $AUTOLOAD;
-*VERSION = \'2.4.7.3';
+*VERSION = \'2.4.7.4';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -1225,8 +1225,8 @@ sub valdiff {
       }
     }
     if ($mode eq "normal" || $mode eq "lookback" || $mode eq "lookback_freeze_chill") {
-      if ($self->{$_} =~ /^\d+\.*\d*$/) {
-        $last_values->{$_} = 0 if ! exists $last_values->{$_};
+      if (exists $self->{$_} && defined $self->{$_} && $self->{$_} =~ /^\d+\.*\d*$/) {
+        $last_values->{$_} = 0 if ! (exists $last_values->{$_} && defined $last_values->{$_});
         if ($self->{$_} >= $last_values->{$_}) {
           $self->{'delta_'.$_} = $self->{$_} - $last_values->{$_};
         } elsif ($self->{$_} eq $last_values->{$_}) {
@@ -1273,6 +1273,13 @@ sub valdiff {
         my @lost = grep(!defined $current{$_}, @{$last_values->{$_}});
         $self->{'delta_found_'.$_} = \@found;
         $self->{'delta_lost_'.$_} = \@lost;
+      } else {
+        # nicht ganz sauber, aber das artet aus, wenn man jedem uninitialized hinterherstochert.
+        # wem das nicht passt, der kann gerne ein paar tage debugging beauftragen.
+        # das kostet aber mehr als drei kugeln eis.
+        $last_values->{$_} = 0 if ! (exists $last_values->{$_} && defined $last_values->{$_});
+        $self->{$_} = 0 if ! (exists $self->{$_} && defined $self->{$_});
+        $self->{'delta_'.$_} = 0;
       }
     }
   }
