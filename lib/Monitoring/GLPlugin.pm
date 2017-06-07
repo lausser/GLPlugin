@@ -13,7 +13,7 @@ use Digest::MD5 qw(md5_hex);
 use Errno;
 use Data::Dumper;
 our $AUTOLOAD;
-*VERSION = \'2.4.7.4';
+*VERSION = \'2.4.7.5';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -1380,12 +1380,14 @@ sub protect_value {
   if (ref($validfunc) ne "CODE" && $validfunc eq "percent") {
     $validfunc = sub {
       my $value = shift;
+      return 0 if ! defined $value;
       return 0 if $value !~ /^[-+]?([0-9]+(\.[0-9]+)?|\.[0-9]+)$/;
       return ($value < 0 || $value > 100) ? 0 : 1;
     };
   } elsif (ref($validfunc) ne "CODE" && $validfunc eq "positive") {
     $validfunc = sub {
       my $value = shift;
+      return 0 if ! defined $value;
       return 0 if $value !~ /^[-+]?([0-9]+(\.[0-9]+)?|\.[0-9]+)$/;
       return ($value < 0) ? 0 : 1;
     };

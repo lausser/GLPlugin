@@ -1,3 +1,5 @@
+* 2017-06-07 2.4.7.5
+  workaround for unititialized in protect
 * 2017-06-01 2.4.7.4
   workaround for unititialized in valdiff
 * 2017-05-29 2.4.7.3
