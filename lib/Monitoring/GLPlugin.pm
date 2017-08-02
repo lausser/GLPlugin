@@ -550,21 +550,21 @@ sub accentfree {
 }
 
 sub dump {
-  my ($self) = @_;
+  my ($self, $indent) = @_;
+  $indent = $indent ? " " x $indent : "";
   my $class = ref($self);
   $class =~ s/^.*:://;
   if (exists $self->{flat_indices}) {
-    printf "[%s_%s]\n", uc $class, $self->{flat_indices};
+    printf "%s[%s_%s]\n", $indent, uc $class, $self->{flat_indices};
   } else {
-    printf "[%s]\n", uc $class;
+    printf "%s[%s]\n", $indent, uc $class;
   }
   foreach (grep !/^(info|trace|warning|critical|blacklisted|extendedinfo|flat_indices|indices)$/, sort keys %{$self}) {
-    printf "%s: %s\n", $_, $self->{$_} if defined $self->{$_} && ref($self->{$_}) ne "ARRAY";
+    printf "%s%s: %s\n", $indent, $_, $self->{$_} if defined $self->{$_} && ref($self->{$_}) ne "ARRAY";
   }
   if ($self->{info}) {
-    printf "info: %s\n", $self->{info};
+    printf "%sinfo: %s\n", $indent, $self->{info};
   }
-  printf "\n";
   foreach (grep !/^(info|trace|warning|critical|blacklisted|extendedinfo|flat_indices|indices)$/, sort keys %{$self}) {
     if (defined $self->{$_} && ref($self->{$_}) eq "ARRAY") {
       my $have_flat_indices = 1;
@@ -583,8 +583,11 @@ sub dump {
           $obj->dump() if UNIVERSAL::can($obj, "isa") && $obj->can("dump");
         }
       }
+    } elsif (defined $self->{$_} && ref($self->{$_}) =~ /^Classes::/) {
+      $self->{$_}->dump(2) if UNIVERSAL::can($self->{$_}, "isa") && $self->{$_}->can("dump");
     }
   }
+  printf "\n";
 }
 
 sub table_ascii {
