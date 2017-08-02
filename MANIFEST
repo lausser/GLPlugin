@@ -176,9 +176,11 @@ lib/Monitoring/GLPlugin/UPNP.pm
 Makefile.PL
 MANIFEST			This list of files
 README
-t/00-load.t
 t/01-new.t
 t/02-valdiff.t
+t/03-environment.t
+t/04-extra-opts.t
+t/10-snmp.t
 t/manifest.t
 t/pod.t
 t/pod-coverage.t

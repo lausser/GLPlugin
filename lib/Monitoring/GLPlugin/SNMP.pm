@@ -2169,6 +2169,25 @@ sub valid_response {
   }
 }
 
+sub get_symbol {
+  my ($self, $mib, $oid) = @_;
+  # "LIEBERT-GP-ENVIRONMENTAL-MIB", "1.3.6.1.4.1.476.1.42.3.4.1.1.4"
+  # dahinter steckt
+  # lgpEnvSupplyAirTemperature => '1.3.6.1.4.1.476.1.42.3.4.1.1.3'
+  # lgpAmbientTemperature => '1.3.6.1.4.1.476.1.42.3.4.1.1.4'
+  # und als info vom geraet
+  # LgpEnvTemperatureMeasurementDegC = '1.3.6.1.4.1.476.1.42.3.4.1.1.4'
+  # der name des temp. sensor wird ueber die oid mitgeteilt
+  $self->require_mib($mib);
+  foreach my $symoid
+      (keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}}) {
+    if ($oid eq $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid}) {
+      return $symoid;
+    }
+  }
+  return undef;
+}
+
 # make_symbolic
 # mib is the name of a mib (must be in mibs_and_oids)
 # result is a hash-key oid->value
