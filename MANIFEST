@@ -74,6 +74,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/F5BIGIPLOCALMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/F5BIGIPSYSTEMMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/FCEOSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/FCMGMTMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/FIBRECHANNELFEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/FORTINETFORTIGATEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/FOUNDRYSNAGENTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/FOUNDRYSNSWL4SWITCHGROUPMIB.pm
