@@ -1650,10 +1650,10 @@ sub get_snmp_table_objects {
         $self->get_indices(
             -baseoid => $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry},
             -oids => [keys %{$result}]);
-    $self->debug(sprintf "get_snmp_table_objects get_table returns %d indices",
-        scalar(@indices));
     @entries = $self->make_symbolic($mib, $result, \@indices);
     @entries = map { $_->{indices} = shift @indices; $_ } @entries;
+    $self->debug(sprintf "get_snmp_table_objects mini returns %d entries",
+        scalar(@entries));
   } elsif (scalar(@{$indices}) == 1) {
     my $index = join('.', @{$indices->[0]});
     my $result = $self->get_entries(
@@ -1672,6 +1672,8 @@ sub get_snmp_table_objects {
     }
     @entries = $self->make_symbolic($mib, $result, $indices);
     @entries = map { $_->{indices} = shift @{$indices}; $_ } @entries;
+    $self->debug(sprintf "get_snmp_table_objects single returns %d entries",
+        scalar(@entries));
   } elsif (scalar(@{$indices}) > 1) {
     my $result = {};
     my @sortedindices = $self->sort_indices($indices);
@@ -1714,37 +1716,47 @@ sub get_snmp_table_objects {
     # $self->get_indices($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry});
     @entries = $self->make_symbolic($mib, $result, $indices);
     @entries = map { $_->{indices} = shift @{$indices}; $_ } @entries;
+    $self->debug(sprintf "get_snmp_table_objects single returns %d entries",
+        scalar(@entries));
   } elsif (scalar(@{$rows})) {
     my $result = $self->get_entries(
         -columns => \@columns,
     );
-    $self->debug(sprintf "get_snmp_table_objects get_table_r returns %d oids",
-        scalar(keys %{$result}));
+    if ($augmenting_table) {
+      my $augmenting_result = $self->get_entries(
+          -columns => \@augmenting_columns,
+      );
+      map { $result->{$_} = $augmenting_result->{$_} }
+          keys %{$augmenting_result};
+    }
     my @indices =
         $self->get_indices(
             -baseoid => $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry},
             -oids => [keys %{$result}]);
-    $self->debug(sprintf "get_snmp_table_objects get_table_r returns %d indices",
-        scalar(@indices));
     @entries = $self->make_symbolic($mib, $result, \@indices);
     @entries = map { $_->{indices} = shift @indices; $_ } @entries;
+    $self->debug(sprintf "get_snmp_table_objects rows returns %d entries",
+        scalar(@entries));
   } else {
-    $self->debug(sprintf "get_snmp_table_objects calls get_table %s",
-        $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$table});
     my $result = $self->get_table(
         -baseoid => $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$table});
-    $self->debug(sprintf "get_snmp_table_objects get_table returns %d oids",
-        scalar(keys %{$result}));
+    if ($augmenting_table) {
+      my $augmenting_result = $self->get_entries(
+          -columns => \@augmenting_columns,
+      );
+      map { $result->{$_} = $augmenting_result->{$_} }
+          keys %{$augmenting_result};
+    }
     # now we have numerical_oid+index => value
     # needs to become symboic_oid => value
     my @indices = 
         $self->get_indices(
             -baseoid => $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry},
             -oids => [keys %{$result}]);
-    $self->debug(sprintf "get_snmp_table_objects get_table returns %d indices",
-        scalar(@indices));
     @entries = $self->make_symbolic($mib, $result, \@indices);
     @entries = map { $_->{indices} = shift @indices; $_ } @entries;
+    $self->debug(sprintf "get_snmp_table_objects default returns %d entries",
+        scalar(@entries));
   }
   @entries = map { $_->{flat_indices} = join(".", @{$_->{indices}}); $_ } @entries;
   return @entries;
