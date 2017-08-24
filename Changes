@@ -1,3 +1,5 @@
+* 2017-08-24 2.4.11.1
+  fix SW-MIB
 * 2017-08-24 2.4.11
   fix a bug in get_snmp_table_objects wo indexes
 * 2017-08-22 2.4.10

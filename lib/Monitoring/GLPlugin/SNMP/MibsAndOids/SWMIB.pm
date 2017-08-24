@@ -5,7 +5,8 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'SW-MIB'} = {
   name => 'SW-MIB',
 };
 
-#$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'SW-MIB'} = 
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'SW-MIB'} =
+    '1.3.6.1.4.1.1588.2.1.1.1';
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'SW-MIB'} = {
   sw => '1.3.6.1.4.1.1588.2.1.1.1',
