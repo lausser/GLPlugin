@@ -1910,7 +1910,13 @@ sub get_entries_get_simple {
       $singleparams{'-varbindlist'} = [$oid.".".$index];
       my $singleresult = $Monitoring::GLPlugin::SNMP::session->get_request(%singleparams);
       foreach my $key (keys %{$singleresult}) {
-        $result->{$key} = $singleresult->{$key};
+        if ($singleresult->{$key} eq "noSuchObject" ||
+            $singleresult->{$key} eq "noSuchInstance" ||
+            $singleresult->{$key} eq "endOfMibView") {
+          $result->{$key} = undef;
+        } else {
+          $result->{$key} = $singleresult->{$key};
+        }
       }
     }
   }

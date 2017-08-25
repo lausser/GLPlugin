@@ -1,3 +1,5 @@
+* 2017-08-25 2.4.11.2
+  fix a bug in get_entries_get_simple
 * 2017-08-24 2.4.11.1
   fix SW-MIB
 * 2017-08-24 2.4.11
