@@ -50,26 +50,54 @@ sub v2tov3 {
     my $separator = $1;
     my ($authprotocol, $authpassword, $privprotocol, $privpassword,
         $username, $contextengineid, $contextname) = split(/$separator/, $2);
-    $self->override_opt('authprotocol', $authprotocol) 
+    $self->override_opt('authprotocol', $authprotocol)
         if defined($authprotocol) && $authprotocol;
-    $self->override_opt('authpassword', $authpassword) 
+    $self->override_opt('authpassword', $authpassword)
         if defined($authpassword) && $authpassword;
-    $self->override_opt('privprotocol', $privprotocol) 
+    $self->override_opt('privprotocol', $privprotocol)
         if defined($privprotocol) && $privprotocol;
-    $self->override_opt('privpassword', $privpassword) 
+    $self->override_opt('privpassword', $privpassword)
         if defined($privpassword) && $privpassword;
     $self->override_opt('username', $username) 
         if defined($username) && $username;
-    $self->override_opt('contextengineid', $contextengineid) 
+    $self->override_opt('contextengineid', $contextengineid)
         if defined($contextengineid) && $contextengineid;
-    $self->override_opt('contextname', $contextname) 
+    $self->override_opt('contextname', $contextname)
         if defined($contextname) && $contextname;
+    $self->override_opt('community', undef) ;
     $self->override_opt('protocol', '3') ;
   }
   if (($self->opts->authpassword || $self->opts->authprotocol ||
       $self->opts->privpassword || $self->opts->privprotocol) && 
       $self->opts->protocol ne '3') {
     $self->override_opt('protocol', '3') ;
+  }
+  if ($self->opts->community2 && $self->opts->community2 =~ /^snmpv3(.)(.+)/) {
+    my $separator = $1;
+    $self->create_opt('authprotocol2');
+    $self->create_opt('authpassword2');
+    $self->create_opt('privprotocol2');
+    $self->create_opt('privpassword2');
+    $self->create_opt('username2');
+    $self->create_opt('contextengineid2');
+    $self->create_opt('contextname2');
+    my ($authprotocol, $authpassword, $privprotocol, $privpassword,
+        $username, $contextengineid, $contextname) = split(/$separator/, $2);
+    $self->override_opt('authprotocol2', $authprotocol)
+        if defined($authprotocol) && $authprotocol;
+    $self->override_opt('authpassword2', $authpassword)
+        if defined($authpassword) && $authpassword;
+    $self->override_opt('privprotocol2', $privprotocol)
+        if defined($privprotocol) && $privprotocol;
+    $self->override_opt('privpassword2', $privpassword)
+        if defined($privpassword) && $privpassword;
+    $self->override_opt('username2', $username)
+        if defined($username) && $username;
+    $self->override_opt('contextengineid2', $contextengineid)
+        if defined($contextengineid) && $contextengineid;
+    $self->override_opt('contextname2', $contextname)
+        if defined($contextname) && $contextname;
+    $self->override_opt('community2', undef);
   }
 }
 
@@ -1081,14 +1109,52 @@ sub session_translate {
 
 sub establish_snmp_secondary_session {
   my ($self) = @_;
-  if ($self->opts->protocol eq '3') {
+  if ($self->opts->protocol eq '3' && (
+      defined $self->opts->authprotocol2 ||
+      defined $self->opts->authpassword2 ||
+      defined $self->opts->privprotocol2 ||
+      defined $self->opts->privpassword2 ||
+      defined $self->opts->username2 ||
+      defined $self->opts->contextengineid2 ||
+      defined $self->opts->contextname2
+  )) {
+    my $relogin = 0;
+    # bei --community2="snmpv3,..." wurde alles in xyz2 per override gesteckt
+    $relogin = 1 if ! $self->strequal($self->opts->authprotocol,
+        $self->opts->authprotocol2);
+    $relogin = 1 if ! $self->strequal($self->opts->authpassword,
+        $self->opts->authpassword2);
+    $relogin = 1 if ! $self->strequal($self->opts->privprotocol,
+        $self->opts->privprotocol2);
+    $relogin = 1 if ! $self->strequal($self->opts->privpassword,
+        $self->opts->privpassword2);
+    $relogin = 1 if ! $self->strequal($self->opts->username,
+        $self->opts->username2);
+    if ($relogin) {
+      $Monitoring::GLPlugin::SNMP::session = undef;
+      $self->opts->override_opt('authprotocol',
+          $self->decode_password($self->opts->authprotocol2));
+      $self->opts->override_opt('authpassword',
+          $self->decode_password($self->opts->authpassword2));
+      $self->opts->override_opt('privprotocol',
+          $self->decode_password($self->opts->privprotocol2));
+      $self->opts->override_opt('privpassword',
+          $self->decode_password($self->opts->privpassword2));
+      $self->opts->override_opt('username',
+          $self->decode_password($self->opts->username2));
+      $self->establish_snmp_session;
+    }
+    $self->opts->override_opt('contextengineid',
+        $self->decode_password($self->opts->contextengineid2));
+    $self->opts->override_opt('contextname',
+        $self->decode_password($self->opts->contextname2));
   } else {
     if (defined $self->opts->community2 &&
         $self->decode_password($self->opts->community2) ne
         $self->decode_password($self->opts->community)) {
       $Monitoring::GLPlugin::SNMP::session = undef;
       $self->opts->override_opt('community',
-        $self->decode_password($self->opts->community2)) ;
+          $self->decode_password($self->opts->community2)) ;
       $self->establish_snmp_session;
     }
   }

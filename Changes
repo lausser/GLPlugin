@@ -1,3 +1,7 @@
+* 2017-09-22 2.4.12
+  implement a context switch for snmpv3, sponsored by http://www.lidl.de
+  If you like check_nwc_health, go shopping at Lidl or Kaufland,
+  they sponsor a lot of the features.
 * 2017-08-25 2.4.11.2
   fix a bug in get_entries_get_simple
 * 2017-08-24 2.4.11.1
