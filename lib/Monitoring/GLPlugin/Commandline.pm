@@ -597,6 +597,15 @@ sub check_thresholds {
   return $level;
 }
 
+sub strequal {
+  my($self, $str1, $str2) = @_;
+  return 1 if ! defined $str1 && ! defined $str2;
+  return 0 if ! defined $str1 && defined $str2;
+  return 0 if defined $str1 && ! defined $str2;
+  return 1 if $str1 eq $str2;
+  return 0;
+}
+
 1;
 
 __END__
