@@ -1148,6 +1148,7 @@ sub establish_snmp_secondary_session {
         $self->decode_password($self->opts->contextengineid2));
     $self->opts->override_opt('contextname',
         $self->decode_password($self->opts->contextname2));
+    return 1;
   } else {
     if (defined $self->opts->community2 &&
         $self->decode_password($self->opts->community2) ne
@@ -1156,8 +1157,10 @@ sub establish_snmp_secondary_session {
       $self->opts->override_opt('community',
           $self->decode_password($self->opts->community2)) ;
       $self->establish_snmp_session;
+      return 1;
     }
   }
+  return 0;
 }
 
 sub reset_snmp_max_msg_size {
