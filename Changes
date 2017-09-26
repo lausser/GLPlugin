@@ -1,3 +1,5 @@
+* 2017-09-26 2.4.13
+  add DELL-RAC-MIB and IDRAC-MIB-SMI2
 * 2017-09-23 2.4.12.2
   return true on secondary context switch
 * 2017-09-22 2.4.12.1
