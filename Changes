@@ -1,3 +1,5 @@
+* 2017-09-28 2.4.13.1
+  fix dell mibs
 * 2017-09-26 2.4.13
   add DELL-RAC-MIB and IDRAC-MIB-SMI2
 * 2017-09-23 2.4.12.2

@@ -1030,9 +1030,24 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'IDRAC-MIB-SMIv2'} = {
     '8' => 'storageClass',
   },
   SystemBatteryReadingFlags => {
-    '1' => 'predictiveFailure',
-    '2' => 'failed',
-    '4' => 'presenceDetected',
+    my $val = shift;
+    my $state = unpack("B*", $val);
+    my @errors = ();
+    my $errors = {
+        0 => 'noProblem',
+        1 => 'predictiveFailure',
+        2 => 'failed',
+        4 => 'presenceDetected',
+    };
+    foreach my $bit (0..2) {
+      if (substr($state, $bit, 1) eq "1") {
+        push(@errors, $errors->{2**$bit});
+      }
+    }
+    return @errors ? join("|", @errors) : 'noProblem';
+    #'1' => 'predictiveFailure',
+    #'2' => 'failed',
+    #'4' => 'presenceDetected',
   },
   physicalDiskPCIeNegotiatedLinkWidth => {
     '1' => 'other',
