@@ -1029,7 +1029,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'IDRAC-MIB-SMIv2'} = {
     '7' => 'netPCClass',
     '8' => 'storageClass',
   },
-  SystemBatteryReadingFlags => {
+  SystemBatteryReadingFlags => sub {
     my $val = shift;
     my $state = unpack("B*", $val);
     my @errors = ();
