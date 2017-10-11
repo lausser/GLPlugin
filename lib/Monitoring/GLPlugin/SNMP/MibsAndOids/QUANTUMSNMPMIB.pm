@@ -6,7 +6,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'QUANTUM-SNMP-MIB'} = {
 };
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'QUANTUM-SNMP-MIB'} =
-    ''1.3.6.1.4.1.2036.2.1;
+    '1.3.6.1.4.1.2036.2.1';
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'QUANTUM-SNMP-MIB'} = {
   atlp => '1.3.6.1.4.1.2036',
