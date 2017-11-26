@@ -13,7 +13,7 @@ use Digest::MD5 qw(md5_hex);
 use Errno;
 use Data::Dumper;
 our $AUTOLOAD;
-*VERSION = \'2.4.14.6';
+*VERSION = \'2.4.14.7';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -41,6 +41,13 @@ sub new {
       if ! grep /BEGIN/, keys %Monitoring::GLPlugin::TableItem::;
   $Monitoring::GLPlugin::plugin = Monitoring::GLPlugin::Commandline->new(%params);
   return $self;
+}
+
+sub rebless {
+  my ($self, $class) = @_;
+  bless $self, $class;
+  $self->debug('using '.$class);
+  $self->{classified_as} = ref($self);
 }
 
 sub init {

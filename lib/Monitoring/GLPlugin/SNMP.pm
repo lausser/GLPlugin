@@ -29,8 +29,6 @@ sub new {
   my ($class, %params) = @_;
   require Monitoring::GLPlugin
       if ! grep /BEGIN/, keys %Monitoring::GLPlugin::;
-  require Monitoring::GLPlugin::SNMP::SysDescPrettify
-      if ! grep /BEGIN/, keys %Monitoring::GLPlugin::SNMP::SysDescPrettify::;
   require Monitoring::GLPlugin::SNMP::MibsAndOids
       if ! grep /BEGIN/, keys %Monitoring::GLPlugin::SNMP::MibsAndOids::;
   require Monitoring::GLPlugin::SNMP::CSF
@@ -1020,17 +1018,20 @@ sub check_snmp_and_model {
 
 sub pretty_sysdesc {
   my ($self, $sysDesc) = @_;
-  foreach my $vendor (
-      keys %{$Monitoring::GLPlugin::SNMP::SysDescPrettify::vendor_rules}) {
-    if ($sysDesc =~ /$Monitoring::GLPlugin::SNMP::SysDescPrettify::vendor_rules->{$vendor}->{vendor_pattern}/) {
-      foreach my $func (@{$Monitoring::GLPlugin::SNMP::SysDescPrettify::vendor_rules->{$vendor}->{prettifier_funcs}}) {
-        if (my $pretty = $func->($sysDesc, $self->session())) {
-          return $pretty;
-        }
-      }
+  my $prettySysDescription = undef;
+  if (exists $self->{classified_as}) {
+    my $now_class = ref($self);
+    my $now_pretty_sysdesc = $self->can("pretty_sysdesc");
+    bless $self, $self->{classified_as};
+    my $classified_pretty_sysdesc = $self->can("pretty_sysdesc");
+    if ($now_pretty_sysdesc && $classified_pretty_sysdesc && $now_pretty_sysdesc ne $classified_pretty_sysdesc) {
+      $prettySysDescription = $self->pretty_sysdesc($sysDesc);
+    } elsif (! $now_pretty_sysdesc && $classified_pretty_sysdesc) {
+      $prettySysDescription = $self->pretty_sysdesc($sysDesc);
     }
+    bless $self, $now_class;
   }
-  return $sysDesc;
+  return $prettySysDescription ? $prettySysDescription : $sysDesc;
 }
 
 sub establish_snmp_session {
