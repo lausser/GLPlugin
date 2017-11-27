@@ -47,7 +47,8 @@ sub rebless {
   my ($self, $class) = @_;
   bless $self, $class;
   $self->debug('using '.$class);
-  $self->{classified_as} = ref($self);
+  # gilt nur fuer "echte" Fabrikate mit "Classes::" vorndran
+  $self->{classified_as} = ref($self) if $class !~ /^Monitoring::GLPlugin/;
 }
 
 sub init {
