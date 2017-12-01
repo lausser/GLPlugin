@@ -13,7 +13,7 @@ use Digest::MD5 qw(md5_hex);
 use Errno;
 use Data::Dumper;
 our $AUTOLOAD;
-*VERSION = \'2.4.14.8';
+*VERSION = \'2.4.14.xi98';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -1054,7 +1054,7 @@ sub is_blacklisted {
     }
   } else {
     foreach my $bl_items (split(/\//, $self->opts->blacklist)) {
-      if ($bl_items =~ /^(\w+):([\:\d\-,]+)$/) {
+      if ($bl_items =~ /^(\w+):([\:\d\-\.,]+)$/) {
         my $bl_type = $1;
         my $bl_names = $2;
         foreach my $bl_name (split(/,/, $bl_names)) {
