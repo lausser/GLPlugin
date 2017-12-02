@@ -1494,7 +1494,7 @@ sub load_cache {
       require $statefile;
     };
     if($@) {
-      printf "rumms\n";
+      printf "FATAL: Could not load cache!\n";
     }
     # keinesfalls mehr require verwenden!!!!!!
     # beim require enthaelt VAR1 andere werte als beim slurp

@@ -1457,7 +1457,7 @@ sub load_state {
       require $statefile;
     };
     if($@) {
-      printf "rumms\n";
+      printf "FATAL: Could not load state!\n";
     }
     $self->debug(sprintf "load %s from %s", Data::Dumper::Dumper($VAR1), $statefile);
     return $VAR1;
