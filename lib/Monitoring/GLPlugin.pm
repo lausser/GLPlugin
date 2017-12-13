@@ -13,7 +13,7 @@ use Digest::MD5 qw(md5_hex);
 use Errno;
 use Data::Dumper;
 our $AUTOLOAD;
-*VERSION = \'2.4.14.11';
+*VERSION = \'2.4.14.12';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -1288,8 +1288,8 @@ sub valdiff {
         # nicht ganz sauber, aber das artet aus, wenn man jedem uninitialized hinterherstochert.
         # wem das nicht passt, der kann gerne ein paar tage debugging beauftragen.
         # das kostet aber mehr als drei kugeln eis.
-        $last_values->{$_} = 0 if ! (exists $last_values->{$_} && defined $last_values->{$_});
-        $self->{$_} = 0 if ! (exists $self->{$_} && defined $self->{$_});
+        $last_values->{$_} = 0 if ! (exists $last_values->{$_} && defined $last_values->{$_} && $last_values->{$_} ne "");
+        $self->{$_} = 0 if ! (exists $self->{$_} && defined $self->{$_} && $self->{$_} ne "");
         $self->{'delta_'.$_} = 0;
       }
     }
