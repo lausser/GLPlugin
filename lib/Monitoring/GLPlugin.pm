@@ -13,7 +13,7 @@ use Digest::MD5 qw(md5_hex);
 use Errno;
 use Data::Dumper;
 our $AUTOLOAD;
-*VERSION = \'2.4.14.12';
+*VERSION = \'2.4.14.13';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -1237,7 +1237,9 @@ sub valdiff {
     }
     if ($mode eq "normal" || $mode eq "lookback" || $mode eq "lookback_freeze_chill") {
       if (exists $self->{$_} && defined $self->{$_} && $self->{$_} =~ /^\d+\.*\d*$/) {
-        $last_values->{$_} = 0 if ! (exists $last_values->{$_} && defined $last_values->{$_});
+        # $VAR1 = { 'sysStatTmSleepCycles' => '',
+        # no idea why this happens, but we can repair it.
+        $last_values->{$_} = 0 if ! (exists $last_values->{$_} && defined $last_values->{$_} && $last_values->{$_} ne "");
         if ($self->{$_} >= $last_values->{$_}) {
           $self->{'delta_'.$_} = $self->{$_} - $last_values->{$_};
         } elsif ($self->{$_} eq $last_values->{$_}) {

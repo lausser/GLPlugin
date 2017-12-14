@@ -1,3 +1,5 @@
+* 2017-12-14 2.4.14.13
+  Prevent uninitialized in valdiff
 * 2017-12-13 2.4.14.12
   Prevent uninitialized in valdiff
 * 2017-12-06 2.4.14.11
