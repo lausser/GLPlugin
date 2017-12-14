@@ -1239,7 +1239,7 @@ sub valdiff {
       if (exists $self->{$_} && defined $self->{$_} && $self->{$_} =~ /^\d+\.*\d*$/) {
         # $VAR1 = { 'sysStatTmSleepCycles' => '',
         # no idea why this happens, but we can repair it.
-        $last_values->{$_} = 0 if ! (exists $last_values->{$_} && defined $last_values->{$_} && $last_values->{$_} ne "");
+        $last_values->{$_} = $self->{$_} if ! (exists $last_values->{$_} && defined $last_values->{$_} && $last_values->{$_} ne "");
         if ($self->{$_} >= $last_values->{$_}) {
           $self->{'delta_'.$_} = $self->{$_} - $last_values->{$_};
         } elsif ($self->{$_} eq $last_values->{$_}) {
