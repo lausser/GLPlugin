@@ -1085,8 +1085,12 @@ sub establish_snmp_session {
       $params{'-community'} = 
           $self->decode_password($self->opts->community);
     }
-    # breaks cisco wlc $params{'-timeout'} = $self->opts->timeout() > 60 ?
-    #    15 : $self->opts->timeout() - 1;
+    # breaks cisco wlc. at least with 15, wlc did not work.
+    # removing this at all may cause strange epn errors. As if only
+    # certain oids were returned as undef, others not.
+    # next try: 50
+    $params{'-timeout'} = $self->opts->timeout() >= 60 ?
+        50 : $self->opts->timeout() - 2;
     my ($session, $error) = Net::SNMP->session(%params);
     if (! defined $session) {
       $self->add_message(CRITICAL, 
