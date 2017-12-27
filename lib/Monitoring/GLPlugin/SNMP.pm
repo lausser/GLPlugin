@@ -1517,15 +1517,10 @@ sub load_cache {
 sub get_snmp_objects {
   my ($self, $mib, @mos) = @_;
   foreach (@mos) {
-    #my $value = $self->get_snmp_object($mib, $_, 0);
-    #if (defined $value) {
-    #  $self->{$_} = $value;
-    #} else {
-      my $value = $self->get_snmp_object($mib, $_);
-      if (defined $value) {
-        $self->{$_} = $value;
-      }
-    #}
+    my $value = $self->get_snmp_object($mib, $_);
+    if (defined $value) {
+      $self->{$_} = $value;
+    }
   }
 }
 
@@ -1626,15 +1621,14 @@ sub clear_table_cache {
 sub get_snmp_object {
   my ($self, $mib, $mo, $index) = @_;
   $self->require_mib($mib);
-  if (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib} &&
-      exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$mo}) {
-    my $oid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$mo}.
-        (defined $index ? '.'.$index : '');
-    my $response = $self->get_request(-varbindlist => [$oid]);
-    if (defined $response->{$oid}) {
-      if ($response->{$oid} eq 'noSuchInstance' || $response->{$oid} eq 'noSuchObject') {
-        $response->{$oid} = undef;
-      } elsif (my @symbols = $self->make_symbolic($mib, $response, [[$index]])) {
+  my $oid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$mo};
+  if (defined $oid) {
+    my $qoid = $oid.(defined $index ? '.'.$index : '');
+    my $response = $self->get_request(-varbindlist => [$qoid]);
+    if (defined $response->{$qoid}) {
+      if ($response->{$qoid} eq 'noSuchInstance' || $response->{$qoid} eq 'noSuchObject') {
+        $response->{$qoid} = undef;
+      } elsif (my @symbols = $self->make_symbolic($mib, $response, [[$index]], { $oid => $mo })) {
         $response->{$oid} = $symbols[0]->{$mo};
       }
     }
@@ -1660,23 +1654,27 @@ sub get_snmp_table_objects_with_cache {
 }
 
 sub get_table_row_oids {
-  my ($self, $mib, $table, $rows) = @_;
+  my ($self, $mib, $entry, $rows, $sym_lookup) = @_;
   $self->require_mib($mib);
-  my $entry = $table;
-  $entry =~ s/Table/Entry/g;
   my $eoid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry}.'.';
   my $eoidlen = length($eoid);
   my @columns = scalar(@{$rows}) ?
-  grep {
+  map {
+    $sym_lookup->{$_->[1]} = $_->[0];
+    $_->[1];
+  } grep {
       substr($_, 0, $eoidlen) eq $eoid
   } map {
       $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$_}
   } @{$rows}
   :
-  grep {
-      substr($_, 0, $eoidlen) eq $eoid
+  map {
+    $sym_lookup->{$_->[1]} = $_->[0];
+    $_->[1];
+  } grep {
+      substr($_->[1], 0, $eoidlen) eq $eoid
   } map {
-      $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$_}
+      [$_, $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$_}]
   } keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}};
   return @columns;
 }
@@ -1690,6 +1688,7 @@ sub get_snmp_table_objects {
   $self->require_mib($mib);
   my @entries = ();
   my $augmenting_table;
+  my $sym_lookup = {};
   $self->debug(sprintf "get_snmp_table_objects %s %s", $mib, $table);
   if ($table =~ /^(.*?)\+(.*)/) {
     $table = $1;
@@ -1699,16 +1698,20 @@ sub get_snmp_table_objects {
   $entry =~ s/Table/Entry/g;
   if (! exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib} ||
       ! exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$table}) {
-    return @entries;
+    return ();
   }
   if (! exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry}) {
     $self->debug(sprintf "table %s::%s has no entry oid", $mib, $table);
-    return @entries;
+    return ();
   }
-  my @columns = $self->get_table_row_oids($mib, $table, $rows);
+  my $tableoid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$table};
+  my $entryoid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry};
+  my @columns = $self->get_table_row_oids($mib, $table, $rows, $sym_lookup);
   my @augmenting_columns = ();
   if($augmenting_table) {
-    @augmenting_columns = $self->get_table_row_oids($mib, $augmenting_table, $rows);
+    my $augmenting_entry = $table;
+    $augmenting_entry =~ s/Table/Entry/g;
+    @augmenting_columns = $self->get_table_row_oids($mib, $augmenting_entry, $rows, $sym_lookup);
   }
   if (scalar(@{$indices}) == 1 && $indices->[0] == -1) {
     # get mini-version of a table
@@ -1719,14 +1722,15 @@ sub get_snmp_table_objects {
       my $augmenting_result = $self->get_entries(
           -columns => \@augmenting_columns,
       );
-      map { $result->{$_} = $augmenting_result->{$_} }
-          keys %{$augmenting_result};
+      while (my ($key, $value) = each %{$augmenting_result}) {
+        $result->{$key} = $value;
+      }
     }
     my @indices = 
         $self->get_indices(
-            -baseoid => $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry},
+            -baseoid => $entryoid,
             -oids => [keys %{$result}]);
-    @entries = $self->make_symbolic($mib, $result, \@indices);
+    @entries = $self->make_symbolic($mib, $result, \@indices, $sym_lookup);
     @entries = map { $_->{indices} = shift @indices; $_ } @entries;
     $self->debug(sprintf "get_snmp_table_objects mini returns %d entries",
         scalar(@entries));
@@ -1743,10 +1747,11 @@ sub get_snmp_table_objects {
           -endindex => $index,
           -columns => \@augmenting_columns,
       );
-      map { $result->{$_} = $augmenting_result->{$_} }
-          keys %{$augmenting_result};
+      while (my ($key, $value) = each %{$augmenting_result}) {
+        $result->{$key} = $value;
+      }
     }
-    @entries = $self->make_symbolic($mib, $result, $indices);
+    @entries = $self->make_symbolic($mib, $result, $indices, $sym_lookup);
     @entries = map { $_->{indices} = shift @{$indices}; $_ } @entries;
     $self->debug(sprintf "get_snmp_table_objects single returns %d entries",
         scalar(@entries));
@@ -1771,8 +1776,9 @@ sub get_snmp_table_objects {
             -endindex => $idx,
             -columns => \@columns,
         );
-        map { $result->{$_} = $tmp_result->{$_} }
-            keys %{$tmp_result};
+        while (my ($key, $value) = each %{$tmp_result}) {
+          $result->{$key} = $value;
+        }
       }
     }
     if ($augmenting_table) {
@@ -1782,15 +1788,14 @@ sub get_snmp_table_objects {
             -endindex => $idx,
             -columns => \@augmenting_columns,
         );
-        map { $result->{$_} = $tmp_result->{$_} }
-            keys %{$tmp_result};
+        while (my ($key, $value) = each %{$tmp_result}) {
+          $result->{$key} = $value;
+        }
       }
     }
     # now we have numerical_oid+index => value
     # needs to become symboic_oid => value
-    #my @indices =
-    # $self->get_indices($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry});
-    @entries = $self->make_symbolic($mib, $result, $indices);
+    @entries = $self->make_symbolic($mib, $result, $indices, $sym_lookup);
     @entries = map { $_->{indices} = shift @{$indices}; $_ } @entries;
     $self->debug(sprintf "get_snmp_table_objects single returns %d entries",
         scalar(@entries));
@@ -1802,34 +1807,37 @@ sub get_snmp_table_objects {
       my $augmenting_result = $self->get_entries(
           -columns => \@augmenting_columns,
       );
-      map { $result->{$_} = $augmenting_result->{$_} }
-          keys %{$augmenting_result};
+      while (my ($key, $value) = each %{$augmenting_result}) {
+        $result->{$key} = $value;
+      }
     }
     my @indices =
         $self->get_indices(
-            -baseoid => $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry},
+            -baseoid => $entryoid,
             -oids => [keys %{$result}]);
-    @entries = $self->make_symbolic($mib, $result, \@indices);
+    @entries = $self->make_symbolic($mib, $result, \@indices, $sym_lookup);
     @entries = map { $_->{indices} = shift @indices; $_ } @entries;
     $self->debug(sprintf "get_snmp_table_objects rows returns %d entries",
         scalar(@entries));
   } else {
     my $result = $self->get_table(
-        -baseoid => $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$table});
+        -baseoid => $tableoid,
+    );
     if ($augmenting_table) {
       my $augmenting_result = $self->get_entries(
           -columns => \@augmenting_columns,
       );
-      map { $result->{$_} = $augmenting_result->{$_} }
-          keys %{$augmenting_result};
+      while (my ($key, $value) = each %{$augmenting_result}) {
+        $result->{$key} = $value;
+      }
     }
     # now we have numerical_oid+index => value
     # needs to become symboic_oid => value
     my @indices = 
         $self->get_indices(
-            -baseoid => $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry},
+            -baseoid => $entryoid,
             -oids => [keys %{$result}]);
-    @entries = $self->make_symbolic($mib, $result, \@indices);
+    @entries = $self->make_symbolic($mib, $result, \@indices, $sym_lookup);
     @entries = map { $_->{indices} = shift @indices; $_ } @entries;
     $self->debug(sprintf "get_snmp_table_objects default returns %d entries",
         scalar(@entries));
@@ -1876,7 +1884,7 @@ sub get_request {
     # letzteres kommt in raw_data
     # und beim abschliessenden map wirds natuerlich nicht mehr gefunden 
     # also leeres return. <<kraftausdruck>>
-    foreach my $key (%{$result}) {
+    while (my ($key, $value) = each %{$result}) {
       # so, und zwei jahre spaeter kommt man drauf, dass es viele sorten 
       # von stinkstiefeln gibt. die fragt man nach 1.3.6.1.4.1.13885.120.1.3.1
       # und kriegt als antwort 1.3.6.1.4.1.13885.120.1.3.1.0=[noSuchInstance]
@@ -1885,7 +1893,7 @@ sub get_request {
       # dann prompt aus dem cache gefischt wird, anstatt den agenten zu fragen,
       # der in diesem fall eine saubere antwort liefern wuerde.
       # ergo: keine fehlermeldungen in den chache
-      $self->add_rawdata($key, $result->{$key}) if defined $result->{$key} && $result->{$key} ne 'noSuchInstance';
+      $self->add_rawdata($key, $value) if defined $value && $value ne 'noSuchInstance';
     }
   }
   my $result = {};
@@ -1958,8 +1966,8 @@ sub get_entries_get_next_1index {
       $singleparams{'-startindex'} = $index;
       $singleparams{'-endindex'} =$index;
       my $singleresult = $Monitoring::GLPlugin::SNMP::session->get_entries(%singleparams);
-      foreach my $key (keys %{$singleresult}) {
-        $result->{$key} = $singleresult->{$key};
+      while (my ($key, $value) = each %{$singleresult}) {
+        $result->{$key} = $value;
       }
     }
   }
@@ -1985,13 +1993,13 @@ sub get_entries_get_simple {
     foreach my $oid (@{$newparams{'-columns'}}) {
       $singleparams{'-varbindlist'} = [$oid.".".$index];
       my $singleresult = $Monitoring::GLPlugin::SNMP::session->get_request(%singleparams);
-      foreach my $key (keys %{$singleresult}) {
-        if ($singleresult->{$key} eq "noSuchObject" ||
-            $singleresult->{$key} eq "noSuchInstance" ||
-            $singleresult->{$key} eq "endOfMibView") {
+      while (my ($key, $value) = each %{$singleresult}) {
+        if ($value eq "noSuchObject" ||
+            $value eq "noSuchInstance" ||
+            $value eq "endOfMibView") {
           $result->{$key} = undef;
         } else {
-          $result->{$key} = $singleresult->{$key};
+          $result->{$key} = $value;
         }
       }
     }
@@ -2077,8 +2085,8 @@ sub get_entries {
   } else {
     my $preresult = $self->get_matching_oids(
         -columns => $params{'-columns'});
-    foreach (keys %{$preresult}) {
-      $result->{$_} = $preresult->{$_};
+    while (my ($key, $value) = each %{$preresult}) {
+      $result->{$key} = $value;
     }
     my @sortedkeys = $self->sort_oids([keys %{$result}]);
     my @to_del = ();
@@ -2174,8 +2182,7 @@ sub get_table {
     }
     $self->debug(sprintf "get_table %s", Data::Dumper::Dumper(\%params));
     my $result = $Monitoring::GLPlugin::SNMP::session->get_table(%params);
-    $self->debug(sprintf "get_table returned %d oids", scalar(keys %{$result}));
-    if (scalar(keys %{$result}) == 0) {
+    if (! %{$result}) {
       $self->debug(sprintf "get_table error: %s", 
           $Monitoring::GLPlugin::SNMP::session->error());
       if ($Monitoring::GLPlugin::SNMP::session->error() =~ /The message size exceeded the buffer maxMsgSize of (\d+)/i) {
@@ -2194,7 +2201,7 @@ sub get_table {
       $self->debug(sprintf "get_table %s", Data::Dumper::Dumper(\%params));
       $result = $Monitoring::GLPlugin::SNMP::session->get_table(%params);
       $self->debug(sprintf "get_table returned %d oids", scalar(keys %{$result}));
-      if (scalar(keys %{$result}) == 0) {
+      if (! %{$result}) {
         $self->debug(sprintf "get_table error: %s", 
             $Monitoring::GLPlugin::SNMP::session->error());
         if (exists $params{'-maxrepetitions'} && $params{'-maxrepetitions'} > 1) {
@@ -2204,7 +2211,7 @@ sub get_table {
           $result = $Monitoring::GLPlugin::SNMP::session->get_table(%params);
           $self->debug(sprintf "get_table returned %d oids", scalar(keys %{$result}));
         }
-        if (scalar(keys %{$result}) == 0) {
+        if (! %{$result}) {
           $self->debug("get_table error: no more fallbacks. Try --protocol 1");
         }
       }
@@ -2212,17 +2219,23 @@ sub get_table {
     # Drecksstinkstiefel Net::SNMP
     # '1.3.6.1.2.1.2.2.1.22.4 ' => 'endOfMibView',
     # '1.3.6.1.2.1.2.2.1.22.4' => '0.0',
-    foreach my $key (keys %{$result}) {
+    my $num_rows = 0;
+    my @blank_keys = ();
+    while (my ($key, $value) = each %{$result}) {
+      $num_rows++;
       if (substr($key, -1) eq " ") {
-        my $value = $result->{$key};
-        delete $result->{$key};
-        (my $shortkey = $key) =~ s/\s+$//g;
-        if (! exists $result->{shortkey}) {
-          $result->{$shortkey} = $value;
-        }
-        $self->add_rawdata($key, $result->{$key}) if exists $result->{$key};
+        push(@blank_keys, $key);
       } else {
-        $self->add_rawdata($key, $result->{$key});
+        $self->add_rawdata($key, $value);
+      }
+    }
+    $self->debug(sprintf "get_table returned %d oids", $num_rows);
+    foreach my $key (@blank_keys) {
+      my $value = $result->{$key};
+      delete $result->{$key};
+      (my $shortkey = $key) =~ s/\s+$//g;
+      if (! exists $result->{shortkey}) {
+        $self->add_rawdata($shortkey, $value);
       }
     }
   }
@@ -2246,7 +2259,7 @@ sub valid_response {
     my $result = $self->get_request(
         -varbindlist => [$oid]
     );
-    if (!defined($result) ||
+    if (! defined($result) ||
         ! defined $result->{$oid} ||
         $result->{$oid} eq 'noSuchInstance' ||
         $result->{$oid} eq 'noSuchObject' ||
@@ -2287,7 +2300,7 @@ sub get_symbol {
 # result is a hash-key oid->value
 # indices is a array ref of array refs. [[1],[2],...] or [[1,0],[1,1],[2,0]..
 sub make_symbolic {
-  my ($self, $mib, $result, $indices) = @_;
+  my ($self, $mib, $result, $indices, $sym_lookup) = @_;
   $self->require_mib($mib);
   my @entries = ();
   if (! wantarray && ref(\$result) eq "SCALAR" && ref(\$indices) eq "SCALAR") {
@@ -2307,60 +2320,120 @@ sub make_symbolic {
     }
     my $mo = {};
     my $idx = join('.', @{$index}); # index can be multi-level
-    foreach my $symoid
-        (keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}}) {
-      my $oid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid};
-      if (ref($oid) ne 'HASH') {
-        my $fulloid = $oid . '.'.$idx;
-        if (exists $result->{$fulloid}) {
-          if (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'}) {
-            if (ref($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'}) eq 'HASH') {
-              if (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'}->{$result->{$fulloid}}) {
-                $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'}->{$result->{$fulloid}};
+    if (! $sym_lookup) {
+      foreach my $symoid
+          (keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}}) {
+        my $oid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid};
+        if (ref($oid) ne 'HASH') {
+          my $fulloid = $oid . '.'.$idx;
+          if (exists $result->{$fulloid}) {
+            if (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'}) {
+              if (ref($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'}) eq 'HASH') {
+                if (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'}->{$result->{$fulloid}}) {
+                  $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'}->{$result->{$fulloid}};
+                } else {
+                  $mo->{$symoid} = 'unknown_'.$result->{$fulloid};
+                }
+              } elsif ($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'} =~ /^OID::(.*)/) {
+                my $othermib = $1;
+                if (! exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$othermib}) {
+                  # may point to another mib's definitions, which hasn't
+                  # been used yet.
+                  $self->require_mib($othermib);
+                }
+                my $value_which_is_a_oid = $result->{$fulloid};
+                $value_which_is_a_oid =~ s/^\.//g;
+                my @result = grep { $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$othermib}->{$_} eq $value_which_is_a_oid } keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$othermib}};
+                if (scalar(@result)) {
+                  $mo->{$symoid} = $result[0];
+                } else {
+                  $mo->{$symoid} = 'unknown_'.$result->{$fulloid};
+                }
+              } elsif ($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'} =~ /^(.*?)::(.*)/) {
+                my $mib = $1;
+                my $definition = $2;
+                if (! exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}) {
+                  # may point to another mib's definitions, which hasn't
+                  # been used yet.
+                  $self->require_mib($mib);
+                }
+                if  (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib} &&
+                    exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition} &&
+                    ref($Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}) eq 'CODE') {
+                  $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->($result->{$fulloid});
+                } elsif  (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib} &&
+                    exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition} &&
+                    ref($Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}) eq 'HASH' &&
+                    exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->{$result->{$fulloid}}) {
+                  $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->{$result->{$fulloid}};
+                } else {
+                  $mo->{$symoid} = 'unknown_'.$result->{$fulloid};
+                }
               } else {
                 $mo->{$symoid} = 'unknown_'.$result->{$fulloid};
-              }
-            } elsif ($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'} =~ /^OID::(.*)/) {
-              my $othermib = $1;
-              if (! exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$othermib}) {
-                # may point to another mib's definitions, which hasn't 
-                # been used yet.
-                $self->require_mib($othermib);
-              }
-              my $value_which_is_a_oid = $result->{$fulloid};
-              $value_which_is_a_oid =~ s/^\.//g;
-              my @result = grep { $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$othermib}->{$_} eq $value_which_is_a_oid } keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$othermib}};
-              if (scalar(@result)) {
-                $mo->{$symoid} = $result[0];
-              } else {
-                $mo->{$symoid} = 'unknown_'.$result->{$fulloid};
-              }
-            } elsif ($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'} =~ /^(.*?)::(.*)/) {
-              my $mib = $1;
-              my $definition = $2;
-              if (! exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}) {
-                # may point to another mib's definitions, which hasn't 
-                # been used yet.
-                $self->require_mib($mib);
-              }
-              if  (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib} &&
-                  exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition} &&
-                  ref($Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}) eq 'CODE') {
-                $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->($result->{$fulloid});
-              } elsif  (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib} &&
-                  exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition} &&
-                  ref($Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}) eq 'HASH' &&
-                  exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->{$result->{$fulloid}}) {
-                $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->{$result->{$fulloid}};
-              } else {
-                $mo->{$symoid} = 'unknown_'.$result->{$fulloid};
+                # oder $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'}?
               }
             } else {
-              $mo->{$symoid} = 'unknown_'.$result->{$fulloid};
-              # oder $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'}?
+              $mo->{$symoid} = $result->{$fulloid};
             }
-          } else {
-            $mo->{$symoid} = $result->{$fulloid};
+          }
+        }
+      }
+    } else {
+      foreach my $oid (keys %{$sym_lookup}) {
+        if (ref($oid) ne 'HASH') {
+          my $fulloid = $oid . '.'.$idx;
+          my $symoid = $sym_lookup->{$oid};
+          if (exists $result->{$fulloid}) {
+            if (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'}) {
+              if (ref($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'}) eq 'HASH') {
+                if (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'}->{$result->{$fulloid}}) {
+                  $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'}->{$result->{$fulloid}};
+                } else {
+                  $mo->{$symoid} = 'unknown_'.$result->{$fulloid};
+                }
+              } elsif ($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'} =~ /^OID::(.*)/) {
+                my $othermib = $1;
+                if (! exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$othermib}) {
+                  # may point to another mib's definitions, which hasn't
+                  # been used yet.
+                  $self->require_mib($othermib);
+                }
+                my $value_which_is_a_oid = $result->{$fulloid};
+                $value_which_is_a_oid =~ s/^\.//g;
+                my @result = grep { $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$othermib}->{$_} eq $value_which_is_a_oid } keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$othermib}};
+                if (scalar(@result)) {
+                  $mo->{$symoid} = $result[0];
+                } else {
+                  $mo->{$symoid} = 'unknown_'.$result->{$fulloid};
+                }
+              } elsif ($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'} =~ /^(.*?)::(.*)/) {
+                my $mib = $1;
+                my $definition = $2;
+                if (! exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}) {
+                  # may point to another mib's definitions, which hasn't
+                  # been used yet.
+                  $self->require_mib($mib);
+                }
+                if  (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib} &&
+                    exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition} &&
+                    ref($Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}) eq 'CODE') {
+                  $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->($result->{$fulloid});
+                } elsif  (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib} &&
+                    exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition} &&
+                    ref($Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}) eq 'HASH' &&
+                    exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->{$result->{$fulloid}}) {
+                  $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->{$result->{$fulloid}};
+                } else {
+                  $mo->{$symoid} = 'unknown_'.$result->{$fulloid};
+                }
+              } else {
+                $mo->{$symoid} = 'unknown_'.$result->{$fulloid};
+                # oder $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'}?
+              }
+            } else {
+              $mo->{$symoid} = $result->{$fulloid};
+            }
           }
         }
       }
@@ -2459,15 +2532,16 @@ sub get_indices {
   # find all oids beginning with $entry
   # then skip one field for the sequence
   # then read the next numindices fields
-  my $entrypat = $params{'-baseoid'};
-  $entrypat =~ s/\./\\\./g;
-  my @indices = map {
-      /^$entrypat\.\d+\.(.*)/ && $1;
-  } grep {
-      /^$entrypat/
-  } keys %{$Monitoring::GLPlugin::SNMP::rawdata};
+  my $entry = $params{'-baseoid'};
+  my $entrypat = $entry;
   my %seen = ();
-  my @o = map {[split /\./]} sort grep !$seen{$_}++, @indices;
+  $entrypat =~ s/\./\\\./g;
+  map {
+      $seen{$1} = 1 if /^$entrypat\.\d+\.(.*)/;
+  } grep {
+      rindex($_, $entry) == 0;
+  } keys %{$Monitoring::GLPlugin::SNMP::rawdata};
+  my @o = map {[split /\./]} sort keys %seen;
   return @o;
 }
 
