@@ -12,8 +12,10 @@ use File::Basename;
 use Digest::MD5 qw(md5_hex);
 use Errno;
 use Data::Dumper;
+$Data::Dumper::Indent = 1;
+$Data::Dumper::Sparseseen = 1;
 our $AUTOLOAD;
-*VERSION = \'2.4.15';
+*VERSION = \'3.0';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -445,20 +447,16 @@ sub get_variable {
 
 sub debug {
   my ($self, $format, @message) = @_;
-  my $tracefile = $self->opts->tracefile ?
-      $self->opts->tracefile :
-      "/tmp/".$Monitoring::GLPlugin::pluginname.".trace";
-  $self->{trace} = -f $tracefile ? 1 : 0;
   if ($self->get_variable("verbose") &&
       $self->get_variable("verbose") > $self->get_variable("verbosity", 10)) {
     printf("%s: ", scalar localtime);
     printf($format, @message);
     printf "\n";
   }
-  if ($self->{trace}) {
+  if ($Monitoring::GLPlugin::tracefile) {
     my $logfh = IO::File->new();
     $logfh->autoflush(1);
-    if ($logfh->open($tracefile, "a")) {
+    if ($logfh->open($Monitoring::GLPlugin::tracefile, "a")) {
       $logfh->printf("%s: ", scalar localtime);
       $logfh->printf($format, @message);
       $logfh->printf("\n");
@@ -801,6 +799,12 @@ sub getopts {
   # (insb. fuer dbi disconnect) steht dann $self->opts->verbose
   # nicht mehr zur verfuegung bzw. $Monitoring::GLPlugin::plugin->opts ist undef.
   $self->set_variable("verbose", $self->opts->verbose);
+  $Monitoring::GLPlugin::tracefile = $self->opts->tracefile ?
+      $self->opts->tracefile :
+      $self->system_tmpdir()."/".$Monitoring::GLPlugin::pluginname.".trace";
+  if (! -f $Monitoring::GLPlugin::tracefile) {
+    $Monitoring::GLPlugin::tracefile = undef;
+  }
   #
   # die gueltigkeit von modes wird bereits hier geprueft und nicht danach
   # in validate_args. (zwischen getopts und validate_args wird

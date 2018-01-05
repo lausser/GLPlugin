@@ -1,3 +1,5 @@
+* 2018-01-05 3.0
+  performance improvements for snmp
 * 2017-12-21 2.4.15
   add IANAIFTYPEMIB and DELLRACMIB
 * 2017-12-20 2.4.14.15

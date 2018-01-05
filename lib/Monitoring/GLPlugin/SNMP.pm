@@ -1173,7 +1173,7 @@ sub establish_snmp_secondary_session {
 sub reset_snmp_max_msg_size {
   my ($self) = @_;
   $self->debug(sprintf "reset snmp_max_msg_size to %s",
-      $Monitoring::GLPlugin::SNMP::max_msg_size) if $Monitoring::GLPlugin::SNMP::session;
+      $Monitoring::GLPlugin::SNMP::max_msg_size);
   $Monitoring::GLPlugin::SNMP::session->max_msg_size($Monitoring::GLPlugin::SNMP::max_msg_size) if $Monitoring::GLPlugin::SNMP::session;
 }
 
@@ -1662,10 +1662,8 @@ sub get_table_row_oids {
   map {
     $sym_lookup->{$_->[1]} = $_->[0];
     $_->[1];
-  } grep {
-      substr($_, 0, $eoidlen) eq $eoid
   } map {
-      $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$_}
+      [$_, $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$_}]
   } @{$rows}
   :
   map {
@@ -2182,7 +2180,7 @@ sub get_table {
     }
     $self->debug(sprintf "get_table %s", Data::Dumper::Dumper(\%params));
     my $result = $Monitoring::GLPlugin::SNMP::session->get_table(%params);
-    if (! %{$result}) {
+    if (! defined $result || ! %{$result}) {
       $self->debug(sprintf "get_table error: %s", 
           $Monitoring::GLPlugin::SNMP::session->error());
       if ($Monitoring::GLPlugin::SNMP::session->error() =~ /The message size exceeded the buffer maxMsgSize of (\d+)/i) {
@@ -2201,7 +2199,7 @@ sub get_table {
       $self->debug(sprintf "get_table %s", Data::Dumper::Dumper(\%params));
       $result = $Monitoring::GLPlugin::SNMP::session->get_table(%params);
       $self->debug(sprintf "get_table returned %d oids", scalar(keys %{$result}));
-      if (! %{$result}) {
+      if (! defined $result || ! %{$result}) {
         $self->debug(sprintf "get_table error: %s", 
             $Monitoring::GLPlugin::SNMP::session->error());
         if (exists $params{'-maxrepetitions'} && $params{'-maxrepetitions'} > 1) {
@@ -2211,11 +2209,12 @@ sub get_table {
           $result = $Monitoring::GLPlugin::SNMP::session->get_table(%params);
           $self->debug(sprintf "get_table returned %d oids", scalar(keys %{$result}));
         }
-        if (! %{$result}) {
+        if (! defined $result || ! %{$result}) {
           $self->debug("get_table error: no more fallbacks. Try --protocol 1");
         }
       }
     }
+    $result = {} if ! defined $result;
     # Drecksstinkstiefel Net::SNMP
     # '1.3.6.1.2.1.2.2.1.22.4 ' => 'endOfMibView',
     # '1.3.6.1.2.1.2.2.1.22.4' => '0.0',
@@ -2516,10 +2515,24 @@ sub get_matching_oids {
   my $result = {};
   $self->debug(sprintf "get_matching_oids %s", Data::Dumper::Dumper(\%params));
   foreach my $oid (@{$params{'-columns'}}) {
-    my $oidpattern = $oid;
-    $oidpattern =~ s/\./\\./g;
-    map { $result->{$_} = $Monitoring::GLPlugin::SNMP::rawdata->{$_} }
-        grep /^$oidpattern(?=\.|$)/, keys %{$Monitoring::GLPlugin::SNMP::rawdata};
+    while (my ($key, $value) = each %{$Monitoring::GLPlugin::SNMP::rawdata}) {
+      # oid 1.3.6.1.4.1.9999.12.3.4
+      # raw 1.3.6.1.4.1.9999.12.3.4.2.3
+      # raw 1.3.6.1.4.1.9999.12.3.41.10.2
+      # raw 1.3.6.1.4.1.9999.12.3.4
+      if (rindex($key, $oid, 0) == 0) {
+        my $len = length($oid);
+        if ($len == length($key)) {
+          $result->{$key} = $value;
+        } elsif (substr($key, $len, 1) eq ".") {
+          $result->{$key} = $value;
+        }
+      }
+    }
+    #my $oidpattern = $oid;
+    #$oidpattern =~ s/\./\\./g;
+    #map { $result->{$_} = $Monitoring::GLPlugin::SNMP::rawdata->{$_} }
+    #    grep /^$oidpattern(?=\.|$)/, keys %{$Monitoring::GLPlugin::SNMP::rawdata};
   }
   $self->debug(sprintf "get_matching_oids returns %d from %d oids", 
       scalar(keys %{$result}), scalar(keys %{$Monitoring::GLPlugin::SNMP::rawdata}));
