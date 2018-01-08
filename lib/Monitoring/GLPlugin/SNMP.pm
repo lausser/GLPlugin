@@ -2180,7 +2180,7 @@ sub get_table {
     }
     $self->debug(sprintf "get_table %s", Data::Dumper::Dumper(\%params));
     my $result = $Monitoring::GLPlugin::SNMP::session->get_table(%params);
-    if (! defined $result || ! %{$result}) {
+    if (! defined $result || (defined $result && ! %{$result})) {
       $self->debug(sprintf "get_table error: %s", 
           $Monitoring::GLPlugin::SNMP::session->error());
       if ($Monitoring::GLPlugin::SNMP::session->error() =~ /The message size exceeded the buffer maxMsgSize of (\d+)/i) {
