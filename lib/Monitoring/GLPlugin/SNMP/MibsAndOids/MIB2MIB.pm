@@ -23,8 +23,8 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'MIB-2-MIB'} = {
     my $value = shift;
     use Time::Local;
     my ($month, $day, $hour, $minute, $second, $dseconds, $dirutc, $hoursutc, $minutesutc,
-        $wday, $yday, $isdst) =
-        (0, 0, 0, 0, 0, 0, "+", 0, 0, 0, 0, 0);
+        $wday, $yday, $isdst, $year) =
+        (0, 0, 0, 0, 0, 0, "+", 0, 0, 0, 0, 0, 0);
 #      DISPLAY-HINT "2d-1d-1d,1d:1d:1d.1d,1a1d:1d"
 #      STATUS       current
 #      DESCRIPTION
@@ -65,7 +65,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'MIB-2-MIB'} = {
     )) {
       $value = $1;
       $value =~ s/ //g;
-      my $year = hex substr($value, 0, 4);
+      $year = hex substr($value, 0, 4);
       $value = substr($value, 4);
       if (length($value) > 6) {
         ($month, $day, $hour, $minute, $second, $dseconds,
