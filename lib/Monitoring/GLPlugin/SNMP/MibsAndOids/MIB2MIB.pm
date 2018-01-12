@@ -70,6 +70,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'MIB-2-MIB'} = {
       if (length($value) > 6) {
         ($month, $day, $hour, $minute, $second, $dseconds,
             $dirutc, $hoursutc, $minutesutc) = unpack "C*", pack "H*", $value;
+        $minutesutc ||= 0;
       } else {
         ($month, $day, $hour, $minute, $second, $dseconds) = unpack "C*", pack "H*", $value;
         ($dirutc, $hoursutc, $minutesutc) = ("+", 0, 0);
@@ -78,7 +79,6 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'MIB-2-MIB'} = {
     } elsif ($value && $value =~ /(\d+)-(\d+)-(\d+),(\d+):(\d+):(\d+)\.(\d+),([\+\-]*)(\d+):(\d+)/) {
       ($year, $month, $day, $hour, $minute, $second, $dseconds,
           $dirutc, $hoursutc, $minutesutc) = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);
-      $minutesutc ||= 0;
     } elsif ($value && $value =~ /(\d+)-(\d+)-(\d+),(\d+):(\d+):(\d+)/) {
       ($year, $month, $day, $hour, $minute, $second, $dseconds) =
           ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);
