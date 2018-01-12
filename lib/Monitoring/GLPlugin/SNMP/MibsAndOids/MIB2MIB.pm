@@ -63,6 +63,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'MIB-2-MIB'} = {
     if ($value && (
         $value =~ /^0x((\w{2} ){8,})/ ||
         $value =~ /^0x((\w{2} ){7,}(\w{2}){1,})/ ||
+        $value =~ /^((\w{2}){8,})/ ||
         $value =~ /^((\w{2} ){8,})/ ||
         $value =~ /^((\w{2} ){7,}(\w{2}){1,})/
     )) {
