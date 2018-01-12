@@ -72,6 +72,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'MIB-2-MIB'} = {
             $dirutc, $hoursutc, $minutesutc) = unpack "C*", pack "H*", $value;
       } else {
         ($month, $day, $hour, $minute, $second, $dseconds) = unpack "C*", pack "H*", $value;
+        ($dirutc, $hoursutc, $minutesutc) = ("+", 0, 0);
       }
       $dirutc = ($dirutc == 43) ? "+" : ($dirutc == 45) ? "-" : "+";
     } elsif ($value && $value =~ /(\d+)-(\d+)-(\d+),(\d+):(\d+):(\d+)\.(\d+),([\+\-]*)(\d+):(\d+)/) {
