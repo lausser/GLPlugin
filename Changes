@@ -1,3 +1,5 @@
+* 2018-01-15 3.0.0.5
+  fix fix fix mib2 DateAndTime returns epoch
 * 2018-01-11 3.0.0.4
   fix fix mib2 DateAndTime returns epoch
 * 2018-01-11 3.0.0.3
