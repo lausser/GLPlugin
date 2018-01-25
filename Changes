@@ -1,3 +1,7 @@
+* 2018-01-25 3.0.1.2
+  fix ADIC_TAPE_LIBRARY_MIB name
+* 2018-01-25 3.0.1.1
+  fix adic/quantum signatures
 * 2018-01-25 3.0.1
   add ADIC-TAPE-LIBRARY-MIB
 * 2018-01-15 3.0.0.5

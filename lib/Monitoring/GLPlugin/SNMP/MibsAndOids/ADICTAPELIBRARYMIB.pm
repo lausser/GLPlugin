@@ -1,14 +1,14 @@
 package Monitoring::GLPlugin::SNMP::MibsAndOids::ADICTAPELIBRARYMIB;
 
-$Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'ADIC_TAPE_LIBRARY_MIB'} = {
+$Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'ADIC-TAPE-LIBRARY-MIB'} = {
   url => '',
-  name => 'ADIC_TAPE_LIBRARY_MIB',
+  name => 'ADIC-TAPE-LIBRARY-MIB',
 };
 
-$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'ADIC_TAPE_LIBRARY_MIB'} =
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'ADIC-TAPE-LIBRARY-MIB'} =
     '1.3.6.1.4.1.3764.1.10';
 
-$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'ADIC_TAPE_LIBRARY_MIB'} = {
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'ADIC-TAPE-LIBRARY-MIB'} = {
   quantum => '1.3.6.1.4.1.3764',
   storage => '1.3.6.1.4.1.3764.1',
   library => '1.3.6.1.4.1.3764.1.10',
@@ -239,7 +239,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'ADIC_TAPE_LIBRARY_MIB
   blHPFPhysicalPortInterventionDefinition => 'ADIC-TAPE-LIBRARY-MIB::Boolean',
 };
 
-$Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'ADIC_TAPE_LIBRARY_MIB'} = {
+$Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'ADIC-TAPE-LIBRARY-MIB'} = {
   BladeState => {
     '0' => 'unknown',
     '1' => 'notReady',
