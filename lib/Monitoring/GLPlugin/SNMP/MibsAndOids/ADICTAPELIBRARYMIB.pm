@@ -1,68 +1,416 @@
-[?25l[J[J[J[?2004h[?25h[?1049h[?1h=[?2004h[1;80r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[80;1HE325: ATTENTION
-Found a swap file by the name "MIBS/.ADIC_TAPE_LIBRARY_MIB.mib.swp"
-[10Cowned by: Hulse+lausser   dated: Thu Jan 25 14:52:25 2018
-[9Cfile name: ~Hulse+lausser/git/check_tl_health/MIBS/ADIC_TAPE_LIBRARY_MIB.mib
-[10Cmodified: no
-[9Cuser name: Hulse+lausser   host name: Hulse
-[8Cprocess ID: 8096
-While opening file "MIBS/ADIC_TAPE_LIBRARY_MIB.mib"
-[13Cdated: Wed Jan 24 21:46:00 2018
+package Monitoring::GLPlugin::SNMP::MibsAndOids::ADICTAPELIBRARYMIB;
 
-(1) Another program may be editing the same file.  If this is the case,
-    be careful not to end up with two different instances of the same
-    file when making changes.  Quit, or continue with caution.
-(2) An edit session for this file crashed.
-    If this is the case, use ":recover" or "vim -r MIBS/ADIC_TAPE_LIBRARY_MIB.mib"
-    to recover the changes (see ":help recovery").
-    If you did this already, delete the swap file "MIBS/.ADIC_TAPE_LIBRARY_MIB.mib.swp"
-    to avoid this message.
+$Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'ADIC_TAPE_LIBRARY_MIB'} = {
+  url => '',
+  name => 'ADIC_TAPE_LIBRARY_MIB',
+};
 
-"MIBS/ADIC_TAPE_LIBRARY_MIB.mib"[79;1H"MIBS/ADIC_TAPE_LIBRARY_MIB.mib" 2454 lines, 83207 characters[80;1H[K[80;1HPress ENTER or type command to continue[?25h[1;1H[19L[?25l[1;1H-- ****************************************************
--- ADIC-TAPE-LIBRARY-MIB.mib: Tape Library Platform Specific MIB
---
--- $Date: 2014-04-03 12:42:38 -0600 (Thu, 03 Apr 2014) $
---
--- Copyright (c) 2005-2014 by Quantum Corporation
--- All rights reserved.
---
--- ****************************************************
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'ADIC_TAPE_LIBRARY_MIB'} =
+    '1.3.6.1.4.1.3764.1.10';
 
--- Glossary of terms
---
--- RAS : Reliability, Accessibility  and Serviceability
--- EVPS: Extended Virtual Private SAN (the Quantum/ADIC
---[7CMasking and Mapping Feature)
---[20;1HADIC-TAPE-LIBRARY-MIB DEFINITIONS ::= BEGIN
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'ADIC_TAPE_LIBRARY_MIB'} = {
+  quantum => '1.3.6.1.4.1.3764',
+  storage => '1.3.6.1.4.1.3764.1',
+  library => '1.3.6.1.4.1.3764.1.10',
+  tapeLibraryMIB => '1.3.6.1.4.1.3764.1.10.10',
+  tapeLibrarySystem => '1.3.6.1.4.1.3764.1.10.10.1',
+  libraryIpAddress => '1.3.6.1.4.1.3764.1.10.10.1.1',
+  librarySNMPAgentDescription => '1.3.6.1.4.1.3764.1.10.10.1.2',
+  libraryName => '1.3.6.1.4.1.3764.1.10.10.1.3',
+  libraryVendor => '1.3.6.1.4.1.3764.1.10.10.1.4',
+  librarySerialNumber => '1.3.6.1.4.1.3764.1.10.10.1.5',
+  libraryDescription => '1.3.6.1.4.1.3764.1.10.10.1.6',
+  libraryModel => '1.3.6.1.4.1.3764.1.10.10.1.7',
+  libraryGlobalStatus => '1.3.6.1.4.1.3764.1.10.10.1.8',
+  libraryGlobalStatusDefinition => 'ADIC-TAPE-LIBRARY-MIB::RASSubSystemStatus',
+  libraryURL => '1.3.6.1.4.1.3764.1.10.10.1.9',
+  libraryProductName => '1.3.6.1.4.1.3764.1.10.10.1.10',
+  libraryFirmwareVersion => '1.3.6.1.4.1.3764.1.10.10.1.11',
+  tapeLibraryMIBNotificationPrefix => '1.3.6.1.4.1.3764.1.10.10.3',
+  tapeLibraryMIBNotifications => '1.3.6.1.4.1.3764.1.10.10.3.0',
+  tapeLibraryMIBNotificationOnlyData => '1.3.6.1.4.1.3764.1.10.10.3.1',
+  faultyLibLocation => '1.3.6.1.4.1.3764.1.10.10.3.1.1',
+  tapeLibraryMIBConformance => '1.3.6.1.4.1.3764.1.10.10.4',
+  tapeLibraryMIBCompliances => '1.3.6.1.4.1.3764.1.10.10.4.1',
+  tapeLibraryMIBGroups => '1.3.6.1.4.1.3764.1.10.10.4.2',
+  physicalDrive => '1.3.6.1.4.1.3764.1.10.10.11',
+  overallPhDriveReadinessStatus => '1.3.6.1.4.1.3764.1.10.10.11.1',
+  overallPhDriveReadinessStatusDefinition => 'ADIC-TAPE-LIBRARY-MIB::OnlineState',
+  physicalDriveTable => '1.3.6.1.4.1.3764.1.10.10.11.3',
+  physicalDriveEntry => '1.3.6.1.4.1.3764.1.10.10.11.3.1',
+  phDriveIndex => '1.3.6.1.4.1.3764.1.10.10.11.3.1.1',
+  phDriveSerialNumber => '1.3.6.1.4.1.3764.1.10.10.11.3.1.2',
+  phDriveModel => '1.3.6.1.4.1.3764.1.10.10.11.3.1.3',
+  phDriveVendor => '1.3.6.1.4.1.3764.1.10.10.11.3.1.4',
+  phDriveType => '1.3.6.1.4.1.3764.1.10.10.11.3.1.5',
+  phDriveLocation => '1.3.6.1.4.1.3764.1.10.10.11.3.1.6',
+  phDriveFirmwareVersion => '1.3.6.1.4.1.3764.1.10.10.11.3.1.7',
+  phDriveLogicalLibraryName => '1.3.6.1.4.1.3764.1.10.10.11.3.1.8',
+  phDriveLibrarySerialNumber => '1.3.6.1.4.1.3764.1.10.10.11.3.1.9',
+  phDriveState => '1.3.6.1.4.1.3764.1.10.10.11.3.1.10',
+  phDriveStateDefinition => 'ADIC-TAPE-LIBRARY-MIB::OnlineState',
+  phDriveRasStatus => '1.3.6.1.4.1.3764.1.10.10.11.3.1.11',
+  phDriveRasStatusDefinition => 'ADIC-TAPE-LIBRARY-MIB::RASSubSystemStatus',
+  phDriveNeedsCleaning => '1.3.6.1.4.1.3764.1.10.10.11.3.1.12',
+  phDriveNeedsCleaningDefinition => 'ADIC-TAPE-LIBRARY-MIB::CleaningStatus',
+  phDriveInterfaceType => '1.3.6.1.4.1.3764.1.10.10.11.3.1.13',
+  phDriveInterfaceTypeDefinition => 'ADIC-TAPE-LIBRARY-MIB::InterfaceType',
+  phDriveScsiLun => '1.3.6.1.4.1.3764.1.10.10.11.3.1.14',
+  phDriveScsiId => '1.3.6.1.4.1.3764.1.10.10.11.3.1.15',
+  phDriveLoads => '1.3.6.1.4.1.3764.1.10.10.11.3.1.16',
+  phDrivePhysicalSerialNumber => '1.3.6.1.4.1.3764.1.10.10.11.3.1.17',
+  rasSubSystem => '1.3.6.1.4.1.3764.1.10.10.12',
+  powerStatus => '1.3.6.1.4.1.3764.1.10.10.12.1',
+  powerStatusDefinition => 'ADIC-TAPE-LIBRARY-MIB::RASSubSystemStatus',
+  coolingStatus => '1.3.6.1.4.1.3764.1.10.10.12.2',
+  coolingStatusDefinition => 'ADIC-TAPE-LIBRARY-MIB::RASSubSystemStatus',
+  controlStatus => '1.3.6.1.4.1.3764.1.10.10.12.3',
+  controlStatusDefinition => 'ADIC-TAPE-LIBRARY-MIB::RASSubSystemStatus',
+  connectivityStatus => '1.3.6.1.4.1.3764.1.10.10.12.4',
+  connectivityStatusDefinition => 'ADIC-TAPE-LIBRARY-MIB::RASSubSystemStatus',
+  roboticsStatus => '1.3.6.1.4.1.3764.1.10.10.12.5',
+  roboticsStatusDefinition => 'ADIC-TAPE-LIBRARY-MIB::RASSubSystemStatus',
+  mediaStatus => '1.3.6.1.4.1.3764.1.10.10.12.6',
+  mediaStatusDefinition => 'ADIC-TAPE-LIBRARY-MIB::RASSubSystemStatus',
+  driveStatus => '1.3.6.1.4.1.3764.1.10.10.12.7',
+  driveStatusDefinition => 'ADIC-TAPE-LIBRARY-MIB::RASSubSystemStatus',
+  operatorActionRequest => '1.3.6.1.4.1.3764.1.10.10.12.8',
+  operatorActionRequestDefinition => 'ADIC-TAPE-LIBRARY-MIB::operatorActionRequest',
+  logicalLibrary => '1.3.6.1.4.1.3764.1.10.10.13',
+  numLogicalLibraries => '1.3.6.1.4.1.3764.1.10.10.13.1',
+  logicalLibraryTable => '1.3.6.1.4.1.3764.1.10.10.13.2',
+  logicalLibraryEntry => '1.3.6.1.4.1.3764.1.10.10.13.2.1',
+  logicalLibraryIndex => '1.3.6.1.4.1.3764.1.10.10.13.2.1.1',
+  logicalLibraryName => '1.3.6.1.4.1.3764.1.10.10.13.2.1.2',
+  logicalLibrarySerialNumber => '1.3.6.1.4.1.3764.1.10.10.13.2.1.3',
+  logicalLibraryModel => '1.3.6.1.4.1.3764.1.10.10.13.2.1.4',
+  logicalLibraryAssignedLun => '1.3.6.1.4.1.3764.1.10.10.13.2.1.5',
+  logicalLibraryMediaDomain => '1.3.6.1.4.1.3764.1.10.10.13.2.1.6',
+  logicalLibrarySupportedMediaTypes => '1.3.6.1.4.1.3764.1.10.10.13.2.1.7',
+  logicalLibraryState => '1.3.6.1.4.1.3764.1.10.10.13.2.1.8',
+  logicalLibraryStateDefinition => 'ADIC-TAPE-LIBRARY-MIB::OnlineState',
+  logicalLibraryNumSlots => '1.3.6.1.4.1.3764.1.10.10.13.2.1.9',
+  logicalLibraryNumIE => '1.3.6.1.4.1.3764.1.10.10.13.2.1.10',
+  logicalLibraryNumTapeDrives => '1.3.6.1.4.1.3764.1.10.10.13.2.1.11',
+  logicalLibraryStorageElemAddr => '1.3.6.1.4.1.3764.1.10.10.13.2.1.12',
+  logicalLibraryIEElemAddr => '1.3.6.1.4.1.3764.1.10.10.13.2.1.13',
+  logicalLibraryTapeDriveElemAddr => '1.3.6.1.4.1.3764.1.10.10.13.2.1.14',
+  logicalLibraryChangerDeviceAddr => '1.3.6.1.4.1.3764.1.10.10.13.2.1.15',
+  physicalLibrary => '1.3.6.1.4.1.3764.1.10.10.14',
+  physicalLibraryState => '1.3.6.1.4.1.3764.1.10.10.14.1',
+  physicalLibraryStateDefinition => 'ADIC-TAPE-LIBRARY-MIB::OnlineState',
+  aggregatedMainDoorStatus => '1.3.6.1.4.1.3764.1.10.10.14.2',
+  aggregatedMainDoorStatusDefinition => 'ADIC-TAPE-LIBRARY-MIB::LibraryDoorStatus',
+  aggregatedIEDoorStatus => '1.3.6.1.4.1.3764.1.10.10.14.3',
+  aggregatedIEDoorStatusDefinition => 'ADIC-TAPE-LIBRARY-MIB::IEDoorStatus',
+  numStorageSlots => '1.3.6.1.4.1.3764.1.10.10.14.4',
+  numIESlots => '1.3.6.1.4.1.3764.1.10.10.14.5',
+  numPhDrives => '1.3.6.1.4.1.3764.1.10.10.14.6',
+  robot => '1.3.6.1.4.1.3764.1.10.10.14.30',
+  robotState => '1.3.6.1.4.1.3764.1.10.10.14.30.2',
+  robotStateDefinition => 'ADIC-TAPE-LIBRARY-MIB::RoboticsReadiness',
+  libraryInterfaces => '1.3.6.1.4.1.3764.1.10.10.15',
+  fcPortTable => '1.3.6.1.4.1.3764.1.10.10.15.1',
+  fcPortEntry => '1.3.6.1.4.1.3764.1.10.10.15.1.1',
+  fcPortIndex => '1.3.6.1.4.1.3764.1.10.10.15.1.1.1',
+  fcPortType => '1.3.6.1.4.1.3764.1.10.10.15.1.1.2',
+  fcPortTypeDefinition => 'ADIC-TAPE-LIBRARY-MIB::FCPortType',
+  fcPortWWNodeName => '1.3.6.1.4.1.3764.1.10.10.15.1.1.3',
+  fcPortWWPortName => '1.3.6.1.4.1.3764.1.10.10.15.1.1.4',
+  fcPortLoopId => '1.3.6.1.4.1.3764.1.10.10.15.1.1.5',
+  fcPortLoopIdMode => '1.3.6.1.4.1.3764.1.10.10.15.1.1.6',
+  fcPortLoopIdModeDefinition => 'ADIC-TAPE-LIBRARY-MIB::FCPortLoopIdMode',
+  fcPortId => '1.3.6.1.4.1.3764.1.10.10.15.1.1.7',
+  fcPortNegotiatedSpeed => '1.3.6.1.4.1.3764.1.10.10.15.1.1.8',
+  fcPortNegotiatedSpeedDefinition => 'ADIC-TAPE-LIBRARY-MIB::FCPortSpeed',
+  fcPortRasStatus => '1.3.6.1.4.1.3764.1.10.10.15.1.1.9',
+  fcPortRasStatusDefinition => 'ADIC-TAPE-LIBRARY-MIB::RASSubSystemStatus',
+  fcPortFWRev => '1.3.6.1.4.1.3764.1.10.10.15.1.1.10',
+  fcPortFrameSize => '1.3.6.1.4.1.3764.1.10.10.15.1.1.11',
+  fcPortDriveSerialNumber => '1.3.6.1.4.1.3764.1.10.10.15.1.1.12',
+  fcPortLogicalLibrarySerialNumber => '1.3.6.1.4.1.3764.1.10.10.15.1.1.13',
+  scsiControllerTable => '1.3.6.1.4.1.3764.1.10.10.15.2',
+  scsiControllerEntry => '1.3.6.1.4.1.3764.1.10.10.15.2.1',
+  scsiControllerIndex => '1.3.6.1.4.1.3764.1.10.10.15.2.1.1',
+  scsiControllerRasStatus => '1.3.6.1.4.1.3764.1.10.10.15.2.1.2',
+  scsiControllerRasStatusDefinition => 'ADIC-TAPE-LIBRARY-MIB::RASSubSystemStatus',
+  scsiControllerSpeed => '1.3.6.1.4.1.3764.1.10.10.15.2.1.3',
+  scsiControllerSpeedDefinition => 'ADIC-TAPE-LIBRARY-MIB::SCSICtrlSpeed',
+  scsiControllerRole => '1.3.6.1.4.1.3764.1.10.10.15.2.1.4',
+  scsiControllerRoleDefinition => 'ADIC-TAPE-LIBRARY-MIB::scsiControllerRole',
+  scsiControllerIoCard => '1.3.6.1.4.1.3764.1.10.10.15.2.1.5',
+  scsiControllerIoCardDefinition => 'ADIC-TAPE-LIBRARY-MIB::SCSICtrlCardType',
+  scsiControllerMaxIds => '1.3.6.1.4.1.3764.1.10.10.15.2.1.6',
+  scsiControllerMaxLuns => '1.3.6.1.4.1.3764.1.10.10.15.2.1.7',
+  scsiControllerMaxWidth => '1.3.6.1.4.1.3764.1.10.10.15.2.1.8',
+  scsiControllerFWRev => '1.3.6.1.4.1.3764.1.10.10.15.2.1.9',
+  scsiControllerDriveSerialNumber => '1.3.6.1.4.1.3764.1.10.10.15.2.1.10',
+  scsiControllerLogicalLibrarySN => '1.3.6.1.4.1.3764.1.10.10.15.2.1.11',
+  sasPortTable => '1.3.6.1.4.1.3764.1.10.10.15.3',
+  sasPortEntry => '1.3.6.1.4.1.3764.1.10.10.15.3.1',
+  sasPortIndex => '1.3.6.1.4.1.3764.1.10.10.15.3.1.1',
+  sasPortAddress => '1.3.6.1.4.1.3764.1.10.10.15.3.1.2',
+  sasPortRasStatus => '1.3.6.1.4.1.3764.1.10.10.15.3.1.3',
+  sasPortRasStatusDefinition => 'ADIC-TAPE-LIBRARY-MIB::RASSubSystemStatus',
+  sasPortNegotiatedSpeed => '1.3.6.1.4.1.3764.1.10.10.15.3.1.4',
+  sasPortNegotiatedSpeedDefinition => 'ADIC-TAPE-LIBRARY-MIB::SASPortSpeed',
+  sasPortFWRev => '1.3.6.1.4.1.3764.1.10.10.15.3.1.5',
+  sasPortDriveSerialNumber => '1.3.6.1.4.1.3764.1.10.10.15.3.1.6',
+  sasPortLogicalLibrarySN => '1.3.6.1.4.1.3764.1.10.10.15.3.1.7',
+  bladeInterfaces => '1.3.6.1.4.1.3764.1.10.10.16',
+  bladeTable => '1.3.6.1.4.1.3764.1.10.10.16.1',
+  bladeEntry => '1.3.6.1.4.1.3764.1.10.10.16.1.1',
+  bladeIndex => '1.3.6.1.4.1.3764.1.10.10.16.1.1.1',
+  bladeLocation => '1.3.6.1.4.1.3764.1.10.10.16.1.1.2',
+  bladeIP => '1.3.6.1.4.1.3764.1.10.10.16.1.1.3',
+  bladeWWNodeName => '1.3.6.1.4.1.3764.1.10.10.16.1.1.4',
+  bladeHealthCheckValue => '1.3.6.1.4.1.3764.1.10.10.16.1.1.5',
+  bladeHealthCheckLevel => '1.3.6.1.4.1.3764.1.10.10.16.1.1.6',
+  bladeHealthCheckLevelDefinition => 'ADIC-TAPE-LIBRARY-MIB::bladeHealthCheckLevel',
+  bladeHealthCheckInterval => '1.3.6.1.4.1.3764.1.10.10.16.1.1.7',
+  bladeFWRev => '1.3.6.1.4.1.3764.1.10.10.16.1.1.8',
+  bladeSerialNumber => '1.3.6.1.4.1.3764.1.10.10.16.1.1.9',
+  bladeEVPSEnabled => '1.3.6.1.4.1.3764.1.10.10.16.1.1.10',
+  bladeMaxHostLun => '1.3.6.1.4.1.3764.1.10.10.16.1.1.11',
+  bladeState => '1.3.6.1.4.1.3764.1.10.10.16.1.1.12',
+  bladeStateDefinition => 'ADIC-TAPE-LIBRARY-MIB::BladeState',
+  blHPFLinkDownThreshold => '1.3.6.1.4.1.3764.1.10.10.16.1.1.13',
+  blHPFErrorRecoveryMode => '1.3.6.1.4.1.3764.1.10.10.16.1.1.14',
+  blHPFErrorRecoveryModeDefinition => 'ADIC-TAPE-LIBRARY-MIB::FcHPFRecoveryType',
+  blHPFLinkDownRecoveryMode => '1.3.6.1.4.1.3764.1.10.10.16.1.1.15',
+  blHPFLinkDownRecoveryModeDefinition => 'ADIC-TAPE-LIBRARY-MIB::FcHPFRecoveryType',
+  blDevTable => '1.3.6.1.4.1.3764.1.10.10.16.2',
+  blDevEntry => '1.3.6.1.4.1.3764.1.10.10.16.2.1',
+  blDevIndex => '1.3.6.1.4.1.3764.1.10.10.16.2.1.1',
+  blDevUID => '1.3.6.1.4.1.3764.1.10.10.16.2.1.2',
+  blDevType => '1.3.6.1.4.1.3764.1.10.10.16.2.1.3',
+  blDevTypeDefinition => 'ADIC-TAPE-LIBRARY-MIB::DeviceType',
+  blDevVendor => '1.3.6.1.4.1.3764.1.10.10.16.2.1.4',
+  blDevProduct => '1.3.6.1.4.1.3764.1.10.10.16.2.1.5',
+  blDevSerial => '1.3.6.1.4.1.3764.1.10.10.16.2.1.6',
+  blDevInterfaceType => '1.3.6.1.4.1.3764.1.10.10.16.2.1.7',
+  blDevInterfaceTypeDefinition => 'ADIC-TAPE-LIBRARY-MIB::InterfaceType',
+  blDevLun => '1.3.6.1.4.1.3764.1.10.10.16.2.1.8',
+  blDevCtlrIndex => '1.3.6.1.4.1.3764.1.10.10.16.2.1.9',
+  blDevFWRev => '1.3.6.1.4.1.3764.1.10.10.16.2.1.10',
+  blDevTargetLun => '1.3.6.1.4.1.3764.1.10.10.16.2.1.11',
+  blCtlrTable => '1.3.6.1.4.1.3764.1.10.10.16.3',
+  blCtlrEntry => '1.3.6.1.4.1.3764.1.10.10.16.3.1',
+  blCtlrIndex => '1.3.6.1.4.1.3764.1.10.10.16.3.1.1',
+  blCtlrType => '1.3.6.1.4.1.3764.1.10.10.16.3.1.2',
+  blCtlrTypeDefinition => 'ADIC-TAPE-LIBRARY-MIB::InterfaceType',
+  blCtlrChannelMask => '1.3.6.1.4.1.3764.1.10.10.16.3.1.3',
+  blFcCtlrTable => '1.3.6.1.4.1.3764.1.10.10.16.4',
+  blFcCtlrEntry => '1.3.6.1.4.1.3764.1.10.10.16.4.1',
+  blFcCtlrStatus => '1.3.6.1.4.1.3764.1.10.10.16.4.1.1',
+  blFcCtlrStatusDefinition => 'ADIC-TAPE-LIBRARY-MIB::FcStatus',
+  blFcCtlrMaxSpeed => '1.3.6.1.4.1.3764.1.10.10.16.4.1.2',
+  blFcCtlrWWPortName => '1.3.6.1.4.1.3764.1.10.10.16.4.1.3',
+  blFcCtlrLoopID => '1.3.6.1.4.1.3764.1.10.10.16.4.1.4',
+  blFcCtlrLoopIDMode => '1.3.6.1.4.1.3764.1.10.10.16.4.1.5',
+  blFcCtlrLoopIDModeDefinition => 'ADIC-TAPE-LIBRARY-MIB::FCPortLoopIdMode',
+  blFcCtlrPortMode => '1.3.6.1.4.1.3764.1.10.10.16.4.1.6',
+  blFcCtlrPortModeDefinition => 'ADIC-TAPE-LIBRARY-MIB::FibrePortMode',
+  blFcCtlrConnectionOptions => '1.3.6.1.4.1.3764.1.10.10.16.4.1.7',
+  blFcCtlrConnectionOptionsDefinition => 'ADIC-TAPE-LIBRARY-MIB::FibreConnOptions',
+  blHostTable => '1.3.6.1.4.1.3764.1.10.10.16.5',
+  blHostEntry => '1.3.6.1.4.1.3764.1.10.10.16.5.1',
+  blHostIndex => '1.3.6.1.4.1.3764.1.10.10.16.5.1.1',
+  blHostWWName => '1.3.6.1.4.1.3764.1.10.10.16.5.1.2',
+  blHostName => '1.3.6.1.4.1.3764.1.10.10.16.5.1.3',
+  blHostType => '1.3.6.1.4.1.3764.1.10.10.16.5.1.4',
+  blHostPortID => '1.3.6.1.4.1.3764.1.10.10.16.5.1.5',
+  blHostITLData => '1.3.6.1.4.1.3764.1.10.10.16.5.1.6',
+  blHostLunMap => '1.3.6.1.4.1.3764.1.10.10.16.5.1.7',
+  blHPFMapTable => '1.3.6.1.4.1.3764.1.10.10.16.6',
+  blHPFMapEntry => '1.3.6.1.4.1.3764.1.10.10.16.6.1',
+  blHPFMapVirtualPort => '1.3.6.1.4.1.3764.1.10.10.16.6.1.1',
+  blHPFMapPrimaryPort => '1.3.6.1.4.1.3764.1.10.10.16.6.1.2',
+  blHPFMapStandbyList => '1.3.6.1.4.1.3764.1.10.10.16.6.1.3',
+  blHPFMapActivePort => '1.3.6.1.4.1.3764.1.10.10.16.6.1.4',
+  blHPFPhysicalTable => '1.3.6.1.4.1.3764.1.10.10.16.7',
+  blHPFPhysicalEntry => '1.3.6.1.4.1.3764.1.10.10.16.7.1',
+  blHPFPhysicalPort => '1.3.6.1.4.1.3764.1.10.10.16.7.1.1',
+  blHPFPhysicalPortFailureType => '1.3.6.1.4.1.3764.1.10.10.16.7.1.2',
+  blHPFPhysicalPortFailureTypeDefinition => 'ADIC-TAPE-LIBRARY-MIB::FcHPFPortFailType',
+  blHPFPhysicalPortCurrentState => '1.3.6.1.4.1.3764.1.10.10.16.7.1.3',
+  blHPFPhysicalPortCurrentStateDefinition => 'ADIC-TAPE-LIBRARY-MIB::FcHPFPortState',
+  blHPFPhysicalPortIntervention => '1.3.6.1.4.1.3764.1.10.10.16.7.1.4',
+  blHPFPhysicalPortInterventionDefinition => 'ADIC-TAPE-LIBRARY-MIB::Boolean',
+};
 
-IMPORTS
-    NOTIFICATION-TYPE, MODULE-IDENTITY, enterprises,
-    Integer32, OBJECT-TYPE FROM SNMPv2-SMI
-    TEXTUAL-CONVENTION, DisplayString, TruthValue FROM SNMPv2-TC
-    NOTIFICATION-GROUP, MODULE-COMPLIANCE,
-    OBJECT-GROUP FROM SNMPv2-CONF;[29;5Hquantum OBJECT IDENTIFIER ::= { enterprises 3764 }[31;5Hstorage OBJECT IDENTIFIER ::= { quantum 1 }[33;5Hlibrary OBJECT IDENTIFIER ::= { storage 10 }[35;5HtapeLibraryMIB MODULE-IDENTITY
-    LAST-UPDATED "201404030000Z"
-    ORGANIZATION "Quantum Corporation"
-    CONTACT-INFO[39;12H" Quantum Corporation[40;14H224 Airport Parkway, Suite 300[41;14HSan Jose, CA 95110[42;14HTel: +1 800 284-5101[44;14HE-mail: support@quantum.com"
-    DESCRIPTION[46;9H"This MIB provides Tape Library product information."
-    REVISION    "201404030000Z"
-    DESCRIPTION[49;9H"MIB update as of April 2014"
-    ::= { library 10 }[52;5HtapeLibrarySystem OBJECT IDENTIFIER ::= { tapeLibraryMIB 1 }
-
--- the following two OBJECT IDENTIFIERS are used to define SNMPv2 Notifications
--- that are backward compatible with SNMPv1 Traps.
-    tapeLibraryMIBNotificationPrefix OBJECT IDENTIFIER ::= { tapeLibraryMIB 3 }
-    tapeLibraryMIBNotifications OBJECT IDENTIFIER ::= { tapeLibraryMIBNotificationPrefix 0 }
-    tapeLibraryMIBNotificationOnlyData OBJECT IDENTIFIER ::= { tapeLibraryMIBNotificationPrefix 1 }
-
---
--- Textual conventions
---[64;5HFCPortType ::= TEXTUAL-CONVENTION
-    STATUS      current
-    DESCRIPTION[67;9H"Port type qualifier."
-    SYNTAX INTEGER {[69;12HnPort( 1 ),[70;12HnlPort( 2 ),[71;12HfPort( 3 ),[72;12HflPort( 4 ),[73;12Hunknown( 5 )
-    }[76;5HSCSICtrlSpeed ::= TEXTUAL-CONVENTION
-    STATUS      current
-    DESCRIPTION[79;9H"SCSI Speed."[80;1H[K[1;1H[?25h[?25l[80;1H[1mrecording @u[1;1H[?25h[?2004l[?25l[mt-- [51C*t[?25h[?25l[2;79r[2;1H[L[1;80r[1;2H[K[2;1H-- ****************************************************[?25h[80;1H[?2004l[?1l>[?1049lVim: Caught deadly signal TERM
-Vim: preserving files...
-Vim: Finished.
-[80;1H
+$Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'ADIC_TAPE_LIBRARY_MIB'} = {
+  BladeState => {
+    '0' => 'unknown',
+    '1' => 'notReady',
+    '2' => 'booting',
+    '3' => 'autoleveling',
+    '4' => 'autolevelcomplete',
+    '5' => 'autolevelfailed',
+    '6' => 'ready',
+    '7' => 'powereddown',
+  },
+  CleaningStatus => {
+    '1' => 'required',
+    '2' => 'notRequired',
+    '3' => 'immediate',
+  },
+  Boolean => {
+    '1' => 'true',
+    '2' => 'false',
+  },
+  FCPortType => {
+    '1' => 'nPort',
+    '2' => 'nlPort',
+    '3' => 'fPort',
+    '4' => 'flPort',
+    '5' => 'unknown',
+  },
+  FibrePortMode => {
+    '1' => 'privateTargetOnly',
+    '2' => 'privateInitiatorOnly',
+    '3' => 'privateTargetAndInitiator',
+    '17' => 'publicTargetOnly',
+    '18' => 'publicInitiatorOnly',
+    '19' => 'publicTargetAndInitiator',
+  },
+  IEDoorStatus => {
+    '1' => 'opened',
+    '2' => 'closedAndLocked',
+    '3' => 'closedAndUnLocked',
+  },
+  SASPortSpeed => {
+    '1' => 'auto',
+    '2' => 'threeGbps',
+    '3' => 'sixGbps',
+  },
+  FibreConnOptions => {
+    '0' => 'loopOnly',
+    '1' => 'pointToPointOnly',
+    '2' => 'loopPreferred',
+    '3' => 'pointToPointPreferred',
+  },
+  FCPortLoopIdMode => {
+    '1' => 'soft',
+    '2' => 'hard',
+  },
+  FcHPFRecoveryType => {
+    '0' => 'returnToActive',
+    '1' => 'returnToStandby',
+    '2' => 'requiresIntervention',
+  },
+  RASSubSystemStatus => {
+    '1' => 'good',
+    '2' => 'failed',
+    '3' => 'degraded',
+    '4' => 'warning',
+    '5' => 'informational',
+    '6' => 'unknown',
+    '7' => 'invalid',
+  },
+  LibraryDoorStatus => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'unknown',
+  },
+  FCPortSpeed => {
+    '1' => 'auto',
+    '2' => 'oneGbps',
+    '3' => 'twoGbps',
+    '4' => 'fourGbps',
+    '5' => 'eightGbps',
+  },
+  FcHPFPortFailType => {
+    '0' => 'none',
+    '1' => 'linkDown',
+    '2' => 'linkError',
+  },
+  operatorActionRequest => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  SCSICtrlSpeed => {
+    '0' => 'async',
+    '1' => 'fast',
+    '2' => 'ultra',
+    '3' => 'ultra80',
+    '4' => 'ultra160',
+    '5' => 'ultra320',
+    '6' => 'ultra640',
+    '7' => 'unknown',
+  },
+  InterfaceType => {
+    '1' => 'scsi',
+    '2' => 'fibreChannel',
+    '3' => 'sas',
+    '4' => 'iscsi',
+  },
+  bladeHealthCheckLevel => {
+    '0' => 'none',
+    '1' => 'system',
+    '2' => 'interface',
+    '3' => 'simpleDevice',
+    '4' => 'deviceReady',
+  },
+  RoboticsReadiness => {
+    '1' => 'ready',
+    '2' => 'notReady',
+  },
+  DeviceType => {
+    '0' => 'directAccess',
+    '1' => 'sequentialAccess',
+    '2' => 'printer',
+    '3' => 'processor',
+    '4' => 'worm',
+    '5' => 'cd',
+    '6' => 'scanner',
+    '7' => 'opticalMemory',
+    '8' => 'mediumChanger',
+    '9' => 'communications',
+    '10' => 'ascIt81',
+    '11' => 'ascIt82',
+    '12' => 'storageArrayController',
+    '13' => 'enclosure',
+    '14' => 'simplifiedDirectAccess',
+    '15' => 'opticalCardReader',
+    '31' => 'unknown',
+  },
+  scsiControllerRole => {
+    '0' => 'target',
+    '1' => 'initiator',
+  },
+  SCSICtrlCardType => {
+    '0' => 'none',
+    '1' => 'differentialNoTermination',
+    '2' => 'differentialTerminated',
+    '3' => 'singleEndedNoTermination',
+    '4' => 'singleEndedTerminated',
+    '5' => 'unknown',
+    '6' => 'lowVoltageSingleEnded',
+    '7' => 'lowVoltageDifferential',
+    '8' => 'lowVoltageMultiFunction',
+    '9' => 'highVoltageDifferential',
+  },
+  FcHPFPortState => {
+    '0' => 'onLine',
+    '1' => 'offLine',
+  },
+  OnlineState => {
+    '1' => 'online',
+    '2' => 'onlinePending',
+    '3' => 'offline',
+    '4' => 'offlinePending',
+    '5' => 'shutdownPending',
+  },
+  FcStatus => {
+    '0' => 'configWait',
+    '1' => 'loopInit',
+    '2' => 'login',
+    '3' => 'ready',
+    '4' => 'lostSync',
+    '5' => 'error',
+    '6' => 'reinit',
+    '7' => 'nonPart',
+    '8' => 'failed',
+  },
+};
