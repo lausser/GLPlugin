@@ -15,7 +15,7 @@ use Data::Dumper;
 $Data::Dumper::Indent = 1;
 $Data::Dumper::Sparseseen = 1;
 our $AUTOLOAD;
-*VERSION = \'3.0.0.5';
+*VERSION = \'3.0.1';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 

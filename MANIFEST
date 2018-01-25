@@ -15,6 +15,7 @@ lib/Monitoring/GLPlugin/SNMP/Item.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ADICINTELLIGENTSTORAGEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ADICMANAGEMENTMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ADICTAPELIBRARYMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/AIRESPACESWITCHINGMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/AIRESPACEWIRELESSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ALARMMIB.pm
