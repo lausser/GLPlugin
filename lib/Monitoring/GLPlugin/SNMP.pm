@@ -170,6 +170,7 @@ sub add_snmp_args {
    SNMP community of the server (SNMP v1/2 only)',
       required => 0,
       default => 'public',
+      decode => "rfc3986",
   );
   $self->add_arg(
       spec => 'username:s',
@@ -182,6 +183,7 @@ sub add_snmp_args {
       help => '--authpassword
    The authentication password for SNMPv3',
       required => 0,
+      decode => "rfc3986",
   );
   $self->add_arg(
       spec => 'authprotocol:s',
@@ -194,6 +196,7 @@ sub add_snmp_args {
       help => '--privpassword
    The password for authPriv security level',
       required => 0,
+      decode => "rfc3986",
   );
   $self->add_arg(
       spec => 'privprotocol=s',
@@ -218,6 +221,7 @@ sub add_snmp_args {
       help => '--community2
    SNMP community which can be used to switch the context during runtime',
       required => 0,
+      decode => "rfc3986",
   );
   $self->add_arg(
       spec => 'snmpwalk=s',
@@ -1060,15 +1064,13 @@ sub establish_snmp_session {
       $params{'-version'} = $self->opts->protocol;
       $params{'-username'} = $self->opts->username;
       if ($self->opts->authpassword) {
-        $params{'-authpassword'} = 
-            $self->decode_password($self->opts->authpassword);
+        $params{'-authpassword'} = $self->opts->authpassword;
       }
       if ($self->opts->authprotocol) {
         $params{'-authprotocol'} = $self->opts->authprotocol;
       }
       if ($self->opts->privpassword) {
-        $params{'-privpassword'} = 
-            $self->decode_password($self->opts->privpassword);
+        $params{'-privpassword'} = $self->opts->privpassword;
       }
       if ($self->opts->privprotocol) {
         $params{'-privprotocol'} = $self->opts->privprotocol;
@@ -1082,8 +1084,7 @@ sub establish_snmp_session {
       #  $params{'-contextname'} = $self->opts->contextname;
       #}
     } else {
-      $params{'-community'} = 
-          $self->decode_password($self->opts->community);
+      $params{'-community'} = $self->opts->community;
     }
     # breaks cisco wlc. at least with 15, wlc did not work.
     # removing this at all may cause strange epn errors. As if only
@@ -1140,29 +1141,29 @@ sub establish_snmp_secondary_session {
     if ($relogin) {
       $Monitoring::GLPlugin::SNMP::session = undef;
       $self->opts->override_opt('authprotocol',
-          $self->decode_password($self->opts->authprotocol2));
+          $self->opts->authprotocol2);
       $self->opts->override_opt('authpassword',
-          $self->decode_password($self->opts->authpassword2));
+          $self->opts->authpassword2);
       $self->opts->override_opt('privprotocol',
-          $self->decode_password($self->opts->privprotocol2));
+          $self->opts->privprotocol2);
       $self->opts->override_opt('privpassword',
-          $self->decode_password($self->opts->privpassword2));
+          $self->opts->privpassword2);
       $self->opts->override_opt('username',
-          $self->decode_password($self->opts->username2));
+          $self->opts->username2);
       $self->establish_snmp_session;
     }
     $self->opts->override_opt('contextengineid',
-        $self->decode_password($self->opts->contextengineid2));
+        $self->opts->contextengineid2);
     $self->opts->override_opt('contextname',
-        $self->decode_password($self->opts->contextname2));
+        $self->opts->contextname2);
     return 1;
   } else {
     if (defined $self->opts->community2 &&
-        $self->decode_password($self->opts->community2) ne
-        $self->decode_password($self->opts->community)) {
+        $self->opts->community2 ne
+        $self->opts->community) {
       $Monitoring::GLPlugin::SNMP::session = undef;
       $self->opts->override_opt('community',
-          $self->decode_password($self->opts->community2)) ;
+          $self->opts->community2) ;
       $self->establish_snmp_session;
       return 1;
     }

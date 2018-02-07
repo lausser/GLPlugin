@@ -15,7 +15,7 @@ use Data::Dumper;
 $Data::Dumper::Indent = 1;
 $Data::Dumper::Sparseseen = 1;
 our $AUTOLOAD;
-*VERSION = \'3.0.1.3';
+*VERSION = \'3.0.2';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -128,18 +128,21 @@ sub add_default_args {
       help => "--name
    The name of a specific component to check",
       required => 0,
+      decode => "rfc3986",
   );
   $self->add_arg(
       spec => 'name2=s',
       help => "--name2
    The secondary name of a component",
       required => 0,
+      decode => "rfc3986",
   );
   $self->add_arg(
       spec => 'name3=s',
       help => "--name3
    The tertiary name of a component",
       required => 0,
+      decode => "rfc3986",
   );
   $self->add_arg(
       spec => 'extra-opts=s',
@@ -187,6 +190,7 @@ sub add_default_args {
       help => '--morphmessage
    Modify the final output message',
       required => 0,
+      decode => "rfc3986",
   );
   $self->add_arg(
       spec => 'morphperfdata=s%',
@@ -195,6 +199,7 @@ sub add_default_args {
    It's a perl regexp and a substitution.
    Example: --morphperfdata '(.*)ISATAP(.*)'='\$1patasi\$2'",
       required => 0,
+      decode => "rfc3986",
   );
   $self->add_arg(
       spec => 'selectedperfdata=s',
@@ -270,6 +275,24 @@ sub add_default_args {
       help => "--tracefile
    Write debugging-info to this file (if it exists)",
       required => 0,
+      hidden => 1,
+  );
+}
+
+sub add_default_modes {
+  my ($self) = @_;
+  $self->add_mode(
+      internal => 'encode',
+      spec => 'encode',
+      alias => undef,
+      help => 'encode stdin',
+      hidden => 1,
+  );
+  $self->add_mode(
+      internal => 'decode',
+      spec => 'decode',
+      alias => undef,
+      help => 'decode stdin or --name',
       hidden => 1,
   );
 }
@@ -718,15 +741,6 @@ sub load_my_extension {
       $self->nagios_exit($code, $message);
     }
   }
-}
-
-sub decode_password {
-  my ($self, $password) = @_;
-  if ($password && $password =~ /^rfc3986:\/\/(.*)/) {
-    $password = $1;
-    $password =~ s/%([A-Za-z0-9]{2})/chr(hex($1))/seg;
-  }
-  return $password;
 }
 
 sub number_of_bits {
