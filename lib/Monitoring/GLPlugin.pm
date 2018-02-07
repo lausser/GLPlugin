@@ -16,6 +16,7 @@ $Data::Dumper::Indent = 1;
 $Data::Dumper::Sparseseen = 1;
 our $AUTOLOAD;
 *VERSION = \'3.0.1.3';
+use MIME::Base64;
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -139,6 +140,13 @@ sub add_default_args {
       spec => 'name3=s',
       help => "--name3
    The tertiary name of a component",
+      required => 0,
+  );
+  $self->add_arg(
+      spec => 'base64',
+      help => "--base64
+   specify that all namex are encoded in base64 and have to decode before
+   to be used.",
       required => 0,
   );
   $self->add_arg(
@@ -357,6 +365,21 @@ sub validate_args {
     $self->opts->print_help();
     exit 3;
   }
+  if ($self->opts->base64) {
+    if ($self->opts->name) {
+      my $name = decode_base64($self->opts->name);
+      $self->override_opt('name', $name);
+    }
+    if ($self->opts->name2) {
+      my $name = decode_base64($self->opts->name2);
+      $self->override_opt('name2', $name);
+    }
+    if ($self->opts->name3) {
+      my $name = decode_base64($self->opts->name3);
+      $self->override_opt('name3', $name);
+    }
+  }
+
   if ($self->opts->name && $self->opts->name =~ /(%22)|(%27)/) {
     my $name = $self->opts->name;
     $name =~ s/\%([A-Fa-f0-9]{2})/pack('C', hex($1))/seg;
