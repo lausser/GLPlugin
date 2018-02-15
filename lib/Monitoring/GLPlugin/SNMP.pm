@@ -1701,7 +1701,11 @@ sub get_snmp_table_objects {
   }
   if (! exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry}) {
     $self->debug(sprintf "table %s::%s has no entry oid", $mib, $table);
-    return ();
+    $entry = $table;
+    $entry =~ s/Table/TableEntry/g;
+    if (! exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry}) {
+      return ();
+    }
   }
   my $tableoid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$table};
   my $entryoid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry};
