@@ -5,7 +5,8 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'MIB-DELL-10892'} = {
   name => 'MIB-DELL-10892',
 };
 
-#$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'MIB-DELL-10892'} =
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'MIB-DELL-10892'} =
+    '1.3.6.1.4.1.674.10892.1.1';
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'MIB-DELL-10892'} = {
   dell => '1.3.6.1.4.1.674',
