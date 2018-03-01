@@ -57,7 +57,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'MIB-2-MIB'} = {
 #              information (fields 8-10) is not present."
 #      SYNTAX       OCTET STRING (SIZE (8 | 11))
 
-    if ($value && $value !~ /^[ \w,\:\-\+]+$/) {
+    if ($value && $value !~ /^[ \w,\:\-\+\.]+$/) {
       $value = unpack("H*", $value);
     }
     if ($value && (

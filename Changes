@@ -1,3 +1,5 @@
+* 2018-03-01 3.0.2.1
+  fix DateAndTime parsing in Mib2Mib
 * 2018-02-15 3.0.2
   add MIB-Dell-10892
   rfc3986:// can now be used for --namex too
