@@ -1,5 +1,6 @@
 * 2018-03-07 3.0.2.2
   fix Sparseseen warning for older perls
+  update f5-bigip-system-mib
 * 2018-03-01 3.0.2.1
   fix DateAndTime parsing in Mib2Mib
 * 2018-02-15 3.0.2
