@@ -13,9 +13,14 @@ use Digest::MD5 qw(md5_hex);
 use Errno;
 use Data::Dumper;
 $Data::Dumper::Indent = 1;
-$Data::Dumper::Sparseseen = 1;
+eval {
+  # avoid "used only once" because older Data::Dumper don't have this
+  # use OMD please because OMD has everything!
+  no warnings 'all';
+  $Data::Dumper::Sparseseen = 1;
+};
 our $AUTOLOAD;
-*VERSION = \'3.0.2.1';
+*VERSION = \'3.0.2.2';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
