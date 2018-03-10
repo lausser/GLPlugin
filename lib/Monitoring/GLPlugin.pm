@@ -165,7 +165,9 @@ sub add_default_args {
   $self->add_arg(
       spec => 'mitigation=s',
       help => "--mitigation
-   The parameter allows you to change a critical error to a warning.",
+   The parameter allows you to change a critical error to a warning.
+   It works only for specific checks. Which ones? Try it out or look in the code.
+   --mitigation warning ranks an error as warning which by default would be critical.",
       required => 0,
   );
   $self->add_arg(
