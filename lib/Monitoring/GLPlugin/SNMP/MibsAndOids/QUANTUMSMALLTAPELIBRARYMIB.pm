@@ -6,7 +6,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'QUANTUM-SMALL-TAPE-LIBRARY-M
 };
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'QUANTUM-SMALL-TAPE-LIBRARY-MIB'} = 
-  '1.3.6.1.4.1.3697.1.10';
+  '1.3.6.1.4.1.3697.1.10.10';
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'QUANTUM-SMALL-TAPE-LIBRARY-MIB'} = {
   'quantum' => '1.3.6.1.4.1.3697',

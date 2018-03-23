@@ -1,3 +1,5 @@
+* 2018-03-23 3.0.2.3
+  fix quantim-small-library id, add quantum-midrange
 * 2018-03-07 3.0.2.2
   fix Sparseseen warning for older perls
   update f5-bigip-system-mib
