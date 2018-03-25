@@ -1,3 +1,5 @@
+* 2018-03-26 3.0.2.4
+  fix an obvious bug in quantum-midrange-tape-library-mib
 * 2018-03-23 3.0.2.3
   fix quantim-small-library id, add quantum-midrange
 * 2018-03-07 3.0.2.2

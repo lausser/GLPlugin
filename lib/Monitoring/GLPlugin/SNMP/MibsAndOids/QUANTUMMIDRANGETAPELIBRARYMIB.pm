@@ -117,9 +117,40 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'QUANTUM-MIDRANGE-TAPE
   libraryPSType => '1.3.6.1.4.1.3697.1.10.15.5.100.2.1.4',
   libraryPSTypeDefinition => 'QUANTUM-MIDRANGE-TAPE-LIBRARY-MIB::VoltageType',
   libraryPSWattage => '1.3.6.1.4.1.3697.1.10.15.5.100.2.1.5',
-  libraryPSStatus => '1.3.6.1.4.1.3697.1.10.15.5.100.2.1.7',
+  # einzige fundstelle fuer diese mib war ein pdf, s.o.
+  # da drin steht
+  # libraryPSWattage
+  # DESCRIPTION "Power output rating in units of Watts."
+  # ::= { libraryPowerSupplyEntry 5 }
+  # libraryPSStatus
+  # DESCRIPTION "Status of the P/S."
+  # ::= { libraryPowerSupplyEntry 7 }
+  # libraryPSPowerConsumption
+  # DESCRIPTION "Power consumption in units of Watts."
+  # ::= { libraryPowerSupplyEntry 8 }
+  # in den beispieldaten steht
+  # .1.3.6.1.4.1.3697.1.10.15.5.100.2.1.5.0 = INTEGER: 315
+  # .1.3.6.1.4.1.3697.1.10.15.5.100.2.1.5.1 = INTEGER: 315
+  # .1.3.6.1.4.1.3697.1.10.15.5.100.2.1.5.2 = INTEGER: 315
+  # .1.3.6.1.4.1.3697.1.10.15.5.100.2.1.5.3 = INTEGER: 315
+  # .1.3.6.1.4.1.3697.1.10.15.5.100.2.1.6.0 = INTEGER: 1
+  # .1.3.6.1.4.1.3697.1.10.15.5.100.2.1.6.1 = INTEGER: 1
+  # .1.3.6.1.4.1.3697.1.10.15.5.100.2.1.6.2 = INTEGER: 1
+  # .1.3.6.1.4.1.3697.1.10.15.5.100.2.1.6.3 = INTEGER: 1
+  # .1.3.6.1.4.1.3697.1.10.15.5.100.2.1.7.0 = INTEGER: 62
+  # .1.3.6.1.4.1.3697.1.10.15.5.100.2.1.7.1 = INTEGER: 54
+  # .1.3.6.1.4.1.3697.1.10.15.5.100.2.1.7.2 = INTEGER: 58
+  # .1.3.6.1.4.1.3697.1.10.15.5.100.2.1.7.3 = INTEGER: 44
+  # .1.3.6.1.4.1.3697.1.10.15.5.100.2.1.8 = INTEGER: 62
+  # d.h. status ist 62, 54, 58, 44, und _1_ powerconsumption mit 62,
+  # die ganz zufaellig dem status von index 0 entspricht.
+  # das ist sowohl murks in der mib-datei als auch in der implementierung.
+  # ich korrigiere jetzt libraryPSStatus = die vergessene 6 und
+  # libraryPSPowerConsumption = 7 und woher der ...2.1.8 kommt ist mir wurscht
+  # 
+  libraryPSStatus => '1.3.6.1.4.1.3697.1.10.15.5.100.2.1.6',
   libraryPSStatusDefinition => 'QUANTUM-MIDRANGE-TAPE-LIBRARY-MIB::PSStatus',
-  libraryPSPowerConsumption => '1.3.6.1.4.1.3697.1.10.15.5.100.2.1.8',
+  libraryPSPowerConsumption => '1.3.6.1.4.1.3697.1.10.15.5.100.2.1.7',
   libraryVoltageSensor => '1.3.6.1.4.1.3697.1.10.15.5.110',
   libraryVoltageSensorCount => '1.3.6.1.4.1.3697.1.10.15.5.110.1',
   libraryVoltageSensorTable => '1.3.6.1.4.1.3697.1.10.15.5.110.2',
