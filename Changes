@@ -1,3 +1,5 @@
+* 2018-03-29 3.0.2.5
+  convert more extended ascii characters to ascii
 * 2018-03-26 3.0.2.4
   fix an obvious bug in quantum-midrange-tape-library-mib
 * 2018-03-23 3.0.2.3

@@ -20,7 +20,7 @@ eval {
   $Data::Dumper::Sparseseen = 1;
 };
 our $AUTOLOAD;
-*VERSION = \'3.0.2.4';
+*VERSION = \'3.0.2.5';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -575,6 +575,18 @@ sub accentfree {
     'ef' => 'i', 'f0' => 'o', 'f1' => 'n', 'f2' => 'o', 'f3' => 'o', 'f4' => 'o',
     'f5' => 'o', 'f6' => 'o', 'f8' => 'o', 'f9' => 'u', 'fa' => 'u', 'fb' => 'u',
     'fc' => 'u', 'fd' => 'y', 'ff' => 'y',
+    '8a' => 'S', '8c' => 'CE', '9a' => 's', '9c' => 'oe', '9f' => 'Y', 'a2' => 'o', 'aa' => 'a',
+    'b2' => '2', 'b3' => '3', 'b9' => '1', 'bc' => '1/4', 'bd' => '1/2', 'be' => '3/4',
+    'c0' => 'A', 'c1' => 'A', 'c2' => 'A', 'c3' => 'A', 'c4' => 'A', 'c5' => 'A', 'c6' => 'AE',
+    'c7' => 'C', 'c8' => 'E', 'c9' => 'E', 'ca' => 'E', 'cb' => 'E',
+    'cc' => 'I', 'cd' => 'I', 'ce' => 'I', 'cf' => 'I', 'd0' => 'D', 'd1' => 'N',
+    'd2' => 'O', 'd3' => 'O', 'd4' => 'O', 'd5' => 'O', 'd6' => 'O',
+    'd8' => 'O', 'd9' => 'U', 'da' => 'U', 'db' => 'U', 'dc' => 'U', 'dd' => 'Y',
+    'df' => 'ss', 'e0' => 'a', 'e1' => 'a', 'e2' => 'a', 'e3' => 'a', 'e4' => 'a', 'e5' => 'a',
+    'e6' => 'ae', 'e7' => 'c', 'e8' => 'e', 'e9' => 'e', 'ea' => 'e', 'eb' => 'e',
+    'ec' => 'i', 'ed' => 'i', 'ee' => 'i', 'ef' => 'i', 'f1' => 'n',
+    'f2' => 'o', 'f3' => 'o', 'f4' => 'o', 'f5' => 'o', 'f6' => 'o', 'f8' => 'o',
+    'f9' => 'u', 'fa' => 'u', 'fb' => 'u', 'fc' => 'u', 'fd' => 'y', 'ff' => 'yy',
   );
   my @letters = split //, $text;;
   for (my $i = 0; $i <= $#letters; $i++) {
@@ -582,7 +594,9 @@ sub accentfree {
     $letters[$i] = $replace{$hex} if (exists $replace{$hex});
   }
   push @transformed, @letters;
-  return join '', @transformed;
+  $text = join '', @transformed;
+  $text =~ s/[[:^ascii:]]//g;
+  return $text;
 }
 
 sub dump {
