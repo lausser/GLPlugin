@@ -1661,15 +1661,17 @@ sub get_table_row_oids {
   my $eoidlen = length($eoid);
   my @columns = scalar(@{$rows}) ?
   map {
-    $sym_lookup->{$_->[1]} = $_->[0];
-    $_->[1];
+      $sym_lookup->{$_->[1]} = $_->[0];
+      $_->[1];
+  } grep {
+      substr($_->[1], 0, $eoidlen) eq $eoid
   } map {
       [$_, $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$_}]
   } @{$rows}
   :
   map {
-    $sym_lookup->{$_->[1]} = $_->[0];
-    $_->[1];
+      $sym_lookup->{$_->[1]} = $_->[0];
+      $_->[1];
   } grep {
       substr($_->[1], 0, $eoidlen) eq $eoid
   } map {
@@ -1709,12 +1711,24 @@ sub get_snmp_table_objects {
   }
   my $tableoid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$table};
   my $entryoid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$entry};
-  my @columns = $self->get_table_row_oids($mib, $table, $rows, $sym_lookup);
+  my $augmenting_tableoid = undef;
+  my @columns = $self->get_table_row_oids($mib, $entry, $rows, $sym_lookup);
   my @augmenting_columns = ();
   if($augmenting_table) {
-    my $augmenting_entry = $table;
+    my $augmenting_entry = $augmenting_table;
     $augmenting_entry =~ s/Table/Entry/g;
-    @augmenting_columns = $self->get_table_row_oids($mib, $augmenting_entry, $rows, $sym_lookup);
+    if (! exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$augmenting_entry}) {
+      $self->debug(sprintf "table %s::%s has no entry oid", $mib, $augmenting_table);
+      $augmenting_entry = $augmenting_table;
+      $augmenting_entry =~ s/Table/TableEntry/g;
+      if (! exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$augmenting_entry}) {
+        $augmenting_table = undef;
+      }
+    }
+    if ($augmenting_table) {
+      @augmenting_columns = $self->get_table_row_oids($mib, $augmenting_entry, $rows, $sym_lookup);
+      $augmenting_tableoid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$augmenting_table};
+    }
   }
   if (scalar(@{$indices}) == 1 && $indices->[0] == -1) {
     # get mini-version of a table
@@ -1827,8 +1841,11 @@ sub get_snmp_table_objects {
         -baseoid => $tableoid,
     );
     if ($augmenting_table) {
-      my $augmenting_result = $self->get_entries(
-          -columns => \@augmenting_columns,
+      #my $augmenting_result = $self->get_entries(
+      #    -columns => \@augmenting_columns,
+      #);
+      my $augmenting_result = $self->get_table(
+          -baseoid => $augmenting_tableoid,
       );
       while (my ($key, $value) = each %{$augmenting_result}) {
         $result->{$key} = $value;
