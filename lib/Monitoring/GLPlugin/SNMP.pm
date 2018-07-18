@@ -954,7 +954,7 @@ sub check_snmp_and_model {
     # Datatype Integer32 = 1s
     my $snmpEngineTime = $self->get_snmp_object('SNMP-FRAMEWORK-MIB', 'snmpEngineTime');
     # Datatype TimeTicks = 1/100s
-    my $hrSystemUptime = $self->get_snmp_object('HOST-RESOURCES-MIB', 'hrSystemUptime');
+    my $hrSystemUptime = $self->get_snmp_object_maybe('HOST-RESOURCES-MIB', 'hrSystemUptime');
     my $sysDescr = $self->get_snmp_object('MIB-2-MIB', 'sysDescr', 0);
     my $tac = time;
     if (defined $hrSystemUptime && $hrSystemUptime =~ /^\d+$/ && $hrSystemUptime > 0) {
@@ -1666,6 +1666,26 @@ sub get_snmp_object {
     return $response->{$oid};
   }
   return undef;
+}
+
+sub get_snmp_object_maybe {
+    my ($self, @args) = @_;
+    my $ret;
+
+    # There may be no response at all. Turn the SNMP timeout down so we can
+    # catch that without triggering SIGALRM
+    my $orig_timeout = $Monitoring::GLPlugin::SNMP::session->timeout;
+    my $new_timeout = $orig_timeout / 10;
+    $new_timeout = 5 if $new_timeout > 5;
+    $Monitoring::GLPlugin::SNMP::session->timeout($new_timeout);
+
+    # Get
+    $ret = $self->get_snmp_object(@args);
+
+    # Restore timeout
+    $Monitoring::GLPlugin::SNMP::session->timeout($orig_timeout);
+
+    return $ret;
 }
 
 sub get_snmp_table_objects_with_cache {
