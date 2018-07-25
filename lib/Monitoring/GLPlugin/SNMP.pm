@@ -1092,7 +1092,30 @@ sub establish_snmp_session {
     # next try: 50
     $params{'-timeout'} = $self->opts->timeout() >= 60 ?
         50 : $self->opts->timeout() - 2;
+    my $stderrvar = "";
+    *SAVEERR = *STDERR;
+    open ERR ,'>',\$stderrvar;
+    *STDERR = *ERR;
     my ($session, $error) = Net::SNMP->session(%params);
+    *STDERR = *SAVEERR;
+    if ($stderrvar && $error && $error =~ /Time synchronization failed/) {
+      # This is what you get when you have
+      # - an APC ups with a buggy firmware.
+      # - no chance to update it.
+      # - a support contract.
+      no strict 'refs';
+      no warnings 'redefine';
+      *{'Net::SNMP::_discovery_synchronization_cb'} = sub {
+        my ($this) = @_;
+        if ($this->{_security}->discovered())
+        {
+          $this->_error_clear();
+          return $this->_discovery_complete();
+        }
+        return $this->_discovery_failed();
+      };
+      ($session, $error) = Net::SNMP->session(%params);
+    }
     if (! defined $session) {
       $self->add_message(CRITICAL, 
           sprintf 'cannot create session object: %s', $error);
