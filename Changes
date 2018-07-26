@@ -1,3 +1,5 @@
+* 2018-07-26 3.0.2.9
+  fix get_level
 * 2018-07-25 3.0.2.8
   establish a snmp session with a buggy apc firmware
 * 2018-07-02 3.0.2.7

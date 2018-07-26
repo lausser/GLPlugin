@@ -20,7 +20,7 @@ eval {
   $Data::Dumper::Sparseseen = 1;
 };
 our $AUTOLOAD;
-*VERSION = \'3.0.2.8';
+*VERSION = \'3.0.2.9';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -1052,9 +1052,9 @@ sub get_level {
   my ($self) = @_;
   return OK if ! exists $self->{tmp_level};
   my $code = OK;
-  $code ||= CRITICAL if $self->{tmp_level}->{critical};
-  $code ||= WARNING  if $self->{tmp_level}->{warning};
-  $code ||= UNKNOWN  if $self->{tmp_level}->{unknown};
+  return CRITICAL if $self->{tmp_level}->{critical};
+  return WARNING  if $self->{tmp_level}->{warning};
+  return UNKNOWN  if $self->{tmp_level}->{unknown};
   return $code;
 }
 
