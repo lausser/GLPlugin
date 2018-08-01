@@ -92,9 +92,12 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IEEE8023LAGMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IFMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IPFORWARDMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IPMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNIPERALARMMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNIPERIFMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNIPERIVEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNIPERMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNIPERRPSMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNIPERSRX5000SPUMONITORINGMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNOSBGP4V2MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/KYOCERAPRIVATEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LARAMIB.pm

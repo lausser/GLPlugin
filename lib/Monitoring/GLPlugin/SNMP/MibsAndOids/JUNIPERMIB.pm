@@ -93,6 +93,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'JUNIPER-MIB'} = {
   jnxOperatingChassisIdDefinition => 'JUNIPER-MIB::JnxChassisId',
   jnxOperatingChassisDescr => '1.3.6.1.4.1.2636.3.1.13.1.18',
   jnxOperatingRestartTime => '1.3.6.1.4.1.2636.3.1.13.1.19',
+  jnxOperatingRestartTimeDefinition => 'MIB-2-MIB::DateAndTime',
   jnxRedundancyTable => '1.3.6.1.4.1.2636.3.1.14',
   jnxRedundancyEntry => '1.3.6.1.4.1.2636.3.1.14.1',
   jnxRedundancyContentsIndex => '1.3.6.1.4.1.2636.3.1.14.1.1',
