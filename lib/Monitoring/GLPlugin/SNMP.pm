@@ -1427,6 +1427,9 @@ sub create_interface_cache_file {
     $self->opts->override_opt('hostname',
         'snmpwalk.file'.md5_hex($self->opts->snmpwalk))
   }
+  if ($self->opts->contextname) {
+    $extension .= $self->opts->contextname . '_';
+  }
   if ($self->opts->community) { 
     $extension .= md5_hex($self->opts->community);
   }
