@@ -10,8 +10,8 @@ sub create_statefile {
   if ($self->opts->community) {
     $extension .= md5_hex($self->opts->community);
   }
-  if ($self->opts->context) {
-    $extension .= $self->opts->context;
+  if ($self->opts->contextname) {
+    $extension .= $self->opts->contextname;
   }
   $extension =~ s/\//_/g;
   $extension =~ s/\(/_/g;
