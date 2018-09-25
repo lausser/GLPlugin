@@ -1,3 +1,7 @@
+* 2018-09-25 3.0.5
+  add CPQHLTH-MIB
+  add IF-INVERTED-STACK-MIB
+  add ThreeParMIB
 * 2018-09-10 3.0.4.1
   fix context opt in csr
 * 2018-08-31 3.0.4

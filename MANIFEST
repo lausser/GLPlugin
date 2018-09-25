@@ -62,6 +62,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOSTACKWISEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOSYSTEMEXTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOVTPMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CLAVISTERMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CPQHLTHMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DAMOCLESMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DELLRACMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DISKMIB.pm
@@ -89,6 +90,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HWGWLDMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IANAIFTYPEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IDRACMIBSMIV2.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IEEE8023LAGMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IFINVERTEDSTACKMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IFMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IPFORWARDMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IPMIB.pm
@@ -171,6 +173,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SWMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SYNOPTICSROOTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SYSTEMRESOURCESMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/THEV01MIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/THREEPARMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/UCDDISKIOMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/UCDSNMPMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/UPSMIB.pm
