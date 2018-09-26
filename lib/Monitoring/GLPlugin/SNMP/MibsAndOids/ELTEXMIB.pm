@@ -50,6 +50,12 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'ELTEX-MIB'} = {
 # correctly interpret the value of this object, the associated entPhySensorType,
 # entPhySensorScale, and entPhySensorPrecision objects must also be examined.
   'eltexSensorStatus' => '1.3.6.1.4.1.89.83.2.1.1.1.4',
+# Type of sensor
+  'eltexSensorType' => '1.3.6.1.4.1.89.83.2.1.1.1.1',
+  'eltexSensorTypeDefinition' => {
+    '8' => '°C',
+    '10' => 'rpm',
+},
 # The table of fan status maintained by the environmental monitor.
   'eltexFanTable' => '1.3.6.1.4.1.89.83.1.1',
 # An entry in the fan status table, representing the status of the associated
