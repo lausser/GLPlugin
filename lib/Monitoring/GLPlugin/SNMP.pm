@@ -1672,6 +1672,9 @@ sub get_snmp_object_maybe {
     my ($self, @args) = @_;
     my $ret;
 
+    # Just do a regular fetch when simulating
+    return $self->get_snmp_object(@args) unless defined $Monitoring::GLPlugin::SNMP::session;
+
     # There may be no response at all. Turn the SNMP timeout down so we can
     # catch that without triggering SIGALRM
     my $orig_timeout = $Monitoring::GLPlugin::SNMP::session->timeout;
