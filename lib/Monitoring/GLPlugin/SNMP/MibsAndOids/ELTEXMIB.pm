@@ -53,7 +53,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'ELTEX-MIB'} = {
 # Type of sensor
   'eltexSensorType' => '1.3.6.1.4.1.89.83.2.1.1.1.1',
   'eltexSensorTypeDefinition' => {
-    '8' => '°C',
+    '8' => 'C',
     '10' => 'rpm',
 },
 # The table of fan status maintained by the environmental monitor.
