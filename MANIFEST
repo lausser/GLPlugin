@@ -93,6 +93,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IDRACMIBSMIV2.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IEEE8023LAGMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IFINVERTEDSTACKMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IFMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/INETADDRESSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IPFORWARDMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IPMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNIPERALARMMIB.pm
