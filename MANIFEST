@@ -84,6 +84,8 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/FOUNDRYSNSWL4SWITCHGROUPMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/FSCRAIDMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/GENUAMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HH3CENTITYEXTMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HUAWEIDEVICEMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HUAWEIENERGYMNGTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HUAWEIENTITYEXTENTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HOSTRESOURCESMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HPICFCHASSISMIB.pm

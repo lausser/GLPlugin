@@ -5,7 +5,8 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'FORTINET-FORTIGATE-MIB'} = {
   name => 'FORTINET-FORTIGATE-MIB',
 };
 
-#$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'FORTINET-FORTIGATE-MIB'} =
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'FORTINET-FORTIGATE-MIB'} =
+    '1.3.6.1.4.1.12356.101';
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'FORTINET-FORTIGATE-MIB'} = {
   fnFortiGateMib => '1.3.6.1.4.1.12356.101',
