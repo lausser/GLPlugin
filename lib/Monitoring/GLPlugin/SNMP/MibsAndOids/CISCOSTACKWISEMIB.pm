@@ -17,9 +17,11 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'CISCO-STACKWISE-MIB'}
   cswMaxSwitchNum => '1.3.6.1.4.1.9.9.500.1.1.1',
   cswMaxSwitchConfigPriority => '1.3.6.1.4.1.9.9.500.1.1.2',
   cswRingRedundant => '1.3.6.1.4.1.9.9.500.1.1.3',
-  cswRingRedundantDefinition => 'SNMPv2-TC-v1-MIB::TruthValue',
   cswEnableStackNotifications => '1.3.6.1.4.1.9.9.500.1.1.4',
   cswEnableIndividualStackNotifications => '1.3.6.1.4.1.9.9.500.1.1.5',
+  cswStackDomainNum => '1.3.6.1.4.1.9.9.500.1.1.6',
+  cswStackType => '1.3.6.1.4.1.9.9.500.1.1.7',
+  cswStackBandWidth => '1.3.6.1.4.1.9.9.500.1.1.8',
   cswStackInfo => '1.3.6.1.4.1.9.9.500.1.2',
   cswSwitchInfoTable => '1.3.6.1.4.1.9.9.500.1.2.1',
   cswSwitchInfoEntry => '1.3.6.1.4.1.9.9.500.1.2.1.1',
@@ -38,11 +40,24 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'CISCO-STACKWISE-MIB'}
   cswSwitchSystemPowerPriority => '1.3.6.1.4.1.9.9.500.1.2.1.1.11',
   cswSwitchPoeDevicesLowPriority => '1.3.6.1.4.1.9.9.500.1.2.1.1.12',
   cswSwitchPoeDevicesHighPriority => '1.3.6.1.4.1.9.9.500.1.2.1.1.13',
+  cswSwitchPowerAllocated => '1.3.6.1.4.1.9.9.500.1.2.1.1.14',
   cswStackPortInfoTable => '1.3.6.1.4.1.9.9.500.1.2.2',
   cswStackPortInfoEntry => '1.3.6.1.4.1.9.9.500.1.2.2.1',
   cswStackPortOperStatus => '1.3.6.1.4.1.9.9.500.1.2.2.1.1',
   cswStackPortOperStatusDefinition => 'CISCO-STACKWISE-MIB::cswStackPortOperStatus',
   cswStackPortNeighbor => '1.3.6.1.4.1.9.9.500.1.2.2.1.2',
+  cswDistrStackLinkInfoTable => '1.3.6.1.4.1.9.9.500.1.2.3',
+  cswDistrStackLinkInfoEntry => '1.3.6.1.4.1.9.9.500.1.2.3.1',
+  cswDSLindex => '1.3.6.1.4.1.9.9.500.1.2.3.1.1',
+  cswDistrStackLinkBundleOperStatus => '1.3.6.1.4.1.9.9.500.1.2.3.1.2',
+  cswDistrStackLinkBundleOperStatusDefinition => 'CISCO-STACKWISE-MIB::cswDistrStackLinkBundleOperStatus',
+  cswDistrStackPhyPortInfoTable => '1.3.6.1.4.1.9.9.500.1.2.4',
+  cswDistrStackPhyPortInfoEntry => '1.3.6.1.4.1.9.9.500.1.2.4.1',
+  cswDistrStackPhyPort => '1.3.6.1.4.1.9.9.500.1.2.4.1.1',
+  cswDistrStackPhyPortOperStatus => '1.3.6.1.4.1.9.9.500.1.2.4.1.2',
+  cswDistrStackPhyPortOperStatusDefinition => 'CISCO-STACKWISE-MIB::cswDistrStackPhyPortOperStatus',
+  cswDistrStackPhyPortNbr => '1.3.6.1.4.1.9.9.500.1.2.4.1.3',
+  cswDistrStackPhyPortNbrsw => '1.3.6.1.4.1.9.9.500.1.2.4.1.4',
   cswStackPowerInfo => '1.3.6.1.4.1.9.9.500.1.3',
   cswStackPowerInfoTable => '1.3.6.1.4.1.9.9.500.1.3.1',
   cswStackPowerInfoEntry => '1.3.6.1.4.1.9.9.500.1.3.1.1',
@@ -72,10 +87,9 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'CISCO-STACKWISE-MIB'}
 };
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'CISCO-STACKWISE-MIB'} = {
-  cswStackPortOperStatus => {
-    '1' => 'up',
-    '2' => 'down',
-    '3' => 'forcedDown',
+  CswPowerStackType => {
+    '1' => 'ring',
+    '2' => 'star',
   },
   CswPowerStackMode => {
     '1' => 'powerSharing',
@@ -83,13 +97,13 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'CISCO-STACKWISE-MIB'} =
     '3' => 'powerSharingStrict',
     '4' => 'redundantStrict',
   },
-  CswPowerStackType => {
-    '1' => 'ring',
-    '2' => 'star',
+  cswDistrStackPhyPortOperStatus => {
+    '1' => 'up',
+    '2' => 'down',
   },
-  cswStackPowerPortOperStatus => {
-    '1' => 'enabled',
-    '2' => 'disabled',
+  cswStackPowerPortLinkStatus => {
+    '1' => 'up',
+    '2' => 'down',
   },
   cswSwitchState => {
     '1' => 'waiting',
@@ -104,13 +118,23 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'CISCO-STACKWISE-MIB'} =
     '10' => 'invalid',
     '11' => 'removed',
   },
+  cswDistrStackLinkBundleOperStatus => {
+    '1' => 'up',
+    '2' => 'down',
+  },
+  cswStackPortOperStatus => {
+    '1' => 'up',
+    '2' => 'down',
+    '3' => 'forcedDown',
+  },
   cswSwitchRole => {
     '1' => 'master',
     '2' => 'member',
     '3' => 'notMember',
+    '4' => 'standby',
   },
-  cswStackPowerPortLinkStatus => {
-    '1' => 'up',
-    '2' => 'down',
+  cswStackPowerPortOperStatus => {
+    '1' => 'enabled',
+    '2' => 'disabled',
   },
 };
