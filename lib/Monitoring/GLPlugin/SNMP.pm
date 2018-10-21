@@ -1505,10 +1505,11 @@ sub save_cache {
   my $cache = sprintf "%s_%s_%s_cache", $mib, $table, join('#', @{$key_attrs});
   $self->create_statefilesdir();
   my $statefile = $self->create_entry_cache_file($mib, $table, join('#', @{$key_attrs}));
-  open(STATE, ">".$statefile.".".$$);
+  my $tmpfile = $statefile.$$.rand();
+  open(STATE, ">".$tmpfile);
   printf STATE Data::Dumper::Dumper($self->{$cache});
   close STATE;
-  rename $statefile.".".$$, $statefile;
+  rename $tmpfile, $statefile;
   $self->debug(sprintf "saved %s to %s",
       Data::Dumper::Dumper($self->{$cache}), $statefile);
 }

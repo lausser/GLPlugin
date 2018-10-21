@@ -20,7 +20,7 @@ eval {
   $Data::Dumper::Sparseseen = 1;
 };
 our $AUTOLOAD;
-*VERSION = \'3.0.8.1';
+*VERSION = \'3.0.8.2';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -1470,7 +1470,7 @@ sub save_state {
   my ($self, %params) = @_;
   $self->create_statefilesdir();
   my $statefile = $self->create_statefile(%params);
-  my $tmpfile = $self->statefilesdir().'/check__health_tmp_'.$$;
+  my $tmpfile = $statefile.$$.rand();
   if ((ref($params{save}) eq "HASH") && exists $params{save}->{timestamp}) {
     $params{save}->{localtime} = scalar localtime $params{save}->{timestamp};
   }

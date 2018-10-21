@@ -1,3 +1,5 @@
+* 2018-10-21 3.0.8.2
+  randomize tmp-files, because $$ is not unique among goroutines
 * 2018-10-19 3.0.8.1
   update CISCO-STACK-MIB and CISCO-STACKWISE-MIB
 * 2018-10-17 3.0.8
