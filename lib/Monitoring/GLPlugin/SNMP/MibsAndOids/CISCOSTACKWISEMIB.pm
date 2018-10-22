@@ -17,6 +17,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'CISCO-STACKWISE-MIB'}
   cswMaxSwitchNum => '1.3.6.1.4.1.9.9.500.1.1.1',
   cswMaxSwitchConfigPriority => '1.3.6.1.4.1.9.9.500.1.1.2',
   cswRingRedundant => '1.3.6.1.4.1.9.9.500.1.1.3',
+  cswRingRedundantDefinition => 'SNMPv2-TC-v1-MIB::TruthValue',
   cswEnableStackNotifications => '1.3.6.1.4.1.9.9.500.1.1.4',
   cswEnableIndividualStackNotifications => '1.3.6.1.4.1.9.9.500.1.1.5',
   cswStackDomainNum => '1.3.6.1.4.1.9.9.500.1.1.6',
