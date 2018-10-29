@@ -1,14 +1,14 @@
 package Monitoring::GLPlugin::SNMP::MibsAndOids::STULZWIB8000;
 
-$Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'STULZ-WIB8000'} = {
+$Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'STULZ-WIB8000-MIB'} = {
   url => '',
-  name => 'STULZ-WIB8000',
+  name => 'STULZ-WIB8000-MIB',
 };
 
-$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'STULZ-WIB8000'} =
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'STULZ-WIB8000-MIB'} =
   '1.3.6.1.4.1.29462.10';
 
-$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'STULZ-WIB8000'} = {
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'STULZ-WIB8000-MIB'} = {
   stulz => '1.3.6.1.4.1.29462',
   stulzWib => '1.3.6.1.4.1.29462.10',
   wibIntern => '1.3.6.1.4.1.29462.10.1',
@@ -3220,5 +3220,5 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'STULZ-WIB8000'} = {
   coolingEnable => '1.3.6.1.4.1.29462.10.2.1.4.4.2.1.1781',
 };
 
-$Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'STULZ-WIB8000'} = {
+$Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'STULZ-WIB8000-MIB'} = {
 };
