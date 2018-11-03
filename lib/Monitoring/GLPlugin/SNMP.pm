@@ -2092,7 +2092,9 @@ sub get_entries {
       $result = $self->get_entries_get_bulk(%params);
       if (! $result) {
         $self->debug("bulk failed, retry simple");
-        if ($Monitoring::GLPlugin::SNMP::session->error() =~ /The message size exceeded the buffer maxMsgSize of (\d+)/i) {
+        # The message size exceeded the buffer maxMsgSize of (\d+)
+        # Message size exceeded buffer maxMsgSize
+        if ($Monitoring::GLPlugin::SNMP::session->error() =~ /message size exceeded.*buffer maxMsgSize/i) {
           $self->debug(sprintf "buffer exceeded. raise *5 for next try");
           $self->mult_snmp_max_msg_size(5);
         } else {
@@ -2255,7 +2257,7 @@ sub get_table {
     if (! defined $result || (defined $result && ! %{$result})) {
       $self->debug(sprintf "get_table error: %s", 
           $Monitoring::GLPlugin::SNMP::session->error());
-      if ($Monitoring::GLPlugin::SNMP::session->error() =~ /The message size exceeded the buffer maxMsgSize of (\d+)/i) {
+      if ($Monitoring::GLPlugin::SNMP::session->error() =~ /message size exceeded.*buffer maxMsgSize/i) {
         # bei irrsinnigen maxrepetitions
         $self->debug(sprintf "buffer exceeded");
         #$self->reset_snmp_max_msg_size();
