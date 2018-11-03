@@ -20,7 +20,7 @@ eval {
   $Data::Dumper::Sparseseen = 1;
 };
 our $AUTOLOAD;
-*VERSION = \'3.0.9.3';
+*VERSION = \'3.0.9.4';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -602,11 +602,11 @@ sub accentfree {
 sub dump {
   my ($self, $indent) = @_;
   $indent = $indent ? " " x $indent : "";
-  my $class = ref($self);
-  $class =~ s/^.*:://;
-  if (exists $self->{flat_indices}) {
-    printf "%s[%s_%s]\n", $indent, uc $class, $self->{flat_indices};
+  if ($self->can("internal_name")) {
+    printf "%s[%s]\n", $indent, $self->internal_name();
   } else {
+    my $class = ref($self);
+    $class =~ s/^.*:://;
     printf "%s[%s]\n", $indent, uc $class;
   }
   foreach (grep !/^(info|trace|warning|critical|blacklisted|extendedinfo|flat_indices|indices)$/, sort keys %{$self}) {
