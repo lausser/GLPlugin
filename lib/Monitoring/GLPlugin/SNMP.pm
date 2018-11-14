@@ -1249,6 +1249,32 @@ sub uptime {
   return $Monitoring::GLPlugin::SNMP::uptime;
 }
 
+sub ago_sysuptime {
+  my ($self, $eventtime) = @_;
+  # if there is an oid containing the value of sysUptime at the time of
+  # a certain event (e.g. cipSecFailTime), this method returns the
+  # time that has passed since the event.
+  # sysUptime overflows at 2**32, so it is possible that the eventtime is
+  # bigger than sysUptime
+  #
+  # 0-----------------|---------------X
+  #                   event=2Mio      sysUptime=5.5Mio
+  # event happened (5.5Mio - 2Mio) seconds ago
+  #
+  # 0-----------------|---------------2**32/0-----------X
+  #                   event=2Mio                        sysUptime=100k
+  #
+  # event happened (100k + (2**32 - 2Mio)) seconds ago
+  #
+  my $sysUptime = $self->get_snmp_object('MIB-2-MIB', 'sysUpTime', 0);
+  $sysUptime /= 100;
+  if ($eventtime > $sysUptime) {
+    return $sysUptime + (2**32 - $eventtime);
+  } else {
+    return $sysUptime - $eventtime;
+  }
+}
+
 sub map_oid_to_class {
   my ($self, $oid, $class) = @_;
   $Monitoring::GLPlugin::SNMP::MibsAndOids::discover_ids->{$oid} = $class;
