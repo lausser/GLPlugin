@@ -1,3 +1,7 @@
+* 2018-11-23 3.0.11
+  add OSPF-V3-MIB
+* 2018-11-22 3.0.10.1
+  bugfix in establish_snmp_secondary_session
 * 2018-11-14 3.0.10
   add method ago_sysuptime()
 * 2018-11-03 3.0.9.4

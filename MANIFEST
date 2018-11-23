@@ -142,6 +142,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/OPENBSDMEMMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/OPENBSDPFMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/OPENBSDSENSORSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/OSPFMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/OSPFV3MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/PANCOMMONMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/PANPRODUCTSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/PDU2MIB.pm

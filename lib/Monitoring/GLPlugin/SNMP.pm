@@ -1140,7 +1140,8 @@ sub session_translate {
 
 sub establish_snmp_secondary_session {
   my ($self) = @_;
-  if ($self->opts->protocol eq '3' && (
+  if ($self->opts->protocol eq '3' &&
+      $self->opts->can('authprotocol2') && (
       defined $self->opts->authprotocol2 ||
       defined $self->opts->authpassword2 ||
       defined $self->opts->privprotocol2 ||
