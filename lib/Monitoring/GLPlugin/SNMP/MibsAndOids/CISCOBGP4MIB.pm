@@ -5,7 +5,8 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'CISCO-BGP4-MIB'} = {
   name => 'CISCO-BGP4-MIB',
 };
 
-#$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'CISCO-BGP4-MIB'} =
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'CISCO-BGP4-MIB'} =
+    '1.3.6.1.4.1.9.9.187';
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'CISCO-BGP4-MIB'} = {
   ciscoBgp4MIB => '1.3.6.1.4.1.9.9.187',
