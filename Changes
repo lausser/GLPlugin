@@ -1,3 +1,5 @@
+* 2018-12-03 3.1
+  Oid definitions can be functions in other Mibs (INET-ADDRESS-MIB::InetAddress(ospfv3NbrAddressType))
 * 2018-11-30 3.0.12
   update CISCO-BGP4-MIB
 * 2018-11-23 3.0.11

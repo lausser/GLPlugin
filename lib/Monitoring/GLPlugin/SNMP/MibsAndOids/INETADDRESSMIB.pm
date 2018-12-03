@@ -21,11 +21,15 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'INET-ADDRESS-MIB'} = {
     16 => 'dns',
   },
   InetAddress => sub {
-    my (@objects) = @_;
-    use Data::Dumper;
-printf "------------------------------------------------\n";
-printf "%s\n", Data::Dumper::Dumper(\@objects);
-printf "..------------------------------------------------\n";
-return "xxx";
+    my ($addr, $addrtype) = @_;
+    if ($addrtype  && $addrtype eq "ipv6") {
+      return Monitoring::GLPlugin::SNMP::TableItem->new()->unhex_ipv6($addr);
+    } else {
+      #use Data::Dumper;
+#printf STDERR "------------------------------------------------\n";
+#printf STDERR "%s\n", Data::Dumper::Dumper([$addr, $addrtype]);
+#printf STDERR "..------------------------------------------------\n";
+      return "xxx";
+    }
   }
 };

@@ -2452,6 +2452,11 @@ sub make_symbolic {
               } elsif ($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'} =~ /^(.*?)::(.*)/) {
                 my $mib = $1;
                 my $definition = $2;
+                my $parameters = undef;
+                if ($definition =~ /(.*)\((.*)\)/) {
+                  $definition = $1;
+                  $parameters = $2;
+                }
                 if (! exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}) {
                   # may point to another mib's definitions, which hasn't
                   # been used yet.
@@ -2480,7 +2485,8 @@ sub make_symbolic {
         }
       }
     } else {
-      foreach my $oid (keys %{$sym_lookup}) {
+      my @sym_lookup_keys = $self->sort_oids([keys %{$sym_lookup}]);
+      foreach my $oid (@sym_lookup_keys) {
         if (ref($oid) ne 'HASH') {
           my $fulloid = $oid . '.'.$idx;
           my $symoid = $sym_lookup->{$oid};
@@ -2510,6 +2516,11 @@ sub make_symbolic {
               } elsif ($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'} =~ /^(.*?)::(.*)/) {
                 my $mib = $1;
                 my $definition = $2;
+                my $parameters = undef;
+                if ($definition =~ /(.*)\((.*)\)/) {
+                  $definition = $1;
+                  $parameters = $2;
+                }
                 if (! exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}) {
                   # may point to another mib's definitions, which hasn't
                   # been used yet.
@@ -2518,7 +2529,11 @@ sub make_symbolic {
                 if  (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib} &&
                     exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition} &&
                     ref($Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}) eq 'CODE') {
-                  $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->($result->{$fulloid});
+                  if ($parameters) {
+                    $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->($result->{$fulloid}, $mo->{$parameters});
+                  } else {
+                    $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->($result->{$fulloid});
+                  }
                 } elsif  (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib} &&
                     exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition} &&
                     ref($Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}) eq 'HASH' &&
