@@ -92,6 +92,8 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HOSTRESOURCESMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HPICFCHASSISMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HWGWLDMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IANAIFTYPEMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IBMAUTOMATIONQUERYMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IBMTS4300MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IDRACMIBSMIV2.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IEEE8023LAGMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IFINVERTEDSTACKMIB.pm
@@ -167,6 +169,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SENTRY3MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SENTRY4MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SERVERVIEWSTATUSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SLHWLIBT950MIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SNIASMLMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SNMPFRAMEWORKMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SNMPV2TCV1MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SPECTRALOGICGLOBALREG.pm

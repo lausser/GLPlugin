@@ -1,3 +1,7 @@
+* 2018-12-05 3.2
+  add IBM-TS4300-MIB
+  add IBM-AUTOMATION-QUERY-MIB
+  add SNIA-SML-MIB
 * 2018-12-03 3.1
   Oid definitions can be functions in other Mibs (INET-ADDRESS-MIB::InetAddress(ospfv3NbrAddressType))
 * 2018-11-30 3.0.12
