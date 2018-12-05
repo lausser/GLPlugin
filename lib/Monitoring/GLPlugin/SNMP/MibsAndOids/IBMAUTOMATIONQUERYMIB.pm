@@ -200,158 +200,38 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'IBM-AUTOMATION-QUERY-
 };
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'IBM-AUTOMATION-QUERY-MIB'} = {
-  chassis-Type => {
-    '1' => 'lto',
-    '2' => 'jaguar',
-  },
-  mediaAccessDevice-Port0Topology => {
-    '1' => 'auto-l',
-    '2' => 'l',
-    '3' => 'n',
-    '4' => 'auto-n',
-    '5' => 'notapplicable',
-  },
-  mediaAccessDevice-IsControlPath => {
+  'chassis-PortBEthernetEnabled' => {
     '1' => 'true',
     '2' => 'false',
   },
-  mediaAccessDevice-Port1Topology => {
-    '1' => 'auto-L',
-    '2' => 'l',
-    '3' => 'n',
-    '4' => 'auto-n',
-    '5' => 'notapplicable',
-  },
-  chassis-PS1Status => {
-    '1' => 'notinstalled',
-    '2' => 'ok',
-    '3' => 'notok',
-  },
-  mediaAccessDevice-Port1State => {
+  'mediaAccessDevice-Port1State' => {
     '1' => 'nolight',
     '2' => 'lightdetected',
     '3' => 'unknown',
   },
-  libraryConfiguration-PwdRulesAutoLogout => {
-    '1' => 'true',
-    '2' => 'false',
-  },
-  libraryConfiguration-SSLEnabled => {
-    '1' => 'true',
-    '2' => 'false',
-  },
-  users-UsernameActive => {
-    '1' => 'active',
-    '2' => 'inactive',
-  },
-  libraryConfiguration-PFLicensed => {
-    '1' => 'true',
-    '2' => 'false',
-  },
-  mediaAccessDevice-Port0State => {
-    '1' => 'nolight',
-    '2' => 'lightdetected',
-    '3' => 'unknown',
-  },
-  libraryConfiguration-CallHome => {
-    '1' => 'true',
-    '2' => 'false',
-  },
-  logicallibrary-MediaType => {
-    '1' => 'lto',
-    '2' => 'jaguar',
-  },
-  libraryConfiguration-LDAP => {
-    '1' => 'true',
-    '2' => 'false',
-  },
-  chassis-PortAEthernetEnabled => {
-    '1' => 'true',
-    '2' => 'false',
-  },
-  mediaAccessDevice-Port1Speed => {
-    '1' => 'auto',
-    '2' => 'onegbsec',
-    '3' => 'onedotfive',
-    '4' => 'twogbbsec',
-    '5' => 'threegbsec',
-    '6' => 'fourgbsec',
-    '7' => 'sixgbsec',
-    '8' => 'eigthgbsec',
-    '9' => 'tengbsec',
-    '10' => 'twelvegbsec',
-  },
-  mediaAccessDevice-DriveType => {
-    '1' => 'lto',
-    '2' => 'jaguar',
-  },
-  logicallibrary-EncryptionSSLEnabled => {
-    '1' => 'true',
-    '2' => 'false',
-  },
-  chassis-PS2Status => {
-    '1' => 'notinstalled',
-    '2' => 'ok',
-    '3' => 'notok',
-  },
-  mediaAccessDevice-Port1TopologyActual => {
-    '1' => 'l',
-    '2' => 'n',
-    '3' => 'unknown',
-    '4' => 'notapplicable',
-  },
-  libraryConfiguration-SMTPAuthentication => {
-    '1' => 'true',
-    '2' => 'false',
-  },
-  chassis-IOType => {
+  'chassis-IOType' => {
     '1' => 'none',
     '2' => 'small',
     '3' => 'large',
     '4' => 'fouriodoor',
     '5' => 'magazine',
   },
-  chassis-PortBEthernetEnabled => {
+  'libraryConfiguration-VIOEnabled' => {
     '1' => 'true',
     '2' => 'false',
   },
-  chassis-PortBEthernetIPv6Enabled => {
-    '1' => 'true',
-    '2' => 'false',
+  'mediaAccessDevice-DriveType' => {
+    '1' => 'lto',
+    '2' => 'jaguar',
   },
-  mediaAccessDevice-Port1SpeedActual => {
-    '1' => 'onegbsec',
-    '2' => 'onedotfive',
-    '3' => 'twogbbsec',
-    '4' => 'threegbsec',
-    '5' => 'fourgbsec',
-    '6' => 'sixgbsec',
-    '7' => 'eigthgbsec',
-    '8' => 'tengbsec',
-    '9' => 'twelvegbsec',
-    '10' => 'unknown',
+  'mediaAccessDevice-Port1Topology' => {
+    '1' => 'auto-L',
+    '2' => 'l',
+    '3' => 'n',
+    '4' => 'auto-n',
+    '5' => 'notapplicable',
   },
-  chassis-PortAEthernetIPv6Enabled => {
-    '1' => 'true',
-    '2' => 'false',
-  },
-  logicallibrary-EncryptionEnabled => {
-    '1' => 'true',
-    '2' => 'false',
-  },
-  libraryConfiguration-LDAPStartTLS => {
-    '1' => 'true',
-    '2' => 'false',
-  },
-  logicallibrary-SixCharVolser => {
-    '1' => 'true',
-    '2' => 'false',
-  },
-  libraryConfiguration-TimeConfigured => {
-    '1' => 'true',
-    '2' => 'false',
-  },
-  mediaAccessDevice-Port0Speed => {
+  'mediaAccessDevice-Port0Speed' => {
     '1' => 'auto',
     '2' => 'onegbsec',
     '3' => 'onedotfive',
@@ -363,15 +243,98 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'IBM-AUTOMATION-QUERY-MI
     '9' => 'tengbsec',
     '10' => 'twelvegbsec',
   },
-  libraryConfiguration-SNMP => {
+  'chassis-PS2Status' => {
+    '1' => 'notinstalled',
+    '2' => 'ok',
+    '3' => 'notok',
+  },
+  'logicallibrary-EncryptionSSLEnabled' => {
     '1' => 'true',
     '2' => 'false',
   },
-  mediaAccessDevice-Installed => {
+  'mediaAccessDevice-Installed' => {
     '1' => 'true',
     '2' => 'false',
   },
-  mediaAccessDevice-Port0SpeedActual => {
+  'chassis-PortBEthernetIPv6Enabled' => {
+    '1' => 'true',
+    '2' => 'false',
+  },
+  'logicallibrary-MediaType' => {
+    '1' => 'lto',
+    '2' => 'jaguar',
+  },
+  'chassis-PortAEthernetEnabled' => {
+    '1' => 'true',
+    '2' => 'false',
+  },
+  'chassis-PortAEthernetIPv6Enabled' => {
+    '1' => 'true',
+    '2' => 'false',
+  },
+  'mediaAccessDevice-Port1Speed' => {
+    '1' => 'auto',
+    '2' => 'onegbsec',
+    '3' => 'onedotfive',
+    '4' => 'twogbbsec',
+    '5' => 'threegbsec',
+    '6' => 'fourgbsec',
+    '7' => 'sixgbsec',
+    '8' => 'eigthgbsec',
+    '9' => 'tengbsec',
+    '10' => 'twelvegbsec',
+  },
+  'libraryConfiguration-TimeConfigured' => {
+    '1' => 'true',
+    '2' => 'false',
+  },
+  'libraryConfiguration-SSLEnabled' => {
+    '1' => 'true',
+    '2' => 'false',
+  },
+  'libraryConfiguration-SMTP' => {
+    '1' => 'true',
+    '2' => 'false',
+  },
+  'mediaAccessDevice-Port1TopologyActual' => {
+    '1' => 'l',
+    '2' => 'n',
+    '3' => 'unknown',
+    '4' => 'notapplicable',
+  },
+  'libraryConfiguration-LDAP' => {
+    '1' => 'true',
+    '2' => 'false',
+  },
+  'libraryConfiguration-SMTPAuthentication' => {
+    '1' => 'true',
+    '2' => 'false',
+  },
+  'chassis-Type' => {
+    '1' => 'lto',
+    '2' => 'jaguar',
+  },
+  'libraryConfiguration-PwdRulesAutoLogout' => {
+    '1' => 'true',
+    '2' => 'false',
+  },
+  'logicallibrary-SixCharVolser' => {
+    '1' => 'true',
+    '2' => 'false',
+  },
+  'mediaAccessDevice-IsControlPath' => {
+    '1' => 'true',
+    '2' => 'false',
+  },
+  'libraryConfiguration-KerberosEnabled' => {
+    '1' => 'true',
+    '2' => 'false',
+  },
+  'libraryConfiguration-TimeNTPEnabled' => {
+    '1' => 'true',
+    '2' => 'false',
+  },
+  'mediaAccessDevice-Port1SpeedActual' => {
     '1' => 'onegbsec',
     '2' => 'onedotfive',
     '3' => 'twogbbsec',
@@ -383,37 +346,74 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'IBM-AUTOMATION-QUERY-MI
     '9' => 'twelvegbsec',
     '10' => 'unknown',
   },
-  libraryConfiguration-KerberosEnabled => {
+  'logicallibrary-HideLogLibExportCart' => {
     '1' => 'true',
     '2' => 'false',
   },
-  libraryConfiguration-AutoClean => {
+  'users-UsernameActive' => {
+    '1' => 'active',
+    '2' => 'inactive',
+  },
+  'libraryConfiguration-PFLicensed' => {
     '1' => 'true',
     '2' => 'false',
   },
-  logicallibrary-HideLogLibExportCart => {
-    '1' => 'true',
-    '2' => 'false',
-  },
-  libraryConfiguration-LTOEncryptionLicensed => {
-    '1' => 'true',
-    '2' => 'false',
-  },
-  libraryConfiguration-VIOEnabled => {
-    '1' => 'true',
-    '2' => 'false',
-  },
-  mediaAccessDevice-Port0TopologyActual => {
+  'mediaAccessDevice-Port0TopologyActual' => {
     '1' => 'l',
     '2' => 'n',
     '3' => 'unknown',
     '4' => 'notapplicable',
   },
-  libraryConfiguration-TimeNTPEnabled => {
+  'mediaAccessDevice-Port0SpeedActual' => {
+    '1' => 'onegbsec',
+    '2' => 'onedotfive',
+    '3' => 'twogbbsec',
+    '4' => 'threegbsec',
+    '5' => 'fourgbsec',
+    '6' => 'sixgbsec',
+    '7' => 'eigthgbsec',
+    '8' => 'tengbsec',
+    '9' => 'twelvegbsec',
+    '10' => 'unknown',
+  },
+  'mediaAccessDevice-Port0State' => {
+    '1' => 'nolight',
+    '2' => 'lightdetected',
+    '3' => 'unknown',
+  },
+  'libraryConfiguration-AutoClean' => {
     '1' => 'true',
     '2' => 'false',
   },
-  libraryConfiguration-SMTP => {
+  'libraryConfiguration-CallHome' => {
+    '1' => 'true',
+    '2' => 'false',
+  },
+  'libraryConfiguration-SNMP' => {
+    '1' => 'true',
+    '2' => 'false',
+  },
+  'logicallibrary-EncryptionEnabled' => {
+    '1' => 'true',
+    '2' => 'false',
+  },
+  'chassis-PS1Status' => {
+    '1' => 'notinstalled',
+    '2' => 'ok',
+    '3' => 'notok',
+  },
+  'libraryConfiguration-LTOEncryptionLicensed' => {
+    '1' => 'true',
+    '2' => 'false',
+  },
+  'mediaAccessDevice-Port0Topology' => {
+    '1' => 'auto-l',
+    '2' => 'l',
+    '3' => 'n',
+    '4' => 'auto-n',
+    '5' => 'notapplicable',
+  },
+  'libraryConfiguration-LDAPStartTLS' => {
     '1' => 'true',
     '2' => 'false',
   },
