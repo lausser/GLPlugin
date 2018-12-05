@@ -1008,9 +1008,33 @@ sub check_snmp_and_model {
       $Monitoring::GLPlugin::SNMP::uptime = $self->{uptime};
       $self->debug('whoami: '.$self->{productname});
     } else {
-      if ($tac - $tic >= $Monitoring::GLPlugin::SNMP::session->timeout) {
+      if ($tac - $tic >= ($Monitoring::GLPlugin::SNMP::session ?
+          $Monitoring::GLPlugin::SNMP::session->timeout : $self->opts->timeout())) {
         $self->add_message(UNKNOWN,
             'could not contact snmp agent, timeout during snmp-get sysUptime');
+      } elsif ($self->{broken_snmp_agent}) {
+        # plugins may add an array of subroutines to their Classes::Device.
+        # For example, check_tl_health has to deal with IBM libraries, which
+        # so not show sysUptime nor sysDescr nor any other uptime oids.
+        # In order to let the plugin continue with a fake uptime, one of
+        # the broken_snmp_agent subroutines must return a true value after it
+        # has set the uptime to 1 hour and filled out $self->{productname}
+        my $mein_lieber_freund_und_kupferstecher = 0;
+        foreach my $kriegst_du_die_kurve (@{$self->{broken_snmp_agent}}) {
+          if (&$kriegst_du_die_kurve()) {
+            $mein_lieber_freund_und_kupferstecher = 1;
+            $self->debug(sprintf 'uptime: %s', $self->{uptime});
+            $self->debug(sprintf 'up since: %s',
+                scalar localtime (time - $self->{uptime}));
+            $Monitoring::GLPlugin::SNMP::uptime = $self->{uptime};
+            $self->debug('whoami: '.$self->{productname});
+            last;
+          }
+        }
+        if (! $mein_lieber_freund_und_kupferstecher) {
+          $self->add_message(UNKNOWN,
+              'got neither sysUptime nor sysDescr nor any other useful information, is this snmp agent working correctly?');
+        }
       } else {
         $self->add_message(UNKNOWN,
             'got neither sysUptime nor sysDescr, is this snmp agent working correctly?');

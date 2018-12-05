@@ -1,4 +1,5 @@
 * 2018-12-05 3.2
+  give broken agents a last chance through the broken_snmp_agent trick (used in check_tl_health)
   add IBM-TS4300-MIB
   add IBM-AUTOMATION-QUERY-MIB
   add SNIA-SML-MIB
