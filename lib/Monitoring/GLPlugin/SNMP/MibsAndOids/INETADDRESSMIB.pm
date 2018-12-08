@@ -24,6 +24,8 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'INET-ADDRESS-MIB'} = {
     my ($addr, $addrtype) = @_;
     if ($addrtype  && $addrtype eq "ipv6") {
       return Monitoring::GLPlugin::SNMP::TableItem->new()->unhex_ipv6($addr);
+    } elsif ($addrtype  && $addrtype eq "ipv4") {
+      return Monitoring::GLPlugin::SNMP::TableItem->new()->unhex_ip($addr);
     } else {
       #use Data::Dumper;
 #printf STDERR "------------------------------------------------\n";

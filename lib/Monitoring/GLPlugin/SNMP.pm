@@ -1015,7 +1015,7 @@ sub check_snmp_and_model {
       } elsif ($self->{broken_snmp_agent}) {
         # plugins may add an array of subroutines to their Classes::Device.
         # For example, check_tl_health has to deal with IBM libraries, which
-        # so not show sysUptime nor sysDescr nor any other uptime oids.
+        # do not show sysUptime nor sysDescr nor any other uptime oids.
         # In order to let the plugin continue with a fake uptime, one of
         # the broken_snmp_agent subroutines must return a true value after it
         # has set the uptime to 1 hour and filled out $self->{productname}
@@ -2489,7 +2489,23 @@ sub make_symbolic {
                 if  (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib} &&
                     exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition} &&
                     ref($Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}) eq 'CODE') {
-                  $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->($result->{$fulloid});
+                  if ($parameters) {
+                    if (! exists $mo->{$parameters}) {
+                      # this happens if there are two isolated get_snmp_object calls, one for
+                      # cLHaPeerIpAddressType and one for cLHaPeerIpAddress where the latter needs
+                      # the symbolized value of the first. we are inside this index-loop because
+                      # both have this usual extra .0 although this is not a table row.
+                      # if this were a table row, $mo would know cLHaPeerIpAddressType.
+                      # there's a chance that $self got cLHaPeerIpAddressType in a previous call
+                      # to make_symbolic
+                      if (@{$indices} and scalar(@{$indices}) == 1 and ! $indices->[0]->[0]) {
+                        $mo->{$parameters} = $self->{$parameters};
+                      }
+                    }
+                    $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->($result->{$fulloid}, $mo->{$parameters});
+                  } else {
+                    $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->($result->{$fulloid});
+                  }
                 } elsif  (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib} &&
                     exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition} &&
                     ref($Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}) eq 'HASH' &&
@@ -2554,6 +2570,11 @@ sub make_symbolic {
                     exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition} &&
                     ref($Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}) eq 'CODE') {
                   if ($parameters) {
+                    if (! exists $mo->{$parameters}) {
+                      if (@{$indices} and scalar(@{$indices}) == 1 and ! $indices->[0]->[0]) {
+                        $mo->{$parameters} = $self->{$parameters};
+                      }
+                    }
                     $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->($result->{$fulloid}, $mo->{$parameters});
                   } else {
                     $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->($result->{$fulloid});
@@ -2595,10 +2616,24 @@ sub make_symbolic {
             } elsif ($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'} =~ /^(.*?)::(.*)/) {
               my $mib = $1;
               my $definition = $2;
+              my $parameters = undef;
+              if ($definition =~ /(.*)\((.*)\)/) {
+                $definition = $1;
+                $parameters = $2;
+              }
               if  (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib} &&
                   exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition} &&
                   ref($Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}) eq 'CODE') {
-                $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->($result->{$oid});
+                if ($parameters) {
+                  # we come here fo resolve single oids, so $mo is always initialized new here.
+                  # there's a chance that $self->{$parameters} was queried in a previous call
+                  if (! exists $mo->{$parameters}) {
+                    $mo->{$parameters} = $self->{$parameters};
+                  }
+                  $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->($result->{$oid}, $mo->{$parameters});
+                } else {
+                  $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->($result->{$oid});
+                }
               } elsif  (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib} &&
                   exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition} &&
                   ref($Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}) eq 'HASH' &&
