@@ -128,6 +128,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/MIB2MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/MIBDELL10892.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/MINIIFMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/MMBCOMMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/NETAPPMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/NETGEARMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/NETSCREENCHASSISMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/NETSCREENNSRPMIB.pm

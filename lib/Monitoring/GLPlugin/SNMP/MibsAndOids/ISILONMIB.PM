@@ -8,7 +8,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'ISILON-MIB'} = {
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'ISILON-MIB'} =
     '1.3.6.1.4.1.12124';
 
-$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'ISILON-MIB::201509230000Z'} = {
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'ISILON-MIB::201608050000Z'} = {
   isilon => '1.3.6.1.4.1.12124',
   cluster => '1.3.6.1.4.1.12124.1',
   clusterStatus => '1.3.6.1.4.1.12124.1.1',
@@ -132,6 +132,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'ISILON-MIB::201509230
   nodeTypeDefinition => 'ISILON-MIB::nodeType',
   readOnly => '1.3.6.1.4.1.12124.2.1.4',
   readOnlyDefinition => 'ISILON-MIB::readOnly',
+  nodeSerialNumber => '1.3.6.1.4.1.12124.2.1.5',
   nodePerformance => '1.3.6.1.4.1.12124.2.2',
   nodeIfsPerf => '1.3.6.1.4.1.12124.2.2.1',
   nodeIfsInBytes => '1.3.6.1.4.1.12124.2.2.1.1',
@@ -230,8 +231,12 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'ISILON-MIB::201509230
   nodePerformanceGroup => '1.3.6.1.4.1.12124.5.2.2',
 };
 
-$Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'ISILON-MIB::201509230000Z'} = {
-  accessTimeEnabled => {
+$Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'ISILON-MIB::201608050000Z'} = {
+  chassisUnitIDLEDOn => {
+    '0' => 'no',
+    '1' => 'yes',
+  },
+  snapshotLocked => {
     '0' => 'no',
     '1' => 'yes',
   },
@@ -239,7 +244,25 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'ISILON-MIB::20150923000
     '0' => 'no',
     '1' => 'yes',
   },
-  snapshotSubdirAccessNFS => {
+  snapshotRootVisibilityNFS => {
+    '0' => 'no',
+    '1' => 'yes',
+  },
+  nodeHealth => {
+    '0' => 'ok',
+    '1' => 'attn',
+    '2' => 'down',
+    '3' => 'invalid',
+  },
+  snapshotRootAccessCIFS => {
+    '0' => 'no',
+    '1' => 'yes',
+  },
+  nodeType => {
+    '0' => 'storage',
+    '1' => 'accelerator',
+  },
+  snapshotRootAccessLocal => {
     '0' => 'no',
     '1' => 'yes',
   },
@@ -252,17 +275,27 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'ISILON-MIB::20150923000
     '5' => 'special',
     '6' => 'max',
   },
-  quotaIncludesOverhead => {
+  licenseStatus => {
+    '0' => 'activated',
+    '1' => 'evaluation',
+  },
+  snapshotRootVisibilityCIFS => {
     '0' => 'no',
     '1' => 'yes',
   },
-  nodeHealth => {
-    '0' => 'ok',
-    '1' => 'attn',
-    '2' => 'down',
-    '3' => 'invalid',
+  quotaHardThresholdDefined => {
+    '0' => 'no',
+    '1' => 'yes',
   },
-  snapshotLocked => {
+  snapshotScheduledDeleteEnabled => {
+    '0' => 'no',
+    '1' => 'yes',
+  },
+  accessTimeEnabled => {
+    '0' => 'no',
+    '1' => 'yes',
+  },
+  snapshotScheduledCreateEnabled => {
     '0' => 'no',
     '1' => 'yes',
   },
@@ -272,15 +305,11 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'ISILON-MIB::20150923000
     '2' => 'down',
     '3' => 'invalid',
   },
-  snapshotRootAccessLocal => {
+  snapshotRootVisibilityLocal => {
     '0' => 'no',
     '1' => 'yes',
   },
   readOnly => {
-    '0' => 'no',
-    '1' => 'yes',
-  },
-  quotaIncludesSnapshotUsage => {
     '0' => 'no',
     '1' => 'yes',
   },
@@ -292,15 +321,11 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'ISILON-MIB::20150923000
     '0' => 'no',
     '1' => 'yes',
   },
-  snapshotRootVisibilityLocal => {
+  quotaSoftThresholdDefined => {
     '0' => 'no',
     '1' => 'yes',
   },
-  chassisUnitIDLEDOn => {
-    '0' => 'no',
-    '1' => 'yes',
-  },
-  snapshotRootVisibilityNFS => {
+  quotaIncludesOverhead => {
     '0' => 'no',
     '1' => 'yes',
   },
@@ -308,35 +333,11 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'ISILON-MIB::20150923000
     '0' => 'no',
     '1' => 'yes',
   },
-  quotaSoftThresholdDefined => {
+  snapshotSubdirAccessNFS => {
     '0' => 'no',
     '1' => 'yes',
   },
-  snapshotRootVisibilityCIFS => {
-    '0' => 'no',
-    '1' => 'yes',
-  },
-  nodeType => {
-    '0' => 'storage',
-    '1' => 'accelerator',
-  },
-  quotaHardThresholdDefined => {
-    '0' => 'no',
-    '1' => 'yes',
-  },
-  snapshotScheduledCreateEnabled => {
-    '0' => 'no',
-    '1' => 'yes',
-  },
-  snapshotRootAccessCIFS => {
-    '0' => 'no',
-    '1' => 'yes',
-  },
-  licenseStatus => {
-    '0' => 'activated',
-    '1' => 'evaluation',
-  },
-  snapshotScheduledDeleteEnabled => {
+  quotaIncludesSnapshotUsage => {
     '0' => 'no',
     '1' => 'yes',
   },
