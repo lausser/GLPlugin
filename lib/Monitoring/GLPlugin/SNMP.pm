@@ -1611,10 +1611,13 @@ sub get_snmp_tables {
     my $class = $info->[2];
     my $filter = $info->[3];
     my $rows = $info->[4];
+    my $key_attr = $info->[5];
     $self->{$arrayname} = [] if ! exists $self->{$arrayname};
     if (! exists $Monitoring::GLPlugin::SNMP::tablecache->{$mib} || ! exists $Monitoring::GLPlugin::SNMP::tablecache->{$mib}->{$table}) {
       $Monitoring::GLPlugin::SNMP::tablecache->{$mib}->{$table} = [];
-      foreach ($self->get_snmp_table_objects($mib, $table, undef, $rows)) {
+      foreach ($key_attr ?
+          $self->get_snmp_table_objects_with_cache($mib, $table, $key_attr, $rows) :
+          $self->get_snmp_table_objects($mib, $table, undef, $rows)) {
         push(@{$Monitoring::GLPlugin::SNMP::tablecache->{$mib}->{$table}}, $_);
         my $new_object = $class->new(%{$_});
         next if (defined $filter && ! &$filter($new_object));
