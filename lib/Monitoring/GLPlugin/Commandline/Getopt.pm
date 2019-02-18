@@ -38,6 +38,13 @@ my @ARGS = ({
 # Standard arguments we traditionally display last in the help output
 my %DEFER_ARGS = map { $_ => 1 } qw(timeout verbose);
 
+# volalla: Using global variables for --sum parameter
+our $traffic_sum_in = 0;
+our $traffic_sum_out = 0;
+our $sum_warning = 80000;
+our $sum_critical = 90000;
+our $sum_interfaces = "\nIncluded Ifaces:\n";
+
 sub _init {
   my ($self, %params) = @_;
   # Check params
@@ -213,7 +220,7 @@ sub print_help {
   printf "\n%s\n\n", $self->{_attr}->{blurb};
   $self->print_usage();
   foreach (grep {
-      ! (exists $_->{hidden} && $_->{hidden}) 
+      ! (exists $_->{hidden} && $_->{hidden})
   } @{$self->{_args}}) {
     printf " %s\n", $_->{help};
   }
