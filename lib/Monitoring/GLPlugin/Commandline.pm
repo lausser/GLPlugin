@@ -111,7 +111,7 @@ sub add_perfdata {
 #
 # wenn warning, critical, dann wird von oben ein expliziter wert mitgegeben
 # wenn thresholds
-#  wenn label in 
+#  wenn label in
 #    warningx $self->{thresholds}->{$label}->{warning} existiert
 #  dann nimm $self->{thresholds}->{$label}->{warning}
 #  ansonsten thresholds->default->warning
@@ -407,7 +407,52 @@ sub nagios_exit {
     }
   }
   $output =~ s/\|/!/g if $output;
-  if (scalar (@{$self->{perfdata}})) {
+  # volalla: Added --sum Option
+  if ($self->opts->sum) {
+    if ($traffic_sum_in >= $sum_critical || $traffic_sum_out >= $sum_critical) {
+      $code = 2;
+    }
+    elsif ($traffic_sum_in >= $sum_warning || $traffic_sum_out >= $sum_warning) {
+        $code = 1;
+    }
+    else {
+        $code = 0;
+    }
+    $output = "$STATUS_TEXT{$code}";
+    $output .= " - Summarized Traffic: ";
+    $output .= (sprintf 'traffic_sum_in:%.2f %s/s ',
+                $traffic_sum_in,
+                $self->opts->units);
+    $output .= (sprintf 'traffic_sum_out:%.2f %s/s ',
+                $traffic_sum_out,
+                $self->opts->units);
+    $output .= $sum_interfaces;
+    # perfdata always in Bps
+    if ($self->opts->units eq 'KB') {
+        $traffic_sum_in *= 1024;
+        $traffic_sum_out *= 1024;
+        $sum_warning *= 1024;
+        $sum_critical *= 1024;
+    } elsif ($self->opts->units eq 'MB') {
+        $traffic_sum_in *= 1024 * 1024;
+        $traffic_sum_out *= 1024 * 1024;
+        $sum_warning *= 1024 * 1024;
+        $sum_critical *= 1024 * 1024;
+    } elsif ($self->opts->units eq 'GB') {
+        $traffic_sum_in *= 1024 * 1024 * 1024;
+        $traffic_sum_out *= 1024 * 1024 * 1024;
+        $sum_warning *= 1024 * 1024 * 1024;
+        $sum_critical *= 1024 * 1024 * 1024;
+    }
+    $output .= (sprintf '| traffic_sum_in=%.2fBps;%s;%s traffic_sum_out=%.2fBps;%s;%s',
+                $traffic_sum_in,
+                $sum_warning,
+                $sum_critical,
+                $traffic_sum_out,
+                $sum_warning,
+                $sum_critical);
+  }
+  if (scalar (@{$self->{perfdata}}) && !$self->opts->sum) {
     $output .= " | ".$self->perfdata_string();
   }
   $output .= "\n";
@@ -594,6 +639,17 @@ sub check_thresholds {
         if ($value >= $1 && $value <= $2);
   }
   return $level;
+}
+
+# volalla: Add --sum Option
+sub interface_traffic_sum {
+  my ($self, @params) = @_;
+  my %params = @params;
+  $traffic_sum_in += $params{traffic_in};
+  $traffic_sum_out += $params{traffic_out};
+  $sum_warning = $params{warning};
+  $sum_critical = $params{critical};
+  $sum_interfaces .= $params{interface}."\n";
 }
 
 sub strequal {

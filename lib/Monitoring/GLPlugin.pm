@@ -20,7 +20,7 @@ eval {
   $Data::Dumper::Sparseseen = 1;
 };
 our $AUTOLOAD;
-*VERSION = \'3.2.4';
+*VERSION = \'3.2.3';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -284,6 +284,12 @@ sub add_default_args {
       required => 0,
       hidden => 1,
   );
+  $self->add_arg(
+      spec => 'sum',
+      help => "--sum
+   This parameter allows you to summarize the list of performance data in one only value",
+      required => 0,
+  );
 }
 
 sub add_default_modes {
@@ -454,10 +460,10 @@ sub set_timeout_alarm {
     my $mask = POSIX::SigSet->new( SIGALRM );
     my $action = POSIX::SigAction->new(
         $handler, $mask
-    );   
+    );
     my $oldaction = POSIX::SigAction->new();
     sigaction(SIGALRM ,$action ,$oldaction );
-  }    
+  }
   alarm(int($timeout)); # 1 second before the global unknown timeout
 }
 
@@ -857,9 +863,9 @@ sub getopts {
   if ($self->opts->environment) {
     # wenn die gewuenschten Environmentvariablen sich von den derzeit
     # gesetzten unterscheiden, dann restart. Denn $ENV aendert
-    # _nicht_ das Environment des laufenden Prozesses. 
+    # _nicht_ das Environment des laufenden Prozesses.
     # $ENV{ZEUGS} = 1 bedeutet lediglich, dass $ENV{ZEUGS} bei weiterer
-    # Verwendung 1 ist, bedeutet aber _nicht_, dass diese Variable 
+    # Verwendung 1 ist, bedeutet aber _nicht_, dass diese Variable
     # im Environment des laufenden Prozesses existiert.
     foreach (keys %{$self->opts->environment}) {
       if ((! $ENV{$_}) || ($ENV{$_} ne $self->opts->environment->{$_})) {
@@ -1708,7 +1714,7 @@ sub AUTOLOAD {
     $self->{components}->{$subsystem}->check();
     $self->{components}->{$subsystem}->dump()
         if $self->opts->verbose >= 2;
-  } elsif ($AUTOLOAD =~ /^.*::(status_code|check_messages|nagios_exit|html_string|perfdata_string|selected_perfdata|check_thresholds|get_thresholds|opts|pandora_string|strequal)$/) {
+  } elsif ($AUTOLOAD =~ /^.*::(status_code|check_messages|nagios_exit|html_string|perfdata_string|selected_perfdata|check_thresholds|get_thresholds|opts|pandora_string|strequal|interface_traffic_sum)$/) {
     return $Monitoring::GLPlugin::plugin->$1(@params);
   } elsif ($AUTOLOAD =~ /^.*::(reduce_messages|reduce_messages_short|clear_messages|suppress_messages|add_html|add_perfdata|override_opt|create_opt|set_thresholds|force_thresholds|add_pandora)$/) {
     $Monitoring::GLPlugin::plugin->$1(@params);
