@@ -2413,6 +2413,7 @@ sub get_symbol {
   # LgpEnvTemperatureMeasurementDegC = '1.3.6.1.4.1.476.1.42.3.4.1.1.4'
   # der name des temp. sensor wird ueber die oid mitgeteilt
   $self->require_mib($mib);
+  $oid =~ s/^\.//g;
   foreach my $symoid
       (keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}}) {
     if ($oid eq $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid}) {
