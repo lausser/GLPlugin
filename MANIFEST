@@ -74,6 +74,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ENTITYMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ENTITYSENSORMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ENTITYSTATEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ETHERLIKEMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/F5BIGIPAPMMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/F5BIGIPGLOBALMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/F5BIGIPLOCALMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/F5BIGIPSYSTEMMIB.pm
@@ -153,6 +154,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/PANCOMMONMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/PANPRODUCTSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/PDU2MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/PDUMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/PHIONMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/POWERNETMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/PRINTERMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/PRINTERPORTMONITORMIB.pm
