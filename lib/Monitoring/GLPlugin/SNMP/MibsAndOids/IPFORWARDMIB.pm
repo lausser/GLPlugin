@@ -67,6 +67,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'IP-FORWARD-MIB'} = {
   inetCidrRouteType => '1.3.6.1.2.1.4.24.7.1.8',
   inetCidrRouteTypeDefinition => 'IP-FORWARD-MIB::inetCidrRouteType',
   inetCidrRouteProto => '1.3.6.1.2.1.4.24.7.1.9',
+  inetCidrRouteProtoDefinition => 'IANA-RTPROTO-MIB::IANAipRouteProtocol',
   inetCidrRouteAge => '1.3.6.1.2.1.4.24.7.1.10',
   inetCidrRouteNextHopAS => '1.3.6.1.2.1.4.24.7.1.11',
   inetCidrRouteMetric1 => '1.3.6.1.2.1.4.24.7.1.12',
@@ -75,6 +76,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'IP-FORWARD-MIB'} = {
   inetCidrRouteMetric4 => '1.3.6.1.2.1.4.24.7.1.15',
   inetCidrRouteMetric5 => '1.3.6.1.2.1.4.24.7.1.16',
   inetCidrRouteStatus => '1.3.6.1.2.1.4.24.7.1.17',
+  inetCidrRouteStatusDefinition => 'SNMPv2-TC-v1-MIB::RowStatus',
   inetCidrRouteDiscards => '1.3.6.1.2.1.4.24.8',
 };
 
@@ -120,6 +122,10 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'IP-FORWARD-MIB'} = {
     '14' => 'bgp',
     '15' => 'idpr',
     '16' => 'ciscoEigrp',
+    '17' => 'dvmrp',
+    '18' => 'rpl',
+    '19' => 'dhcp',
+    '20' => 'ttdp',
   },
   ipCidrRouteType => {
     '1' => 'other',

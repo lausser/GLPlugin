@@ -417,6 +417,7 @@ sub nagios_exit {
         $output;
   }
   if (! exists $self->{suppress_messages}) {
+    $output =~ s/[^[:ascii:]]//g;
     print $output;
   }
   exit $code;

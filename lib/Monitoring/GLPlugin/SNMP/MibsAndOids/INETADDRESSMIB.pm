@@ -20,18 +20,18 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'INET-ADDRESS-MIB'} = {
     4 => 'ipv6z',
     16 => 'dns',
   },
-  InetAddress => sub {
-    my ($addr, $addrtype) = @_;
+  InetAddressMaker => sub {
+    my ($addrtype, $addrlen, @addroctets) = @_;
     if ($addrtype  && $addrtype eq "ipv6") {
-      return Monitoring::GLPlugin::SNMP::TableItem->new()->unhex_ipv6($addr);
+      return join(":", map { sprintf "%02x", $_ } @addroctets[0..$addrlen-1]);
     } elsif ($addrtype  && $addrtype eq "ipv4") {
-      return Monitoring::GLPlugin::SNMP::TableItem->new()->unhex_ip($addr);
+      return join(".", @addroctets[0..$addrlen-1]);
     } else {
       #use Data::Dumper;
 #printf STDERR "------------------------------------------------\n";
 #printf STDERR "%s\n", Data::Dumper::Dumper([$addr, $addrtype]);
 #printf STDERR "..------------------------------------------------\n";
-      return "xxx";
+      return sprintf "type=%s, len=%s", $addrtype, $addrlen;
     }
   }
 };

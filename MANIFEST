@@ -95,6 +95,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HOSTRESOURCESMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HPICFCHASSISMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HWGWLDMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IANAIFTYPEMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IANARTPROTOMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IBMAUTOMATIONQUERYMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IBMTS4300MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IDRACMIBSMIV2.pm
