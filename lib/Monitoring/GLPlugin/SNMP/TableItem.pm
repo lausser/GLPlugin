@@ -25,7 +25,7 @@ sub unhex_ip {
   return $value;
 }
 
-sub _compact_v6 {
+sub compact_v6 {
   my ($self, $addr) = @_;
 
   my @o = split /:/, $addr;
@@ -59,22 +59,49 @@ sub _compact_v6 {
   return $addr;
 }
 
-sub unhex_ipv6 {
+sub old_unhex_ipv6 {
   my ($self, $value) = @_;
-  if ($value && $value =~ /^0x(\w{32})/) {
+  if (! defined $value) {
+    return $value; # tut mir leid
+  } elsif ($value =~ /^0x(\w{32})/) {
     $value = join(":", unpack "C*", pack "H*", $1);
   } elsif ($value && $value =~ /^0x(\w{2} \w{2} \w{2} \w{2} \w{2} \w{2} \w{2} \w{2} \w{2} \w{2} \w{2} \w{2} \w{2} \w{2} \w{2} \w{2})/) {
     $value = $1;
     $value =~ s/ //g;
     $value = join(":", unpack "C*", pack "H*", $value);
-  } elsif ($value && $value =~ /^([A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2})/i) {
+  } elsif ($value =~ /^([A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2})/i) {
     $value = $1;
     $value =~ s/ //g;
     $value = join(":", unpack "C*", pack "H*", $value);
-  } elsif ($value && unpack("H32", $value) =~ /(\w{4})(\w{4})(\w{4})(\w{4})(\w{4})(\w{4})(\w{4})(\w{4})/) {
-    $value = join(":", $1, $2, $3, $4, $5, $6, $7, $8);
+  } elsif (unpack("H*", $value) =~ /^([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})/i) {
+	  #$value = join(":", unpack "C*", pack "H*", $value);
+    $value = join(":", ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16));
   }
-  return $self->_compact_v6($value);
+  return $self->compact_v6($value);
+}
+
+sub unhex_ipv6 {
+  my ($self, $value) = @_;
+  my @octets = ();
+  if (! defined $value) {
+    return $value; # tut mir leid
+  } elsif ($value =~ /^0x(\w{32})/) {
+    @octets = unpack "H2" x 16, pack "H*", $1;
+  } elsif ($value && $value =~ /^0x(\w{2} \w{2} \w{2} \w{2} \w{2} \w{2} \w{2} \w{2} \w{2} \w{2} \w{2} \w{2} \w{2} \w{2} \w{2} \w{2})/) {
+    $value = $1;
+    @octets = split(" ", $value);
+  } elsif ($value =~ /^([A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2} [A-Z0-9]{2})/i) {
+    $value = $1;
+    $value =~ s/ //g;
+    @octets = unpack "H2" x 16, pack "H*", $value;
+  } elsif (unpack("H*", $value) =~ /^([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})/i) {
+    @octets = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16);
+  }
+  $value = join(":",
+      map { my $idx = 2*$_; $octets[$idx].$octets[$idx+1] } (0..7)
+  );
+  return $value;
+  return $self->compact_v6($value);
 }
 
 sub unhex_mac {
