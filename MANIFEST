@@ -36,6 +36,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CHECKPOINTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOBGP4MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOCCMMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOCONFIGMANMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOEIGRPMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOENHANCEDMEMPOOLMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOENTITYALARMMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOENTITYFRUCONTROLMIB.pm
