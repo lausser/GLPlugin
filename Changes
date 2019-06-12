@@ -1,3 +1,5 @@
+* 2019-06-12 3.2.10
+  implements_mib can now check for tables too
 * 2019-06-11 3.2.9
   add CISCO-EIGRP-MIB
 * 2019-06-05 3.2.8

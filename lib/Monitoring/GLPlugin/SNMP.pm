@@ -1358,46 +1358,52 @@ sub require_mib {
 }
 
 sub implements_mib {
-  my ($self, $mib) = @_;
+  my ($self, $mib, $table) = @_;
   $self->require_mib($mib);
   if (! exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{$mib}) {
     return 0;
   }
-  my $sysobj = $self->get_snmp_object('MIB-2-MIB', 'sysObjectID', 0);
-  $sysobj =~ s/^\.// if $sysobj;
-  if ($sysobj && $sysobj eq $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{$mib}) {
-    $self->debug(sprintf "implements %s (sysobj exact)", $mib);
-    return 1;
+  if (! $table) {
+    my $sysobj = $self->get_snmp_object('MIB-2-MIB', 'sysObjectID', 0);
+    $sysobj =~ s/^\.// if $sysobj;
+    if ($sysobj && $sysobj eq $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{$mib}) {
+      $self->debug(sprintf "implements %s (sysobj exact)", $mib);
+      return 1;
+    }
+    if ($sysobj && $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{$mib} eq
+        substr $sysobj, 0, length $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{$mib}) {
+      $self->debug(sprintf "implements %s (sysobj)", $mib);
+      return 1;
+    }
   }
-  if ($sysobj && $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{$mib} eq
-      substr $sysobj, 0, length $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{$mib}) {
-    $self->debug(sprintf "implements %s (sysobj)", $mib);
-    return 1;
-  }
+
+  my $check_oid = $table ?
+      $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$table} :
+      $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{$mib};
+
   # some mibs are only composed of tables
   my $traces;
   if ($self->opts->snmpwalk) {
-    my @matches;  
+    my @matches;
     # exact match  
-    push(@matches, @{[map {  
-        $_, $self->rawdata->{$_}  
-    } grep {  
-        $_ eq $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{$mib}  
-    } keys %{$self->rawdata}]});  
-  
-    # partial match (add trailing dot)  
-    my $check = $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{$mib};  
-    $check =~ s/\.?$/./;  
-    push(@matches, @{[map {  
-        $_, $self->rawdata->{$_}  
+    push(@matches, @{[map {
+        $_, $self->rawdata->{$_}
     } grep {
-        substr($_, 0, length($check)) eq $check  
-    } keys %{$self->rawdata}]});  
-    $traces = {@matches};  
+        $_ eq $check_oid
+    } keys %{$self->rawdata}]});
+
+    # partial match (add trailing dot)  
+    $check_oid =~ s/\.?$/./;
+    push(@matches, @{[map {
+        $_, $self->rawdata->{$_}
+    } grep {
+        substr($_, 0, length($check_oid)) eq $check_oid
+    } keys %{$self->rawdata}]});
+    $traces = {@matches};
   } else {
     my %params = (
         -varbindlist => [
-            $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{$mib}
+            $check_oid
         ]
     );
     if ($Monitoring::GLPlugin::SNMP::session->version() == 3) {
@@ -1409,7 +1415,7 @@ sub implements_mib {
   if ($traces && # must find oids following to the ident-oid
       ! exists $traces->{$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{$mib}} && # must not be the ident-oid
       grep { # following oid is inside this tree
-          substr($_, 0, length($Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{$mib})) eq $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{$mib};
+          substr($_, 0, length($check_oid)) eq $check_oid
       } keys %{$traces}) {
     $self->debug(sprintf "implements %s (found traces)", $mib);
     return 1;
