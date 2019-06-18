@@ -170,8 +170,9 @@ sub getopts {
       $_->{spec} =~ /^([\w\-]+)/;
       my $aliasfield = $1;
       next if $self->{opts}->{$field};
+      $self->{opts}->{$field} = $self->{opts}->{$aliasfield};
       *{"$field"} = sub {
-        return $self->{opts}->{$aliasfield};
+        return $self->{opts}->{$field};
       };
     }
     foreach (grep { exists $_->{decode} } @{$self->{_args}}) {

@@ -1507,8 +1507,15 @@ sub create_entry_cache_file {
 }
 
 sub update_entry_cache {
-  my ($self, $force, $mib, $table, $key_attrs) = @_;
+  my ($self, $force, $mib, $table, $key_attrs, $last_change) = @_;
+  $self->debug(sprintf "last change of %s::%s was %s",
+      $mib, $table, scalar localtime $last_change) if $last_change;
   my $update_deadline = time - 3600;
+  if ($last_change) {
+    # epoch timestamp, which is a hint when some table was last updated
+    $update_deadline = ($last_change + 60)
+        if $last_change > $update_deadline;
+  }
   my $must_update = 0;
   if (ref($key_attrs) ne "ARRAY") {
     if ($key_attrs eq 'flat_indices') {

@@ -1,3 +1,5 @@
+* 2019-06-18 3.2.11
+  improve update_entry_cache with last-update-hint, fix override_opt
 * 2019-06-12 3.2.10
   implements_mib can now check for tables too
 * 2019-06-11 3.2.9
