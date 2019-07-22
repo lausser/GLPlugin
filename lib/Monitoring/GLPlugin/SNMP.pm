@@ -1278,9 +1278,10 @@ sub ago_sysuptime {
   my ($self, $eventtime) = @_;
   # if there is an oid containing the value of sysUptime at the time of
   # a certain event (e.g. cipSecFailTime), this method returns the
-  # time that has passed since the event.
+  # time in seconds that has passed since the event.
   # sysUptime overflows at 2**32, so it is possible that the eventtime is
   # bigger than sysUptime
+  # the eventtime value must come as 1/100s, do not normalize it before.
   #
   # 0-----------------|---------------X
   #                   event=2Mio      sysUptime=5.5Mio
@@ -1292,11 +1293,10 @@ sub ago_sysuptime {
   # event happened (100k + (2**32 - 2Mio)) seconds ago
   #
   my $sysUptime = $self->get_snmp_object('MIB-2-MIB', 'sysUpTime', 0);
-  $sysUptime /= 100;
   if ($eventtime > $sysUptime) {
-    return $sysUptime + (2**32 - $eventtime);
+    return ($sysUptime + (2**32 - $eventtime)) / 100;
   } else {
-    return $sysUptime - $eventtime;
+    return ($sysUptime - $eventtime) / 100;
   }
 }
 
