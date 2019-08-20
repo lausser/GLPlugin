@@ -83,6 +83,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'CISCO-EIGRP-MIB'} = {
   cEigrpPeerIfIndex => '1.3.6.1.4.1.9.9.449.1.4.1.1.4',
   cEigrpHoldTime => '1.3.6.1.4.1.9.9.449.1.4.1.1.5',
   cEigrpUpTime => '1.3.6.1.4.1.9.9.449.1.4.1.1.6',
+  cEigrpUpTimeDefinition => 'CISCO-EIGRP-MIB::cEigrpUpTime',
   cEigrpSrtt => '1.3.6.1.4.1.9.9.449.1.4.1.1.7',
   cEigrpRto => '1.3.6.1.4.1.9.9.449.1.4.1.1.8',
   cEigrpPktsEnqueued => '1.3.6.1.4.1.9.9.449.1.4.1.1.9',
@@ -124,5 +125,29 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'CISCO-EIGRP-MIB'} = {
   cEigrpAuthMode => {
     '1' => 'none',
     '2' => 'md5',
+  },
+  cEigrpUpTime => sub {
+    my ($uptime) = @_;
+    # If the up time is less than 24 hours, the number
+    # of days will not be reflected and the string will
+    # be formatted like this: 'hh:mm:ss', reflecting
+    # hours, minutes, and seconds.
+    #
+    # If the up time is greater than 24 hours, EIGRP is
+    # less precise and the minutes and seconds are not
+    # reflected.  Instead only the days and hours are shown
+    # and the string will be formatted like this: 'xxxdxxh'."
+    #
+    # Aha, und wie erklaerst du dir das hier????
+    # 17w3d 6w5d 1y4w 
+    if ($uptime =~ /(\d+)y(\d+)w/) {
+      return $1 * 365*24*3600 + $2 * 7*24*3600;
+    } elsif ($uptime =~ /(\d+)w(\d+)d/) {
+      return $1 * 7*24*3600 + $2 * 24*3600;
+    } elsif ($uptime =~ /(\d+)d(\d+)h/) {
+      return $1 * 24*3600 + $2 * 3600;
+    } elsif ($uptime =~ /(\d+):(\d+):(\d+)/) {
+      return $1 * 3600 + $2 * 60 + $3;
+    }
   },
 };
