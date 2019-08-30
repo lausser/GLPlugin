@@ -2202,7 +2202,9 @@ sub get_entries {
         } else {
           $self->debug($Monitoring::GLPlugin::SNMP::session->error());
         }
-        if (defined $params{'-endindex'} && defined $params{'-startindex'}) {
+        if ($result) {
+          # Rimbfiech fallback was successful
+        } elsif (defined $params{'-endindex'} && defined $params{'-startindex'}) {
           $result = $self->get_entries_get_simple(%params);
         } else {
           $result = $self->get_entries_get_next(%params);
