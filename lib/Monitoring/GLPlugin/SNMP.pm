@@ -1898,11 +1898,36 @@ sub get_snmp_table_objects {
       # holzweg. dicke ciscos liefern unvollstaendiges resultat, d.h.
       # bei 138,19,157 kommt nur 138..144, dann ist schluss.
       # maxrepetitions bringt nichts.
-      $result = $self->get_entries(
-          -startindex => $startindex,
-          -endindex => $endindex,
-          -columns => \@columns,
-      );
+      #$result = $self->get_entries(
+      #    -startindex => $startindex,
+      #    -endindex => $endindex,
+      #    -columns => \@columns,
+      #);
+      # anderer ansatz. zusammenhaengende sequenzen suchen und dann
+      # mehrere bulkwalks absetzen. bringt aber nichts, wenn die indices
+      # wild verstreut sind
+      my @sequences = ();
+      my $sequence;
+      foreach my $idx (0..scalar(@sortedindices)-1) {
+        if ($idx != 0 && $sortedindices[$idx] == $sortedindices[$idx-1]+1) {
+          push(@{$sequence}, $sortedindices[$idx]);
+        } else {
+          $sequence = [$sortedindices[$idx]];
+          push(@sequences, $sequence);
+        }
+      }
+      foreach my $sequence (@sequences) {
+        my $startindex = $sequence->[0];
+        my $endindex = $sequence->[-1];
+        my $tmp_result = $self->get_entries(
+            -startindex => $startindex,
+            -endindex => $endindex,
+            -columns => \@columns,
+        );
+        while (my ($key, $value) = each %{$tmp_result}) {
+          $result->{$key} = $value;
+        }
+      }
     } else {
       foreach my $idx (@sortedindices) {
         my $tmp_result = $self->get_entries(
@@ -2046,14 +2071,18 @@ sub get_request {
 sub get_entries_get_bulk {
   my ($self, %params) = @_;
   my $result = {};
-  $self->debug(sprintf "get_entries_get_bulk %s", Data::Dumper::Dumper(\%params));
   my %newparams = ();
-  $newparams{'-maxrepetitions'} = 3;
   $newparams{'-startindex'} = $params{'-startindex'}
       if defined $params{'-startindex'};
   $newparams{'-endindex'} = $params{'-endindex'}
       if defined $params{'-endindex'};
   $newparams{'-columns'} = $params{'-columns'};
+  if ($Monitoring::GLPlugin::SNMP::maxrepetitions) {
+    $newparams{'-maxrepetitions'} = $Monitoring::GLPlugin::SNMP::maxrepetitions;
+  } else {
+    $newparams{'-maxrepetitions'} = 3;
+  }
+  $self->debug(sprintf "get_entries_get_bulk %s", Data::Dumper::Dumper(\%newparams));
   if ($Monitoring::GLPlugin::SNMP::session->version() == 3) {
     $newparams{-contextengineid} = $self->opts->contextengineid if $self->opts->contextengineid;
     $newparams{-contextname} = $self->opts->contextname if $self->opts->contextname;
@@ -2065,7 +2094,6 @@ sub get_entries_get_bulk {
 sub get_entries_get_next {
   my ($self, %params) = @_;
   my $result = {};
-  $self->debug(sprintf "get_entries_get_next %s", Data::Dumper::Dumper(\%params));
   my %newparams = ();
   $newparams{'-maxrepetitions'} = 0;
   $newparams{'-startindex'} = $params{'-startindex'}
@@ -2073,6 +2101,7 @@ sub get_entries_get_next {
   $newparams{'-endindex'} = $params{'-endindex'}
       if defined $params{'-endindex'};
   $newparams{'-columns'} = $params{'-columns'};
+  $self->debug(sprintf "get_entries_get_next %s", Data::Dumper::Dumper(\%newparams));
   if ($Monitoring::GLPlugin::SNMP::session->version() == 3) {
     $newparams{-contextengineid} = $self->opts->contextengineid if $self->opts->contextengineid;
     $newparams{-contextname} = $self->opts->contextname if $self->opts->contextname;
@@ -2084,13 +2113,13 @@ sub get_entries_get_next {
 sub get_entries_get_next_1index {
   my ($self, %params) = @_;
   my $result = {};
-  $self->debug(sprintf "get_entries_get_next_1index %s", Data::Dumper::Dumper(\%params));
   my %newparams = ();
   $newparams{'-startindex'} = $params{'-startindex'}
       if defined $params{'-startindex'};
   $newparams{'-endindex'} = $params{'-endindex'}
       if defined $params{'-endindex'};
   $newparams{'-columns'} = $params{'-columns'};
+  $self->debug(sprintf "get_entries_get_next_1index %s", Data::Dumper::Dumper(\%newparams));
   my %singleparams = ();
   $singleparams{'-maxrepetitions'} = 0;
   if ($Monitoring::GLPlugin::SNMP::session->version() == 3) {
@@ -2114,13 +2143,13 @@ sub get_entries_get_next_1index {
 sub get_entries_get_simple {
   my ($self, %params) = @_;
   my $result = {};
-  $self->debug(sprintf "get_entries_get_simple %s", Data::Dumper::Dumper(\%params));
   my %newparams = ();
   $newparams{'-startindex'} = $params{'-startindex'}
       if defined $params{'-startindex'};
   $newparams{'-endindex'} = $params{'-endindex'}
       if defined $params{'-endindex'};
   $newparams{'-columns'} = $params{'-columns'};
+  $self->debug(sprintf "get_entries_get_simple %s", Data::Dumper::Dumper(\%newparams));
   my %singleparams = ();
   if ($Monitoring::GLPlugin::SNMP::session->version() == 3) {
     $singleparams{-contextengineid} = $self->opts->contextengineid if $self->opts->contextengineid;
@@ -2164,6 +2193,12 @@ sub get_entries {
         if ($Monitoring::GLPlugin::SNMP::session->error() =~ /message size exceeded.*buffer maxMsgSize/i) {
           $self->debug(sprintf "buffer exceeded. raise *5 for next try");
           $self->mult_snmp_max_msg_size(5);
+        } elsif ($Monitoring::GLPlugin::SNMP::session->error() =~ /Authentication failure/ && $Monitoring::GLPlugin::SNMP::session->max_msg_size() > 10) {
+          $self->debug("A so a Rimbfiech, so a saudumms. Aaf oamol kennda me nimmer");
+          # australische Nexus. Bulkwalk mit hochgedrehten max_repetitions (*128)
+          # fuehrt so so einem fake Authentication failure
+          $self->mult_snmp_max_msg_size(5);
+          $result = $self->get_entries(%params);
         } else {
           $self->debug($Monitoring::GLPlugin::SNMP::session->error());
         }
