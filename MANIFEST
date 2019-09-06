@@ -119,6 +119,11 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LARAMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LCOSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LEXMARKMPSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LEXMARKPVTMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LEXMARKROOTMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LEXMARKSETTINGS.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LEXMARKSETTINGSCONTROL.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LEXMARKSETTINGSDEFINITION.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LEXMARKTCMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LIEBERTGPCONDITIONSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LIEBERTGPENVIRONMENTALMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LIEBERTGPFLEXIBLEMIB.pm

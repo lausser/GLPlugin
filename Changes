@@ -1,6 +1,8 @@
-* 2019-08-30 3.2.10.1
+* 2019-09-06 3.2.13
+  add/improve LEXMARK* mibs, fix DateAndTime
+* 2019-08-30 3.2.12.1
   Drecksfluechtigkeitsfehler, weil der Yogesh gefragt hat, ob ich zum Grillen runterkomme
-* 2019-08-30 3.2.10
+* 2019-08-30 3.2.12
   improve bulk walks
 * 2019-08-20 3.2.11.2
   fix cEigrpPeerAddr in CISCO-EIGRP-MIB

@@ -65,21 +65,26 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'MIB-2-MIB'} = {
         $value =~ /^0x((\w{2} ){7,}(\w{2}){1,})/ ||
         $value =~ /^((\w{2}){8,})/ ||
         $value =~ /^((\w{2} ){8,})/ ||
-        $value =~ /^((\w{2} ){7,}(\w{2}){1,})/
+        $value =~ /^((\w{2} ){7,}(\w{2}){1,})/ ||
+        $value =~ /^(([0-9a-fA-F][0-9a-fA-F]){6,})$/
     )) {
       $value = $1;
       $value =~ s/ //g;
       $year = hex substr($value, 0, 4);
       $value = substr($value, 4);
-      if (length($value) > 6) {
+      if (length($value) > 12) {
         ($month, $day, $hour, $minute, $second, $dseconds,
             $dirutc, $hoursutc, $minutesutc) = unpack "C*", pack "H*", $value;
         $minutesutc ||= 0;
+        $dirutc = ($dirutc == 43) ? "+" : ($dirutc == 45) ? "-" : "+";
       } else {
         ($month, $day, $hour, $minute, $second, $dseconds) = unpack "C*", pack "H*", $value;
-        ($dirutc, $hoursutc, $minutesutc) = ("+", 0, 0);
+        $second ||= 0;
+        $dseconds ||= 0;
+        my @t = localtime(time);
+        my $gmt_offset_in_hours = (timegm(@t) - timelocal(@t)) / 3600;
+        ($dirutc, $hoursutc, $minutesutc) = ("+", $gmt_offset_in_hours, 0);
       }
-      $dirutc = ($dirutc == 43) ? "+" : ($dirutc == 45) ? "-" : "+";
     } elsif ($value && $value =~ /(\d+)-(\d+)-(\d+),(\d+):(\d+):(\d+)\.(\d+),([\+\-]*)(\d+):(\d+)/) {
       ($year, $month, $day, $hour, $minute, $second, $dseconds,
           $dirutc, $hoursutc, $minutesutc) = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);
@@ -91,11 +96,6 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'MIB-2-MIB'} = {
           gmtime(time);
       $year -= 1900;
       $month += 1;
-    }
-    if ($year == 0 && $month == 0) {
-      $year = 1970;
-      $month = 1;
-      $day = 1;
     }
     my $epoch = timegm($second, $minute, $hour, $day, $month-1, $year-1900);
     # 1992-5-26,13:30:15.0,-4:0 = Tuesday May 26, 1992 at 1:30:15 PM EDT
