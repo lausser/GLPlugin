@@ -141,6 +141,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'LEXMARK-MPS-MIB'} = {
   currentSupplyCurrentStatus => '1.3.6.1.4.1.641.6.4.4.1.1.12',
   currentSupplyCurrentStatusDefinition => 'LEXMARK-MPS-MIB::currentSupplyCurrentStatus',
   currentSupplyCapacityUnit => '1.3.6.1.4.1.641.6.4.4.1.1.13',
+  currentSupplyCapacityUnitDefinition => 'LEXMARK-TC-MIB::UnitTC',
   currentSupplyCapacity => '1.3.6.1.4.1.641.6.4.4.1.1.14',
   currentSupplyFirstKnownLevel => '1.3.6.1.4.1.641.6.4.4.1.1.15',
   currentSupplyCurrentLevel => '1.3.6.1.4.1.641.6.4.4.1.1.16',
