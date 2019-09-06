@@ -1,3 +1,5 @@
+* 2019-09-06 3.2.13.1
+  fix LEXMARK-MPS currentSupplyCapacityUnit
 * 2019-09-06 3.2.13
   add/improve LEXMARK* mibs, fix DateAndTime
 * 2019-08-30 3.2.12.1
