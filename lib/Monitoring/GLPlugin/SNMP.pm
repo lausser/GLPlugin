@@ -2656,8 +2656,13 @@ sub make_symbolic {
   }
   if (@{$indices} and scalar(@{$indices}) == 1 and !defined $indices->[0]->[0]) {
     my $mo = {};
-    foreach my $symoid
-        (keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}}) {
+    my @lookup_keys = ();
+    if (! $sym_lookup) {
+      @lookup_keys = keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}};
+    } else {
+      @lookup_keys = values %{$sym_lookup};
+    }
+    foreach my $symoid (@lookup_keys) {
       my $oid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid};
       if (ref($oid) ne 'HASH') {
         if (exists $result->{$oid}) {
