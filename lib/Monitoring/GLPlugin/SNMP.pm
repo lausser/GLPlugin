@@ -2375,8 +2375,10 @@ sub get_table {
       }
       $self->debug("get_table error: try fallback");
       $self->debug(sprintf "get_table %s", Data::Dumper::Dumper(\%params));
+      my $tic = time;
       $result = $Monitoring::GLPlugin::SNMP::session->get_table(%params);
-      $self->debug(sprintf "get_table returned %d oids", scalar(keys %{$result}));
+      my $tac = time;
+      $self->debug(sprintf "get_table returned %d oids in %ds", scalar(keys %{$result}), $tac - $tic);
       if (! defined $result || ! %{$result}) {
         $self->debug(sprintf "get_table error: %s", 
             $Monitoring::GLPlugin::SNMP::session->error());
