@@ -2344,6 +2344,8 @@ sub get_entries_by_walk {
 
 sub get_table {
   my ($self, %params) = @_;
+  my $tic;
+  my $tac;
   $self->add_oidtrace($params{'-baseoid'});
   if (! $self->opts->snmpwalk) {
     my @notcached = ();
@@ -2357,7 +2359,9 @@ sub get_table {
       $params{'-maxrepetitions'} = $Monitoring::GLPlugin::SNMP::maxrepetitions;
     }
     $self->debug(sprintf "get_table %s", Data::Dumper::Dumper(\%params));
+    $tic = time;
     my $result = $Monitoring::GLPlugin::SNMP::session->get_table(%params);
+    $tac = time;
     if (! defined $result || (defined $result && ! %{$result})) {
       $self->debug(sprintf "get_table error: %s", 
           $Monitoring::GLPlugin::SNMP::session->error());
@@ -2375,9 +2379,8 @@ sub get_table {
       }
       $self->debug("get_table error: try fallback");
       $self->debug(sprintf "get_table %s", Data::Dumper::Dumper(\%params));
-      my $tic = time;
       $result = $Monitoring::GLPlugin::SNMP::session->get_table(%params);
-      my $tac = time;
+      $tac = time;
       $self->debug(sprintf "get_table returned %d oids in %ds", scalar(keys %{$result}), $tac - $tic);
       if (! defined $result || ! %{$result}) {
         $self->debug(sprintf "get_table error: %s", 
@@ -2387,7 +2390,8 @@ sub get_table {
           $self->debug("get_table error: try getnext fallback");
           $self->debug(sprintf "get_table %s", Data::Dumper::Dumper(\%params));
           $result = $Monitoring::GLPlugin::SNMP::session->get_table(%params);
-          $self->debug(sprintf "get_table returned %d oids", scalar(keys %{$result}));
+          $tac = time;
+          $self->debug(sprintf "get_table returned %d oids in %ds", scalar(keys %{$result}), $tac - $tic);
         }
         if (! defined $result || ! %{$result}) {
           $self->debug("get_table error: no more fallbacks. Try --protocol 1");
@@ -2408,7 +2412,7 @@ sub get_table {
         $self->add_rawdata($key, $value);
       }
     }
-    $self->debug(sprintf "get_table returned %d oids", $num_rows);
+    $self->debug(sprintf "get_table returned %d oids in %ds", $num_rows, $tac - $tic);
     foreach my $key (@blank_keys) {
       my $value = $result->{$key};
       delete $result->{$key};
