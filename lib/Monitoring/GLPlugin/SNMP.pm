@@ -1147,6 +1147,7 @@ sub establish_snmp_session {
     } else {
       my $max_msg_size = $session->max_msg_size();
       #$session->max_msg_size(4 * $max_msg_size);
+      $Monitoring::GLPlugin::SNMP::maxrepetitions = 50;
       $Monitoring::GLPlugin::SNMP::max_msg_size = $max_msg_size;
       $Monitoring::GLPlugin::SNMP::session = $session;
     }
@@ -1232,6 +1233,24 @@ sub mult_snmp_max_msg_size {
   $self->debug(sprintf "raise snmp_max_msg_size %d * %d", 
       $factor, $Monitoring::GLPlugin::SNMP::session->max_msg_size()) if $Monitoring::GLPlugin::SNMP::session;
   $Monitoring::GLPlugin::SNMP::session->max_msg_size($factor * $Monitoring::GLPlugin::SNMP::session->max_msg_size()) if $Monitoring::GLPlugin::SNMP::session;
+}
+
+sub bulk_baeh_reset {
+  my ($self, $maxrepetitions) = @_;
+  $self->reset_snmp_max_msg_size();
+  $Monitoring::GLPlugin::SNMP::maxrepetitions =
+      $Monitoring::GLPlugin::SNMP::session->max_msg_size() * 0.017;
+}
+
+sub bulk_is_baeh {
+  my ($self, $maxrepetitions) = @_;
+  $maxrepetitions ||= 1;
+  $Monitoring::GLPlugin::SNMP::maxrepetitions = int($maxrepetitions);
+}
+
+sub get_max_repetitions {
+  my ($self) = @_;
+  return $Monitoring::GLPlugin::SNMP::maxrepetitions;
 }
 
 sub no_such_model {
@@ -2008,12 +2027,6 @@ sub get_snmp_table_objects {
   return @entries;
 }
 
-sub bulk_is_baeh {
-  my ($self, $maxrepetitions) = @_;
-  $maxrepetitions ||= 1;
-  $Monitoring::GLPlugin::SNMP::maxrepetitions = $maxrepetitions;
-}
-
 ################################################################
 # 3rd level functions. calling net::snmp-functions
 # 
@@ -2191,8 +2204,11 @@ sub get_entries {
         # The message size exceeded the buffer maxMsgSize of (\d+)
         # Message size exceeded buffer maxMsgSize
         if ($Monitoring::GLPlugin::SNMP::session->error() =~ /message size exceeded.*buffer maxMsgSize/i) {
-          $self->debug(sprintf "buffer exceeded. raise *5 for next try");
-          $self->mult_snmp_max_msg_size(5);
+          # old methos. might be no good idea for wan
+          #$self->debug(sprintf "buffer exceeded. raise *5 for next try");
+          #$self->mult_snmp_max_msg_size(5);
+          $self->debug(sprintf "buffer exceeded. lower repetitions for next try");
+          $self->bulk_is_baeh($self->get_max_repetitions() * 0.75);
         } elsif ($Monitoring::GLPlugin::SNMP::session->error() =~ /Authentication failure/ && $Monitoring::GLPlugin::SNMP::session->max_msg_size() > 10) {
           $self->debug("A so a Rimbfiech, so a saudumms. Aaf oamol kennda me nimmer");
           # australische Nexus. Bulkwalk mit hochgedrehten max_repetitions (*128)
