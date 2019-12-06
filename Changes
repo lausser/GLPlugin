@@ -1,3 +1,5 @@
+* 2019-12-06 3.2.13.5
+  reduce the default maxrepetitions to 20
 * 2019-11-26 3.2.13.4
   handle exceeded size by reducing max-repetitions
 * 2019-10-29 3.2.13.3
