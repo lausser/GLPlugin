@@ -1,3 +1,5 @@
+* 2019-12-13 3.2.14
+  add STREAMLINE-TAPE-LIBRARY4J-MIB (SL4000)
 * 2019-12-06 3.2.13.5
   reduce the default maxrepetitions to 20
 * 2019-11-26 3.2.13.4
