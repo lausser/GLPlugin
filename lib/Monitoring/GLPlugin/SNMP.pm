@@ -1028,7 +1028,7 @@ sub check_snmp_and_model {
                 scalar localtime (time - $self->{uptime}));
             $Monitoring::GLPlugin::SNMP::uptime = $self->{uptime};
             $self->debug('whoami: '.$self->{productname});
-            last;
+            return;
           }
         }
         if (! $mein_lieber_freund_und_kupferstecher) {

@@ -1,3 +1,5 @@
+* 2019-12-14 3.2.14.1
+  bugfix in broken_agent
 * 2019-12-13 3.2.14
   add STREAMLINE-TAPE-LIBRARY4J-MIB (SL4000)
 * 2019-12-06 3.2.13.5
