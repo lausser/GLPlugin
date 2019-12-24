@@ -5,7 +5,8 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'DELL-STORAGE-SC-MIB'} = {
   name => 'DELL-STORAGE-SC-MIB',
 };
 
-#$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'DELL-STORAGE-SC-MIB'} =
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'DELL-STORAGE-SC-MIB'} =
+    '1.3.6.1.4.1.674.11000.2000.500.1';
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'DELL-STORAGE-SC-MIB'} = {
   dellEnterprise => '1.3.6.1.4.1.674',
