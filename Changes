@@ -1,3 +1,6 @@
+* 2019-12-29 3.2.15
+  add DELL-STORAGE-SC-MIB
+  add init/check/dump_subsystems
 * 2019-12-14 3.2.14.1
   bugfix in broken_agent
 * 2019-12-13 3.2.14

@@ -27,6 +27,44 @@ sub check {
   }
 }
 
+sub init_subsystems {
+  my ($self, $subsysref) = @_;
+  foreach (@{$subsysref}) {
+    my ($subsys, $class) = @{$_};
+    $self->{$subsys} = $class->new()
+        if (! $self->opts->subsystem || grep {
+            $_ eq $subsys;
+        } map {
+            s/^\s+|\s+$//g;
+            $_;
+        } split /,/, $self->opts->subsystem);
+  }
+}
+
+sub check_subsystems {
+  my ($self) = @_;
+  my @subsystems = grep { $_ =~ /.*_subsystem$/ } keys %{$self};
+  foreach (@subsystems) {
+    $self->{$_}->check();
+  }
+  $self->reduce_messages_short(join(", ",
+      map {
+          sprintf "%s working fine", $_;
+      } map {
+          s/^\s+|\s+$//g;
+          $_;
+      } split /,/, $self->opts->subsystem
+  ));
+}
+
+sub dump_subsystems {
+  my ($self) = @_;
+  my @subsystems = grep { $_ =~ /.*_subsystem$/ } keys %{$self};
+  foreach (@subsystems) {
+    $self->{$_}->dump();
+  }
+}
+
 1;
 
 __END__
