@@ -54,7 +54,7 @@ sub check_subsystems {
           s/^\s+|\s+$//g;
           $_;
       } split /,/, $self->opts->subsystem
-  ));
+  )) if $self->opts->subsystem;
 }
 
 sub dump_subsystems {
