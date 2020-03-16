@@ -5,12 +5,32 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'ENTITY-SENSOR-MIB'} = {
   name => 'ENTITY-SENSOR-MIB',
 };
 
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'ENTITY-SENSOR-MIB'} =
+    '1.3.6.1.2.1.99';
+
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'ENTITY-SENSOR-MIB'} = {
-  'entitySensorObjects' => '1.3.6.1.2.1.99.1',
-  'entPhySensorTable' => '1.3.6.1.2.1.99.1.1',
-  'entPhySensorEntry' => '1.3.6.1.2.1.99.1.1.1',
-  'entPhySensorType' => '1.3.6.1.2.1.99.1.1.1.1',
-  'entPhySensorTypeDefinition' => {
+  entitySensorMIB => '1.3.6.1.2.1.99',
+  entitySensorObjects => '1.3.6.1.2.1.99.1',
+  entPhySensorTable => '1.3.6.1.2.1.99.1.1',
+  entPhySensorEntry => '1.3.6.1.2.1.99.1.1.1',
+  entPhySensorType => '1.3.6.1.2.1.99.1.1.1.1',
+  entPhySensorTypeDefinition => 'ENTITY-SENSOR-MIB::EntitySensorDataType',
+  entPhySensorScale => '1.3.6.1.2.1.99.1.1.1.2',
+  entPhySensorScaleDefinition => 'ENTITY-SENSOR-MIB::EntitySensorDataScale',
+  entPhySensorPrecision => '1.3.6.1.2.1.99.1.1.1.3',
+  entPhySensorValue => '1.3.6.1.2.1.99.1.1.1.4',
+  entPhySensorOperStatus => '1.3.6.1.2.1.99.1.1.1.5',
+  entPhySensorOperStatusDefinition => 'ENTITY-SENSOR-MIB::EntitySensorStatus',
+  entPhySensorUnitsDisplay => '1.3.6.1.2.1.99.1.1.1.6',
+  entPhySensorValueTimeStamp => '1.3.6.1.2.1.99.1.1.1.7',
+  entPhySensorValueUpdateRate => '1.3.6.1.2.1.99.1.1.1.8',
+  entitySensorConformance => '1.3.6.1.2.1.99.3',
+  entitySensorCompliances => '1.3.6.1.2.1.99.3.1',
+  entitySensorGroups => '1.3.6.1.2.1.99.3.2',
+};
+
+$Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'ENTITY-SENSOR-MIB'} = {
+  EntitySensorDataType => {
     '1' => 'other',
     '2' => 'unknown',
     '3' => 'voltsAC',
@@ -24,8 +44,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'ENTITY-SENSOR-MIB'} =
     '11' => 'cmm',
     '12' => 'truthvalue',
   },
-  'entPhySensorScale' => '1.3.6.1.2.1.99.1.1.1.2',
-  'entPhySensorScaleDefinition' => {
+  EntitySensorDataScale => {
     '1' => 'yocto',
     '2' => 'zepto',
     '3' => 'atto',
@@ -44,23 +63,9 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'ENTITY-SENSOR-MIB'} =
     '16' => 'zetta',
     '17' => 'yotta',
   },
-  'entPhySensorPrecision' => '1.3.6.1.2.1.99.1.1.1.3',
-  'entPhySensorValue' => '1.3.6.1.2.1.99.1.1.1.4',
-  'entPhySensorOperStatus' => '1.3.6.1.2.1.99.1.1.1.5',
-  'entPhySensorOperStatusDefinition' => {
+  EntitySensorStatus => {
     '1' => 'ok',
     '2' => 'unavailable',
     '3' => 'nonoperational',
   },
-  'entPhySensorUnitsDisplay' => '1.3.6.1.2.1.99.1.1.1.6',
-  'entPhySensorValueTimeStamp' => '1.3.6.1.2.1.99.1.1.1.7',
-  'entPhySensorValueUpdateRate' => '1.3.6.1.2.1.99.1.1.1.8',
-  'entitySensorConformance' => '1.3.6.1.2.1.99.3',
-  'entitySensorCompliances' => '1.3.6.1.2.1.99.3.1',
-  'entitySensorGroups' => '1.3.6.1.2.1.99.3.2',
 };
-
-
-1;
-
-__END__
