@@ -56,6 +56,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOMEMORYPOOLMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOPORTCHANNELMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOPORTSECURITYMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOPROCESSMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOREMOTEACCESSMONITORMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOSBHWENVIROMENTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOSBRNDMNGMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOSBSYSMNGMIB.pm
