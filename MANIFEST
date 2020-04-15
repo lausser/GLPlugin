@@ -202,6 +202,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/THEV01MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/THREEPARMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/UCDDISKIOMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/UCDSNMPMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/UPSMANRIELLOSENTRMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/UPSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/UPSV4MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/USAGEMIB.pm

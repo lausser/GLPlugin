@@ -78,6 +78,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'UPS-MIB'} = {
   upsAlarmTable => '1.3.6.1.2.1.33.1.6.2',
   upsAlarmEntry => '1.3.6.1.2.1.33.1.6.2.1',
   upsAlarmId => '1.3.6.1.2.1.33.1.6.2.1.1',
+  upsAlarmIdDefinition => 'OID::UPS-MIB',
   upsAlarmDescr => '1.3.6.1.2.1.33.1.6.2.1.2',
   upsAlarmDescrDefinition => 'OID::UPS-MIB',
   upsAlarmTime => '1.3.6.1.2.1.33.1.6.2.1.3',
