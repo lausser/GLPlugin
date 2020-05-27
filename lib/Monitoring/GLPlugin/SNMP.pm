@@ -1429,7 +1429,10 @@ sub implements_mib {
       $params{-contextengineid} = $self->opts->contextengineid if $self->opts->contextengineid;
       $params{-contextname} = $self->opts->contextname if $self->opts->contextname;
     }
+    my $timeout = $Monitoring::GLPlugin::SNMP::session->timeout();
+    $Monitoring::GLPlugin::SNMP::session->timeout(10);
     $traces = $Monitoring::GLPlugin::SNMP::session->get_next_request(%params);
+    $Monitoring::GLPlugin::SNMP::session->timeout($timeout);
   }
   if ($traces && # must find oids following to the ident-oid
       ! exists $traces->{$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{$mib}} && # must not be the ident-oid
@@ -1824,12 +1827,13 @@ sub get_snmp_table_objects {
   $rows ||= [];
   $self->require_mib($mib);
   my @entries = ();
-  my $augmenting_table;
+  my @augmenting = ();
+  my @augmenting_tables = ();
   my $sym_lookup = {};
   $self->debug(sprintf "get_snmp_table_objects %s %s", $mib, $table);
   if ($table =~ /^(.*?)\+(.*)/) {
     $table = $1;
-    $augmenting_table = $2;
+    @augmenting_tables = split(/\+/, $2);
   }
   my $entry = $table;
   $entry =~ s/Table/Entry/g;
@@ -1850,7 +1854,7 @@ sub get_snmp_table_objects {
   my $augmenting_tableoid = undef;
   my @columns = $self->get_table_row_oids($mib, $entry, $rows, $sym_lookup);
   my @augmenting_columns = ();
-  if($augmenting_table) {
+  foreach my $augmenting_table (@augmenting_tables) {
     my $augmenting_entry = $augmenting_table;
     $augmenting_entry =~ s/Table/Entry/g;
     if (! exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$augmenting_entry}) {
@@ -1858,12 +1862,14 @@ sub get_snmp_table_objects {
       $augmenting_entry = $augmenting_table;
       $augmenting_entry =~ s/Table/TableEntry/g;
       if (! exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$augmenting_entry}) {
-        $augmenting_table = undef;
+        $augmenting_entry = undef;
       }
     }
-    if ($augmenting_table) {
+    if ($augmenting_entry) {
+      $self->debug(sprintf "get_snmp_table_objects augment %s %s with %s", $mib, $table, $augmenting_table);
       @augmenting_columns = $self->get_table_row_oids($mib, $augmenting_entry, $rows, $sym_lookup);
       $augmenting_tableoid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$augmenting_table};
+      push(@augmenting, [$augmenting_tableoid, \@augmenting_columns]);
     }
   }
   if (scalar(@{$indices}) == 1 && $indices->[0] == -1) {
@@ -1871,7 +1877,8 @@ sub get_snmp_table_objects {
     my $result = $self->get_entries(
         -columns => \@columns,
     );
-    if ($augmenting_table) {
+    foreach (@augmenting) {
+      my($augmenting_tableoid, @augmenting_columns) = ($_->[0], @{$_->[1]});
       my $augmenting_result = $self->get_entries(
           -columns => \@augmenting_columns,
       );
@@ -1883,8 +1890,9 @@ sub get_snmp_table_objects {
         $self->get_indices(
             -baseoid => $entryoid,
             -oids => [keys %{$result}]);
-    @entries = $self->make_symbolic($mib, $result, \@indices, $sym_lookup);
-    @entries = map { $_->{indices} = shift @indices; $_ } @entries;
+    @entries = map {
+        $_->{indices} = shift @indices; $_
+    } @entries = $self->make_symbolic($mib, $result, \@indices, $sym_lookup);
     $self->debug(sprintf "get_snmp_table_objects mini returns %d entries",
         scalar(@entries));
   } elsif (scalar(@{$indices}) == 1) {
@@ -1894,7 +1902,8 @@ sub get_snmp_table_objects {
         -endindex => $index,
         -columns => \@columns,
     );
-    if ($augmenting_table) {
+    foreach (@augmenting) {
+      my($augmenting_tableoid, @augmenting_columns) = ($_->[0], @{$_->[1]});
       my $augmenting_result = $self->get_entries(
           -startindex => $index,
           -endindex => $index,
@@ -1904,8 +1913,9 @@ sub get_snmp_table_objects {
         $result->{$key} = $value;
       }
     }
-    @entries = $self->make_symbolic($mib, $result, $indices, $sym_lookup);
-    @entries = map { $_->{indices} = shift @{$indices}; $_ } @entries;
+    @entries = map {
+        $_->{indices} = shift @{$indices}; $_
+    } $self->make_symbolic($mib, $result, $indices, $sym_lookup);
     $self->debug(sprintf "get_snmp_table_objects single returns %d entries",
         scalar(@entries));
   } elsif (scalar(@{$indices}) > 1) {
@@ -1959,7 +1969,8 @@ sub get_snmp_table_objects {
         }
       }
     }
-    if ($augmenting_table) {
+    foreach (@augmenting) {
+      my($augmenting_tableoid, @augmenting_columns) = ($_->[0], @{$_->[1]});
       foreach my $idx (@sortedindices) {
         my $tmp_result = $self->get_entries(
             -startindex => $idx,
@@ -1973,15 +1984,17 @@ sub get_snmp_table_objects {
     }
     # now we have numerical_oid+index => value
     # needs to become symboic_oid => value
-    @entries = $self->make_symbolic($mib, $result, $indices, $sym_lookup);
-    @entries = map { $_->{indices} = shift @{$indices}; $_ } @entries;
+    @entries = map {
+        $_->{indices} = shift @{$indices}; $_
+    } $self->make_symbolic($mib, $result, $indices, $sym_lookup);
     $self->debug(sprintf "get_snmp_table_objects single returns %d entries",
         scalar(@entries));
   } elsif (scalar(@{$rows})) {
     my $result = $self->get_entries(
         -columns => \@columns,
     );
-    if ($augmenting_table) {
+    foreach (@augmenting) {
+      my($augmenting_tableoid, @augmenting_columns) = ($_->[0], @{$_->[1]});
       my $augmenting_result = $self->get_entries(
           -columns => \@augmenting_columns,
       );
@@ -1993,18 +2006,17 @@ sub get_snmp_table_objects {
         $self->get_indices(
             -baseoid => $entryoid,
             -oids => [keys %{$result}]);
-    @entries = $self->make_symbolic($mib, $result, \@indices, $sym_lookup);
-    @entries = map { $_->{indices} = shift @indices; $_ } @entries;
+    @entries = map {
+        $_->{indices} = shift @indices; $_
+    } $self->make_symbolic($mib, $result, \@indices, $sym_lookup);
     $self->debug(sprintf "get_snmp_table_objects rows returns %d entries",
         scalar(@entries));
   } else {
     my $result = $self->get_table(
         -baseoid => $tableoid,
     );
-    if ($augmenting_table) {
-      #my $augmenting_result = $self->get_entries(
-      #    -columns => \@augmenting_columns,
-      #);
+    foreach (@augmenting) {
+      my($augmenting_tableoid, @augmenting_columns) = ($_->[0], @{$_->[1]});
       my $augmenting_result = $self->get_table(
           -baseoid => $augmenting_tableoid,
       );
@@ -2018,8 +2030,9 @@ sub get_snmp_table_objects {
         $self->get_indices(
             -baseoid => $entryoid,
             -oids => [keys %{$result}]);
-    @entries = $self->make_symbolic($mib, $result, \@indices, $sym_lookup);
-    @entries = map { $_->{indices} = shift @indices; $_ } @entries;
+    @entries = map {
+        $_->{indices} = shift @indices; $_
+    } $self->make_symbolic($mib, $result, \@indices, $sym_lookup);
     $self->debug(sprintf "get_snmp_table_objects default returns %d entries",
         scalar(@entries));
   }
