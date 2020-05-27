@@ -223,7 +223,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'ENVIROMUX5D'} = {
   ipSensorGroupNb => '1.3.6.1.4.1.3699.1.1.10.1.16.1.1.6',
   ipSensorGroup => '1.3.6.1.4.1.3699.1.1.10.1.16.1.1.7',
   ipSensorValue => '1.3.6.1.4.1.3699.1.1.10.1.16.1.1.8',
-  ipSensorValueDefinition => 'ENVIROMUX5D::ipSensorValue',
+  ipSensorValueDefinition => 'ENVIROMUX5D::ipSensorValue(ipSensorType)',
   ipSensorUnit => '1.3.6.1.4.1.3699.1.1.10.1.16.1.1.9',
   ipSensorUnitName => '1.3.6.1.4.1.3699.1.1.10.1.16.1.1.10',
   ipSensorStatus => '1.3.6.1.4.1.3699.1.1.10.1.16.1.1.11',
@@ -613,10 +613,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'ENVIROMUX5D'} = {
     '0' => 'closed',
     '1' => 'open',
   },
-  intSensorValue => {
-    '0' => 'closed',
-    '1' => 'open',
-  },
+  intSensorValue => \&sensor_func,
   extSensorStatus => {
     '0' => 'notconnected',
     '1' => 'normal',
