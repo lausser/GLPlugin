@@ -25,6 +25,8 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ARISTABGP4V2MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ARISTAENTITYSENSORMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ARUBATCMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ASYNCOSMAILMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ATSMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ATSTHREEPHASEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ATTACKMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/BDTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/BGP4MIB.pm
