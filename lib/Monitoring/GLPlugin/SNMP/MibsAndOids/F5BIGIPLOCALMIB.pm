@@ -2558,9 +2558,13 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'F5-BIGIP-LOCAL-MIB'} 
   ltmVirtualServEntry => '1.3.6.1.4.1.3375.2.2.10.1.2.1',
   ltmVirtualServName => '1.3.6.1.4.1.3375.2.2.10.1.2.1.1',
   ltmVirtualServAddrType => '1.3.6.1.4.1.3375.2.2.10.1.2.1.2',
+  ltmVirtualServAddrTypeDefinition => 'INET-ADDRESS-MIB::InetAddressType',
   ltmVirtualServAddr => '1.3.6.1.4.1.3375.2.2.10.1.2.1.3',
+  ltmVirtualServAddrDefinition => 'INET-ADDRESS-MIB::InetAddress(ltmVirtualServAddrType)',
   ltmVirtualServWildmaskType => '1.3.6.1.4.1.3375.2.2.10.1.2.1.4',
+  ltmVirtualServWildmaskTypeDefinition => 'INET-ADDRESS-MIB::InetAddressType',
   ltmVirtualServWildmask => '1.3.6.1.4.1.3375.2.2.10.1.2.1.5',
+  ltmVirtualServWildmaskDefinition => 'INET-ADDRESS-MIB::InetAddress(ltmVirtualServWildmaskType)',
   ltmVirtualServPort => '1.3.6.1.4.1.3375.2.2.10.1.2.1.6',
   ltmVirtualServIpProto => '1.3.6.1.4.1.3375.2.2.10.1.2.1.7',
   ltmVirtualServListedEnabledVlans => '1.3.6.1.4.1.3375.2.2.10.1.2.1.8',
@@ -3211,110 +3215,175 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'F5-BIGIP-LOCAL-MIB'} 
 };
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'F5-BIGIP-LOCAL-MIB'} = {
-  ltmDosApplicationLatencyBasedIpRateLimiting => {
+  ltmDnsQueryFilterType => {
+    '0' => 'invalid',
+    '1' => 'a',
+    '2' => 'ns',
+    '3' => 'md',
+    '4' => 'mf',
+    '5' => 'cname',
+    '6' => 'soa',
+    '7' => 'mb',
+    '8' => 'mg',
+    '9' => 'mr',
+    '10' => 'null',
+    '11' => 'wks',
+    '12' => 'ptr',
+    '13' => 'hinfo',
+    '14' => 'minfo',
+    '15' => 'mx',
+    '16' => 'txt',
+    '17' => 'rp',
+    '18' => 'afsdb',
+    '19' => 'x25',
+    '20' => 'isdn',
+    '21' => 'rt',
+    '22' => 'nsap',
+    '23' => 'nsap-ptr',
+    '24' => 'sg',
+    '25' => 'key',
+    '26' => 'px',
+    '27' => 'gpos',
+    '28' => 'aaaa',
+    '29' => 'loc',
+    '30' => 'nxt',
+    '31' => 'eid',
+    '32' => 'nimloc',
+    '33' => 'srv',
+    '34' => 'atma',
+    '35' => 'naptr',
+    '36' => 'kx',
+    '37' => 'cert',
+    '38' => 'a6',
+    '39' => 'dname',
+    '40' => 'sink',
+    '41' => 'opt',
+    '249' => 'tkey',
+    '250' => 'tsig',
+    '251' => 'ixfr',
+    '252' => 'axfr',
+    '253' => 'mailb',
+    '254' => 'maila',
+    '255' => 'any',
+    '256' => 'zxfr',
+    '65536' => 'max',
+  },
+  ltmVirtualServActualPvaAccel => {
+    '0' => 'full',
+    '1' => 'partial',
+    '2' => 'none',
+  },
+  ltmIsessionProfileDeduplication => {
+    '0' => 'disabled',
+    '1' => 'enabled',
+  },
+  ltmTcpProfileAckOnPush => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmFastHttpProfileConnpoolReplenish => {
+  ltmServerSslUncleanShutdown => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmHttpProfilePassthroughOversizeClientHeaders => {
+  ltmAlgLogProfileEndControlElementsElements => {
+    '1' => 'destination',
+  },
+  ltmLsnPoolIcmpEcho => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmTransAddrArpEnabled => {
+  ltmVirtualAddrRouteAdvertisement => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmLsnLogProfileStartInboundAction => {
+  ltmTcpProfileDelayWindowControl => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmServerSslAuthenticateOnce => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmUdpProfileAllowNoPayload => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmClientSslFwdpLookupByIpaddrPort => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmFastHttpProfileUncleanShutdown => {
+    '0' => 'disable',
+    '1' => 'enable',
+    '2' => 'fast',
+  },
+  ltmRtspProfileUnicastRedirect => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmTcpProfileResetOnTimeout => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmLsnLogProfileEndOutboundAction => {
     '1' => 'disabled',
     '2' => 'enabled',
     '3' => 'backup-allocation-only',
   },
-  ltmAlgLogProfileEndDataElementsElements => {
-    '1' => 'destination',
+  ltmOcspStaplingParametersSignHash => {
+    '0' => 'sha1',
+    '1' => 'sha256',
   },
-  ltmPcpProfileConfigSource => {
-    '0' => 'usercfg',
-    '1' => 'basecfg',
-  },
-  ltmPersistProfileMirror => {
+  ltmFastL4ProfileRttFromServer => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmServerSslModsslmethods => {
+  ltmTcpProfileTimeWaitRecycle => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmClientSslConfigSource => {
-    '0' => 'usercfg',
-    '1' => 'basecfg',
+  ltmClientSslSslSignHash => {
+    '0' => 'any',
+    '1' => 'sha1',
+    '2' => 'sha256',
+    '3' => 'sha384',
   },
-  ltmIiopProfileConfigSource => {
-    '0' => 'usercfg',
-    '1' => 'basecfg',
+  ltmTcpProfileCongestionCtrl => {
+    '0' => 'reno',
+    '1' => 'newreno',
+    '2' => 'scalable',
+    '3' => 'highspeed',
+    '4' => 'none',
+    '5' => 'vegas',
+    '6' => 'illinois',
+    '7' => 'woodside',
+    '8' => 'chd',
+    '9' => 'cdg',
+    '10' => 'cubic',
+    '11' => 'westwood',
   },
-  ltmUserStatProfileConfigSource => {
-    '0' => 'usercfg',
-    '1' => 'basecfg',
-  },
-  ltmHttpProfileOneConnect => {
+  ltmTcpProfileMptcpNojoindssack => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmVirtualServType => {
-    '0' => 'poolbased',
-    '1' => 'ipforward',
-    '2' => 'l2forward',
-    '3' => 'reject',
-    '4' => 'fastl4',
-    '5' => 'fasthttp',
-    '6' => 'stateless',
-    '7' => 'dhcp-relay',
-    '8' => 'internal',
-  },
-  ltmIsessionProfileCompressionDeflate => {
-    '0' => 'disabled',
-    '1' => 'enabled',
-  },
-  ltmSctpProfileRcvOrdered => {
+  ltmVirtualAddrIsFloat => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmStreamProfileConfigSource => {
-    '0' => 'usercfg',
-    '1' => 'basecfg',
-  },
-  ltmClientSslAuthenticateOnce => {
+  ltmPersistProfileAcrossServices => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmFtpProfileTranslateExtended => {
+  ltmLsnLogProfileEndInboundAction => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+    '3' => 'backup-allocation-only',
+  },
+  ltmServerSslProxySslPassthrough => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmPptpProfileConfigSource => {
-    '0' => 'usercfg',
-    '1' => 'basecfg',
-  },
-  ltmTcpProfileDeferredAccept => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmVirtualServListedEnabledVlans => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmDosApplicationHeavyUrlAutomaticDetection => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmHttpProfilePassthroughExcessClientHeaders => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmFastL4ProfileSoftSyncookie => {
+  ltmDosApplicationLatencyBasedSiteRateLimiting => {
     '0' => 'false',
     '1' => 'true',
   },
@@ -3323,124 +3392,19 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'F5-BIGIP-LOCAL-MIB'} = 
     '1' => 'external',
     '2' => 'internal',
   },
-  ltmLsnLogProfileStartOutboundElementsElements => {
-    '1' => 'destination',
-  },
-  ltmFastL4ProfileRttFromServer => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmServerSslFwdpEnabled => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmHttpProfileRedirectRewrite => {
-    '0' => 'none',
-    '1' => 'all',
-    '2' => 'matching',
-    '3' => 'nodes',
-  },
-  ltmTcpProfileEcn => {
-    '0' => 'false',
-    '1' => 'true',
-  },
   ltmLsnLogProfileEndOutboundElementsElements => {
     '1' => 'destination',
   },
-  ltmVirtualServSnatType => {
-    '0' => 'none',
-    '1' => 'transaddr',
-    '2' => 'snatpool',
-    '3' => 'automap',
+  ltmDnsProfileDnsLastAction => {
+    '0' => 'allow',
+    '1' => 'drop',
+    '2' => 'reject',
+    '3' => 'hint',
+    '4' => 'noerror',
   },
-  ltmVirtualModuleScoreModuleType => {
-    '0' => 'asm',
-    '1' => 'sam',
-    '2' => 'wam',
-  },
-  ltmDosApplicationLatencyBasedSiteRateLimiting => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmVirtualServProfileContext => {
-    '0' => 'all',
-    '1' => 'client',
-    '2' => 'server',
-  },
-  ltmClientSslGenericAlert => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmLsnPoolPersistenceMode => {
-    '0' => 'none',
-    '1' => 'address',
-    '2' => 'addressPort',
-  },
-  ltmDnsCacheAnswerDefaultZones => {
-    '0' => 'no',
-    '1' => 'yes',
-  },
-  ltmDosApplicationTpsBasedUrlRateLimiting => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmAuthProfileConfigSource => {
-    '0' => 'usercfg',
-    '1' => 'basecfg',
-  },
-  ltmRateFilterQtype => {
-    '0' => 'none',
-    '1' => 'sfq',
-    '2' => 'pfifo',
-  },
-  ltmHttpCompressionProfileVaryHeader => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmTcpProfileMptcpFastjoin => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmPoolMemberAvailabilityState => {
-    '0' => 'none',
-    '1' => 'green',
-    '2' => 'yellow',
-    '3' => 'red',
-    '4' => 'blue',
-  },
-  ltmDosProfileConfigSource => {
-    '0' => 'usercfg',
-    '1' => 'basecfg',
-  },
-  ltmFastL4ProfileHardSyncookie => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmFastL4ProfilePvaAccelMode => {
-    '0' => 'full',
-    '1' => 'partial',
-    '2' => 'none',
-  },
-  ltmLsnLogProfileStartOutboundAction => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-    '3' => 'backup-allocation-only',
-  },
-  ltmDnsCachePrefetchKey => {
-    '0' => 'no',
-    '1' => 'yes',
-  },
-  ltmSnatListedEnabledVlans => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmFastL4ProfileTcpGenerateIsn => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmXmlProfileAbortOnError => {
-    '0' => 'false',
-    '1' => 'true',
+  ltmPoolQueueOnConnectionLimit => {
+    '0' => 'allowed',
+    '1' => 'disallowed',
   },
   ltmServerSslSslSignHash => {
     '0' => 'any',
@@ -3448,42 +3412,264 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'F5-BIGIP-LOCAL-MIB'} = 
     '2' => 'sha256',
     '3' => 'sha384',
   },
-  ltmTcpProfileMptcpDebug => {
+  ltmTcpProfileVerifiedAccept => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmHttpClassWaEnabled => {
+  ltmAlgLogProfileEndDataAction => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+    '3' => 'backup-allocation-only',
+  },
+  ltmAlgLogProfileInboundAction => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  ltmVirtualServSourceAddressTranslationType => {
+    '0' => 'none',
+    '1' => 'snat',
+    '2' => 'lsn',
+    '3' => 'automap',
+  },
+  ltmServerSslSessionMirroring => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmSctpProfileSndPartial => {
+  ltmPptpProfileConfigSource => {
+    '0' => 'usercfg',
+    '1' => 'basecfg',
+  },
+  ltmPersistProfileMirror => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmNodeAddrMonitorState => {
+  ltmFastL4ProfileExplicitFlowMigration => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmIsessionProfileCompression => {
+    '0' => 'disabled',
+    '1' => 'enabled',
+  },
+  ltmClientSslGenericAlert => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmPoolMemberMonitorStatus => {
     '0' => 'unchecked',
     '1' => 'checking',
     '2' => 'inband',
     '3' => 'forced-up',
     '4' => 'up',
+    '18' => 'addr-down',
     '19' => 'down',
     '20' => 'forced-down',
+    '21' => 'maint',
     '22' => 'irule-down',
     '23' => 'inband-down',
     '24' => 'down-manual-resume',
-    '25' => 'disabled',
   },
-  ltmSnatType => {
+  ltmServerSslGenericAlert => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmDnsProfileDnssecEnabled => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmPersistProfileAcrossPools => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmClientSslStrictResume => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmFastL4ProfileTcpStripSack => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmVirtualModuleScoreModuleType => {
+    '0' => 'asm',
+    '1' => 'sam',
+    '2' => 'wam',
+  },
+  ltmPoolStatusAvailState => {
     '0' => 'none',
-    '1' => 'transaddr',
-    '2' => 'snatpool',
-    '3' => 'automap',
+    '1' => 'green',
+    '2' => 'yellow',
+    '3' => 'red',
+    '4' => 'blue',
+    '5' => 'grey',
   },
-  ltmIsessionProfileMode => {
+  ltmSctpProfileSndPartial => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmHttpProfilePassthroughExcessClientHeaders => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmAlgLogProfileStartControlAction => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+    '3' => 'backup-allocation-only',
+  },
+  ltmPoolMemberNewSessionEnable => {
+    '1' => 'user-disabled',
+    '2' => 'user-enabled',
+    '3' => 'monitor-enabled',
+    '4' => 'monitor-disabled',
+  },
+  ltmHttpProfilePassthroughPipeline => {
+    '0' => 'reject',
+    '1' => 'allow',
+    '2' => 'passthrough',
+  },
+  ltmPoolMinUpMemberAction => {
+    '0' => 'unusedhaaction',
+    '1' => 'reboot',
+    '2' => 'restart',
+    '3' => 'failover',
+    '4' => 'goactive',
+    '5' => 'noaction',
+    '6' => 'restartall',
+    '7' => 'failoveraborttm',
+    '8' => 'gooffline',
+    '9' => 'goofflinerestart',
+    '10' => 'goofflineaborttm',
+    '11' => 'goofflinedownlinks',
+    '12' => 'goofflinedownlinksrestart',
+  },
+  ltmHttpCompressionProfileVaryHeader => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmDnsCacheUseIpv6 => {
+    '0' => 'no',
+    '1' => 'yes',
+  },
+  ltmServerSslStrictResume => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmDnsCacheIgnoreCd => {
+    '0' => 'no',
+    '1' => 'yes',
+  },
+  ltmSpdyProfilePriorityHandling => {
+    '0' => 'strict',
+    '1' => 'fair',
+  },
+  ltmLsnLogProfileStartInboundAction => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+    '3' => 'backup-allocation-only',
+  },
+  ltmTcpProfileLimitedTransmit => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmFastL4ProfileConfigSource => {
+    '0' => 'usercfg',
+    '1' => 'basecfg',
+  },
+  ltmAlgLogProfileEndDataElementsElements => {
+    '1' => 'destination',
+  },
+  ltmDosApplicationHeavyUrlProtection => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmVirtualAddrServer => {
+    '0' => 'none',
+    '1' => 'any',
+    '2' => 'all',
+  },
+  ltmXmlProfileMultipleQueryMatches => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmFastHttpProfileLayer7 => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmAlgLogProfileStartDataElementsElements => {
+    '1' => 'destination',
+  },
+  ltmXmlProfileConfigSource => {
+    '0' => 'usercfg',
+    '1' => 'basecfg',
+  },
+  ltmNodeAddrSessionStatus => {
+    '1' => 'enabled',
+    '2' => 'addrdisabled',
+    '3' => 'servdisabled',
+    '4' => 'disabled',
+    '5' => 'forceddisabled',
+  },
+  ltmNodeAddrStatusEnabledState => {
+    '0' => 'none',
+    '1' => 'enabled',
+    '2' => 'disabled',
+    '3' => 'disabledbyparent',
+  },
+  ltmDosApplicationTriggerIrule => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmDosApplicationTpsBasedIpRateLimiting => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmTcpProfileSelectiveAcks => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmV6rdProfileConfigSource => {
+    '0' => 'usercfg',
+    '1' => 'basecfg',
+  },
+  ltmAuthProfileCredentialSource => {
+    '0' => 'httpbasicauth',
+  },
+  ltmTcpProfileBandwidthDelay => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmDnsProfileDns64Mode => {
+    '0' => 'disable',
+    '1' => 'secondary',
+    '2' => 'immediate',
+    '3' => 'v4only',
+  },
+  ltmHttpCompressionProfileAllowHttp10 => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmServerSslPeerCertMode => {
+    '0' => 'ignore',
+    '1' => 'require',
+  },
+  ltmHttpProfileInsertXforwardedFor => {
     '0' => 'disabled',
     '1' => 'enabled',
   },
-  ltmFastL4ProfileExplicitFlowMigration => {
+  ltmClientSslPeerCertMode => {
+    '0' => 'ignore',
+    '1' => 'require',
+    '2' => 'request',
+    '3' => 'auto',
+  },
+  ltmStreamProfileConfigSource => {
+    '0' => 'usercfg',
+    '1' => 'basecfg',
+  },
+  ltmSctpProfileTcpShutdown => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmHttpClassWaEnabled => {
     '0' => 'false',
     '1' => 'true',
   },
@@ -3500,158 +3686,419 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'F5-BIGIP-LOCAL-MIB'} = 
     '24' => 'down-manual-resume',
     '25' => 'disabled',
   },
-  ltmLsnPoolInboundConnections => {
-    '0' => 'disabled',
-    '1' => 'automatic',
-    '2' => 'explicit',
-  },
-  ltmIsessionProfilePortTransparency => {
-    '0' => 'disabled',
-    '1' => 'enabled',
-  },
-  ltmFastL4ProfileRttFromClient => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmTcpProfileTimestamps => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmPoolMemberEnabledState => {
-    '0' => 'none',
-    '1' => 'enabled',
-    '2' => 'disabled',
-    '3' => 'disabledbyparent',
-  },
-  ltmSpdyProfileInsertHeader => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmLsnLogProfileEndInboundAction => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-    '3' => 'backup-allocation-only',
-  },
-  ltmDnsProfileCacheEnabled => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmAlgLogProfileConfigSource => {
+  ltmDosProfileConfigSource => {
     '0' => 'usercfg',
     '1' => 'basecfg',
+  },
+  ltmHttpClassAsmEnabled => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmServerSslProxySsl => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmTcpProfileHighPerfTcpExt => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmClientSslProxySsl => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmHttpProfileRamcacheIgnoreClient => {
+    '0' => 'none',
+    '1' => 'maxage',
+    '2' => 'all',
+  },
+  ltmAuthProfileType => {
+    '0' => 'ldap',
+    '1' => 'radius',
+    '2' => 'sslccldap',
+    '3' => 'sslocsp',
+    '4' => 'tacacs',
+    '5' => 'generic',
+    '6' => 'sslcrldp',
+    '7' => 'krbdelegate',
+  },
+  ltmHttpProfileCompressAllowHttp10 => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmHttpCompressionProfileBrowserWorkarounds => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmRuleConfigSource => {
+    '0' => 'usercfg',
+    '1' => 'basecfg',
+  },
+  ltmFastL4ProfileTcpWscaleMode => {
+    '0' => 'preserve',
+    '1' => 'strip',
+    '2' => 'rewrite',
+  },
+  ltmFastL4ProfilePvaAccelMode => {
+    '0' => 'full',
+    '1' => 'partial',
+    '2' => 'none',
+  },
+  ltmDnsProfileDnsExpressEnabled => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmIsessionProfileCompressionNull => {
+    '0' => 'disabled',
+    '1' => 'enabled',
+  },
+  ltmFastHttpProfileForceHttp10Response => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmServerSslDropUntrustCa => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmTcpProfileNagle => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmDosApplicationTpsBasedSiteClientSideDefense => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmPptpProfileLogServerIp => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmVirtualServTranslatePort => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmRtspProfileRealHttpPersistence => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmTcpProfileMptcp => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmLsnPoolRouteAdvertisement => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmClientSslModsslmethods => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmVirtualServEnabled => {
+    '0' => 'false',
+    '1' => 'true',
   },
   ltmPcpProfileThirdPartyOption => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmVirtualAddrEnabledState => {
+  ltmHttpProfilePassthroughOversizeServerHeaders => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmUserStatProfileConfigSource => {
+    '0' => 'usercfg',
+    '1' => 'basecfg',
+  },
+  ltmFastHttpProfileResetOnTimeout => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmClientSslFwdpBypassEnabled => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmAttrMirrorState => {
+    '0' => 'disabled',
+    '1' => 'enabled',
+  },
+  ltmVirtualServEnabledState => {
     '0' => 'none',
     '1' => 'enabled',
     '2' => 'disabled',
     '3' => 'disabledbyparent',
   },
-  ltmTcpProfileEarlyRetransmit => {
-    '0' => 'false',
-    '1' => 'true',
+  ltmHttpCompressionProfilePreferredMethod => {
+    '0' => 'deflate',
+    '1' => 'gzip',
   },
   ltmSctpProfileResetOnTimeout => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmIsessionProfileDeduplication => {
-    '0' => 'disabled',
-    '1' => 'enabled',
-  },
-  ltmVirtualAddrEnabled => {
+  ltmRtspProfileMulticastRedirect => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmHttpProfileResponseChunking => {
-    '0' => 'preserve',
-    '1' => 'selective',
-    '2' => 'unchunk',
-    '3' => 'rechunk',
-  },
-  ltmOcspStaplingParametersUseProxyServer => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmLsnLogProfileEndOutboundAction => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-    '3' => 'backup-allocation-only',
-  },
-  ltmTcpProfileMptcpFallback => {
-    '0' => 'reset',
-    '1' => 'retransmit',
-    '2' => 'activeaccept',
-    '3' => 'accept',
-  },
-  ltmDosApplicationTpsBasedIpClientSideDefense => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmDnsCacheType => {
-    '0' => 'resolver',
-    '1' => 'validating-resolver',
-    '2' => 'transparent-resolver',
-  },
-  ltmPersistProfileConfigSource => {
-    '0' => 'usercfg',
-    '1' => 'basecfg',
-  },
-  ltmIiopProfilePersistRequestId => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmVirtualAddrAvailabilityState => {
+  ltmVirtualServAvailabilityState => {
     '0' => 'none',
     '1' => 'green',
     '2' => 'yellow',
     '3' => 'red',
     '4' => 'blue',
   },
-  ltmClientSslModsslmethods => {
-    '0' => 'false',
-    '1' => 'true',
+  ltmVirtualServSrcport => {
+    '0' => 'srcportreserve',
+    '1' => 'srcportreservestrict',
+    '2' => 'srcportchange',
   },
-  ltmClientSslPeerCertMode => {
-    '0' => 'ignore',
-    '1' => 'require',
-    '2' => 'request',
-    '3' => 'auto',
+  ltmVirtualServProfileType => {
+    '0' => 'auth',
+    '1' => 'http',
+    '2' => 'serverssl',
+    '3' => 'clientssl',
+    '4' => 'fastl4',
+    '5' => 'tcp',
+    '6' => 'udp',
+    '7' => 'ftp',
+    '8' => 'persist',
+    '9' => 'connpool',
+    '10' => 'stream',
+    '11' => 'xml',
+    '12' => 'fasthttp',
+    '13' => 'iiop',
+    '14' => 'rtsp',
+    '15' => 'user',
+    '16' => 'httpclass',
+    '17' => 'dns',
+    '18' => 'sctp',
+    '19' => 'instance',
+    '20' => 'sipp',
+    '21' => 'dos',
+    '62' => 'pptp',
   },
-  ltmIsessionProfileCompression => {
-    '0' => 'disabled',
-    '1' => 'enabled',
-  },
-  ltmDnsProfileConfigSource => {
+  ltmFtpProfileConfigSource => {
     '0' => 'usercfg',
     '1' => 'basecfg',
   },
-  ltmVsStatusEnabledState => {
+  ltmVirtualServCmpEnabled => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmPersistProfileMapProxies => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmClientSslAuthenticateOnce => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmTcpProfileMptcpCsum => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmPcpProfileConfigSource => {
+    '0' => 'usercfg',
+    '1' => 'basecfg',
+  },
+  ltmLsnLogProfileQuotaExceededAction => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  ltmSnatListedEnabledVlans => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmHttpProfileCompressKeepAcceptEncoding => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmFastL4ProfileLooseClose => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmNodeAddrMonitorState => {
+    '0' => 'unchecked',
+    '1' => 'checking',
+    '2' => 'inband',
+    '3' => 'forced-up',
+    '4' => 'up',
+    '19' => 'down',
+    '20' => 'forced-down',
+    '22' => 'irule-down',
+    '23' => 'inband-down',
+    '24' => 'down-manual-resume',
+    '25' => 'disabled',
+  },
+  ltmHttpProfileRamcache => {
+    '0' => 'disable',
+    '1' => 'enable',
+  },
+  ltmFastL4ProfileResetOnTimeout => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmTcpProfileProxyOptions => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmWebAccelerationProfileCacheInsertAgeHeader => {
+    '0' => 'disable',
+    '1' => 'enable',
+  },
+  ltmHttpCompressionProfileKeepAcceptEncoding => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmNodeAddrEnabledState => {
     '0' => 'none',
     '1' => 'enabled',
     '2' => 'disabled',
     '3' => 'disabledbyparent',
   },
-  ltmClientSslFwdpBypassEnabled => {
+  ltmClientSslProxySslPassthrough => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmFwPolicyRuleStatRuleStatType => {
-    '1' => 'enforced',
-    '2' => 'staged',
-    '3' => 'active',
-    '4' => 'overlapper',
-  },
-  ltmTcpProfileLimitedTransmit => {
+  ltmTcpProfileMptcpMakeafterbreak => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmHttpProfileCompressPreferredMethod => {
-    '0' => 'deflate',
-    '1' => 'gzip',
+  ltmPoolLbMode => {
+    '0' => 'roundRobin',
+    '1' => 'ratioMember',
+    '2' => 'leastConnMember',
+    '3' => 'observedMember',
+    '4' => 'predictiveMember',
+    '5' => 'ratioNodeAddress',
+    '6' => 'leastConnNodeAddress',
+    '7' => 'fastestNodeAddress',
+    '8' => 'observedNodeAddress',
+    '9' => 'predictiveNodeAddress',
+    '10' => 'dynamicRatio',
+    '11' => 'fastestAppResponse',
+    '12' => 'leastSessions',
+    '13' => 'dynamicRatioMember',
+    '14' => 'l3Addr',
+    '15' => 'weightedLeastConnMember',
+    '16' => 'weightedLeastConnNodeAddr',
+    '17' => 'ratioSession',
+  },
+  ltmDosApplicationHeavyUrlAutomaticDetection => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmNodeAddrNewSessionEnable => {
+    '1' => 'user-disabled',
+    '2' => 'user-enabled',
+    '3' => 'monitor-enabled',
+    '4' => 'monitor-disabled',
+  },
+  ltmTcpProfileAbc => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmConnPoolProfileConfigSource => {
+    '0' => 'usercfg',
+    '1' => 'basecfg',
+  },
+  ltmNetworkAttackDataStatAttackType => {
+    '1' => 'ip-opt-frames',
+    '2' => 'ip-frag-flood',
+    '3' => 'too-many-ext-hdrs',
+    '4' => 'ext-hdr-too-large',
+    '5' => 'ip-low-ttl',
+    '6' => 'hop-cnt-low',
+    '7' => 'ipv6-ext-hdr-frames',
+    '8' => 'ipv6-frag-flood',
+    '9' => 'unk-tcp-opt-type',
+    '10' => 'opt-present-with-illegal-len',
+    '11' => 'tcp-opt-overruns-tcp-hdr',
+    '12' => 'tcp-syn-flood',
+    '13' => 'tcp-synack-flood',
+    '14' => 'tcp-rst-flood',
+    '15' => 'icmpv4-flood',
+    '16' => 'icmp-frag',
+    '17' => 'icmpv6-flood',
+    '18' => 'host-unreachable',
+    '19' => 'tidcmp',
+    '20' => 'udp-flood',
+  },
+  ltmFastHttpProfileInsertXforwardedFor => {
+    '0' => 'disabled',
+    '1' => 'enabled',
+  },
+  ltmPersistProfileMode => {
+    '0' => 'none',
+    '1' => 'srcaddr',
+    '2' => 'dstaddr',
+    '3' => 'cookie',
+    '4' => 'msrdp',
+    '5' => 'sslsid',
+    '6' => 'sip',
+    '7' => 'uie',
+    '8' => 'hash',
+  },
+  ltmIsessionProfileCompressionLzo => {
+    '0' => 'disabled',
+    '1' => 'enabled',
+  },
+  ltmAuthProfileMode => {
+    '0' => 'disabled',
+    '1' => 'enabled',
+  },
+  ltmClientSslUncleanShutdown => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmHttpProfileCompressVaryHeader => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmDosApplicationLatencyBasedMode => {
+    '0' => 'off',
+    '1' => 'transparent',
+    '2' => 'blocking',
+  },
+  ltmAlgLogProfileStartDataAction => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+    '3' => 'backup-allocation-only',
+  },
+  ltmVirtualAddrEnabled => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmTcpProfileSlowStart => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmHttpProfileRamcacheInsertAgeHeader => {
+    '0' => 'disable',
+    '1' => 'enable',
+  },
+  ltmFastL4ProfileTcpTimestampMode => {
+    '0' => 'preserve',
+    '1' => 'strip',
+    '2' => 'rewrite',
+  },
+  ltmLsnLogProfileStartOutboundAction => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+    '3' => 'backup-allocation-only',
+  },
+  ltmTcpProfileEarlyRetransmit => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmTcpProfileMptcpFastjoin => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmOcspStaplingParametersStrictRespCertCheck => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmTcpProfileMptcpCsumVerify => {
+    '0' => 'false',
+    '1' => 'true',
   },
   ltmDosAttackDataStatAttackType => {
     '1' => 'ether-brdcst-pkt',
@@ -3757,326 +4204,24 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'F5-BIGIP-LOCAL-MIB'} = 
     '102' => 'flood',
     '103' => 'unk-ipopt-type',
   },
-  ltmVirtualAddrRouteAdvertisement => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmAlgLogProfileEndControlAction => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-    '3' => 'backup-allocation-only',
-  },
-  ltmClientSslSessionMirroring => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmUdpProfileAllowNoPayload => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmSpdyProfileActivationMode => {
-    '0' => 'npn',
-    '1' => 'always',
-  },
-  ltmPoolStatusAvailState => {
-    '0' => 'none',
-    '1' => 'green',
-    '2' => 'yellow',
-    '3' => 'red',
-    '4' => 'blue',
-    '5' => 'grey',
-  },
-  ltmPoolMinUpMemberAction => {
-    '0' => 'unusedhaaction',
-    '1' => 'reboot',
-    '2' => 'restart',
-    '3' => 'failover',
-    '4' => 'goactive',
-    '5' => 'noaction',
-    '6' => 'restartall',
-    '7' => 'failoveraborttm',
-    '8' => 'gooffline',
-    '9' => 'goofflinerestart',
-    '10' => 'goofflineaborttm',
-    '11' => 'goofflinedownlinks',
-    '12' => 'goofflinedownlinksrestart',
-  },
-  ltmDnsProfileDnsExpressEnabled => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmRtspProfileUnicastRedirect => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmHttpCompressionProfilePreferredMethod => {
-    '0' => 'deflate',
-    '1' => 'gzip',
-  },
-  ltmFastL4ProfileTcpStripSack => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmHttpProfileTruncatedRedirects => {
-    '0' => 'disabled',
-    '1' => 'enabled',
-  },
-  ltmDnsCacheUseIpv4 => {
-    '0' => 'no',
-    '1' => 'yes',
-  },
-  ltmPoolActionOnServiceDown => {
-    '0' => 'none',
-    '1' => 'reset',
-    '2' => 'drop',
-    '3' => 'reselect',
-  },
-  ltmTcpProfileMptcp => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmVirtualServSrcport => {
-    '0' => 'srcportreserve',
-    '1' => 'srcportreservestrict',
-    '2' => 'srcportchange',
-  },
-  ltmFastHttpProfileLayer7 => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmAlgLogProfileInboundAction => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  ltmHttpProfilePassthroughUnknownMethod => {
-    '0' => 'reject',
-    '1' => 'allow',
-    '2' => 'passthrough',
-  },
-  ltmDosApplicationLatencyBasedIpClientSideDefense => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmWebAccelerationProfileCacheIgnoreClient => {
-    '0' => 'none',
-    '1' => 'maxage',
-    '2' => 'all',
-  },
-  ltmVirtualServEnabled => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmNatArpEnabled => {
-    '0' => 'false',
-    '1' => 'true',
-  },
   ltmVirtualServTranslateAddr => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmUdpProfileConfigSource => {
+  ltmTcpProfileEcn => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmDnsHeaderFilterOpcodeExclusion => {
+    '0' => 'query',
+    '1' => 'iquery',
+    '2' => 'status',
+    '4' => 'notify',
+    '5' => 'update',
+  },
+  ltmHttpClassConfigSource => {
     '0' => 'usercfg',
     '1' => 'basecfg',
-  },
-  ltmVirtualAddrArpEnabled => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmNatEnabled => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmFastL4ProfileConfigSource => {
-    '0' => 'usercfg',
-    '1' => 'basecfg',
-  },
-  ltmNodeAddrAvailabilityState => {
-    '0' => 'none',
-    '1' => 'green',
-    '2' => 'yellow',
-    '3' => 'red',
-    '4' => 'blue',
-  },
-  ltmDnsQueryFilterType => {
-    '0' => 'invalid',
-    '1' => 'a',
-    '2' => 'ns',
-    '3' => 'md',
-    '4' => 'mf',
-    '5' => 'cname',
-    '6' => 'soa',
-    '7' => 'mb',
-    '8' => 'mg',
-    '9' => 'mr',
-    '10' => 'null',
-    '11' => 'wks',
-    '12' => 'ptr',
-    '13' => 'hinfo',
-    '14' => 'minfo',
-    '15' => 'mx',
-    '16' => 'txt',
-    '17' => 'rp',
-    '18' => 'afsdb',
-    '19' => 'x25',
-    '20' => 'isdn',
-    '21' => 'rt',
-    '22' => 'nsap',
-    '23' => 'nsap-ptr',
-    '24' => 'sg',
-    '25' => 'key',
-    '26' => 'px',
-    '27' => 'gpos',
-    '28' => 'aaaa',
-    '29' => 'loc',
-    '30' => 'nxt',
-    '31' => 'eid',
-    '32' => 'nimloc',
-    '33' => 'srv',
-    '34' => 'atma',
-    '35' => 'naptr',
-    '36' => 'kx',
-    '37' => 'cert',
-    '38' => 'a6',
-    '39' => 'dname',
-    '40' => 'sink',
-    '41' => 'opt',
-    '249' => 'tkey',
-    '250' => 'tsig',
-    '251' => 'ixfr',
-    '252' => 'axfr',
-    '253' => 'mailb',
-    '254' => 'maila',
-    '255' => 'any',
-    '256' => 'zxfr',
-    '65536' => 'max',
-  },
-  ltmVAddrStatusAvailState => {
-    '0' => 'none',
-    '1' => 'green',
-    '2' => 'yellow',
-    '3' => 'red',
-    '4' => 'blue',
-    '5' => 'gray',
-  },
-  ltmDnsCacheUseUdp => {
-    '0' => 'no',
-    '1' => 'yes',
-  },
-  ltmVirtualAddrSfFlags => {
-    '0' => 'disabled',
-    '1' => 'enabled',
-  },
-  ltmPersistProfileMapProxies => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmDosApplicationHeavyUrlProtection => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmHttpProfilePassthroughOversizeServerHeaders => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmVirtualServSourceAddressTranslationType => {
-    '0' => 'none',
-    '1' => 'snat',
-    '2' => 'lsn',
-    '3' => 'automap',
-  },
-  ltmDnsProfileFastDnsEnabled => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmNodeAddrEnabledState => {
-    '0' => 'none',
-    '1' => 'enabled',
-    '2' => 'disabled',
-    '3' => 'disabledbyparent',
-  },
-  ltmUdpProfileDatagramLb => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmHttpProfilePassthroughPipeline => {
-    '0' => 'reject',
-    '1' => 'allow',
-    '2' => 'passthrough',
-  },
-  ltmAuthProfileCredentialSource => {
-    '0' => 'httpbasicauth',
-  },
-  ltmAlgLogProfileEndControlElementsElements => {
-    '1' => 'destination',
-  },
-  ltmServerSslMode => {
-    '0' => 'disabled',
-    '1' => 'enabled',
-  },
-  ltmDnsProfileSecurityEnabled => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmDnsProfileProcessRd => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmServerSslDropExpCert => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmSctpProfileConfigSource => {
-    '0' => 'usercfg',
-    '1' => 'basecfg',
-  },
-  ltmPoolAvailabilityState => {
-    '0' => 'none',
-    '1' => 'green',
-    '2' => 'yellow',
-    '3' => 'red',
-    '4' => 'blue',
-  },
-  ltmV6rdProfileConfigSource => {
-    '0' => 'usercfg',
-    '1' => 'basecfg',
-  },
-  ltmFastL4ProfileTimeoutRecovery => {
-    '0' => 'disconnect',
-    '1' => 'fallback',
-  },
-  ltmHttpProfileInsertXforwardedFor => {
-    '0' => 'disabled',
-    '1' => 'enabled',
-  },
-  ltmDosApplicationTpsBasedUrlClientSideDefense => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmHttpProfileCompressCpusaver => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmSipProfileInsertRecordRoute => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmPoolMinUpMembersEnable => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmAlgLogProfileStartControlAction => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-    '3' => 'backup-allocation-only',
-  },
-  ltmLsnPoolHairpinMode => {
-    '0' => 'disabled',
-    '1' => 'enabled',
-  },
-  ltmFastHttpProfileUncleanShutdown => {
-    '0' => 'disable',
-    '1' => 'enable',
-    '2' => 'fast',
   },
   ltmPoolMemberSessionStatus => {
     '1' => 'enabled',
@@ -4085,23 +4230,73 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'F5-BIGIP-LOCAL-MIB'} = 
     '4' => 'disabled',
     '5' => 'forceddisabled',
   },
-  ltmFastL4ProfileLooseClose => {
+  ltmFastHttpProfileConfigSource => {
+    '0' => 'usercfg',
+    '1' => 'basecfg',
+  },
+  ltmLsnLogProfileStartOutboundElementsElements => {
+    '1' => 'destination',
+  },
+  ltmLsnPoolEgressInterfacesEnabled => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmTcpProfileMptcpCsumVerify => {
+  ltmPoolMinUpMembersEnable => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmTcpProfileTailLossProbe => {
+  ltmLsnLogProfileConfigSource => {
+    '0' => 'usercfg',
+    '1' => 'basecfg',
+  },
+  ltmSnatSfFlags => {
+    '0' => 'disabled',
+    '1' => 'enabled',
+  },
+  ltmTransAddrEnabled => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmTcpProfileMptcpCsum => {
+  ltmPoolEnabledState => {
+    '0' => 'none',
+    '1' => 'enabled',
+    '2' => 'disabled',
+    '3' => 'disabledbyparent',
+  },
+  ltmHttpProfileCompressCpusaver => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmTcpProfileProxyMss => {
+  ltmIsessionProfileCompressionBzip2 => {
+    '0' => 'disabled',
+    '1' => 'enabled',
+  },
+  ltmHttpProfileResponseChunking => {
+    '0' => 'preserve',
+    '1' => 'selective',
+    '2' => 'unchunk',
+    '3' => 'rechunk',
+  },
+  ltmIsessionProfileConnectionReuse => {
+    '0' => 'disabled',
+    '1' => 'enabled',
+  },
+  ltmPoolActionOnServiceDown => {
+    '0' => 'none',
+    '1' => 'reset',
+    '2' => 'drop',
+    '3' => 'reselect',
+  },
+  ltmDosApplicationTpsBasedIpClientSideDefense => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmVirtualServClonePoolType => {
+    '0' => 'unspec',
+    '1' => 'clientside',
+    '2' => 'serverside',
+  },
+  ltmSctpProfileRcvOrdered => {
     '0' => 'false',
     '1' => 'true',
   },
@@ -4109,105 +4304,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'F5-BIGIP-LOCAL-MIB'} = 
     '0' => 'false',
     '1' => 'true',
   },
-  ltmHttpProfileCompressAllowHttp10 => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmTcpProfileResetOnTimeout => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmTcpProfileHighPerfTcpExt => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmFastL4ProfileResetOnTimeout => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmRtspProfileSessionReconnect => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmClientSslFwdpEnabled => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmNodeAddrSessionStatus => {
-    '1' => 'enabled',
-    '2' => 'addrdisabled',
-    '3' => 'servdisabled',
-    '4' => 'disabled',
-    '5' => 'forceddisabled',
-  },
-  ltmSpdyProfilePriorityHandling => {
-    '0' => 'strict',
-    '1' => 'fair',
-  },
-  ltmServerSslAuthenticateOnce => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmNetworkAttackDataStatAttackType => {
-    '1' => 'ip-opt-frames',
-    '2' => 'ip-frag-flood',
-    '3' => 'too-many-ext-hdrs',
-    '4' => 'ext-hdr-too-large',
-    '5' => 'ip-low-ttl',
-    '6' => 'hop-cnt-low',
-    '7' => 'ipv6-ext-hdr-frames',
-    '8' => 'ipv6-frag-flood',
-    '9' => 'unk-tcp-opt-type',
-    '10' => 'opt-present-with-illegal-len',
-    '11' => 'tcp-opt-overruns-tcp-hdr',
-    '12' => 'tcp-syn-flood',
-    '13' => 'tcp-synack-flood',
-    '14' => 'tcp-rst-flood',
-    '15' => 'icmpv4-flood',
-    '16' => 'icmp-frag',
-    '17' => 'icmpv6-flood',
-    '18' => 'host-unreachable',
-    '19' => 'tidcmp',
-    '20' => 'udp-flood',
-  },
-  ltmSpdyProfileConfigSource => {
-    '0' => 'usercfg',
-    '1' => 'basecfg',
-  },
-  ltmServerSslDropUntrustCa => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmHttpProfileCompressKeepAcceptEncoding => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmDnsProfileDnsLastAction => {
-    '0' => 'allow',
-    '1' => 'drop',
-    '2' => 'reject',
-    '3' => 'hint',
-    '4' => 'noerror',
-  },
-  ltmSpdyProfileProtocolVersionsProtocolVersions => {
-    '1' => 'spdy2',
-    '2' => 'spdy3',
-    '3' => 'http11',
-  },
-  ltmTcpProfileVerifiedAccept => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmClientSslStrictResume => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmAlgLogProfileStartDataAction => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-    '3' => 'backup-allocation-only',
-  },
-  ltmSipProfileFirewallEnabled => {
+  ltmSpdyProfileInsertHeader => {
     '0' => 'false',
     '1' => 'true',
   },
@@ -4219,90 +4316,86 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'F5-BIGIP-LOCAL-MIB'} = 
     '4' => 'blue',
     '5' => 'gray',
   },
-  ltmVirtualServAvailabilityState => {
-    '0' => 'none',
-    '1' => 'green',
-    '2' => 'yellow',
-    '3' => 'red',
-    '4' => 'blue',
-  },
-  ltmLsnPoolEgressInterfacesEnabled => {
+  ltmServerSslModsslmethods => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmPersistProfileAcrossPools => {
+  ltmServerSslSessionTicket => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmDnsProfileDnssecEnabled => {
+  ltmClientSslAllowNonssl => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmVirtualServEnabledState => {
-    '0' => 'none',
-    '1' => 'enabled',
-    '2' => 'disabled',
-    '3' => 'disabledbyparent',
-  },
-  ltmTcpProfileConfigSource => {
-    '0' => 'usercfg',
-    '1' => 'basecfg',
-  },
-  ltmNodeAddrStatusEnabledState => {
-    '0' => 'none',
-    '1' => 'enabled',
-    '2' => 'disabled',
-    '3' => 'disabledbyparent',
-  },
-  ltmLsnLogProfileQuotaExceededAction => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  ltmFastL4ProfileLooseInitiation => {
+  ltmTcpProfileTailLossProbe => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmRtspProfileConfigSource => {
-    '0' => 'usercfg',
-    '1' => 'basecfg',
-  },
-  ltmPersistProfileMode => {
-    '0' => 'none',
-    '1' => 'srcaddr',
-    '2' => 'dstaddr',
-    '3' => 'cookie',
-    '4' => 'msrdp',
-    '5' => 'sslsid',
-    '6' => 'sip',
-    '7' => 'uie',
-    '8' => 'hash',
-  },
-  ltmIsessionProfileCompressionLzo => {
+  ltmIsessionProfileMode => {
     '0' => 'disabled',
     '1' => 'enabled',
   },
-  ltmServerSslSessionMirroring => {
+  ltmPoolDisallowSnat => {
+    '0' => 'allowed',
+    '1' => 'disallowed',
+  },
+  ltmTcpProfileRatePace => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmClientSslProxySslPassthrough => {
+  ltmDosApplicationLatencyBasedUrlRateLimiting => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmTcpProfileSlowStart => {
+  ltmVirtualServPersistUseDefault => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmPoolStatusEnabledState => {
-    '0' => 'none',
-    '1' => 'enabled',
-    '2' => 'disabled',
-    '3' => 'disabledbyparent',
+  ltmTcpProfileCmetricsCache => {
+    '0' => 'false',
+    '1' => 'true',
   },
-  ltmFastL4ProfileTcpWscaleMode => {
-    '0' => 'preserve',
-    '1' => 'strip',
-    '2' => 'rewrite',
+  ltmServerSslFwdpEnabled => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmHttpProfileCompressBrowserWorkarounds => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmLsnLogProfileErrorsAction => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  ltmVirtualAddrArpEnabled => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmClientSslFwdpEnabled => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmDnsProfileUseLocalBind => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmUdpProfileConfigSource => {
+    '0' => 'usercfg',
+    '1' => 'basecfg',
+  },
+  ltmDosApplicationTpsBasedMode => {
+    '0' => 'off',
+    '1' => 'transparent',
+    '2' => 'blocking',
+  },
+  ltmDnsCacheAnswerDefaultZones => {
+    '0' => 'no',
+    '1' => 'yes',
+  },
+  ltmFtpProfileTranslateExtended => {
+    '0' => 'false',
+    '1' => 'true',
   },
   ltmPoolMbrStatusAvailState => {
     '0' => 'none',
@@ -4312,142 +4405,99 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'F5-BIGIP-LOCAL-MIB'} = 
     '4' => 'blue',
     '5' => 'gray',
   },
-  ltmFastHttpProfileHttp11CloseWorkarounds => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmHttpCompressionProfileKeepAcceptEncoding => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmFastL4ProfileLateBinding => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmHttpProfileRamcacheIgnoreClient => {
+  ltmNodeAddrAvailabilityState => {
     '0' => 'none',
-    '1' => 'maxage',
-    '2' => 'all',
+    '1' => 'green',
+    '2' => 'yellow',
+    '3' => 'red',
+    '4' => 'blue',
   },
-  ltmPersistProfileMsrdpNoSessionDir => {
+  ltmDnsProfileConfigSource => {
+    '0' => 'usercfg',
+    '1' => 'basecfg',
+  },
+  ltmAuthProfileConfigSource => {
+    '0' => 'usercfg',
+    '1' => 'basecfg',
+  },
+  ltmIiopProfilePersistRequestId => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmServerSslFwdpBypassEnabled => {
+  ltmLsnPoolInboundConnections => {
+    '0' => 'disabled',
+    '1' => 'automatic',
+    '2' => 'explicit',
+  },
+  ltmTcpProfileTimestamps => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmIiopProfileAbortOnTimeout => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmVirtualServProfileType => {
-    '0' => 'auth',
-    '1' => 'http',
-    '2' => 'serverssl',
-    '3' => 'clientssl',
-    '4' => 'fastl4',
-    '5' => 'tcp',
-    '6' => 'udp',
-    '7' => 'ftp',
-    '8' => 'persist',
-    '9' => 'connpool',
-    '10' => 'stream',
-    '11' => 'xml',
-    '12' => 'fasthttp',
-    '13' => 'iiop',
-    '14' => 'rtsp',
-    '15' => 'user',
-    '16' => 'httpclass',
-    '17' => 'dns',
-    '18' => 'sctp',
-    '19' => 'instance',
-    '20' => 'sipp',
-    '21' => 'dos',
-    '62' => 'pptp',
-  },
-  ltmHttpCompressionProfileBrowserWorkarounds => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmTcpProfileProxyOptions => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmTcpProfileDelayedAcks => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmSipProfileTerminateBye => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmLsnLogProfileErrorsAction => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  ltmPersistProfileAcrossServices => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmLsnPoolMode => {
-    '0' => 'napt',
-    '1' => 'pba',
-    '2' => 'deterministic',
-  },
-  ltmIsessionProfileCompressionNull => {
+  ltmHttpProfilePipelining => {
     '0' => 'disabled',
     '1' => 'enabled',
   },
-  ltmTcpProfileDelayWindowControl => {
+  ltmPersistProfileAcrossVirtuals => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmHttpClassAsmEnabled => {
+  ltmFastL4ProfileTcpGenerateIsn => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmWebAccelerationProfileCacheInsertAgeHeader => {
+  ltmHttpCompressionProfileSelective => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmIsessionProfileCompressionAdaptive => {
+    '0' => 'disabled',
+    '1' => 'enabled',
+  },
+  ltmTcpProfileDeferredAccept => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmVirtualServListedEnabledVlans => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmHttpProfileCompressMode => {
     '0' => 'disable',
     '1' => 'enable',
+    '2' => 'selective',
   },
-  ltmAuthProfileType => {
-    '0' => 'ldap',
-    '1' => 'radius',
-    '2' => 'sslccldap',
-    '3' => 'sslocsp',
-    '4' => 'tacacs',
-    '5' => 'generic',
-    '6' => 'sslcrldp',
-    '7' => 'krbdelegate',
-  },
-  ltmServerSslStrictResume => {
+  ltmDnsProfileGtmEnabled => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmDnsHeaderFilterOpcodeExclusion => {
-    '0' => 'query',
-    '1' => 'iquery',
-    '2' => 'status',
-    '4' => 'notify',
-    '5' => 'update',
+  ltmDnsCacheUseUdp => {
+    '0' => 'no',
+    '1' => 'yes',
   },
-  ltmDnsProfileUseLocalBind => {
-    '0' => 'false',
-    '1' => 'true',
+  ltmSpdyProfileProtocolVersionsProtocolVersions => {
+    '1' => 'spdy2',
+    '2' => 'spdy3',
+    '3' => 'http11',
   },
-  ltmDosApplicationLatencyBasedSiteClientSideDefense => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmNatListedEnabledVlans => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmVirtualAddrServer => {
+  ltmPoolStatusEnabledState => {
     '0' => 'none',
-    '1' => 'any',
-    '2' => 'all',
+    '1' => 'enabled',
+    '2' => 'disabled',
+    '3' => 'disabledbyparent',
+  },
+  ltmAttrSnatAnyIpProtocol => {
+    '0' => 'disabled',
+    '1' => 'enabled',
+  },
+  ltmFwRuleStatRuleStatType => {
+    '1' => 'enforced',
+    '2' => 'staged',
+    '3' => 'active',
+    '4' => 'overlapper',
+  },
+  ltmDnsProfileCacheEnabled => {
+    '0' => 'false',
+    '1' => 'true',
   },
   ltmPersistProfileCookieMethod => {
     '0' => 'unspecified',
@@ -4456,133 +4506,112 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'F5-BIGIP-LOCAL-MIB'} = 
     '3' => 'passive',
     '4' => 'hash',
   },
-  ltmAlgLogProfileStartDataElementsElements => {
-    '1' => 'destination',
-  },
-  ltmFastHttpProfileInsertXforwardedFor => {
-    '0' => 'disabled',
-    '1' => 'enabled',
-  },
-  ltmPoolQueueOnConnectionLimit => {
-    '0' => 'allowed',
-    '1' => 'disallowed',
-  },
-  ltmTcpProfileTimeWaitRecycle => {
+  ltmClientSslSessionTicket => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmSipProfileInsertVia => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmAlgLogProfileEndDataAction => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-    '3' => 'backup-allocation-only',
-  },
-  ltmDnsCacheUseTcp => {
-    '0' => 'no',
-    '1' => 'yes',
-  },
-  ltmIiopProfilePersistObjectKey => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmRuleConfigSource => {
-    '0' => 'usercfg',
-    '1' => 'basecfg',
-  },
-  ltmWebAccelerationProfileConfigSource => {
-    '0' => 'usercfg',
-    '1' => 'basecfg',
-  },
-  ltmOcspStaplingParametersStrictRespCertCheck => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmLsnPoolRouteAdvertisement => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmTcpProfileBandwidthDelay => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmVirtualServTranslatePort => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmFwRuleStatRuleStatType => {
-    '1' => 'enforced',
-    '2' => 'staged',
-    '3' => 'active',
-    '4' => 'overlapper',
-  },
-  ltmTcpProfileRatePace => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmServerSslSessionTicket => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmDnsProfileDns64Mode => {
+  ltmDnsProfileDns64AdditionalRewrite => {
     '0' => 'disable',
-    '1' => 'secondary',
-    '2' => 'immediate',
-    '3' => 'v4only',
+    '1' => 'v6only',
+    '2' => 'v4only',
+    '3' => 'any',
   },
-  ltmClientSslUncleanShutdown => {
+  ltmPoolAvailabilityState => {
+    '0' => 'none',
+    '1' => 'green',
+    '2' => 'yellow',
+    '3' => 'red',
+    '4' => 'blue',
+  },
+  ltmOcspStaplingParametersUseProxyServer => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmSnatSfFlags => {
+  ltmWebAccelerationProfileCacheIgnoreClient => {
+    '0' => 'none',
+    '1' => 'maxage',
+    '2' => 'all',
+  },
+  ltmClientSslMode => {
     '0' => 'disabled',
     '1' => 'enabled',
   },
-  ltmRateFilterDirection => {
-    '0' => 'any',
-    '1' => 'client',
-    '2' => 'server',
+  ltmSnatType => {
+    '0' => 'none',
+    '1' => 'transaddr',
+    '2' => 'snatpool',
+    '3' => 'automap',
+  },
+  ltmServerSslFwdpBypassEnabled => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmHttpProfileOneConnect => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmServerSslMode => {
+    '0' => 'disabled',
+    '1' => 'enabled',
+  },
+  ltmVirtualAddrAvailabilityState => {
+    '0' => 'none',
+    '1' => 'green',
+    '2' => 'yellow',
+    '3' => 'red',
+    '4' => 'blue',
+  },
+  ltmHttpCompressionProfileConfigSource => {
+    '0' => 'usercfg',
+    '1' => 'basecfg',
+  },
+  ltmFastL4ProfileRttFromClient => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmSctpProfileConfigSource => {
+    '0' => 'usercfg',
+    '1' => 'basecfg',
   },
   ltmAlgLogProfileStartControlElementsElements => {
     '1' => 'destination',
   },
-  ltmFtpProfileConfigSource => {
-    '0' => 'usercfg',
-    '1' => 'basecfg',
+  ltmDosApplicationTpsBasedSiteRateLimiting => {
+    '0' => 'false',
+    '1' => 'true',
   },
-  ltmHttpProfilePipelining => {
-    '0' => 'disabled',
-    '1' => 'enabled',
-  },
-  ltmAttrSnatAnyIpProtocol => {
-    '0' => 'disabled',
-    '1' => 'enabled',
-  },
-  ltmPoolEnabledState => {
+  ltmPoolMemberEnabledState => {
     '0' => 'none',
     '1' => 'enabled',
     '2' => 'disabled',
     '3' => 'disabledbyparent',
   },
-  ltmPptpProfileLogServerIp => {
+  ltmIsessionProfileCompressionDeflate => {
+    '0' => 'disabled',
+    '1' => 'enabled',
+  },
+  ltmXmlProfileAbortOnError => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmHttpProfileCompressBrowserWorkarounds => {
+  ltmSipProfileFirewallEnabled => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmHttpCompressionProfileAllowHttp10 => {
+  ltmLsnPoolMode => {
+    '0' => 'napt',
+    '1' => 'pba',
+    '2' => 'deterministic',
+  },
+  ltmDosApplicationTpsBasedUrlClientSideDefense => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmHttpProfileCompressVaryHeader => {
+  ltmIiopProfileAbortOnTimeout => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmRtspProfileRealHttpPersistence => {
+  ltmFastL4ProfileLooseInitiation => {
     '0' => 'false',
     '1' => 'true',
   },
@@ -4592,25 +4621,38 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'F5-BIGIP-LOCAL-MIB'} = 
     '2' => 'disabled',
     '3' => 'disabledbyparent',
   },
-  ltmDosApplicationTriggerIrule => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmTcpProfileSelectiveAcks => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmAttrPersistDestAddrLimitMode => {
-    '0' => 'timeout',
-    '1' => 'maxcount',
-  },
-  ltmDnsCacheIgnoreCd => {
+  ltmDnsCachePrefetchKey => {
     '0' => 'no',
     '1' => 'yes',
   },
-  ltmRtspProfileMulticastRedirect => {
+  ltmFastHttpProfileHttp11CloseWorkarounds => {
     '0' => 'false',
     '1' => 'true',
+  },
+  ltmVirtualAddrSfFlags => {
+    '0' => 'disabled',
+    '1' => 'enabled',
+  },
+  ltmUdpProfileDatagramLb => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmPoolMemberAvailabilityState => {
+    '0' => 'none',
+    '1' => 'green',
+    '2' => 'yellow',
+    '3' => 'red',
+    '4' => 'blue',
+  },
+  ltmDosApplicationLatencyBasedUrlClientSideDefense => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmTcpProfileMptcpFallback => {
+    '0' => 'reset',
+    '1' => 'retransmit',
+    '2' => 'activeaccept',
+    '3' => 'accept',
   },
   ltmNodeAddrStatusAvailState => {
     '0' => 'none',
@@ -4620,72 +4662,112 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'F5-BIGIP-LOCAL-MIB'} = 
     '4' => 'blue',
     '5' => 'gray',
   },
-  ltmDnsProfileGtmEnabled => {
+  ltmTcpProfileDelayedAcks => {
     '0' => 'false',
     '1' => 'true',
+  },
+  ltmRtspProfileSessionReconnect => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmFastL4ProfileHardSyncookie => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmClientSslConfigSource => {
+    '0' => 'usercfg',
+    '1' => 'basecfg',
+  },
+  ltmSpdyProfileConfigSource => {
+    '0' => 'usercfg',
+    '1' => 'basecfg',
+  },
+  ltmHttpProfileCompressPreferredMethod => {
+    '0' => 'deflate',
+    '1' => 'gzip',
+  },
+  ltmDnsProfileSecurityEnabled => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmDosApplicationLatencyBasedSiteClientSideDefense => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmSpdyProfileActivationMode => {
+    '0' => 'npn',
+    '1' => 'always',
+  },
+  ltmSipProfileInsertRecordRoute => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmServerSslConfigSource => {
+    '0' => 'usercfg',
+    '1' => 'basecfg',
+  },
+  ltmPoolDisallowNat => {
+    '0' => 'allowed',
+    '1' => 'disallowed',
+  },
+  ltmDosApplicationTpsBasedUrlRateLimiting => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmDnsProfileProcessRd => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmAttrPersistDestAddrLimitMode => {
+    '0' => 'timeout',
+    '1' => 'maxcount',
+  },
+  ltmDosApplicationLatencyBasedIpRateLimiting => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmPersistProfileConfigSource => {
+    '0' => 'usercfg',
+    '1' => 'basecfg',
+  },
+  ltmFastL4ProfileSoftSyncookie => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmDnsCacheUseTcp => {
+    '0' => 'no',
+    '1' => 'yes',
   },
   ltmDnsSecurityQueryTypeInclusion => {
     '0' => 'no',
     '1' => 'yes',
   },
-  ltmDosApplicationLatencyBasedMode => {
-    '0' => 'off',
-    '1' => 'transparent',
-    '2' => 'blocking',
-  },
-  ltmDosApplicationTpsBasedIpRateLimiting => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmHttpClassConfigSource => {
+  ltmHttpProfileConfigSource => {
     '0' => 'usercfg',
     '1' => 'basecfg',
   },
-  ltmDosApplicationTpsBasedSiteClientSideDefense => {
+  ltmLsnPoolPersistenceMode => {
+    '0' => 'none',
+    '1' => 'address',
+    '2' => 'addressPort',
+  },
+  ltmSipProfileSecureVia => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmVirtualServCmpEnabled => {
+  ltmFastL4ProfileTimeoutRecovery => {
+    '0' => 'disconnect',
+    '1' => 'fallback',
+  },
+  ltmTcpProfileProxyMss => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmFastL4ProfileIpFragReass => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmIsessionProfileCompressionBzip2 => {
-    '0' => 'disabled',
-    '1' => 'enabled',
-  },
-  ltmPoolLbMode => {
-    '0' => 'roundRobin',
-    '1' => 'ratioMember',
-    '2' => 'leastConnMember',
-    '3' => 'observedMember',
-    '4' => 'predictiveMember',
-    '5' => 'ratioNodeAddress',
-    '6' => 'leastConnNodeAddress',
-    '7' => 'fastestNodeAddress',
-    '8' => 'observedNodeAddress',
-    '9' => 'predictiveNodeAddress',
-    '10' => 'dynamicRatio',
-    '11' => 'fastestAppResponse',
-    '12' => 'leastSessions',
-    '13' => 'dynamicRatioMember',
-    '14' => 'l3Addr',
-    '15' => 'weightedLeastConnMember',
-    '16' => 'weightedLeastConnNodeAddr',
-    '17' => 'ratioSession',
-  },
-  ltmDnsCacheRandomizeQueryNameCase => {
+  ltmDnsCacheUseIpv4 => {
     '0' => 'no',
     '1' => 'yes',
   },
-  ltmConnPoolProfileConfigSource => {
-    '0' => 'usercfg',
-    '1' => 'basecfg',
-  },
-  ltmFastHttpProfileResetOnTimeout => {
+  ltmDnsProfileLoggingEnabled => {
     '0' => 'false',
     '1' => 'true',
   },
@@ -4693,170 +4775,70 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'F5-BIGIP-LOCAL-MIB'} = 
     '0' => 'false',
     '1' => 'true',
   },
-  ltmVirtualServPersistUseDefault => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmHttpCompressionProfileCpusaver => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmSipProfileSecureVia => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmFastHttpProfileConfigSource => {
+  ltmWebAccelerationProfileConfigSource => {
     '0' => 'usercfg',
     '1' => 'basecfg',
   },
-  ltmClientSslMode => {
+  ltmTcpProfileDsack => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmTransAddrArpEnabled => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmSipProfileConfigSource => {
+    '0' => 'usercfg',
+    '1' => 'basecfg',
+  },
+  ltmNatListedEnabledVlans => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmIsessionProfilePortTransparency => {
     '0' => 'disabled',
     '1' => 'enabled',
   },
-  ltmIsessionProfileTargetVirtual => {
+  ltmClientSslSessionMirroring => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmRateFilterQtype => {
     '0' => 'none',
-    '1' => 'hostmatchnoisession',
-    '2' => 'hostmatchall',
-    '3' => 'matchall',
+    '1' => 'sfq',
+    '2' => 'pfifo',
   },
-  ltmClientSslSessionTicket => {
-    '0' => 'false',
-    '1' => 'true',
+  ltmHttpProfileRedirectRewrite => {
+    '0' => 'none',
+    '1' => 'all',
+    '2' => 'matching',
+    '3' => 'nodes',
   },
-  ltmPoolDisallowNat => {
-    '0' => 'allowed',
-    '1' => 'disallowed',
-  },
-  ltmFastL4ProfileTcpTimestampMode => {
-    '0' => 'preserve',
-    '1' => 'strip',
-    '2' => 'rewrite',
-  },
-  ltmHttpProfileCompressMode => {
-    '0' => 'disable',
-    '1' => 'enable',
-    '2' => 'selective',
-  },
-  ltmTcpProfileMptcpNojoindssack => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmServerSslPeerCertMode => {
-    '0' => 'ignore',
-    '1' => 'require',
-  },
-  ltmFastHttpProfileForceHttp10Response => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmClientSslFwdpLookupByIpaddrPort => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmLsnPoolIcmpEcho => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmDosApplicationTpsBasedSiteRateLimiting => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmTcpProfileCmetricsCache => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmVirtualServClonePoolType => {
-    '0' => 'unspec',
-    '1' => 'clientside',
-    '2' => 'serverside',
-  },
-  ltmXmlProfileConfigSource => {
-    '0' => 'usercfg',
-    '1' => 'basecfg',
-  },
-  ltmSctpProfileTcpShutdown => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmTcpProfileMptcpMakeafterbreak => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmOcspStaplingParametersSignHash => {
-    '0' => 'sha1',
-    '1' => 'sha256',
-  },
-  ltmVirtualServActualPvaAccel => {
-    '0' => 'full',
-    '1' => 'partial',
-    '2' => 'none',
-  },
-  ltmTcpProfileNagle => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmDosApplicationTpsBasedMode => {
-    '0' => 'off',
-    '1' => 'transparent',
-    '2' => 'blocking',
-  },
-  ltmPersistProfileAcrossVirtuals => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmClientSslProxySsl => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmVirtualAddrIsFloat => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmTcpProfileAckOnPush => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmHttpProfileConfigSource => {
-    '0' => 'usercfg',
-    '1' => 'basecfg',
-  },
-  ltmServerSslProxySslPassthrough => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmTcpProfileCongestionCtrl => {
-    '0' => 'reno',
-    '1' => 'newreno',
-    '2' => 'scalable',
-    '3' => 'highspeed',
-    '4' => 'none',
-    '5' => 'vegas',
-    '6' => 'illinois',
-    '7' => 'woodside',
-    '8' => 'chd',
-    '9' => 'cdg',
-    '10' => 'cubic',
-    '11' => 'westwood',
-  },
-  ltmDnsCacheUseIpv6 => {
+  ltmDnsCacheRandomizeQueryNameCase => {
     '0' => 'no',
     '1' => 'yes',
   },
-  ltmHttpProfileRamcache => {
-    '0' => 'disable',
-    '1' => 'enable',
+  ltmVirtualServProfileContext => {
+    '0' => 'all',
+    '1' => 'client',
+    '2' => 'server',
   },
-  ltmPoolMemberNewSessionEnable => {
-    '1' => 'user-disabled',
-    '2' => 'user-enabled',
-    '3' => 'monitor-enabled',
-    '4' => 'monitor-disabled',
+  ltmVirtualServType => {
+    '0' => 'poolbased',
+    '1' => 'ipforward',
+    '2' => 'l2forward',
+    '3' => 'reject',
+    '4' => 'fastl4',
+    '5' => 'fasthttp',
+    '6' => 'stateless',
+    '7' => 'dhcp-relay',
+    '8' => 'internal',
   },
-  ltmPoolDisallowSnat => {
-    '0' => 'allowed',
-    '1' => 'disallowed',
+  ltmSipProfileInsertVia => {
+    '0' => 'false',
+    '1' => 'true',
   },
-  ltmServerSslGenericAlert => {
+  ltmDnsProfileFastDnsEnabled => {
     '0' => 'false',
     '1' => 'true',
   },
@@ -4866,101 +4848,25 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'F5-BIGIP-LOCAL-MIB'} = 
     '2' => 'disabled',
     '3' => 'disabledbyparent',
   },
-  ltmTcpProfileDsack => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmPoolMemberMonitorStatus => {
-    '0' => 'unchecked',
-    '1' => 'checking',
-    '2' => 'inband',
-    '3' => 'forced-up',
-    '4' => 'up',
-    '18' => 'addr-down',
-    '19' => 'down',
-    '20' => 'forced-down',
-    '21' => 'maint',
-    '22' => 'irule-down',
-    '23' => 'inband-down',
-    '24' => 'down-manual-resume',
-  },
-  ltmHttpCompressionProfileSelective => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmNodeAddrNewSessionEnable => {
-    '1' => 'user-disabled',
-    '2' => 'user-enabled',
-    '3' => 'monitor-enabled',
-    '4' => 'monitor-disabled',
-  },
-  ltmLsnLogProfileConfigSource => {
+  ltmIiopProfileConfigSource => {
     '0' => 'usercfg',
     '1' => 'basecfg',
   },
-  ltmIsessionProfileConnectionReuse => {
+  ltmVirtualServSnatType => {
+    '0' => 'none',
+    '1' => 'transaddr',
+    '2' => 'snatpool',
+    '3' => 'automap',
+  },
+  ltmHttpCompressionProfileCpusaver => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmHttpProfileTruncatedRedirects => {
     '0' => 'disabled',
     '1' => 'enabled',
   },
-  ltmXmlProfileMultipleQueryMatches => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmServerSslConfigSource => {
-    '0' => 'usercfg',
-    '1' => 'basecfg',
-  },
-  ltmTransAddrEnabled => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmSipProfileConfigSource => {
-    '0' => 'usercfg',
-    '1' => 'basecfg',
-  },
-  ltmClientSslSslSignHash => {
-    '0' => 'any',
-    '1' => 'sha1',
-    '2' => 'sha256',
-    '3' => 'sha384',
-  },
-  ltmAttrMirrorState => {
-    '0' => 'disabled',
-    '1' => 'enabled',
-  },
-  ltmClientSslAllowNonssl => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmHttpProfileRamcacheInsertAgeHeader => {
-    '0' => 'disable',
-    '1' => 'enable',
-  },
-  ltmVirtualServSfFlags => {
-    '0' => 'disabled',
-    '1' => 'enabled',
-  },
-  ltmIsessionProfileCompressionAdaptive => {
-    '0' => 'disabled',
-    '1' => 'enabled',
-  },
-  ltmDnsProfileLoggingEnabled => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmTcpProfileAbc => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmDosApplicationLatencyBasedUrlClientSideDefense => {
-    '0' => 'false',
-    '1' => 'true',
-  },
-  ltmAuthProfileMode => {
-    '0' => 'disabled',
-    '1' => 'enabled',
-  },
-  ltmDosApplicationLatencyBasedUrlRateLimiting => {
+  ltmSipProfileTerminateBye => {
     '0' => 'false',
     '1' => 'true',
   },
@@ -4978,22 +4884,120 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'F5-BIGIP-LOCAL-MIB'} = 
     '23' => 'inband-down',
     '24' => 'down-manual-resume',
   },
-  ltmHttpCompressionProfileConfigSource => {
+  ltmDnsCacheType => {
+    '0' => 'resolver',
+    '1' => 'validating-resolver',
+    '2' => 'transparent-resolver',
+  },
+  ltmRtspProfileConfigSource => {
     '0' => 'usercfg',
     '1' => 'basecfg',
   },
-  ltmServerSslUncleanShutdown => {
+  ltmIiopProfilePersistObjectKey => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmServerSslProxySsl => {
+  ltmFastL4ProfileIpFragReass => {
     '0' => 'false',
     '1' => 'true',
   },
-  ltmDnsProfileDns64AdditionalRewrite => {
-    '0' => 'disable',
-    '1' => 'v6only',
-    '2' => 'v4only',
-    '3' => 'any',
+  ltmTcpProfileConfigSource => {
+    '0' => 'usercfg',
+    '1' => 'basecfg',
+  },
+  ltmIsessionProfileTargetVirtual => {
+    '0' => 'none',
+    '1' => 'hostmatchnoisession',
+    '2' => 'hostmatchall',
+    '3' => 'matchall',
+  },
+  ltmHttpProfilePassthroughOversizeClientHeaders => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmTcpProfileMptcpDebug => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmFastL4ProfileLateBinding => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmAlgLogProfileEndControlAction => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+    '3' => 'backup-allocation-only',
+  },
+  ltmPersistProfileMsrdpNoSessionDir => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmVsStatusEnabledState => {
+    '0' => 'none',
+    '1' => 'enabled',
+    '2' => 'disabled',
+    '3' => 'disabledbyparent',
+  },
+  ltmLsnPoolHairpinMode => {
+    '0' => 'disabled',
+    '1' => 'enabled',
+  },
+  ltmRateFilterDirection => {
+    '0' => 'any',
+    '1' => 'client',
+    '2' => 'server',
+  },
+  ltmFastHttpProfileConnpoolReplenish => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmFwPolicyRuleStatRuleStatType => {
+    '1' => 'enforced',
+    '2' => 'staged',
+    '3' => 'active',
+    '4' => 'overlapper',
+  },
+  ltmVirtualAddrEnabledState => {
+    '0' => 'none',
+    '1' => 'enabled',
+    '2' => 'disabled',
+    '3' => 'disabledbyparent',
+  },
+  ltmServerSslDropExpCert => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmVAddrStatusAvailState => {
+    '0' => 'none',
+    '1' => 'green',
+    '2' => 'yellow',
+    '3' => 'red',
+    '4' => 'blue',
+    '5' => 'gray',
+  },
+  ltmNatArpEnabled => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmAlgLogProfileConfigSource => {
+    '0' => 'usercfg',
+    '1' => 'basecfg',
+  },
+  ltmVirtualServSfFlags => {
+    '0' => 'disabled',
+    '1' => 'enabled',
+  },
+  ltmDosApplicationLatencyBasedIpClientSideDefense => {
+    '0' => 'false',
+    '1' => 'true',
+  },
+  ltmHttpProfilePassthroughUnknownMethod => {
+    '0' => 'reject',
+    '1' => 'allow',
+    '2' => 'passthrough',
+  },
+  ltmNatEnabled => {
+    '0' => 'false',
+    '1' => 'true',
   },
 };
