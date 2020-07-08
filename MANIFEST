@@ -127,6 +127,16 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNOSBGP4V2MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/KYOCERAPRIVATEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LARAMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LCOSMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LEFTHANDNETWORKSNSMCLUSTERINGMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LEFTHANDNETWORKSNSMDNSMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LEFTHANDNETWORKSNSMINFOMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LEFTHANDNETWORKSNSMMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LEFTHANDNETWORKSNSMNETWORKMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LEFTHANDNETWORKSNSMNOTIFICATIONMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LEFTHANDNETWORKSNSMNTPMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LEFTHANDNETWORKSNSMSECURITYMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LEFTHANDNETWORKSNSMSTATUSMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LEFTHANDNETWORKSNSMSTORAGEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LEXMARKMPSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LEXMARKPVTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LEXMARKROOTMIB.pm
