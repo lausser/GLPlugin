@@ -77,6 +77,9 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DELLSTORAGESCMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DISKMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ELTEXMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/EMDMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ENPACPACCMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ENPENVSICMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ENPRDUMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ENTITYMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ENTITYSENSORMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ENTITYSTATEMIB.pm

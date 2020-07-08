@@ -824,7 +824,8 @@ sub init {
     my $confirmed = {};
     foreach my $mib (keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids}) {
       foreach my $sym (keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}}) {
-        if (my $obj = $self->get_snmp_object($mib, $sym)) {
+        my $obj = $self->get_snmp_object($mib, $sym);
+        if (defined $obj) {
           my $oid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$sym};
           if (exists $unknowns->{$oid}) {
             $confirmed->{$oid} = sprintf '%s::%s = %s', $mib, $sym, $obj;
@@ -2740,6 +2741,8 @@ sub make_symbolic {
               $mo->{$symoid} = 'unknown_'.$result->{$oid};
               # oder $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'}?
             }
+          } else {
+            $mo->{$symoid} = $result->{$oid};
           }
         }
       }
