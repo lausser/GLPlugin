@@ -194,6 +194,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/RESOURCEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/RITTALCMCIIIMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/RITTALCMCIIIPRODUCTSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/RITTALCMCTCMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/RITTALLCPDXMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/RMONMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/S5CHASSISMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SEMIMIB.pm
