@@ -224,6 +224,15 @@ sub add_snmp_args {
       decode => "rfc3986",
   );
   $self->add_arg(
+      spec => '--join-communities',
+      help => '--join-communities
+   It --community2 is used, run the query with community, then community2
+   and add up both results. The default is to use community for the initial
+   handshake and community2 for querying (bgp and ospf)',
+      required => 0,
+      default => 0,
+  );
+  $self->add_arg(
       spec => 'snmpwalk=s',
       help => '--snmpwalk
    A file with the output of a snmpwalk (used for simulation)
