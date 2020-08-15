@@ -1157,7 +1157,11 @@ sub establish_snmp_session {
     } else {
       my $max_msg_size = $session->max_msg_size();
       #$session->max_msg_size(4 * $max_msg_size);
-      $Monitoring::GLPlugin::SNMP::maxrepetitions = 20;
+      if ($self->opts->protocol eq "1") {
+        $Monitoring::GLPlugin::SNMP::maxrepetitions = 0;
+      } else {
+        $Monitoring::GLPlugin::SNMP::maxrepetitions = 20;
+      }
       $Monitoring::GLPlugin::SNMP::max_msg_size = $max_msg_size;
       $Monitoring::GLPlugin::SNMP::session = $session;
     }

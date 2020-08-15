@@ -1,3 +1,5 @@
+* 2020-08-15 3.2.26.1
+  no maxrepetitions when protocol 1 is used
 * 2020-07-13 3.2.26
   add RITTAL-LCP-DX-MIB
 * 2020-07-08 3.2.25
