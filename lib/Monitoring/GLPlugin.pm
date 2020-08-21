@@ -20,7 +20,7 @@ eval {
   $Data::Dumper::Sparseseen = 1;
 };
 our $AUTOLOAD;
-*VERSION = \'3.2.26.1';
+*VERSION = \'3.2.26.2';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -1453,7 +1453,8 @@ sub protect_value {
     # if the device gives us an clearly wrong value, simply use the last value.
     my $laststate = $self->load_state(name => 'protect_'.$ident.'_'.$key);
     $self->debug(sprintf "self->{%s} is %s and invalid for the %dth time",
-        $key, $self->{$key}, $laststate->{exception} + 1);
+        $key, defined $self->{$key} ? $self->{$key} : "<undef>",
+         $laststate->{exception} + 1);
     if ($laststate->{exception} <= 5) {
       # but only 5 times.
       # if the error persists, somebody has to check the device.
