@@ -142,6 +142,27 @@ sub getopts {
     *{"all_my_opts"} = sub {
       return $self->{opts}->{all_my_opts};
     };
+    foreach (@{$self->{_args}}) {
+      $_->{spec} =~ /^([\w\-]+)/;
+      my $spec = $1;
+      my $envname = uc $spec;
+      $envname =~ s/\-/_/g;
+      if (! exists $commandline{$spec}) {
+        # Kommandozeile hat oberste Prioritaet
+        # Also: --option ueberschreibt NAGIOS__HOSTOPTION
+        # Aaaaber: extra-opts haben immer noch Vorrang vor allem anderen.
+        # https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html
+        # beschreibt das anders, Posix-Tools verhalten sich auch entsprechend.
+        # Irgendwann wird das hier daher umgeschrieben, so dass extra-opts
+        # die niedrigste Prioritaet erhalten.
+        if (exists $ENV{'NAGIOS__SERVICE'.$envname}) {
+          $commandline{$spec} = $ENV{'NAGIOS__SERVICE'.$envname};
+        } elsif (exists $ENV{'NAGIOS__HOST'.$envname}) {
+          $commandline{$spec} = $ENV{'NAGIOS__HOST'.$envname};
+        }
+      }
+      $self->{opts}->{$spec} = $_->{default};
+    }
     foreach (map { $_->{spec} =~ /^([\w\-]+)/; $1; }
         grep { exists $_->{required} && $_->{required} } @{$self->{_args}}) {
       do { $self->print_usage(); exit 3 } if ! exists $commandline{$_};
