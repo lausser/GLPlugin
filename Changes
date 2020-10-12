@@ -1,3 +1,5 @@
+* 2020-10-12 3.3.1
+  add VORMETRIC-MIB
 * 2020-10-05 3.3
   all command line parameters can now be replaced by environment variables
 * 2020-10-04 3.2.26.3
