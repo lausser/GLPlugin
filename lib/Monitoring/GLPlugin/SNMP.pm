@@ -908,6 +908,8 @@ sub check_snmp_and_model {
         }
       }
       $self->opts->override_opt('hostname', 'walkhost') if $self->opts->mode ne 'walk';
+      my $current_oid = undef;
+      my @multiline_string = ();
       open(MESS, $self->opts->snmpwalk);
       while(<MESS>) {
         # SNMPv2-SMI::enterprises.232.6.2.6.7.1.3.1.4 = INTEGER: 6
@@ -919,6 +921,9 @@ sub check_snmp_and_model {
           $response->{$1} = $2;
         } elsif (/^([\d\.]+) = STRING:\s*$/) {
           $response->{$1} = "";
+        } elsif (/^([\.\d]+) = STRING: "([^"]*)$/) {
+          $current_oid = $1;
+          push(@multiline_string, $2);
         } elsif (/^([\d\.]+) = Network Address: (.*)/) {
           $response->{$1} = $2;
         } elsif (/^([\d\.]+) = Hex-STRING: (.*)/) {
@@ -939,6 +944,12 @@ sub check_snmp_and_model {
         } elsif (/^([\d\.]+) = "(.*?)"/) {
           $response->{$1} = $2;
           $response->{$1} =~ s/\s+$//;
+        } elsif (/^"$/ && @multiline_string && $current_oid) {
+          $response->{$current_oid} = join("\n", @multiline_string);
+          $current_oid = undef;
+          @multiline_string = ();
+        } elsif (/(.*)/ && @multiline_string && $current_oid) {
+          push(@multiline_string, $1);
         }
       }
       close MESS;
