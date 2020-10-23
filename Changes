@@ -1,3 +1,5 @@
+* 2020-10-23 3.3.1.1
+  sort oids for get_snmp_table_objects with single columns
 * 2020-10-12 3.3.1
   add VORMETRIC-MIB
 * 2020-10-05 3.3

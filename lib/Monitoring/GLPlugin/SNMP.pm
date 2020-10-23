@@ -1841,7 +1841,7 @@ sub get_table_row_oids {
   } map {
       [$_, $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$_}]
   } keys %{$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}};
-  return @columns;
+  return $self->sort_oids(\@columns);
 }
 
 # get_snmp_table_objects('MIB-Name', 'Table-Name', 'Table-Entry', [indices])
