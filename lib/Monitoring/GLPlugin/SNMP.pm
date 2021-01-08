@@ -1459,6 +1459,14 @@ sub implements_mib {
     $traces = $Monitoring::GLPlugin::SNMP::session->get_next_request(%params);
     $Monitoring::GLPlugin::SNMP::session->timeout($timeout);
   }
+
+  # endOfMibView probably does not give much information here
+  foreach (keys %{$traces}) {
+    if (${$traces}{$_} eq 'endOfMibView') {
+      delete @{$traces}{$_};
+    }
+  }
+
   if ($traces && # must find oids following to the ident-oid
       ! exists $traces->{$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{$mib}} && # must not be the ident-oid
       grep { # following oid is inside this tree
