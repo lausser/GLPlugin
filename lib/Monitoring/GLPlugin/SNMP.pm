@@ -944,6 +944,11 @@ sub check_snmp_and_model {
         } elsif (/^([\d\.]+) = "(.*?)"/) {
           $response->{$1} = $2;
           $response->{$1} =~ s/\s+$//;
+        } elsif (/^([^"]*)"$/ && @multiline_string && $current_oid) {
+          push(@multiline_string, $1);
+          $response->{$current_oid} = join("\n", @multiline_string);
+          $current_oid = undef;
+          @multiline_string = ();
         } elsif (/^"$/ && @multiline_string && $current_oid) {
           $response->{$current_oid} = join("\n", @multiline_string);
           $current_oid = undef;
