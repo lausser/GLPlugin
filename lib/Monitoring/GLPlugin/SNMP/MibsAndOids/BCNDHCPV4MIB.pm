@@ -1,0 +1,80 @@
+package Monitoring::GLPlugin::SNMP::MibsAndOids::BCNDHCPV4MIB;
+
+$Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'BCN-DHCPV4-MIB'} = {
+  url => '',
+  name => 'BCN-DHCPV4-MIB',
+};
+
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'BCN-DHCPV4-MIB'} =
+    'bcnDhcpv4MIB';
+
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'BCN-DHCPV4-MIB'} = {
+  'bcnDhcpv4' => '1.3.6.1.4.1.13315.3.1.1',
+  'bcnDhcpv4MIB' => '1.3.6.1.4.1.13315.3.1.1.1',
+  'bcnDhcpv4Objects' => '1.3.6.1.4.1.13315.3.1.1.2',
+  'bcnDhcpv4ServiceStatus' => '1.3.6.1.4.1.13315.3.1.1.2.1',
+  'bcnDhcpv4SerOperState' => '1.3.6.1.4.1.13315.3.1.1.2.1.1',
+  'bcnDhcpv4SerOperStateDefinition' => 'BCN-DHCPV4-MIB::bcnDhcpv4SerOperState',
+  'bcnDhcpv4FirstAlertIpAddr' => '1.3.6.1.4.1.13315.3.1.1.2.1.2',
+  'bcnDhcpv4LeaseStatsSuccess' => '1.3.6.1.4.1.13315.3.1.1.2.1.3',
+  'bcnDhcpv4ServiceStatistics' => '1.3.6.1.4.1.13315.3.1.1.2.2',
+  'bcnDhcpv4LeaseTable' => '1.3.6.1.4.1.13315.3.1.1.2.2.1',
+  'bcnDhcpv4LeaseEntry' => '1.3.6.1.4.1.13315.3.1.1.2.2.1.1',
+  'bcnDhcpv4LeaseIP' => '1.3.6.1.4.1.13315.3.1.1.2.2.1.1.1',
+  'bcnDhcpv4LeaseStartTime' => '1.3.6.1.4.1.13315.3.1.1.2.2.1.1.2',
+  'bcnDhcpv4LeaseEndTime' => '1.3.6.1.4.1.13315.3.1.1.2.2.1.1.3',
+  'bcnDhcpv4LeaseTimeStamp' => '1.3.6.1.4.1.13315.3.1.1.2.2.1.1.4',
+  'bcnDhcpv4LeaseMacAddress' => '1.3.6.1.4.1.13315.3.1.1.2.2.1.1.5',
+  'bcnDhcpv4LeaseHostname' => '1.3.6.1.4.1.13315.3.1.1.2.2.1.1.6',
+  'bcnDhcpv4SubnetTable' => '1.3.6.1.4.1.13315.3.1.1.2.2.2',
+  'bcnDhcpv4SubnetEntry' => '1.3.6.1.4.1.13315.3.1.1.2.2.2.1',
+  'bcnDhcpv4SubnetIP' => '1.3.6.1.4.1.13315.3.1.1.2.2.2.1.1',
+  'bcnDhcpv4SubnetMask' => '1.3.6.1.4.1.13315.3.1.1.2.2.2.1.2',
+  'bcnDhcpv4SubnetSize' => '1.3.6.1.4.1.13315.3.1.1.2.2.2.1.3',
+  'bcnDhcpv4SubnetFreeAddresses' => '1.3.6.1.4.1.13315.3.1.1.2.2.2.1.4',
+  'bcnDhcpv4SubnetLowThreshold' => '1.3.6.1.4.1.13315.3.1.1.2.2.2.1.5',
+  'bcnDhcpv4SubnetHighThreshold' => '1.3.6.1.4.1.13315.3.1.1.2.2.2.1.6',
+  'bcnDhcpv4PoolTable' => '1.3.6.1.4.1.13315.3.1.1.2.2.3',
+  'bcnDhcpv4PoolEntry' => '1.3.6.1.4.1.13315.3.1.1.2.2.3.1',
+  'bcnDhcpv4PoolStartIP' => '1.3.6.1.4.1.13315.3.1.1.2.2.3.1.1',
+  'bcnDhcpv4PoolEndIP' => '1.3.6.1.4.1.13315.3.1.1.2.2.3.1.2',
+  'bcnDhcpv4PoolSubnetIP' => '1.3.6.1.4.1.13315.3.1.1.2.2.3.1.3',
+  'bcnDhcpv4PoolSize' => '1.3.6.1.4.1.13315.3.1.1.2.2.3.1.4',
+  'bcnDhcpv4PoolFreeAddresses' => '1.3.6.1.4.1.13315.3.1.1.2.2.3.1.5',
+  'bcnDhcpv4FixedIPTable' => '1.3.6.1.4.1.13315.3.1.1.2.2.4',
+  'bcnDhcpv4FixedIPEntry' => '1.3.6.1.4.1.13315.3.1.1.2.2.4.1',
+  'bcnDhcpv4FixedIP' => '1.3.6.1.4.1.13315.3.1.1.2.2.4.1.1',
+  'bcnDhcpv4Notification' => '1.3.6.1.4.1.13315.3.1.1.3',
+  'bcnDhcpv4NotificationEvents' => '1.3.6.1.4.1.13315.3.1.1.3.0',
+  'bcnDhcpv4NotificationData' => '1.3.6.1.4.1.13315.3.1.1.3.1',
+  'bcnDhcpv4AlarmSeverity' => '1.3.6.1.4.1.13315.3.1.1.3.1.1',
+  'bcnDhcpv4AlarmInfo' => '1.3.6.1.4.1.13315.3.1.1.3.1.2',
+  'bcnDhcpv4FailOverState' => '1.3.6.1.4.1.13315.3.1.1.3.1.3',
+  'bcnDhcpv4FailOverStateDefinition' => 'BCN-DHCPV4-MIB::bcnDhcpv4FailOverState',
+  'bcnDhcpv4SubnetAlertIpAddr' => '1.3.6.1.4.1.13315.3.1.1.3.1.4',
+  'bcnDhcpv4Conformance' => '1.3.6.1.4.1.13315.3.1.1.4',
+  'bcnDhcpv4ServiceCompliances' => '1.3.6.1.4.1.13315.3.1.1.4.1',
+  'bcnDhcpv4ServiceGroups' => '1.3.6.1.4.1.13315.3.1.1.4.2',
+};
+
+$Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'BCN-DHCPV4-MIB'} = {
+  'bcnDhcpv4FailOverState' => {
+    '1' => 'startup',
+    '2' => 'normal',
+    '3' => 'communicationsInterrupted',
+    '4' => 'partnerDown',
+    '5' => 'potentialConflict',
+    '6' => 'recover',
+    '7' => 'paused',
+    '8' => 'shutdown',
+    '9' => 'recoverDone',
+    '254' => 'recoverWait',
+  },
+  'bcnDhcpv4SerOperState' => {
+    '1' => 'running',
+    '2' => 'notRunning',
+    '3' => 'starting',
+    '4' => 'stopping',
+    '5' => 'fault',
+  },
+};

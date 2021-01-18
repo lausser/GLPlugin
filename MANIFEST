@@ -16,6 +16,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ADICINTELLIGENTSTORAGEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ADICMANAGEMENTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ADICTAPELIBRARYMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ADONISDNSMIBMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ADSLLINEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/AIRESPACESWITCHINGMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/AIRESPACEWIRELESSMIB.pm
@@ -28,6 +29,10 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ASYNCOSMAILMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ATSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ATSTHREEPHASEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ATTACKMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/BAMSNMPMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/BCNDHCPV4MIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/BCNDNSMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/BCNSYSTEMMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/BDTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/BGP4MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/BIANCABRICKMIBRESMIB.pm
