@@ -625,6 +625,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'LIEBERT-GP-CONDITIONS
   lgpConditionEntry => '1.3.6.1.4.1.476.1.42.3.2.3.1',
   lgpConditionId => '1.3.6.1.4.1.476.1.42.3.2.3.1.1',
   lgpConditionDescr => '1.3.6.1.4.1.476.1.42.3.2.3.1.2',
+  lgpConditionDescrDefinition => 'OID::LIEBERT-GP-CONDITIONS-MIB',
   lgpConditionTime => '1.3.6.1.4.1.476.1.42.3.2.3.1.3',
   lgpConditionTableRef => '1.3.6.1.4.1.476.1.42.3.2.3.1.5',
   lgpConditionTableRowRef => '1.3.6.1.4.1.476.1.42.3.2.3.1.6',
