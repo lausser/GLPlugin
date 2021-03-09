@@ -17,7 +17,6 @@ plugins-scripts/check_*_health
 plugins-scripts/subst
 contrib/
 *.cfg
-t/etc
 t/this_is_random.*
 t/bin/*.bat
 t/*.ptkdb

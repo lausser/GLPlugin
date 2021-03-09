@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Test::More;
 
-plan tests => 1;
+plan tests => 7;
 
 @ARGV = (
   '--mode', 'uptime',
@@ -25,6 +25,7 @@ if ( ! grep /BEGIN/, keys %Monitoring::GLPlugin::) {
     require Monitoring::GLPlugin::UPNP;
   };
 }
+
 ok(grep /BEGIN/, keys %Monitoring::GLPlugin::, 'module loaded');
 
 my $plugin = Monitoring::GLPlugin->new(
