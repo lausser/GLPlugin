@@ -531,12 +531,14 @@ sub check_thresholds {
     $value = $params{value};
     my $metric = $params{metric};
     if ($metric ne 'default') {
-      $warningrange = exists $self->{thresholds}->{$metric}->{warning} ?
-          $self->{thresholds}->{$metric}->{warning} :
-          $self->{thresholds}->{default}->{warning};
-      $criticalrange = exists $self->{thresholds}->{$metric}->{critical} ?
-          $self->{thresholds}->{$metric}->{critical} :
-          $self->{thresholds}->{default}->{critical};
+      $warningrange = defined $params{warning} ? $params{warning} :
+          (exists $self->{thresholds}->{$metric}->{warning} ?
+              $self->{thresholds}->{$metric}->{warning} :
+              $self->{thresholds}->{default}->{warning});
+      $criticalrange = defined $params{critical} ? $params{critical} :
+          (exists $self->{thresholds}->{$metric}->{critical} ?
+              $self->{thresholds}->{$metric}->{critical} :
+              $self->{thresholds}->{default}->{critical});
     } else {
       $warningrange = (defined $params{warning}) ?
           $params{warning} : $self->{thresholds}->{default}->{warning};
