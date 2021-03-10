@@ -1269,7 +1269,7 @@ sub bulk_baeh_reset {
   my ($self, $maxrepetitions) = @_;
   $self->reset_snmp_max_msg_size();
   $Monitoring::GLPlugin::SNMP::maxrepetitions =
-      $Monitoring::GLPlugin::SNMP::session->max_msg_size() * 0.017;
+      int($Monitoring::GLPlugin::SNMP::session->max_msg_size() * 0.017);
 }
 
 sub bulk_is_baeh {
