@@ -21,6 +21,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'CISCO-ENTITY-SENSOR-M
   'entSensorScaleDefinition' => 'CISCO-ENTITY-SENSOR-MIB::SensorDataScale',
   'entSensorPrecision' => '1.3.6.1.4.1.9.9.91.1.1.1.1.3',
   'entSensorValue' => '1.3.6.1.4.1.9.9.91.1.1.1.1.4',
+  'entSensorValueDefinition' => 'CISCO-ENTITY-SENSOR-MIB::entSensorValue(entSensorScale,entSensorType)',
   'entSensorStatus' => '1.3.6.1.4.1.9.9.91.1.1.1.1.5',
   'entSensorStatusDefinition' => 'CISCO-ENTITY-SENSOR-MIB::SensorStatus',
   'entSensorValueTimeStamp' => '1.3.6.1.4.1.9.9.91.1.1.1.1.6',
@@ -94,6 +95,35 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'CISCO-ENTITY-SENSOR-MIB
     '15' => 'peta',
     '16' => 'zetta',
     '17' => 'yotta',
+  },
+  'entSensorValue' => sub {
+    my($value, $scale, $type) = @_;
+    if ($type eq "truthvalue") {
+      return $value ? "true" : "false";
+    } elsif ($type eq "specialEnum") {
+      return $value;
+    } else {
+      my $exp = {
+          yocto => -24,
+          zepto => -21,
+          atto => -18,
+          femto => -15,
+          pico => -12,
+          nano => -9,
+          micro => -6,
+          milli => -3,
+          units => 0,
+          kilo => 3,
+          mega => 6,
+          giga => 9,
+          tera => 12,
+          exa => 15,
+          peta => 18,
+          zetta => 21,
+          yotta => 24,
+      };
+      return exists $exp->{$scale} ? $value * 10 ** $exp->{$scale} : $value;
+    }
   },
 };
 
