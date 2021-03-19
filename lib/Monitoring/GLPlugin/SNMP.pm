@@ -2609,19 +2609,23 @@ sub make_symbolic {
                     exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition} &&
                     ref($Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}) eq 'CODE') {
                   if ($parameters) {
-                    if (! exists $mo->{$parameters}) {
-                      # this happens if there are two isolated get_snmp_object calls, one for
-                      # cLHaPeerIpAddressType and one for cLHaPeerIpAddress where the latter needs
-                      # the symbolized value of the first. we are inside this index-loop because
-                      # both have this usual extra .0 although this is not a table row.
-                      # if this were a table row, $mo would know cLHaPeerIpAddressType.
-                      # there's a chance that $self got cLHaPeerIpAddressType in a previous call
-                      # to make_symbolic
-                      if (@{$indices} and scalar(@{$indices}) == 1 and ! $indices->[0]->[0]) {
-                        $mo->{$parameters} = $self->{$parameters};
+                    my @args = ($result->{$fulloid});
+                    foreach my $parameter (split(",", $parameters)) {
+                      if (! exists $mo->{$parameter}) {
+                        # this happens if there are two isolated get_snmp_object calls, one for
+                        # cLHaPeerIpAddressType and one for cLHaPeerIpAddress where the latter needs
+                        # the symbolized value of the first. we are inside this index-loop because
+                        # both have this usual extra .0 although this is not a table row.
+                        # if this were a table row, $mo would know cLHaPeerIpAddressType.
+                        # there's a chance that $self got cLHaPeerIpAddressType in a previous call
+                        # to make_symbolic
+                        if (@{$indices} and scalar(@{$indices}) == 1 and ! $indices->[0]->[0]) {
+                          $mo->{$parameter} = $self->{$parameter};
+                        }
                       }
+                      push(@args, $mo->{$parameter});
                     }
-                    $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->($result->{$fulloid}, $mo->{$parameters});
+                    $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->(@args);
                   } else {
                     $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->($result->{$fulloid});
                   }
@@ -2689,12 +2693,16 @@ sub make_symbolic {
                     exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition} &&
                     ref($Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}) eq 'CODE') {
                   if ($parameters) {
-                    if (! exists $mo->{$parameters}) {
-                      if (@{$indices} and scalar(@{$indices}) == 1 and ! $indices->[0]->[0]) {
-                        $mo->{$parameters} = $self->{$parameters};
+                    my @args = ($result->{$fulloid});
+                    foreach my $parameter (split(",", $parameters)) {
+                      if (! exists $mo->{$parameter}) {
+                        if (@{$indices} and scalar(@{$indices}) == 1 and ! $indices->[0]->[0]) {
+                          $mo->{$parameter} = $self->{$parameter};
+                        }
                       }
+                      push(@args, $mo->{$parameter});
                     }
-                    $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->($result->{$fulloid}, $mo->{$parameters});
+                    $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->(@args);
                   } else {
                     $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->($result->{$fulloid});
                   }

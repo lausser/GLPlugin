@@ -19,6 +19,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'ENTITY-SENSOR-MIB'} =
   entPhySensorScaleDefinition => 'ENTITY-SENSOR-MIB::EntitySensorDataScale',
   entPhySensorPrecision => '1.3.6.1.2.1.99.1.1.1.3',
   entPhySensorValue => '1.3.6.1.2.1.99.1.1.1.4',
+  #entPhySensorValueDefinition => 'ENTITY-SENSOR-MIB::entPhySensorValue(entPhySensorScale,entPhySensorType)',
   entPhySensorOperStatus => '1.3.6.1.2.1.99.1.1.1.5',
   entPhySensorOperStatusDefinition => 'ENTITY-SENSOR-MIB::EntitySensorStatus',
   entPhySensorUnitsDisplay => '1.3.6.1.2.1.99.1.1.1.6',
@@ -67,5 +68,36 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'ENTITY-SENSOR-MIB'} = {
     '1' => 'ok',
     '2' => 'unavailable',
     '3' => 'nonoperational',
+  },
+  entPhySensorValue => sub {
+    my($value, $scale, $type) = @_;
+    if ($type eq "truthvalue") {
+      return $value ? "true" : "false";
+    } else {
+      my $exp = {
+# Irgend so ein Hanswurscht bei Cisco hat fuer alle Werte einer ASA
+# entPhySensorScale auf yocto gesetzt.
+# rpm sensor PS0 Fan Sensor reports 5.9e-21rpm
+# Viel ist das nicht. Depp.
+#          yocto => -24,
+          zepto => -21,
+          atto => -18,
+          femto => -15,
+          pico => -12,
+          nano => -9,
+          micro => -6,
+          milli => -3,
+          units => 0,
+          kilo => 3,
+          mega => 6,
+          giga => 9,
+          tera => 12,
+          exa => 15,
+          peta => 18,
+          zetta => 21,
+          yotta => 24,
+      };
+      return exists $exp->{$scale} ? $value * 10 ** $exp->{$scale} : $value;
+    }
   },
 };

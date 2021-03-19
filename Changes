@@ -1,3 +1,5 @@
+* 2021-03-19 3.3.3.4
+  bugfix in CISCO-ENTITY-SENSOR-MIB + ENTITY-SENSOR-MIB. Scale values correctly.
 * 2021-03-09 3.3.3.3
   bugfix in check_thresholds
 * 2021-03-08 3.3.3.2
