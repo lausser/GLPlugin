@@ -90,6 +90,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ENTITYMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ENTITYSENSORMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ENTITYSTATEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ENVIROMUX5D.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/EPPCMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ETHERLIKEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/F5BIGIPAPMMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/F5BIGIPGLOBALMIB.pm
