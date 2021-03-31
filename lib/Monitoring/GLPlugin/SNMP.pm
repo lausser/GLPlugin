@@ -1469,6 +1469,10 @@ sub implements_mib {
       grep { # following oid is inside this tree
           substr($_, 0, length($check_oid)) eq $check_oid
       } keys %{$traces}) {
+    if (exists $traces->{$check_oid} &&
+        $traces->{$check_oid} eq "endOfMibView") {
+      return 0;
+    }
     $self->debug(sprintf "implements %s (found traces)", $mib);
     return 1;
   }
