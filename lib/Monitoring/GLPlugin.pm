@@ -20,7 +20,7 @@ eval {
   $Data::Dumper::Sparseseen = 1;
 };
 our $AUTOLOAD;
-*VERSION = \'3.3.4.1';
+*VERSION = \'3.4';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -77,8 +77,10 @@ sub dumper {
 
 sub no_such_mode {
   my ($self) = @_;
-  printf "Mode %s is not implemented for this type of device\n",
-      $self->opts->mode;
+  $self->nagios_exit(3,
+      sprintf "Mode %s is not implemented for this type of device",
+      $self->opts->mode
+  );
   exit 3;
 }
 

@@ -133,8 +133,10 @@ sub no_such_mode {
     $self->init();
   }
   if (ref($self) eq "Monitoring::GLPlugin") {
-    printf "Mode %s is not implemented for this type of device\n",
-        $self->opts->mode;
+    $self->nagios_exit(3,
+        sprintf "Mode %s is not implemented for this type of device",
+        $self->opts->mode
+    );
     exit 3;
   }
 }

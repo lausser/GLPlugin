@@ -1,3 +1,5 @@
+* 2021-04-07 3.4
+  use nagios_exit for not implemented modes
 * 2021-03-31 3.3.4.1
   bugfix in implements_mib
 * 2021-03-23 3.3.4
