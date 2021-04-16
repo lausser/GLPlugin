@@ -1,3 +1,5 @@
+* 2021-04-16 3.4.0.1
+  pr #30, Fix Month '-1' out of range 0..11
 * 2021-04-07 3.4
   use nagios_exit for not implemented modes
 * 2021-03-31 3.3.4.1
