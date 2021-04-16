@@ -77,6 +77,11 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'MIB-2-MIB'} = {
             $dirutc, $hoursutc, $minutesutc) = unpack "C*", pack "H*", $value;
         $minutesutc ||= 0;
         $dirutc = ($dirutc == 43) ? "+" : ($dirutc == 45) ? "-" : "+";
+        if ($value eq "000000000000000000") {
+          $day = 1;
+          $month = 1;
+          $year = 1970;
+        }
       } else {
         ($month, $day, $hour, $minute, $second, $dseconds) = unpack "C*", pack "H*", $value;
         $second ||= 0;
