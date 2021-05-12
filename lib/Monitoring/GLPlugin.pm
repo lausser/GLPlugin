@@ -20,7 +20,7 @@ eval {
   $Data::Dumper::Sparseseen = 1;
 };
 our $AUTOLOAD;
-*VERSION = \'3.4.0.1';
+*VERSION = \'3.4.0.2';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -1453,7 +1453,9 @@ sub protect_value {
     });
   } else {
     # if the device gives us an clearly wrong value, simply use the last value.
-    my $laststate = $self->load_state(name => 'protect_'.$ident.'_'.$key);
+    my $laststate = $self->load_state(name => 'protect_'.$ident.'_'.$key) || {
+        exception => 0,
+    };
     $self->debug(sprintf "self->{%s} is %s and invalid for the %dth time",
         $key, defined $self->{$key} ? $self->{$key} : "<undef>",
          $laststate->{exception} + 1);
