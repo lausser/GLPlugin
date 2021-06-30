@@ -2177,6 +2177,7 @@ sub get_entries_get_bulk {
     $newparams{-contextengineid} = $self->opts->contextengineid if $self->opts->contextengineid;
     $newparams{-contextname} = $self->opts->contextname if $self->opts->contextname;
   }
+  delete $newparams{'-maxrepetitions'}; # bulk howe gsagt!!
   $result = $Monitoring::GLPlugin::SNMP::session->get_entries(%newparams);
   return $result;
 }
