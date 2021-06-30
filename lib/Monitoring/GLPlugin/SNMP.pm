@@ -368,12 +368,39 @@ sub init {
         printf "OK - all requested oids are in %s\n", $name;
       }
     } else {
+      my @credentials = ();
+      my $credmapping = {
+        "-community" => "-c",
+        "-privpassword" => "-X",
+        "-privprotocol" => "-x",
+        "-authpassword" => "-A",
+        "-authprotocol" => "-a",
+        "-username" => "-u",
+        "-context" => "-n",
+        "-version" => "-v",
+      };
+      foreach (keys %{$Monitoring::GLPlugin::SNMP::session_params}) {
+        if (exists $credmapping->{$_}) {
+          push(@credentials, sprintf "%s '%s'",
+              $credmapping->{$_},
+              $Monitoring::GLPlugin::SNMP::session_params->{$_}
+          );
+        }
+      }
+      if (grep(/-X/, @credentials) and grep(/-A/, @credentials)) {
+        push(@credentials, "-l authPriv");
+      } elsif (grep(/-A/, @credentials)) {
+        push(@credentials, "-l authNoPriv");
+      } else {
+        push(@credentials, "-l noAuthNoPriv");
+      }
+      my $credentials = join(" ", @credentials);
+      $credentials =~ s/-v2 /-v2c /g;
       printf "rm -f %s\n", $name;
       foreach (@trees) {
-        printf "%s -ObentU -v%s -c %s %s %s >> %s\n",
+        printf "%s -ObentU %s %s %s >> %s\n",
             ($self->mode =~ /bulk/) ? "snmpbulkwalk -t 15 -r 20" : "snmpwalk",
-            $self->opts->protocol,
-            $self->opts->community,
+            $credentials,
             $self->opts->hostname,
             $_, $name;
       }
@@ -1180,6 +1207,7 @@ sub establish_snmp_session {
       }
       $Monitoring::GLPlugin::SNMP::max_msg_size = $max_msg_size;
       $Monitoring::GLPlugin::SNMP::session = $session;
+      $Monitoring::GLPlugin::SNMP::session_params = \%params;
     }
   } else {
     $self->add_message(CRITICAL,
