@@ -40,6 +40,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/BINTECFILESYS.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/BLUECOATAVMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/BLUECOATSGPROXYMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/BROTHERMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CARELUG40CDZMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CHECKPOINTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOBGP4MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOCCMMIB.pm
@@ -132,6 +133,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNIPERMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNIPERRPSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNIPERSRX5000SPUMONITORINGMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNOSBGP4V2MIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/KELVINPCOWEBLCPDXMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/KYOCERAPRIVATEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LARAMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LCOSMIB.pm
