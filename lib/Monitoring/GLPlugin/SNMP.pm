@@ -819,7 +819,7 @@ sub init {
     push(@{$mibdepot}, ['1.3.6.1.2.1.65', 'ietf', 'v2', 'WWW-MIB']);
     push(@{$mibdepot}, ['1.3.6.1.4.1.8072', 'net-snmp', 'v2', 'NET-SNMP-MIB']);
     my $oids = $self->get_entries_by_walk(-varbindlist => [
-        '1.3.6.1.2.1', '1.3.6.1.4.1',
+        '1.3.6.1.2.1', '1.3.6.1.4.1', '1',
     ]);
     foreach my $mibinfo (@{$mibdepot}) {
       next if $self->opts->protocol eq "1" && $mibinfo->[2] ne "v1";
@@ -843,7 +843,8 @@ sub init {
     }
     my $toplevels = {};
     map {
-        /^(1\.3\.6\.1\.(\d+)\.(\d+)\.\d+\.\d+)\./; $toplevels->{$1} = 1; 
+        /^(1\.\d+\.\d+\.\d+\.\d+\.\d+\.\d+\.\d+)\./ and $toplevels->{$1} = 1; 
+        /^(1\.\d+\.\d+\.\d+\.\d+\.\d+\.\d+\.\d+\.\d+\.\d+\.\d+\.\d+)\./ and $toplevels->{$1} = 1; 
     } keys %{$unknowns};
     foreach (sort {$a cmp $b} keys %{$toplevels}) {
       push(@outputlist, ["<unknown>", $_]);
@@ -939,6 +940,7 @@ sub check_snmp_and_model {
       my @multiline_string = ();
       open(MESS, $self->opts->snmpwalk);
       while(<MESS>) {
+        next if /No Such Object available on this agent at this OID/;
         # SNMPv2-SMI::enterprises.232.6.2.6.7.1.3.1.4 = INTEGER: 6
         if (/^([\d\.]+) = .*?INTEGER: .*\((\-*\d+)\)/) {
           # .1.3.6.1.2.1.2.2.1.8.1 = INTEGER: down(2)
@@ -2426,6 +2428,9 @@ sub get_entries_by_walk {
         while (my $result = $Monitoring::GLPlugin::SNMP::session->get_bulk_request(%params)) {
           my @names = $Monitoring::GLPlugin::SNMP::session->var_bind_names();
           my @oids = $self->sort_oids(\@names);
+          foreach (keys %{$result}) {
+            $self->add_rawdata($_, $result->{$_});
+          }
           $params{-varbindlist} = [pop @oids];
         }
       }
