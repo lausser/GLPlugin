@@ -1,3 +1,5 @@
+* 2021-09-01 3.4.3.1
+  fix entPhySensorValue scaling
 * 2021-09-01 3.4.3
   add DC-BGP-MIB
   add DEVICE-MIB
