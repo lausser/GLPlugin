@@ -25,6 +25,12 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ALCATELIND1BASEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ARISTABGP4V2MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ARISTAENTITYSENSORMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ARUBATCMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ARUBAWIREDCHASSISMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ARUBAWIREDFANMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ARUBAWIREDFANTRAYMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ARUBAWIREDPOWERSUPPLYMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ARUBAWIREDTEMPSENSORMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ARUBAWIREDVSFMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ASYNCOSMAILMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ATSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ATSTHREEPHASEMIB.pm
