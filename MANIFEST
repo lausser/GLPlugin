@@ -206,6 +206,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/POWERNETMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/PRINTERMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/PRINTERPORTMONITORMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/PROXYMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/PULSESECUREPSGMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/QUANTUMMIDRANGETAPELIBRARYMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/QUANTUMSMALLTAPELIBRARYMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/QUANTUMSNMPMIB.pm
