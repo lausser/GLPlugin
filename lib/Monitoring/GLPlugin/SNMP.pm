@@ -5,6 +5,8 @@ our @ISA = qw(Monitoring::GLPlugin);
 use strict;
 use File::Basename;
 use Digest::MD5 qw(md5_hex);
+use JSON;
+use File::Slurp qw(read_file);
 use Module::Load;
 use AutoLoader;
 our $AUTOLOAD;
@@ -1658,9 +1660,14 @@ sub save_cache {
   $self->create_statefilesdir();
   my $statefile = $self->create_entry_cache_file($mib, $table, join('#', @{$key_attrs}));
   my $tmpfile = $statefile.$$.rand();
-  open(STATE, ">".$tmpfile);
-  printf STATE Data::Dumper::Dumper($self->{$cache});
-  close STATE;
+  my $fh = IO::File->new();
+  if ($fh->open($tmpfile, "w")) {
+    my $coder = JSON::XS->new->ascii->pretty->allow_nonref;
+    my $jsonscalar = $coder->encode($self->{$cache});
+    $fh->print($jsonscalar);
+    $fh->flush();
+    $fh->close();
+  }
   rename $tmpfile, $statefile;
   $self->debug(sprintf "saved %s to %s",
       Data::Dumper::Dumper($self->{$cache}), $statefile);
@@ -1672,24 +1679,25 @@ sub load_cache {
   my $statefile = $self->create_entry_cache_file($mib, $table, join('#', @{$key_attrs}));
   $self->{$cache} = {};
   if ( -f $statefile) {
+    my $jsonscalar = read_file($statefile);
     our $VAR1;
-    our $VAR2;
     eval {
-      require $statefile;
+      my $coder = JSON::XS->new->ascii->pretty->allow_nonref;
+      $VAR1 = $coder->decode($jsonscalar);
     };
     if($@) {
-      printf "FATAL: Could not load cache!\n";
+      $self->debug(sprintf "json load from %s failed. fallback", $statefile);
+      delete $INC{$statefile} if exists $INC{$statefile}; # else unit tests fail
+      eval "$jsonscalar";
+      if($@) {
+        printf "FATAL: Could not load cache in perl format!\n";
+        $self->debug(sprintf "fallback perl load from %s failed", $statefile);
+      }
     }
-    # keinesfalls mehr require verwenden!!!!!!
-    # beim require enthaelt VAR1 andere werte als beim slurp
-    # und zwar diejenigen, die beim letzten save_cache geschrieben wurden.
-    my $content = do { local (@ARGV, $/) = $statefile; my $x = <>; close ARGV; $x };
-    $VAR1 = eval "$content";
     $self->debug(sprintf "load %s", Data::Dumper::Dumper($VAR1));
     $self->{$cache} = $VAR1;
   }
 }
-
 
 ################################################################
 # top-level convenience functions
