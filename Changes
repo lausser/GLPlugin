@@ -1,3 +1,5 @@
+* 2021-11-13 5.0
+  speedup in load/save_state
 * 2021-10-13 3.4.6
   add CISCO-LICENSE-MGMT-MIB
 * 2021-10-13 3.4.5

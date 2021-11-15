@@ -11,6 +11,8 @@ use IO::File;
 use File::Basename;
 use Digest::MD5 qw(md5_hex);
 use Errno;
+use JSON;
+use File::Slurp qw(read_file);
 use Data::Dumper;
 $Data::Dumper::Indent = 1;
 eval {
@@ -20,7 +22,7 @@ eval {
   $Data::Dumper::Sparseseen = 1;
 };
 our $AUTOLOAD;
-*VERSION = \'3.4.6';
+*VERSION = \'5.0';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -1481,7 +1483,11 @@ sub save_state {
   }
   my $seekfh = IO::File->new();
   if ($seekfh->open($tmpfile, "w")) {
-    $seekfh->printf("%s", Data::Dumper::Dumper($params{save}));
+    my $coder = JSON::XS->new->ascii->pretty->allow_nonref;
+    my $jsonscalar = $coder->encode($params{save});
+    $seekfh->print($jsonscalar);
+    # the very time-consuming old way.
+    # $seekfh->printf("%s", Data::Dumper::Dumper($params{save}));
     $seekfh->flush();
     $seekfh->close();
     $self->debug(sprintf "saved %s to %s",
@@ -1500,10 +1506,18 @@ sub load_state {
     our $VAR1;
     eval {
       delete $INC{$statefile} if exists $INC{$statefile}; # else unit tests fail
-      require $statefile;
+      my $jsonscalar = read_file($statefile);
+      my $coder = JSON::XS->new->ascii->pretty->allow_nonref;
+      $VAR1 = $coder->decode($jsonscalar);
     };
     if($@) {
-      printf "FATAL: Could not load state!\n";
+      $self->debug(sprintf "json load from %s failed. fallback", $statefile);
+      eval {
+        require $statefile;
+      };
+      if($@) {
+        printf "FATAL: Could not load old state in perl format!\n";
+      }
     }
     $self->debug(sprintf "load %s from %s", Data::Dumper::Dumper($VAR1), $statefile);
     return $VAR1;
