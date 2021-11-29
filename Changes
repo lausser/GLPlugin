@@ -1,3 +1,5 @@
+* 2021-11-29 5.0.0.1
+  bugfix in --environment
 * 2021-11-13 5.0
   speedup in load/save_state
 * 2021-10-13 3.4.6

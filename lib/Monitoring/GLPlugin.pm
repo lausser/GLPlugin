@@ -22,7 +22,7 @@ eval {
   $Data::Dumper::Sparseseen = 1;
 };
 our $AUTOLOAD;
-*VERSION = \'5.0';
+*VERSION = \'5.0.0.1';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -897,7 +897,7 @@ sub getopts {
       # der fliegt raus, sonst gehts gleich wieder in needs_restart rein
       next if $option eq "runas";
       foreach my $spec (map { $_->{spec} } @{$Monitoring::GLPlugin::plugin->opts->{_args}}) {
-        if ($spec =~ /^(\w+)[\|\w+]*=(.*)/) {
+        if ($spec =~ /^([\-\w]+)[\?\+:\|\w+]*=(.*)/) {
           if ($1 eq $option && $2 =~ /s%/) {
             foreach (keys %{$self->opts->$option()}) {
               push(@restart_opts, sprintf "--%s", $option);
