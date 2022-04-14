@@ -1038,25 +1038,27 @@ sub check_snmp_and_model {
           scalar localtime (time - $sysUptime),
           $self->human_timeticks($sysUptime));
     }
-    if (defined $sysUptime && defined $sysDescr) {
-      if ($hrSystemUptime) {
-        # Bei Linux-basierten Geraeten wird snmpEngineTime viel zu haeufig
-        # durchgestartet, also lieber das hier.
-        $self->{uptime} = $hrSystemUptime;
-        # Es sei denn, snmpEngineTime ist tatsaechlich groesser, dann gilt
-        # wiederum dieses. Mag sein, dass der zahlenwert hier manchmal huepft
-        # und ein Performancegraph Zacken bekommt, aber das ist mir egal.
-        # es geht nicht um Graphen in Form einer ansteigenden Geraden, sondern
-        # um das Erkennen von spontanen Reboots und das Vermeiden von
-        # falschen Alarmen.
-        if ($snmpEngineTime && $snmpEngineTime > $hrSystemUptime) {
-          $self->{uptime} = $snmpEngineTime;
-        }
-      } elsif ($snmpEngineTime) {
-        $self->{uptime} = $snmpEngineTime;
-      } else {
-        $self->{uptime} = $sysUptime;
+    my $best_uptime = undef;
+    if ($hrSystemUptime) {
+      # Bei Linux-basierten Geraeten wird snmpEngineTime viel zu haeufig
+      # durchgestartet, also lieber das hier.
+      $best_uptime = $hrSystemUptime;
+      # Es sei denn, snmpEngineTime ist tatsaechlich groesser, dann gilt
+      # wiederum dieses. Mag sein, dass der zahlenwert hier manchmal huepft
+      # und ein Performancegraph Zacken bekommt, aber das ist mir egal.
+      # es geht nicht um Graphen in Form einer ansteigenden Geraden, sondern
+      # um das Erkennen von spontanen Reboots und das Vermeiden von
+      # falschen Alarmen.
+      if ($snmpEngineTime && $snmpEngineTime > $hrSystemUptime) {
+        $best_uptime = $snmpEngineTime;
       }
+    } elsif ($snmpEngineTime) {
+      $best_uptime = $snmpEngineTime;
+    } else {
+      $best_uptime = $sysUptime;
+    }
+    if (defined $best_uptime && defined $sysDescr) {
+      $self->{uptime} = $best_uptime;
       $self->{productname} = $sysDescr;
       $self->{sysobjectid} = $self->get_snmp_object('MIB-2-MIB', 'sysObjectID', 0);
       $self->debug(sprintf 'uptime: %s', $self->{uptime});
@@ -1090,11 +1092,11 @@ sub check_snmp_and_model {
         }
         if (! $mein_lieber_freund_und_kupferstecher) {
           $self->add_message(UNKNOWN,
-              'got neither sysUptime nor sysDescr nor any other useful information, is this snmp agent working correctly?');
+              'got neither sysUptime and sysDescr nor any other useful information, is this snmp agent working correctly?');
         }
       } else {
         $self->add_message(UNKNOWN,
-            'got neither sysUptime nor sysDescr, is this snmp agent working correctly?');
+            'Did not receive both sysUptime and sysDescr, is this snmp agent working correctly?');
       }
       $Monitoring::GLPlugin::SNMP::session->close if $Monitoring::GLPlugin::SNMP::session;
     }
