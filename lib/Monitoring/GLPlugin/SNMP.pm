@@ -2474,6 +2474,7 @@ sub get_table {
     if (! defined $result || (defined $result && ! %{$result})) {
       $self->debug(sprintf "get_table error: %s", 
           $Monitoring::GLPlugin::SNMP::session->error());
+      my $fallback = 0;
       if ($Monitoring::GLPlugin::SNMP::session->error() =~ /message size exceeded.*buffer maxMsgSize/i) {
         # bei irrsinnigen maxrepetitions
         $self->debug(sprintf "buffer exceeded");
@@ -2485,12 +2486,24 @@ sub get_table {
         } else {
           $self->mult_snmp_max_msg_size(2);
         }
+        $fallback = 1;
+      } elsif ($Monitoring::GLPlugin::SNMP::session->error() =~ /No response from remote host/i) {
+        # some agents can not handle big loads
+        if ($params{'-maxrepetitions'}) {
+          $params{'-maxrepetitions'} = int($params{'-maxrepetitions'} / 2);
+          $self->debug(sprintf "reduce maxrepetitions to %d",
+              $params{'-maxrepetitions'});
+          $fallback = 1;
+        }
       }
-      $self->debug("get_table error: try fallback");
-      $self->debug(sprintf "get_table %s", Data::Dumper::Dumper(\%params));
-      $result = $Monitoring::GLPlugin::SNMP::session->get_table(%params);
-      $tac = time;
-      $self->debug(sprintf "get_table returned %d oids in %ds", scalar(keys %{$result}), $tac - $tic);
+      if ($fallback) {
+        $self->debug("get_table error: try fallback");
+        $self->debug(sprintf "get_table %s", Data::Dumper::Dumper(\%params));
+        $tic = time;
+        $result = $Monitoring::GLPlugin::SNMP::session->get_table(%params);
+        $tac = time;
+        $self->debug(sprintf "get_table returned %d oids in %ds", scalar(keys %{$result}), $tac - $tic);
+      }
       if (! defined $result || ! %{$result}) {
         $self->debug(sprintf "get_table error: %s", 
             $Monitoring::GLPlugin::SNMP::session->error());
@@ -2498,6 +2511,7 @@ sub get_table {
           $params{'-maxrepetitions'} = 1;
           $self->debug("get_table error: try getnext fallback");
           $self->debug(sprintf "get_table %s", Data::Dumper::Dumper(\%params));
+          $tic = time;
           $result = $Monitoring::GLPlugin::SNMP::session->get_table(%params);
           $tac = time;
           $self->debug(sprintf "get_table returned %d oids in %ds", scalar(keys %{$result}), $tac - $tic);
