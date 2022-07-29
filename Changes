@@ -1,3 +1,6 @@
+* 2022-07-29 5.1.1
+  add CISCO-RTTMON-MIB
+  add CISCO-RTTMON-TC-MIB
 * 2022-07-20 5.1
   improve fallback on get_table timeouts
 * 2022-05-04 5.0.3
