@@ -998,6 +998,11 @@ sub check_snmp_and_model {
         delete $response->{$oid};
       }
     }
+    # Achtung!! Der schnippelt von einem Hex-STRING, der mit 20 aufhoert,
+    # das letzte Byte weg. Das muss beruecksichtigt werden, wenn man 
+    # spaeter MAC-Adressen o.ae. zueueckrechnet.
+    # } elsif ($self->{hwWlanRadioMac} && unpack("H12", $self->{hwWlanRadioMac}." ") =~ /(\w{2})(\w{2})(\w{2})(\w{2})(\w{2})(\w{2})/) {
+    # siehe Classes::Huawei::Component::WlanSubsystem::Radio
     map { $response->{$_} =~ s/^\s+//; $response->{$_} =~ s/\s+$//; }
         keys %$response;
     $self->set_rawdata($response);
