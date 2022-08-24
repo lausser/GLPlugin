@@ -126,6 +126,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HUAWEIENTITYEXTENTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HUAWEIWLANAPMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HUAWEIWLANAPRADIOMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HUAWEIWLANCONFIGURATIONMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HUAWEIWLANSTATIONMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HOSTRESOURCESMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HPICFCHASSIS.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/HWGWLDMIB.pm
