@@ -135,6 +135,8 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'HOST-RESOURCES-MIB'} 
   hrFSRFS => '1.3.6.1.2.1.25.3.9.19',
   hrFSDGCFS => '1.3.6.1.2.1.25.3.9.20',
   hrFSBFS => '1.3.6.1.2.1.25.3.9.21',
+  hrFSFAT32 => '1.3.6.1.2.1.25.3.9.22',
+  hrFSLinuxExt2 => '1.3.6.1.2.1.25.3.9.23',
   hrSWRun => '1.3.6.1.2.1.25.4',
   hrSWOSIndex => '1.3.6.1.2.1.25.4.1',
   hrSWRunTable => '1.3.6.1.2.1.25.4.2',
