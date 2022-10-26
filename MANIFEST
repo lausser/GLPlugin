@@ -259,6 +259,8 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/VRRPMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/WEBGRAPH8XTHERMOMETERMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/WEBGRAPHTHERMOHYGROBAROMETERMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/WEBGRAPHTHERMOHYGROBAROMETERUSMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/WEBGRAPHTHERMOHYGROMETERMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/WEBGRAPHTHERMOHYGROMETERUSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/WLSXSYSTEMEXTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/WLSXWLANMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/XPPCMIB.pm
