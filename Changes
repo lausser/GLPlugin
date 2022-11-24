@@ -1,3 +1,5 @@
+* 2022-11-24 5.5
+  blacklisting based on regex is now possible TYPE:(regex)
 * 2022-10-26 5.4
   add WEB-GRAPH-THERMO-HYGROMETER-MIB
   add WEB-GRAPH-THERMO-HYGROMETER-US-MIB

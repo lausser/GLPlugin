@@ -22,7 +22,7 @@ eval {
   $Data::Dumper::Sparseseen = 1;
 };
 our $AUTOLOAD;
-*VERSION = \'5.4';
+*VERSION = \'5.5';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -1089,6 +1089,7 @@ sub is_blacklisted {
   }
   # FAN:459,203/TEMP:102229/ENVSUBSYSTEM
   # FAN_459,FAN_203,TEMP_102229,ENVSUBSYSTEM
+  # ALERT:(The Storage Center is not able to access Tiebreaker)/TEMP:102229
   if ($self->opts->blacklist =~ /_/) {
     foreach my $bl_item (split(/,/, $self->opts->blacklist)) {
       if ($bl_item eq $self->internal_name()) {
@@ -1102,6 +1103,14 @@ sub is_blacklisted {
         my $bl_names = $2;
         foreach my $bl_name (split(/,/, $bl_names)) {
           if ($bl_type."_".$bl_name eq $self->internal_name()) {
+            $self->{blacklisted} = 1;
+          }
+        }
+      } elsif ($bl_items =~ /^(\w+):\((.*)\)$/ and $self->can("internal_content")) {
+        my $bl_type = $1;
+        my $bl_pattern = qr/$2/;
+        if ($self->internal_name() =~ /^${bl_type}_/) {
+          if ($self->internal_content() =~ /$bl_pattern/) {
             $self->{blacklisted} = 1;
           }
         }
