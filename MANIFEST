@@ -254,6 +254,9 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/UPSMANRIELLOSENTRMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/UPSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/UPSV4MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/USAGEMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/VIPTELAHARDWARE.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/VIPTELAOPERSYSTEM.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/VIPTELASECURITY.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/VORMETRICMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/VRRPMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/WEBGRAPH8XTHERMOMETERMIB.pm
