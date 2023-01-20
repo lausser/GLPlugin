@@ -156,6 +156,21 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'UPS-MIB'} = {
   upsConfigAudibleStatus => '1.3.6.1.2.1.33.1.9.8.0',
   upsConfigLowVoltageTransferPoint => '1.3.6.1.2.1.33.1.9.9.0',
   upsConfigHighVoltageTransferPoint => '1.3.6.1.2.1.33.1.9.10.0',
+  sensorMan => '1.3.6.1.2.1.33.1.12',
+  sensor1 => '1.3.6.1.2.1.33.1.12.1',
+  sensorMan1Value => '1.3.6.1.2.1.33.1.12.1.1.0',
+  sensorMan1Location => '1.3.6.1.2.1.33.1.12.1.2.0',
+  sensorMan1Unit => '1.3.6.1.2.1.33.1.12.1.3.0',
+  sensorMan1ThresholdLow => '1.3.6.1.2.1.33.1.12.1.4.0',
+  sensorMan1ThresholdHigh => '1.3.6.1.2.1.33.1.12.1.5.0',
+  sensorMan1Offset => '1.3.6.1.2.1.33.1.12.1.7.0',
+  sensor2 => '1.3.6.1.2.1.33.1.12.2',
+  sensorMan2Value => '1.3.6.1.2.1.33.1.12.2.1.0',
+  sensorMan2Location => '1.3.6.1.2.1.33.1.12.2.2.0',
+  sensorMan2Unit => '1.3.6.1.2.1.33.1.12.2.3.0',
+  sensorMan2ThresholdLow => '1.3.6.1.2.1.33.1.12.2.4.0',
+  sensorMan2ThresholdHigh => '1.3.6.1.2.1.33.1.12.2.5.0',
+  sensorMan2Offset => '1.3.6.1.2.1.33.1.12.2.7.0',
 };
 1;
 
