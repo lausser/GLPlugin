@@ -2500,6 +2500,14 @@ sub get_table {
               $params{'-maxrepetitions'});
           $fallback = 1;
         }
+      } elsif ($Monitoring::GLPlugin::SNMP::session->error() =~ /Received tooBig/i) {
+        # some agents can not handle big loads
+        if ($params{'-maxrepetitions'}) {
+          $params{'-maxrepetitions'} = int($params{'-maxrepetitions'} / 4) + 1;
+          $self->debug(sprintf "toobig reduce maxrepetitions to %d",
+              $params{'-maxrepetitions'});
+          $fallback = 1;
+        }
       }
       if ($fallback) {
         $self->debug("get_table error: try fallback");
