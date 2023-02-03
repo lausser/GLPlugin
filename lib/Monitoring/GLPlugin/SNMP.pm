@@ -1651,7 +1651,15 @@ sub update_entry_cache {
         $self->opts->hostname, $self->opts->mode, $mib, $table);
     $self->{$cache} = {};
     foreach my $entry ($self->get_snmp_table_objects($mib, $table, undef, $key_attrs)) {
-      my $key = join('#', map { $entry->{$_} } @{$key_attrs});
+      # HUAWEI-L2MAM-MIB/hwMacVlanStatisticsTable hat hwMacVlanStatisticsVlanId, welches aber nicht
+      # existiert. Id ist nichts anderes als der Index. sub finish() wuerde das Attribut
+      # anlegen, aber das ist hier noch nicht gelaufen. $entry->{$_} ist daher undef
+      # bei key_attrs==hwMacVlanStatisticsVlanId. Aber was noch geht:
+      # Leerstring, dann heißt es ""-//-index => index statt blubb-//-index => index
+      # Weil hwMacVlanStatisticsVlanId kein Text ist, sondern der Index, wird das Holen
+      # aus dem Cache funktionieren, weil wenn --name numerisch ist, wird mit dem Index
+      # aus ""-//-index verglichen und die leere Description ist Wurst.
+      my $key = join('#', map { exists $entry->{$_} ? $entry->{$_} : "" } @{$key_attrs});
       my $hash = $key . '-//-' . join('.', @{$entry->{indices}});
       $self->{$cache}->{$hash} = $entry->{indices};
     }
