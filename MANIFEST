@@ -247,6 +247,15 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/STREAMLINETAPELIBRARY4JMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/STORAGEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/STULZWIB8000MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SWMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SYNOLOGYDISKMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SYNOLOGYGPUINFOMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SYNOLOGYRAIDMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SYNOLOGYSERVICESMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SYNOLOGYSMARTMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SYNOLOGYSPACEIOMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SYNOLOGYSTORAGEIOMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SYNOLOGYSYSTEMMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SYNOLOGYUPSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SYNOPTICSROOTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SYSTEMRESOURCESMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/THEV01MIB.pm
