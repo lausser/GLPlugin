@@ -6,7 +6,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'RITTAL-LCP-DX-MIB'} = {
 };
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'RITTAL-LCP-DX-MIB'} =
-    '1.3.6.1.4.1.9839.2';
+    '1.3.6.1.4.1.2606.2';
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'RITTAL-LCP-DX-MIB'} = {
   'rittal' => '1.3.6.1.4.1.2606',

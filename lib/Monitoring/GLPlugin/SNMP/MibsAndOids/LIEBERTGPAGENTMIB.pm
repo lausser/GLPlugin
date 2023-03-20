@@ -49,14 +49,14 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'LIEBERT-GP-AGENT-MIB'
 };
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'LIEBERT-GP-AGENT-MIB'} = {
-  'lgpAgentVelocityServerEnabled' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
   'lgpAgentWebServerMode' => {
     '0' => 'disabled',
     '1' => 'http',
     '2' => 'https',
+  },
+  'lgpAgentVelocityServerEnabled' => {
+    '1' => 'yes',
+    '2' => 'no',
   },
   'lgpAgentTelnetEnabled' => {
     '1' => 'yes',
