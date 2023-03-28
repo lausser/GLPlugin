@@ -587,15 +587,28 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'HUAWEI-ENTITY-EXTENT-MI
     '2' => 'resetTestValue',
     '3' => 'readyStartTest',
   },
-  'HwAlarmStatus' => {
-    '0' => 'notSupported',
-    '1' => 'underRepair',
-    '2' => 'critical',
-    '3' => 'major',
-    '4' => 'minor',
-    '5' => 'alarmOutstanding',
-    '6' => 'warning',
-    '7' => 'indeterminate',
+  'HwAlarmStatus' => sub {
+    my $value = shift;
+    my %conditions = (
+        0 => "notSupported",
+        1 => "underRepair",
+        2 => "critical",
+        3 => "major",
+        4 => "minor",
+        5 => "alarmOutstanding",
+        6 => "warning",
+        7 => "indeterminate"
+    );
+    my @errors = ();
+    my $binary_string = unpack("B*", $value);
+    for my $bit_pos (0..scalar(keys %conditions)-1) {
+       my $condition = $conditions{$bit_pos};
+       my $bit_value = substr($binary_string, -$bit_pos-1, 1);
+       if ($bit_value == 1) {
+         push(@errors, $condition);
+       }
+    }
+    return join(",", @errors);
   },
   'hwEntityPwrState' => {
     '1' => 'supply',
