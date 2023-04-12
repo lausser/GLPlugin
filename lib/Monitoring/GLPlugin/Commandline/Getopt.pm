@@ -4,7 +4,7 @@ use File::Basename;
 use Getopt::Long qw(:config no_ignore_case bundling);
 
 # Standard defaults
-my %DEFAULT = (
+our %DEFAULT = (
   timeout => 15,
   verbose => 0,
   license =>
@@ -13,7 +13,7 @@ It may be used, redistributed and/or modified under the terms of the GNU
 General Public Licence (see http://www.fsf.org/licensing/licenses/gpl.txt).",
 );
 # Standard arguments
-my @ARGS = ({
+our @ARGS = ({
     spec => 'usage|?',
     help => "-?, --usage\n   Print usage information",
   }, {
@@ -36,7 +36,7 @@ my @ARGS = ({
   },
 );
 # Standard arguments we traditionally display last in the help output
-my %DEFER_ARGS = map { $_ => 1 } qw(timeout verbose);
+our %DEFER_ARGS = map { $_ => 1 } qw(timeout verbose);
 
 sub _init {
   my ($self, %params) = @_;
