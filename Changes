@@ -1,3 +1,5 @@
+* 2023-05-11 5.11.0.1
+  fix a potentially source for another epn error
 * 2023-04-2 5.11
   change scope of certain variables to play well with embedded perl
 * 2023-04-05 5.10.3

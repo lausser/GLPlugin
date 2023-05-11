@@ -64,9 +64,8 @@ sub _init {
           if ref ($self->{_attr}->{$_}) eq 'HASH' &&
               exists $self->{_attr}->{$_}->{default};
     }
+    chomp $self->{_attr}->{$_} if exists $self->{_attr}->{$_};
   }
-  # Chomp _attr values
-  chomp foreach values %{$self->{_attr}};
 
   # Setup initial args list
   $self->{_args} = [ grep { exists $_->{spec} } @ARGS ];
