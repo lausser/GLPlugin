@@ -45,7 +45,7 @@ sub _init {
     usage => 1,
     version => 0,
     url => 0,
-    plugin => { default => $Monitoring::GLPlugin::pluginname },
+    plugin => undef,
     blurb => 0,
     extra => 0,
     'extra-opts' => 0,

@@ -36,9 +36,9 @@ sub new {
     $self->{$_} = $params{$_};
   }
   bless $self, $class;
-  $self->{plugin} ||= $Monitoring::GLPlugin::pluginname;
   $self->{name} = $self->{plugin};
-  $Monitoring::GLPlugin::plugin = $self;
+
+  $self
 }
 
 sub AUTOLOAD {

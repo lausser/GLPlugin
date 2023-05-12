@@ -48,7 +48,7 @@ sub new {
       if ! grep /BEGIN/, keys %Monitoring::GLPlugin::Item::;
   require Monitoring::GLPlugin::TableItem
       if ! grep /BEGIN/, keys %Monitoring::GLPlugin::TableItem::;
-  $Monitoring::GLPlugin::pluginname = basename($ENV{'NAGIOS_PLUGIN'} || $0);
+  $params{plugin} ||= basename($ENV{'NAGIOS_PLUGIN'} || $0);
   $Monitoring::GLPlugin::plugin = Monitoring::GLPlugin::Commandline->new(%params);
   return $self;
 }
