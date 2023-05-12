@@ -22,14 +22,14 @@ eval {
   $Data::Dumper::Sparseseen = 1;
 };
 our $AUTOLOAD;
-*VERSION = \'5.11.0.1';
+*VERSION = \'5.11.0.2';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
 {
   our $mode = undef;
   our $plugin = undef;
-  our $pluginname = basename($ENV{'NAGIOS_PLUGIN'} || $0);
+  our $pluginname = undef;
   our $blacklist = undef;
   our $info = [];
   our $extendedinfo = [];
@@ -48,6 +48,7 @@ sub new {
       if ! grep /BEGIN/, keys %Monitoring::GLPlugin::Item::;
   require Monitoring::GLPlugin::TableItem
       if ! grep /BEGIN/, keys %Monitoring::GLPlugin::TableItem::;
+  $Monitoring::GLPlugin::pluginname = basename($ENV{'NAGIOS_PLUGIN'} || $0);
   $Monitoring::GLPlugin::plugin = Monitoring::GLPlugin::Commandline->new(%params);
   return $self;
 }

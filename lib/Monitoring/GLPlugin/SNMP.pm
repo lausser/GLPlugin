@@ -393,7 +393,7 @@ sub init {
         push(@credentials, "-l authPriv");
       } elsif (grep(/-A/, @credentials)) {
         push(@credentials, "-l authNoPriv");
-      } else {
+      } elsif (! grep(/-c/, @credentials)) {
         push(@credentials, "-l noAuthNoPriv");
       }
       my $credentials = join(" ", @credentials);
