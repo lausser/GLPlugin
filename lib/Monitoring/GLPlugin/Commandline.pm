@@ -599,6 +599,34 @@ sub check_thresholds {
   return $level;
 }
 
+sub mod_threshold {
+  # this method can be used to modify/multiply thresholds or upper and lower
+  # limit of a threshold range. For example, we have thresholds for an
+  # interface usage together with the maximum bandwidth and want to
+  # create thresholds for bitrates.
+  my ($self, $threshold, $func) = @_;
+  if (! $threshold) {
+    return "";
+  } elsif ($threshold =~ /^([-+]?[0-9]*\.?[0-9]+)$/) {
+    # 10
+    return &{$func}($1);
+  } elsif ($threshold =~ /^([-+]?[0-9]*\.?[0-9]+):$/) {
+    # 10:
+    return &{$func}($1).":";
+  } elsif ($threshold =~ /^~:([-+]?[0-9]*\.?[0-9]+)$/) {
+    # ~:10
+    return "~:".&{$func}($1);
+  } elsif ($threshold =~ /^([-+]?[0-9]*\.?[0-9]+):([-+]?[0-9]*\.?[0-9]+)$/) {
+    # 10:20
+    return &{$func}($1).":".&{$func}($2);
+  } elsif ($threshold =~ /^@([-+]?[0-9]*\.?[0-9]+):([-+]?[0-9]*\.?[0-9]+)$/) {
+    # @10:20
+    return "@".&{$func}($1).":".&{$func}($2);
+  } else {
+    return $threshold."scheise";
+  }
+}
+
 sub strequal {
   my($self, $str1, $str2) = @_;
   return 1 if ! defined $str1 && ! defined $str2;
