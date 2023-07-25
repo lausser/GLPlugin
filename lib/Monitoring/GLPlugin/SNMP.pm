@@ -1342,7 +1342,11 @@ sub no_such_mode {
     $self->init();
   } else {
     eval {
-      bless $self, "Classes::Generic";
+      if (exists $self->{generic_class}) {
+        bless $self, $self->{generic_class};
+      } else {
+        bless $self, "Classes::Generic";
+      }
       $self->init();
     };
     if ($@) {
