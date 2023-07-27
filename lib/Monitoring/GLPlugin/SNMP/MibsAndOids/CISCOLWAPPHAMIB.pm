@@ -268,7 +268,8 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'CISCO-LWAPP-HA-MIB::201
     '5' => 'timeout',
   },
   cLHaPeerHotStandbyEvent => {
-    '1' => 'haPeerHotstandby',
+    '0' => 'down',
+    '1' => 'up',
   },
   cLHaBulkSyncCompleteEvent => {
     '1' => 'bulkSyncComplete',
