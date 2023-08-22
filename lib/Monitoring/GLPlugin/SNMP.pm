@@ -892,6 +892,27 @@ sub init {
               }
             }
           }
+        } elsif ($sym =~ /Table/ and exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$sym =~ s/Table/Entry/gr}) {
+          # fuer die Pappenheimer von QNAP, die nennen ihren Krempel
+          # kakaTable und kakaTableEntry
+          # oder noch schlauer: systemIfTable und ifEntry
+          if (my @table = $self->get_snmp_table_objects($mib, $sym)) {
+            my $oid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$sym};
+            $confirmed->{$oid} = sprintf '%s::%s', $mib, $sym;
+            $self->add_rawdata($oid, '--------------------');
+            foreach my $line (@table) {
+              if ($line->{flat_indices}) {
+                foreach my $column (grep !/(flat_indices)|(indices)/, keys %{$line}) {
+                  my $oid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$column};
+                  if (exists $unknowns->{$oid.'.'.$line->{flat_indices}}) {
+                    $confirmed->{$oid.'.'.$line->{flat_indices}} =
+                        sprintf '%s::%s.%s = %s', $mib, $column, $line->{flat_indices}, $line->{$column};
+                    delete $unknowns->{$oid.'.'.$line->{flat_indices}};
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

@@ -192,6 +192,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/MIB2MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/MIBDELL10892.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/MINIIFMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/MMBCOMMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/NASMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/NETAPPMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/NETGEARMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/NETSCREENCHASSISMIB.pm
@@ -225,6 +226,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/PULSESECUREPSGMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/QUANTUMMIDRANGETAPELIBRARYMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/QUANTUMSMALLTAPELIBRARYMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/QUANTUMSNMPMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/QTSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/RAPIDCITYMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/RESOURCEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/RITTALCMCIIIMIB.pm
