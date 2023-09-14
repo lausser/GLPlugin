@@ -1785,9 +1785,10 @@ sub get_snmp_tables {
 
 sub get_snmp_tables_cached {
   my ($self, $mib, $infos, $retention) = @_;
+  $retention ||= 3600;
   foreach my $info (@{$infos}) {
     my $table = $info->[1];
-    my $statefile = $self->create_entry_cache_file($mib, $table, ["tablecache"]);
+    my $statefile = $self->create_entry_cache_file($mib, $table, "tablecache");
     my @fileinfo = stat($statefile);
     if (@fileinfo and time - $fileinfo[9] < $retention) {
       # exist und recent
@@ -1800,13 +1801,13 @@ sub get_snmp_tables_cached {
   $self->get_snmp_tables($mib, $infos);
   foreach my $info (@{$infos}) {
     my $table = $info->[1];
-    my $cache = sprintf "%s_%s_%s_cache", $mib, $table, "tablecache";
     if (exists $Monitoring::GLPlugin::SNMP::tablecache->{$mib} and
         exists $Monitoring::GLPlugin::SNMP::tablecache->{$mib}->{$table}) {
+      my $cache = sprintf "%s_%s_%s_cache", $mib, $table, "tablecache";
       $self->{$cache} =
           $Monitoring::GLPlugin::SNMP::tablecache->{$mib}->{$table};
       $self->save_cache($mib, $table, ["tablecache"]);
-      delete $self->{$cache} if exists $self->{$cache};
+      delete $self->{$cache};
     }
   }
 }
