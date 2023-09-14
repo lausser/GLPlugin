@@ -1783,6 +1783,34 @@ sub get_snmp_tables {
   }
 }
 
+sub get_snmp_tables_cached {
+  my ($self, $mib, $infos, $retention) = @_;
+  foreach my $info (@{$infos}) {
+    my $table = $info->[1];
+    my $statefile = $self->create_entry_cache_file($mib, $table, ["tablecache"]);
+    my @fileinfo = stat($statefile);
+    if (@fileinfo and time - $fileinfo[9] < $retention) {
+      # exist und recent
+      my $cache = sprintf "%s_%s_%s_cache", $mib, $table, "tablecache";
+      $self->load_cache($mib, $table, ["tablecache"]);
+      $Monitoring::GLPlugin::SNMP::tablecache->{$mib}->{$table} = $self->{$cache};
+      delete $self->{$cache} if exists $self->{$cache};
+    }
+  }
+  $self->get_snmp_tables($mib, $infos);
+  foreach my $info (@{$infos}) {
+    my $table = $info->[1];
+    my $cache = sprintf "%s_%s_%s_cache", $mib, $table, "tablecache";
+    if (exists $Monitoring::GLPlugin::SNMP::tablecache->{$mib} and
+        exists $Monitoring::GLPlugin::SNMP::tablecache->{$mib}->{$table}) {
+      $self->{$cache} =
+          $Monitoring::GLPlugin::SNMP::tablecache->{$mib}->{$table};
+      $self->save_cache($mib, $table, ["tablecache"]);
+      delete $self->{$cache} if exists $self->{$cache};
+    }
+  }
+}
+
 sub merge_tables {
   my ($self, $into, @from) = @_;
   my $into_indices = {};
