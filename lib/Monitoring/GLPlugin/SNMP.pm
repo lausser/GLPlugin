@@ -3114,6 +3114,86 @@ sub get_cache_indices {
   return map { join('.', ref($_) eq "ARRAY" ? @{$_} : $_) } @indices;
 }
 
+sub get_cache_indices_by_value {
+  # we have a table like
+  #  [TABLEITEM_40 in dot1dBasePortTable]
+  #  dot1dBasePort: 40 (-> index in dot1qPortVlanTable)
+  #  dot1dBasePortCircuit: .0.0
+  #  dot1dBasePortIfIndex: 46  -> ifIndex in ifTable
+  # $self->update_entry_cache(0, 'BRIDGE-MIB', 'dot1dBasePortTable', ['dot1dBasePort', "dot1dBasePortIfIndex"]);
+  # creates entries like
+  # '40#46-//-40' => [
+  #   '40'
+  # ],
+  # get_cache_indices only works with --name
+  #  '40#46-//-40' will be split into descr=40#46 and index=40
+  #  descr would then be compared to --name and the value (which is [indices])
+  #  be added to the return list. (the index 40 can also be a flat_indices)
+  # we can't use dot1dBasePortIfIndex as the key_attr, as it is not unique
+  # i ho an dot1dBasePortIfIndex und mou aussafina, wos fir index das aaf
+  # dem hizoing.
+  # zammbaut ho i dem zaech mied ['dot1dBasePort', "dot1dBasePortIfIndex"]
+  # also woas i das descr vo dene zammgsetzt is und da wecha wos is.
+  # na moue sched get_cache_indices_by_value('BRIDGE-MIB', 'dot1dBasePortTable', ['dot1dBasePort', "dot1dBasePortIfIndex"], "dot1dBasePortIfIndex", $pifidx)
+  # aafruafa.
+  # Liefert flache zruck.
+  my ($self, $mib, $table, $key_attr, $cmp_attr, $cmp_value) = @_;
+  if (ref($key_attr) ne "ARRAY") {
+    $key_attr = [$key_attr];
+  }
+  if (ref($cmp_value) ne "ARRAY") {
+    $cmp_value = [$cmp_value];
+  }
+  my $cache = sprintf "%s_%s_%s_cache",
+      $mib, $table, join('#', @{$key_attr});
+  my @indices = ();
+  foreach my $key (keys %{$self->{$cache}}) {
+    my ($descr, $index) = split('-//-', $key, 2);
+    # descr was join('#', map { exists $entry->{$_} ? $entry->{$_} : "" } @{$key_attrs});
+    my @values = split(/#/, $descr);
+    my %cmp = map { $key_attr->[$_] => $values[$_] } 0 .. $#values;
+    for my $cmp_val (@{$cmp_value}) {
+      if ($cmp{$cmp_attr} && $cmp{$cmp_attr} eq $cmp_val) {
+        push(@indices, $index);
+      }
+    }
+  }
+  return @indices;
+}
+
+sub get_cache_values_by_indices {
+  my ($self, $mib, $table, $key_attr, $indices) = @_;
+  # -> indices is an array of flat_indices
+# records are
+# val1#val#2#flat_index-//-flat_index => [indices]
+# val1#val2 represent join(#, @key_attr)
+  if (ref($key_attr) ne "ARRAY") {
+    $key_attr = [$key_attr];
+  }
+  if (ref($indices) ne "ARRAY") {
+    $indices = [$indices];
+  }
+  my $cache = sprintf "%s_%s_%s_cache",
+      $mib, $table, join('#', @{$key_attr});
+  my @results = ();
+  foreach my $key (keys %{$self->{$cache}}) {
+    my ($descr, $index) = split('-//-', $key, 2);
+    my @values = split('#', $descr);
+    foreach my $flat_indices (@{$indices}) {
+      if ($flat_indices eq $index) {
+        my $element = {
+          flat_indices => $flat_indices,
+        };
+        foreach my $descr_idx (0 .. $#values) {
+          $element->{$key_attr->[$descr_idx]} = $values[$descr_idx];
+        }
+        push(@results, $element);
+      }
+    }
+  }
+  return @results;
+}
+
 sub get_entities {
   my ($self, $class, $filter) = @_;
   foreach ($self->get_sub_table('ENTITY-MIB', [

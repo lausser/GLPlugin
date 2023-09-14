@@ -1,3 +1,5 @@
+* 2023-09-14 5.15.1
+  add get_cache_values_by_indices, get_cache_indices_by_value
 * 2023-09-14 5.15
   add get_snmp_tables_cached
   add BRIDGE-MIB
