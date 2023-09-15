@@ -1786,6 +1786,7 @@ sub get_snmp_tables {
 sub get_snmp_tables_cached {
   my ($self, $mib, $infos, $retention) = @_;
   $retention ||= 3600;
+  my $from_file = {};
   foreach my $info (@{$infos}) {
     my $table = $info->[1];
     my $statefile = $self->create_entry_cache_file($mib, $table, "tablecache");
@@ -1794,8 +1795,16 @@ sub get_snmp_tables_cached {
       # exist und recent
       my $cache = sprintf "%s_%s_%s_cache", $mib, $table, "tablecache";
       $self->load_cache($mib, $table, ["tablecache"]);
-      $Monitoring::GLPlugin::SNMP::tablecache->{$mib}->{$table} = $self->{$cache};
+      if (exists $self->{$cache} and defined $self->{$cache} and keys %{$self->{$cache}}) {
+        $Monitoring::GLPlugin::SNMP::tablecache->{$mib}->{$table} = $self->{$cache};
+        $from_file->{$cache} = 1 if exists $self->{$cache};
+        $self->debug(sprintf "get_snmp_tables_cached loaded file for %s %s", $mib, $table);
+      } else {
+        $self->debug(sprintf "get_snmp_tables_cached loaded empty file for %s %s", $mib, $table);
+      }
       delete $self->{$cache} if exists $self->{$cache};
+    } else {
+      $self->debug(sprintf "get_snmp_tables_cached has no (or outdated) file for %s %s", $mib, $table);
     }
   }
   $self->get_snmp_tables($mib, $infos);
@@ -1804,6 +1813,7 @@ sub get_snmp_tables_cached {
     if (exists $Monitoring::GLPlugin::SNMP::tablecache->{$mib} and
         exists $Monitoring::GLPlugin::SNMP::tablecache->{$mib}->{$table}) {
       my $cache = sprintf "%s_%s_%s_cache", $mib, $table, "tablecache";
+      next if exists $from_file->{$cache};
       $self->{$cache} =
           $Monitoring::GLPlugin::SNMP::tablecache->{$mib}->{$table};
       $self->save_cache($mib, $table, ["tablecache"]);

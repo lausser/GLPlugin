@@ -1,3 +1,5 @@
+* 2023-09-15 5.15.1.2
+  avoid unnecessary file operations when a table is cached
 * 2023-09-14 5.15.1.1
   bugfix in get_snmp_tables_cached filename creation
 * 2023-09-14 5.15.1
