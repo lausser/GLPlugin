@@ -1795,7 +1795,9 @@ sub get_snmp_tables_cached {
       # exist und recent
       my $cache = sprintf "%s_%s_%s_cache", $mib, $table, "tablecache";
       $self->load_cache($mib, $table, ["tablecache"]);
-      if (exists $self->{$cache} and defined $self->{$cache} and keys %{$self->{$cache}}) {
+      if (exists $self->{$cache} and defined $self->{$cache} and
+          ((ref($self->{$cache}) eq "HASH" and keys %{$self->{$cache}}) or
+           (ref($self->{$cache}) eq "ARRAY" and @{$self->{$cache}}))) {
         $Monitoring::GLPlugin::SNMP::tablecache->{$mib}->{$table} = $self->{$cache};
         $from_file->{$cache} = 1 if exists $self->{$cache};
         $self->debug(sprintf "get_snmp_tables_cached loaded file for %s %s", $mib, $table);
