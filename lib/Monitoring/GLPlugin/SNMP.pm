@@ -1207,7 +1207,8 @@ sub establish_snmp_session {
     *STDERR = *ERR;
     my ($session, $error) = Net::SNMP->session(%params);
     *STDERR = *SAVEERR;
-    if ($stderrvar && $error && $error =~ /Time synchronization failed/) {
+    if (($stderrvar && $error && $error =~ /Time synchronization failed/) ||
+        ($error && $error =~ /Received usmStatsUnknownEngineIDs.0 Report-PDU with value \d+ during synchronization/)) {
       # This is what you get when you have
       # - an APC ups with a buggy firmware.
       # - no chance to update it.
