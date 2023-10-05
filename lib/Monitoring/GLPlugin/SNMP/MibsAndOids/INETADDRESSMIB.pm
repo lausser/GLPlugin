@@ -50,6 +50,8 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'INET-ADDRESS-MIB'} = {
       return Monitoring::GLPlugin::SNMP::TableItem->new()->unhex_ipv6($addr);
     } elsif ($addrtype  && $addrtype eq "ipv4") {
       return Monitoring::GLPlugin::SNMP::TableItem->new()->unhex_ip($addr);
+    } elsif ($addrtype  && $addrtype eq "dns") {
+      return $addr;
     } else {
       return "unsupported_address_format: ".$addrtype;
     }
