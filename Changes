@@ -1,3 +1,8 @@
+* 2023-10-06 5.16
+  add ASSET-MANAGEMENT-MIB (Raritan)
+  add SNMPv2-TC-MIV
+  update PDU2-MIB
+  handle handshake error usmStatsUnknownEngineIDs.0
 * 2023-09-15 5.15.1.2
   avoid unnecessary file operations when a table is cached
 * 2023-09-14 5.15.1.1
