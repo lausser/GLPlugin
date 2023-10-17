@@ -82,6 +82,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'GEIST-V4-MIB'} = {
   't3hdSensorIntHumidity' => '1.3.6.1.4.1.21239.5.1.8.1.7',
   't3hdSensorIntDewPoint' => '1.3.6.1.4.1.21239.5.1.8.1.8',
   't3hdSensorExtAAvail' => '1.3.6.1.4.1.21239.5.1.8.1.9',
+  't3hdSensorExtAAvailDefinition' => 'GEIST-V4-MIB::availability',
   't3hdSensorExtAName' => '1.3.6.1.4.1.21239.5.1.8.1.10',
   't3hdSensorExtATemp' => '1.3.6.1.4.1.21239.5.1.8.1.11',
   't3hdSensorExtBAvail' => '1.3.6.1.4.1.21239.5.1.8.1.12',

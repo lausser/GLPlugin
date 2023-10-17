@@ -22,7 +22,7 @@ eval {
   $Data::Dumper::Sparseseen = 1;
 };
 our $AUTOLOAD;
-*VERSION = \'5.16';
+*VERSION = \'5.16.0.1\';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -1062,6 +1062,25 @@ sub get_level {
   return WARNING  if $self->{tmp_level}->{warning};
   return UNKNOWN  if $self->{tmp_level}->{unknown};
   return $code;
+}
+
+sub worst_level {
+  my ($self, @levels) = @_;
+  my $level = 0;
+  foreach (@levels) {
+    if ($_ == 2) {
+      $level = 2;
+    } elsif ($_ == 1) {
+      if ($level == 0 || $level == 3) {
+        $level = 1;
+      }
+    } elsif ($_ == 3) {
+      if ($level == 0) {
+        $level = 3;
+      }
+    }
+  }
+  return $level;
 }
 
 #########################################################
