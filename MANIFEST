@@ -68,6 +68,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOL2L3INTERFACECONFIGMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOLAGMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOLICENSEMGMTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOLWAPPAPMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOLWAPPCDPMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOLWAPPHAMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOMEMORYPOOLMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOPORTCHANNELMIB.pm

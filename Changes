@@ -1,3 +1,5 @@
+* 2023-11-28 5.17
+  add CISCO-LWAPP-CDP-MIB
 * 2023-10-17 5.16.0.1
   add function worst_level, fix a definition in GEIST-V4-MIB
 * 2023-10-06 5.16
