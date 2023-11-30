@@ -24,6 +24,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ALARMMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ALCATELIND1BASEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ARISTABGP4V2MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ARISTAENTITYSENSORMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ARISTAIFMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ARUBATCMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ARUBAWIREDCHASSISMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ARUBAWIREDFANMIB.pm
@@ -58,6 +59,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOENTITYALARMMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOENTITYFRUCONTROLMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOENTITYSENSORMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOENVMONMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOERRDISABLEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOETHERNETFABRICEXTENDERMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOFEATURECONTROLMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOFIREWALLMIB.pm
