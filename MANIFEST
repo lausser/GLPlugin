@@ -154,9 +154,13 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IPFORWARDMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IPMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ISILONMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNIPERALARMMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNIPERDOMMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNIPERFRUMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNIPERIFMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNIPERIVEMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNIPERHOSTRESOURCESMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNIPERMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNIPERPOWERSUPPLYUNITMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNIPERRPSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNIPERSRX5000SPUMONITORINGMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNOSBGP4V2MIB.pm

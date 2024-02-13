@@ -30,4 +30,8 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'SNMPv2-TC'} = {
     '1' => 'true',
     '2' => 'false',
   },
+  'DateAndTime' => sub {
+      return $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'MIB-2-MIB'}->{'DateAndTime'}->(@_);
+  },
 };
+
