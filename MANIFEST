@@ -100,6 +100,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DELLRACMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DELLSTORAGESCMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DEVICEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DISKMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/EATONSENSORMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ELTEXMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/EMDMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ENPACPACCMIB.pm
@@ -150,6 +151,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IEEE8023LAGMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IFINVERTEDSTACKMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IFMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/INETADDRESSMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/INTELSERVERBASEBOARD7.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IPFORWARDMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/IPMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ISILONMIB.pm
@@ -249,6 +251,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SENSORMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SENTRY3MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SENTRY4MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SERVERVIEWSTATUSMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SKYHIGHSECURITYSWGMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SLHWLIBT950MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SNIASMLMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SNMPFRAMEWORKMIB.pm
