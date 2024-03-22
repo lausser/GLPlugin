@@ -100,6 +100,9 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DELLRACMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DELLSTORAGESCMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DEVICEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DISKMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/EATONATS2MIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/EATONEMPMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/EATONEPDUMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/EATONSENSORMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ELTEXMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/EMDMIB.pm
