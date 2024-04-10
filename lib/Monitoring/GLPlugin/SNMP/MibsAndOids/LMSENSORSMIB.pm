@@ -5,6 +5,9 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'LM-SENSORS-MIB'} = {
   name => 'LM-SENSORS-MIB',
 };
 
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'LM-SENSORS-MIB'} =
+  '1.3.6.1.4.1.2021.13.16';
+
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'LM-SENSORS-MIB'} = {
   'lmSensors' => '1.3.6.1.4.1.2021.13.16',
   'lmSensorsMIB' => '1.3.6.1.4.1.2021.13.16.1',

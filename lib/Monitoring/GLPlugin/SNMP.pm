@@ -2861,10 +2861,18 @@ sub make_symbolic {
                 } elsif  (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib} &&
                     exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition} &&
                     ref($Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}) eq 'HASH' &&
+                    # weil am 27.3.24 so ein Drecksticket reinkam und bei
+                    # einem Cisco link-aggregations-Gedoens eins der Interfaces
+                    # ifLinkUpDownTrapEnable=<undefined> lieferte.
+                    # Drum muss man extra nochmal kontrollieren, ob das ein
+                    # gueltiger Wert ist, den man im Def-Hash suchen kann.
+                    # Wieder ein halber Vormittag im Arsch wegen so einem Dreck.
+                    defined $result->{$fulloid} && \
                     exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->{$result->{$fulloid}}) {
                   $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->{$result->{$fulloid}};
                 } else {
-                  $mo->{$symoid} = 'unknown_'.$result->{$fulloid};
+                  $mo->{$symoid} = 'unknown_'.(defined $result->{$fulloid} ?
+                      $result->{$fulloid} : '<undef>');
                 }
               } else {
                 $mo->{$symoid} = 'unknown_'.$result->{$fulloid};
