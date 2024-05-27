@@ -194,6 +194,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LEXMARKTCMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LIEBERTGPAGENTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LIEBERTGPCONDITIONSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LIEBERTGPENVIRONMENTALMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LIEBERTGPFLEXIBLECONDITIONSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LIEBERTGPFLEXIBLEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LIEBERTGPPDUMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LIEBERTGPPOWERMIB.pm
