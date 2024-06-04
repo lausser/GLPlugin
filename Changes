@@ -1,3 +1,5 @@
+* 2024-06-04 5.3
+  handle uptime's exit in a mod_gearman epn environment
 * 2024-05-27 5.23
   add LIEBERT-GP-FLEXIBLE-CONDITIONS-MIB
 * 2024-04-10 5.22

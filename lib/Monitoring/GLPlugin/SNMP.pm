@@ -422,7 +422,7 @@ sub init {
       $self->add_ok($self->pretty_sysdesc($self->{productname}));
     }
     my ($code, $message) = $self->check_messages(join => ', ', join_all => ', ');
-    $Monitoring::GLPlugin::plugin->nagios_exit($code, $message);
+    $self->nagios_exit($code, $message);
   } elsif ($self->mode =~ /device::supportedmibs/) {
     our $mibdepot = [];
     my $unknowns = {};
@@ -1372,6 +1372,18 @@ sub no_such_mode {
       $self->init();
     };
     if ($@) {
+      if ($@ =~ /Redefine exit to trap plugin exit/) {
+        # this message comes from mod_gearman epn.
+        # this happens mostly because mode is device::uptime and
+        # inside init() in the eval nagios_exit was already called.
+        # in the standalone plugin this exits immediately, however inside
+        # of an embedded perl (like mod_gearman) there is another eval around
+        # the whole plugin code, which catches the exit. whatever happens there
+        # it leads to triple output and triple perfdata. (because init() would
+        # be called again). No more init, we finish here.
+        my ($code, $message) = $self->check_messages(join => ', ', join_all => ', ');
+        exit $code;
+      }
       bless $self, "Monitoring::GLPlugin::SNMP";
       $self->init();
     }
@@ -2861,18 +2873,10 @@ sub make_symbolic {
                 } elsif  (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib} &&
                     exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition} &&
                     ref($Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}) eq 'HASH' &&
-                    # weil am 27.3.24 so ein Drecksticket reinkam und bei
-                    # einem Cisco link-aggregations-Gedoens eins der Interfaces
-                    # ifLinkUpDownTrapEnable=<undefined> lieferte.
-                    # Drum muss man extra nochmal kontrollieren, ob das ein
-                    # gueltiger Wert ist, den man im Def-Hash suchen kann.
-                    # Wieder ein halber Vormittag im Arsch wegen so einem Dreck.
-                    defined $result->{$fulloid} && \
                     exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->{$result->{$fulloid}}) {
                   $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->{$result->{$fulloid}};
                 } else {
-                  $mo->{$symoid} = 'unknown_'.(defined $result->{$fulloid} ?
-                      $result->{$fulloid} : '<undef>');
+                  $mo->{$symoid} = 'unknown_'.$result->{$fulloid};
                 }
               } else {
                 $mo->{$symoid} = 'unknown_'.$result->{$fulloid};
