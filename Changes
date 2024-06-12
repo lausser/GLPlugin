@@ -1,3 +1,5 @@
+* 2024-06-12 5.3.0.1
+  bugfix (accidentially reverted by last commit) in mibs_and_oids Hash-Definition
 * 2024-06-04 5.3
   handle uptime's exit in a mod_gearman epn environment
 * 2024-05-27 5.23
