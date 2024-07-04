@@ -168,8 +168,8 @@ sub add_perfdata {
     }
   }
   if ($uom eq "%") {
-    $min = 0;
-    $max = 100;
+    $min = 0 if $min eq "";
+    $max = 100 if $max eq "";
   }
   if (defined $args{places}) {
     # cut off excessive decimals which may be the result of a division
