@@ -171,6 +171,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNIPERRPSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNIPERSRX5000SPUMONITORINGMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNOSBGP4V2MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/KELVINPCOWEBLCPDXMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/KNUERRDCLMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/KYOCERAPRIVATEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LARAMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LCOSMIB.pm
