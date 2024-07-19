@@ -888,7 +888,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'KNUERR-DCL-MIB'} = {
   },
   'FanState' => sub {
     my $val = shift; 
-    $val &= 0xffffffff;
+    #$val &= 0xffffffff;
     $val = unpack("B32", pack("h", $val));
     my @return = (); 
     my $bits = {
@@ -1140,7 +1140,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'KNUERR-DCL-MIB'} = {
   },
   'ValveState' => sub {
     my $val = shift; 
-    $val &= 0xffffffff;
+    #$val &= 0xffffffff;
     $val = unpack("B32", pack("h", $val));
     my @return = (); 
     my $bits = {

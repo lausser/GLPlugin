@@ -1,3 +1,5 @@
+* 2024-07-19 5.31.0.1
+  bugfix in KNUERR-DCL-MIB FanState binary conversion
 * 2024-07-19 5.31
   add KNUERR-DCL-MIB
 * 2024-07-04 5.30.0.2
