@@ -1,3 +1,7 @@
+* 2024-07-23 5.32
+  add CAREL-RITTAL-LCP-3311-MIB
+  add KELVIN-pCOWeb-Chiller-MIB
+  add UCD-DLMOD-MIB
 * 2024-07-19 5.31.0.1
   bugfix in KNUERR-DCL-MIB FanState binary conversion
 * 2024-07-19 5.31

@@ -48,6 +48,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/BLUECOATAVMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/BLUECOATSGPROXYMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/BRIDGEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/BROTHERMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CARELRITTALLCP3311MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CARELUG40CDZMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CHECKPOINTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOBGP4MIB.pm
@@ -170,6 +171,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNIPERPOWERSUPPLYUNITMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNIPERRPSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNIPERSRX5000SPUMONITORINGMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/JUNOSBGP4V2MIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/KELVINPCOWEBCHILLERMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/KELVINPCOWEBLCPDXMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/KNUERRDCLMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/KYOCERAPRIVATEMIB.pm
@@ -285,6 +287,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SYSTEMRESOURCESMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/THEV01MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/THREEPARMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/UCDDISKIOMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/UCDDLMODMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/UCDSNMPMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/UPSMANRIELLOSENTRMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/UPSMIB.pm
