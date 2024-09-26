@@ -2040,7 +2040,29 @@ sub get_snmp_table_objects {
       push(@augmenting, [$augmenting_tableoid, \@augmenting_columns]);
     }
   }
-  if (scalar(@{$indices}) == 1 && $indices->[0] == -1) {
+  if ($self->get_snmp_object('MIB-2-MIB', 'sysDescr', 0) =~ /(RouterOS|SwOS)/) {
+    my $result = $self->get_table(
+        -baseoid => $tableoid,
+    );
+    foreach (@augmenting) {
+      my($augmenting_tableoid, @augmenting_columns) = ($_->[0], @{$_->[1]});
+      my $augmenting_result = $self->get_table(
+          -baseoid => $augmenting_tableoid,
+      );
+      while (my ($key, $value) = each %{$augmenting_result}) {
+        $result->{$key} = $value;
+      }
+    }
+    my @indices =
+        $self->get_indices(
+            -baseoid => $entryoid,
+            -oids => [keys %{$result}]);
+    @entries = map {
+        $_->{indices} = shift @indices; $_
+    } $self->make_symbolic($mib, $result, \@indices, $sym_lookup);
+    $self->debug(sprintf "get_snmp_table_objects MikroTik returns %d entries",
+        scalar(@entries));
+  } elsif (scalar(@{$indices}) == 1 && $indices->[0] == -1) {
     # get mini-version of a table
     my $result = $self->get_entries(
         -columns => \@columns,
