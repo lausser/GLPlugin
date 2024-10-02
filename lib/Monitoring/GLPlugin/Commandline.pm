@@ -149,12 +149,14 @@ sub add_perfdata {
   my $min = defined $args{min} ? $args{min} : "";
   my $max = defined $args{max} ? $args{max} : "";
   if ($args{thresholds} || (! exists $args{warning} && ! exists $args{critical})) {
-    if (exists $self->{thresholds}->{$label}->{warning}) {
+    if (exists $self->{thresholds}->{$label}->{warning} && \
+        defined $self->{thresholds}->{$label}->{warning}) {
       $warn = $self->{thresholds}->{$label}->{warning};
     } elsif (exists $self->{thresholds}->{default}->{warning}) {
       $warn = $self->{thresholds}->{default}->{warning};
     }
-    if (exists $self->{thresholds}->{$label}->{critical}) {
+    if (exists $self->{thresholds}->{$label}->{critical} && \
+        defined $self->{thresholds}->{$label}->{critical}) {
       $crit = $self->{thresholds}->{$label}->{critical};
     } elsif (exists $self->{thresholds}->{default}->{critical}) {
       $crit = $self->{thresholds}->{default}->{critical};
