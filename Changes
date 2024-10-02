@@ -1,3 +1,6 @@
+* 2024-10-02 5.32.0.3
+  update ENTITY-MIB
+  bugfix in add_perfdata
 * 2024-08-23 5.32.0.2
   update PAN-PRODUCTS-MIB
   update PAN-COMMON-MIB
