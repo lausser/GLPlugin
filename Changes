@@ -1,3 +1,5 @@
+* 2024-10-02 5.32.0.4
+  bloeden Python-Zeilenverlaengerer entfernt
 * 2024-10-02 5.32.0.3
   update ENTITY-MIB
   bugfix in add_perfdata
