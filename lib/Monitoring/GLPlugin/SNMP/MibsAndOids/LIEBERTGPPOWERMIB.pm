@@ -362,258 +362,27 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'LIEBERT-GP-POWER-MIB'
 };
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'LIEBERT-GP-POWER-MIB'} = {
-  'lgpPwrStateSource1BypassBrkrState' => {
-    '1' => 'open',
-    '2' => 'closed',
-    '3' => 'notInstalled',
-  },
-  'lgpPwrStateSource2BypassBrkrState' => {
-    '1' => 'open',
-    '2' => 'closed',
-    '3' => 'notInstalled',
-  },
-  'lgpPwrStateModuleOutBrkrState' => {
-    '1' => 'open',
-    '2' => 'closed',
-    '3' => 'notInstalled',
-  },
-  'lgpPwrInputIsolationTransformerInstalled' => {
-    '1' => 'notInstalled',
-    '2' => 'installed',
-  },
-  'lgpPwrParallelSystemOutputToLoadSource' => {
-    '0' => 'unknown',
-    '1' => 'utility',
-    '2' => 'battery',
-    '3' => 'bypass',
-    '4' => 'none',
-  },
-  'lgpPwrBatteryCharger' => {
-    '1' => 'on',
-    '2' => 'off',
-  },
-  'lgpPwrUpsInverterStandby' => {
-    '1' => 'on',
-    '2' => 'off',
-  },
-  'lgpPwrTopRedundantControlModules' => {
+  'lgpPwrShutdownRemote' => {
     '1' => 'yes',
     '2' => 'no',
   },
-  'lgpPwrShutdownOverload' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'lgpPwrStateMaintIsolBrkrState' => {
-    '1' => 'open',
-    '2' => 'closed',
-    '3' => 'notInstalled',
-  },
-  'lgpPwrEconomicOperationMode' => {
-    '1' => 'on',
-    '2' => 'off',
-  },
-  'lgpPwrUPSModuleMode' => {
-    '1' => 'single',
-    '2' => 'parallel',
-    '3' => 'hotmaster',
-    '4' => 'hotslave',
-  },
-  'lgpPwrRedundantSubModule' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'lgpPwrStateStaticSwitchType' => {
-    '1' => 'notApplicable',
-    '2' => 'continuousDuty',
-    '3' => 'momentaryDuty',
-  },
-  'lgpPwrStateSource1PduInputBrkrState' => {
-    '1' => 'open',
-    '2' => 'closed',
-    '3' => 'notInstalled',
-  },
-  'lgpPwrBatteryLifeEnhancer' => {
-    '1' => 'on',
-    '2' => 'off',
-  },
-  'lgpPwrTopVoltageConverter' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'lgpPwrStateBypassIsolBrkrState' => {
-    '1' => 'open',
-    '2' => 'closed',
-    '3' => 'notInstalled',
-  },
-  'lgpPwrStateBackfeedBrkrState' => {
-    '1' => 'open',
-    '2' => 'closed',
-    '3' => 'notInstalled',
-  },
-  'lgpPwrStateDCBusQualification' => {
-    '1' => 'fail',
-    '2' => 'marginalLow',
-    '3' => 'normal',
-    '4' => 'marginalHigh',
-  },
-  'lgpPwrStateLoadDisconnectState' => {
-    '1' => 'open',
-    '2' => 'closed',
-    '3' => 'notInstalled',
-  },
-  'lgpPwrUPSTopDualInput' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'lgpPwrStateOutputBrkrState' => {
-    '1' => 'open',
-    '2' => 'closed',
-    '3' => 'notInstalled',
-  },
-  'lgpPwrLoadCircuitState' => {
-    '1' => 'on',
-    '2' => 'off',
-    '3' => 'default',
-  },
-  'lgpPwrLoadBusSyncMode' => {
-    '1' => 'master',
-    '2' => 'slave',
-    '3' => 'none',
-  },
-  'lgpPwrShutdownOutputShort' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'lgpPwrBoost' => {
-    '1' => 'on',
-    '2' => 'off',
-  },
-  'lgpPwrBatteryChargeCompensating' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'lgpPwrStateRectifierIsolBrkrState' => {
-    '1' => 'open',
-    '2' => 'closed',
-    '3' => 'notInstalled',
-  },
-  'lgpPwrStateInverterQualification' => {
-    '1' => 'fail',
-    '2' => 'marginalLow',
-    '3' => 'normal',
-    '4' => 'marginalHigh',
-  },
-  'lgpPwrShutdownLineSwap' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'lgpPwrRectifierPassiveFilterInstalled' => {
-    '1' => 'notInstalled',
-    '2' => 'installed',
-  },
-  'lgpPwrAutoReTransferEnabled' => {
-    '0' => 'no',
-    '1' => 'yes',
-  },
-  'lgpPwrShutdownPowerFactorCorrectionFailure' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'lgpPwrAutomaticBatteryTest' => {
-    '1' => 'on',
-    '2' => 'off',
-  },
-  'lgpPwrBatteryTest' => {
-    '1' => 'start',
-    '2' => 'abort',
-  },
-  'lgpPwrInverterReady' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'lgpPwrGeneratorStatus' => {
-    '1' => 'connected',
-    '2' => 'disconnected',
-  },
-  'lgpPwrRectifierActiveFilterInstalled' => {
-    '1' => 'notInstalled',
-    '2' => 'installed',
-  },
-  'lgpPwrStateSource2InputBrkrState' => {
-    '1' => 'open',
-    '2' => 'closed',
-    '3' => 'notInstalled',
-  },
-  'lgpPwrUpsTopLineInteractive' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'lgpPwrLoadCircuitStateAndControl' => {
+  'lgpPwrEconomicOperation' => {
     '0' => 'off',
     '1' => 'on',
-    '2' => 'reboot',
   },
-  'lgpPwrStateMaintBypassBrkrState' => {
-    '1' => 'open',
-    '2' => 'closed',
-    '3' => 'notInstalled',
-  },
-  'lgpPwrStateInputSource' => {
-    '1' => 'none',
-    '2' => 'utility',
-    '3' => 'generator',
+  'lgpPwrStateInputQualification' => {
+    '1' => 'fail',
+    '2' => 'marginalLow',
+    '3' => 'normal',
+    '4' => 'marginalHigh',
   },
   'lgpPwrShutdownOverTemperature' => {
     '1' => 'yes',
     '2' => 'no',
   },
-  'lgpPwrShutdownHardware' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'lgpPwrDcToDcConverter' => {
-    '1' => 'on',
-    '2' => 'off',
-  },
-  'lgpPwrStateOutputConfig' => {
-    '1' => 'singlePhase2WireL1WithReturn',
-    '2' => 'twoPhase2WireL1L2',
-    '3' => 'twoPhase3WireL1L2WithNeutral',
-    '4' => 'threePhase3WireL1L2L3',
-    '5' => 'threePhase4WireL1L2L3WithNeutral',
-  },
-  'lgpPwrStateAuxOutputBrkrState' => {
-    '1' => 'open',
-    '2' => 'closed',
-    '3' => 'notInstalled',
-  },
-  'lgpPwrStateRectifierState' => {
-    '1' => 'on',
-    '2' => 'off',
-  },
-  'lgpPwrStateOutQualification' => {
-    '1' => 'fail',
-    '2' => 'marginalLow',
-    '3' => 'normal',
-    '4' => 'marginalHigh',
-  },
-  'lgpPwrRectifierTrapInstalled' => {
-    '1' => 'notInstalled',
-    '2' => 'installed',
-  },
-  'lgpPwrShutdownLowBattery' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'lgpPwrStateTrapFilterBrkrState' => {
-    '1' => 'open',
-    '2' => 'closed',
-    '3' => 'notInstalled',
-  },
-  'lgpPwrUpsAutoRestart' => {
-    '1' => 'on',
-    '2' => 'off',
+  'lgpPwrBatteryChargeMode' => {
+    '1' => 'float',
+    '2' => 'equalize',
   },
   'lgpPwrStateUpsOutputSource' => {
     '1' => 'other',
@@ -624,116 +393,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'LIEBERT-GP-POWER-MIB'} 
     '6' => 'booster',
     '7' => 'reducer',
   },
-  'lgpPwrShutdownRemote' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'lgpPwrShutdownDcBusOverload' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'lgpPwrStateBypassInputConfig' => {
-    '1' => 'singlePhase2WireL1WithReturn',
-    '2' => 'twoPhase2WireL1L2',
-    '3' => 'twoPhase3WireL1L2WithNeutral',
-    '4' => 'threePhase3WireL1L2L3',
-    '5' => 'threePhase4WireL1L2L3WithNeutral',
-  },
-  'lgpPwrBatteryChargeStatus' => {
-    '1' => 'fullycharged',
-    '2' => 'notfullycharged',
-    '3' => 'charging',
-    '4' => 'discharging',
-  },
-  'lgpPwrOutputToLoadOnBypass' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'lgpPwrShutdownInputUnderVoltage' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
   'lgpPwrUpsTopOffline' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'lgpPwrStateInputQualification' => {
-    '1' => 'fail',
-    '2' => 'marginalLow',
-    '3' => 'normal',
-    '4' => 'marginalHigh',
-  },
-  'lgpPwrBatteryCabinetType' => {
-    '1' => 'notSpecified',
-    '2' => 'internal',
-    '3' => 'external',
-    '4' => 'lrt',
-  },
-  'lgpPwrPowerFactorCorrection' => {
-    '1' => 'on',
-    '2' => 'off',
-  },
-  'lgpPwrStateOutStaticSwState' => {
-    '1' => 'off',
-    '2' => 'on',
-    '3' => 'notInstalled',
-  },
-  'lgpPwrStateModuleType' => {
-    '1' => 'singleModuleSystem',
-    '2' => 'module1plus1',
-    '3' => 'module1plusN',
-    '4' => 'moduleNplus1',
-    '5' => 'systemControlCabinet',
-    '6' => 'mainStaticSwitch',
-  },
-  'lgpPwrEconomicOperationModeControl' => {
-    '0' => 'disabled',
-    '1' => 'mode1',
-    '2' => 'mode2',
-  },
-  'lgpPwrStateInputBrkrState' => {
-    '1' => 'open',
-    '2' => 'closed',
-    '3' => 'notInstalled',
-  },
-  'lgpPwrBatteryCircuitBreakerState' => {
-    '0' => 'unknown',
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'lgpPwrLineMeasurementPowerFactorTag' => {
-    '1' => 'leading',
-    '2' => 'lagging',
-  },
-  'lgpPwrStateSource1InputBrkrState' => {
-    '1' => 'open',
-    '2' => 'closed',
-    '3' => 'notInstalled',
-  },
-  'lgpPwrBatteryTestResult' => {
-    '1' => 'unknown',
-    '2' => 'passed',
-    '3' => 'failed',
-    '4' => 'inProgress',
-    '5' => 'systemFailure',
-    '6' => 'inhibited',
-  },
-  'lgpPwrStateLoadBusSynchronization' => {
-    '0' => 'unknown',
-    '1' => 'active',
-    '2' => 'abnormal',
-  },
-  'lgpPwrBypassReady' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'lgpPwrBatteryCapacityStatus' => {
-    '1' => 'unknown',
-    '2' => 'batteryNormal',
-    '3' => 'batteryLow',
-    '4' => 'batteryDepleted',
-  },
-  'lgpPwrTopFrequencyConverter' => {
     '1' => 'yes',
     '2' => 'no',
   },
@@ -743,19 +403,29 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'LIEBERT-GP-POWER-MIB'} 
     '3' => 'bypass',
     '4' => 'maintenanceBypass',
   },
-  'lgpPwrEconomicOperation' => {
-    '0' => 'off',
+  'lgpPwrBatteryCharger' => {
     '1' => 'on',
+    '2' => 'off',
   },
-  'lgpPwrMeasurementPointPowerFactorTag' => {
-    '1' => 'leading',
-    '2' => 'lagging',
+  'lgpPwrStateDCBusQualification' => {
+    '1' => 'fail',
+    '2' => 'marginalLow',
+    '3' => 'normal',
+    '4' => 'marginalHigh',
   },
-  'lgpPwrRectifierPulseCount' => {
-    '1' => 'sixPulse',
-    '2' => 'twelvePulse',
-    '3' => 'eighteenPulse',
-    '4' => 'twentyFourPulse',
+  'lgpPwrStateLoadBusSynchronization' => {
+    '0' => 'unknown',
+    '1' => 'active',
+    '2' => 'abnormal',
+  },
+  'lgpPwrStateAuxOutputBrkrState' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'notInstalled',
+  },
+  'lgpPwrTopFrequencyConverter' => {
+    '1' => 'yes',
+    '2' => 'no',
   },
   'lgpPwrRotaryBreakerStatus' => {
     '1' => 'unknown',
@@ -765,26 +435,13 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'LIEBERT-GP-POWER-MIB'} 
     '5' => 'bypass',
     '6' => 'maintenance',
   },
-  'lgpPwrBatteryChargeMode' => {
-    '1' => 'float',
-    '2' => 'equalize',
+  'lgpPwrLineMeasurementPowerFactorTag' => {
+    '1' => 'leading',
+    '2' => 'lagging',
   },
-  'lgpPwrStateInverterState' => {
-    '1' => 'on',
-    '2' => 'off',
-  },
-  'lgpPwrBuck' => {
-    '1' => 'on',
-    '2' => 'off',
-  },
-  'lgpPwrStateBypassStaticSwitchState' => {
-    '1' => 'on',
-    '2' => 'off',
-  },
-  'lgpPwrStateInvOutputBrkrState' => {
-    '1' => 'open',
-    '2' => 'closed',
-    '3' => 'notInstalled',
+  'lgpPwrBatteryTest' => {
+    '1' => 'start',
+    '2' => 'abort',
   },
   'lgpPwrStateBypassQualification' => {
     '1' => 'fail',
@@ -792,11 +449,324 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'LIEBERT-GP-POWER-MIB'} 
     '3' => 'normal',
     '4' => 'marginalHigh',
   },
+  'lgpPwrShutdownPowerFactorCorrectionFailure' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'lgpPwrParallelSystemOutputToLoadSource' => {
+    '0' => 'unknown',
+    '1' => 'utility',
+    '2' => 'battery',
+    '3' => 'bypass',
+    '4' => 'none',
+  },
+  'lgpPwrBypassReady' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'lgpPwrLoadBusSyncMode' => {
+    '1' => 'master',
+    '2' => 'slave',
+    '3' => 'none',
+  },
+  'lgpPwrStateSource2PduInputBrkrState' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'notInstalled',
+  },
+  'lgpPwrBatteryChargeStatus' => {
+    '1' => 'fullycharged',
+    '2' => 'notfullycharged',
+    '3' => 'charging',
+    '4' => 'discharging',
+  },
+  'lgpPwrStateMaintIsolBrkrState' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'notInstalled',
+  },
+  'lgpPwrGeneratorStatus' => {
+    '1' => 'connected',
+    '2' => 'disconnected',
+  },
+  'lgpPwrStateInputSource' => {
+    '1' => 'none',
+    '2' => 'utility',
+    '3' => 'generator',
+  },
+  'lgpPwrStateInvOutputBrkrState' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'notInstalled',
+  },
+  'lgpPwrInputIsolationTransformerInstalled' => {
+    '1' => 'notInstalled',
+    '2' => 'installed',
+  },
+  'lgpPwrStateSource2BypassBrkrState' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'notInstalled',
+  },
+  'lgpPwrRectifierPulseCount' => {
+    '1' => 'sixPulse',
+    '2' => 'twelvePulse',
+    '3' => 'eighteenPulse',
+    '4' => 'twentyFourPulse',
+  },
+  'lgpPwrStateLoadDisconnectState' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'notInstalled',
+  },
+  'lgpPwrShutdownHardware' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'lgpPwrBatteryLifeEnhancer' => {
+    '1' => 'on',
+    '2' => 'off',
+  },
+  'lgpPwrOutputToLoadOnBypass' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'lgpPwrInverterReady' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'lgpPwrStateBypassIsolBrkrState' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'notInstalled',
+  },
+  'lgpPwrUPSTopDualInput' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'lgpPwrStateInverterQualification' => {
+    '1' => 'fail',
+    '2' => 'marginalLow',
+    '3' => 'normal',
+    '4' => 'marginalHigh',
+  },
+  'lgpPwrStateRectifierState' => {
+    '1' => 'on',
+    '2' => 'off',
+  },
+  'lgpPwrRectifierPassiveFilterInstalled' => {
+    '1' => 'notInstalled',
+    '2' => 'installed',
+  },
+  'lgpPwrShutdownInputUnderVoltage' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'lgpPwrStateOutputConfig' => {
+    '1' => 'singlePhase2WireL1WithReturn',
+    '2' => 'twoPhase2WireL1L2',
+    '3' => 'twoPhase3WireL1L2WithNeutral',
+    '4' => 'threePhase3WireL1L2L3',
+    '5' => 'threePhase4WireL1L2L3WithNeutral',
+  },
+  'lgpPwrRectifierActiveFilterInstalled' => {
+    '1' => 'notInstalled',
+    '2' => 'installed',
+  },
+  'lgpPwrStateSource1BypassBrkrState' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'notInstalled',
+  },
+  'lgpPwrStateBypassInputConfig' => {
+    '1' => 'singlePhase2WireL1WithReturn',
+    '2' => 'twoPhase2WireL1L2',
+    '3' => 'twoPhase3WireL1L2WithNeutral',
+    '4' => 'threePhase3WireL1L2L3',
+    '5' => 'threePhase4WireL1L2L3WithNeutral',
+  },
+  'lgpPwrBatteryChargeCompensating' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'lgpPwrBatteryTestResult' => {
+    '1' => 'unknown',
+    '2' => 'passed',
+    '3' => 'failed',
+    '4' => 'inProgress',
+    '5' => 'systemFailure',
+    '6' => 'inhibited',
+  },
+  'lgpPwrUpsInverterStandby' => {
+    '1' => 'on',
+    '2' => 'off',
+  },
+  'lgpPwrShutdownLineSwap' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'lgpPwrRedundantSubModule' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'lgpPwrStateModuleType' => {
+    '1' => 'singleModuleSystem',
+    '2' => 'module1plus1',
+    '3' => 'module1plusN',
+    '4' => 'moduleNplus1',
+    '5' => 'systemControlCabinet',
+    '6' => 'mainStaticSwitch',
+  },
+  'lgpPwrRectifierTrapInstalled' => {
+    '1' => 'notInstalled',
+    '2' => 'installed',
+  },
+  'lgpPwrStateModuleOutBrkrState' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'notInstalled',
+  },
+  'lgpPwrStateSource1PduInputBrkrState' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'notInstalled',
+  },
+  'lgpPwrBuck' => {
+    '1' => 'on',
+    '2' => 'off',
+  },
+  'lgpPwrStateStaticSwitchType' => {
+    '1' => 'notApplicable',
+    '2' => 'continuousDuty',
+    '3' => 'momentaryDuty',
+  },
+  'lgpPwrPowerFactorCorrection' => {
+    '1' => 'on',
+    '2' => 'off',
+  },
+  'lgpPwrMeasurementPointPowerFactorTag' => {
+    '1' => 'leading',
+    '2' => 'lagging',
+  },
+  'lgpPwrAutoReTransferEnabled' => {
+    '0' => 'no',
+    '1' => 'yes',
+  },
+  'lgpPwrStateTrapFilterBrkrState' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'notInstalled',
+  },
+  'lgpPwrStateMaintBypassBrkrState' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'notInstalled',
+  },
   'lgpPwrOutputToLoadOnInverter' => {
     '1' => 'yes',
     '2' => 'no',
   },
-  'lgpPwrStateSource2PduInputBrkrState' => {
+  'lgpPwrBoost' => {
+    '1' => 'on',
+    '2' => 'off',
+  },
+  'lgpPwrAutomaticBatteryTest' => {
+    '1' => 'on',
+    '2' => 'off',
+  },
+  'lgpPwrBatteryCircuitBreakerState' => {
+    '0' => 'unknown',
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'lgpPwrBatteryCabinetType' => {
+    '1' => 'notSpecified',
+    '2' => 'internal',
+    '3' => 'external',
+    '4' => 'lrt',
+  },
+  'lgpPwrLoadCircuitState' => {
+    '1' => 'on',
+    '2' => 'off',
+    '3' => 'default',
+  },
+  'lgpPwrDcToDcConverter' => {
+    '1' => 'on',
+    '2' => 'off',
+  },
+  'lgpPwrTopVoltageConverter' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'lgpPwrTopRedundantControlModules' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'lgpPwrUpsAutoRestart' => {
+    '1' => 'on',
+    '2' => 'off',
+  },
+  'lgpPwrShutdownOverload' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'lgpPwrStateInverterState' => {
+    '1' => 'on',
+    '2' => 'off',
+  },
+  'lgpPwrStateRectifierIsolBrkrState' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'notInstalled',
+  },
+  'lgpPwrStateOutQualification' => {
+    '1' => 'fail',
+    '2' => 'marginalLow',
+    '3' => 'normal',
+    '4' => 'marginalHigh',
+  },
+  'lgpPwrShutdownOutputShort' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'lgpPwrStateOutStaticSwState' => {
+    '1' => 'off',
+    '2' => 'on',
+    '3' => 'notInstalled',
+  },
+  'lgpPwrStateOutputBrkrState' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'notInstalled',
+  },
+  'lgpPwrEconomicOperationMode' => {
+    '1' => 'on',
+    '2' => 'off',
+  },
+  'lgpPwrStateBypassStaticSwitchState' => {
+    '1' => 'on',
+    '2' => 'off',
+  },
+  'lgpPwrUPSModuleMode' => {
+    '1' => 'single',
+    '2' => 'parallel',
+    '3' => 'hotmaster',
+    '4' => 'hotslave',
+  },
+  'lgpPwrStateInputBrkrState' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'notInstalled',
+  },
+  'lgpPwrShutdownDcBusOverload' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'lgpPwrUpsTopLineInteractive' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'lgpPwrStateBackfeedBrkrState' => {
     '1' => 'open',
     '2' => 'closed',
     '3' => 'notInstalled',
@@ -805,5 +775,35 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'LIEBERT-GP-POWER-MIB'} 
     '1' => 'open',
     '2' => 'closed',
     '3' => 'notInstalled',
+  },
+  'lgpPwrShutdownLowBattery' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'lgpPwrStateSource1InputBrkrState' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'notInstalled',
+  },
+  'lgpPwrStateSource2InputBrkrState' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'notInstalled',
+  },
+  'lgpPwrLoadCircuitStateAndControl' => {
+    '0' => 'off',
+    '1' => 'on',
+    '2' => 'reboot',
+  },
+  'lgpPwrEconomicOperationModeControl' => {
+    '0' => 'disabled',
+    '1' => 'mode1',
+    '2' => 'mode2',
+  },
+  'lgpPwrBatteryCapacityStatus' => {
+    '1' => 'unknown',
+    '2' => 'batteryNormal',
+    '3' => 'batteryLow',
+    '4' => 'batteryDepleted',
   },
 };

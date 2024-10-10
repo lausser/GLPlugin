@@ -6,7 +6,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'LIEBERT-GP-FLEXIBLE-MIB'} = 
 };
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'LIEBERT-GP-FLEXIBLE-MIB'} =
-        '1.3.6.1.4.1.476.1.42.3.9.10';
+  '1.3.6.1.4.1.476.1.42.3.9';
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'LIEBERT-GP-FLEXIBLE-MIB'} = {
   'liebertGlobalProductsFlexibleModule' => '1.3.6.1.4.1.476.1.42.1.10.1',

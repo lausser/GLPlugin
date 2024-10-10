@@ -6,7 +6,8 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'LIEBERT-GP-AGENT-MIB'} = {
 };
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'LIEBERT-GP-AGENT-MIB'} =
-  '1.3.6.1.4.1.476.1.42.1.2.1';
+  # is not found in snmpwalk '1.3.6.1.4.1.476.1.42.1.2.1';
+  # 1.3.6.1.4.1.476.1.42.2.1
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'LIEBERT-GP-AGENT-MIB'} = {
   'liebertAgentModule' => '1.3.6.1.4.1.476.1.42.1.2.1',
