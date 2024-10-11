@@ -57,12 +57,29 @@ sub check_subsystems {
   )) if $self->opts->subsystem;
 }
 
+sub summarize_subsystems {
+  my ($self) = @_;
+  my @subsystems = grep { $_ =~ /.*_subsystem$/ } keys %{$self};
+  my @subsystem_summary = ();
+  foreach (@subsystems) {
+    if ($self->{$_}->{subsystem_summary}) {
+      push(@subsystem_summary, $self->{$_}->{subsystem_summary});
+    }
+  }
+  return join(", ", @subsystem_summary);
+}
+
 sub dump_subsystems {
   my ($self) = @_;
   my @subsystems = grep { $_ =~ /.*_subsystem$/ } keys %{$self};
   foreach (@subsystems) {
     $self->{$_}->dump();
   }
+}
+
+sub subsystem_summary {
+  my ($self, $summary) = @_;
+  $self->{subsystem_summary} = $summary;
 }
 
 1;
