@@ -269,6 +269,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SKYHIGHSECURITYSWGMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SLHWLIBT950MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SNIASMLMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SNMPFRAMEWORKMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SNMPV2TC.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SNMPV2TCV1MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SPECTRALOGICGLOBALREG.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/SPECTRALOGICGLOBALREGSLHARDWARESLLIBRARIESSLTSERIES.pm
