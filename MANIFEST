@@ -123,10 +123,13 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ENTITYSTATEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ENVIROMUX5D.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/EPPCMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ETHERLIKEMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/F5COMMONSMIMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/F5BIGIPAPMMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/F5BIGIPGLOBALMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/F5BIGIPLOCALMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/F5BIGIPSYSTEMMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/F5OSSYSTEMMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/F5PLATFORMSTATSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/FCEOSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/FCMGMTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/FIBRECHANNELFEMIB.pm
