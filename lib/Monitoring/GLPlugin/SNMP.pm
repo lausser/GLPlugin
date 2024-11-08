@@ -1226,7 +1226,13 @@ sub establish_snmp_session {
       };
       ($session, $error) = Net::SNMP->session(%params);
     }
-    if (! defined $session) {
+    if (! defined $session && $error && $error =~ /No response from remote host.*during synchronization/) {
+      # Before the Oct 2024 Net::SNMP patch, this situation ended up in a
+      # timeout and was caught by the alarm handler. With the patch, Net::SNMP
+      # returns earlier so that we handle the return here.
+      $self->add_message(UNKNOWN,
+          sprintf 'cannot create session object: %s', $error);
+    } elsif (! defined $session) {
       $self->add_message(CRITICAL, 
           sprintf 'cannot create session object: %s', $error);
       $self->debug(Data::Dumper::Dumper(\%params));

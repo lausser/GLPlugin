@@ -58,6 +58,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOEIGRPMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOENHANCEDMEMPOOLMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOENTITYALARMMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOENTITYFRUCONTROLMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOENTITYQFPMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOENTITYSENSORMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOENVMONMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOERRDISABLEMIB.pm

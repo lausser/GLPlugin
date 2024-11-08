@@ -1,3 +1,7 @@
+* 2024-10-17 5.36
+  add CISCO-ENTITY-QFP-MIB
+  catch (patched) Net::SNMP error string for compatibility purpose (same exit code)
+  renew FORTINET-FORTIGATE-MIB
 * 2024-10-17 5.35
   add F5-COMMON-SMI-MIB F5-OS-SYSTEM-MIB F5-PLATFORM-STATS-MIB
 * 2024-10-11 5.34
