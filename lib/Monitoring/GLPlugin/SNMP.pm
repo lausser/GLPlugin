@@ -1618,6 +1618,63 @@ sub internal_name {
 ################################################################
 # file-related functions
 #
+
+sub release_lock {
+  my $lock_file = shift;
+  unlink $lock_file if -f $lock_file;
+}
+
+sub acquire_lock {
+  my $lock_file = shift;
+  my $max_depth = shift || 2;
+  my $depth = shift || 0;
+  if ($depth > $max_depth) {
+    # wait no longer
+    return 0;
+  }
+  if (-f $lock_file && (time - (stat($lock_file))[9]) > 600) {
+    # lock_file is older than 10 minutes, check PID
+    # maybe the process, which refreshed the cache, crashed or was killed
+    # by the Naemon timeout.
+    my ($pid, $hostname);
+    if (open(my $pid_fh, '<', $lock_file)) {
+      ($pid, $hostname) = split /\s+/, <$pid_fh>;
+      close $pid_fh;
+      my $is_process_running = sub {
+        my $pid = shift;
+        return kill(0, $pid) ? 1 : 0;
+      };
+      if (!$pid || ! &$is_process_running($pid)) {
+        # orphaned lock, wait a bit then retry
+        unlink $lock_file;
+        sleep rand(2);
+        return acquire_lock($max_depth, $depth + 1);
+      } else {
+        # the lock is held by a running process
+        return 0;
+      }
+    } else {
+      # cannot read PID, assume lock is orphaned and retry
+      unlink $lock_file;
+      sleep rand(2);
+      return acquire_lock($max_depth, $depth + 1);
+    }
+  } elsif (-f $lock_file) {
+    # lock_file is younger than 10 minutes, refreshing is in-progress
+    return 0;
+  }
+  # attempt to create a new lock file
+  if (open(my $lock_fh, ">", $lock_file)) {
+    print $lock_fh "$$ $ENV{HOSTNAME}\n";
+    close $lock_fh;
+    return 1; # lock acquired
+  } else {
+    # failed to create lock_file, try again
+    sleep rand(2);
+    return acquire_lock($max_depth, $depth + 1);
+  }
+}
+
 sub create_interface_cache_file {
   my ($self) = @_;
   my $extension = "";
@@ -1648,7 +1705,22 @@ sub create_entry_cache_file {
 }
 
 sub update_entry_cache {
-  my ($self, $force, $mib, $table, $key_attrs, $last_change) = @_;
+  my ($self, $force, $mib, $table, $key_attrs, $last_change, $class) = @_;
+  # force
+  #   0 = nur update, wenn es keinen cache gibt oder er veraltet ist
+  #   1 = in jedem Fall updaten
+  # mib, table
+  # key_attrs
+  #   Attribute, deren Werte die erste Haelfte des Keys bilden.
+  #   Werte durch # vernkuepft, dann -//- und dann der Index
+  #   (weil ggf. Werte nicht unique sind)
+  # last_change
+  #   optional, falls man weiss, wann sich die zu cachende Tabelle zuletzt
+  #   geaendert hat.
+  # class
+  #   optional, falls man mit key_attrs arbeiten will, die erst bei finish()
+  #   entstehen, z.b. not-accessible Attribute, die sich im Index verstecken.
+  #   Falls class, dann $class->new() statt ...::SNMP::TableItem
   $self->debug(sprintf "last change of %s::%s was %s",
       $mib, $table, scalar localtime $last_change) if $last_change;
   my $update_deadline = time - 3600;
@@ -1682,6 +1754,15 @@ sub update_entry_cache {
   my $key_attr_id = join('#', @{$key_attrs});
   my $cache = sprintf "%s_%s_%s_cache", $mib, $table, $key_attr_id;
   my $statefile = $self->create_entry_cache_file($mib, $table, $key_attr_id);
+  if ($statefile && ((stat $statefile)[9]) < ($update_deadline)) {
+    # check if somebody is already refreshing the cache
+    # in this case, $deadline = 0 and read the existing one
+    #   otherwise, if we are the process in charge, set a flag file
+    #   remove it after the walk.
+    # remove leftover refresh flag files (has a pid in it)
+    # pid does not exist and file is older than 10 minutes)
+    # epn has a pid?
+  }
   if ($force == -1 && -f $statefile) {
     $must_update = 1;
     # brauchts unter keinen umstaenden.
@@ -1691,26 +1772,53 @@ sub update_entry_cache {
         $self->opts->hostname, $self->opts->mode, $mib, $table);
   } elsif ($force != 0 || ! -f $statefile || ((stat $statefile)[9]) < ($update_deadline)) {
     $must_update = 1;
-    $self->debug(sprintf 'force update of %s %s %s %s cache',
-        $self->opts->hostname, $self->opts->mode, $mib, $table);
-    $self->{$cache} = {};
-    foreach my $entry ($self->get_snmp_table_objects($mib, $table, undef, $key_attrs)) {
-      # HUAWEI-L2MAM-MIB/hwMacVlanStatisticsTable hat hwMacVlanStatisticsVlanId, welches aber nicht
-      # existiert. Id ist nichts anderes als der Index. sub finish() wuerde das Attribut
-      # anlegen, aber das ist hier noch nicht gelaufen. $entry->{$_} ist daher undef
-      # bei key_attrs==hwMacVlanStatisticsVlanId. Aber was noch geht:
-      # Leerstring, dann heißt es ""-//-index => index statt blubb-//-index => index
-      # Weil hwMacVlanStatisticsVlanId kein Text ist, sondern der Index, wird das Holen
-      # aus dem Cache funktionieren, weil wenn --name numerisch ist, wird mit dem Index
-      # aus ""-//-index verglichen und die leere Description ist Wurst.
-      my $key = join('#', map { exists $entry->{$_} ? $entry->{$_} : "" } @{$key_attrs});
-      my $hash = $key . '-//-' . join('.', @{$entry->{indices}});
-      $self->{$cache}->{$hash} = $entry->{indices};
+    my $lockfile = $statefile."_updating";
+    # if there is an old cache, just try twice, somebody else is updating
+    # and next time there will be a fresh cache.
+    # if this is an initial run, try over and over until the other process
+    # has finished refreshing.
+    my $locked = $self->acquire_lock($lockfile, -f $statefile ? 2 : 10);
+    if ($locked && ((stat $statefile)[9]) < ($update_deadline)) {
+      # if >= update_deadline, then another process refreshed the cache file
+      # while we were waiting for the lock
+      $self->debug(sprintf 'force update of %s %s %s %s cache',
+          $self->opts->hostname, $self->opts->mode, $mib, $table);
+      $self->{$cache} = {};
+      foreach my $entry ($self->get_snmp_table_objects($mib, $table, undef, $key_attrs)) {
+        if ($class) {
+          $entry = $class->new(%{$entry});
+        } else {
+          # bleibt generisch
+          # HUAWEI-L2MAM-MIB/hwMacVlanStatisticsTable hat hwMacVlanStatisticsVlanId, welches aber nicht
+          # existiert. Id ist nichts anderes als der Index. sub finish() wuerde das Attribut
+          # anlegen, aber das ist hier noch nicht gelaufen. $entry->{$_} ist daher undef
+          # bei key_attrs==hwMacVlanStatisticsVlanId. Aber was noch geht:
+          # Leerstring, dann heißt es ""-//-index => index statt blubb-//-index => index
+          # Weil hwMacVlanStatisticsVlanId kein Text ist, sondern der Index, wird das Holen
+          # aus dem Cache funktionieren, weil wenn --name numerisch ist, wird mit dem Index
+          # aus ""-//-index verglichen und die leere Description ist Wurst.
+        }
+        my $key = join('#', map { exists $entry->{$_} ? $entry->{$_} : "" } @{$key_attrs});
+        my $hash = $key . '-//-' . join('.', @{$entry->{indices}});
+        $self->{$cache}->{$hash} = $entry->{indices};
+      }
+      $self->save_cache($mib, $table, $key_attrs);
+    } else {
+      # another process is updating the cache just in this moment
     }
-    $self->save_cache($mib, $table, $key_attrs);
+    if ($locked) {
+      $self->release_lock($lockfile);
+    }
   }
   $self->load_cache($mib, $table, $key_attrs);
   return $must_update;
+}
+
+sub delete_cache {
+  my ($self, $mib, $table, $key_attrs) = @_;
+  my $statefile = $self->create_entry_cache_file($mib, $table, join('#', @{$key_attrs}));
+  unlink $statefile if -f $statefile;
+  $self->debug(sprintf "deleted cache in %s", $statefile);
 }
 
 sub save_cache {
@@ -1956,11 +2064,17 @@ sub get_snmp_object_maybe {
 }
 
 sub get_snmp_table_objects_with_cache {
-  my ($self, $mib, $table, $key_attr, $rows, $force) = @_;
+  my ($self, $mib, $table, $key_attr, $rows, $force, $last_change, $class) = @_;
   $force ||= 0;
-  $self->update_entry_cache($force, $mib, $table, $key_attr);
+  $self->update_entry_cache($force, $mib, $table, $key_attr, $last_change, $class);
   my @indices = $self->get_cache_indices($mib, $table, $key_attr);
   my @entries = ();
+  # es gibt einen cache, dieser wurde soeben neu angelegt oder erneuert.
+  # wenn das plugin mit --name aufgerufen wurde, dann wird da drin irgendwas
+  # bestimmtes gesucht. keine indices = nix gefunden
+  # ohne ein --name kommt aus get_cache_indices die leere liste raus, damit
+  # die daraufhin folgende walk-methode saemtliche zeilen holt.
+  return @entries if ! @indices and $self->opts->name;
   foreach ($self->get_snmp_table_objects($mib, $table, \@indices, $rows)) {
     push(@entries, $_);
   }

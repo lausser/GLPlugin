@@ -1,3 +1,7 @@
+* 2025-02-03 5.38
+  update_entry_cache gets a lock, so that only one process at a time is refreshing the cache. (others continue using the existing cache)
+* 2025-01-15 5.37
+  update_entry_cache() and get_snmp_table_objects_with_cache() get an optional argument $class, so that index-based attributes (which are created in finish()) can be cached.
 * 2024-10-17 5.36
   add CISCO-ENTITY-QFP-MIB
   catch (patched) Net::SNMP error string for compatibility purpose (same exit code)
