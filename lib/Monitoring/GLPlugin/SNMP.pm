@@ -1620,19 +1620,22 @@ sub internal_name {
 #
 
 sub release_lock {
-  my $lock_file = shift;
+  my ($self, $lock_file) = @_;
+  $self->debug(sprintf "release %s", $lock_file);
   unlink $lock_file if -f $lock_file;
 }
 
 sub acquire_lock {
-  my $lock_file = shift;
-  my $max_depth = shift || 2;
-  my $depth = shift || 0;
+  my ($self, $lock_file, $max_depth, $depth) = @_;
+  $max_depth ||= 2;
+  $depth ||= 0;
+  $self->debug(sprintf "try to aquire %s, attempt %d", $lock_file, $depth);
   if ($depth > $max_depth) {
     # wait no longer
     return 0;
   }
   if (-f $lock_file && (time - (stat($lock_file))[9]) > 600) {
+    $self->debug(sprintf "lock %s exists, but is quite old", $lock_file);
     # lock_file is older than 10 minutes, check PID
     # maybe the process, which refreshed the cache, crashed or was killed
     # by the Naemon timeout.
@@ -1646,32 +1649,37 @@ sub acquire_lock {
       };
       if (!$pid || ! &$is_process_running($pid)) {
         # orphaned lock, wait a bit then retry
-        unlink $lock_file;
+        $self->debug(sprintf "lock %s is orphaned", $lock_file);
+        $self->release_lock($lock_file);
         sleep rand(2);
-        return acquire_lock($max_depth, $depth + 1);
+        return acquire_lock($lock_file, $max_depth, $depth + 1);
       } else {
         # the lock is held by a running process
+        $self->debug(sprintf "lock %s is justified, refresh in progress", $lock_file);
         return 0;
       }
     } else {
       # cannot read PID, assume lock is orphaned and retry
-      unlink $lock_file;
+      $self->debug(sprintf "lock %s is damaged", $lock_file);
+      $self->release_lock($lock_file);
       sleep rand(2);
-      return acquire_lock($max_depth, $depth + 1);
+      return acquire_lock($lock_file, $max_depth, $depth + 1);
     }
   } elsif (-f $lock_file) {
     # lock_file is younger than 10 minutes, refreshing is in-progress
+    $self->debug(sprintf "lock %s exists, refresh in progress", $lock_file);
     return 0;
   }
   # attempt to create a new lock file
   if (open(my $lock_fh, ">", $lock_file)) {
     print $lock_fh "$$ $ENV{HOSTNAME}\n";
     close $lock_fh;
+    $self->debug(sprintf "lock %s claimed", $lock_file);
     return 1; # lock acquired
   } else {
     # failed to create lock_file, try again
     sleep rand(2);
-    return acquire_lock($max_depth, $depth + 1);
+    return acquire_lock($lock_file, $max_depth, $depth + 1);
   }
 }
 
@@ -1754,15 +1762,6 @@ sub update_entry_cache {
   my $key_attr_id = join('#', @{$key_attrs});
   my $cache = sprintf "%s_%s_%s_cache", $mib, $table, $key_attr_id;
   my $statefile = $self->create_entry_cache_file($mib, $table, $key_attr_id);
-  if ($statefile && ((stat $statefile)[9]) < ($update_deadline)) {
-    # check if somebody is already refreshing the cache
-    # in this case, $deadline = 0 and read the existing one
-    #   otherwise, if we are the process in charge, set a flag file
-    #   remove it after the walk.
-    # remove leftover refresh flag files (has a pid in it)
-    # pid does not exist and file is older than 10 minutes)
-    # epn has a pid?
-  }
   if ($force == -1 && -f $statefile) {
     $must_update = 1;
     # brauchts unter keinen umstaenden.
@@ -1778,7 +1777,7 @@ sub update_entry_cache {
     # if this is an initial run, try over and over until the other process
     # has finished refreshing.
     my $locked = $self->acquire_lock($lockfile, -f $statefile ? 2 : 10);
-    if ($locked && ((stat $statefile)[9]) < ($update_deadline)) {
+    if ($locked && (!-f $statefile || -f $statefile && (stat $statefile)[9] < $update_deadline)) {
       # if >= update_deadline, then another process refreshed the cache file
       # while we were waiting for the lock
       $self->debug(sprintf 'force update of %s %s %s %s cache',

@@ -1,3 +1,5 @@
+* 2025-02-14 5.38.1
+  improve the cache locking, only one process is refreshing, others use the old one
 * 2025-02-03 5.38
   update_entry_cache gets a lock, so that only one process at a time is refreshing the cache. (others continue using the existing cache)
 * 2025-01-15 5.37
