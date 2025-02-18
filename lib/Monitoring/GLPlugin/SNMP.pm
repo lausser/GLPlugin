@@ -7,6 +7,7 @@ use File::Basename;
 use Digest::MD5 qw(md5_hex);
 use JSON;
 use File::Slurp qw(read_file);
+use Sys::Hostname;
 use Module::Load;
 use AutoLoader;
 our $AUTOLOAD;
@@ -1672,7 +1673,7 @@ sub acquire_lock {
   }
   # attempt to create a new lock file
   if (open(my $lock_fh, ">", $lock_file)) {
-    print $lock_fh "$$ $ENV{HOSTNAME}\n";
+    printf $lock_fh "%d %s\n", $$, hostname();
     close $lock_fh;
     $self->debug(sprintf "lock %s claimed", $lock_file);
     return 1; # lock acquired
