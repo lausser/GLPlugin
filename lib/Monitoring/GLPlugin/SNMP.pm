@@ -1653,7 +1653,7 @@ sub acquire_lock {
         $self->debug(sprintf "lock %s is orphaned", $lock_file);
         $self->release_lock($lock_file);
         sleep rand(2);
-        return acquire_lock($lock_file, $max_depth, $depth + 1);
+        return $self->acquire_lock($lock_file, $max_depth, $depth + 1);
       } else {
         # the lock is held by a running process
         $self->debug(sprintf "lock %s is justified, refresh in progress", $lock_file);
@@ -1664,7 +1664,7 @@ sub acquire_lock {
       $self->debug(sprintf "lock %s is damaged", $lock_file);
       $self->release_lock($lock_file);
       sleep rand(2);
-      return acquire_lock($lock_file, $max_depth, $depth + 1);
+      return $self->acquire_lock($lock_file, $max_depth, $depth + 1);
     }
   } elsif (-f $lock_file) {
     # lock_file is younger than 10 minutes, refreshing is in-progress
@@ -1680,7 +1680,7 @@ sub acquire_lock {
   } else {
     # failed to create lock_file, try again
     sleep rand(2);
-    return acquire_lock($lock_file, $max_depth, $depth + 1);
+    return $self->acquire_lock($lock_file, $max_depth, $depth + 1);
   }
 }
 

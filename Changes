@@ -1,3 +1,5 @@
+* 2025-02-18 5.39.0.2
+  bugfix in aquire_lock
 * 2025-02-18 5.39.0.1
   fix the hostname variable for the lockfile (kein env, sondern scheiss bash)
 * 2025-02-18 5.39
