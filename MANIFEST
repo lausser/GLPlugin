@@ -88,6 +88,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOSBTUNINGMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOSDWANAPPROUTEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOSDWANBFDMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOSDWANOPERSYSTEMMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOSDWANSECURITYMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOSMARTLICMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOSTACKMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOSTACKWISEMIB.pm

@@ -1,3 +1,5 @@
+* 2025-02-18 5.39
+  add CISCO-SDWAN-SECURITY-MIB
 * 2025-02-14 5.38.1
   improve the cache locking, only one process is refreshing, others use the old one
 * 2025-02-03 5.38
