@@ -1,3 +1,6 @@
+* 2025-02-19 5.40
+  add TPLINK-SYSINFO-MIB
+  add TPLINK-SYSMONITOR-MIB
 * 2025-02-18 5.39.0.2
   bugfix in aquire_lock
 * 2025-02-18 5.39.0.1

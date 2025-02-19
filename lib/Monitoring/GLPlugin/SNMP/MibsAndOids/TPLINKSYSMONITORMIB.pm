@@ -1,4 +1,4 @@
-package Monitoring::GLPlugin::SNMP::MibsAndOids::TPLINKMIB;
+package Monitoring::GLPlugin::SNMP::MibsAndOids::TPLINKSYSMONITORMIB;
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'TPLINK-SYSMONITOR-MIB'} = {
   url => '',
