@@ -107,6 +107,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DAMOCLESMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DCBGPMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DELLRACMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DELLSTORAGESCMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DELLVENDORMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DEVICEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DIDACTUMSYSTEMMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DISKMIB.pm
