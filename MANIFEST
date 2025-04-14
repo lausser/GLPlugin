@@ -105,6 +105,10 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CPQHLTHMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DATADOMAINMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DAMOCLESMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DCBGPMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DELLEMCOS10BGP4V2MIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DELLEMCOS10CHASSISMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DELLEMCOS10PORTSECURITYMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DELLEMCOS10TCMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DELLRACMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DELLSTORAGESCMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/DELLVENDORMIB.pm

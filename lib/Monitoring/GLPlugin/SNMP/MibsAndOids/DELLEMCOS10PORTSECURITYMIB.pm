@@ -1,0 +1,113 @@
+package Monitoring::GLPlugin::SNMP::MibsAndOids::DELLEMCOS10PORTSECURITYMIB;
+
+$Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'DELLEMC-OS10-PORT-SECURITY-MIB'} = {
+  url => '',
+  name => 'DELLEMC-OS10-PORT-SECURITY-MIB',
+};
+
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'DELLEMC-OS10-PORT-SECURITY-MIB'} =
+  '1.3.6.1.4.1.674.11000.5000.100.5';
+
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'DELLEMC-OS10-PORT-SECURITY-MIB'} = {
+  'os10PortSecurityMib' => '1.3.6.1.4.1.674.11000.5000.100.5',
+  'os10PortSecurityMibObjects' => '1.3.6.1.4.1.674.11000.5000.100.5.1',
+  'os10PortSecurityGlobalObjects' => '1.3.6.1.4.1.674.11000.5000.100.5.1.1',
+  'os10PortSecurityGlobalEnable' => '1.3.6.1.4.1.674.11000.5000.100.5.1.1.1',
+  'os10PortSecurityGlobalEnableDefinition' => 'SNMPv2-TC::TruthValue',
+  'os10PortSecurityGlobalTotalSecureAddresses' => '1.3.6.1.4.1.674.11000.5000.100.5.1.1.2',
+  'os10PortSecurityGlobalTotalSecureDynamicAddresses' => '1.3.6.1.4.1.674.11000.5000.100.5.1.1.3',
+  'os10PortSecurityGlobalTotalSecureStickyAddresses' => '1.3.6.1.4.1.674.11000.5000.100.5.1.1.4',
+  'os10PortSecurityGlobalTotalSecureStaticAddresses' => '1.3.6.1.4.1.674.11000.5000.100.5.1.1.5',
+  'os10PortSecurityGlobalClearSecureMacAddresses' => '1.3.6.1.4.1.674.11000.5000.100.5.1.1.6',
+  'os10PortSecurityGlobalClearSecureMacAddressesDefinition' => 'DELLEMC-OS10-PORT-SECURITY-MIB::SecureMacAddrType',
+  'os10PortSecurityGlobalResetViolation' => '1.3.6.1.4.1.674.11000.5000.100.5.1.1.7',
+  'os10PortSecurityGlobalResetViolationDefinition' => 'DELLEMC-OS10-PORT-SECURITY-MIB::SecureMacViolationType',
+  'os10PortSecurityInterfaceObjects' => '1.3.6.1.4.1.674.11000.5000.100.5.1.2',
+  'os10PortSecurityIfConfigTable' => '1.3.6.1.4.1.674.11000.5000.100.5.1.2.1',
+  'os10PortSecurityIfConfigEntry' => '1.3.6.1.4.1.674.11000.5000.100.5.1.2.1.1',
+  'os10PortSecurityIfIndex' => '1.3.6.1.4.1.674.11000.5000.100.5.1.2.1.1.1',
+  #'os10PortSecurityIfIndexDefinition' => 'IF-MIB::InterfaceIndex',
+  'os10PortSecurityIfPortSecurityEnable' => '1.3.6.1.4.1.674.11000.5000.100.5.1.2.1.1.2',
+  'os10PortSecurityIfPortSecurityEnableDefinition' => 'SNMPv2-TC::TruthValue',
+  'os10PortSecurityIfViolationStatus' => '1.3.6.1.4.1.674.11000.5000.100.5.1.2.1.1.3',
+  'os10PortSecurityIfViolationStatusDefinition' => 'DELLEMC-OS10-PORT-SECURITY-MIB::os10PortSecurityIfViolationStatus',
+  'os10PortSecurityIfSecureMacLearnLimit' => '1.3.6.1.4.1.674.11000.5000.100.5.1.2.1.1.4',
+  'os10PortSecurityIfStationMoveEnable' => '1.3.6.1.4.1.674.11000.5000.100.5.1.2.1.1.5',
+  'os10PortSecurityIfStationMoveEnableDefinition' => 'SNMPv2-TC::TruthValue',
+  'os10PortSecurityIfMacViolationAction' => '1.3.6.1.4.1.674.11000.5000.100.5.1.2.1.1.6',
+  'os10PortSecurityIfMacViolationActionDefinition' => 'DELLEMC-OS10-PORT-SECURITY-MIB::os10PortSecurityIfMacViolationAction',
+  'os10PortSecurityIfStmvViolationAction' => '1.3.6.1.4.1.674.11000.5000.100.5.1.2.1.1.7',
+  'os10PortSecurityIfStmvViolationActionDefinition' => 'DELLEMC-OS10-PORT-SECURITY-MIB::os10PortSecurityIfStmvViolationAction',
+  'os10PortSecurityIfStickyEnable' => '1.3.6.1.4.1.674.11000.5000.100.5.1.2.1.1.8',
+  'os10PortSecurityIfStickyEnableDefinition' => 'SNMPv2-TC::TruthValue',
+  'os10PortSecurityIfClearSecureMacAddresses' => '1.3.6.1.4.1.674.11000.5000.100.5.1.2.1.1.9',
+  'os10PortSecurityIfClearSecureMacAddressesDefinition' => 'DELLEMC-OS10-PORT-SECURITY-MIB::SecureMacAddrType',
+  'os10PortSecurityIfSecureMacAgeEnable' => '1.3.6.1.4.1.674.11000.5000.100.5.1.2.1.1.10',
+  'os10PortSecurityIfSecureMacAgeEnableDefinition' => 'SNMPv2-TC::TruthValue',
+  'os10PortSecurityIfTotalSecureAddresses' => '1.3.6.1.4.1.674.11000.5000.100.5.1.2.1.1.11',
+  'os10PortSecurityIfTotalSecureDynamicAddresses' => '1.3.6.1.4.1.674.11000.5000.100.5.1.2.1.1.12',
+  'os10PortSecurityIfTotalSecureStickyAddresses' => '1.3.6.1.4.1.674.11000.5000.100.5.1.2.1.1.13',
+  'os10PortSecurityIfTotalSecureStaticAddresses' => '1.3.6.1.4.1.674.11000.5000.100.5.1.2.1.1.14',
+  'os10PortSecurityMacObjects' => '1.3.6.1.4.1.674.11000.5000.100.5.1.3',
+  'os10PortSecuritySecureMacAddrTable' => '1.3.6.1.4.1.674.11000.5000.100.5.1.3.1',
+  'os10PortSecuritySecureMacAddrEntry' => '1.3.6.1.4.1.674.11000.5000.100.5.1.3.1.1',
+  'os10PortSecuritySecureMacVlanId' => '1.3.6.1.4.1.674.11000.5000.100.5.1.3.1.1.1',
+  #'os10PortSecuritySecureMacVlanIdDefinition' => 'Q-BRIDGE-MIB::VlanIndex',
+  'os10PortSecuritySecureMacAddress' => '1.3.6.1.4.1.674.11000.5000.100.5.1.3.1.1.2',
+  #'os10PortSecuritySecureMacAddressDefinition' => 'SNMPv2-TC::MacAddress',
+  'os10PortSecuritySecureMacIfIndex' => '1.3.6.1.4.1.674.11000.5000.100.5.1.3.1.1.3',
+  #'os10PortSecuritySecureMacIfIndexDefinition' => 'IF-MIB::InterfaceIndex',
+  'os10PortSecuritySecureMacAddrType' => '1.3.6.1.4.1.674.11000.5000.100.5.1.3.1.1.4',
+  'os10PortSecuritySecureMacAddrTypeDefinition' => 'DELLEMC-OS10-PORT-SECURITY-MIB::os10PortSecuritySecureMacAddrType',
+  'os10PortSecurityMibConformance' => '1.3.6.1.4.1.674.11000.5000.100.5.2',
+  'os10PortSecurityCompliances' => '1.3.6.1.4.1.674.11000.5000.100.5.2.1',
+  'os10PortSecurityGroups' => '1.3.6.1.4.1.674.11000.5000.100.5.2.2',
+};
+
+$Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'DELLEMC-OS10-PORT-SECURITY-MIB'} = {
+  'os10PortSecurityIfMacViolationAction' => {
+    '1' => 'drop',
+    '2' => 'dropAndNotify',
+    '3' => 'shutdown',
+    '4' => 'forward',
+  },
+  'os10PortSecurityIfViolationStatus' => {
+    '1' => 'normal',
+    '2' => 'macLearnLimitErrDisable',
+    '3' => 'stationMoveErrDisable',
+  },
+  'os10PortSecurityIfStmvViolationAction' => {
+    '1' => 'drop',
+    '2' => 'dropAndNotify',
+    '3' => 'shutdownOrigPort',
+    '4' => 'shutDownOffendingPort',
+    '5' => 'shutdownBoth',
+  },
+  'SecureMacAddrType' => {
+    '0' => 'none',
+    '1' => 'dynamic',
+    '2' => 'sticky',
+    '3' => 'all',
+  },
+  'os10PortSecuritySecureMacAddrType' => {
+    '1' => 'static',
+    '2' => 'dynamic',
+    '3' => 'sticky',
+  },
+  'SecureMacViolationType' => {
+    '0' => 'none',
+    '1' => 'macLimitViolation',
+    '2' => 'stmvViolation',
+  },
+  'SecureMacViolationType' => {
+    '0' => 'none',
+    '1' => 'macLimitViolation',
+    '2' => 'stmvViolation',
+  },
+  'SecureMacAddrType' => {
+    '0' => 'none',
+    '1' => 'dynamic',
+    '2' => 'sticky',
+    '3' => 'all',
+  },
+};
