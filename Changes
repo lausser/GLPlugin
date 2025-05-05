@@ -1,3 +1,5 @@
+* 2025-05-05 5.42.0.2
+  fix a bug in aquire_lock
 * 2025-05-05 5.42.0.1
   mode locking to GLPlugin.pm
   update PowerNet-MIB

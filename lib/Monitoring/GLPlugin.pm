@@ -13,6 +13,7 @@ use Digest::MD5 qw(md5_hex);
 use Errno;
 use JSON;
 use File::Slurp qw(read_file);
+use Sys::Hostname;
 use Data::Dumper;
 $Data::Dumper::Indent = 1;
 eval {
@@ -22,7 +23,7 @@ eval {
   $Data::Dumper::Sparseseen = 1;
 };
 our $AUTOLOAD;
-*VERSION = \'5.42.0.1';
+*VERSION = \'5.42.0.2';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
