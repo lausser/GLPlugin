@@ -12,6 +12,7 @@ use File::Basename;
 use Digest::MD5 qw(md5_hex);
 use Errno;
 use JSON;
+use Sys::Hostname;
 use File::Slurp qw(read_file);
 use Sys::Hostname;
 use Data::Dumper;

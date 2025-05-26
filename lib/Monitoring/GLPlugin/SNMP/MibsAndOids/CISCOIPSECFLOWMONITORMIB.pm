@@ -5,6 +5,9 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'CISCO-IPSEC-FLOW-MONITOR-MIB
   name => 'CISCO-IPSEC-FLOW-MONITOR-MIB',
 };
 
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'CISCO-CISCO-IPSEC-FLOW-MONITOR-MIB'} =
+  '1.3.6.1.4.1.9.9.171.1';
+
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'CISCO-IPSEC-FLOW-MONITOR-MIB'} = {
   'enterprises' => '1.3.6.1.4.1',
   'cisco' => '1.3.6.1.4.1.9',
