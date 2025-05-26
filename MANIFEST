@@ -64,6 +64,9 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOENVMONMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOERRDISABLEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOETHERNETFABRICEXTENDERMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOFEATURECONTROLMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOFIREPOWERAPEQUIPMENTMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOFIREPOWERAPMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOFIREPOWERAPTCMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOFIREWALLMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOHSRPMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOIETFNATMIB.pm
@@ -92,6 +95,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOSDWANSECURITYMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOSMARTLICMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOSTACKMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOSTACKWISEMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOSYSTEMMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOSYSTEMEXTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOUNIFIEDCOMPUTINGCOMPUTEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/CISCOUNIFIEDCOMPUTINGEQUIPMENTMIB.pm
