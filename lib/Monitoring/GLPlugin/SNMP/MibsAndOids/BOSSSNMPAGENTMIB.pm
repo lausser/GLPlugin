@@ -618,6 +618,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'BOSS-SNMP-AGENT-MIB'}
   'l9d1gsWHsDev11cHrs' => '1.3.6.1.4.1.476.1.42.4.3.32.382',
   'l9d1Second' => '1.3.6.1.4.1.476.1.42.4.3.32.383',
   'l9d1UnitStatus' => '1.3.6.1.4.1.476.1.42.4.3.32.384',
+  'l9d1UnitStatusDefinition' => 'BOSS-SNMP-AGENT-MIB::l9d1UnitStatus',
   'l9d1Year' => '1.3.6.1.4.1.476.1.42.4.3.32.385',
   'l9d1CPYMngCPYConduct' => '1.3.6.1.4.1.476.1.42.4.3.32.386',
   'l9d1CPYMngCPYState' => '1.3.6.1.4.1.476.1.42.4.3.32.387',
@@ -695,17 +696,23 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'BOSS-SNMP-AGENT-MIB'}
   'l9d1CfgretHiHumThrsAbsr' => '1.3.6.1.4.1.476.1.42.4.3.32.460',
   'l9d1CfgretHiHumThrsDPr' => '1.3.6.1.4.1.476.1.42.4.3.32.461',
   'l9d1CfgretHiHumThrsRelr' => '1.3.6.1.4.1.476.1.42.4.3.32.462',
+  'l9d1CfgretHiHumThrsRelrDefinition' => 'BOSS-SNMP-AGENT-MIB::l9d1Opaque',
   'l9d1CfgretHiTThrsr' => '1.3.6.1.4.1.476.1.42.4.3.32.463',
+  'l9d1CfgretHiTThrsrDefinition' => 'BOSS-SNMP-AGENT-MIB::l9d1Opaque',
   'l9d1CfgretLowHumThrsAbsr' => '1.3.6.1.4.1.476.1.42.4.3.32.464',
   'l9d1CfgretLowHumThrsDPr' => '1.3.6.1.4.1.476.1.42.4.3.32.465',
   'l9d1CfgretLowHumThrsRelr' => '1.3.6.1.4.1.476.1.42.4.3.32.466',
+  'l9d1CfgretLowHumThrsRelrDefinition' => 'BOSS-SNMP-AGENT-MIB::l9d1Opaque',
   'l9d1CfgretLowTThrsr' => '1.3.6.1.4.1.476.1.42.4.3.32.467',
+  'l9d1CfgretLowTThrsrDefinition' => 'BOSS-SNMP-AGENT-MIB::l9d1Opaque',
   'l9d1CfgretPBr' => '1.3.6.1.4.1.476.1.42.4.3.32.468',
   'l9d1CfgretSetPr' => '1.3.6.1.4.1.476.1.42.4.3.32.469',
   'l9d1CfgsecondSetPr' => '1.3.6.1.4.1.476.1.42.4.3.32.470',
   'l9d1CfgsupDBr' => '1.3.6.1.4.1.476.1.42.4.3.32.471',
   'l9d1CfgsupHiTThrsr' => '1.3.6.1.4.1.476.1.42.4.3.32.472',
+  'l9d1CfgsupHiTThrsrDefinition' => 'BOSS-SNMP-AGENT-MIB::l9d1Opaque',
   'l9d1CfgsupLowTThrsr' => '1.3.6.1.4.1.476.1.42.4.3.32.473',
+  'l9d1CfgsupLowTThrsrDefinition' => 'BOSS-SNMP-AGENT-MIB::l9d1Opaque',
   'l9d1CfgsupPBr' => '1.3.6.1.4.1.476.1.42.4.3.32.474',
   'l9d1CfgsupSetPr' => '1.3.6.1.4.1.476.1.42.4.3.32.475',
   'l9d1Cond1Reqr' => '1.3.6.1.4.1.476.1.42.4.3.32.476',
@@ -769,10 +776,12 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'BOSS-SNMP-AGENT-MIB'}
   'l9d1RemPrbHumValr' => '1.3.6.1.4.1.476.1.42.4.3.32.534',
   'l9d1RemPrbTempValr' => '1.3.6.1.4.1.476.1.42.4.3.32.535',
   'l9d1RetAirHumValuer' => '1.3.6.1.4.1.476.1.42.4.3.32.536',
+  'l9d1RetAirHumValuerDefinition' => 'BOSS-SNMP-AGENT-MIB::l9d1Opaque',
   'l9d1RetAirHum2Valuer' => '1.3.6.1.4.1.476.1.42.4.3.32.537',
   'l9d1RetAirHum3Valuer' => '1.3.6.1.4.1.476.1.42.4.3.32.538',
   'l9d1RetAirHum4Valuer' => '1.3.6.1.4.1.476.1.42.4.3.32.539',
   'l9d1RetAirTempValuer' => '1.3.6.1.4.1.476.1.42.4.3.32.540',
+  'l9d1RetAirTempValuerDefinition' => 'BOSS-SNMP-AGENT-MIB::l9d1Opaque',
   'l9d1RetAirTemp2Valuer' => '1.3.6.1.4.1.476.1.42.4.3.32.541',
   'l9d1RetAirTemp3Valuer' => '1.3.6.1.4.1.476.1.42.4.3.32.542',
   'l9d1RetAirTemp4Valuer' => '1.3.6.1.4.1.476.1.42.4.3.32.543',
@@ -781,6 +790,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'BOSS-SNMP-AGENT-MIB'}
   'l9d1SuctTCirc1Valuer' => '1.3.6.1.4.1.476.1.42.4.3.32.546',
   'l9d1SuctTCirc2Valuer' => '1.3.6.1.4.1.476.1.42.4.3.32.547',
   'l9d1SupAirTempValuer' => '1.3.6.1.4.1.476.1.42.4.3.32.548',
+  'l9d1SupAirTempValuerDefinition' => 'BOSS-SNMP-AGENT-MIB::l9d1Opaque',
   'l9d1SupAirTemp2Valuer' => '1.3.6.1.4.1.476.1.42.4.3.32.549',
   'l9d1SupAirTemp3Valuer' => '1.3.6.1.4.1.476.1.42.4.3.32.550',
   'l9d1SupPrbTempValr' => '1.3.6.1.4.1.476.1.42.4.3.32.551',
@@ -983,4 +993,45 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'BOSS-SNMP-AGENT-MIB'}
 };
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'BOSS-SNMP-AGENT-MIB'} = {
+  'l9d1UnitStatus' => {
+      0 => "display off",
+      1 => "remote off",
+      2 => "3pos off",
+      3 => "monit off",
+      4 => "timer off",
+      5 => "alarm off",
+      6 => "shutdown del",
+      7 => "standby",
+      8 => "tr stby",
+      9 => "alarm stby",
+      10 => "fanback",
+      11 => "unit on",
+      12 => "warning on",
+      13 => "alarm on",
+      14 => "damper open",
+      15 => "power fail",
+      16 => "manual",
+      17 => "restart delay",
+  },
+  'l9d1Opaque' => sub {
+    my $value = shift;
+    if ($value =~ /^[0-9\.]*$/) {
+      # stammt wohl vom snmpwalk, passt
+    } elsif (length($value) == 7) {
+      # raw to hex zum validieren
+      my $hex = unpack("H*", $value);
+      # einzelne bytes
+      my @bytes = $hex =~ /(..)/g;
+      if (@bytes != 7 || $bytes[0] ne '9f' || $bytes[1] ne '78' || $bytes[2] ne '04') {
+        # ja mei
+      } else {
+        my $binary_float = substr($value, -4);
+        # big-endian single-precision float
+        $value = unpack('f>', $binary_float);
+      }
+    } else {
+      # tut mir leid
+    }
+    return $value;
+  },
 };

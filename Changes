@@ -1,3 +1,5 @@
+* 2025-05-28 5.44.1
+  move logic from check_wut_health to BOSS-SNMP-AGENT-MIB
 * 2025-05-28 5.44
   add BOSS-SNMP-AGENT-MIB
 * 2025-05-26 5.43
