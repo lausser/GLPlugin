@@ -9,6 +9,9 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::requirements->{'ASYNCOS-MAIL-MIB'} = [
   'SNMPv2-TC-v1-MIB',
 ];
 
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'ASYNCOS-MAIL-MIB'} =
+  '1.3.6.1.4.1.15497.1.1.1';
+
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'ASYNCOS-MAIL-MIB'} = {
   'asyncOSMailObjects' => '1.3.6.1.4.1.15497.1.1.1',
   'perCentMemoryUtilization' => '1.3.6.1.4.1.15497.1.1.1.1.0',
