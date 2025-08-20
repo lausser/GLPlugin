@@ -1,3 +1,6 @@
+* 2025-08-20 5.45
+  add LCOS-SX-MIB
+  add identifier to ASYNCOS-MAIL-MIB
 * 2025-06-26 5.44.1.1
   update CISCO-SMART-LIC-MIB
 * 2025-05-28 5.44.1

@@ -198,6 +198,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/KNUERRDCLMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/KYOCERAPRIVATEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LARAMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LCOSMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LCOSSXMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LEFTHANDNETWORKSNSMCLUSTERINGMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LEFTHANDNETWORKSNSMDNSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/LEFTHANDNETWORKSNSMINFOMIB.pm
