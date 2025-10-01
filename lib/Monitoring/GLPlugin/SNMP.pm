@@ -111,6 +111,12 @@ sub add_snmp_modes {
       help => 'Check the uptime of the device',
   );
   $self->add_mode(
+      internal => 'device::snmpget',
+      spec => 'snmpget',
+      alias => undef,
+      help => 'Perform an SNMP GET on an OID specified with --name',
+  );
+  $self->add_mode(
       internal => 'device::walk',
       spec => 'walk',
       alias => undef,
@@ -422,6 +428,120 @@ sub init {
     if ($self->opts->report ne 'short') {
       $self->add_ok($self->pretty_sysdesc($self->{productname}));
     }
+    my ($code, $message) = $self->check_messages(join => ', ', join_all => ', ');
+    $self->nagios_exit($code, $message);
+  } elsif ($self->mode =~ /device::snmpget/) {
+    # Validate --name parameter
+    if (!$self->opts->name) {
+        $self->add_unknown('Please specify an OID with --name parameter');
+        my ($code, $message) = $self->check_messages(join => ', ', join_all => ', ');
+        $self->nagios_exit($code, $message);
+    }
+
+    my $name = $self->opts->name;
+    my $value;
+    my $display_name = $name;
+    my $default_label;
+
+    # Detect format and fetch value
+    if ($name =~ /^(\d+(?:\.\d+)+)(?:\.(\d+))?$/) {
+        # Raw numeric OID format: 1.3.6.1.4.1.20.23.1 or 1.3.6.1.4.1.20.23.1.0
+        my ($oid, $index) = ($1, $2);
+        my $full_oid = defined $index ? "$oid.$index" : $oid;
+        $default_label = $full_oid;
+
+        my $response = $self->get_request(-varbindlist => [$full_oid]);
+
+        if (!defined $response) {
+            $self->add_unknown(sprintf 'SNMP GET failed for OID %s', $full_oid);
+            my ($code, $message) = $self->check_messages(join => ', ', join_all => ', ');
+            $self->nagios_exit($code, $message);
+        }
+
+        # Check both with and without .0 suffix
+        $value = exists $response->{$full_oid} ? $response->{$full_oid} : undef;
+
+        # If no value and no explicit index, try with .0
+        if (!defined $value && !defined $index) {
+            my $oid_with_zero = $oid . '.0';
+            $value = exists $response->{$oid_with_zero} ? $response->{$oid_with_zero} : undef;
+            $full_oid = $oid_with_zero if defined $value;
+        }
+
+        if (!defined $value) {
+            $self->add_unknown(sprintf 'No value returned for OID %s', $full_oid);
+            my ($code, $message) = $self->check_messages(join => ', ', join_all => ', ');
+            $self->nagios_exit($code, $message);
+        }
+
+        # Handle SNMP error values
+        if ($value eq 'noSuchInstance' || $value eq 'noSuchObject') {
+            $self->add_unknown(sprintf 'OID %s: %s', $full_oid, $value);
+            my ($code, $message) = $self->check_messages(join => ', ', join_all => ', ');
+            $self->nagios_exit($code, $message);
+        }
+
+    } elsif ($name =~ /^([A-Z0-9\-]+)::([a-zA-Z0-9_]+)(?:\.(\d+))?$/) {
+        # Symbolic format: MIB::object or MIB::object.index
+        my ($mib, $object, $index) = ($1, $2, $3);
+        $default_label = $object;
+
+        # get_snmp_object handles all error cases and returns undef on failure
+        $value = $self->get_snmp_object($mib, $object, $index);
+
+        if (!defined $value) {
+            $self->add_unknown(sprintf 'Could not fetch %s::%s%s',
+                $mib, $object, defined $index ? ".$index" : '');
+            my ($code, $message) = $self->check_messages(join => ', ', join_all => ', ');
+            $self->nagios_exit($code, $message);
+        }
+
+    } else {
+        # Invalid format
+        $self->add_unknown(sprintf 'Invalid OID format: %s (expected numeric OID like 1.3.6.1... or symbolic like MIB::object)', $name);
+        my ($code, $message) = $self->check_messages(join => ', ', join_all => ', ');
+        $self->nagios_exit($code, $message);
+    }
+
+    # Process the value (numeric or non-numeric)
+    use Scalar::Util qw(looks_like_number);
+
+    if (looks_like_number($value)) {
+        # Numeric value - apply thresholds
+        my $label = $self->opts->name2 || $default_label;
+
+        # If --name2 is provided, show it along with the original name
+        if ($self->opts->name2) {
+            $self->add_info(sprintf '%s (%s) = %s', $label, $display_name, $value);
+        } else {
+            $self->add_info(sprintf '%s = %s', $display_name, $value);
+        }
+
+        $self->set_thresholds(metric => $label, warning => undef, critical => undef);
+        $self->add_message($self->check_thresholds(metric => $label, value => $value));
+
+        # Determine unit of measure
+        my $uom;
+        if ($self->opts->units && $self->opts->units eq '%') {
+            $uom = '%';
+        } elsif ($label =~ /(percent|percentage|pct)/i) {
+            $uom = '%';
+        }
+
+        $self->add_perfdata(
+            label => $label,
+            value => $value,
+            defined $uom ? (uom => $uom) : (),
+        );
+    } else {
+        # Non-numeric value - just report it
+        if ($self->opts->name2) {
+            $self->add_info(sprintf '%s (%s) = %s (non-numeric)', $self->opts->name2, $display_name, $value);
+        } else {
+            $self->add_info(sprintf '%s = %s (non-numeric)', $display_name, $value);
+        }
+    }
+
     my ($code, $message) = $self->check_messages(join => ', ', join_all => ', ');
     $self->nagios_exit($code, $message);
   } elsif ($self->mode =~ /device::supportedmibs/) {
