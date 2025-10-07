@@ -506,7 +506,33 @@ sub init {
     # Process the value (numeric or non-numeric)
     use Scalar::Util qw(looks_like_number);
 
-    if (looks_like_number($value)) {
+    # Check for string comparison with --name3
+    if ($self->opts->name3) {
+        # String comparison mode
+        if ($self->filter_name3($value)) {
+            if ($self->opts->name2) {
+                $self->add_ok(sprintf '%s (%s) = %s (matches %s)',
+                    $self->opts->name2, $display_name, $value,
+                    $self->opts->regexp ? 'pattern' : 'expected string');
+            } else {
+                $self->add_ok(sprintf '%s = %s (matches %s)',
+                    $display_name, $value,
+                    $self->opts->regexp ? 'pattern' : 'expected string');
+            }
+        } else {
+            if ($self->opts->name2) {
+                $self->add_critical(sprintf '%s (%s) = %s (does not match %s: %s)',
+                    $self->opts->name2, $display_name, $value,
+                    $self->opts->regexp ? 'pattern' : 'expected string',
+                    $self->opts->name3);
+            } else {
+                $self->add_critical(sprintf '%s = %s (does not match %s: %s)',
+                    $display_name, $value,
+                    $self->opts->regexp ? 'pattern' : 'expected string',
+                    $self->opts->name3);
+            }
+        }
+    } elsif (looks_like_number($value)) {
         # Numeric value - apply thresholds
         my $label = $self->opts->name2 || $default_label;
 
