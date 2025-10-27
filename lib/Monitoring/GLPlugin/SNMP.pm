@@ -117,6 +117,12 @@ sub add_snmp_modes {
       help => 'Perform an SNMP GET on an OID specified with --name',
   );
   $self->add_mode(
+      internal => 'device::snmpgetnext',
+      spec => 'snmpgetnext',
+      alias => undef,
+      help => 'Perform an SNMP GETNEXT on an OID specified with --name',
+  );
+  $self->add_mode(
       internal => 'device::walk',
       spec => 'walk',
       alias => undef,
@@ -430,7 +436,10 @@ sub init {
     }
     my ($code, $message) = $self->check_messages(join => ', ', join_all => ', ');
     $self->nagios_exit($code, $message);
-  } elsif ($self->mode =~ /device::snmpget/) {
+  } elsif ($self->mode =~ /device::snmpget(next)?/) {
+    # Detect if this is GETNEXT mode
+    my $is_getnext = $self->mode =~ /snmpgetnext/;
+
     # Validate --name parameter
     if (!$self->opts->name) {
         $self->add_unknown('Please specify an OID with --name parameter');
@@ -440,7 +449,11 @@ sub init {
 
     my $name = $self->opts->name;
     my $value;
+    my $returned_oid;  # Track the OID returned by GETNEXT
     my $display_name = $name;
+    if ($self->opts->name2) {
+      $display_name = $self->opts->name2;
+    }
     my $default_label;
 
     # Detect format and fetch value
@@ -450,33 +463,67 @@ sub init {
         my $full_oid = defined $index ? "$oid.$index" : $oid;
         $default_label = $full_oid;
 
-        my $response = $self->get_request(-varbindlist => [$full_oid]);
+        my $response;
+        if ($is_getnext) {
+            # GETNEXT: get the next OID after the specified one
+            $response = $self->get_next_request(-varbindlist => [$full_oid]);
+        } else {
+            # GET: get the exact OID
+            $response = $self->get_request(-varbindlist => [$full_oid]);
+        }
 
         if (!defined $response) {
-            $self->add_unknown(sprintf 'SNMP GET failed for OID %s', $full_oid);
+            $self->add_unknown(sprintf 'SNMP %s failed for OID %s',
+                $is_getnext ? 'GETNEXT' : 'GET', $full_oid);
             my ($code, $message) = $self->check_messages(join => ', ', join_all => ', ');
             $self->nagios_exit($code, $message);
         }
 
-        # Check both with and without .0 suffix
-        $value = exists $response->{$full_oid} ? $response->{$full_oid} : undef;
+        if ($is_getnext) {
+            # For GETNEXT, the response key is the next OID in the tree
+            my @returned_oids = keys %{$response};
+            if (@returned_oids == 0) {
+                $self->add_unknown(sprintf 'No next OID found after %s', $full_oid);
+                my ($code, $message) = $self->check_messages(join => ', ', join_all => ', ');
+                $self->nagios_exit($code, $message);
+            }
 
-        # If no value and no explicit index, try with .0
-        if (!defined $value && !defined $index) {
-            my $oid_with_zero = $oid . '.0';
-            $value = exists $response->{$oid_with_zero} ? $response->{$oid_with_zero} : undef;
-            $full_oid = $oid_with_zero if defined $value;
-        }
+            $returned_oid = $returned_oids[0];
+            $value = $response->{$returned_oid};
 
-        if (!defined $value) {
-            $self->add_unknown(sprintf 'No value returned for OID %s', $full_oid);
-            my ($code, $message) = $self->check_messages(join => ', ', join_all => ', ');
-            $self->nagios_exit($code, $message);
+            # Validate OID relationship: returned OID must start with requested OID
+            # This ensures we got a related OID, not a random next one
+            if ($returned_oid ne $full_oid && index($returned_oid, $full_oid) != 0) {
+                $self->add_unknown(sprintf 'OID %s does not exist (next OID %s is not related)',
+                    $full_oid, $returned_oid);
+                my ($code, $message) = $self->check_messages(join => ', ', join_all => ', ');
+                $self->nagios_exit($code, $message);
+            }
+
+            $default_label = $returned_oid;
+        } else {
+            # For GET, check both with and without .0 suffix
+            $value = exists $response->{$full_oid} ? $response->{$full_oid} : undef;
+
+            # If no value and no explicit index, try with .0
+            if (!defined $value && !defined $index) {
+                my $oid_with_zero = $oid . '.0';
+                $value = exists $response->{$oid_with_zero} ? $response->{$oid_with_zero} : undef;
+                $full_oid = $oid_with_zero if defined $value;
+            }
+
+            if (!defined $value) {
+                $self->add_unknown(sprintf 'No value returned for OID %s', $full_oid);
+                my ($code, $message) = $self->check_messages(join => ', ', join_all => ', ');
+                $self->nagios_exit($code, $message);
+            }
+
+            $returned_oid = $full_oid;
         }
 
         # Handle SNMP error values
-        if ($value eq 'noSuchInstance' || $value eq 'noSuchObject') {
-            $self->add_unknown(sprintf 'OID %s: %s', $full_oid, $value);
+        if ($value eq 'noSuchInstance' || $value eq 'noSuchObject' || $value eq 'endOfMibView') {
+            $self->add_unknown(sprintf 'OID %s: %s', $returned_oid, $value);
             my ($code, $message) = $self->check_messages(join => ', ', join_all => ', ');
             $self->nagios_exit($code, $message);
         }
@@ -486,14 +533,61 @@ sub init {
         my ($mib, $object, $index) = ($1, $2, $3);
         $default_label = $object;
 
-        # get_snmp_object handles all error cases and returns undef on failure
-        $value = $self->get_snmp_object($mib, $object, $index);
+        if ($is_getnext) {
+            # For GETNEXT with symbolic names, resolve to numeric OID first
+            $self->require_mib($mib);
+            my $oid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$object};
 
-        if (!defined $value) {
-            $self->add_unknown(sprintf 'Could not fetch %s::%s%s',
-                $mib, $object, defined $index ? ".$index" : '');
-            my ($code, $message) = $self->check_messages(join => ', ', join_all => ', ');
-            $self->nagios_exit($code, $message);
+            if (!defined $oid) {
+                $self->add_unknown(sprintf 'Unknown OID %s::%s', $mib, $object);
+                my ($code, $message) = $self->check_messages(join => ', ', join_all => ', ');
+                $self->nagios_exit($code, $message);
+            }
+
+            my $qoid = $oid . (defined $index ? ".$index" : '');
+            my $response = $self->get_next_request(-varbindlist => [$qoid]);
+
+            if (!defined $response) {
+                $self->add_unknown(sprintf 'SNMP GETNEXT failed for %s::%s (%s)',
+                    $mib, $object, $qoid);
+                my ($code, $message) = $self->check_messages(join => ', ', join_all => ', ');
+                $self->nagios_exit($code, $message);
+            }
+
+            my @returned_oids = keys %{$response};
+            if (@returned_oids == 0) {
+                $self->add_unknown(sprintf 'No next OID found after %s::%s', $mib, $object);
+                my ($code, $message) = $self->check_messages(join => ', ', join_all => ', ');
+                $self->nagios_exit($code, $message);
+            }
+
+            $returned_oid = $returned_oids[0];
+            $value = $response->{$returned_oid};
+
+            # Validate OID relationship
+            if ($returned_oid ne $qoid && index($returned_oid, $qoid) != 0) {
+                $self->add_unknown(sprintf 'OID %s::%s does not exist (next OID %s is not related)',
+                    $mib, $object, $returned_oid);
+                my ($code, $message) = $self->check_messages(join => ', ', join_all => ', ');
+                $self->nagios_exit($code, $message);
+            }
+
+            $default_label = $returned_oid;
+        } else {
+            # GET mode: use existing get_snmp_object which handles all error cases
+            $value = $self->get_snmp_object($mib, $object, $index);
+
+            if (!defined $value) {
+                $self->add_unknown(sprintf 'Could not fetch %s::%s%s',
+                    $mib, $object, defined $index ? ".$index" : '');
+                my ($code, $message) = $self->check_messages(join => ', ', join_all => ', ');
+                $self->nagios_exit($code, $message);
+            }
+
+            # For GET mode, construct the returned OID for consistency
+            $self->require_mib($mib);
+            my $oid = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$object};
+            $returned_oid = defined $oid ? ($oid . (defined $index ? ".$index" : '')) : undef;
         }
 
     } else {
@@ -510,38 +604,20 @@ sub init {
     if ($self->opts->name3) {
         # String comparison mode
         if ($self->filter_name3($value)) {
-            if ($self->opts->name2) {
-                $self->add_ok(sprintf '%s (%s) = %s (matches %s)',
-                    $self->opts->name2, $display_name, $value,
-                    $self->opts->regexp ? 'pattern' : 'expected string');
-            } else {
-                $self->add_ok(sprintf '%s = %s (matches %s)',
-                    $display_name, $value,
-                    $self->opts->regexp ? 'pattern' : 'expected string');
-            }
+          $self->add_ok(sprintf '%s = %s (matches %s)',
+              $display_name, $value,
+              $self->opts->regexp ? 'pattern' : 'expected string');
         } else {
-            if ($self->opts->name2) {
-                $self->add_critical(sprintf '%s (%s) = %s (does not match %s: %s)',
-                    $self->opts->name2, $display_name, $value,
-                    $self->opts->regexp ? 'pattern' : 'expected string',
-                    $self->opts->name3);
-            } else {
-                $self->add_critical(sprintf '%s = %s (does not match %s: %s)',
-                    $display_name, $value,
-                    $self->opts->regexp ? 'pattern' : 'expected string',
-                    $self->opts->name3);
-            }
+          $self->add_critical(sprintf '%s = %s (does not match %s: %s)',
+              $display_name, $value,
+              $self->opts->regexp ? 'pattern' : 'expected string',
+              $self->opts->name3);
         }
     } elsif (looks_like_number($value)) {
         # Numeric value - apply thresholds
         my $label = $self->opts->name2 || $default_label;
 
-        # If --name2 is provided, show it along with the original name
-        if ($self->opts->name2) {
-            $self->add_info(sprintf '%s (%s) = %s', $label, $display_name, $value);
-        } else {
-            $self->add_info(sprintf '%s = %s', $display_name, $value);
-        }
+        $self->add_info(sprintf '%s = %s', $display_name, $value);
 
         $self->set_thresholds(metric => $label, warning => undef, critical => undef);
         $self->add_message($self->check_thresholds(metric => $label, value => $value));
@@ -561,10 +637,12 @@ sub init {
         );
     } else {
         # Non-numeric value - just report it
-        if ($self->opts->name2) {
-            $self->add_info(sprintf '%s (%s) = %s (non-numeric)', $self->opts->name2, $display_name, $value);
-        } else {
-            $self->add_info(sprintf '%s = %s (non-numeric)', $display_name, $value);
+        $self->add_info(sprintf '%s = %s', $display_name, $value);
+	# User did not want to compare the string with anything, just see the info.
+	if ($value) {
+	  $self->add_ok();
+	} else {
+	  $self->add_unknown();
         }
     }
 
@@ -2461,6 +2539,31 @@ sub get_request {
       exists $Monitoring::GLPlugin::SNMP::rawdata->{$_.'.0'} ?
           $Monitoring::GLPlugin::SNMP::rawdata->{$_.'.0'} : undef;
   } @{$params{'-varbindlist'}};
+  return $result;
+}
+
+sub get_next_request {
+  my ($self, %params) = @_;
+  my $result = {};
+  if (! $self->opts->snmpwalk) {
+    my %snmp_params = ();
+    if ($Monitoring::GLPlugin::SNMP::session->version() == 0) {
+      $snmp_params{-varbindlist} = $params{'-varbindlist'};
+    } elsif ($Monitoring::GLPlugin::SNMP::session->version() == 1) {
+      $snmp_params{-varbindlist} = $params{'-varbindlist'};
+    } elsif ($Monitoring::GLPlugin::SNMP::session->version() == 3) {
+      $snmp_params{-varbindlist} = $params{'-varbindlist'};
+      $snmp_params{-contextengineid} = $self->opts->contextengineid if $self->opts->contextengineid;
+      $snmp_params{-contextname} = $self->opts->contextname if $self->opts->contextname;
+    }
+    $result = $Monitoring::GLPlugin::SNMP::session->get_next_request(%snmp_params);
+    # For GETNEXT, add the returned OID/value pairs to rawdata
+    if ($result) {
+      while (my ($key, $value) = each %{$result}) {
+        $self->add_rawdata($key, $value) if defined $value && $value ne 'noSuchInstance' && $value ne 'noSuchObject' && $value ne 'endOfMibView';
+      }
+    }
+  }
   return $result;
 }
 
