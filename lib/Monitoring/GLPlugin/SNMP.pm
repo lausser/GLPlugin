@@ -501,6 +501,8 @@ sub init {
             }
 
             $default_label = $returned_oid;
+            # Update display_name to show actual returned OID (unless --name2 was specified)
+            $display_name = $returned_oid if !$self->opts->name2;
         } else {
             # For GET, check both with and without .0 suffix
             $value = exists $response->{$full_oid} ? $response->{$full_oid} : undef;
@@ -573,6 +575,8 @@ sub init {
             }
 
             $default_label = $returned_oid;
+            # Update display_name to show actual returned OID (unless --name2 was specified)
+            $display_name = $returned_oid if !$self->opts->name2;
         } else {
             # GET mode: use existing get_snmp_object which handles all error cases
             $value = $self->get_snmp_object($mib, $object, $index);
