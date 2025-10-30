@@ -102,6 +102,11 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'MIB-2-MIB'} = {
       $year -= 1900;
       $month += 1;
     }
+    if ($year == 0 && $month == 0) {
+      $year = 1970;
+      $month = 1;
+      $day = 1;
+    }
     my $epoch = timegm($second, $minute, $hour, $day, $month-1, $year-1900);
     # 1992-5-26,13:30:15.0,-4:0 = Tuesday May 26, 1992 at 1:30:15 PM EDT
     # Eastern Daylight Time (EDT) is 4 hours behind Coordinated Universal Time (UTC)
