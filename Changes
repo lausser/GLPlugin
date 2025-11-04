@@ -1,3 +1,5 @@
+* 2025-11-04 5.53
+  add Audiocode MIBs
 * 2025-10-27 5.52
   implement --mode snmpgetnext (as a replacement for check_snmp)
 * 2025-10-24 5.51.1
