@@ -41,6 +41,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ASYNCOSMAILMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ATSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ATSTHREEPHASEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ATTACKMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/AVOCENTPMMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/BAMSNMPMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/BCNDHCPV4MIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/BCNDNSMIB.pm

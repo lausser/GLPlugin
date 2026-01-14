@@ -1,3 +1,6 @@
+* 2026-01-14 5.54
+  add AVOCENT-PM-MIB (PR #34, thx Andreas Thienemann)
+  bugfix in unhex_ip
 * 2025-11-04 5.53
   add Audiocode MIBs
 * 2025-10-27 5.52

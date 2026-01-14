@@ -9,7 +9,10 @@ sub ensure_index {
 
 sub unhex_ip {
   my ($self, $value) = @_;
-  if ($value && $value =~ /^0x(\w{8})/) {
+  if ($value && $value =~ /^\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*$/) {
+    # this is already a valid ipv4
+    $value = $1;
+  } elsif ($value && $value =~ /^0x(\w{8})/) {
     $value = join(".", unpack "C*", pack "H*", $1);
   } elsif ($value && $value =~ /^0x(\w{2} \w{2} \w{2} \w{2})/) {
     $value = $1;
