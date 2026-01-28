@@ -1,3 +1,5 @@
+* 2026-01-28 6.0
+  add XS backend
 * 2026-01-14 5.54
   add AVOCENT-PM-MIB (PR #34, thx Andreas Thienemann)
   bugfix in unhex_ip

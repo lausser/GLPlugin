@@ -182,7 +182,22 @@ sub add_snmp_args {
   $self->add_arg(
       spec => 'community|C=s',
       help => '--community
-   SNMP community of the server (SNMP v1/2 only)',
+   SNMP community of the server (SNMP v1/2)
+   For SNMPv3, you can use a shorthand format:
+     snmpv3<sep>authproto<sep>authpass<sep>privproto<sep>privpass<sep>username[<sep>contextengineid][<sep>contextname]
+   where <sep> is any separator character (typically comma)
+
+   Examples:
+     SNMPv2:     public
+     SNMPv3:     snmpv3,sha,mypass,aes,mypass,admin
+     With contextname only (note the double comma):
+                 snmpv3,sha,mypass,aes,mypass,admin,,mycontext
+     With both:  snmpv3,sha,mypass,aes,mypass,admin,0x8000000001,mycontext
+
+   Fields: authproto (sha|md5), authpass, privproto (aes|des|3des),
+           privpass, username, contextengineid (optional), contextname (optional)
+   Note: Use <sep><sep> (double separator) to skip contextengineid when
+         providing only contextname',
       required => 0,
       default => 'public',
       decode => "rfc3986",
@@ -1379,107 +1394,158 @@ sub pretty_sysdesc {
 sub establish_snmp_session {
   my ($self) = @_;
   $self->set_timeout_alarm();
-  if (eval "require Net::SNMP") {
-    my %params = ();
-    my $net_snmp_version = Net::SNMP->VERSION(); # 5.002000 or 6.000000
-    $params{'-translate'} = [ # because we see "NULL" coming from socomec devices
-      -all => 0x0,
-      -nosuchobject => 1,
-      -nosuchinstance => 1,
-      -endofmibview => 1,
-      -unsigned => 1,
-    ];
-    $params{'-hostname'} = $self->opts->hostname;
+
+  # Build common session parameters (used by both backends)
+  my %params = ();
+  $params{'-hostname'} = $self->opts->hostname;
+  $params{'-version'} = $self->opts->protocol;
+  if ($self->opts->port) {
+    $params{'-port'} = $self->opts->port;
+  }
+  if ($self->opts->domain) {
+    $params{'-domain'} = $self->opts->domain;
+  }
+  $self->v2tov3;
+  if ($self->opts->protocol eq '3') {
     $params{'-version'} = $self->opts->protocol;
-    if ($self->opts->port) {
-      $params{'-port'} = $self->opts->port;
+    $params{'-username'} = $self->opts->username;
+    if ($self->opts->authpassword) {
+      $params{'-authpassword'} = $self->opts->authpassword;
     }
-    if ($self->opts->domain) {
-      $params{'-domain'} = $self->opts->domain;
+    if ($self->opts->authprotocol) {
+      $params{'-authprotocol'} = $self->opts->authprotocol;
     }
-    $self->v2tov3;
-    if ($self->opts->protocol eq '3') {
-      $params{'-version'} = $self->opts->protocol;
-      $params{'-username'} = $self->opts->username;
-      if ($self->opts->authpassword) {
-        $params{'-authpassword'} = $self->opts->authpassword;
-      }
-      if ($self->opts->authprotocol) {
-        $params{'-authprotocol'} = $self->opts->authprotocol;
-      }
-      if ($self->opts->privpassword) {
-        $params{'-privpassword'} = $self->opts->privpassword;
-      }
-      if ($self->opts->privprotocol) {
-        $params{'-privprotocol'} = $self->opts->privprotocol;
-      }
-      # context hat in der session nix verloren, sondern wird
-      # als zusatzinfo bei den requests mitgeschickt
-      #if ($self->opts->contextengineid) {
-      #  $params{'-contextengineid'} = $self->opts->contextengineid;
-      #}
-      #if ($self->opts->contextname) {
-      #  $params{'-contextname'} = $self->opts->contextname;
-      #}
-    } else {
-      $params{'-community'} = $self->opts->community;
+    if ($self->opts->privpassword) {
+      $params{'-privpassword'} = $self->opts->privpassword;
     }
-    # breaks cisco wlc. at least with 15, wlc did not work.
-    # removing this at all may cause strange epn errors. As if only
-    # certain oids were returned as undef, others not.
-    # next try: 50
-    $params{'-timeout'} = $self->opts->timeout() >= 60 ?
-        50 : $self->opts->timeout() - 2;
-    my $stderrvar = "";
-    *SAVEERR = *STDERR;
-    open ERR ,'>',\$stderrvar;
-    *STDERR = *ERR;
-    my ($session, $error) = Net::SNMP->session(%params);
-    *STDERR = *SAVEERR;
-    if (($stderrvar && $error && $error =~ /Time synchronization failed/) ||
-        ($error && $error =~ /Received usmStatsUnknownEngineIDs.0 Report-PDU with value \d+ during synchronization/)) {
-      # This is what you get when you have
-      # - an APC ups with a buggy firmware.
-      # - no chance to update it.
-      # - a support contract.
-      no strict 'refs';
-      no warnings 'redefine';
-      *{'Net::SNMP::_discovery_synchronization_cb'} = sub {
-        my ($this) = @_;
-        if ($this->{_security}->discovered())
-        {
-          $this->_error_clear();
-          return $this->_discovery_complete();
-        }
-        return $this->_discovery_failed();
-      };
-      ($session, $error) = Net::SNMP->session(%params);
+    if ($self->opts->privprotocol) {
+      $params{'-privprotocol'} = $self->opts->privprotocol;
     }
-    if (! defined $session && $error && $error =~ /No response from remote host.*during synchronization/) {
-      # Before the Oct 2024 Net::SNMP patch, this situation ended up in a
-      # timeout and was caught by the alarm handler. With the patch, Net::SNMP
-      # returns earlier so that we handle the return here.
-      $self->add_message(UNKNOWN,
-          sprintf 'cannot create session object: %s', $error);
-    } elsif (! defined $session) {
-      $self->add_message(CRITICAL, 
-          sprintf 'cannot create session object: %s', $error);
-      $self->debug(Data::Dumper::Dumper(\%params));
-    } else {
-      my $max_msg_size = $session->max_msg_size();
-      #$session->max_msg_size(4 * $max_msg_size);
-      if ($self->opts->protocol eq "1") {
-        $Monitoring::GLPlugin::SNMP::maxrepetitions = 0;
-      } else {
-        $Monitoring::GLPlugin::SNMP::maxrepetitions = 20;
-      }
-      $Monitoring::GLPlugin::SNMP::max_msg_size = $max_msg_size;
-      $Monitoring::GLPlugin::SNMP::session = $session;
-      $Monitoring::GLPlugin::SNMP::session_params = \%params;
+    # SNMPv3 context (needed for SNMP module session creation)
+    if ($self->opts->contextname) {
+      $params{'-contextname'} = $self->opts->contextname;
+    }
+    if ($self->opts->contextengineid) {
+      $params{'-contextengineid'} = $self->opts->contextengineid;
     }
   } else {
-    $self->add_message(CRITICAL,
-        'could not find Net::SNMP module');
+    $params{'-community'} = $self->opts->community;
+  }
+  # Timeout handling: ensure reasonable timeout value
+  $params{'-timeout'} = $self->opts->timeout() >= 60 ?
+      50 : $self->opts->timeout() - 2;
+
+  # =============================================================================
+  # Backend Selection: Try SNMP module first (modern cipher support),
+  # fall back to Net::SNMP if unavailable
+  # =============================================================================
+
+  my $snmp_backend_used = 0;
+
+  # Try SNMP module first (Net-SNMP XS bindings with modern cipher support)
+  if (eval "require SNMP") {
+    # Check if Backend::XS is already loaded (bundled script) or try to load it
+    my $backend_available = 0;
+    if (Monitoring::GLPlugin::SNMP::Backend::XS->can('session')) {
+      # Already loaded (bundled script)
+      $backend_available = 1;
+    } else {
+      # Try to load from filesystem
+      eval { require Monitoring::GLPlugin::SNMP::Backend::XS; };
+      $backend_available = 1 if ! $@;
+    }
+    if ($backend_available) {
+      $self->debug("SNMP module available, attempting XS backend session");
+      my ($session, $error) = Monitoring::GLPlugin::SNMP::Backend::XS->session(%params);
+      if (defined $session) {
+        my $max_msg_size = $session->max_msg_size();
+        if ($self->opts->protocol eq "1") {
+          $Monitoring::GLPlugin::SNMP::maxrepetitions = 0;
+        } else {
+          $Monitoring::GLPlugin::SNMP::maxrepetitions = 20;
+        }
+        $Monitoring::GLPlugin::SNMP::max_msg_size = $max_msg_size;
+        $Monitoring::GLPlugin::SNMP::session = $session;
+        $Monitoring::GLPlugin::SNMP::session_params = \%params;
+        $Monitoring::GLPlugin::SNMP::backend = 'SNMP';
+        $snmp_backend_used = 1;
+        $self->debug("Using SNMP module (XS) backend - modern ciphers available");
+      } else {
+        $self->debug(sprintf "SNMP module session failed: %s, trying Net::SNMP fallback", $error || "unknown error");
+      }
+    } else {
+      $self->debug("Backend::XS module not loadable: $@");
+    }
+  }
+
+  # Fall back to Net::SNMP if SNMP module session creation failed or unavailable
+  if (! $snmp_backend_used) {
+    if (eval "require Net::SNMP") {
+      my $net_snmp_version = Net::SNMP->VERSION(); # 5.002000 or 6.000000
+      # Net::SNMP specific: Remove parameters not supported by Net::SNMP
+      # Net::SNMP only supports -contextname, not -contextengineid
+      delete $params{'-contextengineid'} if exists $params{'-contextengineid'};
+      # Net::SNMP specific: translation settings for special device quirks
+      $params{'-translate'} = [ # because we see "NULL" coming from socomec devices
+        -all => 0x0,
+        -nosuchobject => 1,
+        -nosuchinstance => 1,
+        -endofmibview => 1,
+        -unsigned => 1,
+      ];
+      my $stderrvar = "";
+      *SAVEERR = *STDERR;
+      open ERR ,'>',\$stderrvar;
+      *STDERR = *ERR;
+      my ($session, $error) = Net::SNMP->session(%params);
+      *STDERR = *SAVEERR;
+      if (($stderrvar && $error && $error =~ /Time synchronization failed/) ||
+          ($error && $error =~ /Received usmStatsUnknownEngineIDs.0 Report-PDU with value \d+ during synchronization/)) {
+        # This is what you get when you have
+        # - an APC ups with a buggy firmware.
+        # - no chance to update it.
+        # - a support contract.
+        no strict 'refs';
+        no warnings 'redefine';
+        *{'Net::SNMP::_discovery_synchronization_cb'} = sub {
+          my ($this) = @_;
+          if ($this->{_security}->discovered())
+          {
+            $this->_error_clear();
+            return $this->_discovery_complete();
+          }
+          return $this->_discovery_failed();
+        };
+        ($session, $error) = Net::SNMP->session(%params);
+      }
+      if (! defined $session && $error && $error =~ /No response from remote host.*during synchronization/) {
+        # Before the Oct 2024 Net::SNMP patch, this situation ended up in a
+        # timeout and was caught by the alarm handler. With the patch, Net::SNMP
+        # returns earlier so that we handle the return here.
+        $self->add_message(UNKNOWN,
+            sprintf 'cannot create session object: %s', $error);
+      } elsif (! defined $session) {
+        $self->add_message(CRITICAL,
+            sprintf 'cannot create session object: %s', $error);
+        $self->debug(Data::Dumper::Dumper(\%params));
+      } else {
+        my $max_msg_size = $session->max_msg_size();
+        #$session->max_msg_size(4 * $max_msg_size);
+        if ($self->opts->protocol eq "1") {
+          $Monitoring::GLPlugin::SNMP::maxrepetitions = 0;
+        } else {
+          $Monitoring::GLPlugin::SNMP::maxrepetitions = 20;
+        }
+        $Monitoring::GLPlugin::SNMP::max_msg_size = $max_msg_size;
+        $Monitoring::GLPlugin::SNMP::session = $session;
+        $Monitoring::GLPlugin::SNMP::session_params = \%params;
+        $Monitoring::GLPlugin::SNMP::backend = 'Net::SNMP';
+        $self->debug("Using Net::SNMP backend - legacy ciphers only");
+      }
+    } else {
+      $self->add_message(CRITICAL,
+          'could not find SNMP or Net::SNMP module');
+    }
   }
 }
 
@@ -1513,6 +1579,11 @@ sub establish_snmp_secondary_session {
         $self->opts->privpassword2);
     $relogin = 1 if ! $self->strequal($self->opts->username,
         $self->opts->username2);
+    # Context changes also require session recreation (needed for SNMP module)
+    $relogin = 1 if ! $self->strequal($self->opts->contextname,
+        $self->opts->contextname2);
+    $relogin = 1 if ! $self->strequal($self->opts->contextengineid,
+        $self->opts->contextengineid2);
     if ($relogin) {
       $Monitoring::GLPlugin::SNMP::session = undef;
       $self->opts->override_opt('authprotocol',
@@ -1525,12 +1596,12 @@ sub establish_snmp_secondary_session {
           $self->opts->privpassword2);
       $self->opts->override_opt('username',
           $self->opts->username2);
+      $self->opts->override_opt('contextengineid',
+          $self->opts->contextengineid2);
+      $self->opts->override_opt('contextname',
+          $self->opts->contextname2);
       $self->establish_snmp_session;
     }
-    $self->opts->override_opt('contextengineid',
-        $self->opts->contextengineid2);
-    $self->opts->override_opt('contextname',
-        $self->opts->contextname2);
     return 1;
   } else {
     if (defined $self->opts->community2 &&
