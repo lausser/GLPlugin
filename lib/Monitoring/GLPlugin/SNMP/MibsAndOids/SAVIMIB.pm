@@ -1,0 +1,98 @@
+package Monitoring::GLPlugin::SNMP::MibsAndOids::SAVIMIB;
+
+$Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'SAVI-MIB'} = {
+  url => '',
+  name => 'SAVI-MIB',
+};
+
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'SAVI-MIB'} =
+  '1.3.6.1.2.1.4.40';
+
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'SAVI-MIB'} = {
+  'saviMIB' => '1.3.6.1.2.1.4.40',
+  'saviObjects' => '1.3.6.1.2.1.4.40.1',
+  'saviObjectsSystemTable' => '1.3.6.1.2.1.4.40.1.1',
+  'saviObjectsSystemEntry' => '1.3.6.1.2.1.4.40.1.1.1',
+  'saviObjectsSystemIPVersion' => '1.3.6.1.2.1.4.40.1.1.1.1',
+  'saviObjectsSystemIPVersionDefinition' => 'INET-ADDRESS-MIB::InetVersion',
+  'saviObjectsSystemMode' => '1.3.6.1.2.1.4.40.1.1.1.2',
+  'saviObjectsSystemModeDefinition' => 'SAVI-MIB::saviObjectsSystemMode',
+  'saviObjectsSystemMaxDadDelay' => '1.3.6.1.2.1.4.40.1.1.1.3',
+  #'saviObjectsSystemMaxDadDelayDefinition' => 'SNMPv2-TC::TimeInterval',
+  'saviObjectsSystemMaxDadPrepareDelay' => '1.3.6.1.2.1.4.40.1.1.1.4',
+  #'saviObjectsSystemMaxDadPrepareDelayDefinition' => 'SNMPv2-TC::TimeInterval',
+  'saviObjectsIfTable' => '1.3.6.1.2.1.4.40.1.2',
+  'saviObjectsIfEntry' => '1.3.6.1.2.1.4.40.1.2.1',
+  'saviObjectsIfIPVersion' => '1.3.6.1.2.1.4.40.1.2.1.1',
+  'saviObjectsIfIPVersionDefinition' => 'INET-ADDRESS-MIB::InetVersion',
+  'saviObjectsIfIfIndex' => '1.3.6.1.2.1.4.40.1.2.1.2',
+  #'saviObjectsIfIfIndexDefinition' => 'IF-MIB::InterfaceIndex',
+  'saviObjectsIfValidationStatus' => '1.3.6.1.2.1.4.40.1.2.1.3',
+  'saviObjectsIfValidationStatusDefinition' => 'SAVI-MIB::saviObjectsIfValidationStatus',
+  'saviObjectsIfTrustStatus' => '1.3.6.1.2.1.4.40.1.2.1.4',
+  'saviObjectsIfTrustStatusDefinition' => 'SAVI-MIB::saviObjectsIfTrustStatus',
+  'saviObjectsIfFilteringNum' => '1.3.6.1.2.1.4.40.1.2.1.5',
+  'saviObjectsBindingTable' => '1.3.6.1.2.1.4.40.1.3',
+  'saviObjectsBindingEntry' => '1.3.6.1.2.1.4.40.1.3.1',
+  'saviObjectsBindingIpAddressType' => '1.3.6.1.2.1.4.40.1.3.1.1',
+  'saviObjectsBindingIpAddressTypeDefinition' => 'INET-ADDRESS-MIB::InetAddressType',
+  'saviObjectsBindingType' => '1.3.6.1.2.1.4.40.1.3.1.2',
+  'saviObjectsBindingTypeDefinition' => 'SAVI-MIB::saviObjectsBindingType',
+  'saviObjectsBindingIfIndex' => '1.3.6.1.2.1.4.40.1.3.1.3',
+  #'saviObjectsBindingIfIndexDefinition' => 'IF-MIB::InterfaceIndex',
+  'saviObjectsBindingIpAddress' => '1.3.6.1.2.1.4.40.1.3.1.4',
+  #'saviObjectsBindingIpAddressDefinition' => 'INET-ADDRESS-MIB::InetAddress',
+  'saviObjectsBindingMacAddr' => '1.3.6.1.2.1.4.40.1.3.1.5',
+  #'saviObjectsBindingMacAddrDefinition' => 'SNMPv2-TC::MacAddress',
+  'saviObjectsBindingState' => '1.3.6.1.2.1.4.40.1.3.1.6',
+  'saviObjectsBindingStateDefinition' => 'SAVI-MIB::saviObjectsBindingState',
+  'saviObjectsBindingLifetime' => '1.3.6.1.2.1.4.40.1.3.1.7',
+  #'saviObjectsBindingLifetimeDefinition' => 'SNMPv2-TC::TimeInterval',
+  'saviObjectsBindingRowStatus' => '1.3.6.1.2.1.4.40.1.3.1.8',
+  'saviObjectsBindingRowStatusDefinition' => 'SNMPv2-TC::RowStatus',
+  'saviObjectsFilteringTable' => '1.3.6.1.2.1.4.40.1.4',
+  'saviObjectsFilteringEntry' => '1.3.6.1.2.1.4.40.1.4.1',
+  'saviObjectsFilteringIpAddressType' => '1.3.6.1.2.1.4.40.1.4.1.1',
+  'saviObjectsFilteringIpAddressTypeDefinition' => 'INET-ADDRESS-MIB::InetAddressType',
+  'saviObjectsFilteringIfIndex' => '1.3.6.1.2.1.4.40.1.4.1.2',
+  #'saviObjectsFilteringIfIndexDefinition' => 'IF-MIB::InterfaceIndex',
+  'saviObjectsFilteringIpAddress' => '1.3.6.1.2.1.4.40.1.4.1.3',
+  #'saviObjectsFilteringIpAddressDefinition' => 'INET-ADDRESS-MIB::InetAddress',
+  'saviObjectsFilteringMacAddr' => '1.3.6.1.2.1.4.40.1.4.1.4',
+  #'saviObjectsFilteringMacAddrDefinition' => 'SNMPv2-TC::MacAddress',
+  'saviConformance' => '1.3.6.1.2.1.4.40.2',
+  'saviCompliances' => '1.3.6.1.2.1.4.40.2.1',
+  'saviGroups' => '1.3.6.1.2.1.4.40.2.2',
+};
+
+$Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'SAVI-MIB'} = {
+  'saviObjectsBindingType' => {
+    '1' => 'static',
+    '2' => 'slaac',
+    '3' => 'dhcp',
+  },
+  'saviObjectsBindingState' => {
+    '1' => 'start',
+    '2' => 'live',
+    '3' => 'detection',
+    '4' => 'query',
+    '5' => 'bound',
+  },
+  'saviObjectsIfValidationStatus' => {
+    '1' => 'enable',
+    '2' => 'disable',
+  },
+  'saviObjectsSystemMode' => {
+    '1' => 'savi-disable',
+    '2' => 'savi-default',
+    '3' => 'savi-dhcp-only',
+    '4' => 'savi-slaac-only',
+    '5' => 'savi-dhcp-slaac-mix',
+  },
+  'saviObjectsIfTrustStatus' => {
+    '1' => 'no-trust',
+    '2' => 'dhcp-trust',
+    '3' => 'ra-trust',
+    '4' => 'dhcp-ra-trust',
+  },
+};
