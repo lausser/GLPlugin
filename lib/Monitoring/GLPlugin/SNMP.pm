@@ -1443,7 +1443,14 @@ sub establish_snmp_session {
   my $snmp_backend_used = 0;
 
   # Try SNMP module first (Net-SNMP XS bindings with modern cipher support)
-  if (eval "require SNMP") {
+  # unless SNMP_XS_DISABLE is set (for testing/comparison)
+  if (! $ENV{SNMP_XS_ENABLE}) {
+    $ENV{SNMP_XS_DISABLE} = 1;
+  }
+  if ($ENV{SNMP_XS_DISABLE}) {
+    $self->debug("SNMP_XS_DISABLE set - forcing Net::SNMP backend");
+  }
+  if (!$ENV{SNMP_XS_DISABLE} && eval "require SNMP") {
     # Check if Backend::XS is already loaded (bundled script) or try to load it
     my $backend_available = 0;
     if (Monitoring::GLPlugin::SNMP::Backend::XS->can('session')) {
@@ -1483,8 +1490,10 @@ sub establish_snmp_session {
     if (eval "require Net::SNMP") {
       my $net_snmp_version = Net::SNMP->VERSION(); # 5.002000 or 6.000000
       # Net::SNMP specific: Remove parameters not supported by Net::SNMP
-      # Net::SNMP only supports -contextname, not -contextengineid
+      # Net::SNMP uses context with methods which generate an snmp message,
+      # not with the session constructor.
       delete $params{'-contextengineid'} if exists $params{'-contextengineid'};
+      delete $params{'-contextname'} if exists $params{'-contextname'};
       # Net::SNMP specific: translation settings for special device quirks
       $params{'-translate'} = [ # because we see "NULL" coming from socomec devices
         -all => 0x0,
@@ -2805,36 +2814,28 @@ sub get_entries {
         }
       }
     }
+    # Two-pass processing of result keys:
+    # Net::SNMP GETBULK can return endOfMibView entries with trailing
+    # spaces on OID keys (e.g. "1.3.6.1.2.1.2.2.1.16.2 " => "endOfMibView").
+    # If we trim and overwrite in a single pass, these can replace valid data.
+    # Pass 1: process clean keys; collect trailing-space keys for pass 2.
+    my @blank_keys = ();
     foreach my $key (keys %{$result}) {
       if (substr($key, -1) eq " ") {
-        my $value = $result->{$key};
-        delete $result->{$key};
-        $key =~ s/\s+$//g;
-        $result->{$key} = $value;
-        #
-        # warum?
-        #
-        # %newparams ist:
-        #  '-columns' => [
-        #                  '1.3.6.1.2.1.2.2.1.8',
-        #                  '1.3.6.1.2.1.2.2.1.13',
-        #                  ...
-        #                  '1.3.6.1.2.1.2.2.1.16'
-        #                ],
-        #  '-startindex' => '2',
-        #  '-endindex' => '2'
-        #
-        # und $result ist:
-        #  ...
-        #  '1.3.6.1.2.1.2.2.1.2.2' => 'Adaptive Security Appliance \'outside\' interface',
-        #  '1.3.6.1.2.1.2.2.1.16.2 ' => 4281465004,
-        #  '1.3.6.1.2.1.2.2.1.13.2' => 0,
-        #  ...
-        #
-        # stinkstiefel!
-        #
+        push(@blank_keys, $key);
+      } else {
+        $self->add_rawdata($key, $result->{$key});
       }
-      $self->add_rawdata($key, $result->{$key});
+    }
+    # Pass 2: trailing-space keys only used when no clean version exists
+    foreach my $key (@blank_keys) {
+      my $value = $result->{$key};
+      delete $result->{$key};
+      (my $shortkey = $key) =~ s/\s+$//g;
+      if (! exists $result->{$shortkey}) {
+        $result->{$shortkey} = $value;
+        $self->add_rawdata($shortkey, $value);
+      }
     }
   } else {
     my $preresult = $self->get_matching_oids(
@@ -3020,7 +3021,7 @@ sub get_table {
       my $value = $result->{$key};
       delete $result->{$key};
       (my $shortkey = $key) =~ s/\s+$//g;
-      if (! exists $result->{shortkey}) {
+      if (! exists $result->{$shortkey}) {
         $self->add_rawdata($shortkey, $value);
       }
     }

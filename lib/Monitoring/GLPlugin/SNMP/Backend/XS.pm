@@ -105,8 +105,15 @@ sub session {
         $snmp_session = SNMP::Session->new(%snmp_params);
     };
 
-    if ($ENV{SNMP_XS_DEBUG}) {
-        warn "Backend::XS::session created, Context=" . (defined $snmp_session->{Context} ? $snmp_session->{Context} : "undef") . "\n" if $snmp_session;
+    if ($ENV{SNMP_XS_DEBUG} && $snmp_session) {
+        warn "Backend::XS::session created\n";
+        # Show SNMPv3 context parameters if present
+        if (defined $snmp_session->{Context}) {
+            warn "  Context (contextName): " . $snmp_session->{Context} . "\n";
+        }
+        if (defined $snmp_session->{ContextEngineID}) {
+            warn "  ContextEngineID: " . $snmp_session->{ContextEngineID} . "\n";
+        }
     }
 
     if ($@) {
@@ -224,10 +231,16 @@ sub _translate_session_params {
     # Retries
     $snmp_params{Retries} = $args{-retries} if exists $args{-retries};
 
-    # Context name (SNMPv3)
+    # SNMPv3 Context parameters
+    # contextName: The VRF/namespace identifier
     # Only set if defined AND non-empty - empty context causes server errors
     $snmp_params{Context} = $args{-contextname}
         if exists $args{-contextname} && defined $args{-contextname} && $args{-contextname} ne '';
+
+    # contextEngineID: Identifies which SNMP engine owns the context
+    # Usually auto-discovered, but can be explicitly set
+    $snmp_params{ContextEngineID} = $args{-contextengineid}
+        if exists $args{-contextengineid} && defined $args{-contextengineid} && $args{-contextengineid} ne '';
 
     # Domain (transport)
     if (exists $args{-domain}) {
@@ -270,6 +283,10 @@ sub _normalize_auth_protocol {
 Normalize privacy protocol name to SNMP module format.
 SNMP module uses CamelCase without hyphens: AES256 not AES-256
 
+Handles both Blumenthal (AES192/AES256) and Cisco (AES192C/AES256C) variants.
+The Cisco variants use a different key localization algorithm and are required
+when talking to Cisco devices. Users specify them as aes-192-c or aes-256-c.
+
 =cut
 
 sub _normalize_priv_protocol {
@@ -277,7 +294,10 @@ sub _normalize_priv_protocol {
 
     return 'DES' if $proto =~ /^des$/i;
     return '3DES' if $proto =~ /^3des$/i || $proto =~ /triple/i;
-    return 'AES' if $proto =~ /^aes(?:128)?$/i && $proto !~ /192|256/;
+    return 'AES' if $proto =~ /^aes(?:[- ]?128)?$/i && $proto !~ /192|256/;
+    # Cisco variants must be checked before the generic ones
+    return 'AES192C' if $proto =~ /aes.?192.?c/i;
+    return 'AES256C' if $proto =~ /aes.?256.?c/i;
     return 'AES192' if $proto =~ /aes.?192/i;
     return 'AES256' if $proto =~ /aes.?256/i;
 
@@ -312,7 +332,8 @@ sub new {
         _version => $args{version} || 2,
         _timeout => $args{timeout_seconds} || 1,
         _error => '',
-        _max_msg_size => 1472,  # Default MTU - headers
+        _max_msg_size => 1472,  # Baseline - not modified by setter (C library handles adaptive sizing)
+        _translate_mode => 0,   # OID translation mode (for compatibility)
     }, $class;
     return $self;
 }
@@ -341,31 +362,43 @@ sub version {
 
 Get or set session timeout in seconds (Net::SNMP compatible)
 
+NOTE: Unlike max_msg_size, timeout changes ARE applied to the underlying
+SNMP::Session because timeout is a legitimate operation parameter that
+the C library respects.
+
 =cut
 
 sub timeout {
     my ($self, $timeout) = @_;
-    if (defined $timeout) {
+    my $old_timeout = $self->{_timeout};
+
+    if (defined $timeout && $timeout != $old_timeout) {
         $self->{_timeout} = $timeout;
         # Also update the underlying session
         if ($self->{_snmp_session}) {
             $self->{_snmp_session}->{Timeout} = int($timeout * 1_000_000);
         }
+
+        warn sprintf "[Backend::XS] timeout: Changed from %d to %d seconds (applied)\n",
+            $old_timeout, $timeout if $ENV{SNMP_XS_DEBUG};
     }
-    return $self->{_timeout};
+    return $old_timeout;
 }
 
 =head2 max_msg_size([$size])
 
 Get or set maximum message size (Net::SNMP compatible)
 
+NOTE: With Backend::XS, this is a logging no-op. The Net-SNMP C library
+handles adaptive message sizing automatically, so manual tuning is unnecessary
+and potentially counterproductive. This method logs what would have changed
+for diagnostic purposes but does not apply the change.
+
 =cut
 
 sub max_msg_size {
     my ($self, $size) = @_;
-    if (defined $size) {
-        $self->{_max_msg_size} = $size;
-    }
+    # No-op setter: C library handles adaptive sizing automatically
     return $self->{_max_msg_size};
 }
 
@@ -402,8 +435,94 @@ Close the SNMP session
 
 sub close {
     my ($self) = @_;
+
+    if ($ENV{VERBOSE} || $ENV{SNMP_XS_DEBUG}) {
+        warn "[Backend::XS] Session closed\n";
+    }
+
     undef $self->{_snmp_session};
     return 1;
+}
+
+=head2 translate([$mode])
+
+Set OID translation mode (Net::SNMP compatible)
+
+NOTE: With Backend::XS, OID format is controlled through VarList processing,
+not through a global translation mode. This method logs the mode for
+compatibility but doesn't apply it in the traditional Net::SNMP sense.
+
+=cut
+
+sub translate {
+    my ($self, $mode) = @_;
+    my $old_mode = $self->{_translate_mode} || 0;
+
+    if (defined $mode) {
+        $self->{_translate_mode} = $mode;
+
+        if ($ENV{VERBOSE} || $ENV{SNMP_XS_DEBUG}) {
+            warn sprintf "[Backend::XS] translate: Mode set to %d (OID format controlled through VarList processing)\n",
+                $mode;
+        }
+    }
+
+    return $old_mode;
+}
+
+# ============================================================================
+# VARBIND NORMALIZATION
+# ============================================================================
+
+=head2 _normalize_varbind($vb)
+
+Internal: Extract and normalize OID key and value from an SNMP::Varbind.
+
+Handles three normalization concerns:
+  1. OID key format: Remove leading dot (Net::SNMP returns "1.3.6..." not ".1.3.6...")
+  2. Error values: SNMP module returns UPPERCASE (NOSUCHINSTANCE), Net::SNMP uses camelCase
+  3. OBJECTID values: SNMP module adds leading dot to OID-type values, Net::SNMP doesn't
+
+Returns: ($oid, $val) - normalized OID string and value
+
+=cut
+
+my %_ERROR_MAP = (
+    NOSUCHINSTANCE => 'noSuchInstance',
+    NOSUCHOBJECT   => 'noSuchObject',
+    ENDOFMIBVIEW   => 'endOfMibView',
+);
+
+sub _normalize_varbind {
+    my ($self, $vb) = @_;
+    my $tag = $vb->[0];
+    my $iid = $vb->[1];
+    my $val = $vb->[2];
+    my $type = $vb->[3];
+
+    # Build OID: tag + iid, strip leading dot via substr (avoids regex engine)
+    my $oid;
+    if (defined $iid && $iid ne '') {
+        $oid = (substr($tag, 0, 1) eq '.') ?
+            substr($tag, 1) . '.' . $iid :
+            $tag . '.' . $iid;
+    } else {
+        $oid = (substr($tag, 0, 1) eq '.') ?
+            substr($tag, 1) : $tag;
+    }
+
+    # Hash lookup instead of 3 sequential string comparisons
+    if (defined $val && exists $_ERROR_MAP{$val}) {
+        $val = $_ERROR_MAP{$val};
+    }
+
+    # Strip leading dot from OBJECTID values via substr (avoids regex engine)
+    if (defined $type && $type eq 'OBJECTID' && defined $val
+        && substr($val, 0, 1) eq '.') {
+        $val = substr($val, 1);
+    }
+
+    return ($oid, $val);
 }
 
 # ============================================================================
@@ -449,7 +568,15 @@ sub get_request {
     if ($ENV{SNMP_XS_DEBUG}) {
         warn "Backend::XS: Session ref: " . ref($self->{_snmp_session}) . "\n";
         warn "Backend::XS: Session version: " . ($self->{_snmp_session}->{Version} || 'undef') . "\n";
-        warn "Backend::XS: Session Context: " . ($self->{_snmp_session}->{Context} || 'undef') . "\n";
+        # Context parameters are SNMPv3-specific - only show for v3 sessions
+        if ($self->{_snmp_session}->{Version} && $self->{_snmp_session}->{Version} == 3) {
+            if (defined $self->{_snmp_session}->{Context}) {
+                warn "Backend::XS:   contextName: " . $self->{_snmp_session}->{Context} . "\n";
+            }
+            if (defined $self->{_snmp_session}->{ContextEngineID}) {
+                warn "Backend::XS:   contextEngineID: " . $self->{_snmp_session}->{ContextEngineID} . "\n";
+            }
+        }
         warn "Backend::XS: About to call \$session->get() on " . scalar(@$vbl) . " OIDs\n";
     }
 
@@ -472,20 +599,7 @@ sub get_request {
 
     for (my $i = 0; $i < scalar(@$vbl); $i++) {
         my $vb = $vbl->[$i];
-        # VarBind: [name, iid, val, type]
-        my $oid = $vb->[0];
-        $oid .= '.' . $vb->[1] if defined $vb->[1] && $vb->[1] ne '';
-        my $val = $vb->[2];
-
-        # Normalize error values to match Net::SNMP format (camelCase)
-        if (defined $val) {
-            $val = 'noSuchInstance' if $val eq 'NOSUCHINSTANCE';
-            $val = 'noSuchObject' if $val eq 'NOSUCHOBJECT';
-            $val = 'endOfMibView' if $val eq 'ENDOFMIBVIEW';
-        }
-
-        # Normalize OID format: Net::SNMP returns WITHOUT leading dot
-        $oid =~ s/^\.//;  # Remove leading dot if present
+        my ($oid, $val) = $self->_normalize_varbind($vb);
 
         $result{$oid} = $val;
         push @returned_oids, $oid;
@@ -536,11 +650,7 @@ sub get_next_request {
 
     for (my $i = 0; $i < scalar(@$vbl); $i++) {
         my $vb = $vbl->[$i];
-        my $oid = $vb->[0];
-        $oid .= '.' . $vb->[1] if defined $vb->[1] && $vb->[1] ne '';
-        my $val = $vb->[2];
-
-        $oid = '.' . $oid unless $oid =~ /^\./;
+        my ($oid, $val) = $self->_normalize_varbind($vb);
 
         $result{$oid} = $val;
         push @returned_oids, $oid;
@@ -575,6 +685,12 @@ sub get_bulk_request {
 
     return undef unless @oids;
 
+    # Log if maxrepetitions was explicitly set (likely from wrapper tuning method)
+    if (($ENV{VERBOSE} || $ENV{SNMP_XS_DEBUG}) && defined $args{-maxrepetitions}) {
+        warn sprintf "[Backend::XS] get_bulk_request: Received maxrepetitions=%d (C library may use different adaptive value)\n",
+            $args{-maxrepetitions};
+    }
+
     $self->{_error} = '';
     $self->{_last_oids} = [];
 
@@ -598,11 +714,7 @@ sub get_bulk_request {
 
     for (my $i = 0; $i < scalar(@$vbl); $i++) {
         my $vb = $vbl->[$i];
-        my $oid = $vb->[0];
-        $oid .= '.' . $vb->[1] if defined $vb->[1] && $vb->[1] ne '';
-        my $val = $vb->[2];
-
-        $oid = '.' . $oid unless $oid =~ /^\./;
+        my ($oid, $val) = $self->_normalize_varbind($vb);
 
         $result{$oid} = $val;
         push @returned_oids, $oid;
@@ -627,6 +739,7 @@ sub _bulk_via_getnext {
     foreach my $base_oid (@$oids) {
         my $current_oid = $base_oid;
         my $count = 0;
+        (my $normalized_base = $base_oid) =~ s/^\.//;
 
         while ($count < $maxrepetitions) {
             my $vbl = SNMP::VarList->new([$current_oid]);
@@ -636,16 +749,10 @@ sub _bulk_via_getnext {
                 last;
             }
 
-            my $vb = $vbl->[0];
-            my $oid = $vb->[0];
-            $oid .= '.' . $vb->[1] if defined $vb->[1] && $vb->[1] ne '';
-            my $val = $vb->[2];
-
-            $oid = '.' . $oid unless $oid =~ /^\./;
-            my $normalized_base = $base_oid =~ /^\./ ? $base_oid : ".$base_oid";
+            my ($oid, $val) = $self->_normalize_varbind($vbl->[0]);
 
             # Stop if we've left the subtree
-            last unless index($oid, $normalized_base) == 0;
+            last unless index($oid, $normalized_base . '.') == 0 || $oid eq $normalized_base;
 
             # Stop on endOfMibView
             last if defined $val && $val eq 'endOfMibView';
@@ -662,6 +769,78 @@ sub _bulk_via_getnext {
 }
 
 # ============================================================================
+# GETNEXT WALKING HELPER
+# ============================================================================
+
+=head2 _walk_columns_getnext(\@columns, \%result, %opts)
+
+Internal: Walk one or more columns using GETNEXT operations.
+
+Shared implementation for SNMPv1 table walking and v2c/v3 GETNEXT fallback.
+Walks each column independently, accumulating results into the provided hashref.
+
+Options:
+  startindex  => $idx    Skip entries before this index
+  endindex    => $idx    Stop after this index
+  skip_errors => 1       Filter out noSuchInstance/noSuchObject values
+  set_error   => 1       Set $self->{_error} on SNMP errors
+
+=cut
+
+sub _walk_columns_getnext {
+    my ($self, $columns, $result, %opts) = @_;
+    my $startindex  = $opts{startindex};
+    my $endindex    = $opts{endindex};
+    my $skip_errors = $opts{skip_errors};
+    my $set_error   = $opts{set_error};
+
+    foreach my $col_oid (@$columns) {
+        (my $normalized_col = $col_oid) =~ s/^\.//;
+        my $current_oid = $col_oid;
+
+        while (1) {
+            my $vbl = SNMP::VarList->new([$current_oid]);
+            $self->{_snmp_session}->getnext($vbl);
+
+            if ($self->{_snmp_session}->{ErrorNum}) {
+                $self->{_error} = $self->{_snmp_session}->{ErrorStr} if $set_error;
+                last;
+            }
+
+            my ($oid, $val) = $self->_normalize_varbind($vbl->[0]);
+
+            # Stop if we've left this column's subtree
+            last unless index($oid, $normalized_col . '.') == 0 || $oid eq $normalized_col;
+
+            # Stop on endOfMibView
+            last if defined $val && $val eq 'endOfMibView';
+
+            # Check index range if specified
+            if (defined $startindex || defined $endindex) {
+                my $index = substr($oid, length($normalized_col) + 1);
+                if (defined $startindex && $index lt $startindex) {
+                    $current_oid = $oid;
+                    next;
+                }
+                if (defined $endindex && $index gt $endindex) {
+                    last;
+                }
+            }
+
+            # Skip error marker values if requested
+            if ($skip_errors && defined $val
+                && ($val eq 'noSuchInstance' || $val eq 'noSuchObject')) {
+                $current_oid = $oid;
+                next;
+            }
+
+            $result->{$oid} = $val;
+            $current_oid = $oid;
+        }
+    }
+}
+
+# ============================================================================
 # TABLE OPERATIONS
 # ============================================================================
 
@@ -673,7 +852,7 @@ NOTE: SNMPv1 uses GETNEXT walking. SNMPv2c/v3 uses GETBULK for efficiency.
 
 Parameters:
   -baseoid        => $oid        Root OID of table
-  -maxrepetitions => $n          Repetitions for GETBULK (default: 10)
+  -maxrepetitions => $n          Repetitions for GETBULK (default: 25)
 
 =cut
 
@@ -685,89 +864,39 @@ sub get_table {
     my $baseoid = $args{-baseoid};
     return undef unless defined $baseoid;
 
-    my $maxrepetitions = $args{-maxrepetitions} || 10;
+    my $maxrepetitions = $args{-maxrepetitions} || 25;
 
     $self->{_error} = '';
-    $self->{_last_oids} = [];
 
     my %result;
-    my @returned_oids;
-    my $normalized_base = $baseoid =~ /^\./ ? $baseoid : ".$baseoid";
 
     if ($self->version() == 0) {
         # SNMPv1: Use GETNEXT walking
-        my $current_oid = $baseoid;
-
-        while (1) {
-            my $vbl = SNMP::VarList->new([$current_oid]);
-            $self->{_snmp_session}->getnext($vbl);
-
-            if ($self->{_snmp_session}->{ErrorNum}) {
-                $self->{_error} = $self->{_snmp_session}->{ErrorStr};
-                last;
-            }
-
-            my $vb = $vbl->[0];
-            my $oid = $vb->[0];
-            $oid .= '.' . $vb->[1] if defined $vb->[1] && $vb->[1] ne '';
-            my $val = $vb->[2];
-
-            $oid = '.' . $oid unless $oid =~ /^\./;
-
-            # Stop if we've left the subtree
-            last unless index($oid, $normalized_base . '.') == 0 || $oid eq $normalized_base;
-
-            # Stop on endOfMibView
-            last if defined $val && $val eq 'endOfMibView';
-
-            $result{$oid} = $val;
-            push @returned_oids, $oid;
-            $current_oid = $oid;
-        }
+        $self->_walk_columns_getnext([$baseoid], \%result, set_error => 1);
     } else {
-        # SNMPv2c/v3: Use GETBULK for efficiency
-        my $current_oid = $baseoid;
+        # SNMPv2c/v3: Use bulkwalk() for efficiency.
+        # bulkwalk() handles the GETBULK loop in C, automatically stopping
+        # when leaving the subtree.
+        my $vbl = SNMP::VarList->new([$baseoid]);
+        my @walk_results = $self->{_snmp_session}->bulkwalk(0, $maxrepetitions, $vbl);
 
-        while (1) {
-            my $vbl = SNMP::VarList->new([$current_oid]);
-            $self->{_snmp_session}->getbulk(0, $maxrepetitions, $vbl);
+        if ($self->{_snmp_session}->{ErrorNum}) {
+            $self->{_error} = $self->{_snmp_session}->{ErrorStr};
+        } else {
+            # bulkwalk returns one SNMP::VarList per requested OID (we have one)
+            my $varbinds = $walk_results[0];
+            if (ref $varbinds) {
+                for my $vb (@$varbinds) {
+                    my ($oid, $val) = $self->_normalize_varbind($vb);
 
-            if ($self->{_snmp_session}->{ErrorNum}) {
-                $self->{_error} = $self->{_snmp_session}->{ErrorStr};
-                last;
-            }
+                    next if defined $val && $val eq 'endOfMibView';
 
-            my $last_oid;
-            my $found_any = 0;
-
-            for (my $i = 0; $i < scalar(@$vbl); $i++) {
-                my $vb = $vbl->[$i];
-                my $oid = $vb->[0];
-                $oid .= '.' . $vb->[1] if defined $vb->[1] && $vb->[1] ne '';
-                my $val = $vb->[2];
-
-                $oid = '.' . $oid unless $oid =~ /^\./;
-
-                # Stop if we've left the subtree
-                if (index($oid, $normalized_base . '.') != 0 && $oid ne $normalized_base) {
-                    last;
+                    $result{$oid} = $val;
                 }
-
-                # Skip endOfMibView
-                next if defined $val && $val eq 'endOfMibView';
-
-                $result{$oid} = $val;
-                push @returned_oids, $oid unless exists $result{$oid};
-                $last_oid = $oid;
-                $found_any = 1;
             }
-
-            last unless $found_any && defined $last_oid;
-            $current_oid = $last_oid;
         }
     }
 
-    $self->{_last_oids} = \@returned_oids;
     return %result ? \%result : undef;
 }
 
@@ -798,10 +927,8 @@ sub get_entries {
     my $endindex = $args{-endindex};
 
     $self->{_error} = '';
-    $self->{_last_oids} = [];
 
     my %result;
-    my @returned_oids;
 
     # If specific index range requested, fetch just those
     if (defined $startindex && defined $endindex && $startindex eq $endindex) {
@@ -817,124 +944,80 @@ sub get_entries {
         }
 
         for (my $i = 0; $i < scalar(@$vbl); $i++) {
-            my $vb = $vbl->[$i];
-            my $oid = $vb->[0];
-            $oid .= '.' . $vb->[1] if defined $vb->[1] && $vb->[1] ne '';
-            my $val = $vb->[2];
-
-            $oid = '.' . $oid unless $oid =~ /^\./;
+            my ($oid, $val) = $self->_normalize_varbind($vbl->[$i]);
 
             # Skip noSuchInstance/noSuchObject
             next if defined $val && ($val eq 'noSuchInstance' || $val eq 'noSuchObject');
 
             $result{$oid} = $val;
-            push @returned_oids, $oid;
         }
+    } elsif ($self->version() == 0) {
+        # SNMPv1: GETNEXT walking (no GETBULK available)
+        $self->_walk_columns_getnext(\@columns, \%result,
+            startindex => $startindex, endindex => $endindex);
     } else {
-        # Walk columns
-        foreach my $col_oid (@columns) {
-            my $normalized_col = $col_oid =~ /^\./ ? $col_oid : ".$col_oid";
+        # SNMPv2c/v3: Determine maxrepetitions strategy
+        my $maxreps;
+        if (defined $args{-maxrepetitions} && $args{-maxrepetitions} > 0) {
+            $maxreps = $args{-maxrepetitions};
+        } elsif (defined $args{-maxrepetitions} && $args{-maxrepetitions} == 0) {
+            # Caller requested GETNEXT-style walking (fallback path).
+            # Use column-by-column GETNEXT, same as the v1 code path.
+            $maxreps = 0;
+        } else {
+            # Adaptive default matching Net::SNMP's formula:
+            # int(maxMsgSize * 0.017 / num_columns) + 1
+            # With default UDP maxMsgSize=1472, base is ~25
+            my $num_cols = scalar(@columns) || 1;
+            $maxreps = int(25 / $num_cols) + 1;
+        }
 
-            if ($self->version() == 0) {
-                # SNMPv1: GETNEXT walking
-                my $current_oid = $col_oid;
+        warn "Backend::XS get_entries: maxreps=$maxreps, columns=" . scalar(@columns) . "\n" if $ENV{SNMP_XS_DEBUG};
+        if ($maxreps == 0) {
+            # GETNEXT walking for v2c/v3 (fallback when bulkwalk fails)
+            $self->_walk_columns_getnext(\@columns, \%result,
+                startindex => $startindex, endindex => $endindex,
+                skip_errors => 1);
+        } else {
+            # Use bulkwalk() for multi-column efficiency.
+            # bulkwalk() is a C-level XS method that packs all columns into
+            # each GETBULK PDU and auto-loops until all subtrees are complete,
+            # dramatically reducing network round-trips vs walking one column
+            # at a time.
+            my @start_oids = map { [$_] } @columns;
+            my $vbl = SNMP::VarList->new(@start_oids);
+            my @walk_results = $self->{_snmp_session}->bulkwalk(0, $maxreps, $vbl);
 
-                while (1) {
-                    my $vbl = SNMP::VarList->new([$current_oid]);
-                    $self->{_snmp_session}->getnext($vbl);
+            if ($self->{_snmp_session}->{ErrorNum}) {
+                $self->{_error} = $self->{_snmp_session}->{ErrorStr};
+                return undef;
+            }
 
-                    if ($self->{_snmp_session}->{ErrorNum}) {
-                        last;
-                    }
+            # bulkwalk() returns one SNMP::VarList per column, each containing
+            # SNMP::Varbind objects [tag, iid, val, type]
+            for my $col_idx (0 .. $#walk_results) {
+                my $col_varbinds = $walk_results[$col_idx];
+                next unless ref $col_varbinds;
+                (my $normalized_col = $columns[$col_idx]) =~ s/^\.//;
+                for my $vb (@$col_varbinds) {
+                    my ($oid, $val) = $self->_normalize_varbind($vb);
 
-                    my $vb = $vbl->[0];
-                    my $oid = $vb->[0];
-                    $oid .= '.' . $vb->[1] if defined $vb->[1] && $vb->[1] ne '';
-                    my $val = $vb->[2];
-
-                    $oid = '.' . $oid unless $oid =~ /^\./;
-
-                    # Stop if we've left this column's subtree
-                    last unless index($oid, $normalized_col . '.') == 0;
-
-                    # Stop on endOfMibView
-                    last if defined $val && $val eq 'endOfMibView';
-
-                    # Check index range if specified
+                    # Apply index filtering
                     if (defined $startindex || defined $endindex) {
                         my $index = substr($oid, length($normalized_col) + 1);
-                        if (defined $startindex && $index lt $startindex) {
-                            $current_oid = $oid;
-                            next;
-                        }
-                        if (defined $endindex && $index gt $endindex) {
-                            last;
-                        }
+                        next if defined $startindex && $index lt $startindex;
+                        last if defined $endindex && $index gt $endindex;
                     }
 
+                    next if defined $val && ($val eq 'noSuchInstance'
+                                          || $val eq 'noSuchObject'
+                                          || $val eq 'endOfMibView');
                     $result{$oid} = $val;
-                    push @returned_oids, $oid;
-                    $current_oid = $oid;
-                }
-            } else {
-                # SNMPv2c/v3: GETBULK walking
-                my $current_oid = $col_oid;
-                my $maxreps = 10;
-
-                while (1) {
-                    my $vbl = SNMP::VarList->new([$current_oid]);
-                    $self->{_snmp_session}->getbulk(0, $maxreps, $vbl);
-
-                    if ($self->{_snmp_session}->{ErrorNum}) {
-                        last;
-                    }
-
-                    my $last_oid;
-                    my $found_any = 0;
-
-                    for (my $i = 0; $i < scalar(@$vbl); $i++) {
-                        my $vb = $vbl->[$i];
-                        my $oid = $vb->[0];
-                        $oid .= '.' . $vb->[1] if defined $vb->[1] && $vb->[1] ne '';
-                        my $val = $vb->[2];
-
-                        $oid = '.' . $oid unless $oid =~ /^\./;
-
-                        # Stop if we've left this column's subtree
-                        if (index($oid, $normalized_col . '.') != 0) {
-                            last;
-                        }
-
-                        # Skip endOfMibView
-                        next if defined $val && $val eq 'endOfMibView';
-
-                        # Check index range if specified
-                        if (defined $startindex || defined $endindex) {
-                            my $index = substr($oid, length($normalized_col) + 1);
-                            if (defined $startindex && $index lt $startindex) {
-                                $last_oid = $oid;
-                                $found_any = 1;
-                                next;
-                            }
-                            if (defined $endindex && $index gt $endindex) {
-                                last;
-                            }
-                        }
-
-                        $result{$oid} = $val;
-                        push @returned_oids, $oid unless exists $result{$oid};
-                        $last_oid = $oid;
-                        $found_any = 1;
-                    }
-
-                    last unless $found_any && defined $last_oid;
-                    $current_oid = $last_oid;
                 }
             }
         }
     }
 
-    $self->{_last_oids} = \@returned_oids;
     return %result ? \%result : undef;
 }
 
