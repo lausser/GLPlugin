@@ -16,6 +16,7 @@ lib/Monitoring/GLPlugin/SNMP/Item.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ACALARMMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ACFAULTTC.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ACGATEWAY.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ACKPIMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ACSYSTEMMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ACTYPESMIB.pm
