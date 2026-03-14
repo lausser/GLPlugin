@@ -118,9 +118,9 @@ sub add_default_args {
   $self->add_arg(
       spec => 'warningx=s%',
       help => '--warningx
-   The extended warning thresholds
-   e.g. --warningx db_msdb_free_pct=6: to override the threshold for a
-   specific item ',
+   The extended warning thresholds - example uses:
+   Override a specific threshold:      --warningx db_msdb_free_pct=6
+   Override all thresholds that match: --warningx \'.*discards.*\'=100',
       required => 0,
   );
   $self->add_arg(
