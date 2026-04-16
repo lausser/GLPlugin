@@ -6,7 +6,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'PowerNet-MIB'} = {
 };
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'PowerNet-MIB'} =
-    '1.3.6.1.4.1.318.1.1.1.1';
+  '1.3.6.1.4.1.318';
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'PowerNet-MIB'} = {
   'apc' => '1.3.6.1.4.1.318',
@@ -2808,6 +2808,15 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'PowerNet-MIB'} = {
   #'emsDoorSensorConfigSensorLocationDefinition' => 'RFC1213-MIB::DisplayString',
   'emsDoorSensorConfigSensorSeverity' => '1.3.6.1.4.1.318.1.1.10.3.19.4.1.4',
   'emsDoorSensorConfigSensorSeverityDefinition' => 'PowerNet-MIB::emsDoorSensorConfigSensorSeverity',
+  'emsLeakRopeConfigTable' => '1.3.6.1.4.1.318.1.1.10.3.19.5',
+  'emsLeakRopeConfigEntry' => '1.3.6.1.4.1.318.1.1.10.3.19.5.1',
+  'emsLeakRopeConfigIndex' => '1.3.6.1.4.1.318.1.1.10.3.19.5.1.1',
+  'emsLeakRopeConfigName' => '1.3.6.1.4.1.318.1.1.10.3.19.5.1.2',
+  #'emsLeakRopeConfigNameDefinition' => 'RFC1213-MIB::DisplayString',
+  'emsLeakRopeConfigLocation' => '1.3.6.1.4.1.318.1.1.10.3.19.5.1.3',
+  #'emsLeakRopeConfigLocationDefinition' => 'RFC1213-MIB::DisplayString',
+  'emsLeakRopeConfigSeverity' => '1.3.6.1.4.1.318.1.1.10.3.19.5.1.4',
+  'emsLeakRopeConfigSeverityDefinition' => 'PowerNet-MIB::emsLeakRopeConfigSeverity',
   'emsInputStateSensorStatus' => '1.3.6.1.4.1.318.1.1.10.3.20',
   'emsSmokeSensorStatusTableSize' => '1.3.6.1.4.1.318.1.1.10.3.20.1',
   'emsSmokeSensorStatusTable' => '1.3.6.1.4.1.318.1.1.10.3.20.2',
@@ -2865,6 +2874,20 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'PowerNet-MIB'} = {
   'emsDoorSensorStatusSensorSeverityDefinition' => 'PowerNet-MIB::emsDoorSensorStatusSensorSeverity',
   'emsDoorSensorCommStatus' => '1.3.6.1.4.1.318.1.1.10.3.20.8.1.6',
   'emsDoorSensorCommStatusDefinition' => 'PowerNet-MIB::emsDoorSensorCommStatus',
+  'emsLeakRopeStatusTableSize' => '1.3.6.1.4.1.318.1.1.10.3.20.9',
+  'emsLeakRopeStatusTable' => '1.3.6.1.4.1.318.1.1.10.3.20.10',
+  'emsLeakRopeStatusEntry' => '1.3.6.1.4.1.318.1.1.10.3.20.10.1',
+  'emsLeakRopeStatusIndex' => '1.3.6.1.4.1.318.1.1.10.3.20.10.1.1',
+  'emsLeakRopeStatusName' => '1.3.6.1.4.1.318.1.1.10.3.20.10.1.2',
+  #'emsLeakRopeStatusNameDefinition' => 'RFC1213-MIB::DisplayString',
+  'emsLeakRopeStatusLocation' => '1.3.6.1.4.1.318.1.1.10.3.20.10.1.3',
+  #'emsLeakRopeStatusLocationDefinition' => 'RFC1213-MIB::DisplayString',
+  'emsLeakRopeStatusState' => '1.3.6.1.4.1.318.1.1.10.3.20.10.1.4',
+  'emsLeakRopeStatusStateDefinition' => 'PowerNet-MIB::emsLeakRopeStatusState',
+  'emsLeakRopeStatusSeverity' => '1.3.6.1.4.1.318.1.1.10.3.20.10.1.5',
+  'emsLeakRopeStatusSeverityDefinition' => 'PowerNet-MIB::emsLeakRopeStatusSeverity',
+  'emsLeakRopeCommStatus' => '1.3.6.1.4.1.318.1.1.10.3.20.10.1.6',
+  'emsLeakRopeCommStatusDefinition' => 'PowerNet-MIB::emsLeakRopeCommStatus',
   'modEnvMgr' => '1.3.6.1.4.1.318.1.1.10.4',
   'memModules' => '1.3.6.1.4.1.318.1.1.10.4.1',
   'memModulesStatusTableSize' => '1.3.6.1.4.1.318.1.1.10.4.1.1',
@@ -3206,6 +3229,35 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'PowerNet-MIB'} = {
   'memDoorSensorConfigSensorSeverityDefinition' => 'PowerNet-MIB::memDoorSensorConfigSensorSeverity',
   'memDoorSensorConfigAlarmGeneration' => '1.3.6.1.4.1.318.1.1.10.4.7.12.1.6',
   'memDoorSensorConfigAlarmGenerationDefinition' => 'PowerNet-MIB::memDoorSensorConfigAlarmGeneration',
+  'memLeakRopeStatusTableSize' => '1.3.6.1.4.1.318.1.1.10.4.7.13',
+  'memLeakRopeStatusTable' => '1.3.6.1.4.1.318.1.1.10.4.7.14',
+  'memLeakRopeStatusEntry' => '1.3.6.1.4.1.318.1.1.10.4.7.14.1',
+  'memLeakRopeStatusModuleIndex' => '1.3.6.1.4.1.318.1.1.10.4.7.14.1.1',
+  'memLeakRopeStatusSensorIndex' => '1.3.6.1.4.1.318.1.1.10.4.7.14.1.2',
+  'memLeakRopeStatusSensorName' => '1.3.6.1.4.1.318.1.1.10.4.7.14.1.3',
+  #'memLeakRopeStatusSensorNameDefinition' => 'RFC1213-MIB::DisplayString',
+  'memLeakRopeStatusSensorLocation' => '1.3.6.1.4.1.318.1.1.10.4.7.14.1.4',
+  #'memLeakRopeStatusSensorLocationDefinition' => 'RFC1213-MIB::DisplayString',
+  'memLeakRopeStatusSensorState' => '1.3.6.1.4.1.318.1.1.10.4.7.14.1.5',
+  'memLeakRopeStatusSensorStateDefinition' => 'PowerNet-MIB::memLeakRopeStatusSensorState',
+  'memLeakRopeStatusSensorSeverity' => '1.3.6.1.4.1.318.1.1.10.4.7.14.1.6',
+  'memLeakRopeStatusSensorSeverityDefinition' => 'PowerNet-MIB::memLeakRopeStatusSensorSeverity',
+  'memLeakRopeAlarmStatus' => '1.3.6.1.4.1.318.1.1.10.4.7.14.1.7',
+  'memLeakRopeAlarmStatusDefinition' => 'PowerNet-MIB::memLeakRopeAlarmStatus',
+  'memLeakRopeCommStatus' => '1.3.6.1.4.1.318.1.1.10.4.7.14.1.8',
+  'memLeakRopeCommStatusDefinition' => 'PowerNet-MIB::memLeakRopeCommStatus',
+  'memLeakRopeConfigTable' => '1.3.6.1.4.1.318.1.1.10.4.7.15',
+  'memLeakRopeConfigEntry' => '1.3.6.1.4.1.318.1.1.10.4.7.15.1',
+  'memLeakRopeConfigModuleIndex' => '1.3.6.1.4.1.318.1.1.10.4.7.15.1.1',
+  'memLeakRopeConfigSensorIndex' => '1.3.6.1.4.1.318.1.1.10.4.7.15.1.2',
+  'memLeakRopeConfigSensorName' => '1.3.6.1.4.1.318.1.1.10.4.7.15.1.3',
+  #'memLeakRopeConfigSensorNameDefinition' => 'RFC1213-MIB::DisplayString',
+  'memLeakRopeConfigSensorLocation' => '1.3.6.1.4.1.318.1.1.10.4.7.15.1.4',
+  #'memLeakRopeConfigSensorLocationDefinition' => 'RFC1213-MIB::DisplayString',
+  'memLeakRopeConfigSensorSeverity' => '1.3.6.1.4.1.318.1.1.10.4.7.15.1.5',
+  'memLeakRopeConfigSensorSeverityDefinition' => 'PowerNet-MIB::memLeakRopeConfigSensorSeverity',
+  'memLeakRopeConfigAlarmGeneration' => '1.3.6.1.4.1.318.1.1.10.4.7.15.1.6',
+  'memLeakRopeConfigAlarmGenerationDefinition' => 'PowerNet-MIB::memLeakRopeConfigAlarmGeneration',
   'envWireless' => '1.3.6.1.4.1.318.1.1.10.5',
   'wirelessSensorStatus' => '1.3.6.1.4.1.318.1.1.10.5.1',
   'wirelessSensorStatusTable' => '1.3.6.1.4.1.318.1.1.10.5.1.1',
@@ -7358,6 +7410,64 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'PowerNet-MIB'} = {
   #'accessPXStatusBeaconLocationDefinition' => 'RFC1213-MIB::DisplayString',
   'accessPXStatusBeaconCurrentState' => '1.3.6.1.4.1.318.1.1.20.1.8.3',
   'accessPXStatusBeaconCurrentStateDefinition' => 'PowerNet-MIB::accessPXStatusBeaconCurrentState',
+  'accessPXExt' => '1.3.6.1.4.1.318.1.1.20.2',
+  'accessPXExtIdent' => '1.3.6.1.4.1.318.1.1.20.2.1',
+  'accessPXExtIdentNumber' => '1.3.6.1.4.1.318.1.1.20.2.1.1',
+  'accessPXExtIdentTable' => '1.3.6.1.4.1.318.1.1.20.2.1.2',
+  'accessPXExtIdentEntry' => '1.3.6.1.4.1.318.1.1.20.2.1.2.1',
+  'accessPXExtIdentIndex' => '1.3.6.1.4.1.318.1.1.20.2.1.2.1.1',
+  'accessPXExtIdentAlarmStatus' => '1.3.6.1.4.1.318.1.1.20.2.1.2.1.2',
+  'accessPXExtIdentModuleNumber' => '1.3.6.1.4.1.318.1.1.20.2.1.2.1.3',
+  'accessPXExtIdentModuleName' => '1.3.6.1.4.1.318.1.1.20.2.1.2.1.4',
+  #'accessPXExtIdentModuleNameDefinition' => 'RFC1213-MIB::DisplayString',
+  'accessPXExtIdentModuleLocation' => '1.3.6.1.4.1.318.1.1.20.2.1.2.1.5',
+  #'accessPXExtIdentModuleLocationDefinition' => 'RFC1213-MIB::DisplayString',
+  'accessPXExtIdentModelNumber' => '1.3.6.1.4.1.318.1.1.20.2.1.2.1.6',
+  #'accessPXExtIdentModelNumberDefinition' => 'RFC1213-MIB::DisplayString',
+  'accessPXExtIdentSerialNumber' => '1.3.6.1.4.1.318.1.1.20.2.1.2.1.7',
+  #'accessPXExtIdentSerialNumberDefinition' => 'RFC1213-MIB::DisplayString',
+  'accessPXExtIdentFirmwareRev' => '1.3.6.1.4.1.318.1.1.20.2.1.2.1.8',
+  #'accessPXExtIdentFirmwareRevDefinition' => 'RFC1213-MIB::DisplayString',
+  'accessPXExtIdentHardwareRev' => '1.3.6.1.4.1.318.1.1.20.2.1.2.1.9',
+  #'accessPXExtIdentHardwareRevDefinition' => 'RFC1213-MIB::DisplayString',
+  'accessPXExtConfigFront' => '1.3.6.1.4.1.318.1.1.20.2.2',
+  'accessPXExtConfigFrontNumber' => '1.3.6.1.4.1.318.1.1.20.2.2.1',
+  'accessPXExtConfigFrontTable' => '1.3.6.1.4.1.318.1.1.20.2.2.2',
+  'accessPXExtConfigFrontEntry' => '1.3.6.1.4.1.318.1.1.20.2.2.2.1',
+  'accessPXExtConfigFrontIndex' => '1.3.6.1.4.1.318.1.1.20.2.2.2.1.1',
+  'accessPXExtConfigFrontDoorLockControl' => '1.3.6.1.4.1.318.1.1.20.2.2.2.1.2',
+  'accessPXExtConfigFrontDoorLockControlDefinition' => 'PowerNet-MIB::accessPXExtConfigFrontDoorLockControl',
+  'accessPXExtStatusFront' => '1.3.6.1.4.1.318.1.1.20.2.3',
+  'accessPXExtStatusFrontNumber' => '1.3.6.1.4.1.318.1.1.20.2.3.1',
+  'accessPXExtStatusFrontTable' => '1.3.6.1.4.1.318.1.1.20.2.3.2',
+  'accessPXExtStatusFrontEntry' => '1.3.6.1.4.1.318.1.1.20.2.3.2.1',
+  'accessPXExtStatusFrontIndex' => '1.3.6.1.4.1.318.1.1.20.2.3.2.1.1',
+  'accessPXExtStatusFrontDoorLock' => '1.3.6.1.4.1.318.1.1.20.2.3.2.1.2',
+  'accessPXExtStatusFrontDoorLockDefinition' => 'PowerNet-MIB::accessPXExtStatusFrontDoorLock',
+  'accessPXExtStatusFrontDoor' => '1.3.6.1.4.1.318.1.1.20.2.3.2.1.3',
+  'accessPXExtStatusFrontDoorDefinition' => 'PowerNet-MIB::accessPXExtStatusFrontDoor',
+  'accessPXExtStatusFrontDoorHandle' => '1.3.6.1.4.1.318.1.1.20.2.3.2.1.4',
+  'accessPXExtStatusFrontDoorHandleDefinition' => 'PowerNet-MIB::accessPXExtStatusFrontDoorHandle',
+  'accessPXExtStatusFrontDoorAlarmStatus' => '1.3.6.1.4.1.318.1.1.20.2.3.2.1.5',
+  'accessPXExtConfigRear' => '1.3.6.1.4.1.318.1.1.20.2.4',
+  'accessPXExtConfigRearNumber' => '1.3.6.1.4.1.318.1.1.20.2.4.1',
+  'accessPXExtConfigRearTable' => '1.3.6.1.4.1.318.1.1.20.2.4.2',
+  'accessPXExtConfigRearEntry' => '1.3.6.1.4.1.318.1.1.20.2.4.2.1',
+  'accessPXExtConfigRearIndex' => '1.3.6.1.4.1.318.1.1.20.2.4.2.1.1',
+  'accessPXExtConfigRearDoorLockControl' => '1.3.6.1.4.1.318.1.1.20.2.4.2.1.2',
+  'accessPXExtConfigRearDoorLockControlDefinition' => 'PowerNet-MIB::accessPXExtConfigRearDoorLockControl',
+  'accessPXExtStatusRear' => '1.3.6.1.4.1.318.1.1.20.2.5',
+  'accessPXExtStatusRearNumber' => '1.3.6.1.4.1.318.1.1.20.2.5.1',
+  'accessPXExtStatusRearTable' => '1.3.6.1.4.1.318.1.1.20.2.5.2',
+  'accessPXExtStatusRearEntry' => '1.3.6.1.4.1.318.1.1.20.2.5.2.1',
+  'accessPXExtStatusRearIndex' => '1.3.6.1.4.1.318.1.1.20.2.5.2.1.1',
+  'accessPXExtStatusRearDoorLock' => '1.3.6.1.4.1.318.1.1.20.2.5.2.1.2',
+  'accessPXExtStatusRearDoorLockDefinition' => 'PowerNet-MIB::accessPXExtStatusRearDoorLock',
+  'accessPXExtStatusRearDoor' => '1.3.6.1.4.1.318.1.1.20.2.5.2.1.3',
+  'accessPXExtStatusRearDoorDefinition' => 'PowerNet-MIB::accessPXExtStatusRearDoor',
+  'accessPXExtStatusRearDoorHandle' => '1.3.6.1.4.1.318.1.1.20.2.5.2.1.4',
+  'accessPXExtStatusRearDoorHandleDefinition' => 'PowerNet-MIB::accessPXExtStatusRearDoorHandle',
+  'accessPXExtStatusRearDoorAlarmStatus' => '1.3.6.1.4.1.318.1.1.20.2.5.2.1.5',
   'apcLocalDisplay' => '1.3.6.1.4.1.318.1.1.21',
   'apcLocalDisplayIdent' => '1.3.6.1.4.1.318.1.1.21.1',
   'apcLocalDisplayIdentDisplayType' => '1.3.6.1.4.1.318.1.1.21.1.1',
@@ -8056,6 +8166,12 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'PowerNet-MIB'} = {
   'rPDU2SensorTempHumidityConfigHumidityHysteresis' => '1.3.6.1.4.1.318.1.1.26.10.2.1.1.15',
   'rPDU2SensorTempHumidityConfigTempPeakReset' => '1.3.6.1.4.1.318.1.1.26.10.2.1.1.16',
   'rPDU2SensorTempHumidityConfigTempPeakResetDefinition' => 'PowerNet-MIB::rPDU2SensorTempHumidityConfigTempPeakReset',
+  'rPDU2SensorTempHumidityConfigTempLowThreshF' => '1.3.6.1.4.1.318.1.1.26.10.2.1.1.17',
+  'rPDU2SensorTempHumidityConfigTempMinThreshF' => '1.3.6.1.4.1.318.1.1.26.10.2.1.1.18',
+  'rPDU2SensorTempHumidityConfigTempLowThreshC' => '1.3.6.1.4.1.318.1.1.26.10.2.1.1.19',
+  'rPDU2SensorTempHumidityConfigTempMinThreshC' => '1.3.6.1.4.1.318.1.1.26.10.2.1.1.20',
+  'rPDU2SensorTempHumidityConfigHumidityMaxThresh' => '1.3.6.1.4.1.318.1.1.26.10.2.1.1.21',
+  'rPDU2SensorTempHumidityConfigHumidityHighThresh' => '1.3.6.1.4.1.318.1.1.26.10.2.1.1.22',
   'rPDU2SensorTempHumidityStatusTable' => '1.3.6.1.4.1.318.1.1.26.10.2.2',
   'rPDU2SensorTempHumidityStatusEntry' => '1.3.6.1.4.1.318.1.1.26.10.2.2.1',
   'rPDU2SensorTempHumidityStatusIndex' => '1.3.6.1.4.1.318.1.1.26.10.2.2.1.1',
@@ -9554,6 +9670,9 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'PowerNet-MIB'} = {
   'airACRD300Series' => '1.3.6.1.4.1.318.1.3.14.23',
   'airAquaCentr' => '1.3.6.1.4.1.318.1.3.14.24',
   'airLeoGen2Series' => '1.3.6.1.4.1.318.1.3.14.25',
+  'airFanWallSeries' => '1.3.6.1.4.1.318.1.3.14.27',
+  'airXScrewSeries' => '1.3.6.1.4.1.318.1.3.14.28',
+  'airCloseRPLSeries' => '1.3.6.1.4.1.318.1.3.14.29',
   'infraStruXurePDU' => '1.3.6.1.4.1.318.1.3.15',
   'ais5000UPS' => '1.3.6.1.4.1.318.1.3.16',
   'ais5000UPS10kVA' => '1.3.6.1.4.1.318.1.3.16.1',
@@ -9824,910 +9943,144 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'PowerNet-MIB'} = {
 };
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
-  'pcnsContactFault1EnableCommandFile' => {
+  'upsBasicSystemPFCStatus' => {
+    '1' => 'unknown',
+    '2' => 'ok',
+    '3' => 'inFaultCondition',
+  },
+  'pcnsHumidityOutOfRangeProbe2EnableShutdown' => {
     '1' => 'yes',
     '2' => 'no',
   },
-  'emConfigProbeLowTempEnable' => {
+  'pcnsTurnOffSOG' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'iemConfigContactEnable' => {
     '1' => 'disabled',
     '2' => 'enabled',
   },
-  'upsDiagMCCBBoxStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'opened',
-    '4' => 'closed',
-  },
-  'uioOutputRelayConfigControlState' => {
-    '1' => 'uioOutputClose',
-    '2' => 'uioOutputOpen',
-  },
-  'pcnsMaxInternalTempExceededEnableLogging' => {
+  'pcnsCommunicationLostEnableShutdown' => {
     '1' => 'yes',
     '2' => 'no',
   },
-  'isxModularDistSysOutputVoltageAlarmMinEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'airIRmPmLouver1Position' => {
-    '1' => 'closed',
-    '2' => 'open',
-  },
-  'battManString2BatteryUserLowVoltageAlarm' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'rARUPowerStatusRedundantAcConfig' => {
-    '1' => 'singleCord',
-    '2' => 'dualCord',
-  },
-  'airIRG3RDUConfigOutputSource' => {
-    '1' => 'anyalarm',
-    '2' => 'onlycriticalalarms',
-  },
-  'airIRG3RDUStatusOutputState' => {
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'dm3ConfigRect1ofNAlarm' => {
-    '1' => 'alarmIgnore',
-    '2' => 'alarmRelay1',
-    '3' => 'alarmRelay2',
-    '4' => 'alarmRelay3',
-    '5' => 'alarmRelay4',
-    '6' => 'alarmRelay5',
-    '7' => 'alarmRelay6',
-    '8' => 'alarmMinor',
-    '9' => 'alarmMajor',
-  },
-  'rPDULoadBankConfigAlarm' => {
-    '1' => 'noLoadAlarm',
-    '2' => 'underCurrentAlarm',
-    '3' => 'nearOverCurrentAlarm',
-    '4' => 'overCurrentAlarm',
-  },
-  'isxModularDistSysPowerKwhReset' => {
-    '1' => 'no',
-    '2' => 'yes',
-  },
-  'switchgearBreakerStatus' => {
-    '1' => 'unknown',
-    '2' => 'opened',
-    '3' => 'closed',
-  },
-  'battManSystemPilotProbeDisconnected' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'dm3StatusRectStandby' => {
-    '1' => 'statusTrue',
-    '2' => 'statusFalse',
-  },
-  'emsStatusSysTempUnits' => {
-    '1' => 'celsius',
-    '2' => 'fahrenheit',
-  },
-  'airIRRP100GroupSetpointsActiveFlowControlBias' => {
-    '1' => 'positive',
-    '2' => 'slightlyPositive',
-    '3' => 'zero',
-    '4' => 'slightlyNegative',
-    '5' => 'negative',
-  },
-  'pcnsContactFault2EnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'airFMSysAlarmMapExpMod1LowAirFlow' => {
+  'airFMSysAlarmMapOutput7' => {
     '1' => 'notApplicable',
     '2' => 'disabled',
     '3' => 'enabled',
   },
-  'mdcCoolingStatusOperateMode' => {
-    '1' => 'unknown',
-    '2' => 'cooling',
-    '3' => 'dehumidification',
-    '4' => 'bmsshutdown',
-    '5' => 'coolinghmishutdown',
-    '6' => 'faultshutdown',
-    '7' => 'remoteshutdown',
-    '8' => 'coolingorauxiliaryheating',
-  },
-  'xATSSwitchSettingsClearLatchedAlarms' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'rARUStatusAruManualSetpoint' => {
-    '1' => 'aruOff',
-    '2' => 'aru85F-29C',
-    '3' => 'aru90F-32C',
-    '4' => 'aru95F-35C',
-    '5' => 'aru100F-38C',
-    '6' => 'aru7kW',
-    '7' => 'aru5kW',
-    '8' => 'aru3kW',
-    '9' => 'aru2kW',
-    '10' => 'aruRem',
-  },
-  'emConfigProbeMaxHumidEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'pcnsTurnOffUps' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'ats5gSwitchOrientation' => {
-    '1' => 'unknown',
-    '2' => 'singlePhase',
-    '3' => 'splitPhase',
-    '4' => 'threePhasePhaseToNeutral',
-    '5' => 'threePhasePhaseToPhase',
-  },
-  'dm3ConfigInRlyAlarm' => {
-    '1' => 'alarmIgnore',
-    '2' => 'alarmRelay1',
-    '3' => 'alarmRelay2',
-    '4' => 'alarmRelay3',
-    '5' => 'alarmRelay4',
-    '6' => 'alarmRelay5',
-    '7' => 'alarmRelay6',
-    '8' => 'alarmMinor',
-    '9' => 'alarmMajor',
-  },
-  'upsBasicSystemStatus' => {
-    '1' => 'unknown',
-    '2' => 'onLine',
-    '3' => 'onBattery',
-    '4' => 'onSmartBoost',
-    '5' => 'timedSleeping',
-    '6' => 'softwareBypass',
-    '7' => 'off',
-    '8' => 'rebooting',
-    '9' => 'switchedBypass',
-    '10' => 'hardwareFailureBypass',
-    '11' => 'sleepingUntilPowerReturn',
-    '12' => 'onSmartTrim',
-    '13' => 'ecoMode',
-    '14' => 'inverter',
-    '15' => 'eConversion',
-    '16' => 'staticBypassStandby',
-    '17' => 'efficiencyBoosterMode',
-  },
-  'rARUPowerStatusAuxiliaryAcPresent' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'upsOutletGroupStatusOutletType' => {
-    '1' => 'upsSwitchedOutletGroup',
-    '2' => 'upsMainOutletGroup',
-  },
-  'upsDiagComBusInternalMIMStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'ok',
-    '4' => 'lostComm',
-    '5' => 'rxFailure',
-    '6' => 'txFailure',
-  },
-  'airFMGroupLoadShareCoolRequests' => {
-    '1' => 'disable',
-    '2' => 'enable',
-  },
-  'xATSSwitchStatusAutomaticOperationSwitch' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-    '3' => 'unknown',
-  },
-  'upsOutletGroupStatusCommandPending' => {
-    '1' => 'upsOutletGroupCommandPending',
-    '2' => 'upsOutletGroupNoCommandPending',
-  },
-  'battManAlarmBatteries' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'airFMSysInputNormalState' => {
+  'xATSInputContactCurrentState' => {
     '1' => 'open',
     '2' => 'closed',
   },
-  'airIRSCUnitConfigIdleOnLeakDetect' => {
+  'memLeakRopeAlarmStatus' => {
+    '1' => 'memNormal',
+    '2' => 'memWarning',
+    '3' => 'memCritical',
+  },
+  'pcnsMinRedundancyRegainedEnableLogging' => {
     '1' => 'yes',
     '2' => 'no',
   },
-  'ats5gSwitchVoltageOutStatus' => {
-    '1' => 'off',
-    '2' => 'on',
+  'xATSSwitchStatusSelectedSource' => {
+    '1' => 'none',
+    '2' => 'source1',
+    '3' => 'source2',
+    '4' => 'fault',
+    '5' => 'unknown',
   },
-  'pcnsMaxInternalTempExceededEnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'pcnsNetCommunicationLostEnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'dm3StatusSysRemoteAccess' => {
-    '1' => 'accessEnabled',
-    '2' => 'accessDisabled',
-  },
-  'airIRmPmPWWHeatingType' => {
-    '1' => 'direct',
-    '2' => 'undefined',
-  },
-  'airFMSysAlarmMapSysSecSensFail' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'iemStatusProbeTempUnits' => {
-    '1' => 'celsius',
-    '2' => 'fahrenheit',
-  },
-  'airIRG2GroupConfigConfigurationType' => {
-    '1' => 'racs',
-    '2' => 'spot',
-    '3' => 'in-row',
-    '4' => 'hacs',
-    '5' => 'cacs',
-  },
-  'pmmInputBreakerState' => {
+  'memDoorSensorStatusSensorState' => {
     '1' => 'open',
     '2' => 'closed',
     '3' => 'unknown',
   },
-  'upsDiagSubSysUsrSuppBattMonitorStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'offOk',
-    '4' => 'onOk',
-    '5' => 'offFail',
-    '6' => 'onFail',
-    '7' => 'lostComm',
+  'upsAdvTestDiagnosticsResults' => {
+    '1' => 'ok',
+    '2' => 'failed',
+    '3' => 'invalidTest',
+    '4' => 'testInProgress',
   },
-  'rPDU2DeviceConfigDeviceEnergyReset' => {
-    '1' => 'noOperation',
-    '2' => 'reset',
-    '3' => 'notSupported',
+  'airFMSysAlarmMapSysAnyAlarm' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
   },
-  'accessPXStatusBeaconCurrentState' => {
+  'airIRRP100GroupConfigActiveFlowControllerLampTest' => {
     '1' => 'off',
     '2' => 'on',
-    '3' => 'notInstalled',
-    '4' => 'disconnected',
   },
-  'airFMSysSteamHumDmd' => {
-    '1' => 'notApplicable',
-    '2' => 'off',
-    '3' => 'on',
+  'accessPXConfigBeaconAction' => {
+    '1' => 'turnOff',
+    '2' => 'turnOn',
+    '3' => 'notInstalledReadOnly',
+    '4' => 'disconnectedReadOnly',
   },
-  'airFMSysAlarmMapOutput3' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
+  'xPDUBranchBreakerRDPFeed' => {
+    '1' => 'remoteDistribution',
+    '2' => 'noRemoteDistribution',
   },
-  'airFMSysAlarmMapInput10' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
+  'accessPXConfigRearDoorLockControl' => {
+    '1' => 'unlock',
+    '2' => 'lock',
+    '3' => 'notInstalledReadOnly',
+    '4' => 'disconnectedReadOnly',
   },
-  'airFMSysAlarmMapInput6' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
+  'airPABlowerSpeed' => {
+    '1' => 'speedLOW',
+    '2' => 'speedHIGH',
   },
-  'airFMModServIntHumReset' => {
-    '1' => 'notApplicable',
-    '2' => 'noOperation',
-    '3' => 'reset',
-  },
-  'xATSGeneratorStatusModeSwitchPosition' => {
-    '1' => 'off',
-    '2' => 'manual',
-    '3' => 'automatic',
-    '4' => 'unknown',
-  },
-  'airFMStatusSystemOn' => {
+  'dm3StatusOutRlyStatus' => {
     '1' => 'statusOn',
     '2' => 'statusOff',
   },
-  'upsDiagFlyWheelStatus' => {
-    '1' => 'unknown',
-    '2' => 'present',
-    '3' => 'notPresent',
-  },
-  'airFMSysDehumState' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'airFMGroupAutoRoleNumPrimary' => {
-    '1' => 'one',
-    '2' => 'two',
-    '3' => 'three',
-    '4' => 'four',
-  },
-  'iemConfigProbeMinTempEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'airFMSysAlarmMapExpMod2MaintReq' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'upsAdvControlFlashAndBeep' => {
-    '1' => 'noFlashAndBeep',
-    '2' => 'flashAndBeep',
-    '3' => 'flashAndBeepSyncGroup',
-    '4' => 'flashAndBeepCont',
-    '5' => 'flashAndBeepCancel',
-  },
-  'upsOpStatsReset' => {
-    '1' => 'notSupported',
-    '2' => 'noOperation',
-    '3' => 'reset',
-  },
-  'emsOutputRelayControlOutputRelayCommand' => {
-    '1' => 'immediateCloseEMS',
-    '2' => 'immediateOpenEMS',
-  },
-  'isxModularPduFanStatus' => {
-    '1' => 'normal',
-    '2' => 'failed',
-    '3' => 'noCoolingFansPresent',
-    '4' => 'unknown',
-  },
-  'rPDUOutletConfigOutletPhase' => {
-    '1' => 'phase1',
-    '2' => 'phase2',
-    '3' => 'phase3',
-    '4' => 'phase1-2',
-    '5' => 'phase2-3',
-    '6' => 'phase3-1',
-  },
-  'xATSSwitchSettingsAllowClosedTransfer' => {
-    '1' => 'yes',
-    '2' => 'no',
-    '3' => 'unknown',
-  },
-  'pcnsRunTimeBelowThresholdEnableCommandFile' => {
+  'pcnsContactFault4EnableShutdown' => {
     '1' => 'yes',
     '2' => 'no',
   },
-  'memOutputAction' => {
-    '1' => 'memActionClose',
-    '2' => 'memActionOpen',
-  },
-  'airIRRP100UnitServiceIntervalCompressorAlarm' => {
+  'airIRRP100UnitServiceIntervalCondensatePumpAlarm' => {
     '1' => 'enable',
     '2' => 'disable',
-  },
-  'airIRRCGroupSetpointsFanSpeedControl' => {
-    '1' => 'automatic',
-    '2' => 'manual',
-  },
-  'airFMSysAlarmMapInput8' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'isxModularDistSubFeedInfoKwhReset' => {
-    '1' => 'no',
-    '2' => 'yes',
-  },
-  'airIRmPmCoolingPriority' => {
-    '1' => 'ge',
-    '2' => 'cw',
-    '3' => 'dx',
-  },
-  'xPDUDeviceLoadTestPortPresent' => {
-    '1' => 'notPresent',
-    '2' => 'present',
-  },
-  'airFMSysAlarmMapOutput15' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'airFMSysAlarmMapOutput8' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'battManInputContactState' => {
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'xPDUUPSInputVoltagePhaseIndex' => {
-    '1' => 'phase1',
-    '2' => 'phase2',
-    '3' => 'phase3',
-  },
-  'essentialServicesStatus' => {
-    '1' => 'unknown',
-    '2' => 'stopped',
-    '3' => 'running',
-    '4' => 'time-sync-problems',
-    '5' => 'backup-problems',
-  },
-  'pcnsAdvancedShutdownCommandFileEnabled' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'airFMModHeaterType' => {
-    '1' => 'notApplicable',
-    '2' => 'none',
-    '3' => 'electricSCR',
-    '4' => 'steam',
-    '5' => 'hotWaterOnOff',
-    '6' => 'hotGasReheat',
-    '7' => 'hotGasAndElectric',
-    '8' => 'hotWaterProp',
-  },
-  'airFMSysAirFltr' => {
-    '1' => 'notApplicable',
-    '2' => 'standard',
-    '3' => 'highEfficiency',
-  },
-  'upsDiagPMEnclDoorFltrLifetime' => {
-    '1' => 'heavyFiltration15days',
-    '2' => 'normalFiltration30days',
-    '3' => 'lightFiltration60days',
-    '4' => 'notPresent',
-  },
-  'airFMGroupFailoverSysHighEnvTemp' => {
-    '1' => 'notApplicable',
-    '2' => 'disable',
-    '3' => 'enable',
-  },
-  'airFMGroupCfgDmdFightStatus' => {
-    '1' => 'off',
-    '2' => 'on',
-  },
-  'airFMSysAlarmMapExpMod1MaintReq' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'isxModularDistSysCurrentAlarmMaxEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'pcnsContactNormal1EnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'atsControlResetATS' => {
-    '1' => 'none',
-    '2' => 'reset',
-  },
-  'pcnsMinLoadCapabilityRegainedEnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'memVibrationSensorConfigSensorSeverity' => {
-    '1' => 'critical',
-    '2' => 'warning',
-    '3' => 'informational',
-  },
-  'pcnsBypassManualEnabledEnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'pcnsAdvancedTurnOffSOG' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'airFMSysAlarmMapInput14' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'airFMGroupFailoverSysFireAlarm' => {
-    '1' => 'notApplicable',
-    '2' => 'disable',
-    '3' => 'enable',
-  },
-  'airFMSysResetSysFailure' => {
-    '1' => 'notApplicable',
-    '2' => 'noOperation',
-    '3' => 'reset',
-  },
-  'airFMGroupLoadShareDehumRequests' => {
-    '1' => 'disable',
-    '2' => 'enable',
-  },
-  'airIRSCGroupConfigActiveFlowControllerLampTest' => {
-    '1' => 'off',
-    '2' => 'on',
-  },
-  'upsSCGACInputStatus' => {
-    '1' => 'acInGood',
-    '2' => 'acInBad',
-  },
-  'isxModularDistSubFeedInfoBreakerPosition' => {
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'dcmim2StatusLVDState' => {
-    '1' => 'statusClosed',
-    '2' => 'statusOpened',
-  },
-  'upsDiagBatteryStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'ok',
-    '4' => 'failed',
-    '5' => 'highTemperature',
-    '6' => 'replaceImmediately',
-    '7' => 'lowCapacity',
-  },
-  'loadBalancerStatus' => {
-    '1' => 'unknown',
-    '2' => 'stopped',
-    '3' => 'running',
-    '4' => 'running-missing',
-  },
-  'atsInputType' => {
-    '1' => 'unknown',
-    '2' => 'main',
-    '3' => 'bypass',
-  },
-  'airIRRP500GroupConfigConfigurationType' => {
-    '1' => 'racs',
-    '2' => 'hacs',
-    '3' => 'in-row',
-    '4' => 'cacs',
-  },
-  'airPACompressor' => {
-    '1' => 'statusON',
-    '2' => 'statusOFF',
-  },
-  'uioSensorConfigMinTemperatureEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'iemConfigProbeHighHumidEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'atsConfigFrequencyDeviation' => {
-    '1' => 'one',
-    '2' => 'two',
-    '3' => 'three',
-    '5' => 'five',
-    '10' => 'ten',
-  },
-  'airIRG3GroupConfigCapacityControlType' => {
-    '1' => 'discrete',
-    '2' => 'proportional',
-  },
-  'xATSSwitchTimersStatus' => {
-    '1' => 'inactive',
-    '2' => 'active',
-  },
-  'uioSensorConfigLowHumidityEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'airFMSysAlarmMapMainModHighFltrDP' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'pcnsContactFault3EnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'rPDU2SensorDiscreteConfigNormalState' => {
-    '1' => 'normallyOpen',
-    '2' => 'normallyClosed',
-  },
-  'airIRRP100UnitConfigOutputNormalState' => {
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'memBeaconAction' => {
-    '1' => 'turnOff',
-    '2' => 'turnOn',
-  },
-  'upsAdvConfigFrequencyConverterMode' => {
-    '1' => 'autoRanging',
-    '2' => 'frequencyConverter',
-    '3' => 'unknown',
-  },
-  'pcnsBatteryDischargedEnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'mcontrolRestartAgent' => {
-    '1' => 'restartCurrentAgent',
-    '2' => 'continueCurrentAgent',
-    '3' => 'loadAndExecuteNewAgent',
-    '4' => 'restartWithoutAgent',
-    '5' => 'resetNetworkAndRestart',
-    '6' => 'resetNetworkLeaveModeAndRestart',
-  },
-  'airIRRP100UnitConfigDehumidifyEnable' => {
-    '1' => 'enable',
-    '2' => 'disable',
-  },
-  'upsAdvControlFirmwareUpdate' => {
-    '1' => 'noFirmwareUpdate',
-    '2' => 'firmwareUpdate',
-    '3' => 'updateInProcess',
-    '4' => 'updateSuccessful',
-    '5' => 'updateFailed',
-  },
-  'airIRRP500UnitConfigSecondaryPowerFeedCapability' => {
-    '1' => 'full',
-    '2' => 'reduced',
-  },
-  'airFMGroupFailoverModAirBlockInterlockOpen' => {
-    '1' => 'notApplicable',
-    '2' => 'disable',
-    '3' => 'enable',
-  },
-  'iemConfigProbeLowTempEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'emStatusCommStatus' => {
-    '1' => 'noComm',
-    '2' => 'comm',
-    '3' => 'commLost',
-  },
-  'airFMGroupFailoverSysCommLost' => {
-    '1' => 'notApplicable',
-    '2' => 'disable',
-    '3' => 'enable',
-  },
-  'airIRRP100GroupConfigLoadAssistEnable' => {
-    '1' => 'disable',
-    '2' => 'enable',
-  },
-  'upsParallelSysRedundancy' => {
-    '1' => 'nplus0',
-    '2' => 'nplus1',
-    '3' => 'nplus2',
-    '4' => 'nplus3',
-    '5' => 'nplus4',
-    '6' => 'nplus5',
-  },
-  'airIRSCUnitConfigOutputSource' => {
-    '1' => 'anyAlarm',
-    '2' => 'criticalAlarm',
-  },
-  'upsOutletGroupConfigLoadShedControlInOverload' => {
-    '1' => 'upsOutletGroupConfigDisableInOverloadLoadShed',
-    '2' => 'upsOutletGroupConfigEnableInOverloadLoadShed',
-  },
-  'rPDUIdentDeviceDisplayOrientation' => {
-    '1' => 'displayNormal',
-    '2' => 'displayReverse',
-  },
-  'xATSSwitchSettingsSetToFactoryDefaults' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'airFMModBlwr1CtrlType' => {
-    '1' => 'notApplicable',
-    '2' => 'fujiVFD',
-    '3' => 'ecController',
-    '4' => 'danfossVFD',
-  },
-  'upsOutletGroupConfigLoadShedControlAutoRestart' => {
-    '1' => 'upsOutletGroupConfigAutoRestart',
-    '2' => 'upsOutletGroupConfigManualRestart',
-  },
-  'pmmOutputFrequencyDeviation' => {
-    '1' => 'freqDeviationOff',
-    '2' => 'freqDeviationPointTwo',
-    '3' => 'freqDeviationPointFive',
-    '4' => 'freqDeviationOne',
-    '5' => 'freqDeviationOnePointFive',
-    '6' => 'freqDeviationTwo',
-    '7' => 'freqDeviationThree',
-    '8' => 'freqDeviationFour',
-    '9' => 'freqDeviationFive',
-    '10' => 'freqDeviationNine',
-  },
-  'airFMGroupFailoverSysReturnSensorFail' => {
-    '1' => 'notApplicable',
-    '2' => 'disable',
-    '3' => 'enable',
-  },
-  'airFMSysAlarmMapSysLowEnvHum' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
   },
   'emsFluidSensorStatusSensorState' => {
     '1' => 'fluidDetected',
     '2' => 'noFluid',
     '3' => 'unknown',
   },
-  'airIRSCUnitConfigInputNormalState' => {
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'airIRG3GroupConfigRuntimeBalancingEnable' => {
-    '1' => 'disable',
-    '2' => 'enable',
-  },
-  'rPDULoadStatusLoadState' => {
-    '1' => 'phaseLoadNormal',
-    '2' => 'phaseLoadLow',
-    '3' => 'phaseLoadNearOverload',
-    '4' => 'phaseLoadOverload',
-  },
-  'battManStringOnBattery' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'sPDUOutletStatusMSPOutletCtrlMode' => {
-    '1' => 'modeGracefulShutdown',
-    '2' => 'modeAnnunciator',
-  },
-  'wirelessSensorStatusAlarmGeneration' => {
-    '0' => 'disabled',
-    '1' => 'enabled',
-  },
-  'airIRRP100GroupConfigRuntimeBalancingEnable' => {
-    '1' => 'disable',
-    '2' => 'enable',
-  },
-  'sPDUMasterStatusVMOverloadCondition' => {
-    '1' => 'overloadConditionTrueVM',
-    '2' => 'overloadConditionFalseVM',
-  },
-  'upsAdvTestDiagnosticsBatteryInterval' => {
-    '1' => 'never',
-    '2' => 'weekly',
-    '3' => 'biweekly',
-    '4' => 'every4weeks',
-    '5' => 'every8weeks',
-    '6' => 'every12weeks',
-    '7' => 'every26weeks',
-    '8' => 'every52weeks',
-  },
-  'upsAdvConfigSetEEPROMDefaults' => {
-    '1' => 'noSetEEPROMDefaults',
-    '2' => 'setEEPROMDefaults',
-  },
-  'airIRRP500GroupSetpointsActiveFlowControlBias' => {
-    '1' => 'positive',
-    '2' => 'slightlyPositive',
-    '3' => 'zero',
-    '4' => 'slightlyNegative',
-    '5' => 'negative',
-  },
-  'ats5gSwitchControlEventCountReset' => {
-    '1' => 'none',
-    '2' => 'reset',
-  },
-  'airFMSysNumber' => {
-    '1' => 'notApplicable',
-    '2' => 'one',
-    '3' => 'two',
-    '4' => 'three',
-    '5' => 'four',
-  },
-  'atsStatusSourceAStatus' => {
-    '1' => 'fail',
-    '2' => 'ok',
-  },
-  'upsDiagSwitchGearInputSwitchStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'opened',
-    '4' => 'closed',
-  },
-  'emsStatusCommStatus' => {
-    '1' => 'noComm',
-    '2' => 'comm',
-    '3' => 'commLost',
-  },
-  'uioSensorConfigHighHumidityEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'airFMGroupLoadShareHumRequests' => {
-    '1' => 'disable',
-    '2' => 'enable',
-  },
-  'battManConfigApplication' => {
-    '1' => 'silcon',
-    '2' => 'other',
-  },
-  'upsAdvConfigOutputFreqSlewRate' => {
-    '1' => 'unknown',
-    '2' => 'slewRateQuarterHzPerSec',
-    '3' => 'slewRateHalfHzPerSec',
-    '4' => 'slewRate1HzPerSec',
-    '5' => 'slewRate2HzPerSec',
-    '6' => 'slewRate4HzPerSec',
-    '7' => 'slewRate6HzPerSec',
-  },
-  'airIRRP500GroupConfigRuntimeBalancingEnable' => {
-    '1' => 'disable',
-    '2' => 'enable',
-  },
-  'airFMGroupSysPresentRole' => {
-    '1' => 'primary',
-    '2' => 'backup',
-  },
-  'pcnsEnvironmentCommunicationLostEnableLogging' => {
+  'pcnsBypassDisabledEnableCommandFile' => {
     '1' => 'yes',
     '2' => 'no',
   },
-  'dm3StatusConvFail' => {
-    '1' => 'statusTrue',
-    '2' => 'statusFalse',
-  },
-  'rPDUIdentDeviceOutletLayout' => {
-    '1' => 'seqPhaseToNeutral',
-    '2' => 'seqPhaseToPhase',
-    '3' => 'seqPhToNeu21PhToPh',
-    '4' => 'seqPhToPhGrouped',
-    '5' => 'seqPhToNGrouped',
-    '6' => 'seqPToN1516PToPGrouped',
-    '7' => 'seqPhToPh2xGrouped',
-    '8' => 'seqPhToN2xGrouped',
-    '9' => 'seqNotApplicable',
-  },
-  'atsStatus24VPowerSupply' => {
-    '1' => 'atsPowerSupplyFailure',
-    '2' => 'atsPowerSupplyOK',
-  },
-  'atsStatusSelectedSource' => {
-    '1' => 'sourceA',
-    '2' => 'sourceB',
-  },
-  'iemConfigProbeMaxTempEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'atsStatusVBoostSourceB' => {
-    '1' => 'atsPowerSupplyFailure',
-    '2' => 'atsPowerSupplyOK',
-  },
-  'airIRRP100UnitConfigUnitRoleOverride' => {
-    '1' => 'automatic',
-    '2' => 'forcedOn',
-  },
-  'upsOutputRelayConfigCause' => {
-    '1' => 'outputRelayConfigCauseNone',
-    '2' => 'outputRelayConfigCauseOnBatPwrFail',
-    '3' => 'outputRelayConfigCauseOnBatPwrFailExceptPeakPeriod',
-    '4' => 'outputRelayConfigCauseLoBatWhileOnBat',
-    '5' => 'outputRelayConfigCauseAlarm',
-    '6' => 'outputRelayConfigCauseFault',
-    '7' => 'outputRelayConfigCauseOutputOn',
-    '8' => 'outputRelayConfigCauseOutputOff',
-    '9' => 'outputRelayConfigCauseOnline',
-    '10' => 'outputRelayConfigCauseInBypass',
-  },
-  'airIRRP100UnitServiceIntervalAirFilterAlarm' => {
+  'airIRRP500UnitConfigHumidifyEnable' => {
     '1' => 'enable',
     '2' => 'disable',
   },
-  'pcnsContactNormal3EnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
+  'dcmim2ControlRunCapacityBatteryTest' => {
+    '1' => 'battTestOff',
+    '2' => 'battTestOn',
   },
-  'memVibrationSensorStatusSensorState' => {
-    '1' => 'vibrationDetected',
-    '2' => 'noVibration',
-    '3' => 'unknown',
+  'airIRRP100UnitConfigOutputNormalState' => {
+    '1' => 'open',
+    '2' => 'closed',
   },
-  'upsEbmModeSetting' => {
-    '1' => 'enabled',
-    '2' => 'disabled',
+  'uioOutputRelayStatusCurrentState' => {
+    '1' => 'uioOutputClosed',
+    '2' => 'uioOutputOpen',
+    '3' => 'outputStateNotApplicable',
   },
-  'dm3ConfigLVDHWAlarm' => {
+  'dm3StatusLVDState' => {
+    '1' => 'statusClosed',
+    '2' => 'statusOpened',
+  },
+  'AirIRmActivityState' => {
+    '1' => 'inactive',
+    '2' => 'active',
+  },
+  'airFMSysHumEssFunction' => {
+    '1' => 'notApplicable',
+    '2' => 'yes',
+    '3' => 'no',
+  },
+  'dm3ConfigRectHwVoltAlarm' => {
     '1' => 'alarmIgnore',
     '2' => 'alarmRelay1',
     '3' => 'alarmRelay2',
@@ -10738,137 +10091,117 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
     '8' => 'alarmMinor',
     '9' => 'alarmMajor',
   },
-  'pcnsNetComsLostFlag' => {
-    '1' => 'active',
-    '2' => 'clear',
+  'dm3StatusSysTempSanity' => {
+    '1' => 'saneYES',
+    '2' => 'saneNO',
   },
-  'emsInputContactConfigInputContactNormalState' => {
-    '1' => 'normallyClosedEMS',
-    '2' => 'normallyOpenEMS',
-  },
-  'airIRmPmLouver3Position' => {
-    '1' => 'closed',
-    '2' => 'open',
-  },
-  'pmmInputBreakerOpenAlarm' => {
-    '1' => 'enabled',
-    '2' => 'disabled',
-    '3' => 'unknown',
-  },
-  'memInputAbnormalSeverity' => {
-    '1' => 'inputSeverityinformational',
-    '2' => 'inputSeveritywarning',
-    '3' => 'inputSeveritysevere',
-    '4' => 'inputSeverityNotApplicable',
-  },
-  'battManStringCurrentProbeDisconnected' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'battManString2BatteryUserHighVoltageAlarm' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'upsAdvBatteryReplaceIndicator' => {
-    '1' => 'noBatteryNeedsReplacing',
-    '2' => 'batteryNeedsReplacing',
-  },
-  'airFMSysActualTempCtrlMethod' => {
-    '1' => 'notApplicable',
-    '2' => 'avgReturn',
-    '3' => 'avgRemote',
-    '4' => 'maxRemote',
-  },
-  'airIRSCUnitStatusOutputState' => {
+  'iemConfigRelayNormalState' => {
     '1' => 'open',
     '2' => 'closed',
   },
-  'sPDUOutletControlMSPOutletCommand' => {
-    '1' => 'immediateOnMSP',
-    '2' => 'delayedOnMSP',
-    '3' => 'immediateOffMSP',
-    '4' => 'gracefulRebootMSP',
-    '5' => 'immediateRebootMSP',
-    '6' => 'gracefulshutdownMSP',
-    '7' => 'overrideBatCapThreshMSP',
-    '8' => 'cancelPendingCommandMSP',
+  'rPDUPowerSupply1Status' => {
+    '1' => 'powerSupplyOneOk',
+    '2' => 'powerSupplyOneFailed',
   },
-  'airFMSysAlarmMapSysSecSensActive' => {
+  'airIRRP500UnitStatusInputState' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'airFMSysAlarmMapExpMod1HumReplCyl' => {
     '1' => 'notApplicable',
     '2' => 'disabled',
     '3' => 'enabled',
+  },
+  'airFMGroupFailoverSysHighEnvHum' => {
+    '1' => 'notApplicable',
+    '2' => 'disable',
+    '3' => 'enable',
+  },
+  'pcnsTempInRangeProbe2EnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airIRRP500UnitConfigIdleOnCoolFail' => {
+    '1' => 'enable',
+    '2' => 'disable',
+  },
+  'atsStatus24VSourceBPowerSupply' => {
+    '1' => 'atsPowerSupplyFailure',
+    '2' => 'atsPowerSupplyOK',
+  },
+  'dm3ConfigSysLowTempAlarm' => {
+    '1' => 'alarmIgnore',
+    '2' => 'alarmRelay1',
+    '3' => 'alarmRelay2',
+    '4' => 'alarmRelay3',
+    '5' => 'alarmRelay4',
+    '6' => 'alarmRelay5',
+    '7' => 'alarmRelay6',
+    '8' => 'alarmMinor',
+    '9' => 'alarmMajor',
+  },
+  'airFMGroupFailoverModAirBlockInterlockOpen' => {
+    '1' => 'notApplicable',
+    '2' => 'disable',
+    '3' => 'enable',
+  },
+  'pcnsPowerRestoredEnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'pcnsBypassEnabledEnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'pcnsContactNormal1EnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airFMSysActualSteamHotGasReheat' => {
+    '1' => 'notApplicable',
+    '2' => 'off',
+    '3' => 'on',
+  },
+  'airFMSysAlarmMapOutput2' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'monitoringStatus' => {
+    '1' => 'unknown',
+    '2' => 'enabled',
+    '3' => 'disabled',
+  },
+  'rPDU2PhaseStatusLoadState' => {
+    '1' => 'lowLoad',
+    '2' => 'normal',
+    '3' => 'nearOverload',
+    '4' => 'overload',
+  },
+  'mfiletransferControlInitiateFileTransfer' => {
+    '1' => 'doNotInitiateFileTransfer',
+    '2' => 'initiateFileTransferDownloadViaTFTP',
+    '3' => 'initiateFileTransferDownloadViaFTP',
+  },
+  'iemStatusProbeLowHumidViolation' => {
+    '1' => 'noViolation',
+    '2' => 'lowHumidViolation',
+    '3' => 'disabled',
   },
   'upsIntegratedATSSourceStatus' => {
     '1' => 'upsIntegratedATSSourceGood',
     '2' => 'upsIntegratedATSSourceBad',
     '3' => 'upsIntegratedATSSourceUnknown',
   },
-  'dm3StatusConvFanFail' => {
-    '1' => 'statusTrue',
-    '2' => 'statusFalse',
-  },
-  'airFMSysNumModules' => {
-    '1' => 'notApplicable',
-    '2' => 'one',
-    '3' => 'two',
-    '4' => 'three',
-  },
-  'dm3ConfigConvCurrLimitAlarm' => {
-    '1' => 'alarmIgnore',
-    '2' => 'alarmRelay1',
-    '3' => 'alarmRelay2',
-    '4' => 'alarmRelay3',
-    '5' => 'alarmRelay4',
-    '6' => 'alarmRelay5',
-    '7' => 'alarmRelay6',
-    '8' => 'alarmMinor',
-    '9' => 'alarmMajor',
-    '10' => 'alarmNofN',
-  },
-  'airFMSysSteamHotGasReheatDmd' => {
-    '1' => 'notApplicable',
-    '2' => 'off',
-    '3' => 'on',
-  },
-  'airIRG3GroupConfigConfigurationType' => {
-    '1' => 'racs',
-    '2' => 'spot',
-    '3' => 'in-row',
-    '4' => 'hacs',
-  },
-  'sPDUMasterConfigVMOverloadRestriction' => {
-    '1' => 'alwaysAllowTurnON',
-    '2' => 'restrictOnWarning',
-    '3' => 'restrictOnOverload',
-  },
-  'airFMSysReheatState' => {
+  'airFMSysAlarmMapOutput6' => {
     '1' => 'notApplicable',
     '2' => 'disabled',
     '3' => 'enabled',
   },
-  'battManString1BatteryUserHighVoltageAlarm' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'dm3ConfigConvFanFailAlarm' => {
-    '1' => 'alarmIgnore',
-    '2' => 'alarmRelay1',
-    '3' => 'alarmRelay2',
-    '4' => 'alarmRelay3',
-    '5' => 'alarmRelay4',
-    '6' => 'alarmRelay5',
-    '7' => 'alarmRelay6',
-    '8' => 'alarmMinor',
-    '9' => 'alarmMajor',
-    '10' => 'alarmNofN',
-  },
-  'airFMSysInputAlarmAction' => {
-    '1' => 'statusOnly',
-    '2' => 'minor',
-    '3' => 'major',
-    '4' => 'remoteRunStop',
-    '5' => 'nonessStop',
-    '6' => 'immShutdown',
+  'airFMSysAlarmMapExpMod1CoolFail' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
   },
   'upsDiagSubSysInverterStatus' => {
     '1' => 'unknown',
@@ -10879,263 +10212,21 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
     '6' => 'onFail',
     '7' => 'lostComm',
   },
-  'xATSOutputRelayNormalState' => {
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'pcnsContactFault3EnableShutdown' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'rPDUPowerSupplyAlarm' => {
-    '1' => 'allAvailablePowerSuppliesOK',
-    '2' => 'powerSupplyOneFailed',
-    '3' => 'powerSupplyTwoFailed',
-    '4' => 'powerSupplyOneandTwoFailed',
-  },
-  'upsAdvConfigLCDLockOut' => {
-    '1' => 'disable',
-    '2' => 'enable',
-  },
-  'airFMModHumidifier' => {
-    '1' => 'notApplicable',
-    '2' => 'none',
-    '3' => 'steamElectrode',
-    '4' => 'liveSteam',
-  },
-  'upsBasicStateAlarmStatus' => {
-    '1' => 'noAlarms',
-    '2' => 'infoAlarm',
-    '3' => 'warningAlarm',
-    '4' => 'criticalAlarm',
-  },
-  'airIRG3RDUConfigPowerSource' => {
-    '1' => 'singleFeed',
-    '2' => 'dualFeed',
-  },
-  'upsAdvBatteryChargingCurrentRestricted' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'upsDiagSubSysSystemPowerSupplyStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'offOk',
-    '4' => 'onOk',
-    '5' => 'offFail',
-    '6' => 'onFail',
-    '7' => 'lostComm',
-  },
-  'ats5gSwitchSourceB24VSupplyStatus' => {
-    '1' => 'fail',
-    '2' => 'ok',
-  },
-  'ats5gSwitchRedundancyState' => {
-    '1' => 'atsRedundancyLost',
-    '2' => 'atsFullyRedundant',
-  },
-  'rPDU2SensorTempHumidityStatusCommStatus' => {
-    '1' => 'notInstalled',
-    '2' => 'commsOK',
-    '3' => 'commsLost',
-  },
-  'memVibrationSensorStatusSensorSeverity' => {
-    '1' => 'critical',
-    '2' => 'warning',
-    '3' => 'informational',
-  },
-  'airFMSysAlarmMapExpMod1CondPumpFail' => {
+  'airFMSysAlarmMapExpMod1HighFltrDP' => {
     '1' => 'notApplicable',
     '2' => 'disabled',
     '3' => 'enabled',
   },
-  'rPDU2DeviceStatusPowerSupply2Status' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-    '3' => 'notInstalled',
-  },
-  'airFMSysDehumPIDMethod' => {
-    '1' => 'notApplicable',
-    '2' => 'p',
-    '3' => 'pi',
-    '4' => 'pid',
-  },
-  'airIRRP500UnitConfigOutputSource' => {
-    '1' => 'anyAlarm',
-    '2' => 'criticalAlarm',
-  },
-  'sPDUOutletStatusMSPCommandPending' => {
-    '1' => 'outletStatusMSPCommandPending',
-    '2' => 'outletStatusMSPNoCommandPending',
-  },
-  'upsBasicOutputACwiringConfiguration' => {
-    '1' => 'unknown',
-    '2' => 'noNeutralWiredonSystem',
-    '3' => 'neutralUsedforSupplyingLoad',
-  },
-  'upsInputContactConfigPolarity' => {
-    '1' => 'upsInputContactAllContactsClosedEqualsTrue',
-    '2' => 'upsInputContactAllContactsOpenEqualsTrue',
-  },
-  'airIRRP100UnitConfigHumidifyEnable' => {
-    '1' => 'enable',
-    '2' => 'disable',
-  },
-  'xATSSwitchStatusEngineStartSignal' => {
-    '1' => 'run',
-    '2' => 'stop',
-    '3' => 'unknown',
-  },
-  'battManString2BatteryHighOhmicValue' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'upsDiagSwitchGearBypassSwitchStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'opened',
-    '4' => 'closed',
-  },
-  'emsConfigCheckLogLight' => {
-    '1' => 'lightDisabled',
-    '2' => 'lightOnInformational',
-    '3' => 'lightOnWarning',
-    '4' => 'lightOnSevere',
-  },
-  'apcLocalDisplayConfigCheckLogIndicator' => {
-    '1' => 'checklogNotPresent',
-    '2' => 'checklogDisabled',
-    '3' => 'checklogInformational',
-    '4' => 'checklogWarning',
-    '5' => 'checklogCritical',
-  },
-  'pcnsMinRedundancyLostEnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'emConfigContactEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'upsAdvConfigBatterySelection' => {
-    '1' => 'vrla',
-    '2' => 'ventedcell',
-    '3' => 'nicd',
-    '4' => 'li-ion',
-  },
-  'isxModularDistSysCurrentAlarmLowEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'rPDUOutletPhaseOverloadRestriction' => {
-    '1' => 'alwaysAllowTurnON',
-    '2' => 'restrictOnNearOverload',
-    '3' => 'restrictOnOverload',
-  },
-  'isxModularDistModuleOutputStatus' => {
-    '1' => 'normal',
-    '2' => 'warning',
-    '3' => 'critical',
-    '4' => 'notPresent',
-    '6' => 'unknown',
-  },
-  'pcnsBypassManualEnabledEnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'pcnsPowerFailedEnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'airFMSysInputStatus' => {
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'upsDiagComBusInternalRIMStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'ok',
-    '4' => 'lostComm',
-    '5' => 'rxFailure',
-    '6' => 'txFailure',
-  },
-  'airFMSysAlarmMapOutput7' => {
+  'airFMSysAlarmMapExpMod1MaintReq' => {
     '1' => 'notApplicable',
     '2' => 'disabled',
     '3' => 'enabled',
   },
-  'airIRmPmControllerType' => {
-    '1' => 'unknown',
-    '2' => 'c4000',
-    '3' => 'c1001',
-    '4' => 'c1002',
-    '5' => 'c5000',
-    '6' => 'c6000',
-    '7' => 'c1010',
-    '8' => 'c7000IOC',
-    '9' => 'c7000AT',
-    '10' => 'c7000PT',
-    '11' => 'c5MSC',
-    '12' => 'c7000PT2',
-  },
-  'rPDULoadPhaseConfigIndex' => {
-    '1' => 'phase1',
-    '2' => 'phase2',
-    '3' => 'phase3',
-  },
-  'AirIRSCCapacityControlType' => {
-    '1' => 'discrete',
-    '2' => 'proportional',
-  },
-  'airIRRP500UnitServiceIntervalFansAlarm' => {
+  'airIRRP100UnitConfigHeatAssistEnable' => {
     '1' => 'enable',
     '2' => 'disable',
   },
-  'rPDUOutletPhaseIndex' => {
-    '1' => 'phase1',
-    '2' => 'phase2',
-    '3' => 'phase3',
-  },
-  'upsDiagSubSysXRCommunicationCardStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'offOk',
-    '4' => 'onOk',
-    '5' => 'offFail',
-    '6' => 'onFail',
-    '7' => 'lostComm',
-  },
-  'xATSInputContactCurrentState' => {
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'airFMGroupCfgDmdFightSetting' => {
-    '1' => 'disable',
-    '2' => 'enable',
-  },
-  'atsConfigPhase' => {
-    '1' => 'phase1',
-    '2' => 'phase2',
-    '3' => 'phase3',
-  },
-  'atsStatusVBoostSourceA' => {
-    '1' => 'atsPowerSupplyFailure',
-    '2' => 'atsPowerSupplyOK',
-  },
-  'emsDoorSensorCommStatus' => {
-    '1' => 'commOK',
-    '2' => 'commLost',
-  },
-  'battManSystemConfigurationInvalid' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'xPDUInputContactCurrentState' => {
-    '1' => 'open',
-    '2' => 'closed',
-    '3' => 'unknown',
-  },
-  'dm3ConfigBattDischargeAlarm' => {
+  'dm3ConfigConv2ofNAlarm' => {
     '1' => 'alarmIgnore',
     '2' => 'alarmRelay1',
     '3' => 'alarmRelay2',
@@ -11146,310 +10237,107 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
     '8' => 'alarmMinor',
     '9' => 'alarmMajor',
   },
-  'upsAdvTestDiagnosticsResults' => {
-    '1' => 'ok',
-    '2' => 'failed',
-    '3' => 'invalidTest',
-    '4' => 'testInProgress',
+  'memSmokeStatusAlarmStatus' => {
+    '1' => 'memNormal',
+    '2' => 'memWarning',
+    '3' => 'memCritical',
   },
-  'accessPXConfigBeaconAction' => {
-    '1' => 'turnOff',
-    '2' => 'turnOn',
-    '3' => 'notInstalledReadOnly',
-    '4' => 'disconnectedReadOnly',
-  },
-  'airFMSysAlarmMapMainModCoolFail' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'iemConfigProbeMaxHumidEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'battManSystemPilotBatteryHighTempAlarm' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'pcnsTempInRangeProbe2EnableLogging' => {
+  'pcnsHumidityInRangeProbe1EnableCommandFile' => {
     '1' => 'yes',
     '2' => 'no',
-  },
-  'uioOutputRelayStatusCommStatus' => {
-    '1' => 'notInstalled',
-    '2' => 'commsOK',
-    '3' => 'commsLost',
-  },
-  'airFMModBlwr1ElOvMode' => {
-    '1' => 'notApplicable',
-    '2' => 'inactive',
-    '3' => 'active',
-  },
-  'airFMSysActualSteamHum' => {
-    '1' => 'notApplicable',
-    '2' => 'off',
-    '3' => 'on',
-  },
-  'rPDU2SensorDiscreteStatusCommStatus' => {
-    '1' => 'notInstalled',
-    '2' => 'commsOK',
-    '3' => 'commsLost',
-  },
-  'airIRG3RDUStatusLeadPump' => {
-    '1' => 'pump1',
-    '2' => 'pump2',
-  },
-  'airFMSysAlarmMapInput7' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'airFMGroupCfgSetpointShareStatus' => {
-    '1' => 'off',
-    '2' => 'on',
-  },
-  'upsSCGActiveMembershipStatus' => {
-    '1' => 'enabledSCG',
-    '2' => 'disabledSCG',
-  },
-  'airIRG3RDUStatusPowerSource' => {
-    '1' => 'singleFeed',
-    '2' => 'dualFeed',
-  },
-  'airFMModRHHeaterReset' => {
-    '1' => 'notApplicable',
-    '2' => 'noOperation',
-    '3' => 'reset',
-  },
-  'rPDU2SensorDiscreteStatusAlarmState' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'iemStatusProbeHighTempViolation' => {
-    '1' => 'noViolation',
-    '2' => 'highTempViolation',
-    '3' => 'disabled',
-  },
-  'upsDiagComBusExternalMIMStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'ok',
-    '4' => 'lostComm',
-    '5' => 'rxFailure',
-    '6' => 'txFailure',
-  },
-  'uioSensorStatusAlarmStatus' => {
-    '1' => 'uioNormal',
-    '2' => 'uioWarning',
-    '3' => 'uioCritical',
-    '4' => 'sensorStatusNotApplicable',
-  },
-  'atsStatusMinus12VPowerSupply' => {
-    '1' => 'atsPowerSupplyFailure',
-    '2' => 'atsPowerSupplyOK',
-  },
-  'acceptThisReceiver' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'mdcCoolingConfigCondensationpump' => {
-    '1' => 'unknown',
-    '2' => 'active',
-    '3' => 'inactive',
   },
   'airFMSysAlarmMapExpMod2HighSupplyTemp' => {
     '1' => 'notApplicable',
     '2' => 'disabled',
     '3' => 'enabled',
   },
-  'dm3StatusInRlyStatus' => {
-    '1' => 'statusOn',
-    '2' => 'statusOff',
+  'isxModularDistSubFeedLoadingPhaseIndex' => {
+    '1' => 'phase1',
+    '2' => 'phase2',
+    '3' => 'phase3',
   },
-  'xATSOutputRelayCurrentState' => {
-    '1' => 'open',
-    '2' => 'closed',
+  'battManUnitCommLoss' => {
+    '1' => 'normal',
+    '2' => 'alarm',
   },
-  'uioSensorConfigMaxHumidityEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
+  'apcLocalDisplayIdentDisplayType' => {
+    '1' => 'noDisplayFound',
+    '2' => 'powerviewRM',
+    '3' => 'powerviewWW',
   },
-  'pcnsPowerFailedEnableShutdown' => {
+  'memOutletAction' => {
+    '1' => 'turnOff',
+    '2' => 'turnOn',
+  },
+  'airIRSCUnitStatusLeakSensor' => {
+    '1' => 'no-leak',
+    '2' => 'leak',
+  },
+  'ats5gSwitchConfigTransferVoltageRange' => {
+    '1' => 'wide',
+    '2' => 'medium',
+    '3' => 'narrow',
+  },
+  'airFMGroupCfgNumSystems' => {
+    '1' => 'one',
+    '2' => 'two',
+    '3' => 'three',
+    '4' => 'four',
+  },
+  'upsAdvControlRebootShutdownUps' => {
+    '1' => 'noRebootShutdownUps',
+    '2' => 'rebootShutdownUps',
+    '3' => 'rebootShutdownUpsGracefully',
+    '4' => 'rebootShutdownSyncGroupUps',
+    '5' => 'rebootShutdownSyncGroupUpsGracefully',
+  },
+  'pcnsRunTimeAboveThresholdEnableCommandFile' => {
     '1' => 'yes',
     '2' => 'no',
   },
-  'airFMSysResetUserDflts' => {
-    '1' => 'notApplicable',
-    '2' => 'noOperation',
-    '3' => 'reset',
+  'accessPXExtConfigRearDoorLockControl' => {
+    '1' => 'unlock',
+    '2' => 'lock',
+    '3' => 'notInstalledReadOnly',
+    '4' => 'disconnectedReadOnly',
   },
-  'memDoorSensorConfigAlarmGeneration' => {
+  'emConfigContactSeverity' => {
+    '1' => 'critical',
+    '2' => 'warning',
+    '3' => 'informational',
+  },
+  'airIRRCUnitStatusLeakSensor' => {
+    '1' => 'no-leak',
+    '2' => 'leak',
+  },
+  'xATSGeneratorServiceRunHoursThreshold' => {
     '1' => 'disabled',
-    '2' => 'enabled',
+    '2' => 'runThreshold100Hours',
+    '3' => 'runThreshold150Hours',
+    '4' => 'runThreshold200Hours',
+    '5' => 'runThreshold250Hours',
+    '6' => 'runThreshold300Hours',
+    '7' => 'runThreshold400Hours',
+    '8' => 'runThreshold500Hours',
   },
-  'airIRRP500GroupConfigActiveFlowControllerLampTest' => {
-    '1' => 'off',
-    '2' => 'on',
+  'ats5gSwitchSourceAStatus' => {
+    '1' => 'fail',
+    '2' => 'ok',
   },
-  'accessPXStatusRearDoor' => {
-    '1' => 'open',
-    '2' => 'closed',
-    '3' => 'notInstalled',
-    '4' => 'disconnected',
-  },
-  'pcnsContactNormal1EnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
+  'upsDiagSwitchGearStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'ok',
+    '4' => 'fail',
+    '5' => 'lostComm',
+    '6' => 'overtemp',
   },
   'airFMSysAlarmMapOutput13' => {
     '1' => 'notApplicable',
     '2' => 'disabled',
     '3' => 'enabled',
   },
-  'upsAdvConfigAutoShutdownControlLoadPercentOnUps' => {
-    '1' => 'upsAdvConfigDisableLoadPercentOnUpsAutoShutdown',
-    '2' => 'upsAdvConfigEnableLoadPercentOnUpsAutoShutdown',
-  },
-  'pcnsAdvancedTurnOffUps' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'battManRemoteAnnunciatorReset' => {
-    '1' => 'noOperation',
-    '2' => 'reset',
-  },
-  'airFMSysAlarmMapOutput10' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'battManString1BatteryOpenCell' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'memDoorStatusAlarmStatus' => {
-    '1' => 'memNormal',
-    '2' => 'memWarning',
-    '3' => 'memCritical',
-  },
-  'upsAdvConfigAutoShutdownControlTimeOnBattery' => {
-    '1' => 'upsAdvConfigDisableTimeOnBatteryAutoShutdown',
-    '2' => 'upsAdvConfigEnableTimeOnBatteryAutoShutdown',
-  },
-  'emStatusProbeTempUnits' => {
-    '1' => 'celsius',
-    '2' => 'fahrenheit',
-  },
-  'ePDUOutletStatusState' => {
-    '1' => 'off',
-    '2' => 'on',
-  },
-  'rPDU2DeviceConfigDevicePeakPowerReset' => {
-    '1' => 'noOperation',
-    '2' => 'reset',
-    '3' => 'notSupported',
-  },
-  'airIRmPmFan2Type' => {
-    '1' => 'direct',
-    '2' => 'proportional',
-  },
-  'atsStatusRedundancyState' => {
-    '1' => 'atsRedundancyLost',
-    '2' => 'atsFullyRedundant',
-  },
-  'mdcCoolingConfigPTCHeater' => {
-    '1' => 'unknown',
-    '2' => 'active',
-    '3' => 'inactive',
-  },
-  'airFMSysAlarmMapOutput1' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'upsInputContactConfigAction' => {
-    '1' => 'upsInputContactConfigActionNone',
-    '2' => 'upsInputContactConfigActionSelfTest',
-    '3' => 'upsInputContactConfigActionExternalAlarmOn',
-    '4' => 'upsInputContactConfigActionExternalAlarmOff',
-    '5' => 'upsInputContactConfigActionOutputOffNoDelay',
-    '6' => 'upsInputContactConfigActionOutputOn',
-  },
-  'pcnsUIProtocol' => {
-    '1' => 'http',
-    '2' => 'https',
-  },
-  'airFMModServIntBlwr1Reset' => {
-    '1' => 'notApplicable',
-    '2' => 'noOperation',
-    '3' => 'reset',
-  },
-  'airIRSCGroupSetpointsActiveFlowControlBias' => {
-    '1' => 'positive',
-    '2' => 'slightlyPositive',
-    '3' => 'zero',
-    '4' => 'slightlyNegative',
-    '5' => 'negative',
-  },
-  'upsDiagPMEnclDoorFltrStatus' => {
-    '1' => 'ok',
-    '2' => 'nearEnd',
-    '3' => 'exceeded',
-    '4' => 'unknown',
-  },
-  'pmmBranchCircuitBreakerState' => {
-    '1' => 'open',
-    '2' => 'closed',
-    '3' => 'unknown',
-  },
-  'dm3StatusBattCurrentSanity' => {
-    '1' => 'saneYES',
-    '2' => 'saneNO',
-  },
-  'pcbeUIProtocol' => {
-    '1' => 'http',
-    '2' => 'https',
-  },
-  'isxModularDistModuleOutputAlarmMaxEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'battManInputContactNormalState' => {
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'airFMGroupFailoverModLowSupplyTemp' => {
-    '1' => 'notApplicable',
-    '2' => 'disable',
-    '3' => 'enable',
-  },
-  'rPDU2DeviceStatusLoadState' => {
-    '1' => 'lowLoad',
-    '2' => 'normal',
-    '3' => 'nearOverload',
-    '4' => 'overload',
-    '5' => 'notsupported',
-  },
-  'pcnsParallelRedundancyRegainedEnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'pcnsTempInRangeProbe2EnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'upsBasicSystemPFCStatus' => {
-    '1' => 'unknown',
-    '2' => 'ok',
-    '3' => 'inFaultCondition',
-  },
-  'atsOutputBankState' => {
-    '1' => 'normal',
-    '2' => 'lowload',
-    '3' => 'nearoverload',
-    '4' => 'overload',
-  },
-  'upsDiagSubSysPowerFactorCorrectionStatus' => {
+  'upsDiagSubSysExternalPowerFrameBoardStatus' => {
     '1' => 'unknown',
     '2' => 'notInstalled',
     '3' => 'offOk',
@@ -11458,95 +10346,50 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
     '6' => 'onFail',
     '7' => 'lostComm',
   },
-  'airIRRP500UnitConfigHumidifyEnable' => {
-    '1' => 'enable',
-    '2' => 'disable',
+  'rPDU2DeviceStatusLoadState' => {
+    '1' => 'lowLoad',
+    '2' => 'normal',
+    '3' => 'nearOverload',
+    '4' => 'overload',
+    '5' => 'notsupported',
   },
-  'upsAdvConfigLCDLocalLanguage' => {
-    '1' => 'english',
-    '2' => 'french',
-    '3' => 'italian',
-    '4' => 'german',
-    '5' => 'spanish',
-    '6' => 'portuguese',
-    '7' => 'japanese',
-    '8' => 'russian',
+  'upsOutletGroupStatusCommandPending' => {
+    '1' => 'upsOutletGroupCommandPending',
+    '2' => 'upsOutletGroupNoCommandPending',
   },
-  'airFMGroupFailoverModLossOrLowAirFlow' => {
+  'loadBalancerStatus' => {
+    '1' => 'unknown',
+    '2' => 'stopped',
+    '3' => 'running',
+    '4' => 'running-missing',
+  },
+  'airIRG2GroupConfigCoolPIDReset' => {
+    '1' => 'readBack',
+    '2' => 'reset',
+  },
+  'airFMSysHotWaterVlvAct' => {
+    '1' => 'notApplicable',
+    '2' => 'none',
+    '3' => 'springAnalog',
+    '4' => 'floatingControl',
+  },
+  'emsSensorStatusSensorState' => {
+    '1' => 'sensorFaultedEMS',
+    '2' => 'sensorOKEMS',
+    '3' => 'sensorNotInstalledEMS',
+  },
+  'atsStatusPhaseSyncStatus' => {
+    '1' => 'inSync',
+    '2' => 'outOfSync',
+  },
+  'airFMGroupFailoverSysSmokeAlarm' => {
     '1' => 'notApplicable',
     '2' => 'disable',
     '3' => 'enable',
   },
-  'airIRRP100UnitConfigIdleOnLeakDetect' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'memSensorsStatusSysTempUnits' => {
-    '1' => 'celsius',
-    '2' => 'fahrenheit',
-  },
-  'rPDU2SensorDiscreteStatusType' => {
-    '1' => 'notConnected',
-    '2' => 'doorContactSensor',
-    '3' => 'smokeSensor',
-    '4' => 'motionDetector',
-    '5' => 'vibrationSensor',
-    '6' => 'dryContactSensor',
-    '7' => 'spotLeakSensor',
-  },
-  'upsEcoModeSetting' => {
-    '1' => 'enabled',
-    '2' => 'disabled',
-  },
-  'switchgearBreakerType' => {
-    '1' => 'unknown',
-    '2' => 'unitInputBreaker',
-    '3' => 'staticSwitchInputBreaker',
-    '4' => 'maintenanceBypassBreaker',
-    '5' => 'unitOutputBreaker',
-    '6' => 'systemIsolationBreaker',
-    '7' => 'batteryBreaker',
-    '8' => 'bypassBackFeedBreaker',
-    '9' => 'internalMaintenanceBypassBreaker',
-    '10' => 'redundantInternalMaintenanceBypassBreaker',
-  },
-  'upsDiagSubSysbackfeedContactorStatus' => {
-    '1' => 'unknown',
-    '2' => 'opened',
-    '3' => 'closed',
-  },
-  'airIRRCUnitConfigIdleOnCoolFail' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'pcnsParallelRedundancyRegainedEnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'pcnsContactNormal2EnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'dm3StatusRectPresent' => {
-    '1' => 'statusTrue',
-    '2' => 'statusFalse',
-  },
-  'emStatusProbeLowHumidViolation' => {
-    '1' => 'noViolation',
-    '2' => 'lowHumidViolation',
-    '3' => 'disabled',
-  },
-  'memVibrationSensorCommStatus' => {
-    '1' => 'commOK',
-    '2' => 'commLost',
-  },
-  'pcnsBypassDisabledEnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'dm3StatusRectDiagPass' => {
-    '1' => 'statusTrue',
-    '2' => 'statusFalse',
+  'airIRmPmFan2Type' => {
+    '1' => 'direct',
+    '2' => 'proportional',
   },
   'upsAdvTestDiagnosticSchedule' => {
     '1' => 'unknown',
@@ -11562,2198 +10405,324 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
     '11' => 'twentysixWeeks',
     '12' => 'fiftytwoWeeks',
   },
-  'airIRRP500GroupStatusActiveFlowControlStatus' => {
-    '1' => 'under',
-    '2' => 'okay',
-    '3' => 'over',
-    '4' => 'notApplicable',
-  },
-  'airFMSysSuctPresCompensation' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'memSensorsAlarmGeneration' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'airFMSysCndsrFluidVlvAct' => {
-    '1' => 'notApplicable',
-    '2' => 'none',
-    '3' => 'floatingControl',
-  },
-  'AirIRmAlarmState' => {
-    '1' => 'ok',
-    '2' => 'alarm',
-  },
-  'emStatusProbeHighTempViolation' => {
-    '1' => 'noViolation',
-    '2' => 'highTempViolation',
-    '3' => 'disabled',
-  },
-  'airFMSysHumState' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'rARUStatusAruCommStatus' => {
-    '1' => 'commsNeverDiscovered',
-    '2' => 'commsEstablished',
-    '3' => 'commsLost',
-  },
-  'AirIRSCConfigType' => {
-    '1' => 'racs',
-    '2' => 'spot',
-    '3' => 'in-row',
-  },
-  'dm3StatusSysTempUnits' => {
-    '1' => 'celsius',
-    '2' => 'fahrenheit',
-  },
-  'battManString1BatteryChemLowVoltageAlarm' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'battManString2BatteryChemLowVoltageAlarm' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'atsStatusHardwareStatus' => {
-    '1' => 'fail',
-    '2' => 'ok',
-  },
-  'upsHighPrecBatteryActualVoltagePolarity' => {
-    '0' => 'positive',
-    '1' => 'negative',
-  },
-  'battManString2BatteryDryout' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'pcnsHumidityOutOfRangeProbe2EnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'airFMSysAlarmMapMainModLowAirFlow' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'airIRG3GroupSetpointsAirFlowControl' => {
-    '1' => 'automatic',
-    '2' => 'manual',
-  },
-  'dm3ConfigRectFanFailAlarm' => {
-    '1' => 'alarmIgnore',
-    '2' => 'alarmRelay1',
-    '3' => 'alarmRelay2',
-    '4' => 'alarmRelay3',
-    '5' => 'alarmRelay4',
-    '6' => 'alarmRelay5',
-    '7' => 'alarmRelay6',
-    '8' => 'alarmMinor',
-    '9' => 'alarmMajor',
-    '10' => 'alarmNofN',
-  },
-  'upsDiagSubSysbackfeedContactorType' => {
-    '1' => 'unknown',
-    '2' => 'normalAC',
-    '3' => 'bypassAC',
-  },
-  'airFMGroupFailoverModWaterDetected' => {
-    '1' => 'notApplicable',
-    '2' => 'disable',
-    '3' => 'enable',
-  },
-  'xATSSource2Position' => {
-    '1' => 'open',
-    '2' => 'closed',
-    '3' => 'tripped',
-    '4' => 'unknown',
-  },
-  'upsAdvConfigMainsSetting' => {
-    '1' => 'singleInput',
-    '2' => 'dualInput',
-  },
-  'airIRG3GroupConfigLoadAssistEnable' => {
+  'airFMGroupCfgFailoverCommLoss' => {
     '1' => 'disable',
     '2' => 'enable',
-  },
-  'airFMModWaterDetector' => {
-    '1' => 'notApplicable',
-    '2' => 'notPresent',
-    '3' => 'present',
-  },
-  'pcnsOverloadSolvedEnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'airIRSCUnitConfigOutputNormalState' => {
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'rPDUStatusBankState' => {
-    '1' => 'bankLoadNormal',
-    '2' => 'bankLoadLow',
-    '3' => 'bankLoadNearOverload',
-    '4' => 'bankLoadOverload',
-  },
-  'setPulseOnTXD' => {
-    '1' => 'noSetPulseOnTXD',
-    '2' => 'setPulseOnTXD',
-    '3' => 'setTXDLow',
-    '4' => 'setTXDHigh',
-  },
-  'xATSGeneratorSettingsCrankCycleEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-    '3' => 'unknown',
-  },
-  'acceptThisDevice' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'airIRmPmResetAllAlarms' => {
-    '1' => 'doNothing',
-    '2' => 'reset',
-  },
-  'airIRRP100UnitConfigOutputSource' => {
-    '1' => 'anyAlarm',
-    '2' => 'criticalAlarm',
-  },
-  'airFMGroupFailoverModCondensatePumpFail' => {
-    '1' => 'notApplicable',
-    '2' => 'disable',
-    '3' => 'enable',
-  },
-  'databaseStatus' => {
-    '1' => 'unknown',
-    '2' => 'stopped',
-    '3' => 'running',
-    '4' => 'detached',
-    '5' => 'catching-up',
-    '6' => 'attaching',
-    '7' => 'running-master',
-    '8' => 'running-primary-slave',
-    '9' => 'running-slave',
-    '10' => 'running-alone',
-  },
-  'rPDULoadPhaseConfigAlarm' => {
-    '1' => 'noLoadAlarm',
-    '2' => 'underCurrentAlarm',
-    '3' => 'nearOverCurrentAlarm',
-    '4' => 'overCurrentAlarm',
-  },
-  'xPDUDeviceFusesPresent' => {
-    '1' => 'notPresent',
-    '2' => 'present',
-  },
-  'airFMAlarmClearActiveGroupAlarms' => {
-    '1' => 'noOperation',
-    '2' => 'clearAlarms',
-  },
-  'upsDiagSLCStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'offOk',
-    '4' => 'onOk',
-    '5' => 'offFail',
-    '6' => 'onFail',
-    '7' => 'lostComm',
-  },
-  'isxModularDistSubFeedInfoAlarmLowEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'upsDiagSubSysDCCircuitBreakerStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'opened',
-    '4' => 'closed',
-  },
-  'uioInputContactConfigEnable' => {
-    '1' => 'uioInputContactDisabled',
-    '2' => 'uioInputContactEnabled',
-  },
-  'airFMSysAlarmMapInput4' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'sPDUMasterConfigMSPManualButton' => {
-    '1' => 'manualButtonDisabled',
-    '2' => 'manualButtonEnabled',
-  },
-  'airFMModHumidifierType' => {
-    '1' => 'notApplicable',
-    '2' => 'none',
-    '3' => 'steamElectrode',
-    '4' => 'liveSteam',
-  },
-  'battManString2BatteryChemHighVoltageAlarm' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'airFMSysActualHumCtrlMethod' => {
-    '1' => 'notApplicable',
-    '2' => 'avgReturnRH',
-    '3' => 'avgReturnDewPt',
-    '4' => 'avgRemoteRH',
-    '5' => 'avgRemoteDewPt',
-  },
-  'ats5gSwitchOverCurrentState' => {
-    '1' => 'atsOverCurrent',
-    '2' => 'atsCurrentOK',
-  },
-  'rPDU2AdvPhaseConfigPhasePeakCurrentReset' => {
-    '1' => 'noOperation',
-    '2' => 'reset',
-  },
-  'battManString1BatteryLowCapacity' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'rPDUIdentDeviceOrientation' => {
-    '1' => 'orientHorizontal',
-    '2' => 'orientVertical',
-  },
-  'memVibrationStatusAlarmStatus' => {
-    '1' => 'memNormal',
-    '2' => 'memWarning',
-    '3' => 'memCritical',
-  },
-  'pcnsContactFault3EnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'upsOutletGroupStatusGroupState' => {
-    '1' => 'upsOutletGroupStatusOn',
-    '2' => 'upsOutletGroupStatusOff',
-    '3' => 'upsOutletGroupStatusUnknown',
-  },
-  'isxModularDistModuleBreakerPosition' => {
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'iemStatusProbeMinHumidViolation' => {
-    '1' => 'noViolation',
-    '2' => 'minHumidViolation',
-    '3' => 'disabled',
-  },
-  'pcnsPowerRestoredEnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'pcnsMaxInternalTempInRangeEnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'iemStatusRelayStatus' => {
-    '1' => 'faultState',
-    '2' => 'normalState',
-  },
-  'airFMSysDischAirPtrn' => {
-    '1' => 'notApplicable',
-    '2' => 'upFlow',
-    '3' => 'downFlow',
-    '4' => 'horizFlow',
-  },
-  'airFMSysAlarmMapMainModAnyAlarm' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'airFMSysAlarmMapSysLowEnvTemp' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'sPDUOutletCtl' => {
-    '1' => 'outletOn',
-    '2' => 'outletOff',
-    '3' => 'outletReboot',
-    '4' => 'outletUnknown',
-    '5' => 'outletOnWithDelay',
-    '6' => 'outletOffWithDelay',
-    '7' => 'outletRebootWithDelay',
-  },
-  'upsDiagSwitchGearBypassInputSwitchStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'opened',
-    '4' => 'closed',
-  },
-  'upsAdvBatteryBreakerStatus' => {
-    '1' => 'disconnected',
-    '2' => 'closed',
-    '3' => 'notPresent',
-  },
-  'rPDU2SensorTempHumidityConfigTempPeakReset' => {
-    '1' => 'noOperation',
-    '2' => 'reset',
-  },
-  'sPDUOutletConfigMSPmupsP1LowTemp' => {
-    '1' => 'disableAlarm',
-    '2' => 'enableAlarm',
-  },
-  'emConfigProbeMaxTempEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'airFMSysAlarmMapInput16' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'pcnsBatteryDischargedEnableShutdown' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'atsOutputPhaseState' => {
-    '1' => 'normal',
-    '2' => 'lowload',
-    '3' => 'nearoverload',
-    '4' => 'overload',
-  },
-  'pcnsMaxInternalTempExceededEnableShutdown' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'pcbeUpdateAvailableFlag' => {
-    '1' => 'active',
-    '2' => 'clear',
-  },
-  'sPDUOutletConfigMSPgsDeviceConfirm' => {
-    '1' => 'deviceConfirmNo',
-    '2' => 'deviceConfirmYes',
-  },
-  'upsAdvControlSimulatePowerFail' => {
-    '1' => 'noSimulatePowerFailure',
-    '2' => 'simulatePowerFailure',
-  },
-  'pcnsContactFault4EnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'pcnsUpdateAvailableFlag' => {
-    '1' => 'active',
-    '2' => 'clear',
-  },
-  'pcnsContactFault1EnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'airIRmPmUnitWinterMode' => {
-    '1' => 'summer',
-    '2' => 'winter',
-  },
-  'pcnsTempOutOfRangeProbe1EnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'ats5gBankType' => {
-    '1' => 'total',
-    '2' => 'bank1',
-    '3' => 'bank2',
-  },
-  'emsSensorConfigSensorNormalState' => {
-    '1' => 'normallyClosedEMS',
-    '2' => 'normallyOpenEMS',
-  },
-  'uioOutputRelayConfigNormalState' => {
-    '1' => 'uioOutputNormallyOpen',
-    '2' => 'uioOutputNormallyClosed',
-  },
-  'upsBatteryCabBlockPresent' => {
-    '1' => 'present',
-    '2' => 'notPresent',
-    '3' => 'notAvailable',
-  },
-  'pcnsEnvironmentCommunicationEstablishedEnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'pcbeComsLostFlag' => {
-    '1' => 'active',
-    '2' => 'clear',
-  },
-  'battManConfigAutoAnnunciatorReset' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'airIRRCUnitConfigOutputNormalState' => {
-    '1' => 'open',
-    '2' => 'closed',
   },
   'xPDUOutputRelayCurrentState' => {
     '1' => 'open',
     '2' => 'closed',
     '3' => 'unknown',
   },
-  'battManResetChargeCurrentDeviationBenchmark' => {
-    '1' => 'noOperation',
-    '2' => 'reset',
-  },
-  'rPDU2DeviceStatusPowerSupply1Status' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-    '3' => 'notInstalled',
-  },
-  'airFMSysDehumCapacity' => {
-    '1' => 'notApplicable',
-    '2' => 'half',
-    '3' => 'full',
-  },
-  'airFMSysAlarmMapInput15' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'isxModularDistSubFeedInfoAlarmHighEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'uioSensorConfigMinHumidityEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'dcmim2ControlRunCapacityBatteryTest' => {
-    '1' => 'battTestOff',
-    '2' => 'battTestOn',
-  },
-  'dm3StatusRectCfg' => {
-    '1' => 'statusTrue',
-    '2' => 'statusFalse',
-  },
-  'airIRRCGroupStatusActiveFlowControlStatus' => {
-    '1' => 'under',
-    '2' => 'okay',
-    '3' => 'over',
-    '4' => 'notApplicable',
-  },
-  'airFMSysAlarmMapExpMod1HighFltrDP' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'serverStatus' => {
+  'mdcCoolingConfigCondensationpump' => {
     '1' => 'unknown',
-    '2' => 'stopped',
-    '3' => 'running',
-    '4' => 'running-missing',
-    '5' => 'initializing',
-    '6' => 'starting',
-    '7' => 'disaster-recovery',
-    '8' => 'postoffice-inconsistent',
-    '9' => 'missing-jgroups',
-  },
-  'accessPXConfigFrontDoorLockControl' => {
-    '1' => 'unlock',
-    '2' => 'lock',
-    '3' => 'notInstalledReadOnly',
-    '4' => 'disconnectedReadOnly',
-  },
-  'pcnsContactFault2EnableShutdown' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'pcnsTempOutOfRangeProbe2EnableShutdown' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'dcmim2ConfigLVDState' => {
-    '1' => 'statusClosed',
-    '2' => 'statusOpened',
-  },
-  'AirIRG2RDType2IOState' => {
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'xATSSource1Quality' => {
-    '1' => 'sourceGood',
-    '2' => 'lowVoltage',
-    '3' => 'highVoltage',
-    '4' => 'phaseImbalance',
-    '5' => 'freqOutOfRange',
-    '6' => 'badRotation',
-    '7' => 'unknown',
-  },
-  'pcnsBypassManualEnabledEnableShutdown' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'pcnsMode' => {
-    '1' => 'single',
-    '2' => 'redundant',
-    '3' => 'parallel',
-    '4' => 'advanced',
-  },
-  'uioSensorConfigLowTemperatureEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'upsDiagSubSysFrameType' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'frameTypeMain',
-    '4' => 'frameTypeXR',
-    '5' => 'frameTypeLXR',
-  },
-  'airIRRP500GroupSetpointsFanSpeedControl' => {
-    '1' => 'automatic',
-    '2' => 'manual',
-  },
-  'airFMSysAlarmMapMainModAirBlckIntOpen' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'memFluidSensorStatusSensorSeverity' => {
-    '1' => 'critical',
-    '2' => 'warning',
-    '3' => 'informational',
-  },
-  'airFMModServIntComp1Reset' => {
-    '1' => 'notApplicable',
-    '2' => 'noOperation',
-    '3' => 'reset',
-  },
-  'airFMSysAlarmMapExpMod2LowSupplyTemp' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'pcnsTurnOffSOG' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'airIRRP500UnitConfigUnitRoleOverride' => {
-    '1' => 'automatic',
-    '2' => 'forcedOn',
-  },
-  'upsDiagSubSysDisplayInterfaceCardStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'offOk',
-    '4' => 'onOk',
-    '5' => 'offFail',
-    '6' => 'onFail',
-    '7' => 'lostComm',
-  },
-  'sPDUOutletConfigMSPmupsP1HiTemp' => {
-    '1' => 'disableAlarm',
-    '2' => 'enableAlarm',
-  },
-  'iemStatusContactStatus' => {
-    '1' => 'noFault',
-    '2' => 'fault',
-    '3' => 'disabled',
-  },
-  'wirelessSensorConfigAlarmGeneration' => {
-    '0' => 'disabled',
-    '1' => 'enabled',
-  },
-  'pcnsEnvironmentCommunicationEstablishedEnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'isxModularDistModuleOutputKwhReset' => {
-    '1' => 'no',
-    '2' => 'yes',
-  },
-  'wirelessSensorPodStatusDryContactNormalState' => {
-    '0' => 'normallyOpen',
-    '1' => 'normallyClosed',
-  },
-  'chargerOutputStatus' => {
-    '1' => 'unknown',
-    '2' => 'initialising',
-    '3' => 'standby',
-    '4' => 'onBattery',
-    '5' => 'floatCharging',
-    '6' => 'boostCharging',
-    '7' => 'initialCharging',
-    '8' => 'directfeed',
-    '9' => 'chargernotpresent',
-  },
-  'isxModularDistSubFeedInfoAlarmMaxEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'upsPhaseInputVoltageOrientation' => {
-    '1' => 'unknown',
-    '2' => 'singlePhase',
-    '3' => 'splitPhase',
-    '4' => 'threePhasePhaseToNeutral',
-    '5' => 'threePhasePhaseToPhase',
-  },
-  'atsStatusPhaseSyncStatus' => {
-    '1' => 'inSync',
-    '2' => 'outOfSync',
-  },
-  'pcnsCommunicationLostEnableShutdown' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'memFluidSensorStatusSensorState' => {
-    '1' => 'fluidDetected',
-    '2' => 'noFluid',
-    '3' => 'unknown',
-  },
-  'airFMModFireDetector' => {
-    '1' => 'notApplicable',
-    '2' => 'notPresent',
-    '3' => 'present',
-  },
-  'uioInputContactStatusCommStatus' => {
-    '1' => 'notInstalled',
-    '2' => 'commsOK',
-    '3' => 'commsLost',
-  },
-  'airIRG2RDT2ConfigOutputSource' => {
-    '1' => 'anyAlarm',
-    '2' => 'criticalAlarm',
-  },
-  'dm3StatusSysAlarmState' => {
-    '1' => 'alarmMinor',
-    '2' => 'alarmMajor',
-    '3' => 'alarmBoth',
-    '4' => 'alarmNone',
-  },
-  'rPDU2OutletMeteredStatusState' => {
-    '1' => 'lowLoad',
-    '2' => 'normal',
-    '3' => 'nearOverload',
-    '4' => 'overload',
-  },
-  'rARUStatusAruTempOvrdEnableDisable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'airFMSysAlarmMapExpMod1WaterDetected' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'atsStatusPlus12VPowerSupply' => {
-    '1' => 'atsPowerSupplyFailure',
-    '2' => 'atsPowerSupplyOK',
-  },
-  'pcnsBatteryDischargedEnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'airFMGroupFailoverSysHighEnvHum' => {
-    '1' => 'notApplicable',
-    '2' => 'disable',
-    '3' => 'enable',
-  },
-  'xATSSwitchStatusOperationalMode' => {
-    '1' => 'automatic',
-    '2' => 'notInAutoAbnormal',
-    '3' => 'notInAuto',
-    '4' => 'unknown',
-  },
-  'sPDUOutletConfigMSPannunOutletCtrlMode' => {
-    '1' => 'modeGracefulShutdown',
-    '2' => 'modeAnnunciator',
-  },
-  'airIRG3CMStatusOperatingMode' => {
-    '1' => 'standBy',
-    '2' => 'on',
-    '3' => 'idle',
-  },
-  'airFMGroupCfgFailoverCommLoss' => {
-    '1' => 'disable',
-    '2' => 'enable',
-  },
-  'atsStatusVoltageOutStatus' => {
-    '1' => 'fail',
-    '2' => 'ok',
-  },
-  'emsStatusCheckLogLight' => {
-    '1' => 'lightOff',
-    '2' => 'lightOn',
-  },
-  'ats5gSwitch3p3VSupplyStatus' => {
-    '1' => 'fail',
-    '2' => 'ok',
-  },
-  'airIRmPmFan1Type' => {
-    '1' => 'direct',
-    '2' => 'proportional',
-  },
-  'airFMSysResetRunHours' => {
-    '1' => 'notApplicable',
-    '2' => 'noOperation',
-    '3' => 'reset',
-  },
-  'airFMSysAlarmMapSysRemSensRemoved' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'atsStatus24VSourceBPowerSupply' => {
-    '1' => 'atsPowerSupplyFailure',
-    '2' => 'atsPowerSupplyOK',
-  },
-  'battManProbeRange' => {
-    '1' => 'amps1000',
-    '2' => 'amps500',
-    '3' => 'amps100',
-    '4' => 'amps200',
-    '5' => 'amps2000',
-  },
-  'airIRSCUnitStatusInputState' => {
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'airIRSCUnitStatusOperateMode' => {
-    '1' => 'standby',
-    '2' => 'on',
-    '3' => 'idle',
-  },
-  'dm3ConfigLVDEnable' => {
-    '1' => 'enabledYes',
-    '2' => 'enabledNo',
-  },
-  'upsAdvBatteryCurrentPolarity' => {
-    '0' => 'positive',
-    '1' => 'negative',
-  },
-  'upsDiagSubSysExternalPowerFrameBoardStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'offOk',
-    '4' => 'onOk',
-    '5' => 'offFail',
-    '6' => 'onFail',
-    '7' => 'lostComm',
-  },
-  'ats5gSwitchConfigPreferredSource' => {
-    '1' => 'sourceA',
-    '2' => 'sourceB',
-    '3' => 'none',
-  },
-  'airFMStatusSystemDehumidifyEnabled' => {
-    '1' => 'enabledYes',
-    '2' => 'enabledNo',
-  },
-  'dm3ConfigConvConfigAlarm' => {
-    '1' => 'alarmIgnore',
-    '2' => 'alarmRelay1',
-    '3' => 'alarmRelay2',
-    '4' => 'alarmRelay3',
-    '5' => 'alarmRelay4',
-    '6' => 'alarmRelay5',
-    '7' => 'alarmRelay6',
-    '8' => 'alarmMinor',
-    '9' => 'alarmMajor',
-  },
-  'ats5gSwitchSelectedSource' => {
-    '1' => 'sourceA',
-    '2' => 'sourceB',
-    '3' => 'none',
-  },
-  'airFMSysAlarmMapSystemOn' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'mconfigBOOTPEnabled' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'airIRRCUnitStatusLeakSensor' => {
-    '1' => 'no-leak',
-    '2' => 'leak',
-  },
-  'xPDUDeviceCrossTieOutputPresent' => {
-    '1' => 'notPresent',
-    '2' => 'present',
-  },
-  'airIRmPmEheating1Type' => {
-    '1' => 'direct',
-    '2' => 'pwm',
-  },
-  'upsDiagComBusMIMtoRIMStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'ok',
-    '4' => 'lostComm',
-    '5' => 'rxFailure',
-    '6' => 'txFailure',
-  },
-  'upsDiagIMType' => {
-    '1' => 'imUnknown',
-    '2' => 'imMIM',
-    '3' => 'imRIM',
-  },
-  'airFMGroupFailoverSysSupplySensorFail' => {
-    '1' => 'notApplicable',
-    '2' => 'disable',
-    '3' => 'enable',
-  },
-  'airIRRCUnitServiceIntervalsAirFilterAlarm' => {
-    '1' => 'enable',
-    '2' => 'disable',
-  },
-  'wirelessSensorStatusCommStatus' => {
-    '0' => 'inactive',
-    '1' => 'active',
-  },
-  'memFluidSensorCommStatus' => {
+    '2' => 'active',
+    '3' => 'inactive',
+  },
+  'uioInputContactStatusCurrentState' => {
+    '1' => 'uioInputClosed',
+    '2' => 'uioInputOpen',
+    '3' => 'uioInputDisabled',
+    '4' => 'inputStateNotApplicable',
+  },
+  'memVibrationSensorCommStatus' => {
     '1' => 'commOK',
     '2' => 'commLost',
   },
-  'upsDiagSubSysIntBypSwitchStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'offOk',
-    '4' => 'onOk',
-    '5' => 'offFail',
-    '6' => 'onFail',
-    '7' => 'lostComm',
-  },
-  'sPDUMasterStatusVMLowLoadCondition' => {
-    '1' => 'lowLoadConditionTrueVM',
-    '2' => 'lowLoadConditionFalseVM',
-  },
-  'atsConfigBank' => {
-    '1' => 'total',
-    '2' => 'bank1',
-    '3' => 'bank2',
-  },
-  'apcLocalDisplayConfigKeyClick' => {
-    '1' => 'keyclickDisabled',
-    '2' => 'keyclickEnabled',
-  },
-  'upsAdvConfigAutoShutdownControlBatteryCapacity' => {
-    '1' => 'upsAdvConfigDisableBatteryCapacityAutoShutdown',
-    '2' => 'upsAdvConfigEnableBatteryCapacityAutoShutdown',
-  },
-  'rPDU2SensorTempHumidityConfigTemperatureAlarmEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'airIRG2GroupConfigActiveFlowControllerLampTest' => {
-    '1' => 'off',
-    '2' => 'on',
-  },
-  'emsProbeStatusProbeCommStatus' => {
-    '1' => 'commsNeverDiscovered',
-    '2' => 'commsEstablished',
-    '3' => 'commsLost',
-  },
-  'airIRRCUnitConfigIdleOnLeakDetect' => {
+  'pcnspcnsRunTimeBelowThresholdEnableLogging' => {
     '1' => 'yes',
     '2' => 'no',
-  },
-  'memDoorSensorStatusSensorState' => {
-    '1' => 'open',
-    '2' => 'closed',
-    '3' => 'unknown',
-  },
-  'upsEnergyEfficiencyStatsReset' => {
-    '1' => 'notSupported',
-    '2' => 'noOperation',
-    '3' => 'reset',
-  },
-  'airFMSysCoilFluidVlvType' => {
-    '1' => 'notApplicable',
-    '2' => 'twoWay',
-    '3' => 'threeWay',
-  },
-  'emsInputContactStatusInputContactNormalState' => {
-    '1' => 'normallyClosedEMS',
-    '2' => 'normallyOpenEMS',
-  },
-  'pcnsHumidityInRangeProbe2EnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'ePDUOutletControlCommand' => {
-    '1' => 'immediateOn',
-    '2' => 'immediateOff',
-    '3' => 'outletUnknown',
-  },
-  'airFMModCondPump' => {
-    '1' => 'notApplicable',
-    '2' => 'notPresent',
-    '3' => 'present',
-  },
-  'memInputType' => {
-    '1' => 'noConnection',
-    '2' => 'dryContact',
-    '3' => 'digital',
-    '4' => 'analogmAmps',
-    '5' => 'analogVolts',
-  },
-  'upsAdvConfigAutoShutdownControlRuntimeRemaining' => {
-    '1' => 'upsAdvConfigDisableRuntimeRemainingAutoShutdown',
-    '2' => 'upsAdvConfigEnableRuntimeRemainingAutoShutdown',
-  },
-  'pcnsOverloadEnableShutdown' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'isxModularDistSysOutputVoltageFrequencyTolerance' => {
-    '1' => 'freqToleranceOff',
-    '2' => 'freqTolerancePointTwo',
-    '3' => 'freqTolerancePointFive',
-    '4' => 'freqToleranceOne',
-    '5' => 'freqToleranceOnePointFive',
-    '6' => 'freqToleranceTwo',
-    '7' => 'freqToleranceThree',
-    '8' => 'freqToleranceFour',
-    '9' => 'freqToleranceFive',
-    '10' => 'freqToleranceNine',
-    '11' => 'freqToleranceNotAvailable',
-  },
-  'dm3ConfigConvHighVoltAlarm' => {
-    '1' => 'alarmIgnore',
-    '2' => 'alarmRelay1',
-    '3' => 'alarmRelay2',
-    '4' => 'alarmRelay3',
-    '5' => 'alarmRelay4',
-    '6' => 'alarmRelay5',
-    '7' => 'alarmRelay6',
-    '8' => 'alarmMinor',
-    '9' => 'alarmMajor',
-  },
-  'emStatusProbeMaxTempViolation' => {
-    '1' => 'noViolation',
-    '2' => 'maxTempViolation',
-    '3' => 'disabled',
-  },
-  'isxModularPduTransformerTempStatus' => {
-    '1' => 'normal',
-    '2' => 'overtemp',
-    '3' => 'noTransformerPresent',
-    '4' => 'unknown',
-  },
-  'upsAdvBatteryCondition' => {
-    '1' => 'unknown',
-    '2' => 'ok',
-    '3' => 'weak',
-    '4' => 'poor',
-  },
-  'airIRRP100UnitServiceIntervalCondensatePumpAlarm' => {
-    '1' => 'enable',
-    '2' => 'disable',
-  },
-  'upsAdvConfigSimpleSignalShutdowns' => {
-    '1' => 'unknown',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'airPABlowerSpeed' => {
-    '1' => 'speedLOW',
-    '2' => 'speedHIGH',
-  },
-  'battManString1BatteryCellShorted' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'xATSGeneratorSettingsMetricUnit' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'xATSSource1Rotation' => {
-    '1' => 'abc',
-    '2' => 'cba',
-    '3' => 'unknown',
-  },
-  'memSmokeSensorStatusSensorSeverity' => {
-    '1' => 'critical',
-    '2' => 'warning',
-    '3' => 'informational',
-  },
-  'memOutletAction' => {
-    '1' => 'turnOff',
-    '2' => 'turnOn',
-  },
-  'AirIRSCFanSpeedPreference' => {
-    '1' => 'low',
-    '2' => 'med-low',
-    '3' => 'med',
-    '4' => 'med-high',
-    '5' => 'high',
-  },
-  'upsAdvInputLineFailCause' => {
-    '1' => 'noTransfer',
-    '2' => 'highLineVoltage',
-    '3' => 'brownout',
-    '4' => 'blackout',
-    '5' => 'smallMomentarySag',
-    '6' => 'deepMomentarySag',
-    '7' => 'smallMomentarySpike',
-    '8' => 'largeMomentarySpike',
-    '9' => 'selfTest',
-    '10' => 'rateOfVoltageChange',
-  },
-  'ats5gSwitchCommunicationStatus' => {
-    '1' => 'atsNeverDiscovered',
-    '2' => 'atsCommEstablished',
-    '3' => 'atsCommLost',
-  },
-  'airIRG3RDUStatusRefrigerantLeakDetector' => {
-    '1' => 'suspended',
-    '2' => 'calibrating',
-    '3' => 'operating',
-    '4' => 'disabled',
-  },
-  'airFMAlarmType' => {
-    '1' => 'group',
-    '2' => 'system',
-    '3' => 'mainMod',
-    '4' => 'expMod1',
-    '5' => 'expMod2',
-  },
-  'pcnsBypassContactorFailedEnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'dm3ConfigRectFailAlarm' => {
-    '1' => 'alarmIgnore',
-    '2' => 'alarmRelay1',
-    '3' => 'alarmRelay2',
-    '4' => 'alarmRelay3',
-    '5' => 'alarmRelay4',
-    '6' => 'alarmRelay5',
-    '7' => 'alarmRelay6',
-    '8' => 'alarmMinor',
-    '9' => 'alarmMajor',
-    '10' => 'alarmNofN',
-  },
-  'AirIRSCFanSpeedControl' => {
-    '1' => 'automatic',
-    '2' => 'manual',
-  },
-  'upsDiagSubSysPSUStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'offOk',
-    '4' => 'onOk',
-    '5' => 'offFail',
-    '6' => 'onFail',
-    '7' => 'lostComm',
-  },
-  'ats5gSwitchConfigTransferVoltageRange' => {
-    '1' => 'wide',
-    '2' => 'medium',
-    '3' => 'narrow',
-  },
-  'upsOutletGroupConfigLoadShedControlTimeOnBattery' => {
-    '1' => 'upsOutletGroupConfigDisableTimeOnBatteryLoadShed',
-    '2' => 'upsOutletGroupConfigEnableTimeOnBatteryLoadShed',
-  },
-  'airFMSysAlarmMapExpMod2HighFltrDP' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'currentStatus' => {
-    '1' => 'unknown',
-    '2' => 'noFault',
-    '3' => 'fault',
-  },
-  'rPDUOutletStatusCommandPending' => {
-    '1' => 'outletStatusCommandPending',
-    '2' => 'outletStatusNoCommandPending',
-  },
-  'ats5gEnvControlPeakTempReset' => {
-    '1' => 'none',
-    '2' => 'reset',
-  },
-  'pcnsTempOutOfRangeProbe2EnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'pcnsContactNormal4EnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'coolingUnitConfigurationDiscreteAccess' => {
-    '1' => 'readOnly',
-    '2' => 'readWrite',
-  },
-  'memFluidStatusAlarmStatus' => {
-    '1' => 'memNormal',
-    '2' => 'memWarning',
-    '3' => 'memCritical',
-  },
-  'xATSDeviceDCBackUpPresent' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'ats5gSwitchConfigFrequencyDeviation' => {
-    '1' => 'one',
-    '2' => 'two',
-    '3' => 'three',
-    '5' => 'five',
-    '10' => 'ten',
-  },
-  'airFMGroupFailoverSysLowEnvTemp' => {
-    '1' => 'notApplicable',
-    '2' => 'disable',
-    '3' => 'enable',
-  },
-  'normalState' => {
-    '1' => 'unknown',
-    '2' => 'open',
-    '3' => 'closed',
-  },
-  'emStatusContactStatus' => {
-    '1' => 'noFault',
-    '2' => 'fault',
-    '3' => 'disabled',
-  },
-  'upsOutletGroupControlCommand' => {
-    '1' => 'upsOutletGroupImmediateOn',
-    '2' => 'upsOutletGroupImmediateOff',
-    '3' => 'upsOutletGroupImmediateRebootWithOrWithoutAC',
-    '4' => 'upsOutletGroupDelayedOn',
-    '5' => 'upsOutletGroupDelayedOff',
-    '6' => 'upsOutletGroupDelayedRebootWithOrWithoutAC',
-    '7' => 'upsOutletGroupCancelPendingCommand',
-    '8' => 'upsOutletGroupControlUnknown',
-    '9' => 'upsOutletGroupImmediateRebootShutdown',
-    '10' => 'upsOutletGroupDelayedRebootShutdown',
-  },
-  'Rpdu2OutletPhaseLayoutType' => {
-    '1' => 'seqPhase1ToNeutral',
-    '2' => 'seqPhase2ToNeutral',
-    '3' => 'seqPhase3ToNeutral',
-    '4' => 'seqPhase1ToPhase2',
-    '5' => 'seqPhase2ToPhase3',
-    '6' => 'seqPhase3ToPhase1',
-  },
-  'airFMModServIntBlwrCtrl2Reset' => {
-    '1' => 'notApplicable',
-    '2' => 'noOperation',
-    '3' => 'reset',
-  },
-  'isxModularDistSysOutputVoltageMonitoring' => {
-    '1' => 'notPresent',
-    '2' => 'present',
-  },
-  'sPDUOutletConfigMSPmupsP2HiTemp' => {
-    '1' => 'disableAlarm',
-    '2' => 'enableAlarm',
-  },
-  'upsAdvBatteryChargerStatus' => {
-    '1' => 'unknown',
-    '2' => 'ok',
-    '3' => 'inFaultCondition',
-    '4' => 'floatCharging',
-    '5' => 'boostCharging',
-    '6' => 'resting',
-    '7' => 'notCharging',
-    '8' => 'equalizationCharging',
-    '9' => 'testInProgress',
-    '10' => 'cyclicFloatCharging',
-  },
-  'airIRG3CMConfigPowerSource' => {
-    '1' => 'singleFeed',
-    '2' => 'dualFeed',
-  },
-  'pcnsCommunicationEstablishedEnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'airFMSysHeatRejection' => {
-    '1' => 'notApplicable',
-    '2' => 'airCooled',
-    '3' => 'waterCooled',
-    '4' => 'glycolCooled',
-  },
-  'xPDUSystemOutputFrequencyTolerance' => {
-    '1' => 'freqToleranceOff',
-    '2' => 'freqTolerancePointTwo',
-    '3' => 'freqTolerancePointFive',
-    '4' => 'freqToleranceOne',
-    '5' => 'freqToleranceOnePointFive',
-    '6' => 'freqToleranceTwo',
-    '7' => 'freqToleranceThree',
-    '8' => 'freqToleranceFour',
-    '9' => 'freqToleranceFive',
-    '10' => 'freqToleranceNine',
-  },
-  'sPDUOutletConfigMSPmupsP2LowTemp' => {
-    '1' => 'disableAlarm',
-    '2' => 'enableAlarm',
-  },
-  'battManString2BatteryLowCapacity' => {
-    '1' => 'normal',
-    '2' => 'alarm',
   },
   'airIRG3RDUConfigInputNormalState' => {
     '1' => 'open',
     '2' => 'closed',
   },
-  'coolingUnitConfigurationStringAccess' => {
-    '1' => 'readOnly',
-    '2' => 'readWrite',
-  },
-  'upsAdvTestCalibrationResults' => {
-    '1' => 'ok',
-    '2' => 'invalidCalibration',
-    '3' => 'calibrationInProgress',
-    '4' => 'refused',
-    '5' => 'aborted',
-    '6' => 'pending',
-    '7' => 'unknown',
-  },
-  'emStatusProbeMaxHumidViolation' => {
-    '1' => 'noViolation',
-    '2' => 'maxHumidViolation',
-    '3' => 'disabled',
-  },
-  'airFMGroupCfgSetpointShareSetting' => {
-    '1' => 'disable',
-    '2' => 'enable',
-  },
-  'airFMSysAlarmMapExpMod2CondPumpFail' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'isxModularDistModuleOutputAlarmGeneration' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'rPDUPowerSupply1Status' => {
-    '1' => 'powerSupplyOneOk',
-    '2' => 'powerSupplyOneFailed',
-  },
-  'airIRRP500UnitStatusOutputState' => {
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'pcnsAdvancedShutdownPowerchuteServer' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'airFMSysCoilFluidVlvAct' => {
-    '1' => 'notApplicable',
-    '2' => 'none',
-    '3' => 'springAnalog',
-    '4' => 'floatingControl',
-  },
-  'apcLocalDisplayConfigAlarmBeeper' => {
-    '1' => 'beeperDisabled',
-    '2' => 'beeperEnabled',
-  },
-  'airIRRP100GroupConfigActiveFlowControllerLampTest' => {
-    '1' => 'off',
-    '2' => 'on',
-  },
-  'airFMSysAlarmMapOutput16' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'pcnsHumidityOutOfRangeProbe2EnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'upsHighPrecTotalDCCurrentPolarity' => {
-    '0' => 'positive',
-    '1' => 'negative',
-  },
-  'airFMAlarmClearActiveSysModAlarms' => {
-    '1' => 'noOperation',
-    '2' => 'clearAlarms',
-  },
-  'pcnsMinRedundancyRegainedEnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'battManString1BatteryDryout' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'airFMGroupSysRole' => {
-    '1' => 'rolePrimary',
-    '2' => 'roleBackup',
-  },
-  'upsDiagSwitchGearOutputSwitchStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'opened',
-    '4' => 'closed',
-  },
-  'dm3ConfigCompMethod' => {
-    '1' => 'tempcompOn',
-    '2' => 'tempcompOff',
-  },
-  'airFMSysRefrigType' => {
-    '1' => 'notApplicable',
-    '2' => 'r22',
-    '3' => 'r407C',
-  },
-  'airFMSysCoolEconIsolFunction' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'emsOutletConfigOutletNormalState' => {
-    '1' => 'normallyOnEMS',
-    '2' => 'normallyOffEMS',
-  },
-  'airFMGroupFailoverSysAnyMinorAlarm' => {
+  'airFMGroupFailoverSysReturnSensorFail' => {
     '1' => 'notApplicable',
     '2' => 'disable',
     '3' => 'enable',
   },
-  'upsDiagSubSysIDRCStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'offOk',
-    '4' => 'onOk',
-    '5' => 'offFail',
-    '6' => 'onFail',
-    '7' => 'lostComm',
+  'emsConfigCheckLogLight' => {
+    '1' => 'lightDisabled',
+    '2' => 'lightOnInformational',
+    '3' => 'lightOnWarning',
+    '4' => 'lightOnSevere',
   },
-  'airIRRCUnitStatusActivePowerSource' => {
-    '1' => 'sourceA',
-    '2' => 'sourceB',
-  },
-  'xATSSource2Index' => {
-    '1' => 'phase1',
-    '2' => 'phase2',
-    '3' => 'phase3',
-  },
-  'airIRRCGroupConfigActiveFlowControllerLampTest' => {
-    '1' => 'off',
-    '2' => 'on',
-  },
-  'pcnsRunTimeWithinRangeEnableCommandFile' => {
+  'pcnsMinRedundancyLostEnableShutdown' => {
     '1' => 'yes',
     '2' => 'no',
   },
-  'emConfigProbeHighHumidEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'isxModularPduAlarmStatus' => {
-    '1' => 'normal',
-    '2' => 'warning',
-    '3' => 'critical',
-  },
-  'rPDU2BankConfigBankPeakCurrentReset' => {
-    '1' => 'noOperation',
-    '2' => 'reset',
-  },
-  'pcnsPowerFailedEnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'emConfigProbeMinHumidEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'iemConfigContactSeverity' => {
+  'emsFluidSensorConfigSensorSeverity' => {
     '1' => 'critical',
     '2' => 'warning',
     '3' => 'informational',
   },
-  'airIRG2GroupConfigCapacityControlType' => {
-    '1' => 'discrete',
-    '2' => 'proportional',
+  'sPDUMasterControlVMCommand' => {
+    '1' => 'noCommandAllVM',
+    '2' => 'immediateAllOnVM',
+    '3' => 'immediateAllOffVM',
+    '4' => 'immediateAllRebootVM',
+    '5' => 'delayedAllOnVM',
+    '6' => 'delayedAllOffVM',
+    '7' => 'sequencedAllRebootVM',
+    '8' => 'delayedAllRebootVM',
+    '9' => 'delayedSequenceAllRebootVM',
+    '10' => 'cancelAllPendingCommandsVM',
+    '11' => 'audioAlarmMute',
   },
-  'airIRRP500UnitConfigHumidifierControl' => {
-    '1' => 'auto',
-    '2' => 'drainOff',
-  },
-  'xATSGeneratorFuelSystemVeryLowRunTimeThreshold' => {
-    '1' => 'disabled',
-    '2' => 'oneHour',
-    '3' => 'twoHours',
-    '4' => 'threeHours',
-    '5' => 'fourHours',
-    '6' => 'fiveHours',
-    '7' => 'sixHours',
-    '8' => 'twelveHours',
-    '9' => 'oneDay',
-    '10' => 'twoDays',
-    '11' => 'threeDays',
-    '12' => 'fourDays',
-    '13' => 'fiveDays',
-    '14' => 'sixDays',
-    '15' => 'sevenDays',
-  },
-  'dm3ConfigConvDiagAlarm' => {
-    '1' => 'alarmIgnore',
-    '2' => 'alarmRelay1',
-    '3' => 'alarmRelay2',
-    '4' => 'alarmRelay3',
-    '5' => 'alarmRelay4',
-    '6' => 'alarmRelay5',
-    '7' => 'alarmRelay6',
-    '8' => 'alarmMinor',
-    '9' => 'alarmMajor',
-    '10' => 'alarmNofN',
-  },
-  'airIRmPmEheating3Type' => {
-    '1' => 'direct',
-    '2' => 'pwm',
-  },
-  'pcnsFaultBypassEnabledEnableLogging' => {
+  'pcnsPowerFailedEnableCommandFile' => {
     '1' => 'yes',
     '2' => 'no',
   },
-  'pcnsOverloadEnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
+  'sPDUMasterConfigMSPManualButton' => {
+    '1' => 'manualButtonDisabled',
+    '2' => 'manualButtonEnabled',
   },
-  'pcnsParallelRedundancyLostEnableShutdown' => {
-    '1' => 'yes',
-    '2' => 'no',
+  'battManAlarmCharger' => {
+    '1' => 'normal',
+    '2' => 'alarm',
   },
-  'memSensorsAlarmStatus' => {
-    '1' => 'memNormal',
-    '2' => 'memWarning',
-    '3' => 'memCritical',
-  },
-  'airIRG2RDT2ConfigUnitRoleOverride' => {
-    '1' => 'automatic',
-    '2' => 'forcedOn',
-  },
-  'rPDU2SensorDiscreteConfigAbnormalSeverity' => {
-    '1' => 'informational',
-    '2' => 'warning',
-    '3' => 'critical',
-  },
-  'iemStatusProbeHighHumidViolation' => {
-    '1' => 'noViolation',
-    '2' => 'highHumidViolation',
-    '3' => 'disabled',
-  },
-  'ats5gSwitchSourceBStatus' => {
+  'ats5gSwitchSourceB24VSupplyStatus' => {
     '1' => 'fail',
     '2' => 'ok',
   },
-  'airFMSysAlarmMapInput9' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'airFMGroupCfgShutdownFire' => {
-    '1' => 'disable',
-    '2' => 'enable',
-  },
-  'upsAdvConfigAutoShutdownControlAutoRestart' => {
-    '1' => 'upsAdvConfigControlAutoRestartAutoShutdown',
-    '2' => 'upsAdvConfigControlManualRestartAutoShutdown',
-  },
-  'memInputsCommStatus' => {
-    '1' => 'notInstalled',
-    '2' => 'commsOK',
-    '3' => 'commsLost',
-  },
-  'pcnsMinLoadCapabilityLostEnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'rPDU2SensorAnalogVoltageConfigAlarmEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'airFMModComp2' => {
-    '1' => 'notApplicable',
-    '2' => 'on',
-    '3' => 'off',
-  },
-  'rPDUOutletControlOutletCommand' => {
-    '1' => 'immediateOn',
-    '2' => 'immediateOff',
-    '3' => 'immediateReboot',
-    '4' => 'delayedOn',
-    '5' => 'delayedOff',
-    '6' => 'delayedReboot',
-    '7' => 'cancelPendingCommand',
-  },
-  'pcnsBypassContactorOkEnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'airIRG3RDUStatusStopOnLeakDetect' => {
-    '1' => 'no',
-    '2' => 'yes',
-  },
-  'airIRRP500UnitStatusOperateMode' => {
-    '1' => 'standby',
-    '2' => 'on',
-    '3' => 'idle',
-    '4' => 'prestart',
-    '5' => 'backup',
-    '6' => 'assist',
-  },
-  'airFMSysAlarmMapExpMod2LowAirFlow' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'wirelessSensorPodConfigDryContactNormalState' => {
-    '0' => 'normallyOpen',
-    '1' => 'normallyClosed',
-  },
-  'airFMGroupCfgResetFieldServiceDefaults' => {
-    '1' => 'noOperation',
-    '2' => 'reset',
-  },
-  'upsDiagSubSysExternalConnectorStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'offOk',
-    '4' => 'onOk',
-    '5' => 'offFail',
-    '6' => 'onFail',
-    '7' => 'lostComm',
-  },
-  'dm3ConfigConvHwVoltAlarm' => {
-    '1' => 'alarmIgnore',
-    '2' => 'alarmRelay1',
-    '3' => 'alarmRelay2',
-    '4' => 'alarmRelay3',
-    '5' => 'alarmRelay4',
-    '6' => 'alarmRelay5',
-    '7' => 'alarmRelay6',
-    '8' => 'alarmMinor',
-    '9' => 'alarmMajor',
-    '10' => 'alarmNofN',
-  },
-  'airIRmPmFan3Type' => {
-    '1' => 'direct',
-    '2' => 'proportional',
-  },
-  'pcbeCriticalFlag' => {
-    '1' => 'active',
-    '2' => 'clear',
-  },
-  'xPDUMainInputVoltagePhaseIndex' => {
-    '1' => 'phase1',
-    '2' => 'phase2',
-    '3' => 'phase3',
-  },
-  'pcnsCriticalFlag' => {
-    '1' => 'active',
-    '2' => 'clear',
-  },
-  'pmmSiteConfigServiceType' => {
-    '1' => 'threeWire',
-    '2' => 'fourWire',
-  },
-  'airIRRP100UnitStatusOperateMode' => {
-    '1' => 'standby',
-    '2' => 'on',
-    '3' => 'idle',
-    '4' => 'prestart',
-    '5' => 'service',
-    '6' => 'backup',
-    '7' => 'assist',
-  },
-  'pcnsRunTimeAboveThresholdEnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
+  'airIRRP500UnitServiceIntervalHeaterAlarm' => {
+    '1' => 'enable',
+    '2' => 'disable',
   },
   'airFMSysAlarmMapMainModHumFail' => {
     '1' => 'notApplicable',
     '2' => 'disabled',
     '3' => 'enabled',
   },
-  'airFMSysAlarmMapInput5' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'dipSwitchStatus' => {
-    '1' => 'on',
-    '2' => 'off',
-  },
-  'airFMGroupFailoverModCoolFail' => {
-    '1' => 'notApplicable',
-    '2' => 'disable',
-    '3' => 'enable',
-  },
-  'rARUConfigAruMasterControl' => {
-    '1' => 'aruOn',
-    '2' => 'aruOff',
-  },
-  'dm3ConfigRectStandbyAlarm' => {
-    '1' => 'alarmIgnore',
-    '2' => 'alarmRelay1',
-    '3' => 'alarmRelay2',
-    '4' => 'alarmRelay3',
-    '5' => 'alarmRelay4',
-    '6' => 'alarmRelay5',
-    '7' => 'alarmRelay6',
-    '8' => 'alarmMinor',
-    '9' => 'alarmMajor',
-    '10' => 'alarmNofN',
-  },
-  'airIRRP100GroupSetpointsFanSpeedPreference' => {
-    '1' => 'low',
-    '2' => 'med-low',
-    '3' => 'med',
-    '4' => 'med-high',
-    '5' => 'high',
-  },
-  'airIRRP500UnitServiceIntervalHumidifierAlarm' => {
-    '1' => 'enable',
-    '2' => 'disable',
-  },
-  'airIRG2RDT2ConfigIdleOnLeakDetect' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'airIRRP100GroupStatusActiveFlowControlStatus' => {
-    '1' => 'under',
-    '2' => 'okay',
-    '3' => 'over',
-    '4' => 'notApplicable',
-  },
-  'pcnsRunTimeExceededEnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'upsParallelDiagSubSysBreakerStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'opened',
-    '4' => 'closed',
-  },
-  'airIRG2GroupSetpointsActiveFlowControlBias' => {
-    '1' => 'positive',
-    '2' => 'slightlyPositive',
-    '3' => 'zero',
-    '4' => 'slightlyNegative',
-    '5' => 'negative',
-  },
-  'pcnsPowerRestoredEnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'airFMSysAlarmMapOutput2' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'airIRSCGroupStatusActiveFlowControlStatus' => {
-    '1' => 'under',
-    '2' => 'okay',
-    '3' => 'over',
-    '4' => 'notApplicable',
-  },
-  'upsBatteryCabBlockFuseStatus' => {
-    '1' => 'fuseOpen',
-    '2' => 'fuseOk',
-    '3' => 'notPresent',
-  },
-  'upsAdvConfigBypassPhaseLockRequired' => {
-    '1' => 'unknown',
-    '2' => 'disabled',
-    '3' => 'enabled',
-    '4' => 'alwaysAcceptable',
-    '5' => 'neverAcceptable',
-  },
-  'battManString1BatteryOpenFuseOrConnection' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'airIRG3RDUConfigOnReadyStandby' => {
-    '1' => 'standby',
-    '2' => 'ready',
-    '3' => 'on',
-  },
-  'battManUnitCommLoss' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'isxModularDistSubFeedLoadingPhaseIndex' => {
-    '1' => 'phase1',
-    '2' => 'phase2',
-    '3' => 'phase3',
-  },
-  'upsAdvControlBypassSwitch' => {
-    '1' => 'noBypassSwitch',
-    '2' => 'switchToBypass',
-    '3' => 'switchOutOfBypass',
-  },
-  'sPDUOutletConfigMSPmupsP2LowHum' => {
-    '1' => 'disableAlarm',
-    '2' => 'enableAlarm',
-  },
-  'ats5gSwitchCumulativeAlarmStatus' => {
-    '1' => 'normal',
-    '2' => 'informational',
-    '3' => 'warning',
-    '4' => 'critical',
-  },
-  'dm3ConfigConvStandbyAlarm' => {
-    '1' => 'alarmIgnore',
-    '2' => 'alarmRelay1',
-    '3' => 'alarmRelay2',
-    '4' => 'alarmRelay3',
-    '5' => 'alarmRelay4',
-    '6' => 'alarmRelay5',
-    '7' => 'alarmRelay6',
-    '8' => 'alarmMinor',
-    '9' => 'alarmMajor',
-    '10' => 'alarmNofN',
-  },
-  'dm3ConfigSysRemoteAccess' => {
-    '1' => 'accessEnabled',
-    '2' => 'accessDisabled',
-  },
-  'upsAdvTestBatteryProcessStatus' => {
-    '1' => 'ok',
-    '2' => 'preconditionNotMeet',
-    '3' => 'batteryTestInProgress',
-    '4' => 'refused',
-    '5' => 'aborted',
-    '6' => 'pending',
-    '7' => 'unknown',
-    '8' => 'noBatteryPresent',
-  },
-  'iemConfigProbeTempUnits' => {
-    '1' => 'celsius',
-    '2' => 'fahrenheit',
-  },
-  'sPDUMasterControlMSPCommand' => {
-    '1' => 'noCommandAllMSP',
-    '2' => 'immediateAllOnMSP',
-    '3' => 'sequencedAllOnMSP',
-    '4' => 'immediateAllOffMSP',
-    '5' => 'gracefulAllRebootMSP',
-    '6' => 'immediateAllRebootMSP',
-    '7' => 'gracefulAllShutdownMSP',
-    '8' => 'overrideAllBatCapThreshMSP',
-    '9' => 'cancelAllPendingCommandsMSP',
-    '10' => 'restoreFactoryDefaultsMSP',
-  },
-  'battManString2BatteryThermalRunaway' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'serialPort2Mode' => {
-    '1' => 'localConsole',
-    '2' => 'passthrough',
-  },
-  'upsOutletGroupConfigLoadShedControlRuntimeRemaining' => {
-    '1' => 'upsOutletGroupConfigDisableRuntimeRemainingLoadShed',
-    '2' => 'upsOutletGroupConfigEnableRuntimeRemainingLoadShed',
-  },
-  'pcnsEnvironmentCommunicationLostEnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'airFMModRHComp1Reset' => {
-    '1' => 'notApplicable',
-    '2' => 'noOperation',
-    '3' => 'reset',
-  },
-  'dm3ConfigConv2ofNAlarm' => {
-    '1' => 'alarmIgnore',
-    '2' => 'alarmRelay1',
-    '3' => 'alarmRelay2',
-    '4' => 'alarmRelay3',
-    '5' => 'alarmRelay4',
-    '6' => 'alarmRelay5',
-    '7' => 'alarmRelay6',
-    '8' => 'alarmMinor',
-    '9' => 'alarmMajor',
-  },
-  'rARUStatusSysTempUnits' => {
-    '1' => 'celsius',
-    '2' => 'fahrenheit',
-  },
-  'xATSGeneratorServiceResetRecord' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'airFMSysPresentRole' => {
-    '1' => 'notApplicable',
-    '2' => 'primary',
-    '3' => 'backup',
-  },
-  'isxModularDistModuleInfoAlarmStatus' => {
-    '1' => 'normal',
-    '2' => 'warning',
-    '3' => 'critical',
-    '4' => 'notPresent',
-    '5' => 'unknown',
-  },
-  'battManString1BatteryHighOhmicValue' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'pcnsOverloadEnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'isxModularDistSysCurrentMonitoring' => {
-    '1' => 'notPresent',
-    '2' => 'present',
-  },
-  'airFMModRHBlwr2Reset' => {
-    '1' => 'notApplicable',
-    '2' => 'noOperation',
-    '3' => 'reset',
-  },
-  'xATSSwitchTimersAbort' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'emsSmokeSensorCommStatus' => {
+  'memSmokeSensorCommStatus' => {
     '1' => 'commOK',
     '2' => 'commLost',
   },
-  'subfeedBreakerPresent' => {
-    '1' => 'notPresent',
+  'uioOutputRelayStatusAlarmStatus' => {
+    '1' => 'uioNormal',
+    '2' => 'uioWarning',
+    '3' => 'uioCritical',
+    '4' => 'inputStatusNotApplicable',
+  },
+  'pcnsAdvancedShutdownCommandFileEnabled' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'emsLeakRopeStatusSeverity' => {
+    '1' => 'critical',
+    '2' => 'major',
+    '3' => 'minor',
+    '4' => 'warning',
+    '5' => 'informational',
+  },
+  'memOutletStatusCurrentState' => {
+    '1' => 'off',
+    '2' => 'on',
+  },
+  'xPDUInputContactCurrentState' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'unknown',
+  },
+  'rPDU2SensorTempHumidityConfigTempPeakReset' => {
+    '1' => 'noOperation',
+    '2' => 'reset',
+  },
+  'upsDiagFlyWheelStatus' => {
+    '1' => 'unknown',
     '2' => 'present',
+    '3' => 'notPresent',
   },
-  'dm3ConfigBattHwTempAlarm' => {
-    '1' => 'alarmIgnore',
-    '2' => 'alarmRelay1',
-    '3' => 'alarmRelay2',
-    '4' => 'alarmRelay3',
-    '5' => 'alarmRelay4',
-    '6' => 'alarmRelay5',
-    '7' => 'alarmRelay6',
-    '8' => 'alarmMinor',
-    '9' => 'alarmMajor',
+  'pcnsContactFault1EnableShutdown' => {
+    '1' => 'yes',
+    '2' => 'no',
   },
-  'airFMSysAlarmMapExpMod1CoolFail' => {
+  'airFMSysOutputStatus' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'isxModularDistSubFeedInfoAlarmGeneration' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'rPDU2SensorTempHumidityStatusHumidityStatus' => {
+    '1' => 'notPresent',
+    '2' => 'belowMin',
+    '3' => 'belowLow',
+    '4' => 'normal',
+    '5' => 'aboveHigh',
+    '6' => 'aboveMax',
+  },
+  'airFMSysAlarmMapExpMod1LowAirFlow' => {
     '1' => 'notApplicable',
     '2' => 'disabled',
     '3' => 'enabled',
   },
-  'upsHighPrecBatteryCurrentPolarity' => {
-    '0' => 'positive',
-    '1' => 'negative',
+  'emsVibrationSensorCommStatus' => {
+    '1' => 'commOK',
+    '2' => 'commLost',
   },
-  'emConfigProbeTempUnits' => {
-    '1' => 'celsius',
-    '2' => 'fahrenheit',
+  'xATSTestingStatusTestStatus' => {
+    '1' => 'noTestInProcess',
+    '2' => 'testPending',
+    '3' => 'startingEngine',
+    '4' => 'engineWarmingUp',
+    '5' => 'awaitingTransferToS2',
+    '6' => 'testingWithLoad',
+    '7' => 'awaitingRetransferToS1',
+    '8' => 'testingWithoutLoad',
+    '9' => 'stoppingEngine',
+    '10' => 'holdingOnGenerator',
   },
-  'accessPXStatusFrontDoorLock' => {
-    '1' => 'unlocked',
-    '2' => 'locked',
+  'accessPXStatusRearDoor' => {
+    '1' => 'open',
+    '2' => 'closed',
     '3' => 'notInstalled',
     '4' => 'disconnected',
   },
-  'xATSGeneratorServiceRunHoursThreshold' => {
-    '1' => 'disabled',
-    '2' => 'runThreshold100Hours',
-    '3' => 'runThreshold150Hours',
-    '4' => 'runThreshold200Hours',
-    '5' => 'runThreshold250Hours',
-    '6' => 'runThreshold300Hours',
-    '7' => 'runThreshold400Hours',
-    '8' => 'runThreshold500Hours',
-  },
-  'airFMGroupCfgNumSystems' => {
-    '1' => 'one',
-    '2' => 'two',
-    '3' => 'three',
-    '4' => 'four',
-  },
-  'battManStringChargerLowVoltageAlarm' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'upsDiagBatteryFramePresent' => {
-    '0' => 'notPresent',
-    '1' => 'present',
-  },
-  'etlStatus' => {
-    '1' => 'unknown',
-    '2' => 'running',
-    '3' => 'failed',
-    '4' => 'paused',
-    '5' => 'stopped',
-  },
-  'upsAdvConfigACWiringSetting' => {
-    '1' => 'threeWire',
-    '2' => 'fourWire',
-    '3' => 'fourWireHRG',
-  },
-  'sPDUOutletStatusVMCommandPending' => {
-    '1' => 'outletStatusVMCommandPending',
-    '2' => 'outletStatusVMNoCommandPending',
-  },
-  'battManResetDischargeCounters' => {
-    '1' => 'noOperation',
-    '2' => 'reset',
-  },
-  'airIRG3RDUStatusInputState' => {
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'pcnsBypassContactorFailedEnableShutdown' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'airIRRP100UnitConfigInputNormalState' => {
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'xATSSource1Index' => {
-    '1' => 'phase1',
-    '2' => 'phase2',
-    '3' => 'phase3',
-  },
-  'dm3StatusConvPresent' => {
-    '1' => 'statusTrue',
-    '2' => 'statusFalse',
-  },
-  'xATSGeneratorFuelSystemLowRunTimeThreshold' => {
-    '1' => 'disabled',
-    '2' => 'oneHour',
-    '3' => 'twoHours',
-    '4' => 'threeHours',
-    '5' => 'fourHours',
-    '6' => 'fiveHours',
-    '7' => 'sixHours',
-    '8' => 'twelveHours',
-    '9' => 'oneDay',
-    '10' => 'twoDays',
-    '11' => 'threeDays',
-    '12' => 'fourDays',
-    '13' => 'fiveDays',
-    '14' => 'sixDays',
-    '15' => 'sevenDays',
-  },
-  'emConfigProbeHighTempEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'dm3ConfigBattHighVoltAlarm' => {
-    '1' => 'alarmIgnore',
-    '2' => 'alarmRelay1',
-    '3' => 'alarmRelay2',
-    '4' => 'alarmRelay3',
-    '5' => 'alarmRelay4',
-    '6' => 'alarmRelay5',
-    '7' => 'alarmRelay6',
-    '8' => 'alarmMinor',
-    '9' => 'alarmMajor',
-  },
-  'isxModularDistModuleOutputAlarmHighEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'upsAdvTotalDCCurrentPolarity' => {
-    '0' => 'positive',
-    '1' => 'negative',
-  },
-  'xATSDeviceServiceType' => {
-    '1' => 'threeWire',
-    '2' => 'fourWire',
-  },
-  'battManString2BatteryCellShorted' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'xPDUDeviceServiceType' => {
-    '1' => 'threeWire',
-    '2' => 'fourWire',
-  },
-  'rPDU2DeviceConfigOutletsPeakLoadReset' => {
-    '1' => 'noOperation',
-    '2' => 'reset',
-    '3' => 'notSupported',
-  },
-  'ats5gEnvAlarmStatus' => {
-    '1' => 'normal',
-    '2' => 'informational',
-    '3' => 'warning',
-    '4' => 'critical',
-  },
-  'pcnsCommunicationLostOnBatteryEnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'upsDiagPMLifetimeStatus' => {
-    '1' => 'ok',
-    '2' => 'nearEnd',
-    '3' => 'exceeded',
-    '4' => 'unknown',
-  },
-  'upsDiagTransformerStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'ok',
-    '4' => 'fail',
-    '5' => 'lostComm',
-    '6' => 'overtemp',
-    '7' => 'opened',
-    '8' => 'closed',
-  },
-  'dm3StatusConvDiagPass' => {
-    '1' => 'statusTrue',
-    '2' => 'statusFalse',
-  },
-  'sPDUOutletConfigMSPmupsZone3' => {
-    '1' => 'disableAlarm',
-    '2' => 'enableAlarm',
-  },
-  'airFMModStmElectHumMode' => {
-    '1' => 'notApplicable',
-    '2' => 'off',
-    '3' => 'auto',
-    '4' => 'drain',
-  },
-  'upsAdvBatteryActualVoltagePolarity' => {
-    '0' => 'positive',
-    '1' => 'negative',
-  },
-  'airFMGroupFailoverModBlwrCntrl2Fail' => {
-    '1' => 'notApplicable',
-    '2' => 'disable',
-    '3' => 'enable',
-  },
-  'xPDUBranchBreakerRDPFeed' => {
-    '1' => 'remoteDistribution',
-    '2' => 'noRemoteDistribution',
-  },
-  'memInputNormalState' => {
-    '1' => 'inputClosedHighMEM',
-    '2' => 'inputOpenLowMEM',
-    '3' => 'inputDisabled',
-    '4' => 'inputStateNotApplicable',
-  },
-  'upsAdvConfigAutoShutdownControlSkipOffDelay' => {
-    '1' => 'upsAdvConfigSkipOffDelayAutoShutdown',
-    '2' => 'upsAdvConfigUseOffDelayAutoShutdown',
-  },
-  'airIRmPmUnitControlType' => {
-    '1' => 'room',
-    '2' => 'supply',
-    '3' => 'room-SupplyLimit',
-    '4' => 'supply-RoomLimit',
-  },
-  'ats5gIdentModuleStatus' => {
-    '1' => 'notPresent',
-    '2' => 'checkingComm',
-    '3' => 'lostComm',
-    '4' => 'firmwareUpdate',
-    '5' => 'firmwareVerify',
-    '6' => 'active',
-    '7' => 'firmwareAborted',
-    '8' => 'unknown',
+  'upsEcoModeStatus' => {
+    '1' => 'active',
+    '2' => 'inactive',
   },
   'xPDUDeviceTransformerPresent' => {
     '1' => 'notPresent',
     '2' => 'present',
   },
-  'airPACondenserFan' => {
-    '1' => 'statusON',
-    '2' => 'statusOFF',
+  'battManStringOnBattery' => {
+    '1' => 'normal',
+    '2' => 'alarm',
   },
-  'airIRG3GroupSetpointsFanSpeedPreference' => {
-    '1' => 'low',
-    '2' => 'med-low',
-    '3' => 'med',
-    '4' => 'med-high',
-    '5' => 'high',
-  },
-  'emConfigProbeMinTempEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'airFMModServIntBlwr2Reset' => {
-    '1' => 'notApplicable',
-    '2' => 'noOperation',
-    '3' => 'reset',
-  },
-  'airFMSysReheatEssFunction' => {
-    '1' => 'notApplicable',
-    '2' => 'yes',
-    '3' => 'no',
-  },
-  'ePDUDeviceControlReboot' => {
-    '0' => 'noOperation',
-    '1' => 'reboot',
-  },
-  'pcnsContactFault2EnableLogging' => {
+  'xATSSwitchSettingsClearLatchedAlarms' => {
     '1' => 'yes',
     '2' => 'no',
   },
-  'emsOutputRelayStatusOutputRelayNormalState' => {
-    '1' => 'normallyClosedEMS',
-    '2' => 'normallyOpenEMS',
+  'memSensorsStatusSysTempUnits' => {
+    '1' => 'celsius',
+    '2' => 'fahrenheit',
   },
-  'airFMModElectricHeaterType' => {
+  'battManString2BatteryDryout' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'airFMSysActualSteamHum' => {
     '1' => 'notApplicable',
-    '2' => 'kw10',
-    '3' => 'kw15',
+    '2' => 'off',
+    '3' => 'on',
   },
-  'airIRRP500UnitConfigIdleOnCoolFail' => {
+  'memFluidStatusAlarmStatus' => {
+    '1' => 'memNormal',
+    '2' => 'memWarning',
+    '3' => 'memCritical',
+  },
+  'isxModularPduFanStatus' => {
+    '1' => 'normal',
+    '2' => 'failed',
+    '3' => 'noCoolingFansPresent',
+    '4' => 'unknown',
+  },
+  'emStatusProbeLowHumidViolation' => {
+    '1' => 'noViolation',
+    '2' => 'lowHumidViolation',
+    '3' => 'disabled',
+  },
+  'rPDU2AdvBankConfigBankPeakCurrentReset' => {
+    '1' => 'noOperation',
+    '2' => 'reset',
+  },
+  'pcnsBypassManualEnabledEnableShutdown' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'dm3StatusBreakersStatus' => {
+    '1' => 'statusClosed',
+    '2' => 'statusOpen',
+  },
+  'airIRRP500UnitServiceIntervalAirFilterAlarm' => {
     '1' => 'enable',
     '2' => 'disable',
   },
-  'uioInputContactConfigNormalState' => {
-    '1' => 'uioInputNormallyOpen',
-    '2' => 'uioInputNormallyClosed',
+  'sPDUOutletConfigMSPmupsZone1' => {
+    '1' => 'disableAlarm',
+    '2' => 'enableAlarm',
   },
-  'newCodeAuthentViaTFTP' => {
+  'airFMSysOutputNormalState' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'isxModularDistSysOutputVoltageAlarmHighEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'upsAdvConfigOutputFreqRange' => {
     '1' => 'unknown',
-    '2' => 'validNewAgentCodeImage',
-    '3' => 'sameAgentCodeImage',
-    '4' => 'invalidAgentCodeImage',
+    '2' => 'freqRangeAUTO',
+    '3' => 'freqRange60Var1',
+    '4' => 'freqRange60Var3',
+    '5' => 'freqRange50Var1',
+    '6' => 'freqRange50Var3',
+    '7' => 'freqRange60Var10',
+    '8' => 'freqRange50Var10',
+    '9' => 'freqRange60Var1dot0',
+    '10' => 'freqRange50Var1dot0',
+    '11' => 'freqRange50Pct0dot5',
+    '12' => 'freqRange50Pct1',
+    '13' => 'freqRange50Pct2',
+    '14' => 'freqRange50Pct4',
+    '15' => 'freqRange50Pct6',
+    '16' => 'freqRange50Pct8',
+    '17' => 'freqRange60Pct0dot5',
+    '18' => 'freqRange60Pct1',
+    '19' => 'freqRange60Pct2',
+    '20' => 'freqRange60Pct4',
+    '21' => 'freqRange60Pct6',
+    '22' => 'freqRange60Pct8',
+    '23' => 'freqRange50Var4',
+    '24' => 'freqRange60Var4',
   },
-  'pmmOutputBreakerState' => {
+  'airFMSysAlarmMapOutput1' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'upsAdvTestBatteryConditionStatus' => {
+    '1' => 'unknown',
+    '2' => 'batteryOK',
+    '3' => 'batteryCapacityDecreased',
+    '4' => 'batteryDefect',
+    '5' => 'noBatteryPresent',
+  },
+  'airPAOperatingMode' => {
+    '1' => 'modeOFF',
+    '2' => 'modeVENTING',
+    '3' => 'modeCOOLING',
+  },
+  'emsDoorSensorStatusSensorState' => {
     '1' => 'open',
     '2' => 'closed',
     '3' => 'unknown',
   },
-  'upsAdvControlUpsSleep' => {
-    '1' => 'noPutUpsToSleep',
-    '2' => 'putUpsToSleep',
-    '3' => 'putUpsToSleepGracefully',
-    '4' => 'putUpsSyncGroupToSleep',
-    '5' => 'putUpsSyncGroupToSleepGracefully',
+  'dcmim2StatusSysTempUnits' => {
+    '1' => 'celsius',
+    '2' => 'fahrenheit',
   },
-  'rPDU2BankConfigOverloadRestriction' => {
-    '1' => 'alwaysAllowTurnON',
-    '2' => 'restrictOnNearOverload',
-    '3' => 'restrictOnOverload',
-    '4' => 'notSupported',
+  'upsAdvStateEcomode' => {
+    '1' => 'upsOnEcoMode',
+    '2' => 'upsNotOnEcoMode',
   },
-  'dm3ConfigLVDOpenAlarm' => {
-    '1' => 'alarmIgnore',
-    '2' => 'alarmRelay1',
-    '3' => 'alarmRelay2',
-    '4' => 'alarmRelay3',
-    '5' => 'alarmRelay4',
-    '6' => 'alarmRelay5',
-    '7' => 'alarmRelay6',
-    '8' => 'alarmMinor',
-    '9' => 'alarmMajor',
+  'airFMSysAlarmMapSystemOffline' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
   },
-  'airIRRP500UnitStatusActivePowerSource' => {
-    '1' => 'sourceA',
-    '2' => 'sourceB',
-  },
-  'iemStatusProbeLowTempViolation' => {
-    '1' => 'noViolation',
-    '2' => 'lowTempViolation',
-    '3' => 'disabled',
-  },
-  'rARUFanStatusFanOperatingStatus' => {
+  'upsDiagSubSysbackfeedContactorType' => {
     '1' => 'unknown',
-    '2' => 'off',
-    '3' => 'onOk',
-    '4' => 'onDegraded',
-    '5' => 'offFailed',
+    '2' => 'normalAC',
+    '3' => 'bypassAC',
   },
-  'airIRG3GroupConfigFanSpeedControl' => {
-    '1' => 'automatic',
-    '2' => 'manual',
+  'airIRG3CMConfigPowerSource' => {
+    '1' => 'singleFeed',
+    '2' => 'dualFeed',
   },
   'xATSTestingResultsLastResult' => {
     '1' => 'noResultsAvailable',
@@ -13776,17 +10745,1646 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
     '18' => 'canceledManualTest',
     '19' => 'canceledScheduledTest',
   },
-  'airIRRP500GroupConfigLoadAssistEnable' => {
+  'accessPXExtStatusRearDoorHandle' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'notInstalled',
+    '4' => 'disconnected',
+  },
+  'upsBasicBatteryStatus' => {
+    '1' => 'unknown',
+    '2' => 'batteryNormal',
+    '3' => 'batteryLow',
+    '4' => 'batteryInFaultCondition',
+    '5' => 'noBatteryPresent',
+  },
+  'battManConfigCellsperBattery' => {
+    '1' => 'oneCell',
+    '2' => 'twoCells',
+    '4' => 'fourCells',
+    '6' => 'sixCells',
+  },
+  'isxModularPduDeviceServiceType' => {
+    '1' => 'threeWire',
+    '2' => 'fourWire',
+  },
+  'upsAdvConfigPositionSelector' => {
+    '1' => 'unknown',
+    '2' => 'rack',
+    '3' => 'tower',
+  },
+  'airIRmPmPWWHeatingType' => {
+    '1' => 'direct',
+    '2' => 'undefined',
+  },
+  'airIRRP500GroupStatusActiveFlowControlStatus' => {
+    '1' => 'under',
+    '2' => 'okay',
+    '3' => 'over',
+    '4' => 'notApplicable',
+  },
+  'airFMModBlwr2ElOvMode' => {
+    '1' => 'notApplicable',
+    '2' => 'inactive',
+    '3' => 'active',
+  },
+  'airFMModServIntHumReset' => {
+    '1' => 'notApplicable',
+    '2' => 'noOperation',
+    '3' => 'reset',
+  },
+  'airIRRCUnitConfigCoolCapacity' => {
+    '1' => 'automatic',
+    '2' => 'maximum',
+  },
+  'emsFluidSensorStatusSensorSeverity' => {
+    '1' => 'critical',
+    '2' => 'warning',
+    '3' => 'informational',
+  },
+  'xATSGeneratorServiceResetRecord' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'sPDUOutletConfigMSPannunOutletCtrlMode' => {
+    '1' => 'modeGracefulShutdown',
+    '2' => 'modeAnnunciator',
+  },
+  'upsAdvConfigAutoShutdownControlRuntimeRemaining' => {
+    '1' => 'upsAdvConfigDisableRuntimeRemainingAutoShutdown',
+    '2' => 'upsAdvConfigEnableRuntimeRemainingAutoShutdown',
+  },
+  'pcnsOverloadEnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'memLeakRopeStatusSensorState' => {
+    '1' => 'noleak',
+    '2' => 'leakdetected',
+    '3' => 'unknown',
+  },
+  'memInputAbnormalSeverity' => {
+    '1' => 'inputSeverityinformational',
+    '2' => 'inputSeveritywarning',
+    '3' => 'inputSeveritysevere',
+    '4' => 'inputSeverityNotApplicable',
+  },
+  'rPDU2DeviceConfigOutletsPeakLoadReset' => {
+    '1' => 'noOperation',
+    '2' => 'reset',
+    '3' => 'notSupported',
+  },
+  'atsOutputBank' => {
+    '1' => 'total',
+    '2' => 'bank1',
+    '3' => 'bank2',
+  },
+  'uioSensorConfigMaxTemperatureEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'airIRRP100GroupSetpointsFanSpeedPreference' => {
+    '1' => 'low',
+    '2' => 'med-low',
+    '3' => 'med',
+    '4' => 'med-high',
+    '5' => 'high',
+  },
+  'iemStatusProbeMaxTempViolation' => {
+    '1' => 'noViolation',
+    '2' => 'maxTempViolation',
+    '3' => 'disabled',
+  },
+  'airFMGroupSysRole' => {
+    '1' => 'rolePrimary',
+    '2' => 'roleBackup',
+  },
+  'airIRG3RDUConfigPowerSource' => {
+    '1' => 'singleFeed',
+    '2' => 'dualFeed',
+  },
+  'isxModularDistSysOutputVoltageAlarmLowEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'airIRRCGroupSetpointsFanSpeedControl' => {
+    '1' => 'automatic',
+    '2' => 'manual',
+  },
+  'dm3ConfigSysHighTempAlarm' => {
+    '1' => 'alarmIgnore',
+    '2' => 'alarmRelay1',
+    '3' => 'alarmRelay2',
+    '4' => 'alarmRelay3',
+    '5' => 'alarmRelay4',
+    '6' => 'alarmRelay5',
+    '7' => 'alarmRelay6',
+    '8' => 'alarmMinor',
+    '9' => 'alarmMajor',
+  },
+  'airFMGroupSysManualRoleSetting' => {
+    '1' => 'primary',
+    '2' => 'backup',
+  },
+  'emConfigContactNormalState' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'airFMSysResetUserDflts' => {
+    '1' => 'notApplicable',
+    '2' => 'noOperation',
+    '3' => 'reset',
+  },
+  'isxModularDistSysOutputVoltageAlarmMinEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'ats4gCalibrationPowerSupplyVoltage' => {
+    '1' => 'powerSupply24VA',
+    '2' => 'powerSupply24VB',
+    '3' => 'powerSupplyVBoostA',
+    '4' => 'powerSupplyVBoostB',
+    '5' => 'powerSupply3Dot3V',
+    '6' => 'powerSupply1Dot0V',
+  },
+  'dm3ConfigConv1ofNAlarm' => {
+    '1' => 'alarmIgnore',
+    '2' => 'alarmRelay1',
+    '3' => 'alarmRelay2',
+    '4' => 'alarmRelay3',
+    '5' => 'alarmRelay4',
+    '6' => 'alarmRelay5',
+    '7' => 'alarmRelay6',
+    '8' => 'alarmMinor',
+    '9' => 'alarmMajor',
+  },
+  'ats5gSwitchSourceA48VSupplyStatus' => {
+    '1' => 'fail',
+    '2' => 'ok',
+  },
+  'airPASystemPower' => {
+    '1' => 'powerON',
+    '2' => 'powerOFF',
+  },
+  'rPDUOutletBankOverloadRestriction' => {
+    '1' => 'alwaysAllowTurnON',
+    '2' => 'restrictOnNearOverload',
+    '3' => 'restrictOnOverload',
+  },
+  'airFMGroupFailoverModHumReplaceCylinder' => {
+    '1' => 'notApplicable',
+    '2' => 'disable',
+    '3' => 'enable',
+  },
+  'acceptThisDevice' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'atsStatusSourceAStatus' => {
+    '1' => 'fail',
+    '2' => 'ok',
+  },
+  'memOutletStatusAlarmState' => {
+    '1' => 'memOutletNormal',
+    '2' => 'memOutletAbnormal',
+  },
+  'upsAdvIdentUpsPhaseConfigType' => {
+    '1' => 'unknown',
+    '2' => 'threePhaseInOut',
+    '3' => 'onePhaseInOut',
+    '4' => 'threePhaseInOneOut',
+  },
+  'emsStatusCommStatus' => {
+    '1' => 'noComm',
+    '2' => 'comm',
+    '3' => 'commLost',
+  },
+  'battManConfigBatteryChemistry' => {
+    '1' => 'leadAcid',
+    '2' => 'nickel-Cadmium',
+  },
+  'upsBasicStateAlarmStatus' => {
+    '1' => 'noAlarms',
+    '2' => 'infoAlarm',
+    '3' => 'warningAlarm',
+    '4' => 'criticalAlarm',
+  },
+  'rPDU2BankStatusLoadState' => {
+    '1' => 'lowLoad',
+    '2' => 'normal',
+    '3' => 'nearOverload',
+    '4' => 'overload',
+  },
+  'dm3StatusConvFanFail' => {
+    '1' => 'statusTrue',
+    '2' => 'statusFalse',
+  },
+  'upsIntegratedATSSelectedSource' => {
+    '1' => 'noSourceSelected',
+    '2' => 'unknown',
+    '3' => 'sourceA',
+    '4' => 'sourceB',
+  },
+  'pcnsContactFault2EnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'dm3StatusInRlyStatus' => {
+    '1' => 'statusOn',
+    '2' => 'statusOff',
+  },
+  'airFMGroupFailoverModBlwrCntrl2Fail' => {
+    '1' => 'notApplicable',
+    '2' => 'disable',
+    '3' => 'enable',
+  },
+  'xATSSwitchStatusAutomaticOperationSwitch' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+    '3' => 'unknown',
+  },
+  'pcnsTempOutOfRangeProbe1EnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airIRmPmLouver3Position' => {
+    '1' => 'closed',
+    '2' => 'open',
+  },
+  'emConfigProbeLowTempEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'rPDUOutletControlOutletPhase' => {
+    '1' => 'phase1',
+    '2' => 'phase2',
+    '3' => 'phase3',
+    '4' => 'phase1-2',
+    '5' => 'phase2-3',
+    '6' => 'phase3-1',
+  },
+  'airFMSysAlarmMapInput6' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'upsAdvConfigBatterySelection' => {
+    '1' => 'vrla',
+    '2' => 'ventedcell',
+    '3' => 'nicd',
+    '4' => 'li-ion',
+  },
+  'ats5gSwitchSourceB48VSupplyStatus' => {
+    '1' => 'fail',
+    '2' => 'ok',
+  },
+  'xPDUUPSInputVoltageLtoNPresent' => {
+    '1' => 'notPresent',
+    '2' => 'present',
+    '3' => 'unknown',
+  },
+  'pcnsContactNormal4EnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airFMSysAlarmMapSysLowEnvTemp' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'airIRRCUnitStatusInputState' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'airFMSysActualHumCtrl' => {
+    '1' => 'notApplicable',
+    '2' => 'relativeHum',
+    '3' => 'dewPoint',
+  },
+  'iemStatusProbeHighTempViolation' => {
+    '1' => 'noViolation',
+    '2' => 'highTempViolation',
+    '3' => 'disabled',
+  },
+  'airFMSysAlarmMapExpMod1HumFail' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'uioOutputRelayConfigControlState' => {
+    '1' => 'uioOutputClose',
+    '2' => 'uioOutputOpen',
+  },
+  'rARUStatusAruRemoteSetpoint' => {
+    '1' => 'aruOff',
+    '2' => 'aru85F-29C',
+    '3' => 'aru90F-32C',
+    '4' => 'aru95F-35C',
+    '5' => 'aru100F-38C',
+    '6' => 'aru7kW-1200cfm',
+    '7' => 'aru5kW-800cfm',
+    '8' => 'aru3kW-500cfm',
+    '9' => 'aru2kW-300cfm',
+    '10' => 'aru400cfm',
+    '11' => 'aru600cfm',
+    '12' => 'aru700cfm',
+    '13' => 'aru900cfm',
+    '14' => 'aru1000cfm',
+    '15' => 'aru1400cfm',
+    '16' => 'aru1600cfm',
+    '17' => 'aru1800cfm',
+    '18' => 'aru2000cfm',
+  },
+  'ePDUDeviceControlEnergyReset' => {
+    '0' => 'noOperation',
+    '1' => 'reset',
+  },
+  'chargerOutputStatus' => {
+    '1' => 'unknown',
+    '2' => 'initialising',
+    '3' => 'standby',
+    '4' => 'onBattery',
+    '5' => 'floatCharging',
+    '6' => 'boostCharging',
+    '7' => 'initialCharging',
+    '8' => 'directfeed',
+    '9' => 'chargernotpresent',
+  },
+  'dcmim2StatusBattCapacityTestResult' => {
+    '1' => 'capacityTestNotPerformed',
+    '2' => 'capacityTestInProcess',
+    '3' => 'capacityTestInterrupted',
+    '4' => 'capacityTestPass',
+    '5' => 'capacityTestFail',
+  },
+  'airIRRP100UnitConfigIdleOnCoolFail' => {
+    '1' => 'enable',
+    '2' => 'disable',
+  },
+  'upsDiagBatteryStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'ok',
+    '4' => 'failed',
+    '5' => 'highTemperature',
+    '6' => 'replaceImmediately',
+    '7' => 'lowCapacity',
+  },
+  'memSensorsCommStatus' => {
+    '1' => 'notInstalled',
+    '2' => 'commsOK',
+    '3' => 'commsLost',
+  },
+  'pcnsMinRedundancyRegainedEnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'uioSensorConfigHighTemperatureEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'battManStringChargerHighVoltageAlarm' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'airFMSysCoolEconIsolFunction' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'sPDUMasterStatusVMCommandPending' => {
+    '1' => 'commandPendingMasterTrueVM',
+    '2' => 'commandPendingMasterFalseVM',
+  },
+  'emConfigContactEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'airFMGroupCfgResetFieldServiceDefaults' => {
+    '1' => 'noOperation',
+    '2' => 'reset',
+  },
+  'pmmInputBreakerOpenAlarm' => {
+    '1' => 'enabled',
+    '2' => 'disabled',
+    '3' => 'unknown',
+  },
+  'airIRmPmUnitControlType' => {
+    '1' => 'room',
+    '2' => 'supply',
+    '3' => 'room-SupplyLimit',
+    '4' => 'supply-RoomLimit',
+  },
+  'airFMSysSteamHotGasReheatDmd' => {
+    '1' => 'notApplicable',
+    '2' => 'off',
+    '3' => 'on',
+  },
+  'upsAdvControlUpsOff' => {
+    '1' => 'noTurnUpsOff',
+    '2' => 'turnUpsOff',
+    '3' => 'turnUpsOffGracefully',
+    '4' => 'turnUpsSyncGroupOff',
+    '5' => 'turnUpsSyncGroupOffAfterDelay',
+    '6' => 'turnUpsSyncGroupOffGracefully',
+  },
+  'dm3StatusLVDHwFault' => {
+    '1' => 'statusFault',
+    '2' => 'statusNofault',
+  },
+  'airFMSysAlarmMapMainModHighFltrDP' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'upsAdvConfigAutoShutdownControlLoadPercentOnUps' => {
+    '1' => 'upsAdvConfigDisableLoadPercentOnUpsAutoShutdown',
+    '2' => 'upsAdvConfigEnableLoadPercentOnUpsAutoShutdown',
+  },
+  'upsAdvConfigLCDLocalLanguage' => {
+    '1' => 'english',
+    '2' => 'french',
+    '3' => 'italian',
+    '4' => 'german',
+    '5' => 'spanish',
+    '6' => 'portuguese',
+    '7' => 'japanese',
+    '8' => 'russian',
+  },
+  'airFMModServIntComp2Reset' => {
+    '1' => 'notApplicable',
+    '2' => 'noOperation',
+    '3' => 'reset',
+  },
+  'pcnsContactFault3EnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'uioOutputRelayConfigNormalState' => {
+    '1' => 'uioOutputNormallyOpen',
+    '2' => 'uioOutputNormallyClosed',
+  },
+  'pcnsBatteryDischargedEnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'pcnsFaultBypassEnabledEnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airIRmPmDayNightMode' => {
+    '1' => 'day',
+    '2' => 'night',
+  },
+  'battManString2BatteryUserLowVoltageAlarm' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'airIRRP500GroupSetpointsFanSpeedPreference' => {
+    '1' => 'low',
+    '2' => 'med-low',
+    '3' => 'med',
+    '4' => 'med-high',
+    '5' => 'high',
+  },
+  'airFMSysAlarmMapExpMod2HumFail' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'airIRG3GroupConfigCapacityControlType' => {
+    '1' => 'discrete',
+    '2' => 'proportional',
+  },
+  'upsAdvConfigMainsSetting' => {
+    '1' => 'singleInput',
+    '2' => 'dualInput',
+  },
+  'airFMSysAlarmMapMainModMaintReq' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'upsPhaseInputType' => {
+    '1' => 'unknown',
+    '2' => 'main',
+    '3' => 'bypass',
+  },
+  'airIRRP100UnitConfigInputNormalState' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'airFMSysAlarmMapExpMod2MaintReq' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'upsOutletGroupControlCommand' => {
+    '1' => 'upsOutletGroupImmediateOn',
+    '2' => 'upsOutletGroupImmediateOff',
+    '3' => 'upsOutletGroupImmediateRebootWithOrWithoutAC',
+    '4' => 'upsOutletGroupDelayedOn',
+    '5' => 'upsOutletGroupDelayedOff',
+    '6' => 'upsOutletGroupDelayedRebootWithOrWithoutAC',
+    '7' => 'upsOutletGroupCancelPendingCommand',
+    '8' => 'upsOutletGroupControlUnknown',
+    '9' => 'upsOutletGroupImmediateRebootShutdown',
+    '10' => 'upsOutletGroupDelayedRebootShutdown',
+  },
+  'sPDUOutletConfigMSPmupsP1HiHum' => {
+    '1' => 'disableAlarm',
+    '2' => 'enableAlarm',
+  },
+  'upsInputContactConfigPolarity' => {
+    '1' => 'upsInputContactAllContactsClosedEqualsTrue',
+    '2' => 'upsInputContactAllContactsOpenEqualsTrue',
+  },
+  'airFMSysAlarmMapInput4' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'airFMSysAlarmMapOutput15' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'accessPXStatusFrontDoorHandle' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'notInstalled',
+    '4' => 'disconnected',
+  },
+  'switchgearBreakerStatus' => {
+    '1' => 'unknown',
+    '2' => 'opened',
+    '3' => 'closed',
+  },
+  'airIRG3GroupSetpointsFanSpeedPreference' => {
+    '1' => 'low',
+    '2' => 'med-low',
+    '3' => 'med',
+    '4' => 'med-high',
+    '5' => 'high',
+  },
+  'atsStatusSwitchStatus' => {
+    '1' => 'fail',
+    '2' => 'ok',
+  },
+  'rPDU2SensorAnalogVoltageStatusThreshStatus' => {
+    '1' => 'notPresent',
+    '2' => 'belowMin',
+    '3' => 'belowLow',
+    '4' => 'normal',
+    '5' => 'aboveHigh',
+    '6' => 'aboveMax',
+  },
+  'airFMSysAlarmMapSysEconIsol' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'upsDiagSubSysDisplayInterfaceCardStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'offOk',
+    '4' => 'onOk',
+    '5' => 'offFail',
+    '6' => 'onFail',
+    '7' => 'lostComm',
+  },
+  'airFMSysCndsrFluidVlvType' => {
+    '1' => 'notApplicable',
+    '2' => 'twoWay',
+    '3' => 'threeWay',
+  },
+  'upsAdvBatteryChargingCurrentRestricted' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airIRRP500UnitConfigHumidifierControl' => {
+    '1' => 'auto',
+    '2' => 'drainOff',
+  },
+  'airFMGroupFailoverModMaintRequired' => {
+    '1' => 'notApplicable',
+    '2' => 'disable',
+    '3' => 'enable',
+  },
+  'xATSSwitchStatusEngineStartSignal' => {
+    '1' => 'run',
+    '2' => 'stop',
+    '3' => 'unknown',
+  },
+  'emConfigProbeMinTempEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'isxModularDistSysVoltagePhaseIndex' => {
+    '1' => 'phase1',
+    '2' => 'phase2',
+    '3' => 'phase3',
+  },
+  'airIRG2RDT2ServiceIntervalsAirFilterAlarm' => {
+    '1' => 'enable',
+    '2' => 'disable',
+  },
+  'airIRRP500UnitConfigIdleOnLeakDetect' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'iemConfigContactSeverity' => {
+    '1' => 'critical',
+    '2' => 'warning',
+    '3' => 'informational',
+  },
+  'atsConfigBank' => {
+    '1' => 'total',
+    '2' => 'bank1',
+    '3' => 'bank2',
+  },
+  'battManAlarmEnvironment' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'emStatusProbeHighHumidViolation' => {
+    '1' => 'noViolation',
+    '2' => 'highHumidViolation',
+    '3' => 'disabled',
+  },
+  'ePDUDeviceControlReboot' => {
+    '0' => 'noOperation',
+    '1' => 'reboot',
+  },
+  'airIRRP500UnitConfigOutputNormalState' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'airFMAlarmSeverity' => {
+    '1' => 'informational',
+    '2' => 'warningMinor',
+    '3' => 'criticalMajor',
+  },
+  'memOutputStatusCurrentState' => {
+    '1' => 'memOutputClosed',
+    '2' => 'memOutputOpen',
+  },
+  'airFMGroupFailoverModLowSupplyTemp' => {
+    '1' => 'notApplicable',
+    '2' => 'disable',
+    '3' => 'enable',
+  },
+  'airIRSCUnitServiceIntervalsAirFilterAlarm' => {
+    '1' => 'enable',
+    '2' => 'disable',
+  },
+  'airFMGroupFailoverSysAnyMajorAlarm' => {
+    '1' => 'notApplicable',
+    '2' => 'disable',
+    '3' => 'enable',
+  },
+  'upsDiagSubSysIntBypSwitchFanLifetimeStatus' => {
+    '1' => 'ok',
+    '2' => 'nearEnd',
+    '3' => 'exceeded',
+    '4' => 'unknown',
+  },
+  'airFMGroupFailoverModHumFail' => {
+    '1' => 'notApplicable',
+    '2' => 'disable',
+    '3' => 'enable',
+  },
+  'pcnsContactFault3EnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airFMModServIntBlwr1Reset' => {
+    '1' => 'notApplicable',
+    '2' => 'noOperation',
+    '3' => 'reset',
+  },
+  'airFMSysNumPCIOMs' => {
+    '1' => 'notApplicable',
+    '2' => 'one',
+    '3' => 'two',
+    '4' => 'three',
+    '5' => 'four',
+  },
+  'sPDUOutletPending' => {
+    '1' => 'commandPending',
+    '2' => 'noCommandPending',
+    '3' => 'commandPendingUnknown',
+  },
+  'uioSensorStatusCommStatus' => {
+    '1' => 'notInstalled',
+    '2' => 'commsOK',
+    '3' => 'commsLost',
+  },
+  'airFMSysAlarmMapSysSmokeDet' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'airFMGroupFailoverSysCommLost' => {
+    '1' => 'notApplicable',
+    '2' => 'disable',
+    '3' => 'enable',
+  },
+  'airFMModSmokeDetector' => {
+    '1' => 'notApplicable',
+    '2' => 'notPresent',
+    '3' => 'present',
+  },
+  'airIRG2RDT2StatusLeakSensor' => {
+    '1' => 'no-leak',
+    '2' => 'leak',
+  },
+  'rPDUOutletControlOutletCommand' => {
+    '1' => 'immediateOn',
+    '2' => 'immediateOff',
+    '3' => 'immediateReboot',
+    '4' => 'delayedOn',
+    '5' => 'delayedOff',
+    '6' => 'delayedReboot',
+    '7' => 'cancelPendingCommand',
+  },
+  'airFMSysRemoteSensorData' => {
+    '1' => 'notApplicable',
+    '2' => 'average',
+    '3' => 'maximum',
+  },
+  'emsLeakRopeCommStatus' => {
+    '1' => 'connected',
+    '2' => 'disconnected',
+    '3' => 'commsLost',
+  },
+  'memBeaconStatusCurrentState' => {
+    '1' => 'off',
+    '2' => 'on',
+  },
+  'upsDiagSubSysBattMonitorStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'offOk',
+    '4' => 'onOk',
+    '5' => 'offFail',
+    '6' => 'onFail',
+    '7' => 'lostComm',
+  },
+  'rARUPowerStatusAuxiliaryAcPresent' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airFMGroupFailoverSysSupplySensorFail' => {
+    '1' => 'notApplicable',
+    '2' => 'disable',
+    '3' => 'enable',
+  },
+  'emStatusCommStatus' => {
+    '1' => 'noComm',
+    '2' => 'comm',
+    '3' => 'commLost',
+  },
+  'upsDiagIMType' => {
+    '1' => 'imUnknown',
+    '2' => 'imMIM',
+    '3' => 'imRIM',
+  },
+  'etlStatus' => {
+    '1' => 'unknown',
+    '2' => 'running',
+    '3' => 'failed',
+    '4' => 'paused',
+    '5' => 'stopped',
+  },
+  'ats5gSwitchOrientation' => {
+    '1' => 'unknown',
+    '2' => 'singlePhase',
+    '3' => 'splitPhase',
+    '4' => 'threePhasePhaseToNeutral',
+    '5' => 'threePhasePhaseToPhase',
+  },
+  'upsAdvConfigGreenMode' => {
     '1' => 'disable',
     '2' => 'enable',
   },
-  'airIRRP500UnitConfigPowerSourceConfig' => {
-    '1' => 'single',
-    '2' => 'dual',
+  'pmmBranchCircuitBreakerState' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'unknown',
   },
-  'ats5gSwitchSourceAStatus' => {
-    '1' => 'fail',
+  'airIRG3RDUStatusInputState' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'sPDUOutletConfigMSPmupsZone2' => {
+    '1' => 'disableAlarm',
+    '2' => 'enableAlarm',
+  },
+  'airIRG2GroupConfigConfigurationType' => {
+    '1' => 'racs',
+    '2' => 'spot',
+    '3' => 'in-row',
+    '4' => 'hacs',
+    '5' => 'cacs',
+  },
+  'sPDUOutletConfigMSPmupsZone3' => {
+    '1' => 'disableAlarm',
+    '2' => 'enableAlarm',
+  },
+  'iemStatusProbeStatus' => {
+    '1' => 'disconnected',
+    '2' => 'connected',
+  },
+  'airFMGroupFailoverModCondensatePumpFail' => {
+    '1' => 'notApplicable',
+    '2' => 'disable',
+    '3' => 'enable',
+  },
+  'ats5gBankOutputCurrentStatus' => {
+    '1' => 'lowLoad',
+    '2' => 'normal',
+    '3' => 'nearOverload',
+    '4' => 'overload',
+  },
+  'isxModularDistModuleOutputAlarmMaxEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'pcnsContactNormal4EnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airIRG3RDUConfigRefrigerantLeakDetectorEnabled' => {
+    '1' => 'no',
+    '2' => 'yes',
+  },
+  'accessPXExtStatusFrontDoor' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'notInstalled',
+    '4' => 'disconnected',
+  },
+  'upsSCGACInputStatus' => {
+    '1' => 'acInGood',
+    '2' => 'acInBad',
+  },
+  'airFMSysAlarmMapExpMod2HighFltrDP' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'airIRmPmResetAllAlarms' => {
+    '1' => 'doNothing',
+    '2' => 'reset',
+  },
+  'pcnsHumidityOutOfRangeProbe2EnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'upsEbmModeStatus' => {
+    '1' => 'active',
+    '2' => 'inactive',
+  },
+  'pcnsNetworkConfig' => {
+    '1' => 'ipV4',
+    '2' => 'ipV6',
+  },
+  'emsInputContactStatusInputContactNormalState' => {
+    '1' => 'normallyClosedEMS',
+    '2' => 'normallyOpenEMS',
+  },
+  'pcnsBypassManualEnabledEnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'upsAdvBatteryReplaceIndicator' => {
+    '1' => 'noBatteryNeedsReplacing',
+    '2' => 'batteryNeedsReplacing',
+  },
+  'atsCalibrationOutputPhasesTableIndex' => {
+    '1' => 'phase1',
+    '2' => 'phase2',
+    '3' => 'phase3',
+    '4' => 'neutral',
+  },
+  'sPDUOutletConfigMSPmupsP2LowTemp' => {
+    '1' => 'disableAlarm',
+    '2' => 'enableAlarm',
+  },
+  'pmmBranchCircuitAlaramGeneration' => {
+    '1' => 'enabled',
+    '2' => 'disabled',
+    '3' => 'unknown',
+  },
+  'iemStatusProbeTempUnits' => {
+    '1' => 'celsius',
+    '2' => 'fahrenheit',
+  },
+  'rPDULoadBankConfigAlarm' => {
+    '1' => 'noLoadAlarm',
+    '2' => 'underCurrentAlarm',
+    '3' => 'nearOverCurrentAlarm',
+    '4' => 'overCurrentAlarm',
+  },
+  'isxModularDistSysCurrentPhaseIndex' => {
+    '1' => 'phase1',
+    '2' => 'phase2',
+    '3' => 'phase3',
+  },
+  'emsDoorSensorStatusSensorSeverity' => {
+    '1' => 'critical',
+    '2' => 'warning',
+    '3' => 'informational',
+  },
+  'iemConfigProbeMinTempEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'airFMSysAlarmMapMainModHumReplCyl' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'upsDiagSubSysPSUStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'offOk',
+    '4' => 'onOk',
+    '5' => 'offFail',
+    '6' => 'onFail',
+    '7' => 'lostComm',
+  },
+  'rPDU2PhaseConfigOverloadRestriction' => {
+    '1' => 'alwaysAllowTurnON',
+    '2' => 'restrictOnNearOverload',
+    '3' => 'restrictOnOverload',
+    '4' => 'notSupported',
+  },
+  'upsOutletGroupControlOutletType' => {
+    '1' => 'upsSwitchedOutletGroup',
+    '2' => 'upsMainOutletGroup',
+  },
+  'airIRRP100GroupConfigConfigurationType' => {
+    '1' => 'racs',
+    '2' => 'hacs',
+    '3' => 'in-row',
+    '4' => 'cacs',
+  },
+  'isxModularDistSubFeedInfoAlarmLowEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'memDoorSensorStatusSensorSeverity' => {
+    '1' => 'critical',
+    '2' => 'warning',
+    '3' => 'informational',
+  },
+  'upsAdvBatteryWiringConfiguration' => {
+    '1' => 'twoWire',
+    '2' => 'threeWire',
+  },
+  'dm3ConfigRectStandbyAlarm' => {
+    '1' => 'alarmIgnore',
+    '2' => 'alarmRelay1',
+    '3' => 'alarmRelay2',
+    '4' => 'alarmRelay3',
+    '5' => 'alarmRelay4',
+    '6' => 'alarmRelay5',
+    '7' => 'alarmRelay6',
+    '8' => 'alarmMinor',
+    '9' => 'alarmMajor',
+    '10' => 'alarmNofN',
+  },
+  'emsSmokeSensorStatusSensorState' => {
+    '1' => 'smokeDetected',
+    '2' => 'noSmoke',
+    '3' => 'unknown',
+  },
+  'ats5gSwitchRedundancyState' => {
+    '1' => 'atsRedundancyLost',
+    '2' => 'atsFullyRedundant',
+  },
+  'memInputsCommStatus' => {
+    '1' => 'notInstalled',
+    '2' => 'commsOK',
+    '3' => 'commsLost',
+  },
+  'xATSGeneratorStatusRemoteStart' => {
+    '1' => 'stop',
+    '2' => 'run',
+    '3' => 'unknown',
+  },
+  'airFMSysAlarmMapExpMod2HumReplCyl' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'pcnsRunTimeExceededEnableShutdown' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'atsStatusVBoostSourceB' => {
+    '1' => 'atsPowerSupplyFailure',
+    '2' => 'atsPowerSupplyOK',
+  },
+  'airIRG2RDT2ConfigOutputSource' => {
+    '1' => 'anyAlarm',
+    '2' => 'criticalAlarm',
+  },
+  'airFMGroupFailoverSysSecondarySensorFail' => {
+    '1' => 'notApplicable',
+    '2' => 'disable',
+    '3' => 'enable',
+  },
+  'memSmokeSensorConfigSensorSeverity' => {
+    '1' => 'critical',
+    '2' => 'warning',
+    '3' => 'informational',
+  },
+  'airIRG3GroupConfigLoadAssistEnable' => {
+    '1' => 'disable',
+    '2' => 'enable',
+  },
+  'battManString2BatteryChemHighVoltageAlarm' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'upsAdvTestDiagnosticDay' => {
+    '1' => 'monday',
+    '2' => 'tuesday',
+    '3' => 'wednesday',
+    '4' => 'thursday',
+    '5' => 'friday',
+    '6' => 'saturday',
+    '7' => 'sunday',
+  },
+  'pcnsTempOutOfRangeProbe2EnableShutdown' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airFMSysResetRunHours' => {
+    '1' => 'notApplicable',
+    '2' => 'noOperation',
+    '3' => 'reset',
+  },
+  'atsOutputPhaseIndex' => {
+    '1' => 'phase1',
+    '2' => 'phase2',
+    '3' => 'phase3',
+    '4' => 'neutral',
+  },
+  'emsDoorSensorCommStatus' => {
+    '1' => 'commOK',
+    '2' => 'commLost',
+  },
+  'upsDiagSubSysSystemPowerSupplyStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'offOk',
+    '4' => 'onOk',
+    '5' => 'offFail',
+    '6' => 'onFail',
+    '7' => 'lostComm',
+  },
+  'upsEnergyEfficiencyStatsReset' => {
+    '1' => 'notSupported',
+    '2' => 'noOperation',
+    '3' => 'reset',
+  },
+  'battManResetChargeCurrentDeviationBenchmark' => {
+    '1' => 'noOperation',
+    '2' => 'reset',
+  },
+  'emsVibrationSensorConfigSensorSeverity' => {
+    '1' => 'critical',
+    '2' => 'warning',
+    '3' => 'informational',
+  },
+  'airIRRCGroupStatusActiveFlowControlStatus' => {
+    '1' => 'under',
+    '2' => 'okay',
+    '3' => 'over',
+    '4' => 'notApplicable',
+  },
+  'ats5gSwitchControlEventCountReset' => {
+    '1' => 'none',
+    '2' => 'reset',
+  },
+  'dm3StatusSysTempUnits' => {
+    '1' => 'celsius',
+    '2' => 'fahrenheit',
+  },
+  'battManString2BatteryOpenCell' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'wirelessSensorPodConfigDryContactNormalState' => {
+    '0' => 'normallyOpen',
+    '1' => 'normallyClosed',
+  },
+  'rPDUOutletConfigOutletPhase' => {
+    '1' => 'phase1',
+    '2' => 'phase2',
+    '3' => 'phase3',
+    '4' => 'phase1-2',
+    '5' => 'phase2-3',
+    '6' => 'phase3-1',
+  },
+  'pcnsRunTimeExceededEnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airFMAlarmClearActiveGroupAlarms' => {
+    '1' => 'noOperation',
+    '2' => 'clearAlarms',
+  },
+  'upsAdvTotalDCCurrentPolarity' => {
+    '0' => 'positive',
+    '1' => 'negative',
+  },
+  'airIRmPmEheating1Type' => {
+    '1' => 'direct',
+    '2' => 'pwm',
+  },
+  'airFMSysPrimaryControlSensor' => {
+    '1' => 'notApplicable',
+    '2' => 'return',
+    '3' => 'remote',
+  },
+  'battManSystemPilotProbeDisconnected' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'pcnsMaxInternalTempExceededEnableShutdown' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airFMSysHumCtrlMethod' => {
+    '1' => 'notApplicable',
+    '2' => 'avgReturnRH',
+    '3' => 'avgReturnDewPt',
+    '4' => 'avgRemoteRH',
+    '5' => 'avgRemoteDewPt',
+  },
+  'rPDULoadPhaseConfigIndex' => {
+    '1' => 'phase1',
+    '2' => 'phase2',
+    '3' => 'phase3',
+  },
+  'atsControlResetATS' => {
+    '1' => 'none',
+    '2' => 'reset',
+  },
+  'iemConfigProbeTempUnits' => {
+    '1' => 'celsius',
+    '2' => 'fahrenheit',
+  },
+  'upsAdvTestBatteryProcessStatus' => {
+    '1' => 'ok',
+    '2' => 'preconditionNotMeet',
+    '3' => 'batteryTestInProgress',
+    '4' => 'refused',
+    '5' => 'aborted',
+    '6' => 'pending',
+    '7' => 'unknown',
+    '8' => 'noBatteryPresent',
+  },
+  'uioInputContactConfigSeverity' => {
+    '1' => 'uioInputCriticalSeverity',
+    '2' => 'uioInputWarningSeverity',
+  },
+  'rPDUPowerSupplyAlarm' => {
+    '1' => 'allAvailablePowerSuppliesOK',
+    '2' => 'powerSupplyOneFailed',
+    '3' => 'powerSupplyTwoFailed',
+    '4' => 'powerSupplyOneandTwoFailed',
+  },
+  'rPDU2SensorDiscreteStatusCurrentState' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'unknown',
+  },
+  'upsDiagComBusInternalRIMStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'ok',
+    '4' => 'lostComm',
+    '5' => 'rxFailure',
+    '6' => 'txFailure',
+  },
+  'emConfigProbeTempUnits' => {
+    '1' => 'celsius',
+    '2' => 'fahrenheit',
+  },
+  'upsAdvConfigAutoShutdownControlBatteryCapacity' => {
+    '1' => 'upsAdvConfigDisableBatteryCapacityAutoShutdown',
+    '2' => 'upsAdvConfigEnableBatteryCapacityAutoShutdown',
+  },
+  'emStatusProbeMinTempViolation' => {
+    '1' => 'noViolation',
+    '2' => 'minTempViolation',
+    '3' => 'disabled',
+  },
+  'dcmim2StatusLVDState' => {
+    '1' => 'statusClosed',
+    '2' => 'statusOpened',
+  },
+  'airFMSysDehumCapacity' => {
+    '1' => 'notApplicable',
+    '2' => 'half',
+    '3' => 'full',
+  },
+  'dm3ConfigRectCurrLimitAlarm' => {
+    '1' => 'alarmIgnore',
+    '2' => 'alarmRelay1',
+    '3' => 'alarmRelay2',
+    '4' => 'alarmRelay3',
+    '5' => 'alarmRelay4',
+    '6' => 'alarmRelay5',
+    '7' => 'alarmRelay6',
+    '8' => 'alarmMinor',
+    '9' => 'alarmMajor',
+    '10' => 'alarmNofN',
+  },
+  'atsConfigResetValues' => {
+    '1' => 'none',
+    '2' => 'reset',
+  },
+  'airFMSysAlarmMapOutput14' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'xPDUDeviceCrossTieOutputPresent' => {
+    '1' => 'notPresent',
+    '2' => 'present',
+  },
+  'apcLocalDisplayConfigBeeperVolume' => {
+    '1' => 'beeperDisabled',
+    '2' => 'beeperLow',
+    '3' => 'beeperMedium',
+    '4' => 'beeperHigh',
+  },
+  'dm3ConfigConvCurrLimitAlarm' => {
+    '1' => 'alarmIgnore',
+    '2' => 'alarmRelay1',
+    '3' => 'alarmRelay2',
+    '4' => 'alarmRelay3',
+    '5' => 'alarmRelay4',
+    '6' => 'alarmRelay5',
+    '7' => 'alarmRelay6',
+    '8' => 'alarmMinor',
+    '9' => 'alarmMajor',
+    '10' => 'alarmNofN',
+  },
+  'upsParallelSysRedundancy' => {
+    '1' => 'nplus0',
+    '2' => 'nplus1',
+    '3' => 'nplus2',
+    '4' => 'nplus3',
+    '5' => 'nplus4',
+    '6' => 'nplus5',
+  },
+  'rPDU2DeviceStatusPowerSupply2Status' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+    '3' => 'notInstalled',
+  },
+  'iemConfigProbeMaxTempEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'memOutputAction' => {
+    '1' => 'memActionClose',
+    '2' => 'memActionOpen',
+  },
+  'emStatusProbeTempUnits' => {
+    '1' => 'celsius',
+    '2' => 'fahrenheit',
+  },
+  'xATSSource2Rotation' => {
+    '1' => 'abc',
+    '2' => 'cba',
+    '3' => 'unknown',
+  },
+  'upsDiagComBusExternalMIMStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'ok',
+    '4' => 'lostComm',
+    '5' => 'rxFailure',
+    '6' => 'txFailure',
+  },
+  'airIRG3GroupConfigFanSpeedControl' => {
+    '1' => 'automatic',
+    '2' => 'manual',
+  },
+  'rPDUIdentDeviceOutletLayout' => {
+    '1' => 'seqPhaseToNeutral',
+    '2' => 'seqPhaseToPhase',
+    '3' => 'seqPhToNeu21PhToPh',
+    '4' => 'seqPhToPhGrouped',
+    '5' => 'seqPhToNGrouped',
+    '6' => 'seqPToN1516PToPGrouped',
+    '7' => 'seqPhToPh2xGrouped',
+    '8' => 'seqPhToN2xGrouped',
+    '9' => 'seqNotApplicable',
+  },
+  'airIRRCUnitStatusOutputState' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'pcnsMinRedundancyLostEnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'pcnsBypassEnabledEnableShutdown' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'dm3ConfigConvFailAlarm' => {
+    '1' => 'alarmIgnore',
+    '2' => 'alarmRelay1',
+    '3' => 'alarmRelay2',
+    '4' => 'alarmRelay3',
+    '5' => 'alarmRelay4',
+    '6' => 'alarmRelay5',
+    '7' => 'alarmRelay6',
+    '8' => 'alarmMinor',
+    '9' => 'alarmMajor',
+    '10' => 'alarmNofN',
+  },
+  'airFMSysAlarmMapInput14' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'upsAdvControlSimulatePowerFail' => {
+    '1' => 'noSimulatePowerFailure',
+    '2' => 'simulatePowerFailure',
+  },
+  'battManString1BatteryOpenFuseOrConnection' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'mcontrolRestartAgent' => {
+    '1' => 'restartCurrentAgent',
+    '2' => 'continueCurrentAgent',
+    '3' => 'loadAndExecuteNewAgent',
+    '4' => 'restartWithoutAgent',
+    '5' => 'resetNetworkAndRestart',
+    '6' => 'resetNetworkLeaveModeAndRestart',
+  },
+  'airIRmPmLouver2Position' => {
+    '1' => 'closed',
+    '2' => 'open',
+  },
+  'pcnsBypassEnabledEnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'upsDiagSubSysIDRCStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'offOk',
+    '4' => 'onOk',
+    '5' => 'offFail',
+    '6' => 'onFail',
+    '7' => 'lostComm',
+  },
+  'airFMSysSteamHumDmd' => {
+    '1' => 'notApplicable',
+    '2' => 'off',
+    '3' => 'on',
+  },
+  'dm3StatusSysAlarmState' => {
+    '1' => 'alarmMinor',
+    '2' => 'alarmMajor',
+    '3' => 'alarmBoth',
+    '4' => 'alarmNone',
+  },
+  'dm3ConfigRectDiagAlarm' => {
+    '1' => 'alarmIgnore',
+    '2' => 'alarmRelay1',
+    '3' => 'alarmRelay2',
+    '4' => 'alarmRelay3',
+    '5' => 'alarmRelay4',
+    '6' => 'alarmRelay5',
+    '7' => 'alarmRelay6',
+    '8' => 'alarmMinor',
+    '9' => 'alarmMajor',
+    '10' => 'alarmNofN',
+  },
+  'rPDU2DeviceConfigDisplayOrientation' => {
+    '1' => 'displayNormal',
+    '2' => 'displayReverse',
+  },
+  'upsBatteryCabBlockFuseStatus' => {
+    '1' => 'fuseOpen',
+    '2' => 'fuseOk',
+    '3' => 'notPresent',
+  },
+  'pcnsParallelRedundancyLostEnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'pcnsParallelRedundancyLostEnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'upsBasicSystemInverterStatus' => {
+    '1' => 'unknown',
     '2' => 'ok',
+    '3' => 'inFaultCondition',
+  },
+  'memVibrationSensorConfigSensorSeverity' => {
+    '1' => 'critical',
+    '2' => 'warning',
+    '3' => 'informational',
+  },
+  'isxModularDistSubFeedInfoAlarmMinEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'memBeaconStatusAlarmState' => {
+    '1' => 'memBeaconNormal',
+    '2' => 'memBeaconAbnormal',
+  },
+  'airIRRP500UnitStatusOutputState' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'AirIRSCCapacityControlType' => {
+    '1' => 'discrete',
+    '2' => 'proportional',
+  },
+  'pcnsParallelRedundancyRegainedEnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'battManString1BatteryChemLowVoltageAlarm' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'xATSSource2Position' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'tripped',
+    '4' => 'unknown',
+  },
+  'ats5gEnvSensorType' => {
+    '1' => 'noSensor',
+    '2' => 'sensorUnrecognized',
+    '3' => 'sensorUnsupported',
+    '5' => 'temperatureOnly',
+    '6' => 'temperatureHumidity',
+  },
+  'atsConfigPreferredSource' => {
+    '1' => 'sourceA',
+    '2' => 'sourceB',
+    '3' => 'none',
+  },
+  'sPDUMasterControlSwitch' => {
+    '1' => 'turnAllOnNow',
+    '2' => 'turnAllOnSequence',
+    '3' => 'turnAllOffNow',
+    '4' => 'rebootAllNow',
+    '5' => 'rebootAllSequence',
+    '6' => 'noCommand',
+    '7' => 'turnAllOffSequence',
+  },
+  'emsSensorConfigSensorNormalState' => {
+    '1' => 'normallyClosedEMS',
+    '2' => 'normallyOpenEMS',
+  },
+  'pcnsBypassContactorFailedEnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airIRmPmCmp1ManOperationActive' => {
+    '1' => 'automatic',
+    '2' => 'manual',
+  },
+  'airFMSysRefrigType' => {
+    '1' => 'notApplicable',
+    '2' => 'r22',
+    '3' => 'r407C',
+  },
+  'battManStringChargerLowVoltageAlarm' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'pcnsTempOutOfRangeProbe1EnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'pmmOutputFrequencyDeviation' => {
+    '1' => 'freqDeviationOff',
+    '2' => 'freqDeviationPointTwo',
+    '3' => 'freqDeviationPointFive',
+    '4' => 'freqDeviationOne',
+    '5' => 'freqDeviationOnePointFive',
+    '6' => 'freqDeviationTwo',
+    '7' => 'freqDeviationThree',
+    '8' => 'freqDeviationFour',
+    '9' => 'freqDeviationFive',
+    '10' => 'freqDeviationNine',
+  },
+  'upsDiagSubSysFrameType' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'frameTypeMain',
+    '4' => 'frameTypeXR',
+    '5' => 'frameTypeLXR',
+  },
+  'ats5gIdentModuleStatus' => {
+    '1' => 'notPresent',
+    '2' => 'checkingComm',
+    '3' => 'lostComm',
+    '4' => 'firmwareUpdate',
+    '5' => 'firmwareVerify',
+    '6' => 'active',
+    '7' => 'firmwareAborted',
+    '8' => 'unknown',
+  },
+  'atsConfigFrontPanelLockout' => {
+    '1' => 'disableFrontPanel',
+    '2' => 'enableFrontPanel',
+  },
+  'xATSTestingStatusSelectTestProcess' => {
+    '1' => 'engineStartTest',
+    '2' => 'systemLoadTest',
+    '3' => 'generatorHoldTest',
+    '4' => 'cancelTest',
+  },
+  'airIRRP100UnitStatusOperateMode' => {
+    '1' => 'standby',
+    '2' => 'on',
+    '3' => 'idle',
+    '4' => 'prestart',
+    '5' => 'service',
+    '6' => 'backup',
+    '7' => 'assist',
+  },
+  'uioSensorConfigLowTemperatureEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'xPDUSystemOutputFrequencyTolerance' => {
+    '1' => 'freqToleranceOff',
+    '2' => 'freqTolerancePointTwo',
+    '3' => 'freqTolerancePointFive',
+    '4' => 'freqToleranceOne',
+    '5' => 'freqToleranceOnePointFive',
+    '6' => 'freqToleranceTwo',
+    '7' => 'freqToleranceThree',
+    '8' => 'freqToleranceFour',
+    '9' => 'freqToleranceFive',
+    '10' => 'freqToleranceNine',
+  },
+  'pcnsCommunicationLostOnBatteryEnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'pcnsHumidityInRangeProbe2EnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airFMGroupAutoRoleNumPrimary' => {
+    '1' => 'one',
+    '2' => 'two',
+    '3' => 'three',
+    '4' => 'four',
+  },
+  'airFMSysInputStatus' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'uioInputContactConfigEnable' => {
+    '1' => 'uioInputContactDisabled',
+    '2' => 'uioInputContactEnabled',
+  },
+  'airFMGroupFailoverSysFireAlarm' => {
+    '1' => 'notApplicable',
+    '2' => 'disable',
+    '3' => 'enable',
+  },
+  'airFMSysDehumPIDMethod' => {
+    '1' => 'notApplicable',
+    '2' => 'p',
+    '3' => 'pi',
+    '4' => 'pid',
+  },
+  'upsAdvTestRuntimeCalibration' => {
+    '1' => 'noPerformCalibration',
+    '2' => 'performCalibration',
+    '3' => 'cancelCurrentCalibration',
+  },
+  'airFMSysAlarmMapMainModBlwrCntl1Fail' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
   },
   'dm3ConfigRectLowVoltAlarm' => {
     '1' => 'alarmIgnore',
@@ -13799,186 +12397,110 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
     '8' => 'alarmMinor',
     '9' => 'alarmMajor',
   },
-  'dm3StatusSysRectAvailable' => {
-    '1' => 'statusTrue',
-    '2' => 'statusFalse',
+  'airIRRP500UnitConfigCoolCapacity' => {
+    '1' => 'automatic',
+    '2' => 'maximum',
   },
-  'upsAdvConfigGreenMode' => {
-    '1' => 'disable',
-    '2' => 'enable',
-  },
-  'pcnsHumidityOutOfRangeProbe1EnableShutdown' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'upsBasicBatteryStatus' => {
-    '1' => 'unknown',
-    '2' => 'batteryNormal',
-    '3' => 'batteryLow',
-    '4' => 'batteryInFaultCondition',
-    '5' => 'noBatteryPresent',
-  },
-  'upsIntegratedATSSelectedSource' => {
-    '1' => 'noSourceSelected',
-    '2' => 'unknown',
-    '3' => 'sourceA',
-    '4' => 'sourceB',
-  },
-  'uioInputContactStatusCurrentState' => {
-    '1' => 'uioInputClosed',
-    '2' => 'uioInputOpen',
-    '3' => 'uioInputDisabled',
-    '4' => 'inputStateNotApplicable',
-  },
-  'airIRG3RDUConfigByPassValveEnabled' => {
-    '1' => 'no',
-    '2' => 'yes',
-  },
-  'iemStatusProbeMinTempViolation' => {
-    '1' => 'noViolation',
-    '2' => 'minTempViolation',
-    '3' => 'disabled',
-  },
-  'airFMSysAlarmMapSysHighEnvTemp' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'rARUFanStatusReplacementThreshold' => {
-    '1' => 'disabled',
-    '2' => 'khr20',
-    '3' => 'khr25',
-    '4' => 'khr30',
-    '5' => 'khr35',
-    '6' => 'khr40',
-    '7' => 'khr50',
-  },
-  'airIRmPmLouver1ManOpPosition' => {
-    '1' => 'closed',
-    '2' => 'open',
-  },
-  'airIRmPmHumidifier1Type' => {
+  'airIRmPmEheating4Type' => {
     '1' => 'direct',
-    '2' => 'proportional',
+    '2' => 'pwm',
   },
-  'airFMSysAlarmMapInput12' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'memOutletStatusAlarmState' => {
-    '1' => 'memOutletNormal',
-    '2' => 'memOutletAbnormal',
-  },
-  'upsPhaseResetMaxMinValues' => {
-    '1' => 'none',
-    '2' => 'reset',
-  },
-  'memBeaconStatusAlarmState' => {
-    '1' => 'memBeaconNormal',
-    '2' => 'memBeaconAbnormal',
-  },
-  'xATSSource2Rotation' => {
-    '1' => 'abc',
-    '2' => 'cba',
-    '3' => 'unknown',
-  },
-  'airIRG2GroupConfigLoadAssistEnable' => {
-    '1' => 'disable',
-    '2' => 'enable',
-  },
-  'emsVibrationSensorCommStatus' => {
-    '1' => 'commOK',
-    '2' => 'commLost',
-  },
-  'xATSInputContactNormalState' => {
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'pcnsNetCommunicationLostEnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'emsSensorControlSensorCommand' => {
-    '1' => 'noCommandEMS',
-    '2' => 'resetCommandEMS',
-  },
-  'airIRRP100UnitConfigHumidifierControl' => {
-    '1' => 'auto',
-    '2' => 'drainOff',
-  },
-  'emsAlarmDeviceStatusDeviceState' => {
-    '1' => 'alarmDeviceOnEMS',
-    '2' => 'alarmDeviceOffEMS',
-    '3' => 'alarmDeviceNotInstalledEMS',
-  },
-  'pcnsCommunicationLostEnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'upsDiagSubSysUsrSuppBattBreakerStatus' => {
+  'upsDiagSwitchGearInputSwitchStatus' => {
     '1' => 'unknown',
     '2' => 'notInstalled',
     '3' => 'opened',
     '4' => 'closed',
   },
-  'upsDiagSubSysBattMonitorStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'offOk',
-    '4' => 'onOk',
-    '5' => 'offFail',
-    '6' => 'onFail',
-    '7' => 'lostComm',
+  'switchgearBreakerPresent' => {
+    '1' => 'notPresent',
+    '2' => 'present',
   },
-  'airIRRCUnitConfigOutputSource' => {
-    '1' => 'anyAlarm',
-    '2' => 'criticalAlarm',
+  'airFMGroupCfgDmdFightSetting' => {
+    '1' => 'disable',
+    '2' => 'enable',
   },
-  'airFMSysAlarmMapExpMod1HighSupplyTemp' => {
+  'xATSTestingScheduleFrequency' => {
+    '1' => 'never',
+    '2' => 'daily',
+    '3' => 'weekly',
+    '4' => 'monthly',
+  },
+  'airFMSysFlowSwitch' => {
+    '1' => 'notApplicable',
+    '2' => 'none',
+    '3' => 'dxEcon',
+    '4' => 'multiCoolChillWater',
+  },
+  'isxModularDistModuleOutputStatus' => {
+    '1' => 'normal',
+    '2' => 'warning',
+    '3' => 'critical',
+    '4' => 'notPresent',
+    '6' => 'unknown',
+  },
+  'airFMGroupLoadShareCoolRequests' => {
+    '1' => 'disable',
+    '2' => 'enable',
+  },
+  'accessPXExtStatusRearDoorLock' => {
+    '1' => 'unlocked',
+    '2' => 'locked',
+    '3' => 'notInstalled',
+    '4' => 'disconnected',
+  },
+  'airFMSysAlarmMapExpMod1AirBlckIntOpen' => {
     '1' => 'notApplicable',
     '2' => 'disabled',
     '3' => 'enabled',
   },
-  'airIRRP500UnitStatusLeakSensor' => {
-    '1' => 'no-leak',
-    '2' => 'leak',
+  'battManSystemAmbientProbeDisconnected' => {
+    '1' => 'normal',
+    '2' => 'alarm',
   },
-  'airIRSCUnitStatusCompressor' => {
-    '1' => 'off',
-    '2' => 'on',
+  'battManSystemConfigurationInvalid' => {
+    '1' => 'normal',
+    '2' => 'alarm',
   },
-  'AirIRmStopState' => {
-    '1' => 'maybeOn',
-    '2' => 'unitOff',
+  'airIRG3RDUConfigCalibrateRefrigerantLeakDetector' => {
+    '1' => 'no',
+    '2' => 'yes',
   },
-  'isxModularPduDeviceTransformerPresent' => {
-    '1' => 'notPresent',
-    '2' => 'isoXfmrPresent',
-    '3' => 'autoXfmrPresent',
+  'sPDUOutletStatusVMOutletState' => {
+    '1' => 'outletStatusVMOn',
+    '2' => 'outletStatusVMOff',
   },
-  'airFMGroupFailoverModHumReplaceCylinder' => {
-    '1' => 'notApplicable',
-    '2' => 'disable',
-    '3' => 'enable',
-  },
-  'atsInputVoltageOrientation' => {
-    '1' => 'unknown',
-    '2' => 'singlePhase',
-    '3' => 'splitPhase',
-    '4' => 'threePhasePhaseToNeutral',
-    '5' => 'threePhasePhaseToPhase',
-  },
-  'pcnsNetCommunicationLostEnableShutdown' => {
+  'pcnsMaxInternalTempInRangeEnableCommandFile' => {
     '1' => 'yes',
     '2' => 'no',
   },
-  'emConfigContactSeverity' => {
-    '1' => 'critical',
-    '2' => 'warning',
-    '3' => 'informational',
+  'rPDU2SensorAnalogVoltageConfigAlarmEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
   },
-  'dm3ConfigConvLowVoltAlarm' => {
+  'pcnsEnvironmentCommunicationEstablishedEnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airIRG3GroupConfigConfigurationType' => {
+    '1' => 'racs',
+    '2' => 'spot',
+    '3' => 'in-row',
+    '4' => 'hacs',
+  },
+  'xATSSource1Index' => {
+    '1' => 'phase1',
+    '2' => 'phase2',
+    '3' => 'phase3',
+  },
+  'pcnsHumidityInRangeProbe1EnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'emsFluidSensorCommStatus' => {
+    '1' => 'commOK',
+    '2' => 'commLost',
+  },
+  'dm3ConfigBreakersAlarm' => {
     '1' => 'alarmIgnore',
     '2' => 'alarmRelay1',
     '3' => 'alarmRelay2',
@@ -13989,114 +12511,1784 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
     '8' => 'alarmMinor',
     '9' => 'alarmMajor',
   },
-  'battManSystemAmbientLowTempAlarm' => {
-    '1' => 'normal',
-    '2' => 'alarm',
+  'pcnsUIProtocol' => {
+    '1' => 'http',
+    '2' => 'https',
   },
-  'memVibrationSensorConfigAlarmGeneration' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'rPDU2SensorDiscreteStatusCurrentState' => {
-    '1' => 'open',
-    '2' => 'closed',
-    '3' => 'unknown',
-  },
-  'upsDiagIMInControl' => {
-    '1' => 'activeInControl',
-    '2' => 'passive',
-    '3' => 'unknown',
-    '4' => 'fault',
-  },
-  'pcnsMinLoadCapabilityLostEnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'upsAdvConfigDeepDischargeProtection' => {
-    '1' => 'enabled',
-    '2' => 'disabled',
-  },
-  'airFMSysAlarmMapMainModBlwrCntl2Fail' => {
+  'airFMSysAlarmMapExpMod2CoolFail' => {
     '1' => 'notApplicable',
     '2' => 'disabled',
     '3' => 'enabled',
   },
-  'emsFluidSensorConfigSensorSeverity' => {
+  'airIRRP500GroupConfigRuntimeBalancingEnable' => {
+    '1' => 'disable',
+    '2' => 'enable',
+  },
+  'airIRRP500UnitConfigReheatEnable' => {
+    '1' => 'enable',
+    '2' => 'disable',
+  },
+  'upsAdvConfigSimpleSignalShutdowns' => {
+    '1' => 'unknown',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'airIRRP500UnitStatusLeakSensor' => {
+    '1' => 'no-leak',
+    '2' => 'leak',
+  },
+  'memFluidSensorStatusSensorState' => {
+    '1' => 'fluidDetected',
+    '2' => 'noFluid',
+    '3' => 'unknown',
+  },
+  'atsStatusRedundancyState' => {
+    '1' => 'atsRedundancyLost',
+    '2' => 'atsFullyRedundant',
+  },
+  'memOutputStatusAlarmState' => {
+    '1' => 'memOutputNormal',
+    '2' => 'memOutputAbnormal',
+  },
+  'dm3StatusRectPresent' => {
+    '1' => 'statusTrue',
+    '2' => 'statusFalse',
+  },
+  'airFMModRHComp2Reset' => {
+    '1' => 'notApplicable',
+    '2' => 'noOperation',
+    '3' => 'reset',
+  },
+  'airIRRP100GroupStatusActiveFlowControlStatus' => {
+    '1' => 'under',
+    '2' => 'okay',
+    '3' => 'over',
+    '4' => 'notApplicable',
+  },
+  'upsOutletGroupStatusGroupState' => {
+    '1' => 'upsOutletGroupStatusOn',
+    '2' => 'upsOutletGroupStatusOff',
+    '3' => 'upsOutletGroupStatusUnknown',
+  },
+  'databaseStatus' => {
+    '1' => 'unknown',
+    '2' => 'stopped',
+    '3' => 'running',
+    '4' => 'detached',
+    '5' => 'catching-up',
+    '6' => 'attaching',
+    '7' => 'running-master',
+    '8' => 'running-primary-slave',
+    '9' => 'running-slave',
+    '10' => 'running-alone',
+  },
+  'emsOutputRelayControlOutputRelayCommand' => {
+    '1' => 'immediateCloseEMS',
+    '2' => 'immediateOpenEMS',
+  },
+  'memLeakRopeStatusSensorSeverity' => {
     '1' => 'critical',
     '2' => 'warning',
     '3' => 'informational',
   },
-  'upsSCGACOutputStatus' => {
-    '1' => 'acOutOn',
-    '2' => 'acOutOff',
-  },
-  'airFMModComp1' => {
+  'airFMModFireDetector' => {
     '1' => 'notApplicable',
-    '2' => 'on',
-    '3' => 'off',
+    '2' => 'notPresent',
+    '3' => 'present',
   },
-  'ats5gBankOutputCurrentStatus' => {
-    '1' => 'lowLoad',
-    '2' => 'normal',
-    '3' => 'nearOverload',
-    '4' => 'overload',
+  'airFMGroupSysRoleStatus' => {
+    '1' => 'reserved1',
+    '2' => 'reserved2',
+    '3' => 'onLine',
+    '4' => 'idle',
+    '5' => 'loadShare',
+    '6' => 'failed',
+    '7' => 'offLine',
+  },
+  'pcnsBypassContactorOkEnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'upsParallelSysRedundancyStatus' => {
+    '1' => 'nplus0',
+    '2' => 'nplus1',
+    '3' => 'nplus2',
+    '4' => 'nplus3',
+    '5' => 'nplus4',
+    '6' => 'nplus5',
+  },
+  'ats5gSwitchSourceA24VSupplyStatus' => {
+    '1' => 'fail',
+    '2' => 'ok',
+  },
+  'rPDUOutletStatusCommandPending' => {
+    '1' => 'outletStatusCommandPending',
+    '2' => 'outletStatusNoCommandPending',
+  },
+  'pcnsContactFault3EnableShutdown' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'pcnsMaxInternalTempExceededEnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airIRG3RDUConfigStopOnLeakDetect' => {
+    '1' => 'no',
+    '2' => 'yes',
+  },
+  'airFMSysAlarmMapInput13' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'upsAdvBatteryChargerStatus' => {
+    '1' => 'unknown',
+    '2' => 'ok',
+    '3' => 'inFaultCondition',
+    '4' => 'floatCharging',
+    '5' => 'boostCharging',
+    '6' => 'resting',
+    '7' => 'notCharging',
+    '8' => 'equalizationCharging',
+    '9' => 'testInProgress',
+    '10' => 'cyclicFloatCharging',
+  },
+  'wirelessSensorStatusAlarmGeneration' => {
+    '0' => 'disabled',
+    '1' => 'enabled',
+  },
+  'airIRG3RDUStatusPowerSource' => {
+    '1' => 'singleFeed',
+    '2' => 'dualFeed',
+  },
+  'coolingUnitConfigurationDiscreteAccess' => {
+    '1' => 'readOnly',
+    '2' => 'readWrite',
+  },
+  'pcnsEnvironmentCommunicationLostEnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airIRmPmUnitType' => {
+    '1' => 'mc',
+    '2' => 'dx',
+    '3' => 'cw',
+    '4' => 'ch',
+    '5' => 'ecoCool',
+    '6' => 'msc',
+    '7' => 'ge1',
+    '8' => 'ge2',
+    '9' => 'dualFluid',
+    '10' => 'cw2',
+    '256' => 'unknown',
+  },
+  'airFMStatusSystemHumidifyEnabled' => {
+    '1' => 'enabledYes',
+    '2' => 'enabledNo',
+  },
+  'rPDU2BankConfigBankPeakCurrentReset' => {
+    '1' => 'noOperation',
+    '2' => 'reset',
+  },
+  'upsAdvConfigAutoShutdownControlTimeOnBattery' => {
+    '1' => 'upsAdvConfigDisableTimeOnBatteryAutoShutdown',
+    '2' => 'upsAdvConfigEnableTimeOnBatteryAutoShutdown',
+  },
+  'iemStatusProbeMinTempViolation' => {
+    '1' => 'noViolation',
+    '2' => 'minTempViolation',
+    '3' => 'disabled',
+  },
+  'upsAdvBatteryCurrentPolarity' => {
+    '0' => 'positive',
+    '1' => 'negative',
+  },
+  'airFMSysAlarmMapMainModLowSupplyTemp' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'emsVibrationSensorStatusSensorSeverity' => {
+    '1' => 'critical',
+    '2' => 'warning',
+    '3' => 'informational',
+  },
+  'upsDiagUsrSuppSwitchgearMonitorStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'offOk',
+    '4' => 'onOk',
+    '5' => 'offFail',
+    '6' => 'onFail',
+    '7' => 'lostComm',
+  },
+  'airIRSCUnitStatusOperateMode' => {
+    '1' => 'standby',
+    '2' => 'on',
+    '3' => 'idle',
+  },
+  'airIRRP100UnitConfigIdleOnLeakDetect' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airIRRCUnitServiceIntervalsAirFilterAlarm' => {
+    '1' => 'enable',
+    '2' => 'disable',
+  },
+  'airIRRP500UnitConfigHeatAssistEnable' => {
+    '1' => 'enable',
+    '2' => 'disable',
+  },
+  'rARUStatusAruTempOvrdStatus' => {
+    '1' => 'inactive',
+    '2' => 'active',
+  },
+  'AirIRSCConfigType' => {
+    '1' => 'racs',
+    '2' => 'spot',
+    '3' => 'in-row',
+  },
+  'airFMSysResetSysFailure' => {
+    '1' => 'notApplicable',
+    '2' => 'noOperation',
+    '3' => 'reset',
+  },
+  'airIRG3CMConfigStopOnCoolFail' => {
+    '1' => 'no',
+    '2' => 'yes',
+  },
+  'airFMGroupCfgShutdownFire' => {
+    '1' => 'disable',
+    '2' => 'enable',
+  },
+  'accessPXConfigCardReaderEnableDisableAction' => {
+    '1' => 'disabled',
+    '2' => 'enable',
+  },
+  'pcnsNetCommunicationLostEnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airIRG2GroupConfigFanSpeedControl' => {
+    '1' => 'automatic',
+    '2' => 'manual',
+  },
+  'apcLocalDisplayConfigCheckLogIndicator' => {
+    '1' => 'checklogNotPresent',
+    '2' => 'checklogDisabled',
+    '3' => 'checklogInformational',
+    '4' => 'checklogWarning',
+    '5' => 'checklogCritical',
+  },
+  'upsAdvConfigUPSFail' => {
+    '1' => 'unknown',
+    '2' => 'gotoBypass',
+    '3' => 'dropLoad',
+  },
+  'rPDUOutletStatusOutletState' => {
+    '1' => 'outletStatusOn',
+    '2' => 'outletStatusOff',
+  },
+  'rPDU2DeviceStatusPowerSupply1Status' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+    '3' => 'notInstalled',
+  },
+  'emStatusContactStatus' => {
+    '1' => 'noFault',
+    '2' => 'fault',
+    '3' => 'disabled',
+  },
+  'airFMStatusSystemDehumidifyEnabled' => {
+    '1' => 'enabledYes',
+    '2' => 'enabledNo',
+  },
+  'upsAdvTestCalibrationResults' => {
+    '1' => 'ok',
+    '2' => 'invalidCalibration',
+    '3' => 'calibrationInProgress',
+    '4' => 'refused',
+    '5' => 'aborted',
+    '6' => 'pending',
+    '7' => 'unknown',
+  },
+  'pcbeUIProtocol' => {
+    '1' => 'http',
+    '2' => 'https',
+  },
+  'sPDUOutletConfigMSPgsOutletCtrlMode' => {
+    '1' => 'modeGracefulShutdown',
+    '2' => 'modeAnnunciator',
+  },
+  'rPDU2DeviceStatusNPSType' => {
+    '1' => 'notNPS',
+    '2' => 'host',
+    '3' => 'guest',
+  },
+  'AirIRmAlarmState' => {
+    '1' => 'ok',
+    '2' => 'alarm',
+  },
+  'airIRRP100UnitConfigDehumidifyEnable' => {
+    '1' => 'enable',
+    '2' => 'disable',
+  },
+  'memSmokeSensorStatusSensorState' => {
+    '1' => 'smokeDetected',
+    '2' => 'noSmoke',
+    '3' => 'unknown',
+  },
+  'emsOutputRelayConfigOutputRelayNormalState' => {
+    '1' => 'normallyClosedEMS',
+    '2' => 'normallyOpenEMS',
+  },
+  'airFMSysAlarmMapExpMod2LowAirFlow' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'airIRG3RDUConfigOnReadyStandby' => {
+    '1' => 'standby',
+    '2' => 'ready',
+    '3' => 'on',
+  },
+  'sPDUOutletConfigMSPmupsP1LowTemp' => {
+    '1' => 'disableAlarm',
+    '2' => 'enableAlarm',
+  },
+  'airFMModServIntComp1Reset' => {
+    '1' => 'notApplicable',
+    '2' => 'noOperation',
+    '3' => 'reset',
+  },
+  'airFMGroupFailoverSysHighEnvTemp' => {
+    '1' => 'notApplicable',
+    '2' => 'disable',
+    '3' => 'enable',
+  },
+  'rPDU2OutletSwitchedStatusState' => {
+    '1' => 'off',
+    '2' => 'on',
+  },
+  'airIRmPmLouver1Position' => {
+    '1' => 'closed',
+    '2' => 'open',
+  },
+  'airFMModStmElectHumMode' => {
+    '1' => 'notApplicable',
+    '2' => 'off',
+    '3' => 'auto',
+    '4' => 'drain',
+  },
+  'rPDU2DeviceStatusPowerSupplyAlarm' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'wirelessSensorPodStatusDryContactNormalState' => {
+    '0' => 'normallyOpen',
+    '1' => 'normallyClosed',
+  },
+  'pcnsHumidityOutOfRangeProbe1EnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'upsOutletGroupConfigLoadShedControlAutoRestart' => {
+    '1' => 'upsOutletGroupConfigAutoRestart',
+    '2' => 'upsOutletGroupConfigManualRestart',
+  },
+  'airFMSysAlarmMapSysLowEnvHum' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'pcnsBypassContactorOkEnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'serverStatus' => {
+    '1' => 'unknown',
+    '2' => 'stopped',
+    '3' => 'running',
+    '4' => 'running-missing',
+    '5' => 'initializing',
+    '6' => 'starting',
+    '7' => 'disaster-recovery',
+    '8' => 'postoffice-inconsistent',
+    '9' => 'missing-jgroups',
+  },
+  'rPDULoadPhaseConfigAlarm' => {
+    '1' => 'noLoadAlarm',
+    '2' => 'underCurrentAlarm',
+    '3' => 'nearOverCurrentAlarm',
+    '4' => 'overCurrentAlarm',
+  },
+  'dm3ConfigLVDHWAlarm' => {
+    '1' => 'alarmIgnore',
+    '2' => 'alarmRelay1',
+    '3' => 'alarmRelay2',
+    '4' => 'alarmRelay3',
+    '5' => 'alarmRelay4',
+    '6' => 'alarmRelay5',
+    '7' => 'alarmRelay6',
+    '8' => 'alarmMinor',
+    '9' => 'alarmMajor',
+  },
+  'airFMSysAlarmMapInput5' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'upsParallelDiagSubSysBreakerStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'opened',
+    '4' => 'closed',
+  },
+  'airIRG2GroupSetptsFanSpeedPreference' => {
+    '1' => 'low',
+    '2' => 'med-low',
+    '3' => 'med',
+    '4' => 'med-high',
+    '5' => 'high',
+  },
+  'airFMSysAlarmMapOutput10' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'xATSSystemOutputPhaseIndex' => {
+    '1' => 'phase1',
+    '2' => 'phase2',
+    '3' => 'phase3',
+  },
+  'dcmim2StatusRectFail' => {
+    '1' => 'statusTrue',
+    '2' => 'statusFalse',
+  },
+  'airFMAlarmClearActiveSysModAlarms' => {
+    '1' => 'noOperation',
+    '2' => 'clearAlarms',
+  },
+  'upsAdvConfigBypassPhaseLockRequired' => {
+    '1' => 'unknown',
+    '2' => 'disabled',
+    '3' => 'enabled',
+    '4' => 'alwaysAcceptable',
+    '5' => 'neverAcceptable',
+  },
+  'airFMSysNumModules' => {
+    '1' => 'notApplicable',
+    '2' => 'one',
+    '3' => 'two',
+    '4' => 'three',
+  },
+  'isxModularDistSubFeedInfoAlarmHighEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'airIRmPmCmp2ManOperationActive' => {
+    '1' => 'automatic',
+    '2' => 'manual',
+  },
+  'airFMSysCoolState' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'xATSSource1Rotation' => {
+    '1' => 'abc',
+    '2' => 'cba',
+    '3' => 'unknown',
+  },
+  'airIRG3RDUConfigOutputNormalState' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'pcnsCommunicationLostEnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'battManInputContactAlarmState' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'airFMSysAlarmMapInput15' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'battManProbeRange' => {
+    '1' => 'amps1000',
+    '2' => 'amps500',
+    '3' => 'amps100',
+    '4' => 'amps200',
+    '5' => 'amps2000',
+  },
+  'airIRG3RDUStatusOperatingMode' => {
+    '1' => 'standby',
+    '2' => 'ready',
+    '3' => 'on',
+    '4' => 'stop',
+    '5' => 'maintenancemode',
+  },
+  'airIRRP500UnitConfigUnitRoleOverride' => {
+    '1' => 'automatic',
+    '2' => 'forcedOn',
+  },
+  'upsParallelSysUpsMode' => {
+    '1' => 'unknown',
+    '2' => 'onLine',
+    '3' => 'onBattery',
+    '4' => 'onBatteryTest',
+    '5' => 'requestedStaticBypass',
+    '6' => 'forcedBypass',
+    '7' => 'maintenanceBypass',
+    '8' => 'off',
+    '9' => 'ecoMode',
+    '10' => 'hotStandby',
+    '11' => 'inquiring',
+  },
+  'rARUStatusAruManualSetpoint' => {
+    '1' => 'aruOff',
+    '2' => 'aru85F-29C',
+    '3' => 'aru90F-32C',
+    '4' => 'aru95F-35C',
+    '5' => 'aru100F-38C',
+    '6' => 'aru7kW',
+    '7' => 'aru5kW',
+    '8' => 'aru3kW',
+    '9' => 'aru2kW',
+    '10' => 'aruRem',
+  },
+  'atsConfigFrequencyDeviation' => {
+    '1' => 'one',
+    '2' => 'two',
+    '3' => 'three',
+    '5' => 'five',
+    '10' => 'ten',
+  },
+  'upsDiagComBusExternalRIMStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'ok',
+    '4' => 'lostComm',
+    '5' => 'rxFailure',
+    '6' => 'txFailure',
+  },
+  'upsAdvBatteryCondition' => {
+    '1' => 'unknown',
+    '2' => 'ok',
+    '3' => 'weak',
+    '4' => 'poor',
+  },
+  'pcnsContactFault1EnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'memDoorSensorConfigSensorSeverity' => {
+    '1' => 'critical',
+    '2' => 'warning',
+    '3' => 'informational',
+  },
+  'accessPXStatusRearDoorLock' => {
+    '1' => 'unlocked',
+    '2' => 'locked',
+    '3' => 'notInstalled',
+    '4' => 'disconnected',
+  },
+  'airFMStatusSystemCoolingEnabled' => {
+    '1' => 'enabledYes',
+    '2' => 'enabledNo',
+  },
+  'atsStatusFuseSourceA' => {
+    '1' => 'atsFuseStatusClose',
+    '2' => 'atsFuseStatusOpen',
+  },
+  'airFMAlarmType' => {
+    '1' => 'group',
+    '2' => 'system',
+    '3' => 'mainMod',
+    '4' => 'expMod1',
+    '5' => 'expMod2',
+  },
+  'rPDU2DevicePropertiesOrientation' => {
+    '1' => 'horizontal',
+    '2' => 'vertical',
+    '3' => 'verticalISXv2',
+    '4' => 'verticalISXv3',
+  },
+  'pcnsContactFault2EnableShutdown' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airIRRP500UnitConfigDehumidifyEnable' => {
+    '1' => 'enable',
+    '2' => 'disable',
+  },
+  'airFMSysInputNormalState' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'xATSGeneratorServiceCalendarIntervalThreshold' => {
+    '1' => 'disabled',
+    '2' => 'interval1month',
+    '3' => 'interval2month',
+    '4' => 'interval3month',
+    '5' => 'interval6month',
+    '6' => 'intervalyearly',
+  },
+  'airFMSysAlarmMapOutput8' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'airIRG2RDT2RunHoursFanPSPosition' => {
+    '1' => 'upper',
+    '2' => 'lower',
+    '3' => 'left',
+    '4' => 'right',
+  },
+  'emsStatusCheckLogLight' => {
+    '1' => 'lightOff',
+    '2' => 'lightOn',
+  },
+  'pcnsRunTimeBelowThresholdEnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'upsAdvControlUpsSleep' => {
+    '1' => 'noPutUpsToSleep',
+    '2' => 'putUpsToSleep',
+    '3' => 'putUpsToSleepGracefully',
+    '4' => 'putUpsSyncGroupToSleep',
+    '5' => 'putUpsSyncGroupToSleepGracefully',
+  },
+  'uioSensorConfigHighHumidityEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'atsInputVoltageOrientation' => {
+    '1' => 'unknown',
+    '2' => 'singlePhase',
+    '3' => 'splitPhase',
+    '4' => 'threePhasePhaseToNeutral',
+    '5' => 'threePhasePhaseToPhase',
+  },
+  'airIRG3RDUConfigOutputSource' => {
+    '1' => 'anyalarm',
+    '2' => 'onlycriticalalarms',
+  },
+  'dm3StatusRectStandby' => {
+    '1' => 'statusTrue',
+    '2' => 'statusFalse',
+  },
+  'upsInputContactState' => {
+    '1' => 'upsInputContactNormalState',
+    '2' => 'upsInputContactAbnormalState',
+  },
+  'pcnsContactFault2EnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airFMGroupSysStatus' => {
+    '1' => 'statusOnLine',
+    '2' => 'statusIdle',
+    '3' => 'statusLoadShare',
+    '4' => 'statusOffLine',
+    '5' => 'statusFailed',
+    '6' => 'statusDisabled',
+    '7' => 'statusUndefined',
+  },
+  'ats5gEnvConfigHumAlarmsEnabled' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'dm3StatusFusesStatus' => {
+    '1' => 'statusClosed',
+    '2' => 'statusOpen',
+  },
+  'airFMSysAlarmMapOutput16' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'upsOpStatsReset' => {
+    '1' => 'notSupported',
+    '2' => 'noOperation',
+    '3' => 'reset',
+  },
+  'xATSSwitchStatusOperationalMode' => {
+    '1' => 'automatic',
+    '2' => 'notInAutoAbnormal',
+    '3' => 'notInAuto',
+    '4' => 'unknown',
+  },
+  'airFMModCapacityCtrl' => {
+    '1' => 'notApplicable',
+    '2' => 'tandem',
+    '3' => 'hotGasBypass',
+  },
+  'dm3StatusConvDiagPass' => {
+    '1' => 'statusTrue',
+    '2' => 'statusFalse',
+  },
+  'xATSSource1Position' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'tripped',
+    '4' => 'unknown',
+  },
+  'iemConfigProbeLowTempEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'pcnsBypassContactorFailedEnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airIRRP100UnitConfigPowerSourceConfig' => {
+    '1' => 'single',
+    '2' => 'dual',
+  },
+  'pmmInputBreakerState' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'unknown',
+  },
+  'airIRmPmRemoteUPS' => {
+    '1' => 'off',
+    '2' => 'on',
+  },
+  'upsAsiUpsControlServerRequestShutdown' => {
+    '1' => 'serverShutdownOff',
+    '2' => 'serverShutdownReboot',
+  },
+  'pcnsPowerFailedEnableShutdown' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'emsSmokeSensorConfigSensorSeverity' => {
+    '1' => 'critical',
+    '2' => 'warning',
+    '3' => 'informational',
+  },
+  'pcnsPowerRestoredEnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'atsStatus1Dot0VPowerSupply' => {
+    '1' => 'atsPowerSupplyFailure',
+    '2' => 'atsPowerSupplyOK',
+  },
+  'airIRmPmMaintenance' => {
+    '1' => 'notNecessary',
+    '2' => 'necessary',
+  },
+  'atsStatusFrontPanel' => {
+    '1' => 'locked',
+    '2' => 'unlocked',
+  },
+  'wirelessSensorPodStatusAlarmGeneration' => {
+    '0' => 'disabled',
+    '1' => 'enabled',
+  },
+  'airFMSysDehumEssFunction' => {
+    '1' => 'notApplicable',
+    '2' => 'yes',
+    '3' => 'no',
+  },
+  'xATSInputContactNormalState' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'emsDoorSensorConfigSensorSeverity' => {
+    '1' => 'critical',
+    '2' => 'warning',
+    '3' => 'informational',
+  },
+  'pcnsMaxInternalTempExceededEnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'essentialServicesStatus' => {
+    '1' => 'unknown',
+    '2' => 'stopped',
+    '3' => 'running',
+    '4' => 'time-sync-problems',
+    '5' => 'backup-problems',
+  },
+  'airIRG3RDUStatusStopOnLeakDetect' => {
+    '1' => 'no',
+    '2' => 'yes',
+  },
+  'upsDiagnosticDisplayStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'offOk',
+    '4' => 'onOk',
+    '5' => 'offFail',
+    '6' => 'onFail',
+    '7' => 'lostComm',
+  },
+  'emsSensorControlSensorCommand' => {
+    '1' => 'noCommandEMS',
+    '2' => 'resetCommandEMS',
+  },
+  'uioInputContactStatusCommStatus' => {
+    '1' => 'notInstalled',
+    '2' => 'commsOK',
+    '3' => 'commsLost',
+  },
+  'upsOutletGroupConfigOutletType' => {
+    '1' => 'upsSwitchedOutletGroup',
+    '2' => 'upsMainOutletGroup',
+  },
+  'upsAdvConfigAutomaticRestart' => {
+    '1' => 'enabled',
+    '2' => 'disabled',
   },
   'airIRG3RDUStatusOnReadyStandby' => {
     '1' => 'standby',
     '2' => 'ready',
     '3' => 'on',
   },
-  'upsAdvControlUpsOff' => {
-    '1' => 'noTurnUpsOff',
-    '2' => 'turnUpsOff',
-    '3' => 'turnUpsOffGracefully',
-    '4' => 'turnUpsSyncGroupOff',
-    '5' => 'turnUpsSyncGroupOffAfterDelay',
-    '6' => 'turnUpsSyncGroupOffGracefully',
+  'airFMModBlwr1ElOvMode' => {
+    '1' => 'notApplicable',
+    '2' => 'inactive',
+    '3' => 'active',
   },
-  'xATSGeneratorAdvStatusCoolantLevel' => {
-    '1' => 'ok',
-    '2' => 'low',
+  'airFMSysReheatEssFunction' => {
+    '1' => 'notApplicable',
+    '2' => 'yes',
+    '3' => 'no',
+  },
+  'airIRmPmUnitTemperatureScale' => {
+    '1' => 'celsius',
+    '2' => 'fahrenheit',
+  },
+  'switchgearBreakerType' => {
+    '1' => 'unknown',
+    '2' => 'unitInputBreaker',
+    '3' => 'staticSwitchInputBreaker',
+    '4' => 'maintenanceBypassBreaker',
+    '5' => 'unitOutputBreaker',
+    '6' => 'systemIsolationBreaker',
+    '7' => 'batteryBreaker',
+    '8' => 'bypassBackFeedBreaker',
+    '9' => 'internalMaintenanceBypassBreaker',
+    '10' => 'redundantInternalMaintenanceBypassBreaker',
+  },
+  'rPDU2OutletSwitchedControlCommand' => {
+    '1' => 'immediateOn',
+    '2' => 'immediateOff',
+    '3' => 'immediateReboot',
+    '4' => 'outletUnknown',
+    '5' => 'delayedOn',
+    '6' => 'delayedOff',
+    '7' => 'delayedReboot',
+    '8' => 'cancelPendingCommand',
+  },
+  'rARUConfigAruMasterControl' => {
+    '1' => 'aruOn',
+    '2' => 'aruOff',
+  },
+  'airFMGroupFailoverModCoolFail' => {
+    '1' => 'notApplicable',
+    '2' => 'disable',
+    '3' => 'enable',
+  },
+  'pcnsNMCComsLostFlag' => {
+    '1' => 'active',
+    '2' => 'clear',
+  },
+  'airFMSysReheatPIDMethod' => {
+    '1' => 'notApplicable',
+    '2' => 'p',
+    '3' => 'pi',
+    '4' => 'pid',
+  },
+  'pmmOutputBreakerState' => {
+    '1' => 'open',
+    '2' => 'closed',
     '3' => 'unknown',
   },
-  'emsOutletControlOutletCommand' => {
-    '1' => 'immediateOnEMS',
-    '2' => 'immediateOffEMS',
+  'emStatusProbeMaxHumidViolation' => {
+    '1' => 'noViolation',
+    '2' => 'maxHumidViolation',
+    '3' => 'disabled',
   },
-  'pcnsTempInRangeProbe1EnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
+  'airIRmPmLouver1ManOpPosition' => {
+    '1' => 'closed',
+    '2' => 'open',
   },
-  'atsStatusCommStatus' => {
-    '1' => 'atsNeverDiscovered',
-    '2' => 'atsCommEstablished',
-    '3' => 'atsCommLost',
+  'sPDUMasterStatusVMOverloadCondition' => {
+    '1' => 'overloadConditionTrueVM',
+    '2' => 'overloadConditionFalseVM',
+  },
+  'xATSSource2Index' => {
+    '1' => 'phase1',
+    '2' => 'phase2',
+    '3' => 'phase3',
+  },
+  'dm3ConfigRectConfigAlarm' => {
+    '1' => 'alarmIgnore',
+    '2' => 'alarmRelay1',
+    '3' => 'alarmRelay2',
+    '4' => 'alarmRelay3',
+    '5' => 'alarmRelay4',
+    '6' => 'alarmRelay5',
+    '7' => 'alarmRelay6',
+    '8' => 'alarmMinor',
+    '9' => 'alarmMajor',
+  },
+  'uioInputContactStatusAlarmStatus' => {
+    '1' => 'uioNormal',
+    '2' => 'uioWarning',
+    '3' => 'uioCritical',
+    '4' => 'inputStatusNotApplicable',
+  },
+  'pcnsMode' => {
+    '1' => 'single',
+    '2' => 'redundant',
+    '3' => 'parallel',
+    '4' => 'advanced',
+  },
+  'wirelessSensorStatusCommStatus' => {
+    '0' => 'inactive',
+    '1' => 'active',
+  },
+  'upsAdvControlRebootUpsWithOrWithoutAC' => {
+    '1' => 'noRebootUpsWithOrWithoutAC',
+    '2' => 'rebootUpsImmediatelyWithOrWithoutAC',
+    '3' => 'rebootUpsDelayedWithOrWithoutAC',
+  },
+  'airFMModRHComp1Reset' => {
+    '1' => 'notApplicable',
+    '2' => 'noOperation',
+    '3' => 'reset',
+  },
+  'dm3ConfigLVDOpenAlarm' => {
+    '1' => 'alarmIgnore',
+    '2' => 'alarmRelay1',
+    '3' => 'alarmRelay2',
+    '4' => 'alarmRelay3',
+    '5' => 'alarmRelay4',
+    '6' => 'alarmRelay5',
+    '7' => 'alarmRelay6',
+    '8' => 'alarmMinor',
+    '9' => 'alarmMajor',
   },
   'dm3StatusSysRectVoltSanity' => {
     '1' => 'saneYES',
     '2' => 'saneNO',
   },
-  'ats5gIdentModuleType' => {
-    '1' => 'notNPS',
-    '2' => 'host',
-    '3' => 'guest',
+  'pcnsPowerFailedEnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
   },
-  'battManString2BatteryOpenCell' => {
+  'battManString2BatteryHighOhmicValue' => {
     '1' => 'normal',
     '2' => 'alarm',
   },
-  'battManSystemAmbientProbeDisconnected' => {
+  'airIRSCUnitConfigOutputNormalState' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'airFMSysHumCtrlSetting' => {
+    '1' => 'notApplicable',
+    '2' => 'relativeHum',
+    '3' => 'dewPoint',
+  },
+  'airFMSysAlarmMapExpMod2BlwrCntl1Fail' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'airIRRP500UnitConfigSecondaryPowerFeedCapability' => {
+    '1' => 'full',
+    '2' => 'reduced',
+  },
+  'rPDU2BankConfigOverloadRestriction' => {
+    '1' => 'alwaysAllowTurnON',
+    '2' => 'restrictOnNearOverload',
+    '3' => 'restrictOnOverload',
+    '4' => 'notSupported',
+  },
+  'pcnsHumidityOutOfRangeProbe1EnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'pcnsContactFault4EnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'upsBasicControlConserveBattery' => {
+    '1' => 'noTurnOffUps',
+    '2' => 'turnOffUpsToConserveBattery',
+  },
+  'dm3StatusSysConvVoltSanity' => {
+    '1' => 'saneYES',
+    '2' => 'saneNO',
+  },
+  'upsDiagSubSysPowerFactorCorrectionStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'offOk',
+    '4' => 'onOk',
+    '5' => 'offFail',
+    '6' => 'onFail',
+    '7' => 'lostComm',
+  },
+  'upsAdvEnergyStorageType' => {
+    '1' => 'unknown',
+    '2' => 'vrlaOrWetCells',
+    '3' => 'niCdBatteries',
+    '4' => 'liIonBatteries',
+    '5' => 'noEnergyStorage',
+    '6' => 'flywheel',
+    '7' => 'ultracaps',
+  },
+  'airFMSysAlarmMapMainModLowAirFlow' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'airFMSysInputAlarmAction' => {
+    '1' => 'statusOnly',
+    '2' => 'minor',
+    '3' => 'major',
+    '4' => 'remoteRunStop',
+    '5' => 'nonessStop',
+    '6' => 'immShutdown',
+  },
+  'emStatusProbeStatus' => {
+    '1' => 'disconnected',
+    '2' => 'connected',
+  },
+  'dm3StatusRectCfg' => {
+    '1' => 'statusTrue',
+    '2' => 'statusFalse',
+  },
+  'airFMSysAlarmMapSysSecSensFail' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'airPACondensatePump' => {
+    '1' => 'statusON',
+    '2' => 'statusOFF',
+  },
+  'rARUFanStatusFanRunhourReset' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'rPDUIdentDeviceDisplayOrientation' => {
+    '1' => 'displayNormal',
+    '2' => 'displayReverse',
+  },
+  'upsSCGACOutputStatus' => {
+    '1' => 'acOutOn',
+    '2' => 'acOutOff',
+  },
+  'dm3StatusConvFail' => {
+    '1' => 'statusTrue',
+    '2' => 'statusFalse',
+  },
+  'isxModularPduAlarmStatus' => {
+    '1' => 'normal',
+    '2' => 'warning',
+    '3' => 'critical',
+  },
+  'pcnsVirtualInstall' => {
+    '1' => 'none',
+    '2' => 'hyper-V',
+    '3' => 'vmWare',
+    '4' => 'nutanixAHV',
+    '5' => 'nutanixESXi',
+    '6' => 'simpliVity',
+    '7' => 'hyperFlex',
+  },
+  'xPDUDeviceLoadTieBreakerPresent' => {
+    '1' => 'notPresent',
+    '2' => 'present',
+  },
+  'pcnsTempOutOfRangeProbe1EnableShutdown' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'atsConfigTransferVoltageRange' => {
+    '1' => 'wide',
+    '2' => 'medium',
+    '3' => 'narrow',
+  },
+  'rARUStatusAruTempOvrdEnableDisable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'rPDU2AdvBankConfigOverloadRestriction' => {
+    '1' => 'alwaysAllowTurnON',
+    '2' => 'restrictOnNearOverload',
+    '3' => 'restrictOnOverload',
+    '4' => 'notSupported',
+  },
+  'airIRRP500GroupConfigLoadAssistEnable' => {
+    '1' => 'disable',
+    '2' => 'enable',
+  },
+  'airIRG2RDT2ConfigUnitRoleOverride' => {
+    '1' => 'automatic',
+    '2' => 'forcedOn',
+  },
+  'emStatusProbeLowTempViolation' => {
+    '1' => 'noViolation',
+    '2' => 'lowTempViolation',
+    '3' => 'disabled',
+  },
+  'atsStatusPlus12VPowerSupply' => {
+    '1' => 'atsPowerSupplyFailure',
+    '2' => 'atsPowerSupplyOK',
+  },
+  'rPDU2SensorDiscreteStatusType' => {
+    '1' => 'notConnected',
+    '2' => 'doorContactSensor',
+    '3' => 'smokeSensor',
+    '4' => 'motionDetector',
+    '5' => 'vibrationSensor',
+    '6' => 'dryContactSensor',
+    '7' => 'spotLeakSensor',
+  },
+  'xPDUUPSInputVoltagePhaseIndex' => {
+    '1' => 'phase1',
+    '2' => 'phase2',
+    '3' => 'phase3',
+  },
+  'xPDUTransformTempStatus' => {
+    '1' => 'normal',
+    '2' => 'overtemp',
+    '3' => 'noTransformerPresent',
+    '4' => 'unknown',
+  },
+  'upsOutputRelayConfigPolarity' => {
+    '1' => 'upsOutputRelayAllRelaysEnergizedWhenTrue',
+    '2' => 'upsOutputRelayAllRelaysNotEnergizedWhenTrue',
+  },
+  'airIRmPmUnitWinterMode' => {
+    '1' => 'summer',
+    '2' => 'winter',
+  },
+  'upsBatteryStatsReset' => {
+    '1' => 'notSupported',
+    '2' => 'noOperation',
+    '3' => 'reset',
+  },
+  'iemStatusProbeLowTempViolation' => {
+    '1' => 'noViolation',
+    '2' => 'lowTempViolation',
+    '3' => 'disabled',
+  },
+  'ats5gEnvControlPeakTempReset' => {
+    '1' => 'none',
+    '2' => 'reset',
+  },
+  'airFMSysResetFldSrvcDflts' => {
+    '1' => 'notApplicable',
+    '2' => 'noOperation',
+    '3' => 'reset',
+  },
+  'upsDiagSubSysExternalConnectorStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'offOk',
+    '4' => 'onOk',
+    '5' => 'offFail',
+    '6' => 'onFail',
+    '7' => 'lostComm',
+  },
+  'isxModularPduTransformerTempStatus' => {
+    '1' => 'normal',
+    '2' => 'overtemp',
+    '3' => 'noTransformerPresent',
+    '4' => 'unknown',
+  },
+  'airIRSCUnitStatusOutputState' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'xPDUDeviceEarthGroundMonitorPresent' => {
+    '1' => 'notPresent',
+    '2' => 'present',
+  },
+  'airFMModComp1' => {
+    '1' => 'notApplicable',
+    '2' => 'on',
+    '3' => 'off',
+  },
+  'rPDU2SensorDiscreteConfigNormalState' => {
+    '1' => 'normallyOpen',
+    '2' => 'normallyClosed',
+  },
+  'dm3StatusConvStandby' => {
+    '1' => 'statusTrue',
+    '2' => 'statusFalse',
+  },
+  'airFMSysCndsrFluidVlvAct' => {
+    '1' => 'notApplicable',
+    '2' => 'none',
+    '3' => 'floatingControl',
+  },
+  'pcnsCommunicationLostEnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'rARUFanStatusReplacementThreshold' => {
+    '1' => 'disabled',
+    '2' => 'khr20',
+    '3' => 'khr25',
+    '4' => 'khr30',
+    '5' => 'khr35',
+    '6' => 'khr40',
+    '7' => 'khr50',
+  },
+  'airFMSysAlarmMapSysSupplySensFail' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'pcnsAdvancedTurnOffSOG' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airFMSysAlarmMapInput8' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'dm3StatusRectDiagPass' => {
+    '1' => 'statusTrue',
+    '2' => 'statusFalse',
+  },
+  'airIRG2GroupConfigLoadAssistEnable' => {
+    '1' => 'disable',
+    '2' => 'enable',
+  },
+  'emsStatusSysTempUnits' => {
+    '1' => 'celsius',
+    '2' => 'fahrenheit',
+  },
+  'accessPXStatusBeaconCurrentState' => {
+    '1' => 'off',
+    '2' => 'on',
+    '3' => 'notInstalled',
+    '4' => 'disconnected',
+  },
+  'pcnsContactFault1EnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'upsDiagIMStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'offOk',
+    '4' => 'onOk',
+    '5' => 'offFail',
+    '6' => 'onFail',
+    '7' => 'lostComm',
+  },
+  'upsAdvTestDiagnosticsBatteryInterval' => {
+    '1' => 'never',
+    '2' => 'weekly',
+    '3' => 'biweekly',
+    '4' => 'every4weeks',
+    '5' => 'every8weeks',
+    '6' => 'every12weeks',
+    '7' => 'every26weeks',
+    '8' => 'every52weeks',
+  },
+  'sPDUOutletStatusMSPOutletState' => {
+    '1' => 'outletStatusMSPOn',
+    '2' => 'outletStatusMSPOff',
+  },
+  'rARUConfigAruRemoteSetpoint' => {
+    '1' => 'aruOff',
+    '2' => 'aru85F-29C',
+    '3' => 'aru90F-32C',
+    '4' => 'aru95F-35C',
+    '5' => 'aru100F-38C',
+    '6' => 'aru7kW-1200cfm',
+    '7' => 'aru5kW-800cfm',
+    '8' => 'aru3kW-500cfm',
+    '9' => 'aru2kW-300cfm',
+    '10' => 'aru400cfm',
+    '11' => 'aru600cfm',
+    '12' => 'aru700cfm',
+    '13' => 'aru900cfm',
+    '14' => 'aru1000cfm',
+    '15' => 'aru1400cfm',
+    '16' => 'aru1600cfm',
+    '17' => 'aru1800cfm',
+    '18' => 'aru2000cfm',
+  },
+  'upsDiagSubSysDCCircuitBreakerStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'opened',
+    '4' => 'closed',
+  },
+  'uioSpotFluidSensorStatusCommStatus' => {
+    '1' => 'notInstalled',
+    '2' => 'commsOK',
+    '3' => 'commsLost',
+  },
+  'rPDU2GroupEnergyReset' => {
+    '1' => 'noOperation',
+    '2' => 'reset',
+    '3' => 'notSupported',
+  },
+  'rPDU2DeviceStatusCommandPending' => {
+    '1' => 'commandPending',
+    '2' => 'noCommandPending',
+    '3' => 'commandPendingUnknown',
+  },
+  'upsAdvConfigFrequencyConverterMode' => {
+    '1' => 'autoRanging',
+    '2' => 'frequencyConverter',
+    '3' => 'unknown',
+  },
+  'upsAdvConfigChargerLevel' => {
+    '1' => 'unknown',
+    '2' => 'low',
+    '3' => 'high',
+  },
+  'rPDUIdentDeviceOrientation' => {
+    '1' => 'orientHorizontal',
+    '2' => 'orientVertical',
+  },
+  'upsDiagSubSysUsrSuppBattMonitorStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'offOk',
+    '4' => 'onOk',
+    '5' => 'offFail',
+    '6' => 'onFail',
+    '7' => 'lostComm',
+  },
+  'airIRRP100UnitConfigHumidifyEnable' => {
+    '1' => 'enable',
+    '2' => 'disable',
+  },
+  'airFMSysFastStartup' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'battManString1BatteryChemHighVoltageAlarm' => {
     '1' => 'normal',
     '2' => 'alarm',
   },
-  'dcmim2StatusBattCapacityTestResult' => {
-    '1' => 'capacityTestNotPerformed',
-    '2' => 'capacityTestInProcess',
-    '3' => 'capacityTestInterrupted',
-    '4' => 'capacityTestPass',
-    '5' => 'capacityTestFail',
+  'isxModularDistSysOutputVoltageFrequencyTolerance' => {
+    '1' => 'freqToleranceOff',
+    '2' => 'freqTolerancePointTwo',
+    '3' => 'freqTolerancePointFive',
+    '4' => 'freqToleranceOne',
+    '5' => 'freqToleranceOnePointFive',
+    '6' => 'freqToleranceTwo',
+    '7' => 'freqToleranceThree',
+    '8' => 'freqToleranceFour',
+    '9' => 'freqToleranceFive',
+    '10' => 'freqToleranceNine',
+    '11' => 'freqToleranceNotAvailable',
   },
-  'airIRRP500UnitConfigOutputNormalState' => {
+  'isxModularDistModuleOutputKwhReset' => {
+    '1' => 'no',
+    '2' => 'yes',
+  },
+  'xATSTestingScheduleTestWithLoadInterval' => {
+    '1' => 'applyLoadEveryTest',
+    '2' => 'neverApplyLoad',
+    '3' => 'applyLoadMonthly',
+    '4' => 'applyLoadMonthlyDetailed',
+  },
+  'xPDUOutputRelayNormalState' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'airFMSysAlarmMapMainModCondPumpFail' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'pcnsParallelRedundancyLostEnableShutdown' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'sPDUMasterConfigVMOverloadRestriction' => {
+    '1' => 'alwaysAllowTurnON',
+    '2' => 'restrictOnWarning',
+    '3' => 'restrictOnOverload',
+  },
+  'accessPXExtStatusRearDoor' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'notInstalled',
+    '4' => 'disconnected',
+  },
+  'airIRRCUnitStatusActivePowerSource' => {
+    '1' => 'sourceA',
+    '2' => 'sourceB',
+  },
+  'sPDUOutletConfigMSPannunInitialState' => {
+    '1' => 'initialStateOff',
+    '2' => 'initialStateOn',
+  },
+  'xPDUInputContactNormalState' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'airIRRP100GroupSetpointsActiveFlowControlBias' => {
+    '1' => 'positive',
+    '2' => 'slightlyPositive',
+    '3' => 'zero',
+    '4' => 'slightlyNegative',
+    '5' => 'negative',
+  },
+  'emStatusProbeHighTempViolation' => {
+    '1' => 'noViolation',
+    '2' => 'highTempViolation',
+    '3' => 'disabled',
+  },
+  'sPDUOutletConfigMSPmupsZone4' => {
+    '1' => 'disableAlarm',
+    '2' => 'enableAlarm',
+  },
+  'upsDiagSLCStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'offOk',
+    '4' => 'onOk',
+    '5' => 'offFail',
+    '6' => 'onFail',
+    '7' => 'lostComm',
+  },
+  'airIRRP500UnitStatusActivePowerSource' => {
+    '1' => 'sourceA',
+    '2' => 'sourceB',
+  },
+  'airFMModRHHumReset' => {
+    '1' => 'notApplicable',
+    '2' => 'noOperation',
+    '3' => 'reset',
+  },
+  'pcnsContactNormal3EnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'battManStringCurrentProbeDisconnected' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'airIRRP500UnitStatusOperateMode' => {
+    '1' => 'standby',
+    '2' => 'on',
+    '3' => 'idle',
+    '4' => 'prestart',
+    '5' => 'backup',
+    '6' => 'assist',
+  },
+  'xATSGeneratorStatusModeSwitchPosition' => {
+    '1' => 'off',
+    '2' => 'manual',
+    '3' => 'automatic',
+    '4' => 'unknown',
+  },
+  'airFMSysAlarmMapInput9' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'airIRG2GroupSetpointsActiveFlowControlBias' => {
+    '1' => 'positive',
+    '2' => 'slightlyPositive',
+    '3' => 'zero',
+    '4' => 'slightlyNegative',
+    '5' => 'negative',
+  },
+  'emsVibrationSensorStatusSensorState' => {
+    '1' => 'vibrationDetected',
+    '2' => 'noVibration',
+    '3' => 'unknown',
+  },
+  'airIRRCUnitConfigPowerSource' => {
+    '1' => 'sourceA',
+    '2' => 'sourceB',
+    '3' => 'sourceAandB',
+  },
+  'airIRRP100GroupConfigLoadAssistEnable' => {
+    '1' => 'disable',
+    '2' => 'enable',
+  },
+  'airFMGroupLoadShareHumRequests' => {
+    '1' => 'disable',
+    '2' => 'enable',
+  },
+  'battManConfigApplication' => {
+    '1' => 'silcon',
+    '2' => 'other',
+  },
+  'accessPXStatusFrontDoor' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'notInstalled',
+    '4' => 'disconnected',
+  },
+  'battManSystemPilotBatteryHighTempAlarm' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'emsLeakRopeStatusState' => {
+    '1' => 'noleak',
+    '2' => 'leakdetected',
+    '3' => 'unknown',
+  },
+  'pcnsMinLoadCapabilityLostEnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airFMSysAlarmMapMainModAirBlckIntOpen' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'iemConfigProbeHighHumidEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'iemConfigProbeMinHumidEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'memSmokeSensorConfigAlarmGeneration' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'pcnsContactNormal1EnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airIRG3RDUConfigByPassValveEnabled' => {
+    '1' => 'no',
+    '2' => 'yes',
+  },
+  'xATSGeneratorAdvStatusOilLevel' => {
+    '1' => 'ok',
+    '2' => 'low',
+    '3' => 'unknown',
+  },
+  'atsControlClearAllAlarms' => {
+    '1' => 'none',
+    '2' => 'clear',
+  },
+  'ats5gEnvAlarmStatus' => {
+    '1' => 'normal',
+    '2' => 'informational',
+    '3' => 'warning',
+    '4' => 'critical',
+  },
+  'airFMSysHeatRejection' => {
+    '1' => 'notApplicable',
+    '2' => 'airCooled',
+    '3' => 'waterCooled',
+    '4' => 'glycolCooled',
+  },
+  'ats5gSwitchConfigFrontPanelLockout' => {
+    '1' => 'disableFrontPanel',
+    '2' => 'enableFrontPanel',
+  },
+  'pmmSiteConfigServiceType' => {
+    '1' => 'threeWire',
+    '2' => 'fourWire',
+  },
+  'rPDULoadStatusLoadState' => {
+    '1' => 'phaseLoadNormal',
+    '2' => 'phaseLoadLow',
+    '3' => 'phaseLoadNearOverload',
+    '4' => 'phaseLoadOverload',
+  },
+  'rPDU2SensorTempHumidityConfigHumidityAlarmEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'airIRmPmLouver3ManOpPosition' => {
+    '1' => 'closed',
+    '2' => 'open',
+  },
+  'memInputAlarmGeneration' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'airFMModBlwr1CtrlType' => {
+    '1' => 'notApplicable',
+    '2' => 'fujiVFD',
+    '3' => 'ecController',
+    '4' => 'danfossVFD',
+  },
+  'airFMModHeaterType' => {
+    '1' => 'notApplicable',
+    '2' => 'none',
+    '3' => 'electricSCR',
+    '4' => 'steam',
+    '5' => 'hotWaterOnOff',
+    '6' => 'hotGasReheat',
+    '7' => 'hotGasAndElectric',
+    '8' => 'hotWaterProp',
+  },
+  'sPDUMasterStatusVMLowLoadCondition' => {
+    '1' => 'lowLoadConditionTrueVM',
+    '2' => 'lowLoadConditionFalseVM',
+  },
+  'xATSSource1Quality' => {
+    '1' => 'sourceGood',
+    '2' => 'lowVoltage',
+    '3' => 'highVoltage',
+    '4' => 'phaseImbalance',
+    '5' => 'freqOutOfRange',
+    '6' => 'badRotation',
+    '7' => 'unknown',
+  },
+  'emsOutputRelayStatusOutputRelayState' => {
+    '1' => 'relayClosedEMS',
+    '2' => 'relayOpenEMS',
+  },
+  'ats5gSwitchVoltageOutStatus' => {
+    '1' => 'off',
+    '2' => 'on',
+  },
+  'upsAdvConfigDeepDischargeProtection' => {
+    '1' => 'enabled',
+    '2' => 'disabled',
+  },
+  'uioSpotFluidSensorStatusCurrentState' => {
+    '1' => 'uioFluidDetected',
+    '2' => 'uioNoFluid',
+    '3' => 'uioFluidStateNoCommunication',
+  },
+  'memDoorStatusAlarmStatus' => {
+    '1' => 'memNormal',
+    '2' => 'memWarning',
+    '3' => 'memCritical',
+  },
+  'airFMGroupLoadShareReheatRequests' => {
+    '1' => 'disable',
+    '2' => 'enable',
+  },
+  'airFMModRHHeaterReset' => {
+    '1' => 'notApplicable',
+    '2' => 'noOperation',
+    '3' => 'reset',
+  },
+  'atsOutputVoltageOrientation' => {
+    '1' => 'unknown',
+    '2' => 'singlePhase',
+    '3' => 'splitPhase',
+    '4' => 'threePhasePhaseToNeutral',
+    '5' => 'threePhasePhaseToPhase',
+  },
+  'atsOutputBankState' => {
+    '1' => 'normal',
+    '2' => 'lowload',
+    '3' => 'nearoverload',
+    '4' => 'overload',
+  },
+  'pcnsHumidityOutOfRangeProbe1EnableShutdown' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airFMGroupLoadShareDehumRequests' => {
+    '1' => 'disable',
+    '2' => 'enable',
+  },
+  'dm3StatusRectFail' => {
+    '1' => 'statusTrue',
+    '2' => 'statusFalse',
+  },
+  'memFluidSensorConfigSensorSeverity' => {
+    '1' => 'critical',
+    '2' => 'warning',
+    '3' => 'informational',
+  },
+  'emsAlarmDeviceStatusDeviceState' => {
+    '1' => 'alarmDeviceOnEMS',
+    '2' => 'alarmDeviceOffEMS',
+    '3' => 'alarmDeviceNotInstalledEMS',
+  },
+  'airFMSysPresentStatus' => {
+    '1' => 'notApplicable',
+    '2' => 'reserved1',
+    '3' => 'reserved2',
+    '4' => 'onLine',
+    '5' => 'idle',
+    '6' => 'loadShare',
+    '7' => 'failed',
+    '8' => 'offLine',
+  },
+  'ats5gSwitch3p3VSupplyStatus' => {
+    '1' => 'fail',
+    '2' => 'ok',
+  },
+  'airIRRP100UnitStatusInputState' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'emsOutletConfigOutletNormalState' => {
+    '1' => 'normallyOnEMS',
+    '2' => 'normallyOffEMS',
+  },
+  'battManString2BatteryChemLowVoltageAlarm' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'upsSCGActiveMembershipStatus' => {
+    '1' => 'enabledSCG',
+    '2' => 'disabledSCG',
+  },
+  'airFMSysAlarmMapInput7' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'iemStatusProbeMinHumidViolation' => {
+    '1' => 'noViolation',
+    '2' => 'minHumidViolation',
+    '3' => 'disabled',
+  },
+  'upsDiagPMStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'offOk',
+    '4' => 'onOk',
+    '5' => 'offFail',
+    '6' => 'onFail',
+    '7' => 'lostComm',
+  },
+  'airIRSCUnitStatusCompressor' => {
+    '1' => 'off',
+    '2' => 'on',
+  },
+  'pcbeUpdateAvailableFlag' => {
+    '1' => 'active',
+    '2' => 'clear',
+  },
+  'airFMModHumidifier' => {
+    '1' => 'notApplicable',
+    '2' => 'none',
+    '3' => 'steamElectrode',
+    '4' => 'liveSteam',
+  },
+  'memLeakRopeCommStatus' => {
+    '1' => 'commOK',
+    '2' => 'commLost',
+  },
+  'xATSOutputRelayCurrentState' => {
     '1' => 'open',
     '2' => 'closed',
   },
@@ -14130,15 +14322,406 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
     '27' => 'distributedEnergyReserve',
     '28' => 'selfTest',
   },
-  'airIRRCGroupConfigConfigurationType' => {
-    '1' => 'racs',
-    '2' => 'hacs',
-    '3' => 'in-row',
-    '4' => 'cacs',
+  'battManRemoteAnnunciatorReset' => {
+    '1' => 'noOperation',
+    '2' => 'reset',
   },
-  'airIRRP500UnitServiceIntervalHeaterAlarm' => {
+  'upsBatteryCabinetWiringConfiguration' => {
+    '1' => 'twoWire',
+    '2' => 'threeWire',
+  },
+  'airFMSysAirFltr' => {
+    '1' => 'notApplicable',
+    '2' => 'standard',
+    '3' => 'highEfficiency',
+  },
+  'atsStatusOverCurrentState' => {
+    '1' => 'atsOverCurrent',
+    '2' => 'atsCurrentOK',
+  },
+  'xPDUDeviceFusesPresent' => {
+    '1' => 'notPresent',
+    '2' => 'present',
+  },
+  'rPDU2DevicePropertiesOutletLayout' => {
+    '1' => 'seqPhaseToNeutral',
+    '2' => 'seqPhaseToPhase',
+    '3' => 'seqPhToNeu21PhToPh',
+    '4' => 'seqPhToPhGrouped',
+    '5' => 'seqPhToNGrouped',
+    '6' => 'seqPToN1516PToPGrouped',
+    '7' => 'seqPhToPh2xGrouped',
+    '8' => 'seqPhToN2xGrouped',
+    '9' => 'seqNotApplicable',
+    '10' => 'seqPhToNPhToPhPhToN',
+  },
+  'airFMSysAlarmMapExpMod1BlwrCntl1Fail' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'wirelessSensorPodStatusCommStatus' => {
+    '0' => 'inactive',
+    '1' => 'active',
+  },
+  'airIRG3GroupConfigCoolPIDReset' => {
+    '1' => 'readBack',
+    '2' => 'reset',
+  },
+  'dm3ConfigLVDEnable' => {
+    '1' => 'enabledYes',
+    '2' => 'enabledNo',
+  },
+  'airFMGroupFailoverModLossOrLowAirFlow' => {
+    '1' => 'notApplicable',
+    '2' => 'disable',
+    '3' => 'enable',
+  },
+  'airFMSysAlarmMapExpMod1CondPumpFail' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'rPDU2SensorTempHumidityStatusCommStatus' => {
+    '1' => 'notInstalled',
+    '2' => 'commsOK',
+    '3' => 'commsLost',
+  },
+  'dm3StatusConvCfg' => {
+    '1' => 'statusTrue',
+    '2' => 'statusFalse',
+  },
+  'pcnsCommunicationLostOnBatteryEnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'pcnsCriticalFlag' => {
+    '1' => 'active',
+    '2' => 'clear',
+  },
+  'serialPort2Mode' => {
+    '1' => 'localConsole',
+    '2' => 'passthrough',
+  },
+  'pcnsOverloadSolvedEnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'isxModularDistSysCurrentAlarmMinEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'airPACondenserFan' => {
+    '1' => 'statusON',
+    '2' => 'statusOFF',
+  },
+  'upsEcoModeSetting' => {
+    '1' => 'enabled',
+    '2' => 'disabled',
+  },
+  'airIRRP100UnitServiceIntervalFansAlarm' => {
     '1' => 'enable',
     '2' => 'disable',
+  },
+  'airFMSysAlarmMapExpMod1BlwrCntl2Fail' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'ats5gSwitchConfigVoltageSensitivity' => {
+    '1' => 'high',
+    '2' => 'low',
+  },
+  'airFMSysAlarmMapInput2' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'memInputNormalState' => {
+    '1' => 'inputClosedHighMEM',
+    '2' => 'inputOpenLowMEM',
+    '3' => 'inputDisabled',
+    '4' => 'inputStateNotApplicable',
+  },
+  'emConfigProbeMinHumidEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'AirIRG2RDType2IOState' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'airIRG3RDUStatusOutputState' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'receiveTrapType' => {
+    '1' => 'powernet',
+    '2' => 'ietf',
+    '3' => 'both',
+  },
+  'setPulseOnTXD' => {
+    '1' => 'noSetPulseOnTXD',
+    '2' => 'setPulseOnTXD',
+    '3' => 'setTXDLow',
+    '4' => 'setTXDHigh',
+  },
+  'xATSSwitchTimersAbort' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'upsDiagSubSysbackfeedContactorStatus' => {
+    '1' => 'unknown',
+    '2' => 'opened',
+    '3' => 'closed',
+  },
+  'battManString1BatteryUserLowVoltageAlarm' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'upsDiagSubSysChargerStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'offOk',
+    '4' => 'onOk',
+    '5' => 'offFail',
+    '6' => 'onFail',
+    '7' => 'lostComm',
+  },
+  'dm3ConfigConvConfigAlarm' => {
+    '1' => 'alarmIgnore',
+    '2' => 'alarmRelay1',
+    '3' => 'alarmRelay2',
+    '4' => 'alarmRelay3',
+    '5' => 'alarmRelay4',
+    '6' => 'alarmRelay5',
+    '7' => 'alarmRelay6',
+    '8' => 'alarmMinor',
+    '9' => 'alarmMajor',
+  },
+  'battManString2BatteryCellShorted' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'upsDiagComBusInternalMIMStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'ok',
+    '4' => 'lostComm',
+    '5' => 'rxFailure',
+    '6' => 'txFailure',
+  },
+  'dm3ConfigBattLowTempAlarm' => {
+    '1' => 'alarmIgnore',
+    '2' => 'alarmRelay1',
+    '3' => 'alarmRelay2',
+    '4' => 'alarmRelay3',
+    '5' => 'alarmRelay4',
+    '6' => 'alarmRelay5',
+    '7' => 'alarmRelay6',
+    '8' => 'alarmMinor',
+    '9' => 'alarmMajor',
+  },
+  'upsDiagBatteryFramePresent' => {
+    '0' => 'notPresent',
+    '1' => 'present',
+  },
+  'isxModularDistModuleOutputAlarmMinEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'airIRG3CMConfigRemoteOnStandby' => {
+    '1' => 'standBy',
+    '2' => 'on',
+  },
+  'upsAdvBatteryActualVoltagePolarity' => {
+    '0' => 'positive',
+    '1' => 'negative',
+  },
+  'airFMModRHBlwr2Reset' => {
+    '1' => 'notApplicable',
+    '2' => 'noOperation',
+    '3' => 'reset',
+  },
+  'isxModularDistSysOutputVoltageAlarmMaxEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'airIRRCGroupSetpointsActiveFlowControlBias' => {
+    '1' => 'positive',
+    '2' => 'slightlyPositive',
+    '3' => 'zero',
+    '4' => 'slightlyNegative',
+    '5' => 'negative',
+  },
+  'airFMSysAlarmMapExpMod2AirBlckIntOpen' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'dm3StatusSysConvAvailable' => {
+    '1' => 'statusTrue',
+    '2' => 'statusFalse',
+  },
+  'xATSSwitchSettingsSetToFactoryDefaults' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'mdcCoolingStatusOperateMode' => {
+    '1' => 'unknown',
+    '2' => 'cooling',
+    '3' => 'dehumidification',
+    '4' => 'bmsshutdown',
+    '5' => 'coolinghmishutdown',
+    '6' => 'faultshutdown',
+    '7' => 'remoteshutdown',
+    '8' => 'coolingorauxiliaryheating',
+  },
+  'airIRG3CMStatusLocalDisplayOnOffEnabled' => {
+    '1' => 'no',
+    '2' => 'yes',
+  },
+  'pmmInputFrequencyDeviation' => {
+    '1' => 'freqDeviationOff',
+    '2' => 'freqDeviationPointTwo',
+    '3' => 'freqDeviationPointFive',
+    '4' => 'freqDeviationOne',
+    '5' => 'freqDeviationOnePointFive',
+    '6' => 'freqDeviationTwo',
+    '7' => 'freqDeviationThree',
+    '8' => 'freqDeviationFour',
+    '9' => 'freqDeviationFive',
+    '10' => 'freqDeviationNine',
+  },
+  'xPDUDeviceFansPresent' => {
+    '1' => 'notPresent',
+    '2' => 'present',
+  },
+  'pmmDeviceServiceType' => {
+    '1' => 'threeWire',
+    '2' => 'fourWire',
+  },
+  'airFMSysAlarmMapInput3' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'memVibrationSensorConfigAlarmGeneration' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'rPDU2DeviceConfigDevicePeakPowerReset' => {
+    '1' => 'noOperation',
+    '2' => 'reset',
+    '3' => 'notSupported',
+  },
+  'dm3StatusSysRectAvailable' => {
+    '1' => 'statusTrue',
+    '2' => 'statusFalse',
+  },
+  'airIRSCGroupConfigActiveFlowControllerLampTest' => {
+    '1' => 'off',
+    '2' => 'on',
+  },
+  'pmmOutputBreakerOpenAlarm' => {
+    '1' => 'enabled',
+    '2' => 'disabled',
+    '3' => 'unknown',
+  },
+  'ePDUOutletControlCommand' => {
+    '1' => 'immediateOn',
+    '2' => 'immediateOff',
+    '3' => 'outletUnknown',
+  },
+  'rARUStatusAruCommStatus' => {
+    '1' => 'commsNeverDiscovered',
+    '2' => 'commsEstablished',
+    '3' => 'commsLost',
+  },
+  'pcnsTempInRangeProbe2EnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'xATSSwitchSettingsNominalRotation' => {
+    '1' => 'abc',
+    '2' => 'cba',
+    '3' => 'any',
+    '4' => 'unknown',
+  },
+  'airIRmPmHumidifier1Type' => {
+    '1' => 'direct',
+    '2' => 'proportional',
+  },
+  'emsOutputRelayStatusOutputRelayNormalState' => {
+    '1' => 'normallyClosedEMS',
+    '2' => 'normallyOpenEMS',
+  },
+  'isxModularDistModuleBreakerPosition' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'airFMSysAlarmMapExpMod2BlwrCntl2Fail' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'battManConfigMonitorWireLength' => {
+    '1' => 'fiftyFeetOrLess',
+    '2' => 'moreThanFiftyFeet',
+  },
+  'dm3ConfigConvDiagAlarm' => {
+    '1' => 'alarmIgnore',
+    '2' => 'alarmRelay1',
+    '3' => 'alarmRelay2',
+    '4' => 'alarmRelay3',
+    '5' => 'alarmRelay4',
+    '6' => 'alarmRelay5',
+    '7' => 'alarmRelay6',
+    '8' => 'alarmMinor',
+    '9' => 'alarmMajor',
+    '10' => 'alarmNofN',
+  },
+  'pcnsAdvancedShutdownPowerchuteServer' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airIRRP100UnitConfigUnitRoleOverride' => {
+    '1' => 'automatic',
+    '2' => 'forcedOn',
+  },
+  'pcbeCriticalFlag' => {
+    '1' => 'active',
+    '2' => 'clear',
+  },
+  'atsStatusSelectedSource' => {
+    '1' => 'sourceA',
+    '2' => 'sourceB',
+  },
+  'airIRRP500UnitConfigPowerSourceConfig' => {
+    '1' => 'single',
+    '2' => 'dual',
+  },
+  'rPDUOutletPhaseIndex' => {
+    '1' => 'phase1',
+    '2' => 'phase2',
+    '3' => 'phase3',
+  },
+  'upsBatteryCabinetBreaker' => {
+    '1' => 'noBreaker',
+    '2' => 'unknown',
+    '3' => 'breakerOpen',
+    '4' => 'breakerClosed',
+  },
+  'airIRG2GroupStatusActiveFlowControlStatus' => {
+    '1' => 'under',
+    '2' => 'okay',
+    '3' => 'over',
+    '4' => 'notApplicable',
+  },
+  'airFMSysAlarmMapExpMod1AnyAlarm' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
   },
   'accessPXConfigCardFormat' => {
     '1' => 'hidStd26',
@@ -14151,736 +14734,41 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
     '8' => 'mifareplus',
     '9' => 'iCLASS8b',
   },
-  'emsDoorSensorConfigSensorSeverity' => {
-    '1' => 'critical',
-    '2' => 'warning',
-    '3' => 'informational',
+  'pcnsParallelRedundancyRegainedEnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
   },
-  'airIRRP500GroupSetpointsFanSpeedPreference' => {
-    '1' => 'low',
-    '2' => 'med-low',
-    '3' => 'med',
-    '4' => 'med-high',
-    '5' => 'high',
+  'battManInputContactState' => {
+    '1' => 'open',
+    '2' => 'closed',
   },
-  'dm3StatusLVDState' => {
-    '1' => 'statusClosed',
-    '2' => 'statusOpened',
-  },
-  'airPAOperatingMode' => {
-    '1' => 'modeOFF',
-    '2' => 'modeVENTING',
-    '3' => 'modeCOOLING',
-  },
-  'pcnsVirtualInstall' => {
-    '1' => 'none',
-    '2' => 'hyper-V',
-    '3' => 'vmWare',
-    '4' => 'nutanixAHV',
-    '5' => 'nutanixESXi',
-    '6' => 'simpliVity',
-    '7' => 'hyperFlex',
-  },
-  'airIRRCUnitConfigCoolCapacity' => {
-    '1' => 'automatic',
-    '2' => 'maximum',
-  },
-  'xPDUSystemOutputPhaseIndex' => {
-    '1' => 'phase1',
-    '2' => 'phase2',
-    '3' => 'phase3',
-  },
-  'atsControlClearAllAlarms' => {
-    '1' => 'none',
-    '2' => 'clear',
-  },
-  'emStatusProbeMinHumidViolation' => {
-    '1' => 'noViolation',
-    '2' => 'minHumidViolation',
-    '3' => 'disabled',
-  },
-  'iemConfigProbeLowHumidEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'isxModularDistModuleBreakerPositionAlarms' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'airIRG2RDT2StatusOperateMode' => {
-    '1' => 'standby',
-    '2' => 'on',
-    '3' => 'idle',
-    '4' => 'reserved',
-    '5' => 'service',
-  },
-  'isxModularDistSubFeedInfoAlarmStatus' => {
-    '1' => 'normal',
-    '2' => 'warning',
-    '3' => 'critical',
-  },
-  'emsFluidSensorCommStatus' => {
-    '1' => 'commOK',
-    '2' => 'commLost',
-  },
-  'dm3StatusRectFanFail' => {
-    '1' => 'statusTrue',
-    '2' => 'statusFalse',
-  },
-  'airIRRCGroupSetpointsFanSpeedPreference' => {
-    '1' => 'low',
-    '2' => 'med-low',
-    '3' => 'med',
-    '4' => 'med-high',
-    '5' => 'high',
-  },
-  'monitoringStatus' => {
-    '1' => 'unknown',
-    '2' => 'enabled',
-    '3' => 'disabled',
-  },
-  'dm3ConfigRectCurrLimitAlarm' => {
-    '1' => 'alarmIgnore',
-    '2' => 'alarmRelay1',
-    '3' => 'alarmRelay2',
-    '4' => 'alarmRelay3',
-    '5' => 'alarmRelay4',
-    '6' => 'alarmRelay5',
-    '7' => 'alarmRelay6',
-    '8' => 'alarmMinor',
-    '9' => 'alarmMajor',
-    '10' => 'alarmNofN',
-  },
-  'battManStringChargerHighVoltageAlarm' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'upsParallelSysRedundancyStatus' => {
-    '1' => 'nplus0',
-    '2' => 'nplus1',
-    '3' => 'nplus2',
-    '4' => 'nplus3',
-    '5' => 'nplus4',
-    '6' => 'nplus5',
-  },
-  'dm3ConfigBreakersAlarm' => {
-    '1' => 'alarmIgnore',
-    '2' => 'alarmRelay1',
-    '3' => 'alarmRelay2',
-    '4' => 'alarmRelay3',
-    '5' => 'alarmRelay4',
-    '6' => 'alarmRelay5',
-    '7' => 'alarmRelay6',
-    '8' => 'alarmMinor',
-    '9' => 'alarmMajor',
-  },
-  'airFMSysFlowSwitch' => {
+  'airFMSysAlarmMapSysFireDet' => {
     '1' => 'notApplicable',
-    '2' => 'none',
-    '3' => 'dxEcon',
-    '4' => 'multiCoolChillWater',
+    '2' => 'disabled',
+    '3' => 'enabled',
   },
-  'airIRG2GroupConfigRuntimeBalancingEnable' => {
+  'sPDUOutletControlMSPOutletCommand' => {
+    '1' => 'immediateOnMSP',
+    '2' => 'delayedOnMSP',
+    '3' => 'immediateOffMSP',
+    '4' => 'gracefulRebootMSP',
+    '5' => 'immediateRebootMSP',
+    '6' => 'gracefulshutdownMSP',
+    '7' => 'overrideBatCapThreshMSP',
+    '8' => 'cancelPendingCommandMSP',
+  },
+  'rPDU2DeviceConfigDeviceEnergyReset' => {
+    '1' => 'noOperation',
+    '2' => 'reset',
+    '3' => 'notSupported',
+  },
+  'upsAdvConfigLCDLockOut' => {
     '1' => 'disable',
     '2' => 'enable',
   },
-  'uioSpotFluidSensorStatusAlarmStatus' => {
-    '1' => 'uioNormal',
-    '2' => 'uioCritical',
-    '3' => 'uioNoCommunication',
-    '4' => 'uioDisabled',
-  },
-  'airIRRP500UnitConfigCoolCapacity' => {
-    '1' => 'automatic',
-    '2' => 'maximum',
-  },
-  'airFMSysAlarmMapExpMod2HumFail' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'battManConfigCellsperBattery' => {
-    '1' => 'oneCell',
-    '2' => 'twoCells',
-    '4' => 'fourCells',
-    '6' => 'sixCells',
-  },
-  'pcnsContactFault1EnableShutdown' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'sPDUOutletStatusMSPOutletState' => {
-    '1' => 'outletStatusMSPOn',
-    '2' => 'outletStatusMSPOff',
-  },
-  'battManAlarmCharger' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'airIRG2RDT2StatusLeakSensor' => {
-    '1' => 'no-leak',
-    '2' => 'leak',
-  },
-  'iemConfigProbeHighTempEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'accessPXStatusRearDoorHandle' => {
-    '1' => 'open',
-    '2' => 'closed',
-    '3' => 'notInstalled',
-    '4' => 'disconnected',
-  },
-  'rARUPowerStatusPrimaryAcPresent' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'dm3ConfigSysHardwareTempAlarm' => {
-    '1' => 'alarmIgnore',
-    '2' => 'alarmRelay1',
-    '3' => 'alarmRelay2',
-    '4' => 'alarmRelay3',
-    '5' => 'alarmRelay4',
-    '6' => 'alarmRelay5',
-    '7' => 'alarmRelay6',
-    '8' => 'alarmMinor',
-    '9' => 'alarmMajor',
-  },
-  'atsStatus3dot3VPowerSupply' => {
-    '1' => 'atsPowerSupplyFailure',
-    '2' => 'atsPowerSupplyOK',
-  },
-  'rARUStatusAruTempOvrdStatus' => {
-    '1' => 'inactive',
-    '2' => 'active',
-  },
-  'pcnsCommunicationEstablishedEnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'xATSGeneratorServiceCalendarIntervalThreshold' => {
-    '1' => 'disabled',
-    '2' => 'interval1month',
-    '3' => 'interval2month',
-    '4' => 'interval3month',
-    '5' => 'interval6month',
-    '6' => 'intervalyearly',
-  },
-  'airIRRCUnitConfigInputNormalState' => {
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'wirelessSensorPodStatusCommStatus' => {
-    '0' => 'inactive',
-    '1' => 'active',
-  },
-  'isxModularDistModuleBreakerPhaseIndex' => {
-    '1' => 'phaseL1',
-    '2' => 'phaseL2',
-    '3' => 'phaseL3',
-  },
-  'airIRRCUnitConfigPowerSource' => {
-    '1' => 'sourceA',
-    '2' => 'sourceB',
-    '3' => 'sourceAandB',
-  },
-  'airFMSysCndsrFluidVlvType' => {
-    '1' => 'notApplicable',
-    '2' => 'twoWay',
-    '3' => 'threeWay',
-  },
-  'pcnsContactNormal4EnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'apcLocalDisplayConfigBeeperVolume' => {
-    '1' => 'beeperDisabled',
-    '2' => 'beeperLow',
-    '3' => 'beeperMedium',
-    '4' => 'beeperHigh',
-  },
-  'rPDU2SensorAnalogVoltageStatusCommStatus' => {
-    '1' => 'notInstalled',
-    '2' => 'commsOK',
-    '3' => 'commsLost',
-  },
-  'upsAdvConfigOutputFreqRange' => {
-    '1' => 'unknown',
-    '2' => 'freqRangeAUTO',
-    '3' => 'freqRange60Var1',
-    '4' => 'freqRange60Var3',
-    '5' => 'freqRange50Var1',
-    '6' => 'freqRange50Var3',
-    '7' => 'freqRange60Var10',
-    '8' => 'freqRange50Var10',
-    '9' => 'freqRange60Var1dot0',
-    '10' => 'freqRange50Var1dot0',
-    '11' => 'freqRange50Pct0dot5',
-    '12' => 'freqRange50Pct1',
-    '13' => 'freqRange50Pct2',
-    '14' => 'freqRange50Pct4',
-    '15' => 'freqRange50Pct6',
-    '16' => 'freqRange50Pct8',
-    '17' => 'freqRange60Pct0dot5',
-    '18' => 'freqRange60Pct1',
-    '19' => 'freqRange60Pct2',
-    '20' => 'freqRange60Pct4',
-    '21' => 'freqRange60Pct6',
-    '22' => 'freqRange60Pct8',
-    '23' => 'freqRange50Var4',
-    '24' => 'freqRange60Var4',
-  },
-  'ePDUDeviceControlEnergyReset' => {
-    '0' => 'noOperation',
-    '1' => 'reset',
-  },
-  'pcnsRunTimeBelowThresholdEnableShutdown' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'emsSmokeSensorConfigSensorSeverity' => {
-    '1' => 'critical',
-    '2' => 'warning',
-    '3' => 'informational',
-  },
-  'upsParallelSysUpsAlarmStatus' => {
-    '1' => 'unknown',
-    '2' => 'normal',
-    '3' => 'informational',
-    '4' => 'warning',
-    '5' => 'critical',
-  },
-  'uioSensorConfigMaxTemperatureEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'isxModularPduDeviceFansPresent' => {
-    '1' => 'notPresent',
-    '2' => 'present',
-  },
-  'pmmBranchCircuitBreakerOpenAlarm' => {
-    '1' => 'enabled',
-    '2' => 'disabled',
-    '3' => 'unknown',
-  },
-  'coolingUnitConfigurationAnalogAccess' => {
-    '1' => 'readOnly',
-    '2' => 'readWrite',
-  },
-  'atsStatus5VPowerSupply' => {
-    '1' => 'atsPowerSupplyFailure',
-    '2' => 'atsPowerSupplyOK',
-  },
-  'pcnsParallelRedundancyLostEnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'upsAdvTestDiagnostics' => {
-    '1' => 'noTestDiagnostics',
-    '2' => 'testDiagnostics',
-  },
-  'airIRRP500UnitServiceIntervalAirFilterAlarm' => {
-    '1' => 'enable',
-    '2' => 'disable',
-  },
-  'xATSSource2Quality' => {
-    '1' => 'sourceGood',
-    '2' => 'lowVoltage',
-    '3' => 'highVoltage',
-    '4' => 'phaseImbalance',
-    '5' => 'freqOutOfRange',
-    '6' => 'badRotation',
-    '7' => 'unknown',
-  },
-  'xATSSwitchSettingsNominalRotation' => {
-    '1' => 'abc',
-    '2' => 'cba',
-    '3' => 'any',
-    '4' => 'unknown',
-  },
-  'xATSTestingScheduleTestWithLoadInterval' => {
-    '1' => 'applyLoadEveryTest',
-    '2' => 'neverApplyLoad',
-    '3' => 'applyLoadMonthly',
-    '4' => 'applyLoadMonthlyDetailed',
-  },
-  'rPDU2BankStatusLoadState' => {
-    '1' => 'lowLoad',
-    '2' => 'normal',
-    '3' => 'nearOverload',
-    '4' => 'overload',
-  },
-  'airFMSysAlarmMapExpMod1AnyAlarm' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'airFMSysAlarmMapOutput14' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'rPDU2SensorTempHumidityStatusType' => {
-    '1' => 'temperatureOnly',
-    '2' => 'temperatureHumidity',
-    '3' => 'commsLost',
-    '4' => 'notInstalled',
-  },
-  'atsStatusSourceBStatus' => {
-    '1' => 'fail',
-    '2' => 'ok',
-  },
-  'airIRG3CMConfigStopOnCoolFail' => {
-    '1' => 'no',
-    '2' => 'yes',
-  },
-  'airFMSysAlarmMapMainModCondPumpFail' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'upsDiagPMStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'offOk',
-    '4' => 'onOk',
-    '5' => 'offFail',
-    '6' => 'onFail',
-    '7' => 'lostComm',
-  },
-  'airFMSysAlarmMapMainModHighSupplyTemp' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'pcnsRunTimeWithinRangeEnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'pcnsShutdownCommandFileEnabled' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'ats5gEnvConfigHumAlarmsEnabled' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'dm3StatusRectFail' => {
-    '1' => 'statusTrue',
-    '2' => 'statusFalse',
-  },
-  'sPDUOutletConfigMSPmupsP2HiHum' => {
-    '1' => 'disableAlarm',
-    '2' => 'enableAlarm',
-  },
-  'pcnsHumidityInRangeProbe1EnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'uioSensorStatusCommStatus' => {
-    '1' => 'notInstalled',
-    '2' => 'commsOK',
-    '3' => 'commsLost',
-  },
-  'airIRRP500UnitConfigIdleOnLeakDetect' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'airFMSysAlarmMapMainModLowSupplyTemp' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'airFMGroupCfgIdleBlower' => {
-    '1' => 'off',
-    '2' => 'minimumSpeed',
-    '3' => 'normalSpeed',
-  },
-  'airFMSysAlarmMapSysHighEnvHum' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'airIRRP100UnitConfigSecondaryPowerFeedCapability' => {
-    '1' => 'full',
-    '2' => 'reduced',
-  },
-  'airFMGroupFailoverModBlwrCntrl1Fail' => {
-    '1' => 'notApplicable',
-    '2' => 'disable',
-    '3' => 'enable',
-  },
-  'upsAsiUpsControlServerRequestShutdown' => {
-    '1' => 'serverShutdownOff',
-    '2' => 'serverShutdownReboot',
-  },
-  'emConfigProbeLowHumidEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'rPDU2PhaseConfigOverloadRestriction' => {
-    '1' => 'alwaysAllowTurnON',
-    '2' => 'restrictOnNearOverload',
-    '3' => 'restrictOnOverload',
-    '4' => 'notSupported',
-  },
-  'atsOutputBank' => {
-    '1' => 'total',
-    '2' => 'bank1',
-    '3' => 'bank2',
-  },
-  'receiveTrapType' => {
-    '1' => 'powernet',
-    '2' => 'ietf',
-    '3' => 'both',
-  },
-  'airFMSysAlarmMapExpMod2AnyAlarm' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'memSmokeSensorConfigSensorSeverity' => {
-    '1' => 'critical',
-    '2' => 'warning',
-    '3' => 'informational',
-  },
-  'iemConfigContactEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'emStatusProbeHighHumidViolation' => {
-    '1' => 'noViolation',
-    '2' => 'highHumidViolation',
-    '3' => 'disabled',
-  },
-  'uioSensorConfigHighTemperatureEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'emsVibrationSensorStatusSensorState' => {
-    '1' => 'vibrationDetected',
-    '2' => 'noVibration',
-    '3' => 'unknown',
-  },
-  'xPDUEPOMode' => {
-    '1' => 'armed',
-    '2' => 'disarmed',
-    '3' => 'unknown',
-  },
-  'airIRSCUnitStatusLeakSensor' => {
-    '1' => 'no-leak',
-    '2' => 'leak',
-  },
-  'xPDUDeviceLoadTieBreakerPresent' => {
-    '1' => 'notPresent',
-    '2' => 'present',
-  },
-  'emsInputContactStatusInputContactState' => {
-    '1' => 'contactClosedEMS',
-    '2' => 'contactOpenEMS',
-  },
-  'xPDUDeviceFansPresent' => {
-    '1' => 'notPresent',
-    '2' => 'present',
-  },
-  'ats5gSwitchSourceA48VSupplyStatus' => {
-    '1' => 'fail',
-    '2' => 'ok',
-  },
-  'uioInputContactStatusAlarmStatus' => {
-    '1' => 'uioNormal',
-    '2' => 'uioWarning',
-    '3' => 'uioCritical',
-    '4' => 'inputStatusNotApplicable',
-  },
-  'pcnsNMCProtocol' => {
-    '1' => 'http',
-    '2' => 'https',
-  },
-  'rPDU2OutletSwitchedControlCommand' => {
-    '1' => 'immediateOn',
-    '2' => 'immediateOff',
-    '3' => 'immediateReboot',
-    '4' => 'outletUnknown',
-    '5' => 'delayedOn',
-    '6' => 'delayedOff',
-    '7' => 'delayedReboot',
-    '8' => 'cancelPendingCommand',
-  },
-  'pcnsHumidityOutOfRangeProbe1EnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'rPDU2DeviceControlCommand' => {
-    '1' => 'immediateAllOn',
-    '2' => 'delayedAllOn',
-    '3' => 'immediateAllOff',
-    '4' => 'immediateAllReboot',
-    '5' => 'delayedAllReboot',
-    '6' => 'noCommandAll',
-    '7' => 'delayedAllOff',
-    '8' => 'cancelAllPendingCommands',
-  },
-  'airIRRCUnitStatusOperateMode' => {
-    '1' => 'standby',
-    '2' => 'on',
-    '3' => 'idle',
-  },
-  'airFMSysOutputStatus' => {
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'rARUConfigAruRemoteSetpoint' => {
-    '1' => 'aruOff',
-    '2' => 'aru85F-29C',
-    '3' => 'aru90F-32C',
-    '4' => 'aru95F-35C',
-    '5' => 'aru100F-38C',
-    '6' => 'aru7kW-1200cfm',
-    '7' => 'aru5kW-800cfm',
-    '8' => 'aru3kW-500cfm',
-    '9' => 'aru2kW-300cfm',
-    '10' => 'aru400cfm',
-    '11' => 'aru600cfm',
-    '12' => 'aru700cfm',
-    '13' => 'aru900cfm',
-    '14' => 'aru1000cfm',
-    '15' => 'aru1400cfm',
-    '16' => 'aru1600cfm',
-    '17' => 'aru1800cfm',
-    '18' => 'aru2000cfm',
-  },
-  'accessPXConfigRearDoorLockControl' => {
-    '1' => 'unlock',
-    '2' => 'lock',
-    '3' => 'notInstalledReadOnly',
-    '4' => 'disconnectedReadOnly',
-  },
-  'dcmim2StatusBattFunctTestResult' => {
-    '1' => 'functTestNotPerformed',
-    '2' => 'functTestInProcess',
-    '3' => 'functTestInterrupted',
-    '4' => 'functTestPass',
-    '5' => 'functTestFail',
-  },
-  'emsOutletStatusOutletState' => {
-    '1' => 'outletOnEMS',
-    '2' => 'outletOffEMS',
-  },
-  'atsCalibrationPowerSupplyVoltage' => {
-    '1' => 'powerSupply24V',
-    '2' => 'powerSupply12V',
-    '3' => 'powerSupply',
-    '4' => 'powerSupply24VSourceB',
-    '5' => 'powerSupplyMinus12V',
-  },
-  'emsDoorSensorStatusSensorState' => {
-    '1' => 'open',
-    '2' => 'closed',
-    '3' => 'unknown',
-  },
-  'dm3ConfigSysLowTempAlarm' => {
-    '1' => 'alarmIgnore',
-    '2' => 'alarmRelay1',
-    '3' => 'alarmRelay2',
-    '4' => 'alarmRelay3',
-    '5' => 'alarmRelay4',
-    '6' => 'alarmRelay5',
-    '7' => 'alarmRelay6',
-    '8' => 'alarmMinor',
-    '9' => 'alarmMajor',
-  },
-  'airIRRP500UnitConfigReheatEnable' => {
-    '1' => 'enable',
-    '2' => 'disable',
-  },
-  'airIRRP500UnitStatusInputState' => {
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'uioOutputRelayStatusAlarmStatus' => {
-    '1' => 'uioNormal',
-    '2' => 'uioWarning',
-    '3' => 'uioCritical',
-    '4' => 'inputStatusNotApplicable',
-  },
-  'pcnsMinRedundancyRegainedEnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'sPDUOutletPending' => {
-    '1' => 'commandPending',
-    '2' => 'noCommandPending',
-    '3' => 'commandPendingUnknown',
-  },
-  'rPDU2SensorTempHumidityConfigHumidityAlarmEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'airFMStatusSystemHumidifyEnabled' => {
-    '1' => 'enabledYes',
-    '2' => 'enabledNo',
-  },
-  'pcnsContactFault4EnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'airFMSysCoolState' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'airFMModRHBlwr1Reset' => {
-    '1' => 'notApplicable',
-    '2' => 'noOperation',
-    '3' => 'reset',
-  },
-  'atsStatusFuseSourceB' => {
-    '1' => 'atsFuseStatusClose',
-    '2' => 'atsFuseStatusOpen',
-  },
-  'sPDUMasterControlSwitch' => {
-    '1' => 'turnAllOnNow',
-    '2' => 'turnAllOnSequence',
-    '3' => 'turnAllOffNow',
-    '4' => 'rebootAllNow',
-    '5' => 'rebootAllSequence',
-    '6' => 'noCommand',
-    '7' => 'turnAllOffSequence',
-  },
-  'upsOutletGroupConfigOutletType' => {
-    '1' => 'upsSwitchedOutletGroup',
-    '2' => 'upsMainOutletGroup',
-  },
-  'airFMModRHComp2Reset' => {
-    '1' => 'notApplicable',
-    '2' => 'noOperation',
-    '3' => 'reset',
-  },
-  'rPDU2DeviceConfigDisplayOrientation' => {
-    '1' => 'displayNormal',
-    '2' => 'displayReverse',
-  },
-  'airFMGroupSysStatus' => {
-    '1' => 'statusOnLine',
-    '2' => 'statusIdle',
-    '3' => 'statusLoadShare',
-    '4' => 'statusOffLine',
-    '5' => 'statusFailed',
-    '6' => 'statusDisabled',
-    '7' => 'statusUndefined',
-  },
-  'pcnsBypassContactorFailedEnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'isxModularDistSysOutputVoltageAlarmHighEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'dm3StatusOutRlyStatus' => {
-    '1' => 'statusOn',
-    '2' => 'statusOff',
+  'upsPhaseResetMaxMinValues' => {
+    '1' => 'none',
+    '2' => 'reset',
   },
   'xATSSystemOutputFrequencyTolerance' => {
     '1' => 'freqToleranceOff',
@@ -14894,185 +14782,78 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
     '9' => 'freqToleranceFive',
     '10' => 'freqToleranceNine',
   },
-  'airFMSysCoolPIDMethod' => {
-    '1' => 'notApplicable',
-    '2' => 'p',
-    '3' => 'pi',
-    '4' => 'pid',
+  'rARUPowerStatusPrimaryAcPresent' => {
+    '1' => 'yes',
+    '2' => 'no',
   },
-  'upsBatteryCabStringFuseStatus' => {
-    '1' => 'fuseOpen',
-    '2' => 'fuseOk',
-    '3' => 'notPresent',
+  'accessPXStatusFrontDoorLock' => {
+    '1' => 'unlocked',
+    '2' => 'locked',
+    '3' => 'notInstalled',
+    '4' => 'disconnected',
   },
-  'airIRmPmDayNightMode' => {
-    '1' => 'day',
-    '2' => 'night',
+  'upsAdvConfigSetEEPROMDefaults' => {
+    '1' => 'noSetEEPROMDefaults',
+    '2' => 'setEEPROMDefaults',
   },
-  'airFMSysAlarmMapMainModWaterDetected' => {
+  'airFMSysAlarmMapMainModHighSupplyTemp' => {
     '1' => 'notApplicable',
     '2' => 'disabled',
     '3' => 'enabled',
   },
-  'rPDU2GroupEnergyReset' => {
-    '1' => 'noOperation',
+  'emStatusProbeMinHumidViolation' => {
+    '1' => 'noViolation',
+    '2' => 'minHumidViolation',
+    '3' => 'disabled',
+  },
+  'emConfigProbeMaxHumidEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'acceptThisReceiver' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airFMSysNumber' => {
+    '1' => 'notApplicable',
+    '2' => 'one',
+    '3' => 'two',
+    '4' => 'three',
+    '5' => 'four',
+  },
+  'pcnsCommunicationEstablishedEnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'atsStatusResetMaxMinValues' => {
+    '1' => 'none',
     '2' => 'reset',
-    '3' => 'notSupported',
   },
-  'airFMSysAlarmMapOutput12' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'airFMSysAlarmMapExpMod2AirBlckIntOpen' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'airPACondensatePump' => {
-    '1' => 'statusON',
-    '2' => 'statusOFF',
-  },
-  'airFMSysHumCtrlMethod' => {
-    '1' => 'notApplicable',
-    '2' => 'avgReturnRH',
-    '3' => 'avgReturnDewPt',
-    '4' => 'avgRemoteRH',
-    '5' => 'avgRemoteDewPt',
-  },
-  'dm3StatusSysConvVoltSanity' => {
-    '1' => 'saneYES',
-    '2' => 'saneNO',
-  },
-  'severity' => {
-    '1' => 'information',
-    '2' => 'warning',
-    '3' => 'severe',
-  },
-  'atsStatus1Dot0VPowerSupply' => {
-    '1' => 'atsPowerSupplyFailure',
-    '2' => 'atsPowerSupplyOK',
-  },
-  'airPASystemPower' => {
-    '1' => 'powerON',
-    '2' => 'powerOFF',
-  },
-  'battManSystemSuspendVoltage' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'pmmBranchCircuitAlaramGeneration' => {
-    '1' => 'enabled',
-    '2' => 'disabled',
-    '3' => 'unknown',
-  },
-  'rPDU2DeviceStatusCommandPending' => {
+  'rPDU2OutletSwitchedStatusCommandPending' => {
     '1' => 'commandPending',
     '2' => 'noCommandPending',
     '3' => 'commandPendingUnknown',
   },
-  'pcnsMinRedundancyLostEnableShutdown' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'iemStatusProbeMaxTempViolation' => {
-    '1' => 'noViolation',
-    '2' => 'maxTempViolation',
-    '3' => 'disabled',
-  },
-  'emsOutletStatusOutletNormalState' => {
-    '1' => 'normallyOnEMS',
-    '2' => 'normallyOffEMS',
-  },
-  'rPDU2SensorTempHumidityStatusHumidityStatus' => {
-    '1' => 'notPresent',
-    '2' => 'belowMin',
-    '3' => 'belowLow',
-    '4' => 'normal',
-    '5' => 'aboveHigh',
-    '6' => 'aboveMax',
-  },
-  'airIRmPmHumidifier2Type' => {
-    '1' => 'direct',
-    '2' => 'proportional',
-  },
-  'rPDUOutletDevCommand' => {
-    '1' => 'noCommandAll',
-    '2' => 'immediateAllOn',
-    '3' => 'immediateAllOff',
-    '4' => 'immediateAllReboot',
-    '5' => 'delayedAllOn',
-    '6' => 'delayedAllOff',
-    '7' => 'delayedAllReboot',
-    '8' => 'cancelAllPendingCommands',
-  },
-  'airIRG2RDT2ConfigUnitType' => {
-    '1' => 'fluidCooled',
-    '2' => 'airCooled',
-  },
-  'isxModularDistSysVoltagePhaseIndex' => {
+  'atsConfigPhase' => {
     '1' => 'phase1',
     '2' => 'phase2',
     '3' => 'phase3',
   },
-  'upsDiagSubSysChargerStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'offOk',
-    '4' => 'onOk',
-    '5' => 'offFail',
-    '6' => 'onFail',
-    '7' => 'lostComm',
+  'coolingUnitConfigurationStringAccess' => {
+    '1' => 'readOnly',
+    '2' => 'readWrite',
   },
-  'emsAlarmDeviceControlDeviceCommand' => {
-    '1' => 'alarmDeviceOnEMS',
-    '2' => 'alarmDeviceOffEMS',
-    '3' => 'alarmDeviceNotInstalledEMS',
-  },
-  'dm3StatusSysConvAvailable' => {
-    '1' => 'statusTrue',
-    '2' => 'statusFalse',
-  },
-  'pcnsBypassEnabledEnableShutdown' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'pcnsBatteryChargeInRangeEnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'airFMSysAlarmMapSysAnyAlarm' => {
+  'airFMSysAlarmMapInput11' => {
     '1' => 'notApplicable',
     '2' => 'disabled',
     '3' => 'enabled',
   },
-  'upsPhaseOutputVoltageOrientation' => {
-    '1' => 'unknown',
-    '2' => 'singlePhase',
-    '3' => 'splitPhase',
-    '4' => 'threePhasePhaseToNeutral',
-    '5' => 'threePhasePhaseToPhase',
-  },
-  'airIRRP500UnitConfigDehumidifyEnable' => {
-    '1' => 'enable',
-    '2' => 'disable',
-  },
-  'airFMSysAlarmMapOutput5' => {
+  'airFMSysCoolEssFunction' => {
     '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
+    '2' => 'yes',
+    '3' => 'no',
   },
-  'rPDUOutletStatusOutletState' => {
-    '1' => 'outletStatusOn',
-    '2' => 'outletStatusOff',
-  },
-  'airFMSysTempCtrlMethod' => {
-    '1' => 'notApplicable',
-    '2' => 'avgReturn',
-    '3' => 'avgRemote',
-    '4' => 'maxRemote',
-  },
-  'dm3ConfigSysHighTempAlarm' => {
+  'dm3ConfigRectFailAlarm' => {
     '1' => 'alarmIgnore',
     '2' => 'alarmRelay1',
     '3' => 'alarmRelay2',
@@ -15082,54 +14863,60 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
     '7' => 'alarmRelay6',
     '8' => 'alarmMinor',
     '9' => 'alarmMajor',
+    '10' => 'alarmNofN',
   },
-  'airFMSysAlarmMapExpMod2WaterDetected' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
+  'upsDiagIMInControl' => {
+    '1' => 'activeInControl',
+    '2' => 'passive',
+    '3' => 'unknown',
+    '4' => 'fault',
   },
-  'emStatusProbeMinTempViolation' => {
-    '1' => 'noViolation',
-    '2' => 'minTempViolation',
-    '3' => 'disabled',
-  },
-  'atsOutputPhaseIndex' => {
-    '1' => 'phase1',
-    '2' => 'phase2',
-    '3' => 'phase3',
-    '4' => 'neutral',
-  },
-  'dm3ConfigBattLowTempAlarm' => {
-    '1' => 'alarmIgnore',
-    '2' => 'alarmRelay1',
-    '3' => 'alarmRelay2',
-    '4' => 'alarmRelay3',
-    '5' => 'alarmRelay4',
-    '6' => 'alarmRelay5',
-    '7' => 'alarmRelay6',
-    '8' => 'alarmMinor',
-    '9' => 'alarmMajor',
-  },
-  'iemConfigContactNormalState' => {
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'rARUStatusAruMasterControl' => {
-    '1' => 'aruOn',
-    '2' => 'aruOff',
-  },
-  'accessPXStatusFrontDoor' => {
-    '1' => 'open',
-    '2' => 'closed',
+  'accessPXExtStatusFrontDoorLock' => {
+    '1' => 'unlocked',
+    '2' => 'locked',
     '3' => 'notInstalled',
     '4' => 'disconnected',
   },
-  'airIRG3RDUStatusOperatingMode' => {
-    '1' => 'standby',
-    '2' => 'ready',
-    '3' => 'on',
-    '4' => 'stop',
-    '5' => 'maintenancemode',
+  'airFMGroupFailoverModWaterDetected' => {
+    '1' => 'notApplicable',
+    '2' => 'disable',
+    '3' => 'enable',
+  },
+  'upsDiagSwitchGearOutputSwitchStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'opened',
+    '4' => 'closed',
+  },
+  'airIRRP100UnitServiceIntervalHumidifierAlarm' => {
+    '1' => 'enable',
+    '2' => 'disable',
+  },
+  'dm3ConfigCompMethod' => {
+    '1' => 'tempcompOn',
+    '2' => 'tempcompOff',
+  },
+  'xATSGeneratorAdvStatusCoolantLevel' => {
+    '1' => 'ok',
+    '2' => 'low',
+    '3' => 'unknown',
+  },
+  'airFMSysAlarmMapMainModBlwrCntl2Fail' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'pcnsUpdateAvailableFlag' => {
+    '1' => 'active',
+    '2' => 'clear',
+  },
+  'isxModularDistSysPowerKwhReset' => {
+    '1' => 'no',
+    '2' => 'yes',
+  },
+  'pcnsAdvancedShutdownOnLostRedundancy' => {
+    '1' => 'yes',
+    '2' => 'no',
   },
   'xATSGeneratorStatusOperational' => {
     '1' => 'nocomm',
@@ -15144,154 +14931,24 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
     '10' => 'shutdown',
     '11' => 'unknown',
   },
-  'wirelessSensorPodStatusAlarmGeneration' => {
-    '0' => 'disabled',
-    '1' => 'enabled',
-  },
-  'airFMSysResetFldSrvcDflts' => {
-    '1' => 'notApplicable',
-    '2' => 'noOperation',
-    '3' => 'reset',
-  },
-  'xPDUDeviceBypassInputPresent' => {
-    '1' => 'notPresent',
-    '2' => 'present',
-  },
-  'sPDUOutletConfigMSPmupsZone4' => {
-    '1' => 'disableAlarm',
-    '2' => 'enableAlarm',
-  },
-  'airFMStatusSystemCoolingEnabled' => {
-    '1' => 'enabledYes',
-    '2' => 'enabledNo',
-  },
-  'memOutletNormalState' => {
-    '1' => 'off',
-    '2' => 'on',
-  },
-  'airIRG2GroupStatusActiveFlowControlStatus' => {
-    '1' => 'under',
-    '2' => 'okay',
-    '3' => 'over',
-    '4' => 'notApplicable',
-  },
-  'iemStatusProbeMaxHumidViolation' => {
-    '1' => 'noViolation',
-    '2' => 'maxHumidViolation',
-    '3' => 'disabled',
-  },
-  'pcnsBypassEnabledEnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'sPDUOutletConfigMSPmupsZone2' => {
-    '1' => 'disableAlarm',
-    '2' => 'enableAlarm',
-  },
-  'rPDU2AdvPhaseConfigOverloadRestriction' => {
-    '1' => 'alwaysAllowTurnON',
-    '2' => 'restrictOnNearOverload',
-    '3' => 'restrictOnOverload',
-    '4' => 'notSupported',
-  },
-  'airIRRP100UnitConfigReheatEnable' => {
-    '1' => 'enable',
-    '2' => 'disable',
-  },
-  'xPDUOutputRelayNormalState' => {
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'accessPXStatusFrontDoorHandle' => {
-    '1' => 'open',
-    '2' => 'closed',
-    '3' => 'notInstalled',
-    '4' => 'disconnected',
-  },
-  'upsAdvConfigBypassToleranceSetting' => {
-    '1' => 'unknown',
-    '2' => 'wide',
-    '3' => 'medium',
-    '4' => 'narrow',
-    '5' => 'custom',
-  },
-  'atsStatusOverCurrentState' => {
-    '1' => 'atsOverCurrent',
-    '2' => 'atsCurrentOK',
-  },
-  'airFMSysAlarmMapOutput6' => {
+  'airFMSysAlarmMapExpMod2CondPumpFail' => {
     '1' => 'notApplicable',
     '2' => 'disabled',
     '3' => 'enabled',
   },
-  'xATSTestingStatusTestStatus' => {
-    '1' => 'noTestInProcess',
-    '2' => 'testPending',
-    '3' => 'startingEngine',
-    '4' => 'engineWarmingUp',
-    '5' => 'awaitingTransferToS2',
-    '6' => 'testingWithLoad',
-    '7' => 'awaitingRetransferToS1',
-    '8' => 'testingWithoutLoad',
-    '9' => 'stoppingEngine',
-    '10' => 'holdingOnGenerator',
-  },
-  'airFMSysHotWaterVlvAct' => {
-    '1' => 'notApplicable',
-    '2' => 'none',
-    '3' => 'springAnalog',
-    '4' => 'floatingControl',
-  },
-  'airFMSysAlarmMapMainModMaintReq' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'airFMSysReheatPIDMethod' => {
-    '1' => 'notApplicable',
-    '2' => 'p',
-    '3' => 'pi',
-    '4' => 'pid',
-  },
-  'rPDU2OutletSwitchedStatusCommandPending' => {
-    '1' => 'commandPending',
-    '2' => 'noCommandPending',
-    '3' => 'commandPendingUnknown',
-  },
-  'airIRRP100GroupConfigConfigurationType' => {
-    '1' => 'racs',
-    '2' => 'hacs',
-    '3' => 'in-row',
-    '4' => 'cacs',
-  },
-  'emsSensorStatusSensorNormalState' => {
-    '1' => 'normallyClosedEMS',
-    '2' => 'normallyOpenEMS',
-  },
-  'wirelessSensorPodStatusDryContactState' => {
-    '0' => 'drycontactOpen',
-    '1' => 'drycontactClosed',
-  },
-  'xPDUCoolingFanStatus' => {
-    '1' => 'normal',
-    '2' => 'failed',
-    '3' => 'noCoolingFansPresent',
-    '4' => 'unknown',
-  },
-  'pcnsNMCComsLostFlag' => {
-    '1' => 'active',
-    '2' => 'clear',
-  },
-  'airFMGroupFailoverSysPrimarySensorFail' => {
-    '1' => 'notApplicable',
-    '2' => 'disable',
-    '3' => 'enable',
-  },
-  'pcnspcnsRunTimeBelowThresholdEnableLogging' => {
+  'pcnsCommunicationEstablishedEnableLogging' => {
     '1' => 'yes',
     '2' => 'no',
   },
-  'dm3ConfigConv1ofNAlarm' => {
+  'pcnsMinLoadCapabilityRegainedEnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'pcnsRunTimeWithinRangeEnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'dm3ConfigInRlyAlarm' => {
     '1' => 'alarmIgnore',
     '2' => 'alarmRelay1',
     '3' => 'alarmRelay2',
@@ -15302,22 +14959,1431 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
     '8' => 'alarmMinor',
     '9' => 'alarmMajor',
   },
-  'airFMSysAlarmMapExpMod1AirBlckIntOpen' => {
+  'airIRRP100UnitServiceIntervalAirFilterAlarm' => {
+    '1' => 'enable',
+    '2' => 'disable',
+  },
+  'upsDiagUnitControllerStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'offOk',
+    '4' => 'onOk',
+    '5' => 'offFail',
+    '6' => 'onFail',
+    '7' => 'lostComm',
+  },
+  'upsDiagPMEnclDoorFltrLifetime' => {
+    '1' => 'heavyFiltration15days',
+    '2' => 'normalFiltration30days',
+    '3' => 'lightFiltration60days',
+    '4' => 'notPresent',
+  },
+  'rPDU2PhaseConfigPhasePeakCurrentReset' => {
+    '1' => 'noOperation',
+    '2' => 'reset',
+  },
+  'isxModularDistSysCurrentAlarmLowEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'emsOutletControlOutletCommand' => {
+    '1' => 'immediateOnEMS',
+    '2' => 'immediateOffEMS',
+  },
+  'airFMModCondPump' => {
+    '1' => 'notApplicable',
+    '2' => 'notPresent',
+    '3' => 'present',
+  },
+  'upsOutletGroupStatusOutletType' => {
+    '1' => 'upsSwitchedOutletGroup',
+    '2' => 'upsMainOutletGroup',
+  },
+  'memDoorSensorConfigAlarmGeneration' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'rPDU2SensorAnalogVoltageStatusCommStatus' => {
+    '1' => 'notInstalled',
+    '2' => 'commsOK',
+    '3' => 'commsLost',
+  },
+  'airFMSysAlarmMapMainModAnyAlarm' => {
     '1' => 'notApplicable',
     '2' => 'disabled',
     '3' => 'enabled',
   },
-  'ats5gSwitchConfigVoltageSensitivity' => {
-    '1' => 'high',
-    '2' => 'low',
+  'airIRmPmLouver2ManOpPosition' => {
+    '1' => 'closed',
+    '2' => 'open',
   },
-  'pcnsAdvancedShutdownOnLostRedundancy' => {
+  'rPDU2DeviceConfigOutletsEnergyReset' => {
+    '1' => 'noOperation',
+    '2' => 'reset',
+    '3' => 'notSupported',
+  },
+  'airFMSysDehumState' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'airFMSysAlarmMapSysPrimSensFail' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'isxModularPduDeviceTransformerPresent' => {
+    '1' => 'notPresent',
+    '2' => 'isoXfmrPresent',
+    '3' => 'autoXfmrPresent',
+  },
+  'memInputsStatusCurrentState' => {
+    '1' => 'inputClosedHighMEM',
+    '2' => 'inputOpenLowMEM',
+    '3' => 'inputDisabled',
+    '4' => 'inputStateNotApplicable',
+  },
+  'airFMSysAlarmMapSysSecSensActive' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'AirIRmStopState' => {
+    '1' => 'maybeOn',
+    '2' => 'unitOff',
+  },
+  'airIRRP500UnitServiceIntervalHumidifierAlarm' => {
+    '1' => 'enable',
+    '2' => 'disable',
+  },
+  'airFMSysActualHumCtrlMethod' => {
+    '1' => 'notApplicable',
+    '2' => 'avgReturnRH',
+    '3' => 'avgReturnDewPt',
+    '4' => 'avgRemoteRH',
+    '5' => 'avgRemoteDewPt',
+  },
+  'airIRRCUnitConfigOutputNormalState' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'accessPXConfigFrontDoorLockControl' => {
+    '1' => 'unlock',
+    '2' => 'lock',
+    '3' => 'notInstalledReadOnly',
+    '4' => 'disconnectedReadOnly',
+  },
+  'battManAlarmManagementController' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'airIRRP100UnitStatusLeakSensor' => {
+    '1' => 'no-leak',
+    '2' => 'leak',
+  },
+  'airFMStatusSystemReheatingEnabled' => {
+    '1' => 'enabledYes',
+    '2' => 'enabledNo',
+  },
+  'emConfigProbeHighTempEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'pcnsMinLoadCapabilityLostEnableLogging' => {
     '1' => 'yes',
     '2' => 'no',
   },
-  'dm3StatusConvStandby' => {
+  'airIRmPmControllerType' => {
+    '1' => 'unknown',
+    '2' => 'c4000',
+    '3' => 'c1001',
+    '4' => 'c1002',
+    '5' => 'c5000',
+    '6' => 'c6000',
+    '7' => 'c1010',
+    '8' => 'c7000IOC',
+    '9' => 'c7000AT',
+    '10' => 'c7000PT',
+    '11' => 'c5MSC',
+    '12' => 'c7000PT2',
+  },
+  'airFMStatusSystemOn' => {
+    '1' => 'statusOn',
+    '2' => 'statusOff',
+  },
+  'airFMSysCoilFluidVlvType' => {
+    '1' => 'notApplicable',
+    '2' => 'twoWay',
+    '3' => 'threeWay',
+  },
+  'airFMSysAlarmMapMainModWaterDetected' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'ats5gSwitchSourceBStatus' => {
+    '1' => 'fail',
+    '2' => 'ok',
+  },
+  'airFMSysAlarmMapExpMod1WaterDetected' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'xATSSource2Quality' => {
+    '1' => 'sourceGood',
+    '2' => 'lowVoltage',
+    '3' => 'highVoltage',
+    '4' => 'phaseImbalance',
+    '5' => 'freqOutOfRange',
+    '6' => 'badRotation',
+    '7' => 'unknown',
+  },
+  'ats5gSwitchCommunicationStatus' => {
+    '1' => 'atsNeverDiscovered',
+    '2' => 'atsCommEstablished',
+    '3' => 'atsCommLost',
+  },
+  'airIRRP500UnitServiceIntervalFansAlarm' => {
+    '1' => 'enable',
+    '2' => 'disable',
+  },
+  'isxModularDistModuleBreakerPhaseIndex' => {
+    '1' => 'phaseL1',
+    '2' => 'phaseL2',
+    '3' => 'phaseL3',
+  },
+  'subfeedBreakerStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'opened',
+    '4' => 'closed',
+  },
+  'airIRRP100UnitStatusOutputState' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'upsDiagSubSysExternalSwitchGearStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'offOk',
+    '4' => 'onOk',
+    '5' => 'offFail',
+    '6' => 'onFail',
+    '7' => 'lostComm',
+  },
+  'airFMSysCoilCfg' => {
+    '1' => 'notApplicable',
+    '2' => 'dx',
+    '3' => 'econ',
+    '4' => 'multicool',
+    '5' => 'chilledWater',
+  },
+  'airIRSCUnitConfigInputNormalState' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'emsSmokeSensorCommStatus' => {
+    '1' => 'commOK',
+    '2' => 'commLost',
+  },
+  'rPDU2SensorDiscreteStatusCommStatus' => {
+    '1' => 'notInstalled',
+    '2' => 'commsOK',
+    '3' => 'commsLost',
+  },
+  'airIRG2RDT2ConfigIdleOnLeakDetect' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airIRG2RDT2StatusOperateMode' => {
+    '1' => 'standby',
+    '2' => 'on',
+    '3' => 'idle',
+    '4' => 'reserved',
+    '5' => 'service',
+  },
+  'dm3ConfigSysRemoteAccess' => {
+    '1' => 'accessEnabled',
+    '2' => 'accessDisabled',
+  },
+  'rARUFanStatusFanOperatingStatus' => {
+    '1' => 'unknown',
+    '2' => 'off',
+    '3' => 'onOk',
+    '4' => 'onDegraded',
+    '5' => 'offFailed',
+  },
+  'uioOutputRelayStatusCommStatus' => {
+    '1' => 'notInstalled',
+    '2' => 'commsOK',
+    '3' => 'commsLost',
+  },
+  'airFMModRHBlwr1Reset' => {
+    '1' => 'notApplicable',
+    '2' => 'noOperation',
+    '3' => 'reset',
+  },
+  'memVibrationSensorStatusSensorState' => {
+    '1' => 'vibrationDetected',
+    '2' => 'noVibration',
+    '3' => 'unknown',
+  },
+  'isxModularDistSubFeedInfoKwhReset' => {
+    '1' => 'no',
+    '2' => 'yes',
+  },
+  'airFMSysAlarmMapInput12' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'ats5gSwitchConfigFrequencyDeviation' => {
+    '1' => 'one',
+    '2' => 'two',
+    '3' => 'three',
+    '5' => 'five',
+    '10' => 'ten',
+  },
+  'airIRRCUnitStatusOperateMode' => {
+    '1' => 'standby',
+    '2' => 'on',
+    '3' => 'idle',
+  },
+  'atsOutputPhase' => {
+    '1' => 'phase1',
+    '2' => 'phase2',
+    '3' => 'phase3',
+  },
+  'dm3ConfigBattHighVoltAlarm' => {
+    '1' => 'alarmIgnore',
+    '2' => 'alarmRelay1',
+    '3' => 'alarmRelay2',
+    '4' => 'alarmRelay3',
+    '5' => 'alarmRelay4',
+    '6' => 'alarmRelay5',
+    '7' => 'alarmRelay6',
+    '8' => 'alarmMinor',
+    '9' => 'alarmMajor',
+  },
+  'upsDiagPMFanLifetimeStatus' => {
+    '1' => 'ok',
+    '2' => 'nearEnd',
+    '3' => 'exceeded',
+    '4' => 'unknown',
+  },
+  'dm3StatusConvPresent' => {
     '1' => 'statusTrue',
     '2' => 'statusFalse',
+  },
+  'rPDU2SensorDiscreteConfigAbnormalSeverity' => {
+    '1' => 'informational',
+    '2' => 'warning',
+    '3' => 'critical',
+  },
+  'iemStatusProbeMaxHumidViolation' => {
+    '1' => 'noViolation',
+    '2' => 'maxHumidViolation',
+    '3' => 'disabled',
+  },
+  'memOutputNormalState' => {
+    '1' => 'memOutputClosed',
+    '2' => 'memOutputOpen',
+  },
+  'atsStatus5VPowerSupply' => {
+    '1' => 'atsPowerSupplyFailure',
+    '2' => 'atsPowerSupplyOK',
+  },
+  'apcLocalDisplayConfigContrast' => {
+    '1' => 'contrast1',
+    '2' => 'contrast2',
+    '3' => 'contrast3',
+    '4' => 'contrast4',
+    '5' => 'contrast5',
+    '6' => 'contrast6',
+    '7' => 'contrast7',
+    '8' => 'contrast8',
+  },
+  'airFMSysAlarmMapInput16' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'emConfigProbeMaxTempEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'airIRG2RDT2ConfigUnitIdleOnCoolFail' => {
+    '1' => 'no',
+    '2' => 'yes',
+  },
+  'sPDUOutletConfigMSPmupsP1HiTemp' => {
+    '1' => 'disableAlarm',
+    '2' => 'enableAlarm',
+  },
+  'pcnsNetComsLostFlag' => {
+    '1' => 'active',
+    '2' => 'clear',
+  },
+  'xPDUBranchBreakerTieIndicator' => {
+    '1' => 'breakerUnTied',
+    '2' => 'breakerTied',
+  },
+  'airFMModHumidifierType' => {
+    '1' => 'notApplicable',
+    '2' => 'none',
+    '3' => 'steamElectrode',
+    '4' => 'liveSteam',
+  },
+  'pcnsEnvironmentCommunicationLostEnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'memSensorsAlarmStatus' => {
+    '1' => 'memNormal',
+    '2' => 'memWarning',
+    '3' => 'memCritical',
+  },
+  'upsEbmModeSetting' => {
+    '1' => 'enabled',
+    '2' => 'disabled',
+  },
+  'pcnsEnvironmentCommunicationEstablishedEnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airIRRP100GroupConfigRuntimeBalancingEnable' => {
+    '1' => 'disable',
+    '2' => 'enable',
+  },
+  'battManString1BatteryCellShorted' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'rPDU2AdvPhaseConfigOverloadRestriction' => {
+    '1' => 'alwaysAllowTurnON',
+    '2' => 'restrictOnNearOverload',
+    '3' => 'restrictOnOverload',
+    '4' => 'notSupported',
+  },
+  'pcnsTempOutOfRangeProbe2EnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'AirIRSCFanSpeedPreference' => {
+    '1' => 'low',
+    '2' => 'med-low',
+    '3' => 'med',
+    '4' => 'med-high',
+    '5' => 'high',
+  },
+  'ats5gEnvConfigTempAlarmsEnabled' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'rARUStatusSysTempUnits' => {
+    '1' => 'celsius',
+    '2' => 'fahrenheit',
+  },
+  'emsOutletStatusOutletState' => {
+    '1' => 'outletOnEMS',
+    '2' => 'outletOffEMS',
+  },
+  'xPDUEPOMode' => {
+    '1' => 'armed',
+    '2' => 'disarmed',
+    '3' => 'unknown',
+  },
+  'ats5gSwitchPhaseSyncStatus' => {
+    '1' => 'inSync',
+    '2' => 'outOfSync',
+  },
+  'pcnsTempInRangeProbe1EnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'rPDU2AdvPhaseConfigPhasePeakCurrentReset' => {
+    '1' => 'noOperation',
+    '2' => 'reset',
+  },
+  'rARUPowerStatusRedundantAcConfig' => {
+    '1' => 'singleCord',
+    '2' => 'dualCord',
+  },
+  'uioSensorConfigLowHumidityEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'dm3ConfigBattDischargeAlarm' => {
+    '1' => 'alarmIgnore',
+    '2' => 'alarmRelay1',
+    '3' => 'alarmRelay2',
+    '4' => 'alarmRelay3',
+    '5' => 'alarmRelay4',
+    '6' => 'alarmRelay5',
+    '7' => 'alarmRelay6',
+    '8' => 'alarmMinor',
+    '9' => 'alarmMajor',
+  },
+  'airIRRCUnitConfigIdleOnLeakDetect' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'rPDU2OutletMeteredStatusState' => {
+    '1' => 'lowLoad',
+    '2' => 'normal',
+    '3' => 'nearOverload',
+    '4' => 'overload',
+  },
+  'battManResetDischargeCounters' => {
+    '1' => 'noOperation',
+    '2' => 'reset',
+  },
+  'airIRG3RDUStatusRefrigerantLeakDetector' => {
+    '1' => 'suspended',
+    '2' => 'calibrating',
+    '3' => 'operating',
+    '4' => 'disabled',
+  },
+  'memInputType' => {
+    '1' => 'noConnection',
+    '2' => 'dryContact',
+    '3' => 'digital',
+    '4' => 'analogmAmps',
+    '5' => 'analogVolts',
+  },
+  'memLeakRopeConfigSensorSeverity' => {
+    '1' => 'critical',
+    '2' => 'warning',
+    '3' => 'informational',
+  },
+  'airFMSysDischAirPtrn' => {
+    '1' => 'notApplicable',
+    '2' => 'upFlow',
+    '3' => 'downFlow',
+    '4' => 'horizFlow',
+  },
+  'airIRRP500UnitServiceIntervalCondensatePumpAlarm' => {
+    '1' => 'enable',
+    '2' => 'disable',
+  },
+  'xATSTestingSimulatePowerFailTest' => {
+    '1' => 'cancelSimulation',
+    '2' => 'fiveSecondsSimulation',
+    '3' => 'tenSecondsSimulation',
+    '4' => 'thirtySecondsSimulation',
+    '5' => 'oneMinuteSimulation',
+    '6' => 'threeMinutesSimulation',
+    '7' => 'fiveMinutesSimulation',
+    '8' => 'tenMinutesSimulation',
+  },
+  'ePDUDeviceControlBeepAlarm' => {
+    '1' => 'off',
+    '2' => 'on',
+  },
+  'pcnsMinLoadCapabilityLostEnableShutdown' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'isxModularDistModuleOutputAlarmHighEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'airFMSysAlarmMapSysRemSensRemoved' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'emsProbeStatusProbeCommStatus' => {
+    '1' => 'commsNeverDiscovered',
+    '2' => 'commsEstablished',
+    '3' => 'commsLost',
+  },
+  'battManString2BatteryUserHighVoltageAlarm' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'mdcCoolingConfigPTCHeater' => {
+    '1' => 'unknown',
+    '2' => 'active',
+    '3' => 'inactive',
+  },
+  'airFMSysAlarmMapExpMod1HighSupplyTemp' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'sPDUOutletConfigMSPmupsP2HiHum' => {
+    '1' => 'disableAlarm',
+    '2' => 'enableAlarm',
+  },
+  'atsStatusHardwareStatus' => {
+    '1' => 'fail',
+    '2' => 'ok',
+  },
+  'pcnsNetCommunicationLostEnableShutdown' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'ats5gSwitchOverCurrentState' => {
+    '1' => 'atsOverCurrent',
+    '2' => 'atsCurrentOK',
+  },
+  'airFMSysAlarmMapSysHighEnvHum' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'isxModularDistModuleBreakerPositionAlarms' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'xATSDeviceServiceType' => {
+    '1' => 'threeWire',
+    '2' => 'fourWire',
+  },
+  'uioSensorStatusAlarmStatus' => {
+    '1' => 'uioNormal',
+    '2' => 'uioWarning',
+    '3' => 'uioCritical',
+    '4' => 'sensorStatusNotApplicable',
+  },
+  'airIRRP100UnitConfigReheatEnable' => {
+    '1' => 'enable',
+    '2' => 'disable',
+  },
+  'pcnsTempInRangeProbe1EnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'pcnsFaultBypassEnabledEnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'upsAdvBatteryBreakerStatus' => {
+    '1' => 'disconnected',
+    '2' => 'closed',
+    '3' => 'notPresent',
+  },
+  'airFMModWaterDetector' => {
+    '1' => 'notApplicable',
+    '2' => 'notPresent',
+    '3' => 'present',
+  },
+  'pcnsTempOutOfRangeProbe2EnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'memVibrationSensorStatusSensorSeverity' => {
+    '1' => 'critical',
+    '2' => 'warning',
+    '3' => 'informational',
+  },
+  'airFMModServIntBlwr2Reset' => {
+    '1' => 'notApplicable',
+    '2' => 'noOperation',
+    '3' => 'reset',
+  },
+  'memLeakRopeConfigAlarmGeneration' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'sPDUOutletControlVMOutletCommand' => {
+    '1' => 'immediateOnVM',
+    '2' => 'immediateOffVM',
+    '3' => 'immediateRebootVM',
+    '4' => 'delayedOnVM',
+    '5' => 'delayedOffVM',
+    '6' => 'delayedRebootVM',
+    '7' => 'cancelPendingCommandVM',
+  },
+  'airFMSysAlarmMapExpMod2LowSupplyTemp' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'airFMGroupFailoverSysPrimarySensorFail' => {
+    '1' => 'notApplicable',
+    '2' => 'disable',
+    '3' => 'enable',
+  },
+  'AirIRmControlState' => {
+    '1' => 'off',
+    '2' => 'on',
+  },
+  'upsOutletGroupConfigLoadShedControlInOverload' => {
+    '1' => 'upsOutletGroupConfigDisableInOverloadLoadShed',
+    '2' => 'upsOutletGroupConfigEnableInOverloadLoadShed',
+  },
+  'upsAdvTestDiagnostics' => {
+    '1' => 'noTestDiagnostics',
+    '2' => 'testDiagnostics',
+  },
+  'airFMSysReheatState' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'upsAdvConfigSensitivity' => {
+    '1' => 'auto',
+    '2' => 'low',
+    '3' => 'medium',
+    '4' => 'high',
+  },
+  'pcnsRunTimeAboveThresholdEnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'pcnsBatteryDischargedEnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'pcnsOverloadEnableShutdown' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'sPDUOutletStatusMSPCommandPending' => {
+    '1' => 'outletStatusMSPCommandPending',
+    '2' => 'outletStatusMSPNoCommandPending',
+  },
+  'upsDiagSubSysIntBypSwitchStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'offOk',
+    '4' => 'onOk',
+    '5' => 'offFail',
+    '6' => 'onFail',
+    '7' => 'lostComm',
+  },
+  'sPDUOutletConfigMSPmupsP2HiTemp' => {
+    '1' => 'disableAlarm',
+    '2' => 'enableAlarm',
+  },
+  'ats5gSwitchConfigPreferredSource' => {
+    '1' => 'sourceA',
+    '2' => 'sourceB',
+    '3' => 'none',
+  },
+  'memBeaconAction' => {
+    '1' => 'turnOff',
+    '2' => 'turnOn',
+  },
+  'airIRG2RDT2ConfigUnitType' => {
+    '1' => 'fluidCooled',
+    '2' => 'airCooled',
+  },
+  'atsStatusMinus12VPowerSupply' => {
+    '1' => 'atsPowerSupplyFailure',
+    '2' => 'atsPowerSupplyOK',
+  },
+  'sPDUMasterConfigVMAudioAlarmActivated' => {
+    '1' => 'audioAlarmActiveNever',
+    '2' => 'audioAlarmActiveOnOverload',
+    '3' => 'audioAlarmActiveOnOverloadImminent',
+  },
+  'upsOutletGroupConfigLoadShedControlSkipOffDelay' => {
+    '1' => 'upsOutletGroupConfigSkipOffDelay',
+    '2' => 'upsOutletGroupConfigUseOffDelay',
+  },
+  'emsAlarmDeviceControlDeviceCommand' => {
+    '1' => 'alarmDeviceOnEMS',
+    '2' => 'alarmDeviceOffEMS',
+    '3' => 'alarmDeviceNotInstalledEMS',
+  },
+  'airIRmPmEheating3Type' => {
+    '1' => 'direct',
+    '2' => 'pwm',
+  },
+  'airFMGroupFailoverModBlwrCntrl1Fail' => {
+    '1' => 'notApplicable',
+    '2' => 'disable',
+    '3' => 'enable',
+  },
+  'upsAdvConfigACWiringSetting' => {
+    '1' => 'threeWire',
+    '2' => 'fourWire',
+    '3' => 'fourWireHRG',
+  },
+  'upsBatteryCabStringFuseStatus' => {
+    '1' => 'fuseOpen',
+    '2' => 'fuseOk',
+    '3' => 'notPresent',
+  },
+  'pcnsContactNormal2EnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airIRRP100UnitConfigCoolCapacity' => {
+    '1' => 'automatic',
+    '2' => 'maximum',
+  },
+  'upsDiagSubSysXRCommunicationCardStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'offOk',
+    '4' => 'onOk',
+    '5' => 'offFail',
+    '6' => 'onFail',
+    '7' => 'lostComm',
+  },
+  'airFMSysAlarmMapSysReturnSensFail' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'upsDiagSubSysUsrSuppBattBreakerStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'opened',
+    '4' => 'closed',
+  },
+  'airPACompressor' => {
+    '1' => 'statusON',
+    '2' => 'statusOFF',
+  },
+  'airFMGroupCfgShutdownSmoke' => {
+    '1' => 'disable',
+    '2' => 'enable',
+  },
+  'dm3ConfigBattLowVoltAlarm' => {
+    '1' => 'alarmIgnore',
+    '2' => 'alarmRelay1',
+    '3' => 'alarmRelay2',
+    '4' => 'alarmRelay3',
+    '5' => 'alarmRelay4',
+    '6' => 'alarmRelay5',
+    '7' => 'alarmRelay6',
+    '8' => 'alarmMinor',
+    '9' => 'alarmMajor',
+  },
+  'airIRmPmEheating2Type' => {
+    '1' => 'direct',
+    '2' => 'pwm',
+  },
+  'sPDUOutletConfigMSPgsDeviceConfirm' => {
+    '1' => 'deviceConfirmNo',
+    '2' => 'deviceConfirmYes',
+  },
+  'battManString2BatteryLowCapacity' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'battManSystemSuspendVoltage' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'pcnsAdvancedTurnOffUps' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'upsPhaseOutputVoltageOrientation' => {
+    '1' => 'unknown',
+    '2' => 'singlePhase',
+    '3' => 'splitPhase',
+    '4' => 'threePhasePhaseToNeutral',
+    '5' => 'threePhasePhaseToPhase',
+  },
+  'dipSwitchStatus' => {
+    '1' => 'on',
+    '2' => 'off',
+  },
+  'upsDiagSwitchGearBypassSwitchStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'opened',
+    '4' => 'closed',
+  },
+  'upsDiagTransformerStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'ok',
+    '4' => 'fail',
+    '5' => 'lostComm',
+    '6' => 'overtemp',
+    '7' => 'opened',
+    '8' => 'closed',
+  },
+  'pcnsRunTimeWithinRangeEnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'battManString1BatteryUserHighVoltageAlarm' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'pcbeComsLostFlag' => {
+    '1' => 'active',
+    '2' => 'clear',
+  },
+  'dm3StatusSysRemoteAccess' => {
+    '1' => 'accessEnabled',
+    '2' => 'accessDisabled',
+  },
+  'dm3ConfigRectImbalanceAlarm' => {
+    '1' => 'alarmIgnore',
+    '2' => 'alarmRelay1',
+    '3' => 'alarmRelay2',
+    '4' => 'alarmRelay3',
+    '5' => 'alarmRelay4',
+    '6' => 'alarmRelay5',
+    '7' => 'alarmRelay6',
+    '8' => 'alarmMinor',
+    '9' => 'alarmMajor',
+  },
+  'apcLocalDisplayConfigKeyClick' => {
+    '1' => 'keyclickDisabled',
+    '2' => 'keyclickEnabled',
+  },
+  'airIRRCGroupConfigActiveFlowControllerLampTest' => {
+    '1' => 'off',
+    '2' => 'on',
+  },
+  'airIRRP500GroupSetpointsActiveFlowControlBias' => {
+    '1' => 'positive',
+    '2' => 'slightlyPositive',
+    '3' => 'zero',
+    '4' => 'slightlyNegative',
+    '5' => 'negative',
+  },
+  'atsStatusVoltageOutStatus' => {
+    '1' => 'fail',
+    '2' => 'ok',
+  },
+  'dm3ConfigConvFanFailAlarm' => {
+    '1' => 'alarmIgnore',
+    '2' => 'alarmRelay1',
+    '3' => 'alarmRelay2',
+    '4' => 'alarmRelay3',
+    '5' => 'alarmRelay4',
+    '6' => 'alarmRelay5',
+    '7' => 'alarmRelay6',
+    '8' => 'alarmMinor',
+    '9' => 'alarmMajor',
+    '10' => 'alarmNofN',
+  },
+  'airIRRP100GroupSetpointsFanSpeedControl' => {
+    '1' => 'automatic',
+    '2' => 'manual',
+  },
+  'airFMGroupCfgIdleBlower' => {
+    '1' => 'off',
+    '2' => 'minimumSpeed',
+    '3' => 'normalSpeed',
+  },
+  'rPDU2DeviceControlCommand' => {
+    '1' => 'immediateAllOn',
+    '2' => 'delayedAllOn',
+    '3' => 'immediateAllOff',
+    '4' => 'immediateAllReboot',
+    '5' => 'delayedAllReboot',
+    '6' => 'noCommandAll',
+    '7' => 'delayedAllOff',
+    '8' => 'cancelAllPendingCommands',
+  },
+  'uioSpotFluidSensorStatusAlarmStatus' => {
+    '1' => 'uioNormal',
+    '2' => 'uioCritical',
+    '3' => 'uioNoCommunication',
+    '4' => 'uioDisabled',
+  },
+  'pcnsContactNormal3EnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'newCodeAuthentViaTFTP' => {
+    '1' => 'unknown',
+    '2' => 'validNewAgentCodeImage',
+    '3' => 'sameAgentCodeImage',
+    '4' => 'invalidAgentCodeImage',
+  },
+  'dm3ConfigRect1ofNAlarm' => {
+    '1' => 'alarmIgnore',
+    '2' => 'alarmRelay1',
+    '3' => 'alarmRelay2',
+    '4' => 'alarmRelay3',
+    '5' => 'alarmRelay4',
+    '6' => 'alarmRelay5',
+    '7' => 'alarmRelay6',
+    '8' => 'alarmMinor',
+    '9' => 'alarmMajor',
+  },
+  'iemConfigContactNormalState' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'rPDU2SensorTempHumidityConfigTemperatureAlarmEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'airFMModOutputCapacity' => {
+    '1' => 'notApplicable',
+    '2' => 'kw45',
+    '3' => 'kw35',
+    '4' => 'kw40',
+    '5' => 'kw50',
+    '6' => 'kw80',
+  },
+  'atsStatusVBoostSourceA' => {
+    '1' => 'atsPowerSupplyFailure',
+    '2' => 'atsPowerSupplyOK',
+  },
+  'upsAdvControlBypassSwitch' => {
+    '1' => 'noBypassSwitch',
+    '2' => 'switchToBypass',
+    '3' => 'switchOutOfBypass',
+  },
+  'memFluidSensorStatusSensorSeverity' => {
+    '1' => 'critical',
+    '2' => 'warning',
+    '3' => 'informational',
+  },
+  'upsAdvControlFlashAndBeep' => {
+    '1' => 'noFlashAndBeep',
+    '2' => 'flashAndBeep',
+    '3' => 'flashAndBeepSyncGroup',
+    '4' => 'flashAndBeepCont',
+    '5' => 'flashAndBeepCancel',
+  },
+  'xPDUBypassInputVoltagePhaseIndex' => {
+    '1' => 'phase1',
+    '2' => 'phase2',
+    '3' => 'phase3',
+  },
+  'airFMGroupSysComm' => {
+    '1' => 'commLost',
+    '2' => 'commEstablished',
+  },
+  'dm3StatusRectFanFail' => {
+    '1' => 'statusTrue',
+    '2' => 'statusFalse',
+  },
+  'uioSensorConfigMaxHumidityEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'xATSGeneratorSettingsMetricUnit' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'atsStatus24VPowerSupply' => {
+    '1' => 'atsPowerSupplyFailure',
+    '2' => 'atsPowerSupplyOK',
+  },
+  'airIRSCUnitConfigOutputSource' => {
+    '1' => 'anyAlarm',
+    '2' => 'criticalAlarm',
+  },
+  'battManResetLowestDischargeVoltages' => {
+    '1' => 'noOperation',
+    '2' => 'reset',
+  },
+  'upsBatteryCabBlockPresent' => {
+    '1' => 'present',
+    '2' => 'notPresent',
+    '3' => 'notAvailable',
+  },
+  'atsStatus3dot3VPowerSupply' => {
+    '1' => 'atsPowerSupplyFailure',
+    '2' => 'atsPowerSupplyOK',
+  },
+  'emStatusProbeMaxTempViolation' => {
+    '1' => 'noViolation',
+    '2' => 'maxTempViolation',
+    '3' => 'disabled',
+  },
+  'isxModularDistSysCurrentAlarmMaxEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'upsOutputRelayConfigCause' => {
+    '1' => 'outputRelayConfigCauseNone',
+    '2' => 'outputRelayConfigCauseOnBatPwrFail',
+    '3' => 'outputRelayConfigCauseOnBatPwrFailExceptPeakPeriod',
+    '4' => 'outputRelayConfigCauseLoBatWhileOnBat',
+    '5' => 'outputRelayConfigCauseAlarm',
+    '6' => 'outputRelayConfigCauseFault',
+    '7' => 'outputRelayConfigCauseOutputOn',
+    '8' => 'outputRelayConfigCauseOutputOff',
+    '9' => 'outputRelayConfigCauseOnline',
+    '10' => 'outputRelayConfigCauseInBypass',
+  },
+  'airFMSysAlarmMapInput10' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'upsAdvConfigBypassToleranceSetting' => {
+    '1' => 'unknown',
+    '2' => 'wide',
+    '3' => 'medium',
+    '4' => 'narrow',
+    '5' => 'custom',
+  },
+  'airFMSysAlarmMapExpMod2AnyAlarm' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'pcnsHumidityOutOfRangeProbe2EnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'emsSensorStatusSensorNormalState' => {
+    '1' => 'normallyClosedEMS',
+    '2' => 'normallyOpenEMS',
+  },
+  'airIRG3CMStatusUnitType' => {
+    '1' => 'unconfigured',
+    '2' => 'oa',
+    '3' => 'ra',
+  },
+  'isxModularDistSubFeedInfoAlarmStatus' => {
+    '1' => 'normal',
+    '2' => 'warning',
+    '3' => 'critical',
+  },
+  'atsStatusSourceBStatus' => {
+    '1' => 'fail',
+    '2' => 'ok',
+  },
+  'airFMGroupFailoverSysNoSensorsAvailable' => {
+    '1' => 'notApplicable',
+    '2' => 'disable',
+    '3' => 'enable',
+  },
+  'rPDUOutletPhaseOverloadRestriction' => {
+    '1' => 'alwaysAllowTurnON',
+    '2' => 'restrictOnNearOverload',
+    '3' => 'restrictOnOverload',
+  },
+  'pcnsFaultBypassEnabledEnableShutdown' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airFMGroupFailoverSysLowEnvHum' => {
+    '1' => 'notApplicable',
+    '2' => 'disable',
+    '3' => 'enable',
+  },
+  'atsStatusFuseSourceB' => {
+    '1' => 'atsFuseStatusClose',
+    '2' => 'atsFuseStatusOpen',
+  },
+  'airIRG2RDT2StatusCompressor' => {
+    '1' => 'off',
+    '2' => 'on',
+  },
+  'isxModularDistSysOutputVoltageMonitoring' => {
+    '1' => 'notPresent',
+    '2' => 'present',
+  },
+  'upsAdvControlFirmwareUpdate' => {
+    '1' => 'noFirmwareUpdate',
+    '2' => 'firmwareUpdate',
+    '3' => 'updateInProcess',
+    '4' => 'updateSuccessful',
+    '5' => 'updateFailed',
+  },
+  'airIRG3CMServiceIntervalsAirFilterAlarm' => {
+    '1' => 'disable',
+    '2' => 'enable',
+  },
+  'memVibrationStatusAlarmStatus' => {
+    '1' => 'memNormal',
+    '2' => 'memWarning',
+    '3' => 'memCritical',
+  },
+  'ats5gIdentModuleType' => {
+    '1' => 'notNPS',
+    '2' => 'host',
+    '3' => 'guest',
+  },
+  'xPDUDeviceInfraStruXureType' => {
+    '1' => 'typeB',
+    '2' => 'typeC',
+  },
+  'airIRSCUnitConfigOpControl' => {
+    '1' => 'standby',
+    '2' => 'on',
+  },
+  'airFMSysAlarmMapOutput5' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'subfeedBreakerPresent' => {
+    '1' => 'notPresent',
+    '2' => 'present',
+  },
+  'airFMSysAlarmMapOutput11' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'airIRRP100UnitServiceIntervalCompressorAlarm' => {
+    '1' => 'enable',
+    '2' => 'disable',
+  },
+  'xATSDeviceDCBackUpPresent' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airIRSCUnitStatusInputState' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'sPDUOutletCtl' => {
+    '1' => 'outletOn',
+    '2' => 'outletOff',
+    '3' => 'outletReboot',
+    '4' => 'outletUnknown',
+    '5' => 'outletOnWithDelay',
+    '6' => 'outletOffWithDelay',
+    '7' => 'outletRebootWithDelay',
+  },
+  'xPDUCoolingFanStatus' => {
+    '1' => 'normal',
+    '2' => 'failed',
+    '3' => 'noCoolingFansPresent',
+    '4' => 'unknown',
+  },
+  'ats5gSwitchSelectedSource' => {
+    '1' => 'sourceA',
+    '2' => 'sourceB',
+    '3' => 'none',
+  },
+  'isxModularDistSysPowerPhaseIndex' => {
+    '1' => 'phase1',
+    '2' => 'phase2',
+    '3' => 'phase3',
+  },
+  'pcnsMaxInternalTempInRangeEnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'dm3StatusRectCurrentLimit' => {
+    '1' => 'statusTrue',
+    '2' => 'statusFalse',
+  },
+  'airIRRP500UnitConfigInputNormalState' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'upsOutputRelayState' => {
+    '1' => 'outputRelayNormalState',
+    '2' => 'outputRelayAbnormalState',
+  },
+  'pcnsMinRedundancyLostEnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'emConfigProbeHighHumidEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'upsBasicOutputACwiringConfiguration' => {
+    '1' => 'unknown',
+    '2' => 'noNeutralWiredonSystem',
+    '3' => 'neutralUsedforSupplyingLoad',
+  },
+  'isxModularDistModuleInfoAlarmStatus' => {
+    '1' => 'normal',
+    '2' => 'warning',
+    '3' => 'critical',
+    '4' => 'notPresent',
+    '5' => 'unknown',
+  },
+  'isxModularDistModuleOutputAlarmGeneration' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'airIRG3GroupConfigRuntimeBalancingEnable' => {
+    '1' => 'disable',
+    '2' => 'enable',
+  },
+  'airFMGroupFailoverModHighSupplyTemp' => {
+    '1' => 'notApplicable',
+    '2' => 'disable',
+    '3' => 'enable',
+  },
+  'xPDUDeviceServiceType' => {
+    '1' => 'threeWire',
+    '2' => 'fourWire',
+  },
+  'upsHighPrecBatteryCurrentPolarity' => {
+    '0' => 'positive',
+    '1' => 'negative',
+  },
+  'airFMSysAlarmMapOutput9' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'atsOutputPhaseState' => {
+    '1' => 'normal',
+    '2' => 'lowload',
+    '3' => 'nearoverload',
+    '4' => 'overload',
+  },
+  'upsAdvConfigVoutReporting' => {
+    '1' => 'unknown',
+    '2' => 'voutAUTO',
+    '3' => 'vout208',
+    '4' => 'vout240',
+  },
+  'airFMGroupCfgSetpointShareStatus' => {
+    '1' => 'off',
+    '2' => 'on',
+  },
+  'iemConfigProbeMaxHumidEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'dm3ConfigBattHwTempAlarm' => {
+    '1' => 'alarmIgnore',
+    '2' => 'alarmRelay1',
+    '3' => 'alarmRelay2',
+    '4' => 'alarmRelay3',
+    '5' => 'alarmRelay4',
+    '6' => 'alarmRelay5',
+    '7' => 'alarmRelay6',
+    '8' => 'alarmMinor',
+    '9' => 'alarmMajor',
+  },
+  'battManString1BatteryLowCapacity' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'airFMSysAlarmMapOutput12' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'emsInputContactStatusInputContactState' => {
+    '1' => 'contactClosedEMS',
+    '2' => 'contactOpenEMS',
+  },
+  'airIRmPmHumidifier2Type' => {
+    '1' => 'direct',
+    '2' => 'proportional',
+  },
+  'battManAlarmBatteries' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'airIRSCGroupStatusActiveFlowControlStatus' => {
+    '1' => 'under',
+    '2' => 'okay',
+    '3' => 'over',
+    '4' => 'notApplicable',
+  },
+  'iemStatusProbeHighHumidViolation' => {
+    '1' => 'noViolation',
+    '2' => 'highHumidViolation',
+    '3' => 'disabled',
+  },
+  'airIRRP500GroupConfigActiveFlowControllerLampTest' => {
+    '1' => 'off',
+    '2' => 'on',
+  },
+  'dm3StatusBattTempSanity' => {
+    '1' => 'saneYES',
+    '2' => 'saneNO',
+  },
+  'airFMSysCoilFluidVlvAct' => {
+    '1' => 'notApplicable',
+    '2' => 'none',
+    '3' => 'springAnalog',
+    '4' => 'floatingControl',
+  },
+  'emsSmokeSensorStatusSensorSeverity' => {
+    '1' => 'critical',
+    '2' => 'warning',
+    '3' => 'informational',
+  },
+  'battManString1BatteryHighOhmicValue' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'rPDUStatusBankState' => {
+    '1' => 'bankLoadNormal',
+    '2' => 'bankLoadLow',
+    '3' => 'bankLoadNearOverload',
+    '4' => 'bankLoadOverload',
+  },
+  'battManString1BatteryOpenCell' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'isxModularDistSysCurrentMonitoring' => {
+    '1' => 'notPresent',
+    '2' => 'present',
+  },
+  'airFMModElectricHeaterType' => {
+    '1' => 'notApplicable',
+    '2' => 'kw10',
+    '3' => 'kw15',
+  },
+  'atsStatusCommStatus' => {
+    '1' => 'atsNeverDiscovered',
+    '2' => 'atsCommEstablished',
+    '3' => 'atsCommLost',
+  },
+  'upsDiagMCCBBoxStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'opened',
+    '4' => 'closed',
+  },
+  'xATSGeneratorOutputPhaseIndex' => {
+    '1' => 'phase1',
+    '2' => 'phase2',
+    '3' => 'phase3',
+  },
+  'upsDiagSwitchGearBypassInputSwitchStatus' => {
+    '1' => 'unknown',
+    '2' => 'notInstalled',
+    '3' => 'opened',
+    '4' => 'closed',
+  },
+  'upsAdvConfigOutputFreqSlewRate' => {
+    '1' => 'unknown',
+    '2' => 'slewRateQuarterHzPerSec',
+    '3' => 'slewRateHalfHzPerSec',
+    '4' => 'slewRate1HzPerSec',
+    '5' => 'slewRate2HzPerSec',
+    '6' => 'slewRate4HzPerSec',
+    '7' => 'slewRate6HzPerSec',
+  },
+  'upsDiagPMEnclDoorFltrStatus' => {
+    '1' => 'ok',
+    '2' => 'nearEnd',
+    '3' => 'exceeded',
+    '4' => 'unknown',
+  },
+  'pcnsContactNormal2EnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'accessPXStatusRearDoorHandle' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'notInstalled',
+    '4' => 'disconnected',
+  },
+  'emsLeakRopeConfigSeverity' => {
+    '1' => 'critical',
+    '2' => 'major',
+    '3' => 'minor',
+    '4' => 'warning',
+    '5' => 'informational',
+  },
+  'airIRRCGroupSetpointsFanSpeedPreference' => {
+    '1' => 'low',
+    '2' => 'med-low',
+    '3' => 'med',
+    '4' => 'med-high',
+    '5' => 'high',
   },
   'dm3ConfigBattHwCurrentAlarm' => {
     '1' => 'alarmIgnore',
@@ -15330,45 +16396,46 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
     '8' => 'alarmMinor',
     '9' => 'alarmMajor',
   },
-  'airFMSysNumPCIOMs' => {
-    '1' => 'notApplicable',
-    '2' => 'one',
-    '3' => 'two',
-    '4' => 'three',
-    '5' => 'four',
+  'xPDUDeviceLoadTestPortPresent' => {
+    '1' => 'notPresent',
+    '2' => 'present',
   },
-  'accessPXConfigCardReaderEnableDisableAction' => {
-    '1' => 'disabled',
-    '2' => 'enable',
+  'xPDUMainInputVoltagePhaseIndex' => {
+    '1' => 'phase1',
+    '2' => 'phase2',
+    '3' => 'phase3',
   },
-  'sPDUOutletControlVMOutletCommand' => {
-    '1' => 'immediateOnVM',
-    '2' => 'immediateOffVM',
-    '3' => 'immediateRebootVM',
-    '4' => 'delayedOnVM',
-    '5' => 'delayedOffVM',
-    '6' => 'delayedRebootVM',
-    '7' => 'cancelPendingCommandVM',
-  },
-  'airFMSysAlarmMapExpMod1LowSupplyTemp' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'airFMSysAlarmMapSysPrimSensFail' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'pcnsRunTimeExceededEnableShutdown' => {
+  'pcnsCommunicationLostOnBatteryEnableShutdown' => {
     '1' => 'yes',
     '2' => 'no',
   },
-  'airIRmPmRemoteUPS' => {
-    '1' => 'off',
-    '2' => 'on',
+  'airIRRP500UnitConfigOutputSource' => {
+    '1' => 'anyAlarm',
+    '2' => 'criticalAlarm',
   },
-  'dm3ConfigRectHighVoltAlarm' => {
+  'airFMSysAlarmMapInput1' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'rPDUPowerSupply2Status' => {
+    '1' => 'powerSupplyTwoOk',
+    '2' => 'powerSupplyTwoFailed',
+    '3' => 'powerSupplyTwoNotPresent',
+  },
+  'dm3StatusBattCurrentSanity' => {
+    '1' => 'saneYES',
+    '2' => 'saneNO',
+  },
+  'airIRG2GroupConfigRuntimeBalancingEnable' => {
+    '1' => 'disable',
+    '2' => 'enable',
+  },
+  'uioSensorConfigMinTemperatureEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'dm3ConfigBattHighTempAlarm' => {
     '1' => 'alarmIgnore',
     '2' => 'alarmRelay1',
     '3' => 'alarmRelay2',
@@ -15379,34 +16446,9 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
     '8' => 'alarmMinor',
     '9' => 'alarmMajor',
   },
-  'xATSGeneratorAdvStatusOilLevel' => {
-    '1' => 'ok',
-    '2' => 'low',
-    '3' => 'unknown',
-  },
-  'ats4gCalibrationPowerSupplyVoltage' => {
-    '1' => 'powerSupply24VA',
-    '2' => 'powerSupply24VB',
-    '3' => 'powerSupplyVBoostA',
-    '4' => 'powerSupplyVBoostB',
-    '5' => 'powerSupply3Dot3V',
-    '6' => 'powerSupply1Dot0V',
-  },
-  'AirIRmActivityState' => {
-    '1' => 'inactive',
-    '2' => 'active',
-  },
-  'sPDUOutletConfigMSPgsOutletCtrlMode' => {
-    '1' => 'modeGracefulShutdown',
-    '2' => 'modeAnnunciator',
-  },
-  'pcnsParallelRedundancyLostEnableLogging' => {
+  'pcnsRunTimeExceededEnableLogging' => {
     '1' => 'yes',
     '2' => 'no',
-  },
-  'iemStatusProbeStatus' => {
-    '1' => 'disconnected',
-    '2' => 'connected',
   },
   'dm3ConfigConvImbalanceAlarm' => {
     '1' => 'alarmIgnore',
@@ -15420,581 +16462,15 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
     '9' => 'alarmMajor',
     '10' => 'alarmNofN',
   },
-  'airIRRP100UnitStatusLeakSensor' => {
-    '1' => 'no-leak',
-    '2' => 'leak',
-  },
-  'airFMGroupFailoverSysNoSensorsAvailable' => {
+  'airFMSysPresentRole' => {
     '1' => 'notApplicable',
-    '2' => 'disable',
-    '3' => 'enable',
+    '2' => 'primary',
+    '3' => 'backup',
   },
-  'upsOutletGroupConfigLoadShedControlSkipOffDelay' => {
-    '1' => 'upsOutletGroupConfigSkipOffDelay',
-    '2' => 'upsOutletGroupConfigUseOffDelay',
-  },
-  'rPDU2PhaseConfigPhasePeakCurrentReset' => {
-    '1' => 'noOperation',
-    '2' => 'reset',
-  },
-  'upsOutputRelayConfigPolarity' => {
-    '1' => 'upsOutputRelayAllRelaysEnergizedWhenTrue',
-    '2' => 'upsOutputRelayAllRelaysNotEnergizedWhenTrue',
-  },
-  'memSmokeSensorCommStatus' => {
-    '1' => 'commOK',
-    '2' => 'commLost',
-  },
-  'pcnsBatteryChargeInRangeEnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'memDoorSensorConfigSensorSeverity' => {
-    '1' => 'critical',
-    '2' => 'warning',
-    '3' => 'informational',
-  },
-  'dm3StatusConvCurrentLimit' => {
-    '1' => 'statusTrue',
-    '2' => 'statusFalse',
-  },
-  'airFMSysHumEssFunction' => {
-    '1' => 'notApplicable',
-    '2' => 'yes',
-    '3' => 'no',
-  },
-  'airIRRP100UnitStatusInputState' => {
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'airFMGroupSysManualRoleSetting' => {
-    '1' => 'primary',
-    '2' => 'backup',
-  },
-  'xPDUDeviceEarthGroundMonitorPresent' => {
-    '1' => 'notPresent',
-    '2' => 'present',
-  },
-  'airFMSysActualSteamHotGasReheat' => {
-    '1' => 'notApplicable',
-    '2' => 'off',
-    '3' => 'on',
-  },
-  'atsConfigVoltageSensitivity' => {
-    '1' => 'high',
-    '2' => 'low',
-  },
-  'airIRRCUnitStatusOutputState' => {
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'xATSTestingScheduleFrequency' => {
-    '1' => 'never',
-    '2' => 'daily',
-    '3' => 'weekly',
-    '4' => 'monthly',
-  },
-  'airFMSysAlarmMapSysFireDet' => {
+  'airFMSysAlarmMapExpMod1LowSupplyTemp' => {
     '1' => 'notApplicable',
     '2' => 'disabled',
     '3' => 'enabled',
-  },
-  'airFMSysAlarmMapExpMod2BlwrCntl2Fail' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'rPDU2PhaseStatusLoadState' => {
-    '1' => 'lowLoad',
-    '2' => 'normal',
-    '3' => 'nearOverload',
-    '4' => 'overload',
-  },
-  'pcnsTempInRangeProbe1EnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'ats5gEnvSensorType' => {
-    '1' => 'noSensor',
-    '2' => 'sensorUnrecognized',
-    '3' => 'sensorUnsupported',
-    '4' => 'temperatureOnly',
-    '5' => 'temperatureHumidity',
-  },
-  'airIRG3CMServiceIntervalsAirFilterAlarm' => {
-    '1' => 'disable',
-    '2' => 'enable',
-  },
-  'upsAdvConfigChargerLevel' => {
-    '1' => 'unknown',
-    '2' => 'low',
-    '3' => 'high',
-  },
-  'airIRmPmUnitType' => {
-    '1' => 'mc',
-    '2' => 'dx',
-    '3' => 'cw',
-    '4' => 'ch',
-    '5' => 'ecoCool',
-    '6' => 'msc',
-    '7' => 'ge1',
-    '8' => 'ge2',
-    '9' => 'dualFluid',
-    '10' => 'cw2',
-    '256' => 'unknown',
-  },
-  'airFMGroupFailoverModHighFilterDP' => {
-    '1' => 'notApplicable',
-    '2' => 'disable',
-    '3' => 'enable',
-  },
-  'xATSSwitchStatisticsReset' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'dm3ConfigRect2ofNAlarm' => {
-    '1' => 'alarmIgnore',
-    '2' => 'alarmRelay1',
-    '3' => 'alarmRelay2',
-    '4' => 'alarmRelay3',
-    '5' => 'alarmRelay4',
-    '6' => 'alarmRelay5',
-    '7' => 'alarmRelay6',
-    '8' => 'alarmMinor',
-    '9' => 'alarmMajor',
-  },
-  'xATSSystemOutputPhaseIndex' => {
-    '1' => 'phase1',
-    '2' => 'phase2',
-    '3' => 'phase3',
-  },
-  'apcLocalDisplayConfigContrast' => {
-    '1' => 'contrast1',
-    '2' => 'contrast2',
-    '3' => 'contrast3',
-    '4' => 'contrast4',
-    '5' => 'contrast5',
-    '6' => 'contrast6',
-    '7' => 'contrast7',
-    '8' => 'contrast8',
-  },
-  'atsStatusResetMaxMinValues' => {
-    '1' => 'none',
-    '2' => 'reset',
-  },
-  'airFMGroupFailoverModHumFail' => {
-    '1' => 'notApplicable',
-    '2' => 'disable',
-    '3' => 'enable',
-  },
-  'wirelessSensorPodConfigAlarmGeneration' => {
-    '0' => 'disabled',
-    '1' => 'enabled',
-  },
-  'airFMStatusSystemReheatingEnabled' => {
-    '1' => 'enabledYes',
-    '2' => 'enabledNo',
-  },
-  'airIRG2RDT2ServiceIntervalsAirFilterAlarm' => {
-    '1' => 'enable',
-    '2' => 'disable',
-  },
-  'upsDiagnosticDisplayStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'offOk',
-    '4' => 'onOk',
-    '5' => 'offFail',
-    '6' => 'onFail',
-    '7' => 'lostComm',
-  },
-  'atsCalibrationOutputPhasesTableIndex' => {
-    '1' => 'phase1',
-    '2' => 'phase2',
-    '3' => 'phase3',
-    '4' => 'neutral',
-  },
-  'upsAdvConfigPositionSelector' => {
-    '1' => 'unknown',
-    '2' => 'rack',
-    '3' => 'tower',
-  },
-  'battManStringHighRippleCurrent' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'battManString1BatteryThermalRunaway' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'apcLocalDisplayIdentDisplayType' => {
-    '1' => 'noDisplayFound',
-    '2' => 'powerviewRM',
-    '3' => 'powerviewWW',
-  },
-  'upsCommStatus' => {
-    '1' => 'ok',
-    '2' => 'noComm',
-  },
-  'airIRRP100UnitServiceIntervalFansAlarm' => {
-    '1' => 'enable',
-    '2' => 'disable',
-  },
-  'sPDUOutletConfigMSPallOutletCtrlMode' => {
-    '1' => 'modeGracefulShutdown',
-    '2' => 'modeAnnunciator',
-  },
-  'atsStatusSwitchStatus' => {
-    '1' => 'fail',
-    '2' => 'ok',
-  },
-  'pcnsMinRedundancyLostEnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'pcnsMinLoadCapabilityRegainedEnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'battManUnitRelayStuck' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'airIRG2RDT2StatusCompressor' => {
-    '1' => 'off',
-    '2' => 'on',
-  },
-  'upsEcoModeStatus' => {
-    '1' => 'active',
-    '2' => 'inactive',
-  },
-  'rPDU2SensorTempHumidityStatusTempStatus' => {
-    '1' => 'notPresent',
-    '2' => 'belowMin',
-    '3' => 'belowLow',
-    '4' => 'normal',
-    '5' => 'aboveHigh',
-    '6' => 'aboveMax',
-  },
-  'isxModularDistSysCurrentPhaseIndex' => {
-    '1' => 'phase1',
-    '2' => 'phase2',
-    '3' => 'phase3',
-  },
-  'xATSGeneratorOutputPhaseIndex' => {
-    '1' => 'phase1',
-    '2' => 'phase2',
-    '3' => 'phase3',
-  },
-  'rPDU2DevicePropertiesOutletLayout' => {
-    '1' => 'seqPhaseToNeutral',
-    '2' => 'seqPhaseToPhase',
-    '3' => 'seqPhToNeu21PhToPh',
-    '4' => 'seqPhToPhGrouped',
-    '5' => 'seqPhToNGrouped',
-    '6' => 'seqPToN1516PToPGrouped',
-    '7' => 'seqPhToPh2xGrouped',
-    '8' => 'seqPhToN2xGrouped',
-    '9' => 'seqNotApplicable',
-    '10' => 'seqPhToNPhToPhPhToN',
-  },
-  'atsConfigPreferredSource' => {
-    '1' => 'sourceA',
-    '2' => 'sourceB',
-    '3' => 'none',
-  },
-  'ePDUDeviceControlBeepAlarm' => {
-    '1' => 'off',
-    '2' => 'on',
-  },
-  'airIRRP100UnitServiceIntervalHeaterAlarm' => {
-    '1' => 'enable',
-    '2' => 'disable',
-  },
-  'airFMGroupCfgShutdownSmoke' => {
-    '1' => 'disable',
-    '2' => 'enable',
-  },
-  'upsBatteryCabinetFuse' => {
-    '1' => 'fuseOpen',
-    '2' => 'fuseOk',
-    '3' => 'notPresent',
-  },
-  'airFMSysFastStartup' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'pcnsTempOutOfRangeProbe1EnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'pcnsContactNormal3EnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'pcnsFaultBypassEnabledEnableShutdown' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'dm3StatusBattTempSanity' => {
-    '1' => 'saneYES',
-    '2' => 'saneNO',
-  },
-  'dm3StatusBreakersStatus' => {
-    '1' => 'statusClosed',
-    '2' => 'statusOpen',
-  },
-  'airIRG3RDUConfigStopOnLeakDetect' => {
-    '1' => 'no',
-    '2' => 'yes',
-  },
-  'airFMSysAlarmMapInput11' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'sPDUOutletConfigMSPmupsZone1' => {
-    '1' => 'disableAlarm',
-    '2' => 'enableAlarm',
-  },
-  'ats5gEnvConfigTempAlarmsEnabled' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'isxModularDistSysOutputVoltageAlarmMaxEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'emsFluidSensorStatusSensorSeverity' => {
-    '1' => 'critical',
-    '2' => 'warning',
-    '3' => 'informational',
-  },
-  'dm3ConfigRectHwVoltAlarm' => {
-    '1' => 'alarmIgnore',
-    '2' => 'alarmRelay1',
-    '3' => 'alarmRelay2',
-    '4' => 'alarmRelay3',
-    '5' => 'alarmRelay4',
-    '6' => 'alarmRelay5',
-    '7' => 'alarmRelay6',
-    '8' => 'alarmMinor',
-    '9' => 'alarmMajor',
-  },
-  'emsSensorStatusSensorState' => {
-    '1' => 'sensorFaultedEMS',
-    '2' => 'sensorOKEMS',
-    '3' => 'sensorNotInstalledEMS',
-  },
-  'upsAdvBatteryFuseStatus' => {
-    '1' => 'fuseOpen',
-    '2' => 'fuseOk',
-    '3' => 'notPresent',
-  },
-  'isxModularDistSysOutputVoltageAlarmLowEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'upsOutletGroupControlOutletType' => {
-    '1' => 'upsSwitchedOutletGroup',
-    '2' => 'upsMainOutletGroup',
-  },
-  'upsParallelSysUpsMode' => {
-    '1' => 'unknown',
-    '2' => 'onLine',
-    '3' => 'onBattery',
-    '4' => 'onBatteryTest',
-    '5' => 'requestedStaticBypass',
-    '6' => 'forcedBypass',
-    '7' => 'maintenanceBypass',
-    '8' => 'off',
-    '9' => 'ecoMode',
-    '10' => 'hotStandby',
-    '11' => 'inquiring',
-  },
-  'xPDUBypassInputVoltagePhaseIndex' => {
-    '1' => 'phase1',
-    '2' => 'phase2',
-    '3' => 'phase3',
-  },
-  'dcmim2StatusSysTempUnits' => {
-    '1' => 'celsius',
-    '2' => 'fahrenheit',
-  },
-  'memSmokeSensorConfigAlarmGeneration' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'xATSGeneratorStatusRemoteStart' => {
-    '1' => 'stop',
-    '2' => 'run',
-    '3' => 'unknown',
-  },
-  'pcnsMaxInternalTempInRangeEnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'xATSTestingSimulatePowerFailTest' => {
-    '1' => 'cancelSimulation',
-    '2' => 'fiveSecondsSimulation',
-    '3' => 'tenSecondsSimulation',
-    '4' => 'thirtySecondsSimulation',
-    '5' => 'oneMinuteSimulation',
-    '6' => 'threeMinutesSimulation',
-    '7' => 'fiveMinutesSimulation',
-    '8' => 'tenMinutesSimulation',
-  },
-  'airFMGroupFailoverModMaintRequired' => {
-    '1' => 'notApplicable',
-    '2' => 'disable',
-    '3' => 'enable',
-  },
-  'rPDU2DevicePropertiesOrientation' => {
-    '1' => 'horizontal',
-    '2' => 'vertical',
-    '3' => 'verticalISXv2',
-    '4' => 'verticalISXv3',
-  },
-  'airFMSysAlarmMapOutput9' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'airFMSysAlarmMapInput2' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'pcnsBypassContactorOkEnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'emsOutputRelayStatusOutputRelayState' => {
-    '1' => 'relayClosedEMS',
-    '2' => 'relayOpenEMS',
-  },
-  'airFMModBlwr2ElOvMode' => {
-    '1' => 'notApplicable',
-    '2' => 'inactive',
-    '3' => 'active',
-  },
-  'pcnsTempOutOfRangeProbe2EnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'mfiletransferControlInitiateFileTransfer' => {
-    '1' => 'doNotInitiateFileTransfer',
-    '2' => 'initiateFileTransferDownloadViaTFTP',
-    '3' => 'initiateFileTransferDownloadViaFTP',
-  },
-  'memOutputStatusAlarmState' => {
-    '1' => 'memOutputNormal',
-    '2' => 'memOutputAbnormal',
-  },
-  'airIRRP100UnitConfigHeatAssistEnable' => {
-    '1' => 'enable',
-    '2' => 'disable',
-  },
-  'dm3ConfigOutRlyAlarm' => {
-    '1' => 'alarmIgnore',
-    '2' => 'alarmRelay1',
-    '3' => 'alarmRelay2',
-    '4' => 'alarmRelay3',
-    '5' => 'alarmRelay4',
-    '6' => 'alarmRelay5',
-    '7' => 'alarmRelay6',
-    '8' => 'alarmMinor',
-    '9' => 'alarmMajor',
-  },
-  'airIRmPmLouver3ManOpPosition' => {
-    '1' => 'closed',
-    '2' => 'open',
-  },
-  'airIRG3RDUServiceIntervalsAirFilterAlarm' => {
-    '1' => 'enable',
-    '2' => 'disable',
-  },
-  'atsOutputPhase' => {
-    '1' => 'phase1',
-    '2' => 'phase2',
-    '3' => 'phase3',
-  },
-  'memSensorsCommStatus' => {
-    '1' => 'notInstalled',
-    '2' => 'commsOK',
-    '3' => 'commsLost',
-  },
-  'airFMSysAlarmMapExpMod2CoolFail' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'airFMGroupSysRoleAssignment' => {
-    '1' => 'staticManual',
-    '2' => 'dynamicAutomatic',
-  },
-  'memFluidSensorConfigAlarmGeneration' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'upsInputContactState' => {
-    '1' => 'upsInputContactNormalState',
-    '2' => 'upsInputContactAbnormalState',
-  },
-  'upsDiagUsrSuppSwitchgearMonitorStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'offOk',
-    '4' => 'onOk',
-    '5' => 'offFail',
-    '6' => 'onFail',
-    '7' => 'lostComm',
-  },
-  'pcnsHumidityOutOfRangeProbe2EnableShutdown' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'emsSmokeSensorStatusSensorState' => {
-    '1' => 'smokeDetected',
-    '2' => 'noSmoke',
-    '3' => 'unknown',
-  },
-  'battManInputContactAlarmState' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'xATSSource1Position' => {
-    '1' => 'open',
-    '2' => 'closed',
-    '3' => 'tripped',
-    '4' => 'unknown',
-  },
-  'airIRG3RDUConfigCalibrateRefrigerantLeakDetector' => {
-    '1' => 'no',
-    '2' => 'yes',
-  },
-  'upsOutputRelayState' => {
-    '1' => 'outputRelayNormalState',
-    '2' => 'outputRelayAbnormalState',
-  },
-  'airFMModServIntHeaterReset' => {
-    '1' => 'notApplicable',
-    '2' => 'noOperation',
-    '3' => 'reset',
-  },
-  'emStatusProbeStatus' => {
-    '1' => 'disconnected',
-    '2' => 'connected',
-  },
-  'airIRG3RDUConfigRefrigerantLeakDetectorEnabled' => {
-    '1' => 'no',
-    '2' => 'yes',
-  },
-  'isxModularDistSysPowerPhaseIndex' => {
-    '1' => 'phase1',
-    '2' => 'phase2',
-    '3' => 'phase3',
   },
   'xATSGeneratorFuelSystemType' => {
     '1' => 'diesel',
@@ -16002,423 +16478,111 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
     '3' => 'naturalGas',
     '4' => 'unknown',
   },
-  'airFMSysPresentStatus' => {
-    '1' => 'notApplicable',
-    '2' => 'reserved1',
-    '3' => 'reserved2',
-    '4' => 'onLine',
-    '5' => 'idle',
-    '6' => 'loadShare',
-    '7' => 'failed',
-    '8' => 'offLine',
-  },
-  'battManAlarmManagementController' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'uioInputContactConfigSeverity' => {
-    '1' => 'uioInputCriticalSeverity',
-    '2' => 'uioInputWarningSeverity',
-  },
-  'rPDU2SensorAnalogVoltageStatusThreshStatus' => {
-    '1' => 'notPresent',
-    '2' => 'belowMin',
-    '3' => 'belowLow',
-    '4' => 'normal',
-    '5' => 'aboveHigh',
-    '6' => 'aboveMax',
-  },
-  'battManConfigBatteryChemistry' => {
-    '1' => 'leadAcid',
-    '2' => 'nickel-Cadmium',
-  },
-  'upsDiagUnitControllerStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'offOk',
-    '4' => 'onOk',
-    '5' => 'offFail',
-    '6' => 'onFail',
-    '7' => 'lostComm',
-  },
-  'airFMAlarmSeverity' => {
-    '1' => 'informational',
-    '2' => 'warningMinor',
-    '3' => 'criticalMajor',
-  },
-  'airFMSysActualHumCtrl' => {
-    '1' => 'notApplicable',
-    '2' => 'relativeHum',
-    '3' => 'dewPoint',
-  },
-  'upsAdvControlTurnOnUPS' => {
-    '1' => 'noTurnOnUPS',
-    '2' => 'turnOnUPS',
-    '3' => 'turnOnUPSSyncGroup',
-    '4' => 'turnOnUPSDelayed',
-  },
-  'pcnsRunTimeExceededEnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'airIRmPmLouver2Position' => {
-    '1' => 'closed',
-    '2' => 'open',
-  },
-  'airFMSysAlarmMapExpMod1BlwrCntl2Fail' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'dm3StatusFusesStatus' => {
-    '1' => 'statusClosed',
-    '2' => 'statusOpen',
-  },
-  'iemConfigProbeMinHumidEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'dm3StatusLVDHwFault' => {
-    '1' => 'statusFault',
-    '2' => 'statusNofault',
-  },
-  'dm3ConfigRectDiagAlarm' => {
-    '1' => 'alarmIgnore',
-    '2' => 'alarmRelay1',
-    '3' => 'alarmRelay2',
-    '4' => 'alarmRelay3',
-    '5' => 'alarmRelay4',
-    '6' => 'alarmRelay5',
-    '7' => 'alarmRelay6',
-    '8' => 'alarmMinor',
-    '9' => 'alarmMajor',
-    '10' => 'alarmNofN',
-  },
-  'isxModularPduDeviceServiceType' => {
-    '1' => 'threeWire',
-    '2' => 'fourWire',
-  },
-  'airFMSysAlarmMapInput3' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'upsBasicSystemInverterStatus' => {
-    '1' => 'unknown',
-    '2' => 'ok',
-    '3' => 'inFaultCondition',
-  },
-  'upsBatteryStatsReset' => {
-    '1' => 'notSupported',
-    '2' => 'noOperation',
-    '3' => 'reset',
-  },
-  'isxModularDistSubFeedInfoAlarmMinEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'uioSpotFluidSensorStatusCurrentState' => {
-    '1' => 'uioFluidDetected',
-    '2' => 'uioNoFluid',
-    '3' => 'uioFluidStateNoCommunication',
-  },
-  'airIRRP500UnitConfigInputNormalState' => {
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'rPDU2AdvBankConfigOverloadRestriction' => {
-    '1' => 'alwaysAllowTurnON',
-    '2' => 'restrictOnNearOverload',
-    '3' => 'restrictOnOverload',
-    '4' => 'notSupported',
-  },
-  'airFMSysAlarmMapOutput11' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'airFMSysAlarmMapSystemOffline' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'airIRSCUnitConfigOpControl' => {
-    '1' => 'standby',
-    '2' => 'on',
-  },
-  'airIRmPmCmp2ManOperationActive' => {
+  'airIRG3GroupSetpointsAirFlowControl' => {
     '1' => 'automatic',
     '2' => 'manual',
   },
-  'airFMGroupFailoverModHighSupplyTemp' => {
-    '1' => 'notApplicable',
-    '2' => 'disable',
-    '3' => 'enable',
+  'wirelessSensorPodConfigAlarmGeneration' => {
+    '0' => 'disabled',
+    '1' => 'enabled',
   },
-  'ats5gSwitchPhaseSyncStatus' => {
-    '1' => 'inSync',
-    '2' => 'outOfSync',
+  'AirIRSCFanSpeedControl' => {
+    '1' => 'automatic',
+    '2' => 'manual',
   },
-  'dm3ConfigConvFailAlarm' => {
-    '1' => 'alarmIgnore',
-    '2' => 'alarmRelay1',
-    '3' => 'alarmRelay2',
-    '4' => 'alarmRelay3',
-    '5' => 'alarmRelay4',
-    '6' => 'alarmRelay5',
-    '7' => 'alarmRelay6',
-    '8' => 'alarmMinor',
-    '9' => 'alarmMajor',
-    '10' => 'alarmNofN',
+  'upsHighPrecBatteryActualVoltagePolarity' => {
+    '0' => 'positive',
+    '1' => 'negative',
   },
-  'pcnsCommunicationLostOnBatteryEnableCommandFile' => {
+  'pcnsBypassManualEnabledEnableCommandFile' => {
     '1' => 'yes',
     '2' => 'no',
   },
-  'atsStatusFuseSourceA' => {
-    '1' => 'atsFuseStatusClose',
-    '2' => 'atsFuseStatusOpen',
+  'upsBasicSystemStatus' => {
+    '1' => 'unknown',
+    '2' => 'onLine',
+    '3' => 'onBattery',
+    '4' => 'onSmartBoost',
+    '5' => 'timedSleeping',
+    '6' => 'softwareBypass',
+    '7' => 'off',
+    '8' => 'rebooting',
+    '9' => 'switchedBypass',
+    '10' => 'hardwareFailureBypass',
+    '11' => 'sleepingUntilPowerReturn',
+    '12' => 'onSmartTrim',
+    '13' => 'ecoMode',
+    '14' => 'inverter',
+    '15' => 'eConversion',
+    '16' => 'staticBypassStandby',
+    '17' => 'efficiencyBoosterMode',
   },
-  'pcnsTempOutOfRangeProbe1EnableShutdown' => {
-    '1' => 'yes',
-    '2' => 'no',
+  'emsInputContactConfigInputContactNormalState' => {
+    '1' => 'normallyClosedEMS',
+    '2' => 'normallyOpenEMS',
   },
-  'iemConfigRelayNormalState' => {
-    '1' => 'open',
-    '2' => 'closed',
+  'upsAdvConfigAutoShutdownControlAutoRestart' => {
+    '1' => 'upsAdvConfigControlAutoRestartAutoShutdown',
+    '2' => 'upsAdvConfigControlManualRestartAutoShutdown',
   },
-  'airFMSysCoolEssFunction' => {
-    '1' => 'notApplicable',
-    '2' => 'yes',
-    '3' => 'no',
-  },
-  'airIRRP100UnitConfigPowerSourceConfig' => {
-    '1' => 'single',
-    '2' => 'dual',
-  },
-  'pcnsHumidityInRangeProbe2EnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'sPDUOutletStatusVMOutletState' => {
-    '1' => 'outletStatusVMOn',
-    '2' => 'outletStatusVMOff',
-  },
-  'airFMSysAlarmMapSysSmokeDet' => {
+  'airFMSysAlarmMapExpMod2WaterDetected' => {
     '1' => 'notApplicable',
     '2' => 'disabled',
     '3' => 'enabled',
   },
-  'emsDoorSensorStatusSensorSeverity' => {
-    '1' => 'critical',
-    '2' => 'warning',
-    '3' => 'informational',
-  },
-  'rPDU2AdvBankConfigBankPeakCurrentReset' => {
-    '1' => 'noOperation',
-    '2' => 'reset',
-  },
-  'rPDUOutletBankOverloadRestriction' => {
-    '1' => 'alwaysAllowTurnON',
-    '2' => 'restrictOnNearOverload',
-    '3' => 'restrictOnOverload',
-  },
-  'memFluidSensorConfigSensorSeverity' => {
-    '1' => 'critical',
-    '2' => 'warning',
-    '3' => 'informational',
-  },
-  'upsAdvConfigAutomaticRestart' => {
-    '1' => 'enabled',
-    '2' => 'disabled',
-  },
-  'memSmokeStatusAlarmStatus' => {
-    '1' => 'memNormal',
-    '2' => 'memWarning',
-    '3' => 'memCritical',
-  },
-  'rPDU2DeviceStatusPowerSupplyAlarm' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'pcnsRunTimeAboveThresholdEnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'airIRmPmLouver2ManOpPosition' => {
-    '1' => 'closed',
-    '2' => 'open',
-  },
-  'airIRG3CMStatusUnitType' => {
-    '1' => 'unconfigured',
-    '2' => 'oa',
-    '3' => 'ra',
-  },
-  'isxModularDistSysCurrentAlarmMinEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'xPDUUPSInputVoltageLtoNPresent' => {
+  'isxModularPduDeviceFansPresent' => {
     '1' => 'notPresent',
     '2' => 'present',
-    '3' => 'unknown',
   },
-  'airFMSysAlarmMapExpMod2BlwrCntl1Fail' => {
+  'mconfigBOOTPEnabled' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airFMSysAlarmMapSysHighEnvTemp' => {
     '1' => 'notApplicable',
     '2' => 'disabled',
     '3' => 'enabled',
   },
-  'pcnsCommunicationLostOnBatteryEnableShutdown' => {
+  'airIRRCUnitConfigIdleOnCoolFail' => {
     '1' => 'yes',
     '2' => 'no',
   },
-  'dm3StatusRectCurrentLimit' => {
-    '1' => 'statusTrue',
-    '2' => 'statusFalse',
+  'accessPXExtConfigFrontDoorLockControl' => {
+    '1' => 'unlock',
+    '2' => 'lock',
+    '3' => 'notInstalledReadOnly',
+    '4' => 'disconnectedReadOnly',
   },
-  'airFMSysPrimaryControlSensor' => {
-    '1' => 'notApplicable',
-    '2' => 'return',
-    '3' => 'remote',
-  },
-  'emsSmokeSensorStatusSensorSeverity' => {
-    '1' => 'critical',
-    '2' => 'warning',
-    '3' => 'informational',
-  },
-  'rARUStatusAruRemoteSetpoint' => {
-    '1' => 'aruOff',
-    '2' => 'aru85F-29C',
-    '3' => 'aru90F-32C',
-    '4' => 'aru95F-35C',
-    '5' => 'aru100F-38C',
-    '6' => 'aru7kW-1200cfm',
-    '7' => 'aru5kW-800cfm',
-    '8' => 'aru3kW-500cfm',
-    '9' => 'aru2kW-300cfm',
-    '10' => 'aru400cfm',
-    '11' => 'aru600cfm',
-    '12' => 'aru700cfm',
-    '13' => 'aru900cfm',
-    '14' => 'aru1000cfm',
-    '15' => 'aru1400cfm',
-    '16' => 'aru1600cfm',
-    '17' => 'aru1800cfm',
-    '18' => 'aru2000cfm',
-  },
-  'AirIRmControlState' => {
-    '1' => 'off',
-    '2' => 'on',
-  },
-  'xPDUDeviceInfraStruXureType' => {
-    '1' => 'typeB',
-    '2' => 'typeC',
-  },
-  'airIRmPmCmp1ManOperationActive' => {
-    '1' => 'automatic',
-    '2' => 'manual',
-  },
-  'airIRRP500UnitConfigHeatAssistEnable' => {
-    '1' => 'enable',
-    '2' => 'disable',
-  },
-  'memOutputNormalState' => {
-    '1' => 'memOutputClosed',
-    '2' => 'memOutputOpen',
-  },
-  'pcnsBypassEnabledEnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'isxModularDistModuleOutputAlarmLowEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'sPDUOutletConfigMSPannunInitialState' => {
-    '1' => 'initialStateOff',
-    '2' => 'initialStateOn',
-  },
-  'airIRRP100UnitServiceIntervalHumidifierAlarm' => {
-    '1' => 'enable',
-    '2' => 'disable',
-  },
-  'xPDUInputContactNormalState' => {
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'upsDiagSwitchGearStatus' => {
+  'upsDiagComBusMIMtoRIMStatus' => {
     '1' => 'unknown',
     '2' => 'notInstalled',
     '3' => 'ok',
-    '4' => 'fail',
-    '5' => 'lostComm',
-    '6' => 'overtemp',
+    '4' => 'lostComm',
+    '5' => 'rxFailure',
+    '6' => 'txFailure',
   },
-  'uioSpotFluidSensorStatusCommStatus' => {
-    '1' => 'notInstalled',
-    '2' => 'commsOK',
-    '3' => 'commsLost',
+  'airFMModServIntBlwrCtrl1Reset' => {
+    '1' => 'notApplicable',
+    '2' => 'noOperation',
+    '3' => 'reset',
   },
-  'airIRG2RDT2RunHoursFanPSPosition' => {
-    '1' => 'upper',
-    '2' => 'lower',
-    '3' => 'left',
-    '4' => 'right',
-  },
-  'battManString1BatteryChemHighVoltageAlarm' => {
+  'battManString1BatteryThermalRunaway' => {
     '1' => 'normal',
     '2' => 'alarm',
   },
-  'airIRRP500UnitServiceIntervalCondensatePumpAlarm' => {
-    '1' => 'enable',
-    '2' => 'disable',
+  'pcnsTurnOffUps' => {
+    '1' => 'yes',
+    '2' => 'no',
   },
-  'isxModularDistSysCurrentAlarmHighEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
+  'xPDUSystemOutputPhaseIndex' => {
+    '1' => 'phase1',
+    '2' => 'phase2',
+    '3' => 'phase3',
   },
-  'memOutputStatusCurrentState' => {
-    '1' => 'memOutputClosed',
-    '2' => 'memOutputOpen',
-  },
-  'dm3ConfigBattHighTempAlarm' => {
-    '1' => 'alarmIgnore',
-    '2' => 'alarmRelay1',
-    '3' => 'alarmRelay2',
-    '4' => 'alarmRelay3',
-    '5' => 'alarmRelay4',
-    '6' => 'alarmRelay5',
-    '7' => 'alarmRelay6',
-    '8' => 'alarmMinor',
-    '9' => 'alarmMajor',
-  },
-  'upsBatteryCabinetBreaker' => {
-    '1' => 'noBreaker',
-    '2' => 'unknown',
-    '3' => 'breakerOpen',
-    '4' => 'breakerClosed',
-  },
-  'airFMSysAlarmMapSysEconIsol' => {
+  'airFMSysSuctPresCompensation' => {
     '1' => 'notApplicable',
     '2' => 'disabled',
     '3' => 'enabled',
-  },
-  'battManSystemAmbientHighTempAlarm' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'airFMSysAlarmMapExpMod1HumReplCyl' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'rARUConfigAruTempOvrdEnableDisable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'battManString2BatteryOpenFuseOrConnection' => {
-    '1' => 'normal',
-    '2' => 'alarm',
   },
   'dm3ConfigFusesAlarm' => {
     '1' => 'alarmIgnore',
@@ -16431,295 +16595,93 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
     '8' => 'alarmMinor',
     '9' => 'alarmMajor',
   },
-  'airIRG2RDT2ConfigUnitIdleOnCoolFail' => {
-    '1' => 'no',
-    '2' => 'yes',
-  },
-  'subfeedBreakerStatus' => {
+  'atsInputType' => {
     '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'opened',
-    '4' => 'closed',
+    '2' => 'main',
+    '3' => 'bypass',
   },
-  'isxModularDistModuleOutputAlarmMinEnable' => {
+  'rPDUOutletDevCommand' => {
+    '1' => 'noCommandAll',
+    '2' => 'immediateAllOn',
+    '3' => 'immediateAllOff',
+    '4' => 'immediateAllReboot',
+    '5' => 'delayedAllOn',
+    '6' => 'delayedAllOff',
+    '7' => 'delayedAllReboot',
+    '8' => 'cancelAllPendingCommands',
+  },
+  'upsBatteryCabinetFuse' => {
+    '1' => 'fuseOpen',
+    '2' => 'fuseOk',
+    '3' => 'notPresent',
+  },
+  'normalState' => {
+    '1' => 'unknown',
+    '2' => 'open',
+    '3' => 'closed',
+  },
+  'dm3ConfigRectFanFailAlarm' => {
+    '1' => 'alarmIgnore',
+    '2' => 'alarmRelay1',
+    '3' => 'alarmRelay2',
+    '4' => 'alarmRelay3',
+    '5' => 'alarmRelay4',
+    '6' => 'alarmRelay5',
+    '7' => 'alarmRelay6',
+    '8' => 'alarmMinor',
+    '9' => 'alarmMajor',
+    '10' => 'alarmNofN',
+  },
+  'uioSensorConfigMinHumidityEnable' => {
     '1' => 'disabled',
     '2' => 'enabled',
   },
-  'emsVibrationSensorStatusSensorSeverity' => {
-    '1' => 'critical',
-    '2' => 'warning',
-    '3' => 'informational',
-  },
-  'airIRG3RDUConfigOutputNormalState' => {
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'upsAdvBatteryWiringConfiguration' => {
-    '1' => 'twoWire',
-    '2' => 'threeWire',
-  },
-  'rPDUStatusOutletState' => {
-    '1' => 'outletLoadNormal',
-    '2' => 'outletLoadLow',
-    '3' => 'outletLoadNearOverload',
-    '4' => 'outletLoadOverload',
-  },
-  'emStatusProbeLowTempViolation' => {
-    '1' => 'noViolation',
-    '2' => 'lowTempViolation',
-    '3' => 'disabled',
-  },
-  'pmmInputFrequencyDeviation' => {
-    '1' => 'freqDeviationOff',
-    '2' => 'freqDeviationPointTwo',
-    '3' => 'freqDeviationPointFive',
-    '4' => 'freqDeviationOne',
-    '5' => 'freqDeviationOnePointFive',
-    '6' => 'freqDeviationTwo',
-    '7' => 'freqDeviationThree',
-    '8' => 'freqDeviationFour',
-    '9' => 'freqDeviationFive',
-    '10' => 'freqDeviationNine',
-  },
-  'emsOutputRelayConfigOutputRelayNormalState' => {
-    '1' => 'normallyClosedEMS',
-    '2' => 'normallyOpenEMS',
-  },
-  'ats5gSwitchSourceB48VSupplyStatus' => {
-    '1' => 'fail',
-    '2' => 'ok',
-  },
-  'airFMGroupSysComm' => {
-    '1' => 'commLost',
-    '2' => 'commEstablished',
-  },
-  'upsDiagIMStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'offOk',
-    '4' => 'onOk',
-    '5' => 'offFail',
-    '6' => 'onFail',
-    '7' => 'lostComm',
-  },
-  'xPDUBranchBreakerTieIndicator' => {
-    '1' => 'breakerUnTied',
-    '2' => 'breakerTied',
-  },
-  'upsBasicControlConserveBattery' => {
-    '1' => 'noTurnOffUps',
-    '2' => 'turnOffUpsToConserveBattery',
-  },
-  'ats5gSwitchSourceA24VSupplyStatus' => {
-    '1' => 'fail',
-    '2' => 'ok',
-  },
-  'atsOutputVoltageOrientation' => {
-    '1' => 'unknown',
-    '2' => 'singlePhase',
-    '3' => 'splitPhase',
-    '4' => 'threePhasePhaseToNeutral',
-    '5' => 'threePhasePhaseToPhase',
-  },
-  'xPDUTransformTempStatus' => {
-    '1' => 'normal',
-    '2' => 'overtemp',
-    '3' => 'noTransformerPresent',
-    '4' => 'unknown',
-  },
-  'upsDiagSubSysExternalSwitchGearStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'offOk',
-    '4' => 'onOk',
-    '5' => 'offFail',
-    '6' => 'onFail',
-    '7' => 'lostComm',
-  },
-  'rPDUPowerSupply2Status' => {
-    '1' => 'powerSupplyTwoOk',
-    '2' => 'powerSupplyTwoFailed',
-    '3' => 'powerSupplyTwoNotPresent',
-  },
-  'rPDUStatusPhaseState' => {
-    '1' => 'phaseLoadNormal',
-    '2' => 'phaseLoadLow',
-    '3' => 'phaseLoadNearOverload',
-    '4' => 'phaseLoadOverload',
-  },
-  'airFMSysAlarmMapExpMod1BlwrCntl1Fail' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'pcnsOverloadSolvedEnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'pmmOutputBreakerOpenAlarm' => {
-    '1' => 'enabled',
-    '2' => 'disabled',
-    '3' => 'unknown',
-  },
-  'airFMSysAlarmMapSysSupplySensFail' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'dcmim2ControlRunFunctBatteryTest' => {
-    '1' => 'battTestOff',
-    '2' => 'battTestOn',
-  },
-  'airFMSysAlarmMapExpMod1HumFail' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'airFMSysHumCtrlSetting' => {
-    '1' => 'notApplicable',
-    '2' => 'relativeHum',
-    '3' => 'dewPoint',
-  },
-  'upsAdvConfigVoutReporting' => {
-    '1' => 'unknown',
-    '2' => 'voutAUTO',
-    '3' => 'vout208',
-    '4' => 'vout240',
-  },
-  'rPDU2DeviceConfigOutletsEnergyReset' => {
-    '1' => 'noOperation',
-    '2' => 'reset',
-    '3' => 'notSupported',
-  },
-  'xPDUSystemBreakerPosition' => {
-    '1' => 'open',
-    '2' => 'closed',
-    '3' => 'unknown',
-  },
-  'airFMGroupLoadShareReheatRequests' => {
-    '1' => 'disable',
-    '2' => 'enable',
-  },
-  'airIRRP100UnitConfigIdleOnCoolFail' => {
-    '1' => 'enable',
-    '2' => 'disable',
-  },
-  'isxModularDistSubFeedInfoBreakerAlarmEnable' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'pmmDeviceServiceType' => {
-    '1' => 'threeWire',
-    '2' => 'fourWire',
-  },
-  'airIRG3CMConfigRemoteOnStandby' => {
-    '1' => 'standBy',
-    '2' => 'on',
-  },
-  'atsConfigFrontPanelLockout' => {
-    '1' => 'disableFrontPanel',
-    '2' => 'enableFrontPanel',
-  },
-  'airFMSysCoilCfg' => {
-    '1' => 'notApplicable',
-    '2' => 'dx',
-    '3' => 'econ',
-    '4' => 'multicool',
-    '5' => 'chilledWater',
-  },
-  'isxModularDistSubFeedInfoAlarmGeneration' => {
-    '1' => 'disabled',
-    '2' => 'enabled',
-  },
-  'pcnsContactFault4EnableShutdown' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'upsIntegratedATSPreferredSource' => {
-    '1' => 'upsIntegratedATSNoSourcePreference',
-    '2' => 'upsIntegratedATSPreferSourceA',
-    '3' => 'upsIntegratedATSPreferSourceB',
-  },
-  'airIRG3GroupConfigCoolPIDReset' => {
-    '1' => 'readBack',
-    '2' => 'reset',
-  },
-  'airFMSysAlarmMapSysReturnSensFail' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'upsAdvConfigUPSFail' => {
-    '1' => 'unknown',
-    '2' => 'gotoBypass',
-    '3' => 'dropLoad',
-  },
-  'pcnsFaultBypassEnabledEnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'battManString1BatteryUserLowVoltageAlarm' => {
+  'battManString2BatteryThermalRunaway' => {
     '1' => 'normal',
     '2' => 'alarm',
   },
-  'airFMModOutputCapacity' => {
-    '1' => 'notApplicable',
-    '2' => 'kw45',
-    '3' => 'kw35',
-    '4' => 'kw40',
-    '5' => 'kw50',
-    '6' => 'kw80',
-  },
-  'iemStatusProbeLowHumidViolation' => {
-    '1' => 'noViolation',
-    '2' => 'lowHumidViolation',
-    '3' => 'disabled',
-  },
-  'airIRmPmEheating2Type' => {
-    '1' => 'direct',
-    '2' => 'pwm',
-  },
-  'pcnsCommunicationLostEnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'sPDUMasterControlVMCommand' => {
-    '1' => 'noCommandAllVM',
-    '2' => 'immediateAllOnVM',
-    '3' => 'immediateAllOffVM',
-    '4' => 'immediateAllRebootVM',
-    '5' => 'delayedAllOnVM',
-    '6' => 'delayedAllOffVM',
-    '7' => 'sequencedAllRebootVM',
-    '8' => 'delayedAllRebootVM',
-    '9' => 'delayedSequenceAllRebootVM',
-    '10' => 'cancelAllPendingCommandsVM',
-    '11' => 'audioAlarmMute',
-  },
-  'airFMGroupFailoverSysSecondarySensorFail' => {
+  'airFMGroupFailoverSysAnyMinorAlarm' => {
     '1' => 'notApplicable',
     '2' => 'disable',
     '3' => 'enable',
   },
-  'sPDUMasterConfigVMAudioAlarmActivated' => {
-    '1' => 'audioAlarmActiveNever',
-    '2' => 'audioAlarmActiveOnOverload',
-    '3' => 'audioAlarmActiveOnOverloadImminent',
+  'sPDUOutletStatusMSPOutletCtrlMode' => {
+    '1' => 'modeGracefulShutdown',
+    '2' => 'modeAnnunciator',
   },
-  'airFMGroupFailoverSysAnyMajorAlarm' => {
-    '1' => 'notApplicable',
-    '2' => 'disable',
-    '3' => 'enable',
+  'upsHighPrecTotalDCCurrentPolarity' => {
+    '0' => 'positive',
+    '1' => 'negative',
   },
-  'airIRSCUnitServiceIntervalsAirFilterAlarm' => {
-    '1' => 'enable',
-    '2' => 'disable',
+  'battManString2BatteryOpenFuseOrConnection' => {
+    '1' => 'normal',
+    '2' => 'alarm',
   },
-  'memDoorSensorCommStatus' => {
-    '1' => 'commOK',
-    '2' => 'commLost',
+  'sPDUOutletConfigMSPmupsP1LowHum' => {
+    '1' => 'disableAlarm',
+    '2' => 'enableAlarm',
   },
-  'dm3ConfigRectConfigAlarm' => {
+  'upsInputContactConfigAction' => {
+    '1' => 'upsInputContactConfigActionNone',
+    '2' => 'upsInputContactConfigActionSelfTest',
+    '3' => 'upsInputContactConfigActionExternalAlarmOn',
+    '4' => 'upsInputContactConfigActionExternalAlarmOff',
+    '5' => 'upsInputContactConfigActionOutputOffNoDelay',
+    '6' => 'upsInputContactConfigActionOutputOn',
+  },
+  'airIRG3RDUStatusLeadPump' => {
+    '1' => 'pump1',
+    '2' => 'pump2',
+  },
+  'iemConfigProbeHighTempEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'rPDU2SensorDiscreteStatusAlarmState' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'dm3ConfigRect2ofNAlarm' => {
     '1' => 'alarmIgnore',
     '2' => 'alarmRelay1',
     '3' => 'alarmRelay2',
@@ -16730,132 +16692,37 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
     '8' => 'alarmMinor',
     '9' => 'alarmMajor',
   },
-  'memInputAlarmGeneration' => {
+  'rARUConfigAruTempOvrdEnableDisable' => {
     '1' => 'disabled',
     '2' => 'enabled',
   },
-  'upsEbmModeStatus' => {
-    '1' => 'active',
-    '2' => 'inactive',
+  'battManUnitRelayStuck' => {
+    '1' => 'normal',
+    '2' => 'alarm',
   },
-  'memOutletStatusCurrentState' => {
-    '1' => 'off',
-    '2' => 'on',
-  },
-  'airIRG2GroupConfigCoolPIDReset' => {
-    '1' => 'readBack',
-    '2' => 'reset',
-  },
-  'airIRG2GroupSetptsFanSpeedPreference' => {
-    '1' => 'low',
-    '2' => 'med-low',
-    '3' => 'med',
-    '4' => 'med-high',
-    '5' => 'high',
-  },
-  'upsAdvControlRebootShutdownUps' => {
-    '1' => 'noRebootShutdownUps',
-    '2' => 'rebootShutdownUps',
-    '3' => 'rebootShutdownUpsGracefully',
-    '4' => 'rebootShutdownSyncGroupUps',
-    '5' => 'rebootShutdownSyncGroupUpsGracefully',
-  },
-  'airFMModCapacityCtrl' => {
-    '1' => 'notApplicable',
-    '2' => 'tandem',
-    '3' => 'hotGasBypass',
-  },
-  'xATSSwitchStatusSelectedSource' => {
-    '1' => 'none',
-    '2' => 'source1',
-    '3' => 'source2',
-    '4' => 'fault',
-    '5' => 'unknown',
-  },
-  'upsDiagComBusExternalRIMStatus' => {
-    '1' => 'unknown',
-    '2' => 'notInstalled',
-    '3' => 'ok',
-    '4' => 'lostComm',
-    '5' => 'rxFailure',
-    '6' => 'txFailure',
-  },
-  'airFMModRHHumReset' => {
-    '1' => 'notApplicable',
-    '2' => 'noOperation',
-    '3' => 'reset',
-  },
-  'dcmim2StatusRectFail' => {
-    '1' => 'statusTrue',
-    '2' => 'statusFalse',
-  },
-  'upsAdvStateEcomode' => {
-    '1' => 'upsOnEcoMode',
-    '2' => 'upsNotOnEcoMode',
-  },
-  'airIRRP100UnitConfigCoolCapacity' => {
-    '1' => 'automatic',
-    '2' => 'maximum',
-  },
-  'dm3StatusSysTempSanity' => {
-    '1' => 'saneYES',
-    '2' => 'saneNO',
-  },
-  'emsVibrationSensorConfigSensorSeverity' => {
-    '1' => 'critical',
-    '2' => 'warning',
-    '3' => 'informational',
-  },
-  'airFMModSmokeDetector' => {
-    '1' => 'notApplicable',
-    '2' => 'notPresent',
-    '3' => 'present',
-  },
-  'airFMSysAlarmMapOutput4' => {
+  'airFMSysAlarmMapOutput3' => {
     '1' => 'notApplicable',
     '2' => 'disabled',
     '3' => 'enabled',
   },
-  'memSmokeSensorStatusSensorState' => {
-    '1' => 'smokeDetected',
-    '2' => 'noSmoke',
-    '3' => 'unknown',
+  'isxModularDistModuleOutputAlarmLowEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
   },
-  'airIRmPmEheating4Type' => {
-    '1' => 'direct',
-    '2' => 'pwm',
+  'currentStatus' => {
+    '1' => 'unknown',
+    '2' => 'noFault',
+    '3' => 'fault',
   },
-  'switchgearBreakerPresent' => {
-    '1' => 'notPresent',
-    '2' => 'present',
+  'upsDiagPMLifetimeStatus' => {
+    '1' => 'ok',
+    '2' => 'nearEnd',
+    '3' => 'exceeded',
+    '4' => 'unknown',
   },
-  'rPDU2OutletSwitchedStatusState' => {
-    '1' => 'off',
-    '2' => 'on',
-  },
-  'emConfigContactNormalState' => {
-    '1' => 'open',
-    '2' => 'closed',
-  },
-  'pcnsHumidityOutOfRangeProbe1EnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'dm3StatusConvCfg' => {
-    '1' => 'statusTrue',
-    '2' => 'statusFalse',
-  },
-  'airIRRCGroupSetpointsActiveFlowControlBias' => {
-    '1' => 'positive',
-    '2' => 'slightlyPositive',
-    '3' => 'zero',
-    '4' => 'slightlyNegative',
-    '5' => 'negative',
-  },
-  'airFMModServIntComp2Reset' => {
-    '1' => 'notApplicable',
-    '2' => 'noOperation',
-    '3' => 'reset',
+  'memDoorSensorCommStatus' => {
+    '1' => 'commOK',
+    '2' => 'commLost',
   },
   'airFMModBlwr2CtrlType' => {
     '1' => 'notApplicable',
@@ -16863,10 +16730,19 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
     '3' => 'ecController',
     '4' => 'danfossVFD',
   },
-  'memInputsStatusAlarmStatus' => {
-    '1' => 'memNormal',
-    '2' => 'memWarning',
-    '3' => 'memCritical',
+  'upsIntegratedATSPreferredSource' => {
+    '1' => 'upsIntegratedATSNoSourcePreference',
+    '2' => 'upsIntegratedATSPreferSourceA',
+    '3' => 'upsIntegratedATSPreferSourceB',
+  },
+  'xATSSwitchSettingsAllowClosedTransfer' => {
+    '1' => 'yes',
+    '2' => 'no',
+    '3' => 'unknown',
+  },
+  'airIRmPmFan3Type' => {
+    '1' => 'direct',
+    '2' => 'proportional',
   },
   'rPDUOutletStatusOutletPhase' => {
     '1' => 'phase1',
@@ -16876,40 +16752,98 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
     '5' => 'phase2-3',
     '6' => 'phase3-1',
   },
-  'atsConfigTransferVoltageRange' => {
-    '1' => 'wide',
-    '2' => 'medium',
-    '3' => 'narrow',
+  'rPDU2SensorTempHumidityStatusType' => {
+    '1' => 'temperatureOnly',
+    '2' => 'temperatureHumidity',
+    '3' => 'commsLost',
+    '4' => 'notInstalled',
   },
-  'upsAdvTestBatteryConditionStatus' => {
-    '1' => 'unknown',
-    '2' => 'batteryOK',
-    '3' => 'batteryCapacityDecreased',
-    '4' => 'batteryDefect',
-    '5' => 'noBatteryPresent',
+  'iemStatusContactStatus' => {
+    '1' => 'noFault',
+    '2' => 'fault',
+    '3' => 'disabled',
   },
-  'airFMSysAlarmMapInput13' => {
+  'airFMModComp2' => {
     '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
+    '2' => 'on',
+    '3' => 'off',
   },
-  'airFMSysAlarmMapMainModBlwrCntl1Fail' => {
+  'upsAdvBatteryFuseStatus' => {
+    '1' => 'fuseOpen',
+    '2' => 'fuseOk',
+    '3' => 'notPresent',
+  },
+  'airIRRP100UnitConfigOutputSource' => {
+    '1' => 'anyAlarm',
+    '2' => 'criticalAlarm',
+  },
+  'battManConfigAutoAnnunciatorReset' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'airIRG3CMStatusOperatingMode' => {
+    '1' => 'standBy',
+    '2' => 'on',
+    '3' => 'idle',
+  },
+  'xATSSwitchTimersStatus' => {
+    '1' => 'inactive',
+    '2' => 'active',
+  },
+  'dm3StatusConvCurrentLimit' => {
+    '1' => 'statusTrue',
+    '2' => 'statusFalse',
+  },
+  'pcnsBatteryChargeInRangeEnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airFMSysTempCtrlMethod' => {
     '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
+    '2' => 'avgReturn',
+    '3' => 'avgRemote',
+    '4' => 'maxRemote',
   },
-  'upsDiagSubSysIntBypSwitchFanLifetimeStatus' => {
-    '1' => 'ok',
-    '2' => 'nearEnd',
-    '3' => 'exceeded',
-    '4' => 'unknown',
+  'battManString1BatteryDryout' => {
+    '1' => 'normal',
+    '2' => 'alarm',
   },
-  'airFMGroupFailoverSysSmokeAlarm' => {
+  'airFMModServIntBlwrCtrl2Reset' => {
     '1' => 'notApplicable',
-    '2' => 'disable',
-    '3' => 'enable',
+    '2' => 'noOperation',
+    '3' => 'reset',
   },
-  'dm3ConfigRectImbalanceAlarm' => {
+  'ats5gSwitchCumulativeAlarmStatus' => {
+    '1' => 'normal',
+    '2' => 'informational',
+    '3' => 'warning',
+    '4' => 'critical',
+  },
+  'sPDUMasterControlMSPCommand' => {
+    '1' => 'noCommandAllMSP',
+    '2' => 'immediateAllOnMSP',
+    '3' => 'sequencedAllOnMSP',
+    '4' => 'immediateAllOffMSP',
+    '5' => 'gracefulAllRebootMSP',
+    '6' => 'immediateAllRebootMSP',
+    '7' => 'gracefulAllShutdownMSP',
+    '8' => 'overrideAllBatCapThreshMSP',
+    '9' => 'cancelAllPendingCommandsMSP',
+    '10' => 'restoreFactoryDefaultsMSP',
+  },
+  'dm3ConfigConvHwVoltAlarm' => {
+    '1' => 'alarmIgnore',
+    '2' => 'alarmRelay1',
+    '3' => 'alarmRelay2',
+    '4' => 'alarmRelay3',
+    '5' => 'alarmRelay4',
+    '6' => 'alarmRelay5',
+    '7' => 'alarmRelay6',
+    '8' => 'alarmMinor',
+    '9' => 'alarmMajor',
+    '10' => 'alarmNofN',
+  },
+  'dm3ConfigConvHighVoltAlarm' => {
     '1' => 'alarmIgnore',
     '2' => 'alarmRelay1',
     '3' => 'alarmRelay2',
@@ -16920,36 +16854,527 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
     '8' => 'alarmMinor',
     '9' => 'alarmMajor',
   },
-  'ats5gSwitchConfigFrontPanelLockout' => {
-    '1' => 'disableFrontPanel',
-    '2' => 'enableFrontPanel',
+  'pcnsNetCommunicationLostEnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
   },
-  'pcnsNetworkConfig' => {
-    '1' => 'ipV4',
-    '2' => 'ipV6',
+  'wirelessSensorPodStatusDryContactState' => {
+    '0' => 'drycontactOpen',
+    '1' => 'drycontactClosed',
   },
-  'airFMSysAlarmMapExpMod2HumReplCyl' => {
+  'pcnsNMCProtocol' => {
+    '1' => 'http',
+    '2' => 'https',
+  },
+  'upsAdvControlTurnOnUPS' => {
+    '1' => 'noTurnOnUPS',
+    '2' => 'turnOnUPS',
+    '3' => 'turnOnUPSSyncGroup',
+    '4' => 'turnOnUPSDelayed',
+  },
+  'dcmim2StatusBattFunctTestResult' => {
+    '1' => 'functTestNotPerformed',
+    '2' => 'functTestInProcess',
+    '3' => 'functTestInterrupted',
+    '4' => 'functTestPass',
+    '5' => 'functTestFail',
+  },
+  'airIRG3RDUServiceIntervalsAirFilterAlarm' => {
+    '1' => 'enable',
+    '2' => 'disable',
+  },
+  'airFMModServIntHeaterReset' => {
+    '1' => 'notApplicable',
+    '2' => 'noOperation',
+    '3' => 'reset',
+  },
+  'battManSystemAmbientHighTempAlarm' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'airIRG2GroupConfigCapacityControlType' => {
+    '1' => 'discrete',
+    '2' => 'proportional',
+  },
+  'wirelessSensorConfigAlarmGeneration' => {
+    '0' => 'disabled',
+    '1' => 'enabled',
+  },
+  'airIRG2GroupConfigActiveFlowControllerLampTest' => {
+    '1' => 'off',
+    '2' => 'on',
+  },
+  'iemConfigProbeLowHumidEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'airIRmPmFan1Type' => {
+    '1' => 'direct',
+    '2' => 'proportional',
+  },
+  'xATSGeneratorFuelSystemLowRunTimeThreshold' => {
+    '1' => 'disabled',
+    '2' => 'oneHour',
+    '3' => 'twoHours',
+    '4' => 'threeHours',
+    '5' => 'fourHours',
+    '6' => 'fiveHours',
+    '7' => 'sixHours',
+    '8' => 'twelveHours',
+    '9' => 'oneDay',
+    '10' => 'twoDays',
+    '11' => 'threeDays',
+    '12' => 'fourDays',
+    '13' => 'fiveDays',
+    '14' => 'sixDays',
+    '15' => 'sevenDays',
+  },
+  'emsOutletStatusOutletNormalState' => {
+    '1' => 'normallyOnEMS',
+    '2' => 'normallyOffEMS',
+  },
+  'isxModularDistSubFeedInfoBreakerPosition' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'upsPhaseInputVoltageOrientation' => {
+    '1' => 'unknown',
+    '2' => 'singlePhase',
+    '3' => 'splitPhase',
+    '4' => 'threePhasePhaseToNeutral',
+    '5' => 'threePhasePhaseToPhase',
+  },
+  'airIRRCGroupConfigConfigurationType' => {
+    '1' => 'racs',
+    '2' => 'hacs',
+    '3' => 'in-row',
+    '4' => 'cacs',
+  },
+  'pcnsBypassDisabledEnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'pcnsContactFault4EnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'dm3ConfigRectHighVoltAlarm' => {
+    '1' => 'alarmIgnore',
+    '2' => 'alarmRelay1',
+    '3' => 'alarmRelay2',
+    '4' => 'alarmRelay3',
+    '5' => 'alarmRelay4',
+    '6' => 'alarmRelay5',
+    '7' => 'alarmRelay6',
+    '8' => 'alarmMinor',
+    '9' => 'alarmMajor',
+  },
+  'xATSSwitchStatisticsReset' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'pcnsOverloadSolvedEnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airIRSCGroupSetpointsActiveFlowControlBias' => {
+    '1' => 'positive',
+    '2' => 'slightlyPositive',
+    '3' => 'zero',
+    '4' => 'slightlyNegative',
+    '5' => 'negative',
+  },
+  'battManSystemAmbientLowTempAlarm' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'airIRSCUnitConfigIdleOnLeakDetect' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'isxModularDistSubFeedInfoBreakerAlarmEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'upsParallelSysUpsAlarmStatus' => {
+    '1' => 'unknown',
+    '2' => 'normal',
+    '3' => 'informational',
+    '4' => 'warning',
+    '5' => 'critical',
+  },
+  'dm3ConfigSysHardwareTempAlarm' => {
+    '1' => 'alarmIgnore',
+    '2' => 'alarmRelay1',
+    '3' => 'alarmRelay2',
+    '4' => 'alarmRelay3',
+    '5' => 'alarmRelay4',
+    '6' => 'alarmRelay5',
+    '7' => 'alarmRelay6',
+    '8' => 'alarmMinor',
+    '9' => 'alarmMajor',
+  },
+  'airFMGroupCfgDmdFightStatus' => {
+    '1' => 'off',
+    '2' => 'on',
+  },
+  'dm3ConfigOutRlyAlarm' => {
+    '1' => 'alarmIgnore',
+    '2' => 'alarmRelay1',
+    '3' => 'alarmRelay2',
+    '4' => 'alarmRelay3',
+    '5' => 'alarmRelay4',
+    '6' => 'alarmRelay5',
+    '7' => 'alarmRelay6',
+    '8' => 'alarmMinor',
+    '9' => 'alarmMajor',
+  },
+  'airFMSysCoolPIDMethod' => {
+    '1' => 'notApplicable',
+    '2' => 'p',
+    '3' => 'pi',
+    '4' => 'pid',
+  },
+  'memFluidSensorCommStatus' => {
+    '1' => 'commOK',
+    '2' => 'commLost',
+  },
+  'xPDUDeviceBypassInputPresent' => {
+    '1' => 'notPresent',
+    '2' => 'present',
+  },
+  'airFMSysAlarmMapSystemOn' => {
     '1' => 'notApplicable',
     '2' => 'disabled',
     '3' => 'enabled',
   },
-  'airFMSysOutputNormalState' => {
+  'emConfigProbeLowHumidEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'pcnsRunTimeBelowThresholdEnableShutdown' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'airFMGroupFailoverModHighFilterDP' => {
+    '1' => 'notApplicable',
+    '2' => 'disable',
+    '3' => 'enable',
+  },
+  'airIRRCUnitConfigInputNormalState' => {
     '1' => 'open',
     '2' => 'closed',
   },
-  'upsDiagPMFanLifetimeStatus' => {
+  'coolingUnitConfigurationAnalogAccess' => {
+    '1' => 'readOnly',
+    '2' => 'readWrite',
+  },
+  'battManStringHighRippleCurrent' => {
+    '1' => 'normal',
+    '2' => 'alarm',
+  },
+  'ats5gBankType' => {
+    '1' => 'total',
+    '2' => 'bank1',
+    '3' => 'bank2',
+  },
+  'upsAdvConfigAutoShutdownControlSkipOffDelay' => {
+    '1' => 'upsAdvConfigSkipOffDelayAutoShutdown',
+    '2' => 'upsAdvConfigUseOffDelayAutoShutdown',
+  },
+  'xATSGeneratorSettingsCrankCycleEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+    '3' => 'unknown',
+  },
+  'xATSGeneratorFuelSystemVeryLowRunTimeThreshold' => {
+    '1' => 'disabled',
+    '2' => 'oneHour',
+    '3' => 'twoHours',
+    '4' => 'threeHours',
+    '5' => 'fourHours',
+    '6' => 'fiveHours',
+    '7' => 'sixHours',
+    '8' => 'twelveHours',
+    '9' => 'oneDay',
+    '10' => 'twoDays',
+    '11' => 'threeDays',
+    '12' => 'fourDays',
+    '13' => 'fiveDays',
+    '14' => 'sixDays',
+    '15' => 'sevenDays',
+  },
+  'atsCalibrationPowerSupplyVoltage' => {
+    '1' => 'powerSupply24V',
+    '2' => 'powerSupply12V',
+    '3' => 'powerSupply',
+    '4' => 'powerSupply24VSourceB',
+    '5' => 'powerSupplyMinus12V',
+  },
+  'airFMGroupFailoverSysLowEnvTemp' => {
+    '1' => 'notApplicable',
+    '2' => 'disable',
+    '3' => 'enable',
+  },
+  'rPDU2SensorTempHumidityStatusTempStatus' => {
+    '1' => 'notPresent',
+    '2' => 'belowMin',
+    '3' => 'belowLow',
+    '4' => 'normal',
+    '5' => 'aboveHigh',
+    '6' => 'aboveMax',
+  },
+  'atsConfigVoltageSensitivity' => {
+    '1' => 'high',
+    '2' => 'low',
+  },
+  'airFMSysHumState' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'memOutletNormalState' => {
+    '1' => 'off',
+    '2' => 'on',
+  },
+  'memSensorsAlarmGeneration' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'accessPXExtStatusFrontDoorHandle' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'notInstalled',
+    '4' => 'disconnected',
+  },
+  'pcnsBypassContactorFailedEnableShutdown' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'pcnsBatteryChargeInRangeEnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'upsAdvInputLineFailCause' => {
+    '1' => 'noTransfer',
+    '2' => 'highLineVoltage',
+    '3' => 'brownout',
+    '4' => 'blackout',
+    '5' => 'smallMomentarySag',
+    '6' => 'deepMomentarySag',
+    '7' => 'smallMomentarySpike',
+    '8' => 'largeMomentarySpike',
+    '9' => 'selfTest',
+    '10' => 'rateOfVoltageChange',
+  },
+  'upsCommStatus' => {
     '1' => 'ok',
-    '2' => 'nearEnd',
-    '3' => 'exceeded',
-    '4' => 'unknown',
+    '2' => 'noComm',
   },
-  'battManConfigMonitorWireLength' => {
-    '1' => 'fiftyFeetOrLess',
-    '2' => 'moreThanFiftyFeet',
+  'pcnsShutdownCommandFileEnabled' => {
+    '1' => 'yes',
+    '2' => 'no',
   },
-  'sPDUOutletConfigMSPmupsP1HiHum' => {
+  'upsOutletGroupConfigLoadShedControlRuntimeRemaining' => {
+    '1' => 'upsOutletGroupConfigDisableRuntimeRemainingLoadShed',
+    '2' => 'upsOutletGroupConfigEnableRuntimeRemainingLoadShed',
+  },
+  'airIRmPmCoolingPriority' => {
+    '1' => 'ge',
+    '2' => 'cw',
+    '3' => 'dx',
+  },
+  'sPDUOutletConfigMSPallOutletCtrlMode' => {
+    '1' => 'modeGracefulShutdown',
+    '2' => 'modeAnnunciator',
+  },
+  'memInputsStatusAlarmStatus' => {
+    '1' => 'memNormal',
+    '2' => 'memWarning',
+    '3' => 'memCritical',
+  },
+  'memFluidSensorConfigAlarmGeneration' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'airFMGroupCfgSetpointShareSetting' => {
+    '1' => 'disable',
+    '2' => 'enable',
+  },
+  'dcmim2ControlRunFunctBatteryTest' => {
+    '1' => 'battTestOff',
+    '2' => 'battTestOn',
+  },
+  'airIRRP100UnitConfigSecondaryPowerFeedCapability' => {
+    '1' => 'full',
+    '2' => 'reduced',
+  },
+  'airFMSysAlarmMapOutput4' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'airFMSysActualTempCtrlMethod' => {
+    '1' => 'notApplicable',
+    '2' => 'avgReturn',
+    '3' => 'avgRemote',
+    '4' => 'maxRemote',
+  },
+  'xPDUSystemBreakerPosition' => {
+    '1' => 'open',
+    '2' => 'closed',
+    '3' => 'unknown',
+  },
+  'sPDUOutletConfigMSPmupsP2LowHum' => {
     '1' => 'disableAlarm',
     '2' => 'enableAlarm',
+  },
+  'airIRRP100UnitServiceIntervalHeaterAlarm' => {
+    '1' => 'enable',
+    '2' => 'disable',
+  },
+  'airIRRCUnitConfigOutputSource' => {
+    '1' => 'anyAlarm',
+    '2' => 'criticalAlarm',
+  },
+  'airFMGroupSysRoleAssignment' => {
+    '1' => 'staticManual',
+    '2' => 'dynamicAutomatic',
+  },
+  'upsAdvConfigAlarm' => {
+    '1' => 'timed',
+    '2' => 'atLowBattery',
+    '3' => 'never',
+    '4' => 'mute',
+  },
+  'airFMSysAlarmMapMainModCoolFail' => {
+    '1' => 'notApplicable',
+    '2' => 'disabled',
+    '3' => 'enabled',
+  },
+  'pcnsOverloadEnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'sPDUOutletStatusVMCommandPending' => {
+    '1' => 'outletStatusVMCommandPending',
+    '2' => 'outletStatusVMNoCommandPending',
+  },
+  'severity' => {
+    '1' => 'information',
+    '2' => 'warning',
+    '3' => 'severe',
+  },
+  'Rpdu2OutletPhaseLayoutType' => {
+    '1' => 'seqPhase1ToNeutral',
+    '2' => 'seqPhase2ToNeutral',
+    '3' => 'seqPhase3ToNeutral',
+    '4' => 'seqPhase1ToPhase2',
+    '5' => 'seqPhase2ToPhase3',
+    '6' => 'seqPhase3ToPhase1',
+  },
+  'dm3ConfigConvLowVoltAlarm' => {
+    '1' => 'alarmIgnore',
+    '2' => 'alarmRelay1',
+    '3' => 'alarmRelay2',
+    '4' => 'alarmRelay3',
+    '5' => 'alarmRelay4',
+    '6' => 'alarmRelay5',
+    '7' => 'alarmRelay6',
+    '8' => 'alarmMinor',
+    '9' => 'alarmMajor',
+  },
+  'isxModularDistSysCurrentAlarmHighEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'rPDUStatusOutletState' => {
+    '1' => 'outletLoadNormal',
+    '2' => 'outletLoadLow',
+    '3' => 'outletLoadNearOverload',
+    '4' => 'outletLoadOverload',
+  },
+  'uioInputContactConfigNormalState' => {
+    '1' => 'uioInputNormallyOpen',
+    '2' => 'uioInputNormallyClosed',
+  },
+  'airFMGroupSysPresentRole' => {
+    '1' => 'primary',
+    '2' => 'backup',
+  },
+  'xATSOutputRelayNormalState' => {
+    '1' => 'open',
+    '2' => 'closed',
+  },
+  'dm3ConfigConvStandbyAlarm' => {
+    '1' => 'alarmIgnore',
+    '2' => 'alarmRelay1',
+    '3' => 'alarmRelay2',
+    '4' => 'alarmRelay3',
+    '5' => 'alarmRelay4',
+    '6' => 'alarmRelay5',
+    '7' => 'alarmRelay6',
+    '8' => 'alarmMinor',
+    '9' => 'alarmMajor',
+    '10' => 'alarmNofN',
+  },
+  'airIRRP500GroupConfigConfigurationType' => {
+    '1' => 'racs',
+    '2' => 'hacs',
+    '3' => 'in-row',
+    '4' => 'cacs',
+  },
+  'memSmokeSensorStatusSensorSeverity' => {
+    '1' => 'critical',
+    '2' => 'warning',
+    '3' => 'informational',
+  },
+  'airIRRP100UnitConfigHumidifierControl' => {
+    '1' => 'auto',
+    '2' => 'drainOff',
+  },
+  'ePDUOutletStatusState' => {
+    '1' => 'off',
+    '2' => 'on',
+  },
+  'pmmBranchCircuitBreakerOpenAlarm' => {
+    '1' => 'enabled',
+    '2' => 'disabled',
+    '3' => 'unknown',
+  },
+  'iemStatusRelayStatus' => {
+    '1' => 'faultState',
+    '2' => 'normalState',
+  },
+  'rPDUStatusPhaseState' => {
+    '1' => 'phaseLoadNormal',
+    '2' => 'phaseLoadLow',
+    '3' => 'phaseLoadNearOverload',
+    '4' => 'phaseLoadOverload',
+  },
+  'upsOutletGroupConfigLoadShedControlTimeOnBattery' => {
+    '1' => 'upsOutletGroupConfigDisableTimeOnBatteryLoadShed',
+    '2' => 'upsOutletGroupConfigEnableTimeOnBatteryLoadShed',
+  },
+  'airIRRP500GroupSetpointsFanSpeedControl' => {
+    '1' => 'automatic',
+    '2' => 'manual',
+  },
+  'pcnsMinLoadCapabilityRegainedEnableLogging' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'pcnsBatteryDischargedEnableShutdown' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'isxModularDistSubFeedInfoAlarmMaxEnable' => {
+    '1' => 'disabled',
+    '2' => 'enabled',
+  },
+  'apcLocalDisplayConfigAlarmBeeper' => {
+    '1' => 'beeperDisabled',
+    '2' => 'beeperEnabled',
   },
   'mfiletransferStatusLastTransferResult' => {
     '1' => 'lastFileTransferResultSuccessful',
@@ -16961,244 +17386,34 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
     '7' => 'lastFileTransferResultFailureFileTypeUnknown',
     '8' => 'lastFileTransferResultFailureFileCorrupted',
   },
-  'airIRRP100UnitStatusOutputState' => {
+  'dcmim2ConfigLVDState' => {
+    '1' => 'statusClosed',
+    '2' => 'statusOpened',
+  },
+  'pcnsHumidityInRangeProbe2EnableCommandFile' => {
+    '1' => 'yes',
+    '2' => 'no',
+  },
+  'rARUStatusAruMasterControl' => {
+    '1' => 'aruOn',
+    '2' => 'aruOff',
+  },
+  'battManInputContactNormalState' => {
     '1' => 'open',
     '2' => 'closed',
   },
-  'xATSTestingStatusSelectTestProcess' => {
-    '1' => 'engineStartTest',
-    '2' => 'systemLoadTest',
-    '3' => 'generatorHoldTest',
-    '4' => 'cancelTest',
-  },
-  'airIRmPmUnitTemperatureScale' => {
-    '1' => 'celsius',
-    '2' => 'fahrenheit',
-  },
-  'rARUFanStatusFanRunhourReset' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'upsAdvEnergyStorageType' => {
-    '1' => 'unknown',
-    '2' => 'vrlaOrWetCells',
-    '3' => 'niCdBatteries',
-    '4' => 'liIonBatteries',
-    '5' => 'noEnergyStorage',
-    '6' => 'flywheel',
-    '7' => 'ultracaps',
-  },
-  'uioOutputRelayStatusCurrentState' => {
-    '1' => 'uioOutputClosed',
-    '2' => 'uioOutputOpen',
-    '3' => 'outputStateNotApplicable',
-  },
-  'battManAlarmEnvironment' => {
-    '1' => 'normal',
-    '2' => 'alarm',
-  },
-  'airFMGroupFailoverSysLowEnvHum' => {
-    '1' => 'notApplicable',
-    '2' => 'disable',
-    '3' => 'enable',
-  },
-  'memInputsStatusCurrentState' => {
-    '1' => 'inputClosedHighMEM',
-    '2' => 'inputOpenLowMEM',
-    '3' => 'inputDisabled',
-    '4' => 'inputStateNotApplicable',
-  },
-  'airIRRCUnitStatusInputState' => {
+  'AirIRG2RDType2IOState' => {
     '1' => 'open',
     '2' => 'closed',
   },
-  'memDoorSensorStatusSensorSeverity' => {
-    '1' => 'critical',
-    '2' => 'warning',
-    '3' => 'informational',
-  },
-  'sPDUMasterStatusVMCommandPending' => {
-    '1' => 'commandPendingMasterTrueVM',
-    '2' => 'commandPendingMasterFalseVM',
-  },
-  'airFMSysRemoteSensorData' => {
-    '1' => 'notApplicable',
-    '2' => 'average',
-    '3' => 'maximum',
-  },
-  'upsAdvConfigSensitivity' => {
-    '1' => 'auto',
-    '2' => 'low',
-    '3' => 'medium',
-    '4' => 'high',
-  },
-  'accessPXStatusRearDoorLock' => {
-    '1' => 'unlocked',
-    '2' => 'locked',
-    '3' => 'notInstalled',
-    '4' => 'disconnected',
-  },
-  'airFMSysAlarmMapMainModHumReplCyl' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'battManResetLowestDischargeVoltages' => {
-    '1' => 'noOperation',
-    '2' => 'reset',
-  },
-  'airFMGroupSysRoleStatus' => {
-    '1' => 'reserved1',
-    '2' => 'reserved2',
-    '3' => 'onLine',
-    '4' => 'idle',
-    '5' => 'loadShare',
-    '6' => 'failed',
-    '7' => 'offLine',
-  },
-  'upsAdvIdentUpsPhaseConfigType' => {
-    '1' => 'unknown',
-    '2' => 'threePhaseInOut',
-    '3' => 'onePhaseInOut',
-    '4' => 'threePhaseInOneOut',
-  },
-  'airFMSysDehumEssFunction' => {
-    '1' => 'notApplicable',
-    '2' => 'yes',
-    '3' => 'no',
-  },
-  'upsAdvTestDiagnosticDay' => {
-    '1' => 'monday',
-    '2' => 'tuesday',
-    '3' => 'wednesday',
-    '4' => 'thursday',
-    '5' => 'friday',
-    '6' => 'saturday',
-    '7' => 'sunday',
-  },
-  'atsConfigResetValues' => {
-    '1' => 'none',
-    '2' => 'reset',
-  },
-  'pcnsContactNormal2EnableLogging' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'airFMModServIntBlwrCtrl1Reset' => {
-    '1' => 'notApplicable',
-    '2' => 'noOperation',
-    '3' => 'reset',
-  },
-  'atsStatusFrontPanel' => {
-    '1' => 'locked',
-    '2' => 'unlocked',
-  },
-  'pcnsBypassDisabledEnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'rPDUOutletControlOutletPhase' => {
-    '1' => 'phase1',
-    '2' => 'phase2',
-    '3' => 'phase3',
-    '4' => 'phase1-2',
-    '5' => 'phase2-3',
-    '6' => 'phase3-1',
-  },
-  'memBeaconStatusCurrentState' => {
-    '1' => 'off',
-    '2' => 'on',
-  },
-  'airIRmPmMaintenance' => {
-    '1' => 'notNecessary',
-    '2' => 'necessary',
-  },
-  'airFMSysAlarmMapInput1' => {
-    '1' => 'notApplicable',
-    '2' => 'disabled',
-    '3' => 'enabled',
-  },
-  'upsAdvControlRebootUpsWithOrWithoutAC' => {
-    '1' => 'noRebootUpsWithOrWithoutAC',
-    '2' => 'rebootUpsImmediatelyWithOrWithoutAC',
-    '3' => 'rebootUpsDelayedWithOrWithoutAC',
-  },
-  'upsPhaseInputType' => {
-    '1' => 'unknown',
-    '2' => 'main',
-    '3' => 'bypass',
-  },
-  'upsAdvTestRuntimeCalibration' => {
-    '1' => 'noPerformCalibration',
-    '2' => 'performCalibration',
-    '3' => 'cancelCurrentCalibration',
-  },
-  'airIRG3CMStatusLocalDisplayOnOffEnabled' => {
-    '1' => 'no',
-    '2' => 'yes',
-  },
-  'airIRG2GroupConfigFanSpeedControl' => {
-    '1' => 'automatic',
-    '2' => 'manual',
-  },
-  'upsAdvConfigAlarm' => {
-    '1' => 'timed',
-    '2' => 'atLowBattery',
-    '3' => 'never',
-    '4' => 'mute',
-  },
-  'dm3ConfigBattLowVoltAlarm' => {
-    '1' => 'alarmIgnore',
-    '2' => 'alarmRelay1',
-    '3' => 'alarmRelay2',
-    '4' => 'alarmRelay3',
-    '5' => 'alarmRelay4',
-    '6' => 'alarmRelay5',
-    '7' => 'alarmRelay6',
-    '8' => 'alarmMinor',
-    '9' => 'alarmMajor',
-  },
-  'sPDUOutletConfigMSPmupsP1LowHum' => {
-    '1' => 'disableAlarm',
-    '2' => 'enableAlarm',
-  },
-  'pcnsMinLoadCapabilityLostEnableShutdown' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'pcnsHumidityInRangeProbe1EnableCommandFile' => {
-    '1' => 'yes',
-    '2' => 'no',
-  },
-  'rPDU2DeviceStatusNPSType' => {
-    '1' => 'notNPS',
-    '2' => 'host',
-    '3' => 'guest',
-  },
-  'upsBatteryCabinetWiringConfiguration' => {
-    '1' => 'twoWire',
-    '2' => 'threeWire',
-  },
-  'airIRRP100GroupSetpointsFanSpeedControl' => {
-    '1' => 'automatic',
-    '2' => 'manual',
-  },
-  'AirIRmStopState' => {
-    '1' => 'maybeOn',
-    '2' => 'unitOff',
+  'AirIRSCCapacityControlType' => {
+    '1' => 'discrete',
+    '2' => 'proportional',
   },
   'AirIRSCConfigType' => {
     '1' => 'racs',
     '2' => 'spot',
     '3' => 'in-row',
-  },
-  'AirIRmActivityState' => {
-    '1' => 'inactive',
-    '2' => 'active',
-  },
-  'AirIRmAlarmState' => {
-    '1' => 'ok',
-    '2' => 'alarm',
   },
   'AirIRSCFanSpeedControl' => {
     '1' => 'automatic',
@@ -17211,13 +17426,21 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
     '4' => 'med-high',
     '5' => 'high',
   },
-  'AirIRSCCapacityControlType' => {
-    '1' => 'discrete',
-    '2' => 'proportional',
+  'AirIRmActivityState' => {
+    '1' => 'inactive',
+    '2' => 'active',
+  },
+  'AirIRmAlarmState' => {
+    '1' => 'ok',
+    '2' => 'alarm',
   },
   'AirIRmControlState' => {
     '1' => 'off',
     '2' => 'on',
+  },
+  'AirIRmStopState' => {
+    '1' => 'maybeOn',
+    '2' => 'unitOff',
   },
   'Rpdu2OutletPhaseLayoutType' => {
     '1' => 'seqPhase1ToNeutral',
@@ -17226,10 +17449,6 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
     '4' => 'seqPhase1ToPhase2',
     '5' => 'seqPhase2ToPhase3',
     '6' => 'seqPhase3ToPhase1',
-  },
-  'AirIRG2RDType2IOState' => {
-    '1' => 'open',
-    '2' => 'closed',
   },
   'upsBasicStateOutputState' => sub {
     # ftp://ftp.apc.com/apc/public/software/pnetmib/mib/417/powernet417.mib
@@ -17244,17 +17463,17 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'PowerNet-MIB'} = {
     # Flag  2: On Battery
     # Flag  3: Low Battery
     # Flag  4: On Line
-  
+
     # Flag  5: Replace Battery
     # Flag  6: Serial Communication Established
     # Flag  7: AVR Boost Active
     # Flag  8: AVR Trim Active
-  
+
     # Flag  9: Overload
     # Flag 10: Runtime Calibration
     # Flag 11: Batteries Discharged
     # Flag 12: Manual Bypass
-  
+
     # Flag 13: Software Bypass
     # Flag 14: In Bypass due to Internal Fault
     # Flag 15: In Bypass due to Supply Failure
