@@ -1487,59 +1487,20 @@ sub establish_snmp_session {
 
   # Fall back to Net::SNMP if SNMP module session creation failed or unavailable
   if (! $snmp_backend_used) {
-    if (eval "require Net::SNMP") {
-      my $net_snmp_version = Net::SNMP->VERSION(); # 5.002000 or 6.000000
-      # Net::SNMP specific: Remove parameters not supported by Net::SNMP
-      # Net::SNMP uses context with methods which generate an snmp message,
-      # not with the session constructor.
-      delete $params{'-contextengineid'} if exists $params{'-contextengineid'};
-      delete $params{'-contextname'} if exists $params{'-contextname'};
-      # Net::SNMP specific: translation settings for special device quirks
-      $params{'-translate'} = [ # because we see "NULL" coming from socomec devices
-        -all => 0x0,
-        -nosuchobject => 1,
-        -nosuchinstance => 1,
-        -endofmibview => 1,
-        -unsigned => 1,
-      ];
-      my $stderrvar = "";
-      *SAVEERR = *STDERR;
-      open ERR ,'>',\$stderrvar;
-      *STDERR = *ERR;
-      my ($session, $error) = Net::SNMP->session(%params);
-      *STDERR = *SAVEERR;
-      if (($stderrvar && $error && $error =~ /Time synchronization failed/) ||
-          ($error && $error =~ /Received usmStatsUnknownEngineIDs.0 Report-PDU with value \d+ during synchronization/)) {
-        # This is what you get when you have
-        # - an APC ups with a buggy firmware.
-        # - no chance to update it.
-        # - a support contract.
-        no strict 'refs';
-        no warnings 'redefine';
-        *{'Net::SNMP::_discovery_synchronization_cb'} = sub {
-          my ($this) = @_;
-          if ($this->{_security}->discovered())
-          {
-            $this->_error_clear();
-            return $this->_discovery_complete();
-          }
-          return $this->_discovery_failed();
-        };
-        ($session, $error) = Net::SNMP->session(%params);
-      }
-      if (! defined $session && $error && $error =~ /No response from remote host.*during synchronization/) {
-        # Before the Oct 2024 Net::SNMP patch, this situation ended up in a
-        # timeout and was caught by the alarm handler. With the patch, Net::SNMP
-        # returns earlier so that we handle the return here.
-        $self->add_message(UNKNOWN,
-            sprintf 'cannot create session object: %s', $error);
-      } elsif (! defined $session) {
-        $self->add_message(CRITICAL,
-            sprintf 'cannot create session object: %s', $error);
-        $self->debug(Data::Dumper::Dumper(\%params));
-      } else {
+    my $backend_available = 0;
+    if (Monitoring::GLPlugin::SNMP::Backend::Netsnmp->can('session')) {
+      # Already loaded (bundled script)
+      $backend_available = 1;
+    } else {
+      eval { require Monitoring::GLPlugin::SNMP::Backend::Netsnmp; };
+      $backend_available = 1 if ! $@;
+    }
+    if ($backend_available) {
+      $self->debug("attempting Net::SNMP backend session");
+      my ($session, $error) =
+          Monitoring::GLPlugin::SNMP::Backend::Netsnmp->session(%params);
+      if (defined $session) {
         my $max_msg_size = $session->max_msg_size();
-        #$session->max_msg_size(4 * $max_msg_size);
         if ($self->opts->protocol eq "1") {
           $Monitoring::GLPlugin::SNMP::maxrepetitions = 0;
         } else {
@@ -1550,6 +1511,17 @@ sub establish_snmp_session {
         $Monitoring::GLPlugin::SNMP::session_params = \%params;
         $Monitoring::GLPlugin::SNMP::backend = 'Net::SNMP';
         $self->debug("Using Net::SNMP backend - legacy ciphers only");
+      } elsif ($error && $error =~ /No response from remote host.*during synchronization/) {
+        # Before the Oct 2024 Net::SNMP patch, this situation ended up in a
+        # timeout and was caught by the alarm handler. With the patch, Net::SNMP
+        # returns earlier so that we handle the return here.
+        $self->add_message(UNKNOWN,
+            sprintf 'cannot create session object: %s', $error);
+      } else {
+        $self->add_message(CRITICAL,
+            sprintf 'cannot create session object: %s',
+            defined $error ? $error : 'unknown error');
+        $self->debug(Data::Dumper::Dumper(\%params));
       }
     } else {
       $self->add_message(CRITICAL,

@@ -11,6 +11,7 @@ lib/Monitoring/GLPlugin/DB/TableItem.pm
 lib/Monitoring/GLPlugin/Item.pm
 lib/Monitoring/GLPlugin/SNMP.pm
 lib/Monitoring/GLPlugin/SNMP/Backend/XS.pm
+lib/Monitoring/GLPlugin/SNMP/Backend/Netsnmp.pm
 lib/Monitoring/GLPlugin/SNMP/CSF.pm
 lib/Monitoring/GLPlugin/SNMP/Item.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids.pm
