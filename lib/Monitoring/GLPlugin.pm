@@ -23,7 +23,7 @@ eval {
   $Data::Dumper::Sparseseen = 1;
 };
 our $AUTOLOAD;
-*VERSION = \'6.5';
+*VERSION = \'6.5.0.1';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
