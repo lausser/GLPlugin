@@ -1,3 +1,5 @@
+* 2026-05-28 6.5.0.2
+  bugfix in snmpget, also match multi-digit indexes
 * 2026-05-27 6.5.0.1
   bugfix in snmpget, accept mixed case MIB names
 * 2026-04-20 6.5

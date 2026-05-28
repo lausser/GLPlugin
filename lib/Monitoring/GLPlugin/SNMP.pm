@@ -545,7 +545,7 @@ sub init {
             $self->nagios_exit($code, $message);
         }
 
-    } elsif ($name =~ /^([a-zA-Z0-9\-]+)::([a-zA-Z0-9_]+)(?:\.(\d+))?$/) {
+    } elsif ($name =~ /^([a-zA-Z0-9\-]+)::([a-zA-Z0-9_]+)(?:\.(\d+(?:\.\d+)*))?$/) {
         # Symbolic format: MIB::object or MIB::object.index
         my ($mib, $object, $index) = ($1, $2, $3);
         $default_label = $object;
