@@ -599,12 +599,38 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'HUAWEI-ENTITY-EXTENT-MI
         6 => "warning",
         7 => "indeterminate"
     );
+    # HwAlarmStatus is an SNMP BITS value (RFC 2578 7.1.4: bit 0 is the
+    # MSB of the first octet). Two bugs were fixed here:
+    #
+    # 1. Bit order: bits must be read left-to-right ($bit_pos from the
+    #    start of the unpacked string), not right-to-left. The previous
+    #    substr($binary_string, -$bit_pos-1, 1) read from the LSB end,
+    #    so e.g. raw value 0x80 (bit 0 set -> "notSupported") was
+    #    misreported as "indeterminate" (bit 7).
+    #
+    # 2. Input shape: $value arrives in different shapes depending on
+    #    how it was fetched.
+    #    - live/simulated SNMP (Net::SNMP): $value is the raw octet
+    #      string (e.g. chr(0x80)) and must be unpacked once via
+    #      unpack("B*", $value) to get "10000000".
+    #    - --snmpwalk <file>: GLPlugin::SNMP's offline parser already
+    #      converts "Hex-STRING: 80" into the literal ASCII bitstring
+    #      "10000000" before this sub ever sees it (see the Hex-STRING
+    #      branch in GLPlugin/lib/Monitoring/GLPlugin/SNMP.pm). Calling
+    #      unpack("B*", ...) on that again re-encodes each '0'/'1'
+    #      character as its own byte and garbles the result, which is
+    #      why --snmpwalk and live/simulator runs used to disagree on
+    #      the exact same device data.
+    #    We detect which shape we got (same approach already used in
+    #    CISCOFIREPOWERAPTCMIB.pm) and only unpack when it isn't
+    #    already a bitstring.
+    my $binary_string = ($value =~ /^[01]+$/) ? $value : unpack("B*", $value);
     my @errors = ();
-    my $binary_string = unpack("B*", $value);
     for my $bit_pos (0..scalar(keys %conditions)-1) {
+       last if $bit_pos >= length($binary_string);
        my $condition = $conditions{$bit_pos};
-       my $bit_value = substr($binary_string, -$bit_pos-1, 1);
-       if ($bit_value == 1) {
+       my $bit_value = substr($binary_string, $bit_pos, 1);
+       if ($bit_value eq "1") {
          push(@errors, $condition);
        }
     }

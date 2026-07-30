@@ -1,3 +1,7 @@
+* 2026-06-01 6.5.0.3
+  performance improvement in get_entries_get_bulk with the XS backend
+  bugfix for undef oids which refer to a Definition
+  bugfix in HUAWEI-ENTITY-EXTENT-MIB::HwAlarmStatus
 * 2026-05-28 6.5.0.2
   bugfix in snmpget, also match multi-digit indexes
 * 2026-05-27 6.5.0.1

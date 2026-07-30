@@ -3089,7 +3089,12 @@ sub make_symbolic {
           if (exists $result->{$fulloid}) {
             if (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'}) {
               if (ref($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'}) eq 'HASH') {
-                if (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'}->{$result->{$fulloid}}) {
+                if (! defined $result->{$fulloid}) {
+                  # the OID exists but its value is undefined (e.g. noSuchInstance via
+                  # get_entries_get_simple's fallback) -- undef in, undef out, not a
+                  # manufactured 'unknown_<undef>' string.
+                  $mo->{$symoid} = undef;
+                } elsif (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'}->{$result->{$fulloid}}) {
                   $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'}->{$result->{$fulloid}};
                 } else {
                   $mo->{$symoid} = 'unknown_'.$result->{$fulloid};
@@ -3122,7 +3127,16 @@ sub make_symbolic {
                   # been used yet.
                   $self->require_mib($mib);
                 }
-                if  (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib} &&
+                if (! defined $result->{$fulloid}) {
+                  # weil am 27.3.24 so ein Drecksticket reinkam und bei
+                  # einem Cisco link-aggregations-Gedoens eins der Interfaces
+                  # ifLinkUpDownTrapEnable=<undefined> lieferte.
+                  # Drum muss man extra nochmal kontrollieren, ob das ein
+                  # gueltiger Wert ist, bevor man ihn an eine Hash- oder Code-Definition
+                  # weiterreicht. Wieder ein halber Vormittag im Arsch wegen so einem Dreck.
+                  # undef bleibt undef, wird nicht zu 'unknown_<undef>' verhunzt.
+                  $mo->{$symoid} = undef;
+                } elsif  (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib} &&
                     exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition} &&
                     ref($Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}) eq 'CODE') {
                   if ($parameters) {
@@ -3149,21 +3163,14 @@ sub make_symbolic {
                 } elsif  (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib} &&
                     exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition} &&
                     ref($Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}) eq 'HASH' &&
-                    # weil am 27.3.24 so ein Drecksticket reinkam und bei
-                    # einem Cisco link-aggregations-Gedoens eins der Interfaces
-                    # ifLinkUpDownTrapEnable=<undefined> lieferte.
-                    # Drum muss man extra nochmal kontrollieren, ob das ein
-                    # gueltiger Wert ist, den man im Def-Hash suchen kann.
-                    # Wieder ein halber Vormittag im Arsch wegen so einem Dreck.
-                    defined $result->{$fulloid} && \
                     exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->{$result->{$fulloid}}) {
                   $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}->{$result->{$fulloid}};
                 } else {
-                  $mo->{$symoid} = 'unknown_'.(defined $result->{$fulloid} ?
-                      $result->{$fulloid} : '<undef>');
+                  $mo->{$symoid} = 'unknown_'.$result->{$fulloid};
                 }
               } else {
-                $mo->{$symoid} = 'unknown_'.$result->{$fulloid};
+                $mo->{$symoid} = defined $result->{$fulloid} ?
+                    'unknown_'.$result->{$fulloid} : undef;
                 # oder $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'}?
               }
             } else {
@@ -3181,7 +3188,12 @@ sub make_symbolic {
           if (exists $result->{$fulloid}) {
             if (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'}) {
               if (ref($Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'}) eq 'HASH') {
-                if (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'}->{$result->{$fulloid}}) {
+                if (! defined $result->{$fulloid}) {
+                  # the OID exists but its value is undefined (e.g. noSuchInstance via
+                  # get_entries_get_simple's fallback) -- undef in, undef out, not a
+                  # manufactured 'unknown_<undef>' string.
+                  $mo->{$symoid} = undef;
+                } elsif (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'}->{$result->{$fulloid}}) {
                   $mo->{$symoid} = $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'}->{$result->{$fulloid}};
                 } else {
                   $mo->{$symoid} = 'unknown_'.$result->{$fulloid};
@@ -3214,7 +3226,13 @@ sub make_symbolic {
                   # been used yet.
                   $self->require_mib($mib);
                 }
-                if  (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib} &&
+                if (! defined $result->{$fulloid}) {
+                  # same guard as the !$sym_lookup branch above: get_entries_get_simple()
+                  # can leave $result->{$fulloid} existing-but-undef (noSuchInstance).
+                  # undef stays undef, it must not be handed to a hash/code definition
+                  # or manufactured into a stringified 'unknown_<undef>'.
+                  $mo->{$symoid} = undef;
+                } elsif  (exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib} &&
                     exists $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition} &&
                     ref($Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{$mib}->{$definition}) eq 'CODE') {
                   if ($parameters) {
@@ -3240,7 +3258,8 @@ sub make_symbolic {
                   $mo->{$symoid} = 'unknown_'.$result->{$fulloid};
                 }
               } else {
-                $mo->{$symoid} = 'unknown_'.$result->{$fulloid};
+                $mo->{$symoid} = defined $result->{$fulloid} ?
+                    'unknown_'.$result->{$fulloid} : undef;
                 # oder $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{$mib}->{$symoid.'Definition'}?
               }
             } else {
