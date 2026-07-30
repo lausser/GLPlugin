@@ -38,6 +38,8 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'FIBERSTORE-PRODUCTS-M
     fsFanStatusDefinition => {
         '1' => 'ok',
         '2' => 'fault',
+        '3' => 'not installed',
+        '4' => 'unsupported',
     },
     fsFanSpeedPct      => '1.3.6.1.4.1.52642.1.37.1.1.1.1.5',
 
@@ -48,18 +50,23 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'FIBERSTORE-PRODUCTS-M
     fsPsuPresentDefinition => {
         '1' => 'present',
         '2' => 'absent',
+        '3' => 'not installed',
+        '4' => 'unsupported',
     },
     fsPsuState    => '1.3.6.1.4.1.52642.1.37.1.2.1.4',
     fsPsuStateDefinition => {
-        '1' => 'ok',
+        '1' => 'AC',
+        '2' => 'DC',
         '3' => 'fault',
+        '4' => 'not installed',
+        '5' => 'unsupported',
     },
     fsPsuPowered  => '1.3.6.1.4.1.52642.1.37.1.2.1.7',
     fsPsuPoweredDefinition => {
         '1' => 'powered',
         '2' => 'noPower',
     },
-    fsPsuRpm      => '1.3.6.1.4.1.52642.1.37.1.2.1.9',
+    fsPsuCurrentPower => '1.3.6.1.4.1.52642.1.37.1.2.1.9',
 
     # Temperature sensor table (first sensor group)
     fsTempTable    => '1.3.6.1.4.1.52642.1.90.100.1.1',
