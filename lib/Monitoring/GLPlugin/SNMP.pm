@@ -292,11 +292,20 @@ sub add_snmp_args {
       required => 0,
       env => 'OFFLINE',
   );
+  $self->add_arg(
+      spec => 'max-repetitions=i',
+      help => '--max-repetitions
+   The max-repetitions value for snmpbulkwalk (default: 10)',
+      required => 0,
+      default => 10,
+  );
 }
 
 sub validate_args {
   my ($self) = @_;
   $self->SUPER::validate_args();
+  $self->add_unknown('--max-repetitions must be greater than zero')
+      if $self->opts->get('max-repetitions') < 1;
   if ($self->opts->mode =~ /^(bulk)*walk/) {
     if ($self->opts->snmpwalk && $self->opts->hostname) {
       if ($self->check_messages == CRITICAL) {
@@ -376,7 +385,9 @@ sub init {
         my $tree = shift @trees;
         $SIG{CHLD} = 'IGNORE';
         my $cmd = sprintf "%s -ObentU -v%s -c %s %s %s >> %s",
-            ($self->mode =~ /bulk/) ? "snmpbulkwalk" : "snmpwalk",
+            ($self->mode =~ /bulk/) ?
+                sprintf("snmpbulkwalk -Cr%d", $self->opts->get('max-repetitions')) :
+                "snmpwalk",
             $self->opts->protocol,
             $self->opts->community,
             $self->opts->hostname,
