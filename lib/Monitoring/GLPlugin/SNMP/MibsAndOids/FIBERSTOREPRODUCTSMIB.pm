@@ -68,9 +68,11 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'FIBERSTORE-PRODUCTS-M
     },
     fsPsuCurrentPower => '1.3.6.1.4.1.52642.1.37.1.2.1.9',
 
-    # Temperature sensor table (first sensor group)
-    fsTempTable    => '1.3.6.1.4.1.52642.1.90.100.1.1',
-    fsTempEntry    => '1.3.6.1.4.1.52642.1.90.100.1.1',
-    fsTempCurrent  => '1.3.6.1.4.1.52642.1.90.100.1.1.4',
-    fsTempPeak     => '1.3.6.1.4.1.52642.1.90.100.1.1.5',
+    # Temperature sensor table
+    fsTempTable         => '1.3.6.1.4.1.52642.1.37.1.3.1.4',
+    fsTempEntry         => '1.3.6.1.4.1.52642.1.37.1.3.1.4.1',
+    fsTempCurrent       => '1.3.6.1.4.1.52642.1.37.1.3.1.4.1.1',
+    fsTempCriticalLimit => '1.3.6.1.4.1.52642.1.37.1.3.1.5.1.1',
+    fsTempUpperLimit    => '1.3.6.1.4.1.52642.1.37.1.3.1.6.1.1',
+    fsTempLowerLimit    => '1.3.6.1.4.1.52642.1.37.1.3.1.7.1.1',
 };
