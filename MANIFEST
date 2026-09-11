@@ -279,6 +279,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/QBRIDGEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/QUANTUMMIDRANGETAPELIBRARYMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/QUANTUMSMALLTAPELIBRARYMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/QUANTUMSNMPMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/QSCAUDIOMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/QTSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/RAPIDCITYMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/RESOURCEMIB.pm

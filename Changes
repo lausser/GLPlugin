@@ -1,3 +1,5 @@
+* 2026-09-11 6.6
+  add QSC-AUDIO-MIB (the newer oe)
 * 2026-06-01 6.5.0.3
   performance improvement in get_entries_get_bulk with the XS backend
   bugfix for undef oids which refer to a Definition
