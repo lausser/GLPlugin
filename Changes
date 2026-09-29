@@ -1,3 +1,5 @@
+* 2026-09-29 6.6.0.1
+  output supported subsystems if --subsystem has an unsupported value.
 * 2026-09-11 6.6
   add QSC-AUDIO-MIB (the newer oe)
 * 2026-06-01 6.5.0.3

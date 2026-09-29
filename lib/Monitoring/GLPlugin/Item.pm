@@ -29,6 +29,27 @@ sub check {
 
 sub init_subsystems {
   my ($self, $subsysref) = @_;
+  if ($self->opts->subsystem) {
+    my @known = map { $_->[0] } @{$subsysref};
+    my @requested = map {
+        s/^\s+|\s+$//g;
+        $_;
+    } split /,/, $self->opts->subsystem;
+    my @unknown = grep {
+        my $requested = $_;
+        ! grep { $_ eq $requested } @known;
+    } @requested;
+    if (scalar(@unknown)) {
+      $self->nagios_exit("UNKNOWN", sprintf
+          "unknown subsystem%s %s, implemented subsystems are: %s",
+          scalar(@unknown) == 1 ? "" : "s",
+          join(", ", @unknown),
+          join(", ", map {
+              my ($subsys, $class, $description) = @{$_};
+              $description ? sprintf("%s (%s)", $subsys, $description) : $subsys;
+          } @{$subsysref}));
+    }
+  }
   foreach (@{$subsysref}) {
     my ($subsys, $class) = @{$_};
     $self->{$subsys} = $class->new()

@@ -342,17 +342,26 @@ Real examples: `CheckNwcHealth::Cisco::UCS::Component::EnvironmentalSubsystem` c
 five children (cpu/mem/rackunit/equipment/storage); `CheckUpsHealth::UPS::Component::EnvironmentalSubsystem`
 composes two (selftest/alarm).
 
-- `$self->init_subsystems([ [$key, $childClass], [$key2, $childClass2], ... ])`
-  (Item.pm:30) — call from the composite Component's own `init()`. For each pair,
-  instantiates `$childClass->new()` (which runs the child's own `init()` — its SNMP
-  fetches happen right here) and stores the object at `$self->{$key}`. **`$key` must
-  end in `_subsystem`** — every other method below finds child objects by grepping
+- `$self->init_subsystems([ [$key, $childClass, $description], [$key2, $childClass2], ... ])`
+  (Item.pm:30) — call from the composite Component's own `init()`. For each triple
+  (the third element, a human-readable `$description`, is optional), instantiates
+  `$childClass->new()` (which runs the child's own `init()` — its SNMP fetches happen
+  right here) and stores the object at `$self->{$key}`. **`$key` must end in
+  `_subsystem`** — every other method below finds child objects by grepping
   `keys %{$self}` for that suffix, not from any list you pass elsewhere. If the user
   passed `--subsystem cpu_subsystem,mem_subsystem`, any pair whose `$key` isn't in that
   list is skipped (not constructed at all) — this is what lets a plugin support "only
   check part of hardware-health" without a dedicated `--mode`. `--subsystem` is
   plugin-specific, not a GLPlugin default (`add_arg(spec => 'subsystem=s', ...)` in the
   entry-point `.pl`) — only add it if the repo doesn't already register it.
+  If any name in `--subsystem` doesn't match a `$key` in the list passed to
+  `init_subsystems`, the plugin exits `UNKNOWN` immediately (before instantiating
+  anything) with a message naming the typo'd value(s) and listing every implemented
+  `$key` — plus its `$description` when one was given. This is the only place a user
+  can discover the subsystem names for a given vendor/model, since they depend on
+  which device actually answers, so `--help` deliberately can't list them; the
+  suggestion only appears once the plugin has connected to a real device and knows
+  which subsystems that Component actually offers.
 - `$self->check_subsystems()` (Item.pm:44) — calls `->check()` on every `*_subsystem`
   child. Call from the composite Component's own `check()`.
 - `$self->subsystem_summary($text)` (Item.pm:80) — called by a **child** Component's
