@@ -1,3 +1,5 @@
+* 2026-09-30 6.6.1.1
+  update PDU2-MIB
 * 2026-09-29 6.6.1
   update DATADOMAIN-MIB
   output supported subsystems if --subsystem has an unsupported value.

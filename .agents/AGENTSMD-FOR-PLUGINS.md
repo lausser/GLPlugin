@@ -347,3 +347,8 @@ whether `--warningx`/`--criticalx` with a per-item key already covers it.
    every new mode, and confirm the output text, status, and perfdata make sense —
    not just that it doesn't crash.
 6. `configure.ac` version bumped and `ChangeLog` updated.
+
+## What is strictly forbidden
+
+You do NOT sniff around in any folders except the local folder.
+You may create a folder /tmp/<this-plugins-name> if you need to create temporary files
