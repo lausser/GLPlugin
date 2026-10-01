@@ -60,11 +60,22 @@ sub init_subsystems {
             $_;
         } split /,/, $self->opts->subsystem);
   }
+  $self->{subsystems_order} = [ map { $_->[0] } @{$subsysref} ];
+}
+
+sub subsystems_in_order {
+  my ($self) = @_;
+  # subsystems are stored in a hash, so keys() would yield a
+  # (randomized) hash order; use the order declared in init_subsystems
+  my @names = defined $self->{subsystems_order}
+      ? @{$self->{subsystems_order}}
+      : keys %{$self};
+  return grep { $_ =~ /.*_subsystem$/ && exists $self->{$_} } @names;
 }
 
 sub check_subsystems {
   my ($self) = @_;
-  my @subsystems = grep { $_ =~ /.*_subsystem$/ } keys %{$self};
+  my @subsystems = subsystems_in_order($self);
   foreach (@subsystems) {
     $self->{$_}->check();
   }
@@ -80,7 +91,7 @@ sub check_subsystems {
 
 sub summarize_subsystems {
   my ($self) = @_;
-  my @subsystems = grep { $_ =~ /.*_subsystem$/ } keys %{$self};
+  my @subsystems = subsystems_in_order($self);
   my @subsystem_summary = ();
   foreach (@subsystems) {
     if ($self->{$_}->{subsystem_summary}) {
@@ -92,7 +103,7 @@ sub summarize_subsystems {
 
 sub dump_subsystems {
   my ($self) = @_;
-  my @subsystems = grep { $_ =~ /.*_subsystem$/ } keys %{$self};
+  my @subsystems = subsystems_in_order($self);
   foreach (@subsystems) {
     $self->{$_}->dump();
   }

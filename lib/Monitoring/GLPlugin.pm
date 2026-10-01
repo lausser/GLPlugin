@@ -10,6 +10,7 @@ use strict;
 use IO::File;
 use File::Basename;
 use Digest::MD5 qw(md5_hex);
+use Digest::SHA qw(sha256_hex);
 use Errno;
 use JSON;
 use Sys::Hostname;
@@ -23,7 +24,7 @@ eval {
   $Data::Dumper::Sparseseen = 1;
 };
 our $AUTOLOAD;
-*VERSION = \'6.6.1.1';
+*VERSION = \'6.6.2';
 
 use constant { OK => 0, WARNING => 1, CRITICAL => 2, UNKNOWN => 3 };
 
@@ -353,6 +354,32 @@ sub add_mode {
   $Monitoring::GLPlugin::plugin->{modestring} .= "\n";
 }
 
+# Determines the directory for the state files (from --statefilesdir or the
+# platform default). validate_args calls this, but the classification cache
+# needs the directory earlier, because classify() runs before validate_args.
+sub set_statefilesdir {
+  my ($self) = @_;
+  if ($self->opts->can("statefilesdir") && ! $self->opts->statefilesdir) {
+    if ($^O =~ /MSWin/) {
+      if (defined $ENV{TEMP}) {
+        $self->override_opt('statefilesdir', $ENV{TEMP}."/".$Monitoring::GLPlugin::plugin->{name});
+      } elsif (defined $ENV{TMP}) {
+        $self->override_opt('statefilesdir', $ENV{TMP}."/".$Monitoring::GLPlugin::plugin->{name});
+      } elsif (defined $ENV{windir}) {
+        $self->override_opt('statefilesdir', File::Spec->catfile($ENV{windir}, 'Temp')."/".$Monitoring::GLPlugin::plugin->{name});
+      } else {
+        $self->override_opt('statefilesdir', "C:/".$Monitoring::GLPlugin::plugin->{name});
+      }
+    } elsif (exists $ENV{OMD_ROOT}) {
+      $self->override_opt('statefilesdir', $ENV{OMD_ROOT}."/var/tmp/".$Monitoring::GLPlugin::plugin->{name});
+    } else {
+      $self->override_opt('statefilesdir', "/var/tmp/".$Monitoring::GLPlugin::plugin->{name});
+    }
+  }
+  $Monitoring::GLPlugin::plugin->{statefilesdir} = $self->opts->statefilesdir
+      if $self->opts->can("statefilesdir");
+}
+
 sub validate_args {
   my ($self) = @_;
   if ($self->opts->mode =~ /^my-([^\-.]+)/) {
@@ -411,25 +438,7 @@ sub validate_args {
   } else {
     $ENV{NRPE_MULTILINESUPPORT} = 0;
   }
-  if ($self->opts->can("statefilesdir") && ! $self->opts->statefilesdir) {
-    if ($^O =~ /MSWin/) {
-      if (defined $ENV{TEMP}) {
-        $self->override_opt('statefilesdir', $ENV{TEMP}."/".$Monitoring::GLPlugin::plugin->{name});
-      } elsif (defined $ENV{TMP}) {
-        $self->override_opt('statefilesdir', $ENV{TMP}."/".$Monitoring::GLPlugin::plugin->{name});
-      } elsif (defined $ENV{windir}) {
-        $self->override_opt('statefilesdir', File::Spec->catfile($ENV{windir}, 'Temp')."/".$Monitoring::GLPlugin::plugin->{name});
-      } else {
-        $self->override_opt('statefilesdir', "C:/".$Monitoring::GLPlugin::plugin->{name});
-      }
-    } elsif (exists $ENV{OMD_ROOT}) {
-      $self->override_opt('statefilesdir', $ENV{OMD_ROOT}."/var/tmp/".$Monitoring::GLPlugin::plugin->{name});
-    } else {
-      $self->override_opt('statefilesdir', "/var/tmp/".$Monitoring::GLPlugin::plugin->{name});
-    }
-  }
-  $Monitoring::GLPlugin::plugin->{statefilesdir} = $self->opts->statefilesdir
-      if $self->opts->can("statefilesdir");
+  $self->set_statefilesdir();
   if ($self->opts->can("warningx") && $self->opts->warningx) {
     foreach my $key (keys %{$self->opts->warningx}) {
       $self->set_thresholds(metric => $key,
@@ -1444,6 +1453,13 @@ sub create_statefile {
   $extension =~ s/\)/_/g;
   $extension =~ s/\*/_/g;
   $extension =~ s/\s/_/g;
+  if ($params{host_wide_cache}) {
+    # a host-wide entry is shared by all modes, so the name must not contain
+    # the mode. The caller passes the complete, already sanitized name.
+    $extension =~ s/^_//;
+    return sprintf "%s/%s", $self->statefilesdir(),
+        $self->clean_path(lc $extension);
+  }
   return sprintf "%s/%s%s", $self->statefilesdir(),
       $self->clean_path($self->mode), $self->clean_path(lc $extension);
 }
@@ -1506,7 +1522,23 @@ sub protect_value {
 
 sub save_state {
   my ($self, %params) = @_;
-  $self->create_statefilesdir();
+  # host_wide_cache => 1: used for entries which are shared by all modes
+  # (see save_classification_cache). Such an entry is only an optimization,
+  # so every problem is silently ignored (return value 0) instead of
+  # adding a message to the plugin output.
+  my $quiet = $params{host_wide_cache};
+  if ($quiet) {
+    $self->set_statefilesdir() if ! $self->statefilesdir();
+    if (! -d $self->statefilesdir()) {
+      eval {
+        use File::Path;
+        mkpath $self->statefilesdir();
+      };
+    }
+    return 0 if ! -d $self->statefilesdir() || ! -w $self->statefilesdir();
+  } else {
+    $self->create_statefilesdir();
+  }
   my $statefile = $self->create_statefile(%params);
   my $tmpfile = $statefile.$$.rand();
   if ((ref($params{save}) eq "HASH") && exists $params{save}->{timestamp}) {
@@ -1525,14 +1557,30 @@ sub save_state {
         Data::Dumper::Dumper($params{save}), $statefile);
   }
   if (! rename $tmpfile, $statefile) {
+    if ($quiet) {
+      unlink $tmpfile;
+      return 0;
+    }
     $self->add_message(UNKNOWN,
         sprintf "cannot write status file %s! check your filesystem (permissions/usage/integrity) and disk devices", $statefile);
   }
+  return 1 if $quiet;
 }
 
 sub load_state {
   my ($self, %params) = @_;
+  $self->set_statefilesdir() if $params{host_wide_cache} && ! $self->statefilesdir();
   my $statefile = $self->create_statefile(%params);
+  if ($params{host_wide_cache}) {
+    # one small file per entry. No file means there is no entry. Anything
+    # unreadable or undecodable is treated like a missing entry, silently.
+    my $decoded = eval {
+      my $coder = JSON::XS->new->ascii->pretty->allow_nonref;
+      my $jsonscalar = read_file($statefile);
+      $coder->decode($jsonscalar);
+    };
+    return $@ ? undef : $decoded;
+  }
   if ( -f $statefile) {
     our $VAR1;
     eval {
@@ -1555,6 +1603,109 @@ sub load_state {
   } else {
     return undef;
   }
+}
+
+# --- classification cache -------------------------------------------------
+# A plugin's Device::classify() probes the device with a long sequence of
+# checks until it finds the matching vendor class and reblesses into it.
+# The result (the class name) is remembered for 5 minutes in a small file per
+# host/port/credentials, so that the following plugin runs (of any mode) can
+# skip the probing. A plugin uses it with two lines in classify():
+#   } elsif ($self->rebless_from_classification_cache()) {   # after the my- branch
+#   $self->save_classification_cache();                      # before the return
+# A branch of the probing sequence which has side effects besides the rebless
+# (e.g. rewriting global OID tables) must set
+# $self->{classification_uncacheable} = 1, because a replayed class would
+# lack these side effects.
+# The cache is only used if the environment variable USE_CLASSIFICATION_CACHE
+# is set (opt-in while the feature is being tested). The environment variable
+# IGNORE_CLASSIFICATION_CACHE disables it again, even if USE_ is set.
+
+# Returns true if the classification cache must neither be read nor written
+# in this run (not enabled by USE_CLASSIFICATION_CACHE, disabled by
+# IGNORE_CLASSIFICATION_CACHE, simulation by walk file, forced servertype,
+# my-extension modes).
+sub classification_cache_bypassed {
+  my ($self) = @_;
+  return 1 if ! defined $ENV{USE_CLASSIFICATION_CACHE} ||
+      $ENV{USE_CLASSIFICATION_CACHE} eq "";
+  return 1 if defined $ENV{IGNORE_CLASSIFICATION_CACHE} &&
+      $ENV{IGNORE_CLASSIFICATION_CACHE} ne "";
+  return 1 if $self->opts->can("snmpwalk") && $self->opts->snmpwalk;
+  return 1 if $self->opts->can("servertype") && $self->opts->servertype;
+  return 1 if $self->opts->mode && $self->opts->mode =~ /^my-/;
+  return 0;
+}
+
+# Returns the name of the cache entry for the current host/port/credentials,
+# or undef if there is no hostname. The credentials only go into a hash, so
+# neither the name nor the content of the entry reveals them.
+sub classification_cache_identity {
+  my ($self) = @_;
+  my $opts = $self->opts;
+  return undef if ! $opts->can("hostname") || ! $opts->hostname;
+  my $host = $opts->hostname;
+  my $port = $opts->can("port") && defined $opts->port ? $opts->port : "";
+  my @secrets = ();
+  foreach my $name (qw(protocol community username authprotocol authpassword
+      privprotocol privpassword contextengineid contextname)) {
+    if ($opts->can($name) && defined $opts->$name) {
+      push(@secrets, $name."=".$opts->$name);
+    }
+  }
+  my $plugin = $Monitoring::GLPlugin::pluginname || "plugin";
+  my $hash = sha256_hex(join("\0", $host, $port, @secrets));
+  my $identity = sprintf "classification_cache_%s_%s_%s_%s",
+      $plugin, $host, $port, $hash;
+  $identity =~ s/[^\w.\-]/_/g;
+  return $identity;
+}
+
+# Reblesses into the class remembered by a previous full classification, if
+# there is a valid entry younger than 5 minutes. Returns true if so (the
+# caller then skips its probing), otherwise false and nothing has changed.
+sub rebless_from_classification_cache {
+  my ($self) = @_;
+  $self->{classification_start_class} = ref($self);
+  return 0 if $self->classification_cache_bypassed();
+  my $identity = $self->classification_cache_identity();
+  return 0 if ! $identity;
+  my $entry = $self->load_state(name => $identity, host_wide_cache => 1);
+  return 0 if ref($entry) ne "HASH";
+  my $class = $entry->{class};
+  my $timestamp = $entry->{timestamp};
+  return 0 if ! defined $class || $class !~ /^\w+(::\w+)*$/;
+  return 0 if ! defined $timestamp || $timestamp !~ /^\d+$/;
+  my $age = time - $timestamp;
+  # an age < 0 means the clock went backwards. Do not trust such an entry.
+  return 0 if $age < 0 || $age >= 300;
+  # the class is unknown if the plugin was changed since the entry was written
+  return 0 if ! $class->isa("Monitoring::GLPlugin") || ! $class->can("init");
+  $self->debug(sprintf "classification cache hit: %s (%ds old)", $class, $age);
+  $self->rebless($class);
+  $self->{classification_from_cache} = 1;
+  return 1;
+}
+
+# Stores the class which a full classification has found. Nothing is stored
+# if the result is a replayed one (a hit must not extend the lifetime), if it
+# is marked as uncacheable, if the classification failed or found nothing
+# specific.
+sub save_classification_cache {
+  my ($self) = @_;
+  return if $self->{classification_from_cache};
+  return if $self->{classification_uncacheable};
+  return if ! defined $self->{classification_start_class};
+  return if $self->classification_cache_bypassed();
+  return if $self->check_messages();
+  my $class = ref($self);
+  return if $class eq $self->{classification_start_class};
+  return if defined $self->{generic_class} && $class eq $self->{generic_class};
+  return if $class =~ /::Generic$/;
+  my $identity = $self->classification_cache_identity();
+  return if ! $identity;
+  $self->save_state(name => $identity, host_wide_cache => 1,
+      save => { class => $class, timestamp => time });
 }
 
 sub release_lock {

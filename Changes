@@ -1,3 +1,6 @@
+* 2026-10-01 6.6.2
+  init and check subsystems in sorted order
+  cache the classification (USE_CLASSIFICATION_CACHE=1 for a testing period)
 * 2026-09-30 6.6.1.1
   update PDU2-MIB
 * 2026-09-29 6.6.1
