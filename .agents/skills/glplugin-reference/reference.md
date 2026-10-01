@@ -139,13 +139,22 @@ errors/sec) needs the previous run's raw counter values persisted to disk.
   instead of alerting on what's almost certainly a bad SNMP read. Use this for gauges
   that are known to occasionally glitch on certain firmware, not as a general-purpose
   safety net for every value.
-- `$self->save_state(...)` / `load_state(...)` (GLPlugin.pm:1507/1533) — the lower-level
+- `$self->save_state(...)` / `load_state(...)` (GLPlugin.pm:1523/1570) — the lower-level
   primitives `valdiff`/`protect_value` are built on. Reach for these directly only when
   you need to persist something that isn't a simple counter-diff (e.g. "was this alarm
   already active last run", used by watch-style modes like `watch-fexes`/`watch-accesspoints`).
+  The state file name normally starts with the current mode. Passing
+  `host_wide_cache => 1` (used by the classification cache, §8) changes three things:
+  the name is the given `name` only (no mode prefix, so all modes share the entry),
+  `save_state` never adds a message and returns 1/0, and `load_state` returns undef for
+  a missing or undecodable file without any output. Use it only for entries which are a
+  mere optimization and must never change the check result.
 - `--statefilesdir` controls where all of the above write their cache files; you never
   need to construct the path yourself (`create_statefilesdir`/`create_statefile`,
-  GLPlugin.pm:1421/1438, handle that).
+  GLPlugin.pm:1421/1447, handle that). The directory is resolved by `set_statefilesdir`
+  (GLPlugin.pm:360), which `validate_args` calls. Note that `classify()` runs *before*
+  `validate_args`, so code that runs during classification must call
+  `set_statefilesdir()` itself if `statefilesdir()` is still undef.
 
 ## 6. Blacklisting components
 
@@ -169,7 +178,7 @@ errors/sec) needs the previous run's raw counter values persisted to disk.
 
 ## 8. Classification: detecting vendor/model
 
-- `$self->rebless($class)` (GLPlugin.pm:58) — the standard way to switch an object's
+- `$self->rebless($class)` (GLPlugin.pm:59) — the standard way to switch an object's
   class mid-flight while keeping all its accumulated data (`ref($self)` changes; the
   object doesn't). Prefer this over a raw `bless $self, $class` for anything under your
   own `CheckXxxHealth::*` namespace, since `rebless` also records `{classified_as}` and
@@ -191,6 +200,52 @@ errors/sec) needs the previous run's raw counter values persisted to disk.
 - `$self->check_snmp_and_model()` (SNMP.pm:1174) — the one-time SNMP handshake +
   sysDescr/sysObjectID fetch that `Device::classify()` calls before any of the above;
   you call this once per plugin run, not per Component.
+
+### Classification cache (skip the detection chain for 5 minutes)
+
+`classify()` in a plugin's `Device.pm` ends in a long `if/elsif` chain of
+`productname` regexes and `implements_mib()` probes. The cache remembers its result
+(the first-level vendor class) per host/port/credentials in one small JSON file each
+(`classification_cache_<plugin>_<host>_<port>_<sha256 of credentials>` in
+`--statefilesdir`, valid for 300 s, shared by all modes). A plugin adopts it with two
+lines in `classify()`:
+
+```perl
+if ($self->opts->mode =~ /^my-/) {
+  $self->load_my_extension();
+} elsif ($self->rebless_from_classification_cache()) {   # line 1: after the my- branch
+  # restored from the cache, the chain below is skipped
+} elsif ($self->{productname} =~ /.../) {
+  ... existing chain, untouched ...
+}
+...
+$self->save_classification_cache();                      # line 2: right before "return $self;"
+```
+
+- `rebless_from_classification_cache()` (GLPlugin.pm:1667) — true if a valid entry
+  younger than 300 s exists; it then reblesses and sets `{classification_from_cache}`.
+  Otherwise false and nothing changes. `check_snmp_and_model()` still runs before, so
+  `productname`, `sysobjectid` and `uptime` are always fresh (they are never cached).
+- `save_classification_cache()` (GLPlugin.pm:1694) — stores `ref($self)`. It stores
+  nothing after a replay (a hit must not extend the lifetime), if
+  `{classification_uncacheable}` is set, if `check_messages()` is set, if nothing was
+  reblessed, or for a `::Generic` class (or `{generic_class}`).
+- **Mark side effects**: a detection branch that changes global state besides the
+  `rebless` (e.g. rewriting `$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids`
+  entries, as the Rittal LCPDX branches in check_wut_health or the APC branch in
+  check_ups_health do) must set `$self->{classification_uncacheable} = 1;`, because a
+  replayed class would lack those side effects. Devices taking such a branch are fully
+  classified on every run.
+- Switches (environment variables, no command line option): the cache is only used if
+  `USE_CLASSIFICATION_CACHE` is set to a non-empty value (opt-in during the test phase);
+  `IGNORE_CLASSIFICATION_CACHE` (non-empty) disables it and wins. It is always bypassed
+  with `--snmpwalk`, `--servertype` and `my-*` modes, and without a hostname
+  (`classification_cache_bypassed`, GLPlugin.pm:1628). Any problem with the entry
+  (missing, corrupt, expired, unknown class, unwritable dir) silently falls back to
+  full classification. Entries are replaced atomically (temp file plus `rename`), no
+  locks; concurrent runs may each classify and the last writer wins.
+- Credentials only enter the entry name as a SHA-256 hash (`classification_cache_identity`,
+  GLPlugin.pm:1643); nothing secret is stored in the file.
 
 ## 9. SNMP data fetching
 

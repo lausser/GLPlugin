@@ -29,6 +29,7 @@ Full categorized reference with signatures, file:line pointers, and gotchas:
 | Respect `--blacklist` for a component | `$self->is_blacklisted()` | §6 |
 | Respect `--name`/`--name2`/`--regexp` for a component | `filter_name($name)` / `filter_name2` / `filter_name3` | §7 |
 | Switch an object's class after detecting vendor/model | `$self->rebless('Some::Class')` | §8 |
+| Skip the long vendor-detection `if/elsif` chain in `classify()` for 5 minutes (opt-in via `USE_CLASSIFICATION_CACHE`) | `rebless_from_classification_cache()` + `save_classification_cache()` | §8 |
 | Check "does this device speak MIB X (or table Y)" | `$self->implements_mib('SOME-MIB'[, 'someTable'])` | §8 |
 | Fetch one SNMP scalar | `get_snmp_object($mib, $name[, $index])` | §9 |
 | Fetch several SNMP scalars at once | `get_snmp_objects($mib, qw(a b c))` | §9 |
