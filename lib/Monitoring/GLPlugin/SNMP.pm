@@ -194,7 +194,8 @@ sub add_snmp_args {
                  snmpv3,sha,mypass,aes,mypass,admin,,mycontext
      With both:  snmpv3,sha,mypass,aes,mypass,admin,0x8000000001,mycontext
 
-   Fields: authproto (sha|md5), authpass, privproto (aes|des|3des),
+   Fields: authproto (md5|sha|sha224|sha256|sha384|sha512), authpass,
+           privproto (des|3des|aes|aes192|aes256|aes192c|aes256c),
            privpass, username, contextengineid (optional), contextname (optional)
    Note: Use <sep><sep> (double separator) to skip contextengineid when
          providing only contextname',
@@ -218,7 +219,8 @@ sub add_snmp_args {
   $self->add_arg(
       spec => 'authprotocol:s',
       help => '--authprotocol
-   The authentication protocol for SNMPv3 (md5|sha)',
+   The authentication protocol for SNMPv3 (md5|sha|sha224|sha256|sha384|sha512)
+   (sha224 and higher need the SNMP perl module, see SNMP_XS_ENABLE)',
       required => 0,
   );
   $self->add_arg(
@@ -231,7 +233,8 @@ sub add_snmp_args {
   $self->add_arg(
       spec => 'privprotocol=s',
       help => '--privprotocol
-   The private protocol for SNMPv3 (des|aes|aes128|3des|3desde)',
+   The private protocol for SNMPv3 (des|aes|aes128|3des|3desde|aes192|aes256|aes192c|aes256c)
+   (aes192 and aes256 need the SNMP perl module, see SNMP_XS_ENABLE)',
       required => 0,
   );
   $self->add_arg(
@@ -411,9 +414,15 @@ sub init {
       };
       foreach (keys %{$Monitoring::GLPlugin::SNMP::session_params}) {
         if (exists $credmapping->{$_}) {
+          my $credvalue = $Monitoring::GLPlugin::SNMP::session_params->{$_};
+          if ($_ eq '-authprotocol' && $credvalue =~ /^sha[-_ ]?(224|256|384|512)$/i) {
+            $credvalue = "SHA-".$1;
+          } elsif ($_ eq '-privprotocol' && $credvalue =~ /^aes[-_ ]?(192|256)([-_ ]?c)?$/i) {
+            $credvalue = "AES-".$1.($2 ? "-C" : "");
+          }
           push(@credentials, sprintf "%s '%s'",
               $credmapping->{$_},
-              $Monitoring::GLPlugin::SNMP::session_params->{$_}
+              $credvalue
           );
         }
       }
@@ -1444,7 +1453,20 @@ sub establish_snmp_session {
 
   # Try SNMP module first (Net-SNMP XS bindings with modern cipher support)
   # unless SNMP_XS_DISABLE is set (for testing/comparison)
-  if (! $ENV{SNMP_XS_ENABLE}) {
+  # Net::SNMP can only do md5/sha1 and des/aes128. If the user asks for
+  # sha224/256/384/512 or aes192/aes256 (also the Cisco variants "c"), the
+  # XS backend is the only way to get a session, so switch it on automatically.
+  my $need_modern_ciphers = 0;
+  if ($self->opts->protocol eq '3') {
+    my $ap = $self->opts->authprotocol || '';
+    my $pp = $self->opts->privprotocol || '';
+    $need_modern_ciphers = 1 if $ap =~ /^sha[-_ ]?(224|256|384|512)$/i;
+    $need_modern_ciphers = 1 if $pp =~ /^aes[-_ ]?(192|256)([-_ ]?c)?$/i;
+  }
+  if ($need_modern_ciphers) {
+    delete $ENV{SNMP_XS_DISABLE};
+    $self->debug("sha2/aes192/aes256 requested - enabling SNMP XS backend");
+  } elsif (! $ENV{SNMP_XS_ENABLE}) {
     $ENV{SNMP_XS_DISABLE} = 1;
   }
   if ($ENV{SNMP_XS_DISABLE}) {
@@ -1483,6 +1505,17 @@ sub establish_snmp_session {
     } else {
       $self->debug("Backend::XS module not loadable: $@");
     }
+  }
+
+  # sha2/aes192/aes256 cannot be handled by Net::SNMP. A fallback would only
+  # produce the misleading error 'authProtocol sha512 is unknown'.
+  if (! $snmp_backend_used && $need_modern_ciphers) {
+    $self->add_message(CRITICAL, sprintf(
+        'cannot create session object: authprotocol "%s" / privprotocol "%s" ' .
+        'need the SNMP perl module (libsnmp-perl / perl-SNMP built with OpenSSL) ' .
+        'and Monitoring::GLPlugin::SNMP::Backend::XS. Use SNMP_XS_DEBUG=1 for details.',
+        $self->opts->authprotocol || '', $self->opts->privprotocol || ''));
+    return;
   }
 
   # Fall back to Net::SNMP if SNMP module session creation failed or unavailable
