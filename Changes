@@ -1,3 +1,5 @@
+* 2026-10-14 6.7
+  add Nodegrid-MIB, ZPE-PRODUCTS-MIB, ZSW-228-MIB
 * 2026-10-01 6.6.2
   init and check subsystems in sorted order
   cache the classification (USE_CLASSIFICATION_CACHE=1 for a testing period)

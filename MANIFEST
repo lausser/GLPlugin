@@ -252,6 +252,7 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/NETSCREENPRODUCTSMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/NETSCREENRESOURCEMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/NETSWITCHMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/NETVISIONV6MIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/NODEGRIDMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/OLDCISCOCPUMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/OLDCISCOINTERFACESMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/OLDNETSWITCHMIB.pm
@@ -347,6 +348,8 @@ lib/Monitoring/GLPlugin/SNMP/MibsAndOids/WLSXSYSTEMEXTMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/WLSXWLANMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/XPPCMIB.pm
 lib/Monitoring/GLPlugin/SNMP/MibsAndOids/XUPSMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ZPEPRODUCTSMIB.pm
+lib/Monitoring/GLPlugin/SNMP/MibsAndOids/ZSW228MIB.pm
 lib/Monitoring/GLPlugin/SNMP/SysDescPrettify.pm
 lib/Monitoring/GLPlugin/SNMP/TableItem.pm
 lib/Monitoring/GLPlugin/TableItem.pm
