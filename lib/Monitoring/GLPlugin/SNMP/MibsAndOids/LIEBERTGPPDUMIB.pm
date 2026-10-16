@@ -28,8 +28,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'LIEBERT-GP-PDU-MIB'} 
   #'lgpPduEntrySysAssignLabelDefinition' => 'SNMPv2-TC::DisplayString',
   'lgpPduEntryPositionRelative' => '1.3.6.1.4.1.476.1.42.3.8.20.1.20',
   'lgpPduEntrySysStatus' => '1.3.6.1.4.1.476.1.42.3.8.20.1.25',
-  'lgpPduEntrySysStatusDefinition' => 'LIEBERT-GP-PDU-MIB::lgpPduEntrySysStatu
-s',
+  'lgpPduEntrySysStatusDefinition' => 'LIEBERT-GP-PDU-MIB::lgpPduEntrySysStatus',
   'lgpPduEntryUsrTag1' => '1.3.6.1.4.1.476.1.42.3.8.20.1.35',
   #'lgpPduEntryUsrTag1Definition' => 'SNMPv2-TC::DisplayString',
   'lgpPduEntryUsrTag2' => '1.3.6.1.4.1.476.1.42.3.8.20.1.40',
