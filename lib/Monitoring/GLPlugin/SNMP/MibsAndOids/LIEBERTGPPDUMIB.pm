@@ -540,11 +540,7 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'LIEBERT-GP-PDU-MIB'} = 
   },
   lgpPduEntrySysStatus => sub {
     my $val = shift;
-    #printf "lgpPduEntrySysStatus unpack %s to %s\n", $val, unpack("B32", pack("h", $val));
     $val &= 0xffffffff;
-    # we have Octet32 16 which results in 00000000000000000000000000010000
-    # shuffle nibbles so that bit1 is 1: 00000001
-    $val = unpack("B32", pack("h", $val));
     my @return = ();
     my $bits = {
       1 => 'normalOperation',
