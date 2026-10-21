@@ -1,4 +1,4 @@
-package Monitoring::GLPlugin::SNMP::MibsAndOids::ACALARM;
+package Monitoring::GLPlugin::SNMP::MibsAndOids::ACALARMMIB;
 
 $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'AcAlarm'} = {
   url => '',
@@ -95,8 +95,8 @@ $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'AC-ALARM-MIB'} =
     $Monitoring::GLPlugin::SNMP::MibsAndOids::origin->{'AcAlarm'};
 $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'AC-ALARM-MIB'} =
     $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_ids->{'AcAlarm'};
-$Monitoring::GLPlugin::SNMP::MibsAndOids::mib_and_oids->{'AC-ALARM-MIB'} =
-    $Monitoring::GLPlugin::SNMP::MibsAndOids::mib_and_oids->{'AcAlarm'};
+$Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'AC-ALARM-MIB'} =
+    $Monitoring::GLPlugin::SNMP::MibsAndOids::mibs_and_oids->{'AcAlarm'};
 $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'AC-ALARM-MIB'} =
     $Monitoring::GLPlugin::SNMP::MibsAndOids::definitions->{'AcAlarm'};
 
