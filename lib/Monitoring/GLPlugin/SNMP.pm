@@ -1283,6 +1283,11 @@ sub check_snmp_and_model {
     # Datatype TimeTicks = 1/100s
     my $hrSystemUptime = $self->get_snmp_object_maybe('HOST-RESOURCES-MIB', 'hrSystemUptime');
     my $sysDescr = $self->get_snmp_object('MIB-2-MIB', 'sysDescr', 0);
+    # Cisco Meraki dreckdings zoagt ka Uptime, sysORUpTime bringts au net wirklich
+    if (!defined $sysUptime && ( $sysDescr =~ /^Cisco Secure Router/ || $sysDescr =~ /meraki/i )) {
+      my $sysORUpTime = $self->get_snmp_object_maybe('MIB-2-MIB', 'sysORUpTime', 3);
+      $sysUptime = $sysORUpTime;
+    }
     my $tac = time;
     if (defined $hrSystemUptime && $hrSystemUptime =~ /^\d+$/ && $hrSystemUptime > 0) {
       $hrSystemUptime = $self->timeticks($hrSystemUptime);
